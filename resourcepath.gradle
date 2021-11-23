@@ -1,0 +1,9 @@
+ext {
+    sourceDirectoriesPath = [permissiondemo: "src/main/permissiondemo",
+                             common        : "src/main/common",
+                             coroutinedemo : "src/main/coroutinedemo",
+                             home          : "src/main/home",
+                             login         : "src/main/login",
+                             res           : "src/main/res"]
+}
+

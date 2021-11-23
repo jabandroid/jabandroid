@@ -1,0 +1,583 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.global.vtg.appview.home.uploaddocument.UploadDocumentViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_virus"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/splash_bg">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/ic_dashboard_bg_light"
+                android:paddingTop="@dimen/_24sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                android:background="@drawable/ic_bg_top"
+                android:paddingTop="@dimen/_24sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivBack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_arrow_back" />
+
+                        <com.global.vtg.utils.textView.SemiBoldTextView
+                            android:id="@+id/tvTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="@string/label_upload_document"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_18ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.Toolbar>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_bg_bottom" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_6sdp"
+                android:background="@color/curve"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clToolbar">
+
+                <com.global.vtg.utils.textView.BoldTextView
+                    android:id="@+id/tvVaccinations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:text="@string/label_vaccinations"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_18ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvUploadDocument"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:layout_marginBottom="@dimen/_52sdp"
+                    android:onClick="@{viewModel::onClick}"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvVaccinations">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:minHeight="@dimen/_75sdp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivUploadDocument"
+                            android:layout_width="@dimen/_22sdp"
+                            android:layout_height="@dimen/_22sdp"
+                            android:layout_margin="@dimen/_12sdp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_surface1" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:id="@+id/tvSelectDoc"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_12sdp"
+                            android:gravity="center"
+                            android:text="@string/label_upload_text"
+                            android:textSize="@dimen/_8ssp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/ivUploadDocument" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:id="@+id/tvDocName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/_12sdp"
+                            android:gravity="center"
+                            android:text="@string/label_doc_name"
+                            android:textSize="@dimen/_12ssp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivCancel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{viewModel::onClick}"
+                            android:visibility="gone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/ic_cancel" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvBatchNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/label_batch_no"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cvUploadDocument" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etBatchNo"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:text="@={viewModel.batchNo}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBatchNo" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvMobileNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/label_phone_number"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etBatchNo" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/groupMobileNo"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:constraint_referenced_ids="llPhoneNo,tvMobileNo"/>
+
+                <LinearLayout
+                    android:id="@+id/llPhoneNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMobileNo">
+
+                    <com.hbb20.CountryCodePicker
+                        android:id="@+id/ccp"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/_24sdp"
+                        android:background="@drawable/edittext_shadow"
+                        android:gravity="center_vertical"
+                        app:ccp_defaultNameCode="US"
+                        app:ccp_showArrow="false"
+                        app:ccp_showFlag="true"
+                        app:ccp_showFullName="false"
+                        app:ccp_showNameCode="false"
+                        app:ccp_showPhoneCode="true"
+                        app:ccp_textSize="@dimen/_10ssp"
+                        app:layout_constraintBottom_toBottomOf="@+id/etLoginPhoneNo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/etLoginPhoneNo" />
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/etLoginPhoneNo"
+                        style="@style/EdittextPadding"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/edittext_height"
+                        android:layout_marginStart="@dimen/_4sdp"
+                        android:layout_marginEnd="@dimen/_24sdp"
+                        android:background="@drawable/edittext_shadow"
+                        android:drawableStart="@drawable/ic_call"
+                        android:drawablePadding="@dimen/_8sdp"
+                        android:gravity="center_vertical"
+                        android:imeOptions="actionNext"
+                        android:inputType="phone"
+                        android:maxLines="1"
+                        android:shadowColor="@color/gray_light"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:shadowRadius="4"
+                        android:singleLine="true"
+                        android:text="@={viewModel.phone}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="spread_inside"
+                        app:layout_constraintStart_toEndOf="@+id/ccp"
+                        app:layout_constraintTop_toBottomOf="@+id/tvRegistrationPhoneNo" />
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sDose"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/llPhoneNo" />
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cbCertify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:checked="@={viewModel.isCertify}"
+                    android:fontFamily="@font/proximanovareg"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="@dimen/_24sdp"
+                    android:text="@string/label_certify"
+                    android:textColor="@color/black"
+                    app:buttonTint="@color/colorPrimary"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/sDose"/>
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvFee"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/label_fee"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/etFee"
+                    app:layout_constraintStart_toEndOf="@+id/cbCertify"
+                    app:layout_constraintTop_toTopOf="@+id/etFee" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etFee"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:drawableStart="@drawable/ic_dollar"
+                    android:drawablePadding="@dimen/_8sdp"
+                    android:fontFamily="@font/proximanovabold"
+                    android:imeOptions="actionNext"
+                    android:inputType="numberDecimal"
+                    android:maxWidth="@dimen/_100sdp"
+                    android:maxLength="8"
+                    android:maxLines="1"
+                    android:minWidth="@dimen/_100sdp"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.fee}"
+                    android:textSize="@dimen/_12ssp"
+                    app:layout_constraintStart_toEndOf="@+id/tvFee"
+                    app:layout_constraintTop_toBottomOf="@+id/sDose" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvCurrentDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:minWidth="@dimen/_55sdp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="@+id/sVaccine"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/sVaccine" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sVaccine"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvCurrentDate"
+                    app:layout_constraintTop_toBottomOf="@+id/cbCertify" />
+
+                <com.global.vtg.utils.textView.BoldTextView
+                    android:id="@+id/tvVaccinatedOn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:gravity="center"
+                    android:text="@string/label_vaccinated_on"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_18ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sVaccine" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/sDay"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:background="@drawable/disabled_edittext"
+                    android:clickable="false"
+                    android:editable="false"
+                    android:focusable="false"
+                    android:fontFamily="@font/proximanovareg"
+                    android:gravity="center"
+                    android:paddingStart="@dimen/_12sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:text="@string/label_day"
+                    android:textColor="@color/dark_gray"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintEnd_toStartOf="@+id/sDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvVaccinatedOn" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/sDate"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:drawableStart="@drawable/ic_calendar"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:fontFamily="@font/proximanovareg"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:text="@string/label_date1"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintEnd_toStartOf="@+id/sTime"
+                    app:layout_constraintStart_toEndOf="@+id/sDay"
+                    app:layout_constraintTop_toBottomOf="@+id/tvVaccinatedOn" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/sTime"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="false"
+                    android:cursorVisible="false"
+                    android:drawableStart="@drawable/ic_time"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:fontFamily="@font/proximanovareg"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:spinnerMode="dropdown"
+                    android:text="@string/label_time"
+                    android:textSize="@dimen/_10ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sDate"
+                    app:layout_constraintTop_toBottomOf="@+id/tvVaccinatedOn" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvClinicHospitalName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/label_hospital_name"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sDay" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etHospitalName"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:text="@={viewModel.hospitalName}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvClinicHospitalName" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvInstitute"
+                    app:layout_constraintTop_toBottomOf="@+id/etHospitalName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:background="@drawable/recyclerview_shadow"
+                    app:layout_constraintBottom_toTopOf="@+id/btnSaveDocument"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSaveDocument"
+                    style="@style/ButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:onClick="@{viewModel::onClick}"
+                    android:text="@string/action_save"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rvInstitute" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clThankYou"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clToolbar">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivSuccess"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_200sdp"/>
+
+                <com.global.vtg.utils.textView.BoldTextView
+                    android:id="@+id/tvSuccess"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSuccess"
+                    android:layout_width="match_parent"
+                    android:textSize="@dimen/_32ssp"
+                    android:gravity="center"
+                    android:text="@string/label_thank_you"
+                    android:textColor="@color/black"
+                    android:layout_height="wrap_content"/>
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvUploaded"
+                    android:text="@string/label_uploaded"
+                    android:textSize="@dimen/_16ssp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSuccess"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivGift"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvUploaded"
+                    android:layout_width="match_parent"
+                    app:srcCompat="@drawable/ic_gift"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_height="wrap_content"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

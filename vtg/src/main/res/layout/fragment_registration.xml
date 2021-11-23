@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.global.vtg.appview.authentication.registration.RegistrationViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_virus"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/ic_bg_bottom" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_6sdp"
+                android:background="@color/curve"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_splash_top_bg" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_marginTop="@dimen/logo_margin_top"
+                android:padding="@dimen/logo_padding"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.global.vtg.utils.textView.XBoldTextView
+                android:id="@+id/tvRegistration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/label_registration"
+                android:textColor="@color/black"
+                android:textSize="@dimen/auth_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvSubText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:gravity="center"
+                android:text="@string/label_login_subtext"
+                android:textSize="@dimen/auth_subtitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegistration" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvRegistrationEmail"
+                style="@style/MarginStartEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/label_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llPhoneNo" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etLoginEmail"
+                style="@style/EdittextPadding"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edittext_shadow"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="@dimen/_8sdp"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:shadowColor="@color/gray_light"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="4"
+                android:singleLine="true"
+                android:text="@={viewModel.email}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegistrationEmail" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvRegistrationPhoneNo"
+                style="@style/MarginStartEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:text="@string/label_phone_no_register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSubText" />
+
+            <LinearLayout
+                android:id="@+id/llPhoneNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegistrationPhoneNo">
+
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:gravity="center_vertical"
+                    app:ccp_defaultNameCode="US"
+                    app:ccp_showArrow="false"
+                    app:ccp_showFlag="true"
+                    app:ccp_showFullName="false"
+                    app:ccp_showNameCode="false"
+                    app:ccp_showPhoneCode="true"
+                    app:ccp_textSize="@dimen/_10ssp"
+                    app:layout_constraintBottom_toBottomOf="@+id/etRegistrationPhoneNo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/etRegistrationPhoneNo" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etRegistrationPhoneNo"
+                    style="@style/EdittextPadding"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:drawableStart="@drawable/ic_call"
+                    android:drawablePadding="@dimen/_8sdp"
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:inputType="phone"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.phone}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toEndOf="@+id/ccp"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRegistrationPhoneNo" />
+            </LinearLayout>
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvRegistrationPassword"
+                style="@style/MarginStartEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/label_password_register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginEmail" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etLoginPassword"
+                style="@style/EdittextPadding"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:background="@drawable/edittext_shadow"
+                android:drawableStart="@drawable/ic_padlock"
+                android:drawablePadding="@dimen/_8sdp"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:shadowColor="@color/gray_light"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="4"
+                android:text="@={viewModel.password}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegistrationPassword" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivPassword"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegistrationPassword"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@mipmap/visibility_off"
+                app:layout_constraintBottom_toBottomOf="@id/etLoginPassword"
+                android:layout_marginEnd="@dimen/_28sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swVendor"
+                app:thumbTint="@drawable/newthumb"
+                app:trackTint="@drawable/newtrack"
+                android:trackTint="@drawable/newtrack"
+                android:thumbTint="@drawable/newthumb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:checked="@={viewModel.isVendor}"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:fontFamily="@font/proximanovareg"
+                android:text="@string/label_vendor_login"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginPassword"
+                app:switchPadding="@dimen/_8sdp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/swClinic"
+                app:thumbTint="@drawable/newthumb"
+                app:trackTint="@drawable/newtrack"
+                android:trackTint="@drawable/newtrack"
+                android:thumbTint="@drawable/newthumb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:checked="@={viewModel.isClinic}"
+                android:layout_marginEnd="@dimen/_16sdp"
+                android:fontFamily="@font/proximanovareg"
+                android:text="@string/label_clinic"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLoginPassword"
+                app:switchPadding="@dimen/_8sdp" />
+
+            <androidx.appcompat.widget.AppCompatCheckBox
+                android:id="@+id/cbTermsCondition"
+                android:text="@string/label_accept_terms"
+                android:layout_width="match_parent"
+                app:buttonTint="@color/colorPrimary"
+                app:layout_constraintTop_toBottomOf="@+id/swVendor"
+                android:layout_marginStart="@dimen/_16sdp"
+                android:checked="@={viewModel.acceptedTerms}"
+                android:fontFamily="@font/proximanovareg"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRegister"
+                style="@style/ButtonStyle"
+                android:layout_width="0dp"
+                android:layout_marginStart="@dimen/_18sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_18sdp"
+                android:onClick="@{viewModel::onClick}"
+                android:text="@string/label_register"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cbTermsCondition" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvRegistrationSignIn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:onClick="@{viewModel::onClick}"
+                android:paddingTop="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_24sdp"
+                android:text="@string/label_already_sign_in"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnRegister" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>

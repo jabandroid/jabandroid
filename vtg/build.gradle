@@ -1,0 +1,198 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: '../dependencies.gradle'
+apply from: '../resourcepath.gradle'
+
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+android {
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+
+    defaultConfig {
+        applicationId "com.vtg"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resValue "string", "app_name", "Vax Trax"
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        stage {
+            applicationId "com.global.vtg.stage"
+            versionCode 3
+            versionName "1.0"
+        }
+        dev {
+            applicationId "com.global.vtg.dev"
+            versionCode 2
+            versionName "1.0"
+        }
+        prod {
+            applicationId "com.global.vtg"
+            versionCode 1
+            versionName "1.0"
+        }
+    }
+
+
+    signingConfigs {
+
+        release {
+            try {
+                keyAlias keystoreProperties['KEY_ALIAS']
+                keyPassword keystoreProperties['KEY_PASSWORD']
+                storeFile file(keystoreProperties['STORE_FILE'])
+                storePassword keystoreProperties['STORE_PASSWORD']
+            }
+            catch (ignored) {
+                throw new InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+            }
+        }
+
+
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+
+            applicationVariants.all { variant ->
+                renameAPK(variant)
+            }
+        }
+        debug {
+            signingConfig signingConfigs.release
+            debuggable true
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            res.srcDirs = sourceDirectoriesPath.values()
+        }
+    }
+    buildToolsVersion '28.0.3'
+    androidExtensions {
+        experimental = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+    lintOptions {
+        baseline file("lint-baseline.xml")
+        // if set to true (default), stops the build if errors are found.
+        abortOnError true
+
+        checkAllWarnings true
+//        warningsAsErrors true
+
+//         set to true to turn off analysis progress reporting by lint
+//        quiet true
+//         if true, only report errors
+//        ignoreWarnings true
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.3.0-alpha01', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    // Android Support libs
+    implementation androidSupportDependencies.values()
+    // Retrofit, GSON and OkHttp
+    implementation retrofitGSONOkHttpDependencies.values()
+    // Architecture Libs
+    implementation architectureDependencies.values()
+    kapt architectureKapt.values()
+    // Coroutine
+    implementation coroutineDependencies.values()
+    // Picasso\Glide user base on your needs.
+    implementation picasoGlideDependencies.values()
+    // SDP and SSP libs for dimensions
+    implementation sdpSspDependencies.values()
+    //GCM libs
+    implementation playSeriviceDependencies.values()
+    //Paging Libs
+    implementation pagingDependencies.values()
+    //Koin dependencies
+    implementation koinDependencies.values()
+    // Kotlin libs
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    // Log dependency
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation "androidx.media:media:1.1.0-rc01"
+    // Circle ImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    // ViewPager
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'com.afollestad:viewpagerdots:1.0.0'
+
+    // QR Code
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
+
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+    implementation 'com.google.android.libraries.places:places:2.5.0'
+    implementation 'com.hbb20:ccp:2.4.7'
+
+    // Scan QR code
+    implementation 'me.dm7.barcodescanner:zxing:1.9.13'
+    implementation platform('com.google.firebase:firebase-bom:28.4.2')
+    implementation 'io.michaelrocks:libphonenumber-android:8.12.17'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.1.4'
+
+    implementation 'com.braintreepayments.api:drop-in:5.3.0'
+
+}
+repositories {
+    mavenCentral()
+    google()
+}
+
+
+static def renameAPK(variant) {
+    variant.outputs.all { output ->
+        def formattedDate = new Date().format('dd-MM-YYYY')
+        def projectName = variant.mergedFlavor.resValues.get('app_name').getValue()
+        def projectVersionName = "_v" + variant.productFlavors.get(0).versionName
+        def projectBuildCode = "_b" + variant.productFlavors.get(0).versionCode
+        def buildDate = "_d" + formattedDate
+        def flavorsName = "_" + variant.productFlavors.get(0).name
+//        def flavorsType = "_" + variant.variantData.variantConfiguration.buildType.name
+        def fileName = projectName + projectVersionName + projectBuildCode + buildDate + flavorsName + ".apk"
+        outputFileName = fileName
+    }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.global.vtg.utils.textView.RegularTextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvSpinnerText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/_8sdp"
+    android:paddingStart="@dimen/_12sdp"
+    android:paddingEnd="@dimen/_12sdp"
+    android:paddingBottom="@dimen/_8sdp"
+    android:textColor="@color/black" />

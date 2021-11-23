@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_virus">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_splash_top_bg" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivTop"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/logo_margin_top"
+        android:padding="@dimen/logo_padding"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@mipmap/logo" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnVendor"
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_marginStart="@dimen/btn_margin"
+        android:layout_marginEnd="@dimen/btn_margin"
+        android:text="@string/label_vendor"
+        app:layout_constraintBottom_toTopOf="@+id/btnUser"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivTop"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnUser"
+        style="@style/ButtonStyle"
+        android:layout_width="0dp"
+        android:layout_marginStart="@dimen/btn_margin"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_marginEnd="@dimen/btn_margin"
+        android:text="@string/label_user"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnVendor" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_bg_bottom" />
+
+    <View
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:background="@color/curve"
+        android:layout_height="@dimen/_6sdp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

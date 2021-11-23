@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/_16sdp"
+    android:paddingEnd="@dimen/_16sdp"
+    android:paddingTop="@dimen/_16sdp"
+    android:layout_marginBottom="@dimen/_8sdp">
+
+    <com.global.vtg.utils.textView.BoldTextView
+        android:id="@+id/tvVaccineName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_12ssp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:orientation="horizontal">
+
+        <com.global.vtg.utils.textView.BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_hospital"
+            android:textColor="@color/black" />
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/tvHospitalName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.global.vtg.utils.textView.BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_date"
+            android:textColor="@color/black" />
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.global.vtg.utils.textView.BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_status"
+            android:textColor="@color/black" />
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/tvStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.global.vtg.utils.textView.BoldTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_batch_no_row"
+            android:textColor="@color/black" />
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/tvBatchNoValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

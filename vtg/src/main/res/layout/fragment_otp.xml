@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.global.vtg.appview.authentication.otp.OtpViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_virus"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_splash_top_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_bg_bottom"/>
+
+            <View
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:background="@color/curve"
+                android:layout_height="@dimen/_6sdp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivLogo"
+                android:layout_marginTop="@dimen/logo_margin_top"
+                android:layout_width="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@mipmap/logo"
+                android:scaleType="centerCrop"
+                android:padding="@dimen/logo_padding"
+                android:layout_height="@dimen/_100sdp"/>
+
+            <com.global.vtg.utils.textView.XBoldTextView
+                android:id="@+id/tvOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:text="@string/label_otp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/auth_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivLogo" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvSubText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:gravity="center"
+                android:textSize="@dimen/auth_subtitle"
+                android:text="@string/label_otp_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOtp" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvSubText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:gravity="center"
+                android:textSize="@dimen/auth_subtitle"
+                android:text="@string/label_enter_otp_received"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSubText" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:text="@={viewModel.et1}"
+                android:id="@+id/edOtp1"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/OTPEditText"
+                app:layout_constraintEnd_toStartOf="@+id/edOtp2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSubText2" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:text="@={viewModel.et2}"
+                android:id="@+id/edOtp2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/OTPEditText"
+                app:layout_constraintEnd_toStartOf="@+id/edOtp3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/edOtp1"
+                app:layout_constraintTop_toTopOf="@+id/edOtp1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:text="@={viewModel.et3}"
+                android:id="@+id/edOtp3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/OTPEditText"
+                app:layout_constraintEnd_toStartOf="@+id/edOtp4"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/edOtp2"
+                app:layout_constraintTop_toTopOf="@+id/edOtp1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:text="@={viewModel.et4}"
+                android:id="@+id/edOtp4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/OTPEditText"
+                app:layout_constraintEnd_toStartOf="@+id/edOtp5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/edOtp3"
+                app:layout_constraintTop_toTopOf="@+id/edOtp1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:text="@={viewModel.et5}"
+                android:id="@+id/edOtp5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/OTPEditText"
+                app:layout_constraintEnd_toStartOf="@+id/edOtp6"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/edOtp4"
+                app:layout_constraintTop_toTopOf="@+id/edOtp1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:text="@={viewModel.et6}"
+                android:id="@+id/edOtp6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/OTPEditText"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/edOtp5"
+                app:layout_constraintTop_toTopOf="@+id/edOtp1" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvOtpNotReceived"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:gravity="center"
+                android:textSize="@dimen/auth_subtitle"
+                android:text="@string/label_otp_not_received"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/edOtp1" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvRequestOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:textSize="@dimen/auth_subtitle"
+                android:text="@string/label_request_otp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvOtpNotReceived" />
+
+            <com.global.vtg.utils.textView.XBoldTextView
+                android:id="@+id/tvResendOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="@string/label_resend_otp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRequestOtp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnVerify"
+                style="@style/ButtonStyle"
+                android:clickable="true"
+                android:enabled="true"
+                app:layout_constraintTop_toBottomOf="@+id/tvResendOtp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:onClick="@{viewModel::onClick}"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="@string/label_verify"
+                android:layout_height="wrap_content"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

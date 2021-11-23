@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.global.vtg.appview.authentication.registration.RegistrationStep2ViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_virus">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/ic_dashboard_bg_light"
+            android:paddingTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/ic_bg_top"
+            android:paddingTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_arrow_back" />
+
+                    <com.global.vtg.utils.textView.SemiBoldTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/label_step2"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_bg_bottom" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_6sdp"
+            android:background="@color/curve"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:paddingBottom="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clToolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_16sdp"
+                android:orientation="vertical">
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvSsn"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_ssn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etSsn"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="4"
+                    android:maxLines="1"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.ssn}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSsn" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvId"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_id_number"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etSsn" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etId"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:maxLength="20"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.id}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvId" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvDln"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_drivers_license"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etId" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etDln"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:hint="@string/label_number"
+                    android:maxLength="20"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.dln}"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDln" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/sDlnState"
+                    style="@style/EdittextPadding"
+                    android:text="@={viewModel.dlnState}"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:hint="@string/label_state"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toStartOf="@+id/sDlnCountry"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etDln" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/sDlnCountry"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:text="@={viewModel.dlnCountry}"
+                    android:background="@drawable/edittext_shadow"
+                    android:hint="@string/label_country"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sDlnState"
+                    app:layout_constraintTop_toTopOf="@+id/sDlnState" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etDlnIssuedDate"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="false"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/label_issued_date"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:text="@={viewModel.dlnIssuedDate}"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toStartOf="@+id/etDlnExpiryDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sDlnState" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etDlnExpiryDate"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="false"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/label_expiry_date"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.dlnExpiredDate}"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/etDlnIssuedDate"
+                    app:layout_constraintTop_toTopOf="@+id/etDlnIssuedDate" />
+
+                <!--Passport-->
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvPassport"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_passport"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etDlnExpiryDate" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etPassport"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:hint="@string/label_number"
+                    android:maxLength="20"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.passportNumber}"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPassport" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/sPassportState"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:text="@={viewModel.passportState}"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:hint="@string/label_state"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toStartOf="@+id/sPassportCountry"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etPassport" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/sPassportCountry"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:text="@={viewModel.passportCountry}"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:hint="@string/label_country"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:focusableInTouchMode="true"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/sPassportState"
+                    app:layout_constraintTop_toTopOf="@+id/sPassportState" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etPassportIssuedDate"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="false"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/label_issued_date"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.passportIssuedDate}"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toStartOf="@+id/etPassportExpiryDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sPassportState" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etPassportExpiryDate"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="false"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/label_expiry_date"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.passportExpiredDate}"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/etPassportIssuedDate"
+                    app:layout_constraintTop_toTopOf="@+id/etPassportIssuedDate" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnNext"
+                    style="@style/ButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:onClick="@{viewModel::onClick}"
+                    android:text="@string/label_next"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etPassportExpiryDate" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

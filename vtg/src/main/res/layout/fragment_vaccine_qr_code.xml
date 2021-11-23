@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.global.vtg.appview.home.qrcode.VaccineQRCodeViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_virus">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/ic_dashboard_bg_light"
+            android:paddingTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/ic_bg_top"
+            android:paddingTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_arrow_back" />
+
+                    <com.global.vtg.utils.textView.SemiBoldTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/label_vaccine_qr_code"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_bg_bottom"/>
+
+        <View
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:background="@color/curve"
+            android:layout_height="@dimen/_6sdp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvQRCode"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clToolbar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardCornerRadius="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_52sdp"
+            android:layout_marginStart="@dimen/_24sdp"
+            android:layout_marginEnd="@dimen/_24sdp"
+            android:layout_marginTop="@dimen/_24sdp"
+            android:layout_width="0dp"
+            android:layout_height="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/ivQRCode"
+                    android:layout_gravity="top|center"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_width="@dimen/_235sdp"
+                    android:layout_height="@dimen/_235sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnShare"
+                    style="@style/ButtonStyle"
+                    android:layout_width="0dp"
+                    android:visibility="gone"
+                    android:layout_marginStart="@dimen/_32sdp"
+                    android:layout_marginEnd="@dimen/_32sdp"
+                    android:onClick="@{viewModel::onClick}"
+                    app:layout_constraintTop_toBottomOf="@id/ivQRCode"
+                    android:text="@string/label_share"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

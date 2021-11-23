@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.global.vtg.appview.home.profile.ProfileViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_virus">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/ic_dashboard_bg_light"
+            android:paddingTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/ic_bg_top"
+            android:paddingTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_arrow_back" />
+
+                    <com.global.vtg.utils.textView.SemiBoldTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/label_profile"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_bg_bottom" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_6sdp"
+            android:background="@color/curve"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_45sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:background="@color/white"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clToolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_44sdp"
+                android:orientation="vertical">
+
+                <com.global.vtg.utils.textView.SBoldTextView
+                    android:id="@+id/tvUserName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_14ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:orientation="horizontal">
+
+                    <com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/label_mobile_number"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
+
+                    <com.global.vtg.utils.textView.RegularTextView
+                        android:id="@+id/tvMobileValue"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:background="@color/light_gray"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/label_profile_city"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
+
+                    <com.global.vtg.utils.textView.RegularTextView
+                        android:id="@+id/tvCityValue"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:background="@color/light_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/label_profile_state"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
+
+                    <com.global.vtg.utils.textView.RegularTextView
+                        android:id="@+id/tvStateValue"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:background="@color/light_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvPostalCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/label_profile_postal_code"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
+
+                    <com.global.vtg.utils.textView.RegularTextView
+                        android:id="@+id/tvPostalCodeValue"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:background="@color/light_gray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvCountry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/label_profile_country"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
+
+                    <com.global.vtg.utils.textView.RegularTextView
+                        android:id="@+id/tvCountryValue"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <com.global.vtg.utils.textView.SemiBoldTextView
+                    android:id="@+id/tvChangePassword"
+                    android:textColor="@color/colorPrimary"
+                    android:gravity="right"
+                    android:padding="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_10sdp"
+                    android:text="@string/label_change_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!--<com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:text="@string/label_profile_address"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
+
+                    <com.global.vtg.utils.textView.RegularTextView
+                        android:id="@+id/tvAddressValue"
+                        android:layout_width="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_height="wrap_content" />-->
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogout"
+                    style="@style/ButtonStyle"
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:layout_marginBottom="@dimen/_32sdp"
+                    android:onClick="@{viewModel::onClick}"
+                    android:text="@string/label_logout"
+                    app:layout_constraintTop_toBottomOf="@+id/cardView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivProfilePic"
+            android:translationZ="10dp"
+            android:layout_width="@dimen/profile_pic"
+            android:layout_height="@dimen/profile_pic"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:onClick="@{viewModel::onClick}"
+            android:src="@drawable/user"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="@dimen/_4sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/cardView"
+            app:layout_constraintBottom_toTopOf="@+id/cardView" />
+
+        <com.global.vtg.utils.textView.SemiBoldTextView
+            android:id="@+id/tvEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivEditImage"
+            android:paddingEnd="@dimen/_16sdp"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            android:text="@string/label_edit"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_10ssp"
+            />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivEditImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationZ="10dp"
+            android:layout_marginStart="@dimen/_minus24sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+            app:layout_constraintTop_toTopOf="@+id/ivProfilePic"
+            app:srcCompat="@drawable/ic_edit" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
