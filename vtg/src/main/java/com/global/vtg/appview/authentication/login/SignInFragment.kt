@@ -51,6 +51,8 @@ class SignInFragment : AppFragment() {
         viewModel.code.value = ccp.defaultCountryCode
         viewModel.region = ccp.defaultCountryNameCode
         ivPassword.setOnClickListener {
+
+            var selction=etLoginPassword.selectionStart
             if (visibility) {
                 visibility = false
                 etLoginPassword.transformationMethod = PasswordTransformationMethod()
@@ -60,10 +62,17 @@ class SignInFragment : AppFragment() {
             } else {
                 visibility = true
                 etLoginPassword.transformationMethod = null
+
                 val drawableCompat =
                     ContextCompat.getDrawable(getAppActivity(), R.mipmap.visibility_on)
                 ivPassword.setImageDrawable(drawableCompat)
             }
+            etLoginPassword.setSelection(selction)
+        }
+
+        etLoginPassword.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+            var selction = etLoginPassword.selectionStart
+            etLoginPassword.setSelection(selction)
         }
         val username =
             SharedPreferenceUtil.INSTANCE?.getData(PreferenceManager.KEY_REMEMBER_ME_USERNAME, "")
@@ -93,11 +102,26 @@ class SignInFragment : AppFragment() {
             viewModel.region = ccp.selectedCountryNameCode
         }
         viewModel.isVendor.observe(this, {
-            swIsClinic.visibility = if (it == true) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            swVendor.visibility=View.VISIBLE
+
+            if (it == true)
+                swIsClinic.visibility=View.INVISIBLE
+            else
+                swIsClinic.visibility=View.VISIBLE
+
+//            swIsClinic.visibility = if (it == true) {
+//                View.VISIBLE
+//            } else {
+//                View.GONE
+//            }
+        })
+        viewModel.isClinic.observe(this, {
+            swIsClinic.visibility=View.VISIBLE
+            if (it == true)
+                swVendor.visibility=View.INVISIBLE
+            else
+                swVendor.visibility=View.VISIBLE
+
         })
 
         viewModel.userLiveData.observe(this, { resources ->
@@ -106,6 +130,20 @@ class SignInFragment : AppFragment() {
                     is Resource.Success -> {
                         (activity as AuthenticationActivity).hideProgressBar()
                         Constants.USER = it.data
+
+                        SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.saveData(
+                                PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
+                                if (viewModel.isVendor.value == true) "Vendor" else "user"
+
+                            )
+                        SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.saveData(
+                                PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
+                                if (viewModel.isClinic.value == true) "Clinic" else "user"
+
+                            )
+
                         when {
                             it.data.step1Complete == false -> {
                                 addFragmentInStack<Any>(AppFragmentState.F_REG_STEP1)

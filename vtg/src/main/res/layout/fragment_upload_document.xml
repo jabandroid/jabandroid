@@ -113,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:gravity="center"
-                    android:text="@string/label_vaccinations"
+                    android:text="@string/label_vaccinations_covid"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_18ssp"
                     app:layout_constraintEnd_toEndOf="parent"

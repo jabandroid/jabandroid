@@ -55,10 +55,17 @@ class RegistrationStep1ViewModel(
                         USER?.birthCity = city.value
                         USER?.birthState = state.value
                         USER?.birthCountry = country.value
-                        USER?.ethnicity = ethnicity.value
+
+                        USER?.ethnicity =
+                            if (ethnicity.value.equals("--Select--")) "" else ethnicity.value
                         USER?.gender = gender.value
                         USER?.twilioUserId = Constants.twilioUserId.toString()
-                        USER?.role = if (isVendor) "vendor" else "user"
+                        if (isVendor)
+                            USER?.role = "vendor"
+                        else if (isClinic)
+                            USER?.role = "clinic"
+                        else "user"
+
                         USER?.isClinic = isClinic == true
                         USER?.step1Complete = true
                         callRegisterStep()

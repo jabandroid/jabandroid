@@ -117,6 +117,7 @@ class OtpFragment : AppFragment() {
         }
         viewModel.createUser()
 
+
         editTexts = arrayOf(edOtp1, edOtp2, edOtp3, edOtp4, edOtp5, edOtp6)
 
         edOtp1.addTextChangedListener(PinTextWatcher(0, editTexts, activity))
@@ -148,10 +149,23 @@ class OtpFragment : AppFragment() {
                     PreferenceManager.KEY_ROLE,
                     if (isVendor == true) "vendor" else "user"
                 )
+
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(
+                    PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
+                    if (isVendor == true) "Vendor" else "user"
+
+                )
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(
+                    PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
+                    if (isClinic == true) "Clinic" else "user"
+
+                )
             SharedPreferenceUtil.getInstance(getAppActivity())
                 ?.saveData(
                     PreferenceManager.KEY_IS_CLINIC,
-                    if (isClinic == true) "vendor" else "user"
+                    if (isClinic == true) "clinic" else "user"
                 )
             if (isFromForgotPassword == true) {
                 val bundle = Bundle()
@@ -276,6 +290,8 @@ class OtpFragment : AppFragment() {
         viewModel.showToastError.observe(this, {
             DialogUtils.showSnackBar(context, it)
         })
+
+
     }
 
     class PinTextWatcher(

@@ -20,7 +20,11 @@ import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.setDrawableRightTouch
 import com.vtg.R
 import com.vtg.databinding.FragmentRegStep3Binding
+import kotlinx.android.synthetic.main.fragment_reg_step1.*
+import kotlinx.android.synthetic.main.fragment_reg_step2.*
 import kotlinx.android.synthetic.main.fragment_reg_step3.*
+import kotlinx.android.synthetic.main.fragment_reg_step3.ivBack
+import kotlinx.android.synthetic.main.fragment_reg_step3.tvTitle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationStep3Fragment : AppFragment() {
@@ -48,6 +52,20 @@ class RegistrationStep3Fragment : AppFragment() {
     }
 
     override fun initializeComponent(view: View?) {
+        var userType= SharedPreferenceUtil.getInstance(getAppActivity())
+            ?.getData(
+                PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
+                ""
+            )
+
+        if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
+            tvTitle.text = "Vendor Step 3"
+        }
+        if (userType.equals("Clinic")) {
+            tvTitle.text = "Lab/Clinic Step 3"
+        } else if (userType.equals("Vendor")) {
+            tvTitle.text = "Vendor Step 3"
+        }
         if (!USER?.address.isNullOrEmpty()) {
             viewModel.firstName.postValue(USER?.address?.get(0)?.firstName)
             viewModel.lastName.postValue(USER?.address?.get(0)?.lastName)

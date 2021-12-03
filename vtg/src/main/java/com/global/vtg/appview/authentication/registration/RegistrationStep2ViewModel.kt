@@ -55,8 +55,11 @@ class RegistrationStep2ViewModel(
                                 )
                             )
                         }
-                        if (!isNullOrEmpty(ssn
-                                .value?.trim())) {
+                        if (!isNullOrEmpty(
+                                ssn
+                                    .value?.trim()
+                            )
+                        ) {
                             document.add(
                                 Document(
                                     type = "SSN",
@@ -118,35 +121,48 @@ class RegistrationStep2ViewModel(
     //validate login fields
     private fun validateFields(): Boolean {
         var isValidate = true
-        when {
+
+
+
+            when {
 //            isNullOrEmpty(ssn.value) -> {
 //                showToastError.postValue(App.instance?.getString(R.string.empty_ssn))
 //                isValidate = false
 //            }
-            isNullOrEmpty(id.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_id_number))
-                isValidate = false
-            }
-            isNullOrEmpty(dln.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_dln))
-                isValidate = false
-            }
-            isNullOrEmpty(dlnState.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_dln_state))
-                isValidate = false
-            }
-            isNullOrEmpty(dlnCountry.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_dln_country))
-                isValidate = false
-            }
-            isNullOrEmpty(dlnIssuedDate.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_dln_issued_date))
-                isValidate = false
-            }
-            isNullOrEmpty(dlnExpiredDate.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_dln_expiry_date))
-                isValidate = false
-            }
+                ( isNullOrEmpty(id.value)&&!isNullOrEmpty(dln.value)) -> {
+//                    showToastError.postValue(App.instance?.getString(R.string.empty_id_number))
+//                    isValidate = false
+                    when {
+                        isNullOrEmpty(dln.value) -> {
+                            showToastError.postValue(App.instance?.getString(R.string.empty_dln))
+                            isValidate = false
+                        }
+                        isNullOrEmpty(dlnState.value) -> {
+                            showToastError.postValue(App.instance?.getString(R.string.empty_dln_state))
+                            isValidate = false
+                        }
+                        isNullOrEmpty(dlnCountry.value) -> {
+                            showToastError.postValue(App.instance?.getString(R.string.empty_dln_country))
+                            isValidate = false
+                        }
+                        isNullOrEmpty(dlnIssuedDate.value) -> {
+                            showToastError.postValue(App.instance?.getString(R.string.empty_dln_issued_date))
+                            isValidate = false
+                        }
+                        isNullOrEmpty(dlnExpiredDate.value) -> {
+                            showToastError.postValue(App.instance?.getString(R.string.empty_dln_expiry_date))
+                            isValidate = false
+                        }
+                    }
+                }
+
+                (!isNullOrEmpty(id.value)&&isNullOrEmpty(dln.value)) -> {
+
+                }
+                (isNullOrEmpty(id.value)&&isNullOrEmpty(dln.value)) -> {
+                    showToastError.postValue(App.instance?.getString(R.string.empty_id_number))
+                    isValidate = false
+                }
 //            isNullOrEmpty(passportNumber.value) -> {
 //                showToastError.postValue(App.instance?.getString(R.string.empty_passport))
 //                isValidate = false
@@ -167,10 +183,11 @@ class RegistrationStep2ViewModel(
 //                showToastError.postValue(App.instance?.getString(R.string.empty_passport_expiry_date))
 //                isValidate = false
 //            }
-            else -> {
-                showToastError.postValue("")
+                else -> {
+                    showToastError.postValue("")
+                }
             }
-        }
+
 
         if (!isValidate)
             return false

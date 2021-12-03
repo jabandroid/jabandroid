@@ -11,11 +11,15 @@ import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
 import com.vtg.R
 import com.vtg.databinding.FragmentRegStep2Binding
+import kotlinx.android.synthetic.main.fragment_reg_step1.*
 import kotlinx.android.synthetic.main.fragment_reg_step2.*
+import kotlinx.android.synthetic.main.fragment_reg_step2.ivBack
+import kotlinx.android.synthetic.main.fragment_reg_step2.tvTitle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -52,6 +56,21 @@ class RegistrationStep2Fragment : AppFragment() {
     }
 
     override fun initializeComponent(view: View?) {
+        var userType= SharedPreferenceUtil.getInstance(getAppActivity())
+            ?.getData(
+                PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
+                ""
+            )
+
+        if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
+            tvTitle.text = "Vendor Step2"
+        }
+        if (userType.equals("Clinic")) {
+            tvTitle.text = "Lab/Clinic Step 2"
+        } else if (userType.equals("Vendor")) {
+            tvTitle.text = "Vendor Step 2"
+        }
+
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }

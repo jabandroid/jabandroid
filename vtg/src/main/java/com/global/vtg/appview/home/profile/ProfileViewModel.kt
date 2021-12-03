@@ -74,4 +74,11 @@ class ProfileViewModel(application: Application, private val userRepository: Use
             userRepository.uploadProfile(part, id)
         }
     }
+
+
+    fun getUser() {
+        scope.launch {
+            userRepository.getUser()
+        }
+    }
 }

@@ -27,6 +27,7 @@ class AuthenticationActivity : AppActivity() {
     override fun initializeComponent() {
         userType = intent?.getIntExtra(USER_TYPE, 1)
         replaceAllFragment<Any>(AppFragmentState.F_SIGN_IN)
+
     }
 
     fun showProgressBar() {

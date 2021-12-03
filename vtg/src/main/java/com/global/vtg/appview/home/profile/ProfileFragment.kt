@@ -71,7 +71,9 @@ class ProfileFragment : AppFragment() {
         tvUserName.text = USER?.firstName + " " + USER?.lastName
         tvMobileValue.text = USER?.mobileNo
         loadAddress()
-
+        viewModel.getUser()
+        if (!USER!!.profileUrl.isNullOrEmpty())
+            ivProfilePic.setGlideNormalImage(USER!!.profileUrl)
         viewModel.uploadProfilePic.observe(this, {
             DialogUtils.okCancelNeutralDialog(
                 context,

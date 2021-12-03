@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.fragment_registration.*
 import kotlinx.android.synthetic.main.fragment_registration.ccp
 import kotlinx.android.synthetic.main.fragment_registration.etLoginPassword
 import kotlinx.android.synthetic.main.fragment_registration.ivPassword
-import kotlinx.android.synthetic.main.fragment_signin.*
+
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import android.text.method.LinkMovementMethod
 
@@ -42,6 +42,12 @@ import android.text.style.UnderlineSpan
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.BUNDLE_IS_CLINIC
 import kotlinx.android.synthetic.main.fragment_help.*
+import android.view.View.OnFocusChangeListener
+
+import android.R.string.no
+
+
+
 
 
 class RegistrationFragment : AppFragment() {
@@ -92,10 +98,11 @@ class RegistrationFragment : AppFragment() {
         spannableStringPolicies?.setSpan(ForegroundColorSpan(resources.getColor(R.color.colorPrimary, null)), startPosTermsAndCondition, startPosTermsAndCondition + 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannableStringPolicies?.setSpan(ForegroundColorSpan(resources.getColor(R.color.colorPrimary, null)), startPosPrivacyPolicy, startPosPrivacyPolicy + 14, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
 
-        cbTermsCondition.text = spannableStringPolicies
-        cbTermsCondition.movementMethod = LinkMovementMethod.getInstance()
+        textTerm.text = spannableStringPolicies
+        textTerm.movementMethod = LinkMovementMethod.getInstance()
 
         ivPassword.setOnClickListener {
+            var selction=etLoginPassword.selectionStart
             if (visibility) {
                 visibility = false
                 etLoginPassword.transformationMethod = PasswordTransformationMethod()
@@ -107,17 +114,46 @@ class RegistrationFragment : AppFragment() {
                 val drawableCompat = ContextCompat.getDrawable(getAppActivity(), R.mipmap.visibility_on)
                 ivPassword.setImageDrawable(drawableCompat)
             }
+
+            etLoginPassword.setSelection(selction)
+        }
+
+        etLoginPassword.onFocusChangeListener = OnFocusChangeListener { view, hasFocus ->
+            var selction=etLoginPassword.selectionStart
+            etLoginPassword.setSelection(selction)
         }
         viewModel.code.value = ccp.defaultCountryCode
         viewModel.region = ccp.defaultCountryNameCode
 
         viewModel.isVendor.observe(this, {
-            swClinic.visibility = if (it == true) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            swVendor.visibility=View.VISIBLE
+            if (it == true)
+                swClinic.visibility=View.INVISIBLE
+            else
+                swClinic.visibility=View.VISIBLE
+
+//            swIsClinic.visibility = if (it == true) {
+//                View.VISIBLE
+//            } else {
+//                View.GONE
+//            }
         })
+        viewModel.isClinic.observe(this, {
+            swClinic.visibility=View.VISIBLE
+            if (it == true)
+                swVendor.visibility=View.INVISIBLE
+            else
+                swVendor.visibility=View.VISIBLE
+
+        })
+
+//        viewModel.isVendor.observe(this, {
+//            swClinic.visibility = if (it == true) {
+//                View.VISIBLE
+//            } else {
+//                View.GONE
+//            }
+//        })
 
         ccp.setOnCountryChangeListener {
             viewModel.code.value = ccp.selectedCountryCode

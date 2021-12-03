@@ -31,38 +31,38 @@ interface ApiInterface {
     @POST("api/register")
     fun signup(@Body reqSingup: ReqSingup): Deferred<Response<Response<ResSingup>>>*/
 
-    @GET("/api/v1/user")
+    @GET("api/v1/user")
     fun loginAsync(): Deferred<Response<ResUser>>
 
-    @GET("/api/v1/config")
+    @GET("api/v1/config")
     fun getConfigAsync(): Deferred<Response<ResConfig>>
 
-    @POST("/api/v1/user")
+    @POST("api/v1/user")
     fun registerAsync(@Body reqRegister: ReqRegistration): Deferred<Response<ResUser>>
 
-    @PUT("/api/v1/user")
+    @PUT("api/v1/user")
     fun registerStep1Async(@Body reqRegister: ResUser): Deferred<Response<ResUser>>
 
-    @POST("/api/payment/user")
+    @POST("api/payment/user")
     fun makePaymentAsync(@Body reqPayment: ReqPayment): Deferred<Response<BaseResult>>
 
-    @PUT("/api/v1/user/password")
+    @PUT("api/v1/user/password")
     fun forgotPasswordAsync(@Body req: ReqRegistration): Deferred<Response<BaseResult>>
 
-    @PUT("/api/v1/user")
+    @PUT("api/v1/user")
     fun changePasswordAsync(@Body modelReq: ResUser): Deferred<Response<ResUser>>
 
-    @GET("/api/v1/user")
+    @GET("api/v1/user")
     fun getUserAsync(): Deferred<Response<ResUser>>
 
-    @GET("/api/v1/barcode/{barcodeId}")
+    @GET("api/v1/barcode/{barcodeId}")
     fun scanBarcodeIdAsync(@Path("barcodeId") barcodeId: String): Deferred<Response<ResUser>>
 
-    @GET("/api/v1/institute/{name}")
+    @GET("api/v1/institute/{name}")
     fun searchInstituteAsync(@Path("name") name: String): Deferred<Response<ResInstitute>>
 
     @Multipart
-    @POST("/api/v1/vaccine/upload")
+    @POST("api/v1/vaccine/upload")
     fun uploadVaccineAsync(
         @Part file: MultipartBody.Part,
         @Part("type") type: RequestBody?,
@@ -76,7 +76,7 @@ interface ApiInterface {
     ): Deferred<Response<ResUser>>
 
     @Multipart
-    @POST("/api/v1/healthinfo/upload")
+    @POST("api/v1/healthinfo/upload")
     fun uploadHealthInfoAsync(
         @Part file: MultipartBody.Part?,
         @Part("userId") userId: RequestBody?,
@@ -89,14 +89,14 @@ interface ApiInterface {
     ): Deferred<Response<ResUser>>
 
     @Multipart
-    @PUT("/api/v1/user/profile")
+    @PUT("api/v1/user/profile")
     fun uploadProfileAsync(
         @Part file: MultipartBody.Part?,
         @Part("userId") userId: RequestBody?
     ): Deferred<Response<ResProfile>>
 
     @Multipart
-    @PUT("/api/v1/vendor/upload")
+    @PUT("api/v1/vendor/upload")
     fun uploadVendorStep2Async(
         @Part file: MultipartBody.Part?,
         @Part("vendorId") vendorId: RequestBody?,

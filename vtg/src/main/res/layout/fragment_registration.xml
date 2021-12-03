@@ -209,58 +209,79 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivPassword"
-                app:layout_constraintTop_toBottomOf="@+id/tvRegistrationPassword"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_28sdp"
                 android:src="@mipmap/visibility_off"
                 app:layout_constraintBottom_toBottomOf="@id/etLoginPassword"
-                android:layout_marginEnd="@dimen/_28sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvRegistrationPassword" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/swVendor"
-                app:thumbTint="@drawable/newthumb"
-                app:trackTint="@drawable/newtrack"
-                android:trackTint="@drawable/newtrack"
-                android:thumbTint="@drawable/newthumb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:checked="@={viewModel.isVendor}"
                 android:layout_marginEnd="@dimen/_16sdp"
+                android:checked="@={viewModel.isVendor}"
                 android:fontFamily="@font/proximanovareg"
                 android:text="@string/label_vendor_login"
+                android:thumbTint="@drawable/newthumb"
+                android:trackTint="@drawable/newtrack"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etLoginPassword"
-                app:switchPadding="@dimen/_8sdp" />
+                app:switchPadding="@dimen/_8sdp"
+                app:thumbTint="@drawable/newthumb"
+                app:trackTint="@drawable/newtrack" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/swClinic"
-                app:thumbTint="@drawable/newthumb"
-                app:trackTint="@drawable/newtrack"
-                android:trackTint="@drawable/newtrack"
-                android:thumbTint="@drawable/newthumb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
-                android:checked="@={viewModel.isClinic}"
                 android:layout_marginEnd="@dimen/_16sdp"
+                android:checked="@={viewModel.isClinic}"
                 android:fontFamily="@font/proximanovareg"
                 android:text="@string/label_clinic"
+                android:thumbTint="@drawable/newthumb"
+                android:trackTint="@drawable/newtrack"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etLoginPassword"
-                app:switchPadding="@dimen/_8sdp" />
+                app:switchPadding="@dimen/_8sdp"
+                app:thumbTint="@drawable/newthumb"
+                app:trackTint="@drawable/newtrack" />
 
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/cbTermsCondition"
-                android:text="@string/label_accept_terms"
+            <LinearLayout
+                android:id="@+id/term_root"
                 android:layout_width="match_parent"
-                app:buttonTint="@color/colorPrimary"
-                app:layout_constraintTop_toBottomOf="@+id/swVendor"
-                android:layout_marginStart="@dimen/_16sdp"
-                android:checked="@={viewModel.acceptedTerms}"
-                android:fontFamily="@font/proximanovareg"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+
+                app:layout_constraintTop_toBottomOf="@+id/swVendor">
+
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/cbTermsCondition"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:checked="@={viewModel.acceptedTerms}"
+                    android:fontFamily="@font/proximanovareg"
+                    android:gravity="center_vertical"
+                    app:buttonTint="@color/colorPrimary" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textTerm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:fontFamily="@font/proximanovareg"
+                    android:gravity="center_vertical"
+                    android:text="@string/label_accept_terms"
+                    app:buttonTint="@color/colorPrimary" />
+
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnRegister"
@@ -273,7 +294,7 @@
                 android:text="@string/label_register"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cbTermsCondition" />
+                app:layout_constraintTop_toBottomOf="@+id/term_root" />
 
             <com.global.vtg.utils.textView.RegularTextView
                 android:id="@+id/tvRegistrationSignIn"

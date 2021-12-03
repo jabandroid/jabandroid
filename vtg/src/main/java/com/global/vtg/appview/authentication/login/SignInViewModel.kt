@@ -15,6 +15,7 @@ import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.isValidPhoneNumber
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
+import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import kotlinx.coroutines.launch
@@ -73,10 +74,12 @@ class SignInViewModel(
                     if (validateFields()) {
                         showProgress.postValue(true)
                         preferenceManager.saveRole(
-                            if (isVendor.value == true && isClinic.value == true) "clinic"
+                            //if (isVendor.value == true && isClinic.value == true) "clinic"
+                            if ( isClinic.value == true) "clinic"
                             else if (isVendor.value == true) "vendor"
                             else "user"
                         )
+
                         preferenceManager.saveIsClinic(
                             (isClinic.value == true)
                         )

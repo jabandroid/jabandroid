@@ -137,8 +137,8 @@
     <string name="label_resend_otp"><u><b><font fgcolor='#1D4792'>Resend OTP</font></b></u></string>
     <string name="label_verify">Verify</string>
     <string name="label_send">Send</string>
-    <string name="label_vendor_login">Is Vendor ?</string>
-    <string name="label_clinic">Is Clinic ?</string>
+    <string name="label_vendor_login">Vendor</string>
+    <string name="label_clinic">Clinic</string>
 
     <!-- Dashboard -->
     <string name="label_vaccine_history">Vaccine History</string>
@@ -154,8 +154,10 @@
     <string name="label_logout">Logout</string>
     <string name="label_share">Share</string>
     <string name="label_vaccinations">Vaccinations</string>
-    <string name="label_vaccinated_on">Vaccinated On</string>
+    <string name="label_vaccinations_covid">Covid Test</string>
+    <string name="label_vaccinated_on">Tested On</string>
     <string name="label_upload_text">Click to upload document \n(PDF/JPG/PNG Max 5MB)</string>
+    <string name="label_upload_text_b">Click to upload business \n(PDF/JPG/PNG Max 5MB)</string>
     <string name="label_doc_name">Selected Document: %s</string>
 
     <string name="label_hospital">Institute:\u0020</string>
@@ -257,14 +259,14 @@
     <string name="empty_business_name">Please enter Business Name.</string>
     <string name="empty_business_id">Please enter Business ID.</string>
     <string name="empty_employee_id">Please enter Employee Id.</string>
-    <string name="empty_dln">Please enter your driving license number.</string>
-    <string name="empty_dln_state">Please select your driving license state.</string>
-    <string name="empty_dln_country">Please select your driving license country.</string>
+    <string name="empty_dln">Please enter your driver license number.</string>
+    <string name="empty_dln_state">Please select your driver license state.</string>
+    <string name="empty_dln_country">Please select your driver license country.</string>
     <string name="empty_passport">Please enter your passport number.</string>
     <string name="empty_passport_state">Please select your Passport state.</string>
     <string name="empty_passport_country">Please select your Passport country.</string>
-    <string name="empty_dln_issued_date">Please select your driving license issued date.</string>
-    <string name="empty_dln_expiry_date">Please select your driving license expiry date.</string>
+    <string name="empty_dln_issued_date">Please select your driver license issued date.</string>
+    <string name="empty_dln_expiry_date">Please select your driver license expiry date.</string>
     <string name="empty_passport_issued_date">Please select your passport issued date.</string>
     <string name="empty_passport_expiry_date">Please select your passport expiry date.</string>
     <string name="empty_address1">Please enter an Mailing Address 1.</string>
@@ -281,6 +283,7 @@
     </string-array>
 
     <string-array name="ethnicity">
+        <item>--Select--</item>
         <item>White</item>
         <item>African American</item>
         <item>Native American</item>

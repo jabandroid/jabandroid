@@ -293,7 +293,7 @@
                 android:layout_marginStart="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_16sdp"
                 android:text="@string/label_clinic"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:fontFamily="@font/proximanovareg"
                 android:layout_height="wrap_content"
                 app:switchPadding="@dimen/_8sdp"

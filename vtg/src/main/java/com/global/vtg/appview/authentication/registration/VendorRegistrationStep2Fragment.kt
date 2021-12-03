@@ -17,8 +17,10 @@ import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentRegVendorStep2Binding
+
 import kotlinx.android.synthetic.main.fragment_reg_step2.ivBack
 import kotlinx.android.synthetic.main.fragment_reg_vendor_step2.*
+import kotlinx.android.synthetic.main.fragment_reg_vendor_step2.etId
 import kotlinx.android.synthetic.main.fragment_upload_document.*
 import kotlinx.android.synthetic.main.fragment_upload_document.cvUploadDocument
 import kotlinx.android.synthetic.main.fragment_upload_document.ivCancel
@@ -60,6 +62,10 @@ class VendorRegistrationStep2Fragment : AppFragment() {
     }
 
     override fun initializeComponent(view: View?) {
+
+        if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
+            tvTitleMain!!.text = "Vendor Step 2"
+        }
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }

@@ -58,7 +58,7 @@
                         app:srcCompat="@drawable/ic_arrow_back" />
 
                     <com.global.vtg.utils.textView.SemiBoldTextView
-                        android:id="@+id/tvTitle"
+                        android:id="@+id/tvTitleMain"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -142,7 +142,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/_12sdp"
                             android:gravity="center"
-                            android:text="@string/label_upload_text"
+                            android:text="@string/label_upload_text_b"
                             android:textSize="@dimen/_8ssp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
