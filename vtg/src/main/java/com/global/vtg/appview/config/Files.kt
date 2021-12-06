@@ -94,7 +94,7 @@ private fun Uri.checkAuthority(context: Context): String? {
                         return getDataColumn(context, contentUri, null, null)
                     } catch (e: NumberFormatException) {
                         //In Android 8 and Android P the id is not a number
-                        this.path.replaceFirst("^/document/raw:", "").replaceFirst("^raw:", "")
+                        this.path!!.replaceFirst("^/document/raw:", "").replaceFirst("^raw:", "")
                     }
                 }
             }

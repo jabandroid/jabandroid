@@ -76,14 +76,14 @@ object ImageFilePath {
         } else if ("content".equals(uri.scheme, ignoreCase = true)) {
 
             // Return the remote address
-            return if (isGooglePhotosUri(uri)) uri.lastPathSegment else getDataColumn(
+            return if (isGooglePhotosUri(uri)) uri.lastPathSegment!! else getDataColumn(
                 context,
                 uri,
                 null,
                 null
             )
         } else if ("file".equals(uri.scheme, ignoreCase = true)) {
-            return uri.path
+            return uri.path!!
         }
         return nopath
     }
@@ -111,7 +111,7 @@ object ImageFilePath {
         val projection = arrayOf(column)
         try {
             cursor = context.contentResolver.query(
-                uri, projection,
+                uri!!, projection,
                 selection, selectionArgs, null
             )
             if (cursor != null && cursor.moveToFirst()) {

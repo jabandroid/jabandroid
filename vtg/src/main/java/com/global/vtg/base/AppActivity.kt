@@ -25,7 +25,7 @@ import com.global.vtg.appview.authentication.registration.RegistrationStep2Fragm
 import com.global.vtg.appview.authentication.registration.RegistrationStep3Fragment
 import com.global.vtg.appview.config.*
 import com.global.vtg.base.fragment.notifyFragment
-import com.global.vtg.test.Const.BASE_URL
+
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.AUTOCOMPLETE_REQUEST_CODE
 import com.global.vtg.utils.Constants.CONFIG
@@ -49,6 +49,7 @@ import com.braintreepayments.api.dropin.DropInResult
 
 import android.R.attr.data
 import com.braintreepayments.api.dropin.DropInActivity
+import com.global.vtg.utils.Constants.BASE_URL
 
 
 abstract class AppActivity : AppCompatActivity() {
@@ -253,7 +254,7 @@ abstract class AppActivity : AppCompatActivity() {
 
         var filePath: String? = ""
 
-        val columnIndex = cursor.getColumnIndex(column[0])
+        val columnIndex = cursor!!.getColumnIndex(column[0])
 
         if (cursor.moveToFirst()) {
             filePath = cursor.getString(columnIndex)
@@ -267,7 +268,7 @@ abstract class AppActivity : AppCompatActivity() {
         val result: String
         val cursor = contentResolver.query(contentURI, null, null, null, null)
         if (cursor == null) { // Source is Dropbox or other similar local file path
-            result = contentURI.path
+            result = contentURI.path!!
         } else {
             cursor.moveToFirst()
             val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
@@ -280,7 +281,7 @@ abstract class AppActivity : AppCompatActivity() {
     open fun getRealPathFromURI(context: Context, uri: Uri?): String? {
         var result: String? = null
         val proj = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = context.contentResolver.query(uri, proj, null, null, null)
+        val cursor = context.contentResolver.query(uri!!, proj, null, null, null)
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 val columnIndex = cursor.getColumnIndexOrThrow(proj[0])
@@ -306,7 +307,7 @@ abstract class AppActivity : AppCompatActivity() {
     open fun isNetworkAvailable(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo.isConnected
+        return connectivityManager.activeNetworkInfo != null && connectivityManager.activeNetworkInfo!!.isConnected
     }
 
     fun onSearchCalled(requestCode: Int) {

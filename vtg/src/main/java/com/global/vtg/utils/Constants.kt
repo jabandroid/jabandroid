@@ -21,6 +21,9 @@ import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
  */
 object Constants {
 
+
+    const val BASE_URL = "https://vaxserver.com/"
+
     var PREFERENCE_NAME = "pref_app_name"
 
     const val MAX_CLICK_INTERVAL: Long = 500//Max time interval to prevent double click

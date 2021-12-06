@@ -253,7 +253,7 @@ class PickMediaExtensions {
                             if (context?.let {
                                     getMimeType(
                                         it,
-                                        data.data
+                                        data.data!!
                                     )?.contains("image/")
                                 } == true) {
                                 cropImage()
@@ -275,13 +275,14 @@ class PickMediaExtensions {
             }
         }
 
+        @SuppressLint("Range")
         fun getOriginalPath(uriString: String, file: File) {
             try {
                 if (uriString.startsWith("content://")) {
                     var cursor: Cursor? = null
                     try {
                         cursor =
-                            context?.contentResolver?.query(imageUri, null, null, null, null)
+                            context?.contentResolver?.query(imageUri!!, null, null, null, null)
                         if (cursor != null && cursor.moveToFirst()) {
                             displayName =
                                 cursor.getString(

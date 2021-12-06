@@ -287,7 +287,7 @@ class VideoPicker(private val context: Context, private val imagePickerInterface
                 if (onGetBitmapListener != null) {
                     val fileURI = Uri.fromFile(videoFile)
                     val filePath = imagePath?.replace(fileURI.scheme + ":", "")
-                    val thumbnail = ThumbnailUtils.createVideoThumbnail(filePath, MediaStore.Video.Thumbnails.MINI_KIND)
+                    val thumbnail = ThumbnailUtils.createVideoThumbnail(filePath!!, MediaStore.Video.Thumbnails.MINI_KIND)
 
 
                     if (thumbnail != null)
@@ -392,7 +392,7 @@ class VideoPicker(private val context: Context, private val imagePickerInterface
             } else
                 Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, true)
 
-            val exif = ExifInterface(path)
+            val exif = ExifInterface(path!!)
             val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
 
             scaledBitmap = preventAutoRotate(scaledBitmap, orientation)
@@ -417,16 +417,16 @@ class VideoPicker(private val context: Context, private val imagePickerInterface
 
 
                 val returnUri = data.data
-                val returnCursor = context.contentResolver.query(returnUri, null, null, null, null)
-                val sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE)
-                returnCursor.moveToFirst()
-                if (returnCursor.getLong(sizeIndex).toDouble() / 1024 / 1024 < VIDEO_FILE_SIZE / 1024 / 1024) {
+                val returnCursor = context.contentResolver.query(returnUri!!, null, null, null, null)
+                val sizeIndex = returnCursor!!.getColumnIndex(OpenableColumns.SIZE)
+                returnCursor!!.moveToFirst()
+                if (returnCursor!!.getLong(sizeIndex).toDouble() / 1024 / 1024 < VIDEO_FILE_SIZE / 1024 / 1024) {
                     this.uri = data.data
                     getBitmap(data.data, true)
                 } else {
                     DialogUtils.dialog(context, String.format(context.getString(R.string.txt_file_toolarge), VIDEO_FILE_SIZE))
                 }
-                returnCursor.close()
+                returnCursor!!.close()
             }
         }
     }

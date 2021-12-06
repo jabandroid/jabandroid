@@ -343,7 +343,7 @@ class ImagePicker(private val context: Context, private val imagePickerInterface
             } else
                 scaledBitmap = Bitmap.createScaledBitmap(bitmap, bitmap.width, bitmap.height, true)
 
-            val exif = ExifInterface(path)
+            val exif = ExifInterface(path!!)
             val orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_UNDEFINED)
 
             scaledBitmap = preventAutoRotate(scaledBitmap, orientation)
