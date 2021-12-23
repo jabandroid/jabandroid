@@ -1,9 +1,11 @@
 package com.global.vtg.appview.home.vaccinehistory
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,9 +16,9 @@ import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.utils.Constants
 import com.vtg.R
 import com.vtg.databinding.FragmentVaccineHistoryBinding
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_vaccine_history.*
-import kotlinx.android.synthetic.main.fragment_vaccine_history.ivProfilePic
+
+
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -40,6 +42,7 @@ class VaccineHistoryFragment : AppFragment() {
         return mFragmentBinding
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
         ivBack.setOnClickListener {
             activity?.onBackPressed()
@@ -48,7 +51,10 @@ class VaccineHistoryFragment : AppFragment() {
         if (!Constants.USER?.profileUrl.isNullOrEmpty())
             ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl)
 
-        tvUserName.text = Constants.USER?.firstName + " " + Constants.USER?.lastName
+
+        if(!TextUtils.isEmpty(Constants.USER?.firstName!!)&&!TextUtils.isEmpty(Constants.USER?.lastName!!))
+        tvUserNam.text = Constants.USER?.firstName!!.replace("null","") + " " + Constants.USER?.lastName!!.replace("null","")
+
         rvVaccineList.layoutManager = LinearLayoutManager(context)
         adapter = VaccineHistoryAdapter(getAppActivity())
         rvVaccineList.adapter = adapter

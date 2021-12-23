@@ -1,9 +1,11 @@
 package com.global.vtg.appview.home.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
+import com.global.vtg.appview.config.ResConfig
 import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.base.AppFragment
@@ -14,26 +16,28 @@ import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.SharedPreferenceUtil
+import com.global.vtg.utils.ToastUtils
+import com.global.vtg.wscoroutine.ApiInterface
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.gson.Gson
 import com.vtg.R
 import com.vtg.databinding.FragmentDashboardBinding
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.ivProfilePic
 import kotlinx.android.synthetic.main.fragment_dashboard.tvCountry
 import kotlinx.android.synthetic.main.fragment_dashboard.tvState
+import okhttp3.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.io.IOException
 
-class DashboardFragment : AppFragment(), DashboardAdapter.ClickListener {
+class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
     private lateinit var mFragmentBinding: FragmentDashboardBinding
     private val viewModel by viewModel<DashboardViewModel>()
     private lateinit var viewPager2Adapter: ViewPager2Adapter
-    private var titleList = ArrayList<String>()
+    private lateinit var viewPagerDash: ViewPagerDashAdapter
 
-    private val imagesList = arrayListOf(
-        R.drawable.ic_woman, R.drawable.ic_vaccine_history,
-        R.drawable.ic_vaccine_card, R.drawable.ic_qr_code, R.drawable.ic_health_information,
-        R.drawable.ic_travel_information
-    )
+    private val client = OkHttpClient()
+
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_dashboard
@@ -55,10 +59,20 @@ class DashboardFragment : AppFragment(), DashboardAdapter.ClickListener {
         viewModel.getUser()
         viewPager2Adapter = ViewPager2Adapter(getAppActivity())
         viewPager.adapter = viewPager2Adapter
-        TabLayoutMediator(vpDots, viewPager) { _, _ ->
+
+        viewPagerDash = ViewPagerDashAdapter(getAppActivity())
+        viewPager_dash.adapter = viewPagerDash
+        TabLayoutMediator(vpDots, viewPager_dash) { _, _ ->
             //Some implementation
         }.attach()
 
+        viewPagerDash.setImages(
+            arrayListOf(
+                "1","2"
+            )
+        )
+
+        viewPagerDash.setListenerPager(this)
         ivQrCode.setOnClickListener {
             addFragmentInStack<Any>(AppFragmentState.F_VACCINE_QR_CODE)
         }
@@ -68,25 +82,10 @@ class DashboardFragment : AppFragment(), DashboardAdapter.ClickListener {
 
         viewPager2Adapter.setImages(
             arrayListOf(
-                "https://i.ibb.co/s6MgjJR/Mask-Group-2.png",
-                "https://i.ibb.co/s6MgjJR/Mask-Group-2.png",
                 "https://i.ibb.co/s6MgjJR/Mask-Group-2.png"
             )
         )
-        titleList = arrayListOf(
-            resources.getString(R.string.label_profile),
-            resources.getString(R.string.label_my_vaccine_history),
-            resources.getString(R.string.label_my_vaccine_card),
-            resources.getString(R.string.label_my_qr_code),
-            resources.getString(R.string.label_health_information),
-            resources.getString(R.string.label_travel_information)
-        )
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        val dashboardAdapter = DashboardAdapter(
-            getAppActivity(), titleList, imagesList
-        )
-        dashboardAdapter.setListener(this)
-        recyclerView.adapter = dashboardAdapter
+
 
         viewModel.userConfigLiveData.observe(this, {
             when (it) {
@@ -110,28 +109,7 @@ class DashboardFragment : AppFragment(), DashboardAdapter.ClickListener {
 
     }
 
-    override fun onItemClick(position: Int) {
-        when (position) {
-            0 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
-            }
-            1 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_VACCINE_HISTORY)
-            }
-            2 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_VACCINE_CARD)
-            }
-            3 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_VACCINE_QR_CODE)
-            }
-            4 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_HEALTH_INFORMATION)
-            }
-            5 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_PAYMENT)
-            }
-        }
-    }
+
 
     private fun loadData() {
         if (!Constants.USER?.address.isNullOrEmpty()) {
@@ -140,7 +118,7 @@ class DashboardFragment : AppFragment(), DashboardAdapter.ClickListener {
             var country = Constants.USER?.address?.get(0)?.country
             country = country?.let { getCountryCode(it) }
             if (country.isNullOrEmpty()) {
-                ivCountry.visibility = View.INVISIBLE
+                ivCountry.visibility = View.GONE
             } else {
                 ivCountry.visibility = View.VISIBLE
                 country.let { ivCountry.setCountryForNameCode(it) }
@@ -153,4 +131,37 @@ class DashboardFragment : AppFragment(), DashboardAdapter.ClickListener {
         if (!Constants.USER?.profileUrl.isNullOrEmpty())
             ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl)
     }
+
+    override fun onItemClickMain(position: Int) {
+        when (position) {
+            1 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
+            }
+            2 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_VACCINE_HISTORY)
+            }
+            3 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_VACCINE_QR_CODE)
+
+            }
+            4 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_TEST)
+
+            }
+            5 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_VACCINE_CARD)
+            }
+            6 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_HEALTH_INFORMATION)
+            }
+            else ->{
+                ToastUtils.shortToast(0,"Coming soon")
+            }
+//            5 -> {
+//                addFragmentInStack<Any>(AppFragmentState.F_PAYMENT)
+//            }
+        }
+    }
+
+
 }

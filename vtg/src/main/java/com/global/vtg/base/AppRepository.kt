@@ -1,6 +1,7 @@
 package com.global.vtg.base
 
 
+import android.util.Log
 import com.global.vtg.model.network.Resource
 import com.global.vtg.model.network.result.BaseError
 import com.global.vtg.model.network.result.BaseResult
@@ -26,6 +27,7 @@ open class AppRepository {
     suspend fun <T : BaseResult> safeApiResult(call: suspend () -> Response<T>): Resource<T> {
         try {
             val response = call.invoke()
+            Log.e("REsponse","REsponse"+response.toString())
             if (response.isSuccessful) {
                 if (response.body() != null && response.body() is BaseResult) {
                     val baseResult = response.body() as BaseResult

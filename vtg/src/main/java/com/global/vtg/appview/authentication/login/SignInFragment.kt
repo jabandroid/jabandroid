@@ -7,6 +7,7 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.appview.authentication.AuthenticationActivity
+import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
@@ -52,7 +53,7 @@ class SignInFragment : AppFragment() {
         viewModel.region = ccp.defaultCountryNameCode
         ivPassword.setOnClickListener {
 
-            var selction=etLoginPassword.selectionStart
+            var selction = etLoginPassword.selectionStart
             if (visibility) {
                 visibility = false
                 etLoginPassword.transformationMethod = PasswordTransformationMethod()
@@ -102,12 +103,12 @@ class SignInFragment : AppFragment() {
             viewModel.region = ccp.selectedCountryNameCode
         }
         viewModel.isVendor.observe(this, {
-            swVendor.visibility=View.VISIBLE
+            swVendor.visibility = View.VISIBLE
 
             if (it == true)
-                swIsClinic.visibility=View.INVISIBLE
+                swIsClinic.visibility = View.INVISIBLE
             else
-                swIsClinic.visibility=View.VISIBLE
+                swIsClinic.visibility = View.VISIBLE
 
 //            swIsClinic.visibility = if (it == true) {
 //                View.VISIBLE
@@ -116,11 +117,11 @@ class SignInFragment : AppFragment() {
 //            }
         })
         viewModel.isClinic.observe(this, {
-            swIsClinic.visibility=View.VISIBLE
+            swIsClinic.visibility = View.VISIBLE
             if (it == true)
-                swVendor.visibility=View.INVISIBLE
+                swVendor.visibility = View.INVISIBLE
             else
-                swVendor.visibility=View.VISIBLE
+                swVendor.visibility = View.VISIBLE
 
         })
 
@@ -134,32 +135,30 @@ class SignInFragment : AppFragment() {
                         SharedPreferenceUtil.getInstance(getAppActivity())
                             ?.saveData(
                                 PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
-                                if (viewModel.isVendor.value == true) "Vendor" else "user"
-
-                            )
-                        SharedPreferenceUtil.getInstance(getAppActivity())
-                            ?.saveData(
-                                PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
-                                if (viewModel.isClinic.value == true) "Clinic" else "user"
+                                if (viewModel.isVendor.value == true) "Vendor"
+                                else if (viewModel.isClinic.value == true) "Clinic"
+                                else "user"
 
                             )
 
-                        when {
-                            it.data.step1Complete == false -> {
-                                addFragmentInStack<Any>(AppFragmentState.F_REG_STEP1)
-                            }
-                            it.data.step2Complete == false -> {
-                                if (it.data.role.equals("ROLE_VENDOR", true) || it.data.role.equals("ROLE_CLINIC", true))
-                                    addFragmentInStack<Any>(AppFragmentState.F_VENDOR_STEP2)
-                                else addFragmentInStack<Any>(AppFragmentState.F_REG_STEP2)
-                            }
-                            it.data.step3Complete == false -> {
-                                addFragmentInStack<Any>(AppFragmentState.F_REG_STEP3)
-                            }
-                            else -> {
-                                viewModel.loginLiveData.postValue(true)
-                            }
-                        }
+                        viewModel.loginLiveData.postValue(true)
+
+                        /*   when {
+                                    it.data.step1Complete == false -> {
+                                        addFragmentInStack<Any>(AppFragmentState.F_REG_STEP1)
+                                    }
+                                    it.data.step2Complete == false -> {
+                                        if (it.data.role.equals("ROLE_VENDOR", true) || it.data.role.equals("ROLE_CLINIC", true))
+                                            addFragmentInStack<Any>(AppFragmentState.F_VENDOR_STEP2)
+                                        else addFragmentInStack<Any>(AppFragmentState.F_REG_STEP2)
+                                    }
+                                    it.data.step3Complete == false -> {
+                                        addFragmentInStack<Any>(AppFragmentState.F_REG_STEP3)
+                                    }
+                                    else -> {
+                                        viewModel.loginLiveData.postValue(true)
+                                    }
+                                }*/
                     }
                     is Resource.Error -> {
                         (activity as AuthenticationActivity).hideProgressBar()
@@ -276,12 +275,15 @@ class SignInFragment : AppFragment() {
                     PreferenceManager.KEY_USER_LOGGED_IN,
                     true
                 )
-            val intent: Intent = if (Constants.USER?.role.equals("ROLE_USER")
-                || Constants.USER?.role.equals("ROLE_CLINIC")) {
-                Intent(activity, HomeActivity::class.java)
-            } else {
-                Intent(activity, VendorActivity::class.java)
-            }
+            val intent: Intent =
+                if (Constants.USER?.role.equals("ROLE_USER")
+                ) {
+                    Intent(activity, HomeActivity::class.java)
+                } else if (Constants.USER?.role.equals("ROLE_CLINIC")) {
+                    Intent(activity, ClinicActivity::class.java)
+                } else {
+                    Intent(activity, VendorActivity::class.java)
+                }
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         })

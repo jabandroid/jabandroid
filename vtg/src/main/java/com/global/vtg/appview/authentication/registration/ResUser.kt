@@ -18,7 +18,10 @@ data class ResUser(
     var gender: String? = null,
 
     @field:SerializedName("lastName")
-    var lastName: String? = null,
+    var lastName: String? = "",
+
+    @field:SerializedName("website")
+    var website: String? = null,
 
     @field:SerializedName("twilioUserId")
     var twilioUserId: String? = null,
@@ -69,7 +72,7 @@ data class ResUser(
     var title: String? = null,
 
     @field:SerializedName("firstName")
-    var firstName: String? = null,
+    var firstName: String? = "",
 
     @field:SerializedName("step1Complete")
     var step1Complete: Boolean? = null,

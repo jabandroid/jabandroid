@@ -1,11 +1,13 @@
 package com.global.vtg.appview.authentication.registration
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.appview.authentication.AuthenticationActivity
+import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
@@ -56,6 +58,8 @@ class RegistrationStep2Fragment : AppFragment() {
     }
 
     override fun initializeComponent(view: View?) {
+        if(isFromProfile)
+            tvSkip.visibility=View.GONE
         var userType= SharedPreferenceUtil.getInstance(getAppActivity())
             ?.getData(
                 PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
@@ -70,6 +74,7 @@ class RegistrationStep2Fragment : AppFragment() {
         } else if (userType.equals("Vendor")) {
             tvTitle.text = "Vendor Step 2"
         }
+
 
         ivBack.setOnClickListener {
             activity?.onBackPressed()
@@ -129,6 +134,7 @@ class RegistrationStep2Fragment : AppFragment() {
                     when (activity) {
                         is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
                     Constants.USER = it.data
@@ -140,6 +146,7 @@ class RegistrationStep2Fragment : AppFragment() {
                     when (activity) {
                         is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
                     it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
@@ -148,6 +155,7 @@ class RegistrationStep2Fragment : AppFragment() {
                     when (activity) {
                         is AuthenticationActivity -> (activity as AuthenticationActivity).showProgressBar()
                         is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).showProgressBar()
                     }
                 }
@@ -205,6 +213,18 @@ class RegistrationStep2Fragment : AppFragment() {
             datePicker.show()
         }
 
+        tvSkip.setOnClickListener{
+            val intent: Intent = if (Constants.USER?.role.equals("ROLE_USER")) {
+                Intent(activity, HomeActivity::class.java)
+            }else if (Constants.USER?.role.equals("ROLE_CLINIC")) {
+                Intent(activity, ClinicActivity::class.java)
+            } else {
+                Intent(activity, VendorActivity::class.java)
+            }
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+
         etPassportIssuedDate.setOnClickListener {
             KeyboardUtils.hideKeyboard(getAppActivity())
             val datePicker = DatePickerDialog(
@@ -226,18 +246,19 @@ class RegistrationStep2Fragment : AppFragment() {
             datePicker.show()
         }
 
-        sDlnState.setDrawableRightTouch {
+        sDlnState.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.DLN_AUTOCOMPLETE_REQUEST_CODE)
         }
-        sDlnCountry.setDrawableRightTouch {
+        sDlnCountry.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.DLN_AUTOCOMPLETE_REQUEST_CODE)
         }
-        sPassportState.setDrawableRightTouch {
+        sPassportState.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.PASSPORT_AUTOCOMPLETE_REQUEST_CODE)
         }
-        sPassportCountry.setDrawableRightTouch {
+        sPassportCountry.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.PASSPORT_AUTOCOMPLETE_REQUEST_CODE)
         }
+
     }
 
     override fun pageVisible() {

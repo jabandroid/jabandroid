@@ -16,11 +16,14 @@ import android.widget.ArrayAdapter
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.config.Institute
 import com.global.vtg.appview.config.PickMediaExtensions
 import com.global.vtg.appview.config.getRealPath
 import com.global.vtg.appview.config.getRealPathFromURI
+import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
+import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.network.Resource
@@ -73,8 +76,11 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
     override fun initializeComponent(view: View?) {
         if (Constants.USER?.role.equals("ROLE_CLINIC")) {
             groupMobileNo.visibility = View.VISIBLE
+            cbCertify.isChecked=true
+            cbCertify.visibility = View.GONE
         } else {
             groupMobileNo.visibility = View.GONE
+            cbCertify.visibility = View.VISIBLE
         }
         viewModel.code.value = ccp.defaultCountryCode
         viewModel.region = ccp.defaultCountryNameCode
@@ -99,7 +105,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 KeyboardUtils.hideKeyboard(view)
                 if (!isFirstTime)
-                    viewModel.dose = doseList[pos - 1]
+                    viewModel.dose = getIdFromdose(doseList[pos - 1])
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -263,16 +269,26 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
         viewModel.userLiveData.observe(this, {
             when (it) {
                 is Resource.Success -> {
-                    (activity as HomeActivity).hideProgressBar()
+
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
                     Constants.USER = it.data
                     viewModel.saveSuccess.postValue(true)
                 }
                 is Resource.Error -> {
-                    (activity as HomeActivity).hideProgressBar()
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
                     it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
                 }
                 is Resource.Loading -> {
-                    (activity as HomeActivity).showProgressBar()
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                    }
                 }
             }
         })
@@ -321,6 +337,13 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
         }
         return 0
     }
+    private fun getIdFromdose(s: String): String? {
+        for (data in Constants.CONFIG?.doses!!) {
+            if (data!!.name.equals(s))
+                return data!!.id
+        }
+        return ""
+    }
 
     private fun updateDate() {
         val sdf = SimpleDateFormat(DDMMYY, Locale.US)
@@ -339,11 +362,17 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
 
     }
 
+
     private fun addDoses() {
-        doseList.add("Dose 1")
-        doseList.add("Dose 2")
-        doseList.add("Dose 3")
-        doseList.add("Dose 4")
+//        doseList.add("Dose 1")
+//        doseList.add("Dose 2")
+//        doseList.add("Booster 1")
+//        doseList.add("Booster 2")
+        Constants.CONFIG?.doses?.let {
+            for (data in it) {
+                data!!.name?.let { it1 -> doseList.add(it1) }
+            }
+        }
 
         val adapter = ArrayAdapter(
             getAppActivity(),
@@ -354,7 +383,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
         adapter.setDropDownViewResource(R.layout.my_spinner_row)
 
         sDose.adapter = VaccineDoseSpinnerAdapter(
-            getAppActivity(), doseList
+            getAppActivity(),doseList
         )
     }
 

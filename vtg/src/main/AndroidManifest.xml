@@ -50,6 +50,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme" />
         <activity
+            android:name="com.global.vtg.appview.home.ClinicActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/CustomTheme" />
+        <activity
             android:name="com.global.vtg.appview.authentication.AuthenticationActivity"
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme"

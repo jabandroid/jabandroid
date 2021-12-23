@@ -61,10 +61,10 @@
                         android:id="@+id/tvTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/label_step1"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_18ssp"
-                        android:gravity="center"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -92,14 +92,16 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.core.widget.NestedScrollView
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/clToolbar"
             android:layout_width="match_parent"
-            android:paddingBottom="@dimen/_16sdp"
             android:layout_height="0dp"
+            android:fillViewport="true"
+            android:paddingBottom="@dimen/_16sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:fillViewport="true">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clToolbar"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -107,307 +109,402 @@
                 android:layout_marginTop="@dimen/_16sdp"
                 android:orientation="vertical">
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfilePic"
+                        android:layout_width="@dimen/profile_pic"
+                        android:layout_height="@dimen/profile_pic"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:onClick="@{viewModel::onClick}"
+                        android:src="@drawable/user"
+                        android:translationZ="10dp"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="@dimen/_4sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivEditImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_minus24sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:translationZ="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+                        app:layout_constraintTop_toTopOf="@+id/ivProfilePic"
+                        app:srcCompat="@drawable/ic_edit" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvTitle1"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/label_title"
                     style="@style/MarginStartEnd"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/sTitleRegister"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTitle1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="0dp"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:inputType="textEmailAddress"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:background="@drawable/edittext_shadow"
                     android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
                     android:shadowColor="@color/gray_light"
-                    android:shadowRadius="4"
                     android:shadowDx="0"
                     android:shadowDy="0"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/edittext_shadow"
-                    android:layout_height="@dimen/edittext_height"/>
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle1" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvFirstName"
-                    app:layout_constraintTop_toBottomOf="@id/sTitleRegister"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tvLastName"
-                    android:text="@string/label_given_name"
                     style="@style/MarginStartEnd"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_given_name"
+                    app:layout_constraintEnd_toStartOf="@+id/tvLastName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/sTitleRegister" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvLastName"
-                    app:layout_constraintTop_toBottomOf="@id/sTitleRegister"
-                    app:layout_constraintStart_toEndOf="@id/tvFirstName"
-                    android:text="@string/label_last_name"
                     style="@style/MarginStartEnd"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_last_name"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_height="wrap_content"/>
+                    app:layout_constraintStart_toEndOf="@id/tvFirstName"
+                    app:layout_constraintTop_toBottomOf="@id/sTitleRegister" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etFirstName"
                     style="@style/EdittextPadding"
-                    android:text="@={viewModel.firstName}"
-                    android:hint="@string/label_given_name_hint"
-                    app:layout_constraintEnd_toEndOf="@+id/tvFirstName"
-                    app:layout_constraintTop_toBottomOf="@+id/tvFirstName"
-                    app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="0dp"
+                    android:background="@drawable/edittext_shadow"
                     android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:inputType="textEmailAddress"
+                    android:hint="@string/label_given_name_hint"
                     android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
                     android:shadowColor="@color/gray_light"
-                    android:shadowRadius="4"
                     android:shadowDx="0"
                     android:shadowDy="0"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/edittext_shadow"
-                    android:layout_height="@dimen/edittext_height"/>
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.firstName}"
+                    app:layout_constraintEnd_toEndOf="@+id/tvFirstName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFirstName" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etLastName"
                     style="@style/EdittextPadding"
-                    android:text="@={viewModel.lastName}"
-                    app:layout_constraintTop_toBottomOf="@+id/tvFirstName"
-                    app:layout_constraintStart_toStartOf="@+id/tvLastName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
-                    android:layout_marginStart="0dp"
                     android:layout_width="0dp"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:inputType="textEmailAddress"
-                    android:imeOptions="actionNext"
-                    android:shadowColor="@color/gray_light"
-                    android:shadowRadius="4"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="0dp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:background="@drawable/edittext_shadow"
-                    android:layout_height="@dimen/edittext_height"/>
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.lastName}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvLastName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFirstName" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvGender"
-                    app:layout_constraintTop_toBottomOf="@+id/etLastName"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/label_gender"
                     style="@style/MarginStartEnd"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_gender"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etLastName" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/sGender"
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/tvGender"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="0dp"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:inputType="textEmailAddress"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:background="@drawable/edittext_shadow"
                     android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
                     android:shadowColor="@color/gray_light"
-                    android:shadowRadius="4"
                     android:shadowDx="0"
                     android:shadowDy="0"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/edittext_shadow"
-                    android:layout_height="@dimen/edittext_height"/>
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvGender" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvDob"
-                    app:layout_constraintTop_toBottomOf="@+id/sGender"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/label_dob"
                     style="@style/MarginStartEnd"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_dob"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sGender" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etDob"
-                    android:drawableEnd="@drawable/ic_calendar"
-                    android:hint="@string/label_dob_hint"
-                    android:textColorHint="@color/black"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
                     style="@style/EdittextPadding"
-                    android:text="@={viewModel.dob}"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDob"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="0dp"
-                    android:maxLines="1"
-                    android:textSize="@dimen/_11ssp"
-                    android:singleLine="true"
-                    android:shadowColor="@color/gray_light"
-                    android:shadowRadius="4"
-                    android:shadowDx="0"
-                    android:shadowDy="0"
+                    android:layout_height="@dimen/edittext_height"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:background="@drawable/edittext_shadow"
-                    android:layout_height="@dimen/edittext_height"/>
+                    android:clickable="false"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/label_dob_hint"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.dob}"
+                    android:textColorHint="@color/black"
+                    android:textSize="@dimen/_11ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDob" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvPlaceOfBirth"
-                    app:layout_constraintTop_toBottomOf="@+id/etDob"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/label_place_birth"
                     style="@style/MarginStartEnd"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_place_birth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etDob" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <TextView
                     android:id="@+id/etCity"
-                    android:layout_width="0dp"
                     style="@style/EdittextPadding"
-                    android:text="@={viewModel.city}"
-                    android:drawableEnd="@drawable/ic_search"
-                    android:paddingEnd="@dimen/_12sdp"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:gravity="center_vertical"
                     android:hint="@string/label_city"
-                    android:drawablePadding="@dimen/_4sdp"
-                    android:focusableInTouchMode="true"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
                     android:paddingStart="@dimen/_16sdp"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:text="@={viewModel.city}"
                     android:textColorHint="@color/black"
-                    android:spinnerMode="dropdown"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPlaceOfBirth"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tvPlaceOfBirth" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <TextView
                     android:id="@+id/etState"
-                    android:layout_width="0dp"
-                    android:text="@={viewModel.state}"
                     style="@style/EdittextPadding"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:gravity="center_vertical"
                     android:hint="@string/label_state"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:paddingEnd="@dimen/_12sdp"
+                    android:text="@={viewModel.state}"
                     android:textColorHint="@color/black"
-                    android:focusableInTouchMode="true"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
                     app:layout_constraintEnd_toStartOf="@+id/etCountry"
-                    android:paddingStart="@dimen/_16sdp"
-                    android:drawablePadding="@dimen/_4sdp"
-                    android:drawableEnd="@drawable/ic_search"
-                    android:paddingEnd="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etCity"/>
+                    app:layout_constraintTop_toBottomOf="@+id/etCity" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <TextView
                     android:id="@+id/etCountry"
-                    android:layout_width="0dp"
-                    android:text="@={viewModel.country}"
                     style="@style/EdittextPadding"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
-                    app:layout_constraintStart_toEndOf="@+id/etState"
                     android:layout_marginTop="@dimen/_16sdp"
-                    android:hint="@string/label_country"
-                    android:focusableInTouchMode="true"
                     android:layout_marginEnd="@dimen/_16sdp"
-                    android:paddingStart="@dimen/_16sdp"
-                    android:drawablePadding="@dimen/_4sdp"
-                    android:textColorHint="@color/black"
+                    android:clickable="true"
                     android:drawableEnd="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:gravity="center_vertical"
+                    android:hint="@string/label_country"
+                    android:paddingStart="@dimen/_16sdp"
                     android:paddingEnd="@dimen/_12sdp"
+                    android:text="@={viewModel.country}"
+                    android:textColorHint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etCity"/>
+                    app:layout_constraintStart_toEndOf="@+id/etState"
+                    app:layout_constraintTop_toBottomOf="@+id/etCity" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvCitizenship"
-                    app:layout_constraintTop_toBottomOf="@id/etCountry"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/label_citizenship"
                     style="@style/MarginStartEnd"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_citizenship"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/etCountry" />
 
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/ccpCitizenship"
-                    app:layout_constraintTop_toBottomOf="@+id/tvCitizenship"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
                     android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
-                    android:shadowColor="@color/gray_light"
-                    android:shadowRadius="4"
-                    app:ccp_showFullName="true"
-                    app:ccp_defaultNameCode="US"
-                    app:ccp_textSize="@dimen/_12ssp"
+                    android:background="@drawable/edittext_shadow"
                     android:paddingStart="@dimen/_12sdp"
                     android:paddingEnd="@dimen/_12sdp"
+                    android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
-                    app:ccp_showPhoneCode="false"
-                    app:ccp_showArrow="false"
                     android:shadowDy="0"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:background="@drawable/edittext_shadow"
-                    android:layout_height="@dimen/edittext_height"/>
+                    android:shadowRadius="4"
+                    app:ccp_defaultNameCode="US"
+                    app:ccp_showArrow="false"
+                    app:ccp_showFullName="true"
+                    app:ccp_showPhoneCode="false"
+                    app:ccp_textSize="@dimen/_12ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCitizenship" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvEthnicity"
-                    app:layout_constraintTop_toBottomOf="@+id/ccpCitizenship"
-                    app:layout_constraintStart_toStartOf="parent"
-                    android:text="@string/label_ethnicity"
                     style="@style/MarginStartEnd"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_ethnicity"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ccpCitizenship" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/sEthnicity"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
                     android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_16sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEthnicity"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_width="0dp"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
                     android:background="@drawable/edittext_shadow"
-                    android:layout_height="@dimen/edittext_height"/>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnNext"
-                    style="@style/ButtonStyle"
-                    android:layout_width="0dp"
-                    android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_24sdp"
-                    android:onClick="@{viewModel::onClick}"
-                    android:text="@string/label_next"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEthnicity" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvWebsite"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_website"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/sEthnicity" />
 
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edWebsite"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="0dp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.websiteName}"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvWebsite" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:layout_constraintTop_toBottomOf="@+id/edWebsite">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnSkip"
+                        style="@style/ButtonStyle"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="@dimen/_12sdp"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginEnd="@dimen/_4sdp"
+                        android:layout_weight="1"
+                        android:onClick="@{viewModel::onClick}"
+                        android:text="@string/label_skip"
+                        android:visibility="gone"
+                        app:layout_constraintEnd_toStartOf="@+id/btnNext"
+                        app:layout_constraintHorizontal_chainStyle="spread"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="MissingConstraints" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnNext"
+                        style="@style/ButtonStyle"
+                        android:layout_width="0dp"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginEnd="@dimen/_12sdp"
+                        android:layout_weight="1"
+                        android:onClick="@{viewModel::onClick}"
+                        android:text="@string/label_next"
+
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/btnSkip"
+
+                        tools:ignore="MissingConstraints" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -177,6 +177,7 @@ dependencies {
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.1.4'
 
     implementation 'com.braintreepayments.api:drop-in:5.3.0'
+    implementation 'com.github.iwgang:countdownview:2.1.6'
 
 }
 repositories {

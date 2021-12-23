@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import com.global.vtg.appview.authentication.AuthenticationActivity
+import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
@@ -112,6 +113,7 @@ class OtpFragment : AppFragment() {
             when (activity) {
                 is HomeActivity -> (activity as HomeActivity).showProgressBar()
                 is VendorActivity -> (activity as VendorActivity).showProgressBar()
+                is ClinicActivity -> (activity as HomeActivity).showProgressBar()
                 else -> (activity as AuthenticationActivity).showProgressBar()
             }
         }
@@ -147,26 +149,18 @@ class OtpFragment : AppFragment() {
             SharedPreferenceUtil.getInstance(getAppActivity())
                 ?.saveData(
                     PreferenceManager.KEY_ROLE,
-                    if (isVendor == true) "vendor" else "user"
+                    if (isVendor == true) "vendor"
+                    else if (isClinic == true) "clinic" else "user"
                 )
 
             SharedPreferenceUtil.getInstance(getAppActivity())
                 ?.saveData(
                     PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
-                    if (isVendor == true) "Vendor" else "user"
+                    if (isVendor == true) "vendor"
+                    else if (isClinic == true) "clinic" else "user"
 
                 )
-            SharedPreferenceUtil.getInstance(getAppActivity())
-                ?.saveData(
-                    PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
-                    if (isClinic == true) "Clinic" else "user"
 
-                )
-            SharedPreferenceUtil.getInstance(getAppActivity())
-                ?.saveData(
-                    PreferenceManager.KEY_IS_CLINIC,
-                    if (isClinic == true) "clinic" else "user"
-                )
             if (isFromForgotPassword == true) {
                 val bundle = Bundle()
                 bundle.putString(Constants.BUNDLE_TWILIO_USER_ID, viewModel.twilioUserId.toString())
@@ -263,6 +257,7 @@ class OtpFragment : AppFragment() {
             when (activity) {
                 is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                 is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                is ClinicActivity -> (activity as HomeActivity).hideProgressBar()
                 else -> (activity as VendorActivity).hideProgressBar()
             }
             DialogUtils.showSnackBar(getAppActivity(), resources.getString(R.string.label_otp_sent))
@@ -275,12 +270,14 @@ class OtpFragment : AppFragment() {
                 when (activity) {
                     is AuthenticationActivity -> (activity as AuthenticationActivity).showProgressBar()
                     is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                    is ClinicActivity -> (activity as HomeActivity).showProgressBar()
                     else -> (activity as VendorActivity).showProgressBar()
                 }
             } else {
                 when (activity) {
                     is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                     is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                    is ClinicActivity -> (activity as HomeActivity).showProgressBar()
                     else -> (activity as VendorActivity).hideProgressBar()
                 }
             }

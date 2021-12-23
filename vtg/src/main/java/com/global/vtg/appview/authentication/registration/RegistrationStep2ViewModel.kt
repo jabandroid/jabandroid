@@ -3,6 +3,7 @@ package com.global.vtg.appview.authentication.registration
 import android.app.Application
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.base.AppViewModel
@@ -36,6 +37,13 @@ class RegistrationStep2ViewModel(
     var redirectToStep3: MutableLiveData<Boolean> = MutableLiveData()
 
     val registerLiveData = MutableLiveData<Resource<ResUser>>()
+
+
+    val userConfigLiveData = MutableLiveData<Resource<ResUser>>()
+
+    private val userObserver = Observer<Resource<ResUser>> {
+        userConfigLiveData.postValue(it)
+    }
 
     fun onClick(view: View) {
 
@@ -105,6 +113,7 @@ class RegistrationStep2ViewModel(
                             Constants.USER?.document?.clear()
                             Constants.USER?.document?.addAll(document)
                         }
+
                         callRegisterStep()
                     }
                 } else {
@@ -198,6 +207,13 @@ class RegistrationStep2ViewModel(
     private fun callRegisterStep() {
         scope.launch {
             Constants.USER?.let { userRepository.registerStep(registerLiveData, it) }
+        }
+    }
+
+
+    fun getUser() {
+        scope.launch {
+            userRepository.getUser()
         }
     }
 }

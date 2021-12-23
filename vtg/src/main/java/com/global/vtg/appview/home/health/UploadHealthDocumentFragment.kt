@@ -11,6 +11,8 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,8 +20,11 @@ import com.global.vtg.appview.config.Institute
 import com.global.vtg.appview.config.PickMediaExtensions
 import com.global.vtg.appview.config.getRealPath
 import com.global.vtg.appview.config.getRealPathFromURI
+import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.uploaddocument.InstituteAdapter
+import com.global.vtg.appview.home.uploaddocument.TestResultSpinnerAdapter
+import com.global.vtg.appview.home.uploaddocument.VaccineDoseSpinnerAdapter
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
@@ -31,6 +36,7 @@ import com.global.vtg.utils.KeyboardUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentHealthInfoUploadDocumentBinding
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.cbCertify
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.clForm
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.clThankYou
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.cvUploadDocument
@@ -47,6 +53,7 @@ import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvDoc
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvFee
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvSelectDoc
 import kotlinx.android.synthetic.main.fragment_upload_document.*
+
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -63,7 +70,8 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
     private val viewModel by viewModel<UploadHealthDocumentViewModel>()
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
-
+    var isDob=false
+    val resultList: MutableList<String> = ArrayList()
     override fun getLayoutId(): Int {
         return R.layout.fragment_health_info_upload_document
     }
@@ -82,8 +90,16 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
     override fun initializeComponent(view: View?) {
         if (Constants.USER?.role.equals("ROLE_CLINIC")) {
             groupMobileNoHealth.visibility = View.VISIBLE
+            cbCertify.visibility = View.GONE
+            sStatus.visibility = View.VISIBLE
+            sDob.visibility = View.GONE
+            dob.visibility = View.GONE
         } else {
             groupMobileNoHealth.visibility = View.GONE
+            cbCertify.visibility = View.VISIBLE
+            sStatus.visibility = View.GONE
+            sDob.visibility = View.GONE
+            dob.visibility = View.GONE
         }
         viewModel.code.value = ccpHealth.defaultCountryCode
         viewModel.region = ccpHealth.defaultCountryNameCode
@@ -109,16 +125,25 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         viewModel.userLiveData.observe(this, {
             when (it) {
                 is Resource.Success -> {
-                    (activity as HomeActivity).hideProgressBar()
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
                     Constants.USER = it.data
                     viewModel.saveSuccess.postValue(true)
                 }
                 is Resource.Error -> {
-                    (activity as HomeActivity).hideProgressBar()
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
                     it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
                 }
                 is Resource.Loading -> {
-                    (activity as HomeActivity).showProgressBar()
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                    }
                 }
             }
         })
@@ -147,6 +172,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                 tvFee.visibility = View.GONE
             }
         })
+        addResut()
 
         val date =
             OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -157,6 +183,17 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             }
 
         sDate.setOnClickListener {
+            KeyboardUtils.hideKeyboard(getAppActivity())
+            val datePicker = DatePickerDialog(
+                getAppActivity(), R.style.DialogTheme, date, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePicker.datePicker.maxDate = currentCalendar.timeInMillis
+            datePicker.show()
+        }
+        sDob.setOnClickListener {
+            isDob=true
             KeyboardUtils.hideKeyboard(getAppActivity())
             val datePicker = DatePickerDialog(
                 getAppActivity(), R.style.DialogTheme, date, myCalendar
@@ -256,6 +293,41 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         })
     }
 
+    private fun addResut() {
+        resultList.add("Negative")
+        resultList.add("Positive")
+        resultList.add("NA")
+        resultList.add("Invalid")
+
+
+        val adapter = ArrayAdapter(
+            getAppActivity(),
+            R.layout.my_spinner_row, resultList
+        )
+
+        // set adapter to the autocomplete tv to the arrayAdapter
+        adapter.setDropDownViewResource(R.layout.my_spinner_row)
+
+        sStatus.adapter = TestResultSpinnerAdapter(
+            getAppActivity(),resultList
+        )
+
+        sStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
+                KeyboardUtils.hideKeyboard(view)
+                if (!isFirstTime)
+                    viewModel.result = resultList[pos - 1]
+                else{
+                    isFirstTime = false
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+
+        }
+    }
+
     private fun resultMessage(resultCode: Int, path: String, displayName: String?) {
         getAppActivity().getActivityScope(getAppActivity()).launch(Dispatchers.IO) {
             when (resultCode) {
@@ -301,16 +373,24 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
     }
 
     private fun updateDate() {
+
         val sdf = SimpleDateFormat(DDMMYY, Locale.US)
         val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
         val date = sdf.format(myCalendar.time)
-        sDate.setText(date)
+        if(isDob){
+            sDob.text = apiSdf.format(myCalendar.time)
+            viewModel.dob= apiSdf.format(myCalendar.time).toString()
+            isDob=false
 
-        val dayOfWeek = SimpleDateFormat("EEEE", Locale.US).format(myCalendar.time)
-        sDay.setText(dayOfWeek)
+        }else {
+            sDate.setText(date)
 
-        viewModel.day = dayOfWeek
-        viewModel.date = apiSdf.format(myCalendar.time)
+            val dayOfWeek = SimpleDateFormat("EEEE", Locale.US).format(myCalendar.time)
+            sDay.setText(dayOfWeek)
+
+            viewModel.day = dayOfWeek
+            viewModel.date = apiSdf.format(myCalendar.time)
+        }
     }
 
     override fun pageVisible() {

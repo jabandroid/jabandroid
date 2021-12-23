@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.appview.authentication.AuthenticationActivity
+import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppActivity
@@ -35,8 +36,10 @@ class SplashActivity : AppActivity() {
             if (isUserLoggedIn == false)
                 startActivity(Intent(this, AuthenticationActivity::class.java))
             else {
-                if (role?.equals("user") == true || role?.equals("clinic") == true)
+                if (role?.equals("user") == true )
                     startActivity(Intent(this, HomeActivity::class.java))
+                else if   (role?.equals("clinic") == true)
+                    startActivity(Intent(this, ClinicActivity::class.java))
                 else
                     startActivity(Intent(this, VendorActivity::class.java))
             }

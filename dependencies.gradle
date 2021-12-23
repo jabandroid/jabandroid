@@ -14,7 +14,7 @@ ext {
     def retrofitLibraryVersion = '2.6.0'
     def gsonLibraryVersion = '2.8.5'
     def rxAndroidVersion = '2.1.1'
-    def okHttpLibraryVersion = '4.0.0'
+    def okHttpLibraryVersion = '4.9.2'
 
 
     def lifecycleExtensions = '2.0.0'

@@ -49,6 +49,7 @@ class ChangePasswordFragment : AppFragment() {
 
     override fun initializeComponent(view: View?) {
         ivOldPassword.setOnClickListener {
+            var selction=etOldPassword.selectionStart
             if (visibility) {
                 visibility = false
                 etOldPassword.transformationMethod = PasswordTransformationMethod()
@@ -62,8 +63,10 @@ class ChangePasswordFragment : AppFragment() {
                     ContextCompat.getDrawable(getAppActivity(), R.mipmap.visibility_on)
                 ivOldPassword.setImageDrawable(drawableCompat)
             }
+            etOldPassword.setSelection(selction)
         }
         ivChangeNewPassword.setOnClickListener {
+            var selction=etChangeNewPassword.selectionStart
             if (visibilityNew) {
                 visibilityNew = false
                 etChangeNewPassword.transformationMethod = PasswordTransformationMethod()
@@ -77,8 +80,10 @@ class ChangePasswordFragment : AppFragment() {
                     ContextCompat.getDrawable(getAppActivity(), R.mipmap.visibility_on)
                 ivChangeNewPassword.setImageDrawable(drawableCompat)
             }
+            etChangeNewPassword.setSelection(selction)
         }
         ivConfirmPassword.setOnClickListener {
+            var selction=etConfirmNewPassword.selectionStart
             if (visibilityConfirm) {
                 visibilityConfirm = false
                 etConfirmNewPassword.transformationMethod = PasswordTransformationMethod()
@@ -92,6 +97,7 @@ class ChangePasswordFragment : AppFragment() {
                     ContextCompat.getDrawable(getAppActivity(), R.mipmap.visibility_on)
                 ivConfirmPassword.setImageDrawable(drawableCompat)
             }
+            etConfirmNewPassword.setSelection(selction)
         }
         ivBack.setOnClickListener {
             activity?.onBackPressed()

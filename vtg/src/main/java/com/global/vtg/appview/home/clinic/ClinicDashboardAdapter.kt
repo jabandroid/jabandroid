@@ -1,4 +1,4 @@
-package com.global.vtg.appview.home.dashboard
+package com.global.vtg.appview.home.clinic
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -10,33 +10,32 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vtg.R
 
 
-class DashboardAdapter(
+class ClinicDashboardAdapter(
     var context: Context,
-    title: ArrayList<DashBoardItem>
-
+    title: ArrayList<String>,
+    image: ArrayList<Int>
 ) :
-    RecyclerView.Adapter<DashboardAdapter.DashboardViewHolder>() {
-    private var titles: ArrayList<DashBoardItem> = title
-
+    RecyclerView.Adapter<ClinicDashboardAdapter.DashboardViewHolder>() {
+    private var titles: ArrayList<String> = title
+    private var images: ArrayList<Int> = image
     private lateinit var listener: ClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
         // inflate the item Layout
         val v: View =
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.recycler_view_dashboard, parent, false)
+                .inflate(R.layout.recycler_view_vendor_dashboard, parent, false)
         // set the view's size, margins, paddings and layout parameters
         return DashboardViewHolder(v) // pass the view to View Holder
     }
 
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
         // set the data in items
-        holder.name.text = titles[position].title
-        holder.image.setImageResource(titles[position].icon)
+        holder.name.text = titles[position]
+        holder.image.setImageResource(images[position])
         // implement setOnClickListener event on item view.
-        holder.itemView.tag = titles[position].id
         holder.itemView.setOnClickListener {
-            this.listener.onItemClick(holder.itemView.tag as Int)
+            this.listener.onItemClick(position)
         }
     }
 

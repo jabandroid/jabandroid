@@ -6,7 +6,9 @@ import com.global.vtg.appview.authentication.forgotpassword.ForgotPasswordFragme
 import com.global.vtg.appview.authentication.login.SignInFragment
 import com.global.vtg.appview.authentication.otp.OtpFragment
 import com.global.vtg.appview.authentication.registration.*
+import com.global.vtg.appview.home.testHistory.TestHistoryFragment
 import com.global.vtg.appview.home.changepassword.ChangePasswordFragment
+import com.global.vtg.appview.home.clinic.ClinicHomeFragment
 import com.global.vtg.appview.home.dashboard.DashboardFragment
 import com.global.vtg.appview.home.health.HealthInformationFragment
 import com.global.vtg.appview.home.health.UploadHealthDocumentFragment
@@ -26,6 +28,7 @@ import com.global.vtg.appview.permissiondemo.view.PermissionDemoFragment
 enum class AppFragmentState(var fragment: Class<out AppFragment>) {
 
     F_SIGN_IN(SignInFragment::class.java),
+    F_TEST(TestHistoryFragment::class.java),
     F_OTP(OtpFragment::class.java),
     F_SIGN_UP(RegistrationFragment::class.java),
     F_FORGOT_PASSWORD(ForgotPasswordFragment::class.java),
@@ -39,6 +42,7 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_REG_STEP2(RegistrationStep2Fragment::class.java),
     F_REG_STEP3(RegistrationStep3Fragment::class.java),
     F_VENDOR_DASHBOARD(VendorHomeFragment::class.java),
+    F_CLINIC_DASHBOARD(ClinicHomeFragment::class.java),
     F_VENDOR_QR_CODE(VendorQRCodeFragment::class.java),
     F_VENDOR_RESULT(VendorResultFragment::class.java),
     F_PROFILE(ProfileFragment::class.java),
@@ -50,6 +54,7 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_PAYMENT(PaymentFragment::class.java),
     F_VENDOR_SCAN_RESULT(VendorScanResultFragment::class.java),
     F_PERMISSION_DEMO(PermissionDemoFragment::class.java);
+
 
     companion object {
 

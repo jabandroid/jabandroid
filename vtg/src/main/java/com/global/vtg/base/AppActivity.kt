@@ -50,6 +50,16 @@ import com.braintreepayments.api.dropin.DropInResult
 import android.R.attr.data
 import com.braintreepayments.api.dropin.DropInActivity
 import com.global.vtg.utils.Constants.BASE_URL
+import com.global.vtg.wscoroutine.ApiInterface
+import java.lang.RuntimeException
+import java.security.SecureRandom
+import java.security.cert.CertificateException
+import java.security.cert.X509Certificate
+import java.util.concurrent.TimeUnit
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 
 abstract class AppActivity : AppCompatActivity() {
@@ -325,6 +335,9 @@ abstract class AppActivity : AppCompatActivity() {
     }
 
     fun getConfig() {
+
+         var apiServiceInterface: ApiInterface
+
         val request = Request.Builder()
             .url(
                 "$BASE_URL/api/v1/config/1"
@@ -332,9 +345,10 @@ abstract class AppActivity : AppCompatActivity() {
             .get()
             .build()
 
-        client.newCall(request).enqueue(object : Callback {
+        getClient().newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
 //                progressBar.postValue(false)
+                Log.e("",""+e)
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -343,5 +357,56 @@ abstract class AppActivity : AppCompatActivity() {
                 CONFIG = Gson().fromJson(res, ResConfig::class.java)
             }
         })
+    }
+
+    fun getClient() : OkHttpClient {
+        try {
+            // Create a trust manager that does not validate certificate chains
+            val trustAllCerts = arrayOf<TrustManager>(
+                object : X509TrustManager {
+                    @Throws(CertificateException::class)
+                    override fun checkClientTrusted(
+                        chain: Array<X509Certificate?>?,
+                        authType: String?
+                    ) {
+                    }
+
+                    @Throws(CertificateException::class)
+                    override fun checkServerTrusted(
+                        chain: Array<X509Certificate?>?,
+                        authType: String?
+                    ) {
+                    }
+
+                    override fun getAcceptedIssuers(): Array<X509Certificate> {
+                        return arrayOf()
+                    }
+                }
+            )
+
+            // Install the all-trusting trust manager
+            val sslContext = SSLContext.getInstance("SSL")
+            sslContext.init(null, trustAllCerts, SecureRandom())
+
+            // Create an ssl socket factory with our all-trusting manager
+            val sslSocketFactory = sslContext.socketFactory
+            val builder = OkHttpClient.Builder()
+            builder
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+
+
+            builder.sslSocketFactory(
+                sslSocketFactory,
+                trustAllCerts[0] as X509TrustManager
+            )
+            builder.hostnameVerifier(HostnameVerifier { hostname, session -> true })
+
+            return builder.build()
+        } catch (e: java.lang.Exception) {
+            throw RuntimeException(e)
+        }
+
     }
 }

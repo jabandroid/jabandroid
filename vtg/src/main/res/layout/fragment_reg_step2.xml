@@ -69,6 +69,21 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.global.vtg.utils.textView.SemiBoldTextView
+                        android:id="@+id/tvSkip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                       android:gravity="right"
+                        android:layout_marginEnd="@dimen/_14sdp"
+                        android:text="@string/label_skip"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+
+                        app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.appcompat.widget.Toolbar>
@@ -209,7 +224,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvDln" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <TextView
                     android:id="@+id/sDlnState"
                     style="@style/EdittextPadding"
                     android:text="@={viewModel.dlnState}"
@@ -219,8 +234,10 @@
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:background="@drawable/edittext_shadow"
                     android:hint="@string/label_state"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
                     android:drawablePadding="@dimen/_4sdp"
-                    android:focusableInTouchMode="true"
+
                     android:singleLine="true"
                     android:maxLines="1"
                     android:ellipsize="end"
@@ -232,7 +249,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etDln" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <TextView
                     android:id="@+id/sDlnCountry"
                     style="@style/EdittextPadding"
                     android:layout_width="0dp"
@@ -242,9 +259,11 @@
                     android:text="@={viewModel.dlnCountry}"
                     android:background="@drawable/edittext_shadow"
                     android:hint="@string/label_country"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
                     android:drawablePadding="@dimen/_4sdp"
                     android:paddingStart="@dimen/_16sdp"
-                    android:focusableInTouchMode="true"
+
                     android:singleLine="true"
                     android:maxLines="1"
                     android:ellipsize="end"
@@ -347,7 +366,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvPassport" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <TextView
                     android:id="@+id/sPassportState"
                     style="@style/EdittextPadding"
                     android:layout_width="0dp"
@@ -358,7 +377,8 @@
                     android:background="@drawable/edittext_shadow"
                     android:hint="@string/label_state"
                     android:drawablePadding="@dimen/_4sdp"
-                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
                     android:singleLine="true"
                     android:maxLines="1"
                     android:ellipsize="end"
@@ -370,7 +390,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etPassport" />
 
-                <androidx.appcompat.widget.AppCompatEditText
+                <TextView
                     android:id="@+id/sPassportCountry"
                     style="@style/EdittextPadding"
                     android:layout_width="0dp"
@@ -381,7 +401,8 @@
                     android:background="@drawable/edittext_shadow"
                     android:hint="@string/label_country"
                     android:drawablePadding="@dimen/_4sdp"
-                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:clickable="true"
                     android:paddingStart="@dimen/_16sdp"
                     android:drawableEnd="@drawable/ic_search"
                     android:paddingEnd="@dimen/_12sdp"
@@ -449,6 +470,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/etPassportIssuedDate"
                     app:layout_constraintTop_toTopOf="@+id/etPassportIssuedDate" />
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnNext"

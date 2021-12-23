@@ -119,8 +119,14 @@ class UploadDocumentViewModel(
             if (!isNullOrEmpty(srId))
                 batchNo = srId.toRequestBody("text/plain".toMediaTypeOrNull())
 
-            val certified: RequestBody = (if (isCertify.value == false) "false" else "true")
-                .toRequestBody("text/plain".toMediaTypeOrNull())
+            val certified: RequestBody = if (Constants.USER?.role.equals("ROLE_CLINIC")) {
+                "true"
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+            } else {
+
+                (if (isCertify.value == false) "false" else "true")
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+            }
 
             val dateReq: RequestBody? = date?.toRequestBody("text/plain".toMediaTypeOrNull())
             val username: RequestBody? = if (Constants.USER?.role.equals("ROLE_CLINIC")) {
@@ -129,7 +135,8 @@ class UploadDocumentViewModel(
                 )
             } else {
                 Constants.USER?.mobileNo?.toRequestBody(
-                    "text/plain".toMediaTypeOrNull())
+                    "text/plain".toMediaTypeOrNull()
+                )
             }
             userRepository.uploadVaccine(
                 part,
@@ -140,6 +147,7 @@ class UploadDocumentViewModel(
                 certified,
                 dateReq,
                 batchNo,
+                dose,
                 username
             )
         }

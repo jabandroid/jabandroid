@@ -178,7 +178,8 @@ object DialogUtils {
                val tv = view.findViewById(R.id.snackbar_text) as TextView
                val font = Typeface.createFromAsset(context.assets, "font/FontsFree-Net-Proxima-Nova-Sbold.otf")
                tv.typeface = font
-               tv.textSize = 16f
+               tv.textSize = 14f
+               tv.maxLines=5
                tv.setTextColor(ContextCompat.getColor(context, R.color.colorWhite))
                view.layoutParams = params
                snackbar.show()

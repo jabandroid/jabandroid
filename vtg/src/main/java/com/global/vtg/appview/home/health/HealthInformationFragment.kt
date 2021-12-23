@@ -61,6 +61,9 @@ class HealthInformationFragment : AppFragment() {
         viewModel.uploadFile.observe(this, {
             addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_HEALTH_INFORMATION)
         })
+
+
+
     }
 
     override fun pageVisible() {

@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"/>
 
         <com.global.vtg.utils.textView.SBoldTextView
-            android:id="@+id/tvUserName"
+            android:id="@+id/tvUserNam"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
@@ -141,23 +141,23 @@
             android:text="@string/label_vaccine_taken_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvUserNam" />
 
-        <androidx.cardview.widget.CardView
+        <LinearLayout
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvVaccineTitle"
             app:layout_constraintBottom_toTopOf="@+id/btnUploadFile"
             android:layout_width="0dp"
-            app:cardCornerRadius="@dimen/_8sdp"
-            android:paddingTop="@dimen/_4sdp"
-            android:paddingBottom="@dimen/_4sdp"
+            android:orientation="vertical"
+
             android:background="@color/white"
-            android:layout_margin="@dimen/_12sdp"
+            android:layout_margin="@dimen/_8sdp"
             android:layout_height="0dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvVaccineList"
+                android:layout_margin="3dp"
                 tools:listitem="@layout/recycler_view_vaccine_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -166,7 +166,7 @@
                 android:id="@+id/layoutNoData"
                 android:visibility="gone"
                 layout="@layout/no_data_available" />
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUploadFile"

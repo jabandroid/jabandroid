@@ -18,6 +18,7 @@ import com.vtg.R
 import com.vtg.databinding.FragmentForgotUpdatePasswordBinding
 import kotlinx.android.synthetic.main.fragment_forgot_update_password.*
 import kotlinx.android.synthetic.main.fragment_reg_step3.ivBack
+import kotlinx.android.synthetic.main.fragment_registration.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForgotChangePasswordFragment : AppFragment() {
@@ -49,6 +50,7 @@ class ForgotChangePasswordFragment : AppFragment() {
 
     override fun initializeComponent(view: View?) {
         ivNewPassword.setOnClickListener {
+            var selction=etNewPassword.selectionStart
             if (visibility) {
                 visibility = false
                 etNewPassword.transformationMethod = PasswordTransformationMethod()
@@ -62,8 +64,10 @@ class ForgotChangePasswordFragment : AppFragment() {
                     ContextCompat.getDrawable(getAppActivity(), R.mipmap.visibility_on)
                 ivNewPassword.setImageDrawable(drawableCompat)
             }
+            etNewPassword.setSelection(selction)
         }
         ivConfirmPassword.setOnClickListener {
+            var selction=etConfirmNewPassword.selectionStart
             if (visibility) {
                 visibility = false
                 etConfirmNewPassword.transformationMethod = PasswordTransformationMethod()
@@ -77,6 +81,7 @@ class ForgotChangePasswordFragment : AppFragment() {
                     ContextCompat.getDrawable(getAppActivity(), R.mipmap.visibility_on)
                 ivConfirmPassword.setImageDrawable(drawableCompat)
             }
+            etConfirmNewPassword.setSelection(selction)
         }
         twilioUserId.let {
             viewModel.twilioUserId = it

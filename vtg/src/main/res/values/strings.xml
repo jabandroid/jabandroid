@@ -138,7 +138,7 @@
     <string name="label_verify">Verify</string>
     <string name="label_send">Send</string>
     <string name="label_vendor_login">Vendor</string>
-    <string name="label_clinic">Clinic</string>
+    <string name="label_clinic">Lab/clinic</string>
 
     <!-- Dashboard -->
     <string name="label_vaccine_history">Vaccine History</string>
@@ -148,6 +148,7 @@
     <string name="label_payment_method">Payment Method</string>
     <string name="label_information">Information</string>
     <string name="label_upload_document">Upload Document</string>
+    <string name="label_covid_status">Covid Test Status</string>
     <string name="label_change_password">Change Password</string>
     <string name="label_vaccine_taken_list">Vaccine Taken List</string>
     <string name="label_upload_file">Upload File</string>
@@ -155,7 +156,8 @@
     <string name="label_share">Share</string>
     <string name="label_vaccinations">Vaccinations</string>
     <string name="label_vaccinations_covid">Covid Test</string>
-    <string name="label_vaccinated_on">Tested On</string>
+    <string name="label_vaccinated_on">Vaccinated On</string>
+    <string name="label_test_on">Tested On</string>
     <string name="label_upload_text">Click to upload document \n(PDF/JPG/PNG Max 5MB)</string>
     <string name="label_upload_text_b">Click to upload business \n(PDF/JPG/PNG Max 5MB)</string>
     <string name="label_doc_name">Selected Document: %s</string>
@@ -164,7 +166,7 @@
     <string name="label_date">Date:\u0020</string>
     <string name="label_status">Status:\u0020</string>
     <string name="label_batch_no_row">Batch/Serial Number:\u0020</string>
-    <string name="label_hospital_name">Lab/Clinic Institute Name</string>
+    <string name="label_hospital_name">Lab/Clinic Name</string>
     <string name="label_batch_no">Batch/Serial Number</string>
     <string name="label_phone_number">User Mobile No.*</string>
 
@@ -177,6 +179,7 @@
     <string name="label_no_data">No data available…</string>
     <string name="select_type">Select Vaccine Type</string>
     <string name="select_dose">Select Dose</string>
+    <string name="select">Select</string>
     <string name="label_day">Day</string>
     <string name="label_thank_you">Thank You!</string>
     <string name="label_uploaded">Uploaded for Review</string>
@@ -203,7 +206,9 @@
     <string name="label_country_step3"><font size="14">Country*</font></string>
     <string name="label_citizenship">Citizenship</string>
     <string name="label_ethnicity">Ethnicity</string>
+    <string name="label_website">Website</string>
     <string name="label_next">Next</string>
+    <string name="label_skip">Skip</string>
     <string name="label_show_details">Show Details</string>
     <string name="label_ssn">Last 4 digit of PIN/SSN/NIN/SIN/DNI/CPR/eID/NEI</string>
     <string name="label_id_number">ID Number</string>
@@ -219,6 +224,7 @@
     <string name="label_step1">Step 1</string>
     <string name="label_step2">Step 2</string>
     <string name="label_step3">Step 3</string>
+
     <string name="label_business_name">Business Name</string>
     <string name="label_business_id">Business Id</string>
     <string name="label_employee_id">Employee Id</string>
@@ -259,6 +265,7 @@
     <string name="empty_business_name">Please enter Business Name.</string>
     <string name="empty_business_id">Please enter Business ID.</string>
     <string name="empty_employee_id">Please enter Employee Id.</string>
+    <string name="empty_expiry_date">Please enter Business expiry date.</string>
     <string name="empty_dln">Please enter your driver license number.</string>
     <string name="empty_dln_state">Please select your driver license state.</string>
     <string name="empty_dln_country">Please select your driver license country.</string>
@@ -312,11 +319,19 @@
     </string-array>
 
     <string name="label_profile">Profile</string>
+    <string name="label_group">Groups</string>
+    <string name="label_parent">Parent Child Linking</string>
     <string name="label_scan_qr_code">Scan QR Code</string>
-    <string name="label_my_qr_code">My QR Code</string>
-    <string name="label_my_vaccine_history">My Vaccine History</string>
+    <string name="label_Vaccine">Upload Vaccine</string>
+    <string name="label_upload_health">Upload Health Information</string>
+    <string name="label_my_qr_code">QR Code</string>
+    <string name="label_my_test_history">Test History</string>
+    <string name="label_travel_form">Travel Form</string>
+    <string name="label_my_vaccine_history">Vaccine History</string>
     <string name="label_my_vaccine_card">My Vaccine Card</string>
+    <string name="label_event">Event</string>
     <string name="label_health_information">Health Information</string>
+    <string name="label_quarntine">Quarantine</string>
     <string name="label_travel_information">Travel Information</string>
     <string name="label_camera_permission">Please accept the Camera permission to scan QR code.</string>
     <string name="label_select_time">Select Time</string>

@@ -14,6 +14,7 @@ import com.global.vtg.appview.home.health.UploadHealthDocumentViewModel
 import com.global.vtg.appview.home.help.HelpViewModel
 import com.global.vtg.appview.home.profile.ProfileViewModel
 import com.global.vtg.appview.home.qrcode.VaccineQRCodeViewModel
+import com.global.vtg.appview.home.testHistory.TestViewModel
 import com.global.vtg.appview.home.uploaddocument.UploadDocumentViewModel
 import com.global.vtg.appview.home.vaccinecard.VaccineCardViewModel
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryViewModel
@@ -82,6 +83,10 @@ val appViewModelModule = module {
     }
     viewModel {
         UploadDocumentViewModel(get(), get())//it will take one argument i.e. UserRepository
+    }
+
+    viewModel {
+        TestViewModel(get(), get())//it will take one argument i.e. UserRepository
     }
     viewModel {
         RegistrationStep1ViewModel(get(), get())//it will take one argument i.e. UserRepository

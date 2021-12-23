@@ -13,6 +13,7 @@ import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.config.PickMediaExtensions
 import com.global.vtg.appview.config.getRealPath
 import com.global.vtg.appview.config.getRealPathFromURI
+import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
@@ -70,6 +71,9 @@ class ProfileFragment : AppFragment() {
 
         tvUserName.text = USER?.firstName + " " + USER?.lastName
         tvMobileValue.text = USER?.mobileNo
+        tvCityValue.text = USER?.birthCity
+        tvStateValue.text = USER?.birthState
+        tvCountryValue.text = USER?.birthCountry
         loadAddress()
         viewModel.getUser()
         if (!USER!!.profileUrl.isNullOrEmpty())
@@ -114,25 +118,31 @@ class ProfileFragment : AppFragment() {
                 when (it) {
                     is Resource.Success -> {
                         USER?.profileUrl = it.data.profileUrl
-                        if (!it.data.profileUrl.isNullOrEmpty())
-                            ivProfilePic.setGlideNormalImage(it.data.profileUrl)
-                        if (activity is HomeActivity)
-                            (activity as HomeActivity).hideProgressBar()
-                        else
-                            (activity as VendorActivity).hideProgressBar()
+//                        if (!it.data.profileUrl.isNullOrEmpty())
+//                            ivProfilePic.setGlideNormalImage(it.data.profileUrl)
+                        when (activity) {
+
+                            is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                            else -> (activity as VendorActivity).hideProgressBar()
+                        }
                     }
                     is Resource.Error -> {
-                        if (activity is HomeActivity)
-                            (activity as HomeActivity).hideProgressBar()
-                        else
-                            (activity as VendorActivity).hideProgressBar()
+                        when (activity) {
+
+                            is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                            else -> (activity as VendorActivity).hideProgressBar()
+                        }
                         it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
                     }
                     is Resource.Loading -> {
-                        if (activity is HomeActivity)
-                            (activity as HomeActivity).showProgressBar()
-                        else
-                            (activity as VendorActivity).showProgressBar()
+                        when (activity) {
+
+                            is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                            else -> (activity as VendorActivity).showProgressBar()
+                        }
                     }
                 }
             }

@@ -17,7 +17,8 @@ object DateUtils {
 
     //    val API_DATE_FORMAT_VACCINE = "yyyy-MM-dd HH:mm:ss"
     val API_DATE_FORMAT_VACCINE = "yyyy-MM-dd'T'HH:mm:ss.sssZ"
-
+    val API_DATE_FORMAT_EXP = "EEE MMM dd HH:mm:ss 'UTC' yyyy"
+    //Tue Dec 21 00:00:00 UTC 2021
     var dateFormateTwentyFourHour = SimpleDateFormat(MMDDYYHHMM, Locale.getDefault())
 
     val HHMM12HOURS = "hh:mm aaa"

@@ -32,7 +32,9 @@ data class ResConfig(
 	val logoURL: String? = null,
 
 	@field:SerializedName("productList")
-	val productList: List<ProductListItem?>? = null
+	val productList: List<ProductListItem?>? = null	,
+	@field:SerializedName("dose")
+	val doses: List<Doses?>? = null
 ): BaseResult()
 
 data class CountryItem(
@@ -69,6 +71,17 @@ data class ProductListItem(
 
 	@field:SerializedName("id")
 	val id: Int? = null
+)
+
+data class Doses(
+
+
+
+	@field:SerializedName("name")
+	val name: String? = null,
+
+	@field:SerializedName("dose_id")
+	val id: String? = null
 )
 
 data class VaccineTypeItem(

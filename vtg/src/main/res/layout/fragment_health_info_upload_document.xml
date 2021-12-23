@@ -10,12 +10,6 @@
             type="com.global.vtg.appview.home.health.UploadHealthDocumentViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollViewHealth"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@mipmap/bg_virus"
-        android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -82,6 +76,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,14 +93,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/scrollViewHealth"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@mipmap/bg_virus"
+                android:layout_marginTop="@dimen/_80sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/clToolbar"
+                android:fillViewport="true">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clForm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/clToolbar">
+              >
 
                 <com.global.vtg.utils.textView.BoldTextView
                     android:id="@+id/tvVaccinations"
@@ -113,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:gravity="center"
-                    android:text="@string/label_health_information"
+                    android:text="@string/label_vaccinations_covid"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_18ssp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -203,10 +207,10 @@
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/groupMobileNoHealth"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:constraint_referenced_ids="llPhoneNo,tvMobileNo"/>
+                    android:visibility="gone"
+                    app:constraint_referenced_ids="llPhoneNo,tvMobileNo" />
 
                 <LinearLayout
                     android:id="@+id/llPhoneNo"
@@ -275,25 +279,73 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/llPhoneNo" />
 
+
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etBatchNo"
                     style="@style/EdittextPadding"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="@dimen/_24sdp"
                     android:background="@drawable/edittext_shadow"
                     android:text="@={viewModel.batchNo}"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvBatchNo" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:spinnerMode="dropdown"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etBatchNo" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/dob"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/label_dob"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sStatus" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sDob"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="true"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:text="@={viewModel.dob}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dob" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cbCertify"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
                     android:checked="@={viewModel.isCertify}"
                     android:fontFamily="@font/proximanovareg"
                     android:paddingStart="0dp"
@@ -302,8 +354,7 @@
                     android:textColor="@color/black"
                     app:buttonTint="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    app:layout_constraintTop_toBottomOf="@+id/etBatchNo" />
+                    app:layout_constraintTop_toBottomOf="@+id/sDob" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvFee"
@@ -311,9 +362,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:visibility="gone"
                     android:text="@string/label_fee"
                     android:textColor="@color/black"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/etFee"
                     app:layout_constraintStart_toEndOf="@+id/cbCertify"
                     app:layout_constraintTop_toTopOf="@+id/etFee" />
@@ -325,7 +376,6 @@
                     android:layout_height="@dimen/edittext_height"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:visibility="gone"
                     android:background="@drawable/edittext_shadow"
                     android:drawableStart="@drawable/ic_dollar"
                     android:drawablePadding="@dimen/_8sdp"
@@ -343,6 +393,7 @@
                     android:singleLine="true"
                     android:text="@={viewModel.fee}"
                     android:textSize="@dimen/_12ssp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toEndOf="@+id/tvFee"
                     app:layout_constraintTop_toBottomOf="@+id/etBatchNo" />
 
@@ -352,7 +403,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:gravity="center"
-                    android:text="@string/label_vaccinated_on"
+                    android:text="@string/label_test_on"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_18ssp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -455,16 +506,16 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvInstitute"
-                    app:layout_constraintTop_toBottomOf="@+id/etHospitalName"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_24sdp"
                     android:layout_marginEnd="@dimen/_24sdp"
-                    android:layout_width="0dp"
-                    android:visibility="gone"
                     android:background="@drawable/recyclerview_shadow"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/btnHealthSaveDocument"
-                    android:layout_height="wrap_content"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etHospitalName" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnHealthSaveDocument"
@@ -473,70 +524,70 @@
                     android:layout_marginStart="@dimen/_24sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_24sdp"
+                    android:layout_marginBottom="@dimen/_16sdp"
                     android:onClick="@{viewModel::onClick}"
                     android:text="@string/action_save"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginBottom="@dimen/_16sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rvInstitute" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/clThankYou"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/clToolbar">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivSuccess"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginTop="@dimen/_8sdp"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_200sdp"/>
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.global.vtg.utils.textView.BoldTextView
                     android:id="@+id/tvSuccess"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ivSuccess"
                     android:layout_width="match_parent"
-                    android:textSize="@dimen/_32ssp"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:text="@string/label_thank_you"
                     android:textColor="@color/black"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="@dimen/_32ssp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSuccess" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvUploaded"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:gravity="center"
                     android:text="@string/label_uploaded"
                     android:textSize="@dimen/_16ssp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSuccess"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSuccess" />
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivGift"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tvUploaded"
                     android:layout_width="match_parent"
-                    app:srcCompat="@drawable/ic_gift"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_height="wrap_content"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvUploaded"
+                    app:srcCompat="@drawable/ic_gift" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.core.widget.NestedScrollView>
 </layout>

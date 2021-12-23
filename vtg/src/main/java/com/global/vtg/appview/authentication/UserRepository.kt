@@ -25,6 +25,7 @@ class UserRepository constructor(
 
     val userLiveData = MutableLiveData<Resource<ResUser>>()
     val userProfilePicLiveData = MutableLiveData<Resource<ResProfile>>()
+    val userProfilePicLiveDataStep1 = MutableLiveData<Resource<ResProfile>>()
     val userConfigLiveData = MutableLiveData<Resource<ResUser>>()
     val scanBarcodeLiveData = MutableLiveData<Resource<ResUser>>()
     val searchInstituteLiveData = MutableLiveData<Resource<ResInstitute>>()
@@ -145,6 +146,7 @@ class UserRepository constructor(
         certified: RequestBody?,
         date: RequestBody?,
         batchNo: RequestBody?,
+        dose: RequestBody?,
         username: RequestBody?
     ) {
         userLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
@@ -158,6 +160,7 @@ class UserRepository constructor(
                 certified,
                 date,
                 batchNo,
+                dose,
                 username
             ).await()
         })
@@ -177,6 +180,7 @@ class UserRepository constructor(
         certified: RequestBody?,
         date: RequestBody?,
         batchNo: RequestBody?,
+        result: RequestBody?,
         username: RequestBody?
     ) {
         userLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
@@ -189,6 +193,7 @@ class UserRepository constructor(
                 certified,
                 date,
                 batchNo,
+                result,
                 username
             ).await()
         })
@@ -219,12 +224,32 @@ class UserRepository constructor(
         }
     }
 
+    suspend fun uploadProfileStep1(
+        file: MultipartBody.Part?,
+        userId: RequestBody?
+    ) {
+        userProfilePicLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result = safeApiCall(call = {
+            apiServiceInterface.uploadProfileAsync(
+                file!!,
+                userId
+            ).await()
+        })
+        if (result is ResProfile) {
+            userProfilePicLiveDataStep1.postValue(Resource.Success(result))
+
+        } else if (result is BaseError) {
+            userProfilePicLiveDataStep1.postValue(Resource.Error(result))
+        }
+    }
+
     suspend fun uploadVendorStep2(
         file: MultipartBody.Part?,
         vendorId: RequestBody?,
         businessName: RequestBody?,
         businessId: RequestBody?,
-        employeeId: RequestBody?
+        employeeId: RequestBody?,
+        date: RequestBody?,
     ) {
         registerVendorStep2LiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result = safeApiCall(call = {
@@ -233,7 +258,7 @@ class UserRepository constructor(
                 vendorId,
                 businessName,
                 businessId,
-                employeeId
+                employeeId,date
             ).await()
         })
         if (result is ResUser) {

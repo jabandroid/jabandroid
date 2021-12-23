@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.appview.authentication.AuthenticationActivity
+import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
@@ -72,7 +73,7 @@ class RegistrationStep3Fragment : AppFragment() {
             viewModel.address1.postValue(USER?.address?.get(0)?.addr1)
             viewModel.address2.postValue(USER?.address?.get(0)?.addr2)
             viewModel.city.postValue(USER?.address?.get(0)?.city)
-            etMailingCity.setText(USER?.address?.get(0)?.city)
+            etMailingCity.text = USER?.address?.get(0)?.city
             viewModel.state.postValue(USER?.address?.get(0)?.state)
             etMailingState.setText(USER?.address?.get(0)?.state)
             viewModel.zip.postValue(USER?.address?.get(0)?.zipCode)
@@ -85,13 +86,13 @@ class RegistrationStep3Fragment : AppFragment() {
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
-        etMailingCity.setDrawableRightTouch {
+        etMailingCity.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
-        etMailingState.setDrawableRightTouch {
+        etMailingState.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
-        etMailingCountry.setDrawableRightTouch {
+        etMailingCountry.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
 
@@ -110,6 +111,7 @@ class RegistrationStep3Fragment : AppFragment() {
                     when (activity) {
                         is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
                     USER = it.data
@@ -118,11 +120,15 @@ class RegistrationStep3Fragment : AppFragment() {
                             PreferenceManager.KEY_USER_LOGGED_IN,
                             true
                         )
-                    val intent: Intent = if (USER?.role.equals("ROLE_USER")) {
-                        Intent(activity, HomeActivity::class.java)
-                    } else {
-                        Intent(activity, VendorActivity::class.java)
-                    }
+                    val intent: Intent =
+                        if (USER?.role.equals("ROLE_USER")
+                        ) {
+                            Intent(activity, HomeActivity::class.java)
+                        } else if (USER?.role.equals("ROLE_CLINIC")) {
+                            Intent(activity, ClinicActivity::class.java)
+                        } else {
+                            Intent(activity, VendorActivity::class.java)
+                        }
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 }
@@ -130,6 +136,7 @@ class RegistrationStep3Fragment : AppFragment() {
                     when (activity) {
                         is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
                     it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
@@ -138,6 +145,7 @@ class RegistrationStep3Fragment : AppFragment() {
                     when (activity) {
                         is AuthenticationActivity -> (activity as AuthenticationActivity).showProgressBar()
                         is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).showProgressBar()
                     }
                 }
@@ -150,6 +158,7 @@ class RegistrationStep3Fragment : AppFragment() {
                     when (activity) {
                         is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
                     USER = it.data
@@ -183,6 +192,7 @@ class RegistrationStep3Fragment : AppFragment() {
                     when (activity) {
                         is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
                     it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
@@ -191,6 +201,7 @@ class RegistrationStep3Fragment : AppFragment() {
                     when (activity) {
                         is AuthenticationActivity -> (activity as AuthenticationActivity).showProgressBar()
                         is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).showProgressBar()
                     }
                 }

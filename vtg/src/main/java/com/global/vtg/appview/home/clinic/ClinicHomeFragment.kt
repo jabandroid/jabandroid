@@ -1,12 +1,16 @@
-package com.global.vtg.appview.home.vendor
+package com.global.vtg.appview.home.clinic
 
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
+import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.imageview.setGlideNormalImage
-import com.global.vtg.appview.home.VendorActivity
+
 import com.global.vtg.appview.home.dashboard.ViewPager2Adapter
+import com.global.vtg.appview.home.uploaddocument.UploadDocumentFragment
+
+import com.global.vtg.appview.home.vendor.VendorDashboardViewModel
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
@@ -15,6 +19,7 @@ import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.SharedPreferenceUtil
+import com.global.vtg.utils.ToastUtils
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorDashboardBinding
@@ -28,14 +33,14 @@ import kotlinx.android.synthetic.main.fragment_dashboard.vpDots
 import kotlinx.android.synthetic.main.fragment_vendor_dashboard.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
+class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
     private lateinit var mFragmentBinding: FragmentVendorDashboardBinding
     private val viewModel by viewModel<VendorDashboardViewModel>()
     private lateinit var viewPager2Adapter: ViewPager2Adapter
     private var titleList = ArrayList<String>()
     private val imagesList = arrayListOf(
-        R.drawable.ic_woman, R.drawable.ic_vaccine_history,
-        R.drawable.ic_vaccine_card, R.drawable.ic_qr_code, R.drawable.ic_health_information,
+        R.drawable.ic_woman, R.drawable.ic_qr_code,R.drawable.ic_health_information,
+          R.drawable.ic_health_info,R.drawable.ic_vaccine_card,
         R.drawable.ic_travel_information
     )
 
@@ -69,16 +74,19 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
         viewPager2Adapter.setImages(
             arrayListOf(
                 "https://i.ibb.co/s6MgjJR/Mask-Group-2.png"
-
+              
             )
         )
 
-        recyclerView.layoutManager = GridLayoutManager(context, 1)
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         titleList = arrayListOf(
             resources.getString(R.string.label_profile),
-            resources.getString(R.string.label_scan_qr_code)
+            resources.getString(R.string.label_scan_qr_code),
+            resources.getString(R.string.label_Vaccine),
+            resources.getString(R.string.label_upload_health),
+            resources.getString(R.string.label_vaccine_card)
         )
-        val dashboardAdapter = VendorDashboardAdapter(
+        val dashboardAdapter = ClinicDashboardAdapter(
             getAppActivity(), titleList, imagesList
         )
         dashboardAdapter.setListener(this)
@@ -87,16 +95,16 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
         viewModel.userConfigLiveData.observe(this, {
             when (it) {
                 is Resource.Success -> {
-                    (activity as VendorActivity).hideProgressBar()
+                    (activity as ClinicActivity).hideProgressBar()
                     Constants.USER = it.data
                     loadData()
                 }
                 is Resource.Error -> {
-                    (activity as VendorActivity).hideProgressBar()
+                    (activity as ClinicActivity).hideProgressBar()
                     it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
                 }
                 is Resource.Loading -> {
-                    (activity as VendorActivity).showProgressBar()
+                    (activity as ClinicActivity).showProgressBar()
                 }
             }
         })
@@ -113,6 +121,15 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
             }
             1 -> {
                 addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
+            }
+           2 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_DOCUMENT)
+            }
+            3 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_HEALTH_INFORMATION)
+            }
+            4 -> {
+                ToastUtils.shortToast(0,"Coming soon")
             }
         }
     }

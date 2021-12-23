@@ -31,6 +31,7 @@ class VendorRegistrationStep2ViewModel(
     var businessName: MutableLiveData<String> = MutableLiveData()
     var businessId: MutableLiveData<String> = MutableLiveData()
     var employeeId: MutableLiveData<String> = MutableLiveData()
+    var expiryDate: MutableLiveData<String> = MutableLiveData()
     val chooseFile: MutableLiveData<Boolean> = MutableLiveData()
     var documentPath: String? = null
     val registerLiveData = MutableLiveData<Resource<ResUser>>()
@@ -38,14 +39,19 @@ class VendorRegistrationStep2ViewModel(
     var showToastError: MutableLiveData<String> = MutableLiveData()
 
     val registerVendorStep2LiveData = MutableLiveData<Resource<ResUser>>()
+   // val userConfigLiveData = MutableLiveData<Resource<ResUser>>()
+
 
     private val userObserver = Observer<Resource<ResUser>> {
         registerVendorStep2LiveData.postValue(it)
+       // userConfigLiveData.postValue(it)
     }
 
     init {
         userRepository.registerVendorStep2LiveData.postValue(null)
         userRepository.registerVendorStep2LiveData.observeForever(userObserver)
+        userRepository.userConfigLiveData.postValue(null)
+        userRepository.userConfigLiveData.observeForever(userObserver)
     }
 
     fun onClick(view: View) {
@@ -93,6 +99,10 @@ class VendorRegistrationStep2ViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.empty_employee_id))
                 isValidate = false
             }
+            isNullOrEmpty(expiryDate.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.empty_expiry_date))
+                isValidate = false
+            }
             else -> {
                 showToastError.postValue("")
             }
@@ -115,9 +125,10 @@ class VendorRegistrationStep2ViewModel(
             val businessName: RequestBody? = businessName.value?.toRequestBody("text/plain".toMediaTypeOrNull())
             val businessId: RequestBody? = businessId.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
             val employeeID: RequestBody? = employeeId.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val date: RequestBody? = expiryDate.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             userRepository.uploadVendorStep2(
-                part, vendorId, businessName, businessId, employeeID
+                part, vendorId, businessName, businessId, employeeID,date
             )
         }
     }
@@ -125,6 +136,12 @@ class VendorRegistrationStep2ViewModel(
     fun completeStep2() {
         scope.launch {
             Constants.USER?.let { userRepository.registerStep(registerLiveData, it) }
+        }
+    }
+
+    fun getUser() {
+        scope.launch {
+            userRepository.getUser()
         }
     }
 }

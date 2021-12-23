@@ -31,9 +31,11 @@ class UploadHealthDocumentViewModel(
     var instituteId: Int? = null
     var documentPath: String? = null
     var file: File? = null
+    var result: String? = null
     var day: String? = null
     var date: String? = null
     var time: String? = null
+    var dob: String? = null
     var region: String = "US"
     var code: MutableLiveData<String> = MutableLiveData()
     var phone: MutableLiveData<String> = MutableLiveData()
@@ -45,6 +47,7 @@ class UploadHealthDocumentViewModel(
     var showToastError: MutableLiveData<String> = MutableLiveData()
     var saveSuccess: MutableLiveData<Boolean> = MutableLiveData()
     var batchNo: MutableLiveData<String> = MutableLiveData()
+
 
     val instituteLiveData = MutableLiveData<Resource<ResInstitute>>()
 
@@ -121,8 +124,20 @@ class UploadHealthDocumentViewModel(
             if (!isNullOrEmpty(srId))
                 batchNo = srId.toRequestBody("text/plain".toMediaTypeOrNull())
 
-            val certified: RequestBody = (if (isCertify.value == false) "false" else "true")
-                .toRequestBody("text/plain".toMediaTypeOrNull())
+
+            var resultB: RequestBody? = null
+            if (!isNullOrEmpty(result))
+                resultB = result!!.toRequestBody("text/plain".toMediaTypeOrNull())
+
+
+            val certified: RequestBody = if (Constants.USER?.role.equals("ROLE_CLINIC")) {
+                "true"
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+            } else {
+
+                (if (isCertify.value == false) "false" else "true")
+                    .toRequestBody("text/plain".toMediaTypeOrNull())
+            }
             var dateReq: RequestBody? = null
             if (date != null) {
                 dateReq = date?.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -143,6 +158,7 @@ class UploadHealthDocumentViewModel(
                 certified,
                 dateReq,
                 batchNo,
+                resultB,
                 username
             )
         }

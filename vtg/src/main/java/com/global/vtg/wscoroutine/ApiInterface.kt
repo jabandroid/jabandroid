@@ -72,6 +72,7 @@ interface ApiInterface {
         @Part("certified") certified: RequestBody?,
         @Part("date") date: RequestBody?,
         @Part("srId") batchNo: RequestBody?,
+        @Part("dose") dose: RequestBody?,
         @Part("username") username: RequestBody?
     ): Deferred<Response<ResUser>>
 
@@ -85,6 +86,7 @@ interface ApiInterface {
         @Part("certified") certified: RequestBody?,
         @Part("date") date: RequestBody?,
         @Part("srId") batchNo: RequestBody?,
+        @Part("result") result: RequestBody?,
         @Part("username") username: RequestBody?
     ): Deferred<Response<ResUser>>
 
@@ -102,6 +104,7 @@ interface ApiInterface {
         @Part("vendorId") vendorId: RequestBody?,
         @Part("buisnessName") buisnessName: RequestBody?,
         @Part("buisnessId") buisnessId: RequestBody?,
-        @Part("employeeId") employeeId: RequestBody?
+        @Part("employeeId") employeeId: RequestBody?,
+        @Part("certificateExpDate") date: RequestBody?
     ): Deferred<Response<ResUser>>
 }

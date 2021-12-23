@@ -107,6 +107,7 @@ val appNetworkModule = module {
                     password ?: ""
                 )
             }
+
             if (role?.isNotEmpty() == true) {
                 builder.addHeader(
                     ApiConstant.HEADER_ROLE,

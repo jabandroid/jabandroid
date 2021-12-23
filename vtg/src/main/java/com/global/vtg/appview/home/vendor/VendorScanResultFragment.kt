@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.gif.GifDrawable
 import com.bumptech.glide.request.target.SimpleTarget
+import com.global.vtg.appview.home.ClinicActivity
+import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
@@ -112,11 +114,22 @@ class VendorScanResultFragment : AppFragment() {
                     }
                 }
                 is Resource.Error -> {
-                    (activity as VendorActivity).hideProgressBar()
+                    when (activity) {
+
+
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        else -> (activity as VendorActivity).hideProgressBar()
+                    }
+
                     it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
                 }
                 is Resource.Loading -> {
-                    (activity as VendorActivity).showProgressBar()
+                    when (activity) {
+
+
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                        else -> (activity as VendorActivity).showProgressBar()
+                    }
                 }
             }
         })
