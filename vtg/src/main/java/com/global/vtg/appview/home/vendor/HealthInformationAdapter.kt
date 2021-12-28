@@ -143,7 +143,7 @@ class HealthInformationAdapter(
                     .contains(".jpeg") || url.toString().contains(".png")
             ) {
                 // JPG file
-                intent.setDataAndType(uri, "image/jpeg")
+                intent.setDataAndType(uri, "image/*")
             } else if (url.toString().contains(".txt")) {
                 // Text file
                 intent.setDataAndType(uri, "text/plain")

@@ -2,6 +2,7 @@ package com.global.vtg.appview
 
 import android.content.Intent
 import android.os.Handler
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.databinding.ViewDataBinding
@@ -14,6 +15,7 @@ import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
+import java.lang.RuntimeException
 
 
 class SplashActivity : AppActivity() {
@@ -26,6 +28,7 @@ class SplashActivity : AppActivity() {
     }
 
     override fun initializeComponent() {
+
         Constants.PREFERENCE_NAME = resources.getString(R.string.app_name)
         val isUserLoggedIn = SharedPreferenceUtil.getInstance(getAppActivity())
             ?.getData(PreferenceManager.KEY_USER_LOGGED_IN, false)

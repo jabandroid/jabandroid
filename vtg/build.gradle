@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.firebase.crashlytics'
 apply from: '../dependencies.gradle'
 apply from: '../resourcepath.gradle'
 
@@ -179,6 +180,10 @@ dependencies {
     implementation 'com.braintreepayments.api:drop-in:5.3.0'
     implementation 'com.github.iwgang:countdownview:2.1.6'
 
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-analytics'
 }
 repositories {
     mavenCentral()
@@ -199,3 +204,5 @@ static def renameAPK(variant) {
         outputFileName = fileName
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
