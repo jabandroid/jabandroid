@@ -11,6 +11,7 @@ import com.global.vtg.appview.config.ResInstitute
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
+import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
@@ -140,7 +141,10 @@ class UploadHealthDocumentViewModel(
             }
             var dateReq: RequestBody? = null
             if (date != null) {
-                dateReq = date?.toRequestBody("text/plain".toMediaTypeOrNull())
+                var dateForServer=
+                    DateUtils.formatLocalToUtc(date!!, DateUtils.API_DATE_FORMAT, DateUtils.API_DATE_FORMAT)
+
+                dateReq = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
             }
             val username: RequestBody? = if (Constants.USER?.role.equals("ROLE_CLINIC")) {
                 "${code.value}${phone.value}".toRequestBody(

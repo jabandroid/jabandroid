@@ -46,10 +46,10 @@ class VaccineHistoryAdapter(
         val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
         holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
         holder.tvDate.text = list[position].date?.let {
-            DateUtils.convertDate(
-                SimpleDateFormat(API_DATE_FORMAT_VACCINE, Locale.US),
-                SimpleDateFormat(DDMMYYYY, Locale.US),
-                it
+            DateUtils.formatDateUTCToLocal(  it,
+                API_DATE_FORMAT_VACCINE,
+                DDMMYYYY,
+
             )
         }
         holder.tvStatus.text = list[position].status

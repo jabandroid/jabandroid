@@ -33,6 +33,7 @@ class RegistrationStep2ViewModel(
     var passportIssuedDate: MutableLiveData<String> = MutableLiveData()
     var passportExpiredDate: MutableLiveData<String> = MutableLiveData()
 
+
     var showToastError: MutableLiveData<String> = MutableLiveData()
     var redirectToStep3: MutableLiveData<Boolean> = MutableLiveData()
 

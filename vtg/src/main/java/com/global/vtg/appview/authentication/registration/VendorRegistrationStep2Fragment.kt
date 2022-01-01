@@ -36,6 +36,7 @@ class VendorRegistrationStep2Fragment : AppFragment() {
     private lateinit var mFragmentBinding: FragmentRegVendorStep2Binding
     var id: Int? = null
     var isFromProfile = false
+
     var businessDate = ""
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
@@ -116,7 +117,7 @@ class VendorRegistrationStep2Fragment : AppFragment() {
             datePicker.datePicker.minDate = System.currentTimeMillis() - 1000
             datePicker.show()
         }
-
+        viewModel.isDataAvailable=false
         val list = Constants.USER?.extras
         if (list != null && list.isNotEmpty()) {
             for (extra in list) {
@@ -137,17 +138,24 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                         viewModel.employeeId.postValue(extra?.V)
                     }
                     extra?.K.equals("certificateExpDate") -> {
-                        val dateEx = SimpleDateFormat(DateUtils.API_DATE_FORMAT_EXP, Locale.getDefault())
-                        val date = dateEx.parse(extra?.V)
-                        val cal = Calendar.getInstance()
-                        cal.time = date
-                        myCalendar.set(Calendar.YEAR, cal.get(Calendar.YEAR))
-                        myCalendar.set(Calendar.MONTH, cal.get(Calendar.MONTH))
-                        myCalendar.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH))
+//                         businessDate=apiSdf.format(myCalendar.time)
+//
+//                        eExpiryDate.text = date
+                        businessDate=   DateUtils.formatDateUTCToLocal(extra?.V!!,DateUtils.API_DATE_FORMAT_EXP,DateUtils.API_DATE_FORMAT)
+                        viewModel.expiryDate.postValue(businessDate)
+
+//                        val date = dateEx.parse(extra?.V)
+//                        val cal = Calendar.getInstance()
+//                        cal.time = date
+//                        myCalendar.set(Calendar.YEAR, cal.get(Calendar.YEAR))
+//                        myCalendar.set(Calendar.MONTH, cal.get(Calendar.MONTH))
+//                        myCalendar.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH))
                         eExpiryDate.isClickable = false
                         eExpiryDate.isEnabled = false
                         cvUploadDocument.isClickable = false
-                       updateDate()
+                        cvUploadDocument.isEnabled = false
+                        viewModel.isDataAvailable=true
+                      // updateDate()
                     }
                 }
             }
@@ -214,6 +222,15 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                 }
             }
         })
+        viewModel.registerLiveDataAlready.observe(this, {
+            when (activity) {
+                is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                else -> (activity as VendorActivity).hideProgressBar()
+            }
+            val bundle = Bundle()
+            bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isFromProfile)
+            addFragmentInStack<Any>(AppFragmentState.F_REG_STEP3, bundle)})
 
         viewModel.chooseFile.observe(this, {
             PickMediaExtensions.instance.pickFromStorage(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
@@ -321,12 +338,9 @@ class VendorRegistrationStep2Fragment : AppFragment() {
     }
 
     private fun updateDate() {
-        val sdf = SimpleDateFormat(DateUtils.MMDDYYY, Locale.US)
-        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-        val date = sdf.format(myCalendar.time)
+        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.getDefault())
         businessDate=apiSdf.format(myCalendar.time)
         viewModel.expiryDate.postValue(businessDate)
-        eExpiryDate.text = date
 
 
 

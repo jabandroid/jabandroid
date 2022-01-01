@@ -1,6 +1,7 @@
 package com.global.vtg.utils
 
 
+import android.annotation.SuppressLint
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
@@ -455,4 +456,43 @@ object DateUtils {
             return "0$value"
         return value
     }
+
+    fun formatDateUTCToLocal(date:String, formatActual:String, formattoChange :String ): String{
+        @SuppressLint("SimpleDateFormat") val sdf = SimpleDateFormat(formatActual,Locale.getDefault())
+        sdf.timeZone= TimeZone.getTimeZone("UTC")
+        var convertedDate: Date? = null
+        var formattedDateStart: String? = null
+        val simpleDateFormat =SimpleDateFormat(formattoChange,Locale.getDefault())
+        simpleDateFormat.timeZone= TimeZone.getDefault()
+        //  simpleDateFormat.timeZone= TimeZone.getTimeZone("Africa/Johannesburg")
+        try {
+            convertedDate = sdf.parse(date)
+            formattedDateStart =  simpleDateFormat
+                .format(convertedDate!!)
+            return formattedDateStart.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart.toString()
+    }
+
+    fun formatLocalToUtc(date:String, formatActual:String, formattoChange :String ): String{
+        @SuppressLint("SimpleDateFormat") val sdf = SimpleDateFormat(formatActual,Locale.getDefault())
+        sdf.timeZone= TimeZone.getDefault()
+        var convertedDate: Date? = null
+        var formattedDateStart: String? = null
+        val simpleDateFormat =SimpleDateFormat(formattoChange,Locale.getDefault())
+        simpleDateFormat.timeZone= TimeZone.getTimeZone("UTC")
+        //  simpleDateFormat.timeZone= TimeZone.getTimeZone("Africa/Johannesburg")
+        try {
+            convertedDate = sdf.parse(date)
+            formattedDateStart =  simpleDateFormat
+                .format(convertedDate!!)
+            return formattedDateStart.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart.toString()
+    }
+
 }

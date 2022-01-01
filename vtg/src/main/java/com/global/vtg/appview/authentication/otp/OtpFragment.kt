@@ -91,6 +91,18 @@ class OtpFragment : AppFragment() {
     }
 
     override fun initializeComponent(view: View?) {
+
+        SharedPreferenceUtil.getInstance(getAppActivity())
+            ?.saveData(
+                PreferenceManager.KEY_USER_NAME,
+              ""
+            )
+        SharedPreferenceUtil.getInstance(getAppActivity())
+            ?.saveData(
+                PreferenceManager.KEY_PASSWORD,
+                ""
+            )
+
         viewModel.context = activity
         code?.let {
             viewModel.code = it

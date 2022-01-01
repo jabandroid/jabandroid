@@ -7,7 +7,7 @@
     <color name="default_color">#757575</color>
 
     <!--  Splash  -->
-    <color name="splash_bg">#F9F9F6</color>
+    <color name="splash_bg">@color/white</color>
     <color name="curve">#bcd1e1</color>
 
     <color name="edittext_font">#333333</color>

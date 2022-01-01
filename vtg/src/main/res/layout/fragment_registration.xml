@@ -49,7 +49,7 @@
                 android:layout_marginTop="@dimen/logo_margin_top"
                 android:padding="@dimen/logo_padding"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/logo"
+                android:src="@mipmap/logo_new"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,6 +74,7 @@
                 android:gravity="center"
                 android:text="@string/label_login_subtext"
                 android:textSize="@dimen/auth_subtitle"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRegistration" />

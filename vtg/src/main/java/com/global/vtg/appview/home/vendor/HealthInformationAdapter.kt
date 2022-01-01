@@ -44,10 +44,11 @@ class HealthInformationAdapter(
         holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
 
         holder.tvDate.text = list[position].date?.let {
-            DateUtils.convertDate(
-                SimpleDateFormat(DateUtils.API_DATE_FORMAT_VACCINE, Locale.US),
-                SimpleDateFormat(DateUtils.DDMMYYYY, Locale.US),
-                it
+            DateUtils.formatDateUTCToLocal(
+                it,
+                DateUtils.API_DATE_FORMAT_VACCINE,
+                DateUtils.DDMMYYYY
+
             )
         }
         holder.tvBatchNo.text = if (list[position].srId.isNullOrEmpty()) "-" else list[position].srId

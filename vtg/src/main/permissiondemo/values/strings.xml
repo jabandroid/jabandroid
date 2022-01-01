@@ -8,6 +8,6 @@
     <string name="sign_up">Sign Up</string>
     <string name="name">Name</string>
     <string name="description">Description</string>
-    <string name="business_exipry_date">Business Exipry Date</string>
+    <string name="business_exipry_date">Business Expiry Date</string>
 
 </resources>

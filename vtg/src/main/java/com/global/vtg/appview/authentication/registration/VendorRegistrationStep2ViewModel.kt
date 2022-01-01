@@ -11,6 +11,7 @@ import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
+import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
@@ -35,7 +36,8 @@ class VendorRegistrationStep2ViewModel(
     val chooseFile: MutableLiveData<Boolean> = MutableLiveData()
     var documentPath: String? = null
     val registerLiveData = MutableLiveData<Resource<ResUser>>()
-
+    val registerLiveDataAlready = MutableLiveData<String>()
+    var isDataAvailable: Boolean = false
     var showToastError: MutableLiveData<String> = MutableLiveData()
 
     val registerVendorStep2LiveData = MutableLiveData<Resource<ResUser>>()
@@ -62,19 +64,22 @@ class VendorRegistrationStep2ViewModel(
             }
             R.id.btnNext -> {
                 KeyboardUtils.hideKeyboard(view)
-                if (isNetworkAvailable(view.context)) {
-                    if (validateFields()) {
-                        KeyboardUtils.hideKeyboard(view)
-                        Constants.USER?.step2Complete = true
-                        callRegisterStep(view.context)
+                if(isDataAvailable){
+                    registerLiveDataAlready.postValue("")
+                }else {
+                    if (isNetworkAvailable(view.context)) {
+                        if (validateFields()) {
+                            KeyboardUtils.hideKeyboard(view)
+                            Constants.USER?.step2Complete = true
+                            callRegisterStep(view.context)
+                        }
+                    } else {
+                        DialogUtils.showSnackBar(
+                            view.context,
+                            view.context.resources.getString(R.string.no_connection)
+                        )
                     }
-                } else {
-                    DialogUtils.showSnackBar(
-                        view.context,
-                        view.context.resources.getString(R.string.no_connection)
-                    )
                 }
-
             }
         }
     }
@@ -125,7 +130,9 @@ class VendorRegistrationStep2ViewModel(
             val businessName: RequestBody? = businessName.value?.toRequestBody("text/plain".toMediaTypeOrNull())
             val businessId: RequestBody? = businessId.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
             val employeeID: RequestBody? = employeeId.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
-            val date: RequestBody? = expiryDate.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+
+            var utcDate=DateUtils.formatLocalToUtc(expiryDate.value!!,DateUtils.API_DATE_FORMAT,DateUtils.API_DATE_FORMAT)
+            val date: RequestBody? = utcDate?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             userRepository.uploadVendorStep2(
                 part, vendorId, businessName, businessId, employeeID,date
