@@ -39,7 +39,7 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
     private lateinit var viewPager2Adapter: ViewPager2Adapter
     private var titleList = ArrayList<String>()
     private val imagesList = arrayListOf(
-        R.drawable.ic_woman, R.drawable.ic_qr_code,R.drawable.ic_health_information,
+        R.drawable.ic_woman, R.drawable.ic_qr_code,R.drawable.ic_health_info,R.drawable.ic_health_information,
           R.drawable.ic_health_info,R.drawable.ic_vaccine_card,
         R.drawable.ic_travel_information
     )
@@ -83,6 +83,7 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
             resources.getString(R.string.label_profile),
             resources.getString(R.string.label_scan_qr_code),
             resources.getString(R.string.label_Vaccine),
+            resources.getString(R.string.label_test_history),
             resources.getString(R.string.label_upload_health),
             resources.getString(R.string.label_vaccine_card)
         )
@@ -126,9 +127,12 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
                 addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_DOCUMENT)
             }
             3 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_HEALTH_INFORMATION)
+                addFragmentInStack<Any>(AppFragmentState.F_TEST_UPLOAD)
             }
             4 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_HEALTH_INFORMATION)
+            }
+            5 -> {
                 ToastUtils.shortToast(0,"Coming soon")
             }
         }

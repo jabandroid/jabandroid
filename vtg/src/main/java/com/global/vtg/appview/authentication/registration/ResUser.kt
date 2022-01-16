@@ -2,6 +2,7 @@ package com.global.vtg.appview.authentication.registration
 
 import androidx.annotation.Keep
 import com.global.vtg.appview.config.HealthInfo
+import com.global.vtg.appview.config.TestInfo
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
 import com.global.vtg.model.network.result.BaseResult
 import com.google.gson.annotations.SerializedName
@@ -82,6 +83,10 @@ data class ResUser(
 
     @field:SerializedName("vaccine")
     val vaccine: ArrayList<VaccineHistory>? = null,
+
+    @field:SerializedName("testHistory")
+    val test: ArrayList<TestInfo>? = null,
+
 
     @field:SerializedName("step3Complete")
     var step3Complete: Boolean? = null,

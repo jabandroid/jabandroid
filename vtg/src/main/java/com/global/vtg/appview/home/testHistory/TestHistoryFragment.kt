@@ -1,41 +1,47 @@
 package com.global.vtg.appview.home.testHistory
 
 import android.annotation.SuppressLint
+import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.view.WindowManager
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.global.vtg.appview.config.TestInfo
+import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
+import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryAdapter
+import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryViewModel
 import com.global.vtg.base.AppFragment
+import com.global.vtg.base.AppFragmentState
+import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentTestHistoryBinding
+import com.vtg.databinding.FragmentVaccineHistoryBinding
 
 import kotlinx.android.synthetic.main.fragment_test_history.*
+
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-
-
-
-
 class TestHistoryFragment : AppFragment() {
 
     private lateinit var mFragmentBinding: FragmentTestHistoryBinding
-    private val viewModel by viewModel<TestViewModel>()
-
+    private val viewModel by viewModel<TestHistoryViewModel>()
+    lateinit var adapter : TestInformationAdapter
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_test_history
     }
 
     override fun preDataBinding(arguments: Bundle?) {
-        getAppActivity().window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+
     }
 
     override fun postDataBinding(binding: ViewDataBinding): ViewDataBinding {
@@ -47,33 +53,65 @@ class TestHistoryFragment : AppFragment() {
 
     @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
-        if(!TextUtils.isEmpty(Constants.USER?.firstName!!)&&!TextUtils.isEmpty(Constants.USER?.lastName!!))
-            tvName.text = Constants.USER?.firstName!!.replace("null","") + " " + Constants.USER?.lastName!!.replace("null","")
-        if (!Constants.USER?.dateOfBirth.isNullOrEmpty()) {
-            val dob = SimpleDateFormat(DateUtils.API_DATE_FORMAT_VACCINE, Locale.getDefault())
-            val date = dob.parse(Constants.USER?.dateOfBirth)
-            val cal = Calendar.getInstance()
-            cal.time = date
-            val sdf = SimpleDateFormat(DateUtils.DDMMYYYY, Locale.US)
-            val date1 = sdf.format(cal.time)
-            tvDob.text ="DOB: "+ date1
-        }
+//        ivBack.setOnClickListener {
+//            activity?.onBackPressed()
+//        }
 
-        countDown.start(995550000) // Millisecond
+        rvTestList.layoutManager = LinearLayoutManager(context)
+        adapter = TestInformationAdapter(getAppActivity())
+        rvTestList.adapter = adapter
 
-        for (time in 0..999) {
-            countDown.updateShow(time.toLong())
-        }
+        updateNoData()
+//
+//        viewModel.uploadFile.observe(this, {
+//            addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_DOCUMENT)
+//        })
 
-        if (!Constants.USER?.profileUrl.isNullOrEmpty())
-            ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl)
-        ivBack.setOnClickListener {
-            activity?.onBackPressed()
-        }
+//        viewModel.uploadProfilePic.observe(this, {
+//            val intent = Intent(Intent.ACTION_GET_CONTENT)
+//            intent.type = "*/*"
+//            getAppActivity().startActivityForResult(intent, Constants.PICK_IMAGE_REQUEST_CODE)
+//        })
+    }
+
+    fun updateDocument(docName: String, path: String, uri: Uri?) {
+        // API Call
     }
 
     override fun pageVisible() {
 
     }
 
+    fun refreshList() {
+        val list = Constants.USER?.test as ArrayList<TestInfo>
+        Collections.sort(list, Comparator<TestInfo?> { obj1, obj2 ->
+
+            val d1= DateUtils.getDate(  obj1!!.date!!,
+                DateUtils.API_DATE_FORMAT_VACCINE)
+            val d2= DateUtils.getDate(  obj2!!.date!!,
+                DateUtils.API_DATE_FORMAT_VACCINE)
+            return@Comparator d2.compareTo(d1)
+        })
+        adapter.setHealthList(list)
+        updateNoData()
+    }
+
+    private fun updateNoData() {
+        if (!Constants.USER?.test.isNullOrEmpty()) {
+            val list = Constants.USER?.test as ArrayList<TestInfo>
+
+            Collections.sort(list, Comparator<TestInfo?> { obj1, obj2 ->
+
+                val d1= DateUtils.getDate(  obj1!!.date!!,
+                    DateUtils.API_DATE_FORMAT_VACCINE)
+                val d2= DateUtils.getDate(  obj2!!.date!!,
+                    DateUtils.API_DATE_FORMAT_VACCINE)
+                return@Comparator d2.compareTo(d1)
+            })
+            adapter.setHealthList(list)
+            layoutNoData.visibility = View.GONE
+        } else {
+            layoutNoData.visibility = View.VISIBLE
+        }
+    }
 }

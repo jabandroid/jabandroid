@@ -3,11 +3,13 @@ package com.global.vtg.wscoroutine
 import com.global.vtg.appview.authentication.forgotpassword.ReqForgotPasswordModel
 import com.global.vtg.appview.authentication.registration.ReqRegistration
 import com.global.vtg.appview.authentication.registration.ResUser
+import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResConfig
 import com.global.vtg.appview.config.ResInstitute
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.appview.payment.ReqPayment
 import com.global.vtg.model.network.result.BaseResult
+import com.google.gson.JsonObject
 import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -61,6 +63,10 @@ interface ApiInterface {
     @GET("api/v1/institute/{name}")
     fun searchInstituteAsync(@Path("name") name: String): Deferred<Response<ResInstitute>>
 
+
+    @GET("api/v1/testList")
+    fun testType(): Deferred<Response<TestType>>
+
     @Multipart
     @POST("api/v1/vaccine/upload")
     fun uploadVaccineAsync(
@@ -87,6 +93,22 @@ interface ApiInterface {
         @Part("date") date: RequestBody?,
         @Part("srId") batchNo: RequestBody?,
         @Part("result") result: RequestBody?,
+        @Part("testId") testId: RequestBody?,
+        @Part("username") username: RequestBody?
+    ): Deferred<Response<ResUser>>
+
+    @Multipart
+    @POST("api/v1/testHistory/upload")
+    fun uploadTestInfoAsync(
+        @Part file: MultipartBody.Part?,
+        @Part("userId") userId: RequestBody?,
+        @Part("instituteId") instituteId: RequestBody?,
+        @Part("status") status: RequestBody?,
+        @Part("certified") certified: RequestBody?,
+        @Part("date") date: RequestBody?,
+        @Part("srId") batchNo: RequestBody?,
+        @Part("result") result: RequestBody?,
+        @Part("testId") testId: RequestBody?,
         @Part("username") username: RequestBody?
     ): Deferred<Response<ResUser>>
 

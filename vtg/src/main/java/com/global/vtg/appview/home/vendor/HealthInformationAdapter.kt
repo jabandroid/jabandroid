@@ -13,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.HealthInfo
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
@@ -21,12 +22,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+//
 
 class HealthInformationAdapter(
     var context: Context
 ) :
     RecyclerView.Adapter<HealthInformationAdapter.HealthViewHolder>() {
     var list: ArrayList<HealthInfo> = ArrayList()
+     var testType: TestType=TestType()
     private lateinit var listener: ClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HealthViewHolder {
@@ -43,37 +46,66 @@ class HealthInformationAdapter(
         val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
         holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
 
+        if(!TextUtils.isEmpty(list[position].test))
+        {
+            if(!TextUtils.isEmpty(list[position].testName))
+            {
+                holder.tvTest.text =list[position].testName
+            }else{
+                for (item in testType.tests!!){
+                    if(item.id!!.equals(list[position].test)){
+                        holder.tvTest.text =item.name
+                        list[position].testName=item.name
+                        break
+
+                    }
+                }
+            }
+
+        }else{
+            holder.tvTest.text =""
+        }
+
+          //  if (TextUtils.isEmpty(list[position].test)) "-" else list[position].test
+        holder.testRoot.visibility = View.VISIBLE
         holder.tvDate.text = list[position].date?.let {
             DateUtils.formatDateUTCToLocal(
                 it,
                 DateUtils.API_DATE_FORMAT_VACCINE,
                 DateUtils.DDMMYYYY
-
             )
         }
-        holder.tvBatchNo.text = if (list[position].srId.isNullOrEmpty()) "-" else list[position].srId
-        when (list[position].result) {
-            "positive" -> {
-                holder.tvStatusValue.text =
-                    holder.itemView.resources.getString(R.string.label_positive)
-                holder.ivStatus.setImageResource(R.drawable.ic_not_verified)
-                holder.llHealth.setBackgroundResource(R.drawable.red_border)
+        holder.tvBatchNo.text =
+            if (list[position].srId.isNullOrEmpty()) "-" else list[position].srId
+        if (list[position].result != null) {
+            when (list[position].result!!.lowercase(Locale.getDefault())) {
+                "positive" -> {
+                    holder.tvStatusValue.text =
+                        holder.itemView.resources.getString(R.string.label_positive)
+                    holder.ivStatus.setImageResource(R.drawable.ic_not_verified)
+                    holder.llHealth.setBackgroundResource(R.drawable.red_border)
+                }
+                "negative" -> {
+                    holder.tvStatusValue.text =
+                        holder.itemView.resources.getString(R.string.label_negative)
+                    holder.ivStatus.setImageResource(R.drawable.ic_check_circle)
+                    holder.llHealth.setBackgroundResource(R.drawable.green_border)
+                }
+                else -> {
+                    holder.tvStatusValue.text =
+                        holder.itemView.resources.getString(R.string.label_pending)
+                    holder.ivStatus.setImageResource(R.drawable.ic_warning)
+                    holder.llHealth.setBackgroundResource(R.drawable.yellow_border)
+                }
             }
-            "negative" -> {
-                holder.tvStatusValue.text =
-                    holder.itemView.resources.getString(R.string.label_negative)
-                holder.ivStatus.setImageResource(R.drawable.ic_check_circle)
-                holder.llHealth.setBackgroundResource(R.drawable.green_border)
-            }
-            else -> {
-                holder.tvStatusValue.text =
-                    holder.itemView.resources.getString(R.string.label_pending)
-                holder.ivStatus.setImageResource(R.drawable.ic_warning)
-                holder.llHealth.setBackgroundResource(R.drawable.yellow_border)
-            }
+        } else {
+            holder.tvStatusValue.text =
+                holder.itemView.resources.getString(R.string.label_pending)
+            holder.ivStatus.setImageResource(R.drawable.ic_warning)
+            holder.llHealth.setBackgroundResource(R.drawable.yellow_border)
         }
 
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             if (!list[position].documentLink.isNullOrEmpty())
                 openFile(list[position].documentLink.toString())
         }
@@ -87,6 +119,8 @@ class HealthInformationAdapter(
     inner class HealthViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // init the item view's
         var tvHospitalName: TextView = itemView.findViewById(R.id.tvHospitalName)
+        var tvTest: TextView = itemView.findViewById(R.id.tvTestName)
+        var testRoot: LinearLayout = itemView.findViewById(R.id.test_root)
         var tvDate: TextView = itemView.findViewById(R.id.tvDate)
         var tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
         var tvStatusValue: TextView = itemView.findViewById(R.id.tvStatusValue)
@@ -103,6 +137,11 @@ class HealthInformationAdapter(
         list.clear()
         list.addAll(historyList)
         notifyDataSetChanged()
+    }
+
+    fun setTestName(nam: TestType) {
+        testType=nam
+
     }
 
     interface ClickListener {

@@ -110,6 +110,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
+                android:visibility="gone"
                 android:text="@string/label_last_covid_result"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_height="wrap_content" />
@@ -131,7 +132,6 @@
                 android:layout_marginStart="@dimen/_32sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_32sdp"
-                android:layout_marginBottom="@dimen/_32sdp"
                 android:onClick="@{viewModel::onClick}"
                 android:text="@string/label_upload_file"
                 app:layout_constraintTop_toBottomOf="@+id/rvHealth"

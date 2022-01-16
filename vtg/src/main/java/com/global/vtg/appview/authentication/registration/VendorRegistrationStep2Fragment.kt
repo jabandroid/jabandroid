@@ -16,11 +16,13 @@ import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
 import com.vtg.R
 import com.vtg.databinding.FragmentRegVendorStep2Binding
+import kotlinx.android.synthetic.main.fragment_dashboard.*
 
 import kotlinx.android.synthetic.main.fragment_reg_vendor_step2.*
 
@@ -119,6 +121,20 @@ class VendorRegistrationStep2Fragment : AppFragment() {
         }
         viewModel.isDataAvailable=false
         val list = Constants.USER?.extras
+
+        val document= Constants.USER?.document
+        if(document!=null&&document.isNotEmpty()){
+            for (doc in document) {
+                if(doc!!.type!!.lowercase().contains("Vendor/Clinic Certificate".lowercase())){
+                    doc_img.setGlideNormalImage(doc!!.identity)
+                    ivUploadDocument.visibility=View.GONE
+                    tvSelectDoc.visibility=View.GONE
+                    tvDocName.visibility=View.GONE
+                    ivCancel.visibility=View.GONE
+                    break
+                }
+            }
+        }
         if (list != null && list.isNotEmpty()) {
             for (extra in list) {
                 when {
@@ -330,6 +346,7 @@ class VendorRegistrationStep2Fragment : AppFragment() {
             tvDocName.text = resources.getString(R.string.label_doc_name, docName)
             tvDocName.visibility = View.VISIBLE
             ivCancel.visibility = View.VISIBLE
+
         }
     }
 

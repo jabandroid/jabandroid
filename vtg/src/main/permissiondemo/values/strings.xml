@@ -9,5 +9,10 @@
     <string name="name">Name</string>
     <string name="description">Description</string>
     <string name="business_exipry_date">Business Expiry Date</string>
+    <string name="search_here">Search here</string>
+    <string name="label_dl">Dl</string>
+    <string name="label_rapid">Rapid Antigen</string>
+    <string name="rtpcr">RTPCR</string>
+    <string name="label_result">Result</string>
 
 </resources>

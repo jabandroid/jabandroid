@@ -18,10 +18,33 @@
         android:paddingEnd="@dimen/_12sdp">
 
         <LinearLayout
+            android:id="@+id/test_root"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/_4sdp"
             android:orientation="horizontal">
+
+            <com.global.vtg.utils.textView.BoldTextView
+                android:id="@+id/tvname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_test"
+                android:textColor="@color/black" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvTestName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="horizontal">
+
+
 
             <com.global.vtg.utils.textView.BoldTextView
                 android:layout_width="wrap_content"

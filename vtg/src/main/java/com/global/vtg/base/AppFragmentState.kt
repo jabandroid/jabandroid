@@ -15,6 +15,8 @@ import com.global.vtg.appview.home.health.UploadHealthDocumentFragment
 import com.global.vtg.appview.home.help.HelpFragment
 import com.global.vtg.appview.home.profile.ProfileFragment
 import com.global.vtg.appview.home.qrcode.VaccineQRCodeFragment
+import com.global.vtg.appview.home.testHistory.TestBaseFragment
+import com.global.vtg.appview.home.testHistory.UploadTestDocumentFragment
 import com.global.vtg.appview.home.uploaddocument.UploadDocumentFragment
 import com.global.vtg.appview.home.vaccinecard.VaccineCardFragment
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryFragment
@@ -53,7 +55,9 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_VENDOR_STEP2(VendorRegistrationStep2Fragment::class.java),
     F_PAYMENT(PaymentFragment::class.java),
     F_VENDOR_SCAN_RESULT(VendorScanResultFragment::class.java),
-    F_PERMISSION_DEMO(PermissionDemoFragment::class.java);
+    F_PERMISSION_DEMO(PermissionDemoFragment::class.java),
+    F_TEST_BASE(TestBaseFragment::class.java),
+    F_TEST_UPLOAD(UploadTestDocumentFragment::class.java);
 
 
     companion object {

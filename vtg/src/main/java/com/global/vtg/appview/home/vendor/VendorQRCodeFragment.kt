@@ -55,6 +55,13 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
     }
 
     override fun initializeComponent(view: View?) {
+
+        val bundle = Bundle()
+
+        bundle.putString(Constants.BUNDLE_BARCODE_ID, "5F4OWYDDDQ1640003255130")
+
+        addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
+
         PermissionUtils.with(
             getAppActivity(),
             true,
@@ -74,6 +81,7 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
     override fun handleResult(rawResult: Result?) {
         val bundle = Bundle()
         bundle.putString(Constants.BUNDLE_BARCODE_ID, rawResult?.text.toString())
+
         addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
     }
 

@@ -1,8 +1,12 @@
 package com.global.vtg.appview.home.health
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -13,13 +17,16 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.global.vtg.appview.config.Institute
-import com.global.vtg.appview.config.PickMediaExtensions
-import com.global.vtg.appview.config.getRealPath
-import com.global.vtg.appview.config.getRealPathFromURI
+import androidx.recyclerview.widget.RecyclerView
+import com.global.vtg.appview.authentication.registration.TestType
+import com.global.vtg.appview.authentication.registration.TestTypeResult
+import com.global.vtg.appview.config.*
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.uploaddocument.InstituteAdapter
@@ -33,6 +40,7 @@ import com.global.vtg.utils.DateUtils.DDMMYY
 import com.global.vtg.utils.DateUtils.appendZero
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
+import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import com.vtg.databinding.FragmentHealthInfoUploadDocumentBinding
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
@@ -70,6 +78,8 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
     private val viewModel by viewModel<UploadHealthDocumentViewModel>()
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
+    private lateinit var type:TestType
+    private  var typeType:String=""
     var isDob=false
     val resultList: MutableList<String> = ArrayList()
     override fun getLayoutId(): Int {
@@ -92,12 +102,14 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             groupMobileNoHealth.visibility = View.VISIBLE
             cbCertify.visibility = View.GONE
             sStatus.visibility = View.VISIBLE
+            s_status.visibility = View.VISIBLE
             sDob.visibility = View.GONE
             dob.visibility = View.GONE
         } else {
             groupMobileNoHealth.visibility = View.GONE
             cbCertify.visibility = View.VISIBLE
             sStatus.visibility = View.GONE
+            s_status.visibility = View.GONE
             sDob.visibility = View.GONE
             dob.visibility = View.GONE
         }
@@ -122,11 +134,49 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             }
         })
 
+        if (isNetworkAvailable(requireActivity())) {
+            viewModel.testHistory()
+        } else {
+            DialogUtils.showSnackBar(
+                requireActivity(),
+                requireActivity().resources.getString(R.string.no_connection)
+            )
+        }
+
+        sTestType.setOnClickListener {
+            showType(type)
+        }
+
+        viewModel.testData.observe(this, {
+            when (it) {
+                is Resource.Success -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    type=it.data
+                }
+                is Resource.Error -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                    }
+                }
+            }
+        })
+
         viewModel.userLiveData.observe(this, {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
-                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
                     Constants.USER = it.data
@@ -417,4 +467,67 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         viewModel.instituteId = institute.id
         rvInstitute.visibility = View.GONE
     }
+
+
+    fun showType(
+       data: TestType,
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = requireActivity().layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popup_test_type, null)
+        val list = dialogLayout.findViewById<RecyclerView>(R.id.rv_list)
+        val search = dialogLayout.findViewById<EditText>(R.id.search)
+        var layoutManager = LinearLayoutManager(activity)
+        lateinit var mListner: TestTypeAdapter.OnItemClickListener
+        mListner = object :
+            TestTypeAdapter.OnItemClickListener {
+            @SuppressLint("SimpleDateFormat")
+            override fun onItemClick(item: TestTypeResult) {
+                sTestType.text=item.name
+                typeType=item.id.toString()
+                viewModel.type=typeType
+                dialog.dismiss()
+            }
+        }
+        var adapter = TestTypeAdapter(activity, mListner)
+
+        Collections.sort(data.tests!!, Comparator<TestTypeResult?> { obj1, obj2 ->
+            return@Comparator obj2!!.id!!.compareTo(obj1!!.id!!)
+        })
+        adapter.addAll(data.tests!!)
+        list.layoutManager = layoutManager
+        list.adapter = adapter
+
+        search.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence?, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+
+                adapter?.filter?.filter(s.toString())
+            }
+        })
+
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
+
 }

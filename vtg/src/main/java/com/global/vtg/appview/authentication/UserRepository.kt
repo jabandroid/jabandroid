@@ -1,9 +1,11 @@
 package com.global.vtg.appview.authentication
 
+import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import com.global.vtg.appview.authentication.login.ReqLoginModel
 import com.global.vtg.appview.authentication.registration.ReqRegistration
 import com.global.vtg.appview.authentication.registration.ResUser
+import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResInstitute
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.appview.payment.ReqPayment
@@ -27,6 +29,7 @@ class UserRepository constructor(
     val userProfilePicLiveData = MutableLiveData<Resource<ResProfile>>()
     val userProfilePicLiveDataStep1 = MutableLiveData<Resource<ResProfile>>()
     val userConfigLiveData = MutableLiveData<Resource<ResUser>>()
+    val testTypeLiveData = MutableLiveData<Resource<TestType>>()
     val scanBarcodeLiveData = MutableLiveData<Resource<ResUser>>()
     val searchInstituteLiveData = MutableLiveData<Resource<ResInstitute>>()
     val registerLiveData = MutableLiveData<Resource<ResUser>>()
@@ -181,6 +184,7 @@ class UserRepository constructor(
         date: RequestBody?,
         batchNo: RequestBody?,
         result: RequestBody?,
+        test: RequestBody?,
         username: RequestBody?
     ) {
         userLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
@@ -194,6 +198,42 @@ class UserRepository constructor(
                 date,
                 batchNo,
                 result,
+                test,
+                username
+            ).await()
+        })
+        if (result is ResUser) {
+            userLiveData.postValue(Resource.Success(result))
+            getUser()
+        } else if (result is BaseError) {
+            userLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun uploadTestInfo(
+        file: MultipartBody.Part?,
+        userId: RequestBody?,
+        instituteId: RequestBody?,
+        status: RequestBody?,
+        certified: RequestBody?,
+        date: RequestBody?,
+        batchNo: RequestBody?,
+        result: RequestBody?,
+        test: RequestBody?,
+        username: RequestBody?
+    ) {
+        userLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result = safeApiCall(call = {
+            apiServiceInterface.uploadTestInfoAsync(
+                file!!,
+                userId,
+                instituteId,
+                status,
+                certified,
+                date,
+                batchNo,
+                result,
+                test,
                 username
             ).await()
         })
@@ -278,4 +318,17 @@ class UserRepository constructor(
             paymentLiveData.postValue(Resource.Error(result))
         }
     }
+
+    suspend fun getTestHistory() {
+        testTypeLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.testType().await() })
+        if (result is TestType) {
+            testTypeLiveData.postValue(Resource.Success(result))
+
+        } else if (result is BaseError) {
+            testTypeLiveData.postValue(Resource.Error(result))
+        }
+    }
+
 }

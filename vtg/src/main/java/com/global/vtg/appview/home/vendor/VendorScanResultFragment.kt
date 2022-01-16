@@ -2,24 +2,32 @@ package com.global.vtg.appview.home.vendor
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.NonNull
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.gif.GifDrawable
-import com.bumptech.glide.request.target.SimpleTarget
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.global.vtg.appview.home.ClinicActivity
-import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
+import com.global.vtg.appview.home.testHistory.TestHistoryDetailFragment
+import com.global.vtg.appview.home.testHistory.TestHistoryFragment
 import com.global.vtg.base.AppFragment
-import com.global.vtg.base.AppFragmentState
-import com.global.vtg.base.fragment.addFragment
 import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
+import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorScanResultBinding
+import kotlinx.android.synthetic.main.fragment_test_fragment.*
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result.*
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result.ivBackScan
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result.tvTitle
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result.vpDots
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result.vpPager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -27,6 +35,8 @@ class VendorScanResultFragment : AppFragment() {
     private lateinit var mFragmentBinding: FragmentVendorScanResultBinding
     private val viewModel by viewModel<VendorScanResultViewModel>()
     private lateinit var barcodeId: String
+    private var countView: Int = 1
+    private lateinit var listName: ArrayList<String>
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_vendor_scan_result
@@ -57,61 +67,61 @@ class VendorScanResultFragment : AppFragment() {
             f.popFragment()
         }
 
-        viewModel.getDataFromBarcodeId(barcodeId)
 
-        viewModel.detailsLiveData.observe(this, {
-            addFragment<Any>(AppFragmentState.F_VENDOR_RESULT)
-        })
+        viewModel.getDataFromBarcodeId(barcodeId)
 
         viewModel.scanBarcodeLiveData.observe(this, { it ->
             when (it) {
                 is Resource.Success -> {
                     (activity as VendorActivity).hideProgressBar()
-                    btnShowDetails.visibility = View.VISIBLE
                     // Load data
+                    listName = ArrayList()
+                    listName.add("")
                     Constants.SCANNEDUSER = it.data
-                    if (!Constants.SCANNEDUSER?.firstName.isNullOrEmpty()) {
-                        tvName.text =
-                            Constants.SCANNEDUSER?.firstName + " " + Constants.SCANNEDUSER?.lastName
+                    if (it.data.test!!.size > 0) {
+                        listName.add(getString(R.string.label_test_history))
+                        countView++
                     }
-                    val list = Constants.SCANNEDUSER?.document
-                    var passportNumber = "-"
-                    if (list != null && list.isNotEmpty()) {
-                        for (doc in list) {
-                            if (doc?.type.equals("Passport")) {
-                                passportNumber = if (doc?.identity.isNullOrEmpty()) "-" else doc?.identity?:"-"
-                                break
+                    if (it.data.healthInfo!!.size > 0) {
+                        listName.add(getString(R.string.label_health_info_V))
+                        countView++
+                    }
+                    if (it.data.vaccine!!.size > 0) {
+                        listName.add(getString(R.string.label_vaccine_info_V))
+                        countView++
+                    }
+
+
+                    val pagerAdapter = ViewPagerAdapter(activity,barcodeId,countView,listName)
+
+                    vpPager.adapter = pagerAdapter
+
+                    TabLayoutMediator(vpDots, vpPager) { _, _ ->
+                        //Some implementation
+                    }.attach()
+
+                    vpPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                        override fun onPageScrollStateChanged(state: Int) {}
+                        override fun onPageScrolled(
+                            position: Int,
+                            positionOffset: Float,
+                            positionOffsetPixels: Int
+                        ) {
+                        }
+
+                        override fun onPageSelected(position: Int) {
+                            when (position) {
+                                0 -> {
+                                    tvTitle.text=getString(R.string.label_covid_test_status)
+                                }
+
+                                else -> {
+                                    tvTitle.text=listName.get(position)
+
+                                }
                             }
                         }
-                    }
-                    tvPassportNumber.text = resources.getString(
-                        R.string.label_passport_number,
-                        passportNumber
-                    )
-                    if (it.data.vendorVerify.equals("YES")) {
-                        Glide.with(getAppActivity()).asGif().load(R.mipmap.gif_verified)
-                            .into(object :
-                                SimpleTarget<GifDrawable?>() {
-                                override fun onResourceReady(
-                                    resource: GifDrawable,
-                                    transition: com.bumptech.glide.request.transition.Transition<in GifDrawable?>?
-                                ) {
-                                    resource.start()
-                                    ivStatus.setImageDrawable(resource)
-                                }
-                            })
-                    } else {
-                        Glide.with(getAppActivity()).asGif().load(R.mipmap.gif_error).into(object :
-                            SimpleTarget<GifDrawable?>() {
-                            override fun onResourceReady(
-                                resource: GifDrawable,
-                                transition: com.bumptech.glide.request.transition.Transition<in GifDrawable?>?
-                            ) {
-                                resource.start()
-                                ivStatus.setImageDrawable(resource)
-                            }
-                        })
-                    }
+                    })
                 }
                 is Resource.Error -> {
                     when (activity) {
@@ -133,9 +143,79 @@ class VendorScanResultFragment : AppFragment() {
                 }
             }
         })
+
+
     }
 
     override fun pageVisible() {
 
     }
+
+    class ViewPagerAdapter(@NonNull fragmentActivity: FragmentActivity?, b:String, count:Int, listName: ArrayList<String>) :
+
+        FragmentStateAdapter(fragmentActivity!!) {
+        @NonNull
+        override fun createFragment(position: Int): Fragment {
+
+            when (position) {
+                0 -> {
+                    var f = VendorScanResultCountFragment()
+                    val bundle = Bundle()
+                    bundle.putString(Constants.BUNDLE_BARCODE_ID, barcodeId)
+                    f.arguments = bundle
+                    return f
+                }
+
+                else -> {
+                    var f = VendorResultFragment()
+                    val bundle = Bundle()
+                    bundle.putString("name", listName.get(position))
+                    f.arguments = bundle
+                    return f
+
+                }
+            }
+        }
+
+        override fun getItemCount(): Int {
+            return CARD_ITEM_SIZE
+        }
+
+        private val barcodeId: String =b
+        private val CARD_ITEM_SIZE=count
+        private val listName: ArrayList<String> = listName
+
+
+    }
+
+
+//    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) :
+//        FragmentStatePagerAdapter(fm) {
+//        override fun getCount(): Int = countView
+//
+//        override fun getItem(position: Int): Fragment {
+//
+//            when (position) {
+//                0 -> {
+//                    var f = VendorScanResultCountFragment()
+//                    val bundle = Bundle()
+//                    bundle.putString(Constants.BUNDLE_BARCODE_ID, barcodeId)
+//                    f.arguments = bundle
+//                    return f
+//                }
+//
+//                else -> {
+//                    var f = VendorResultFragment()
+//                    val bundle = Bundle()
+//                    bundle.putString("name",listName.get(position))
+//                    f.arguments = bundle
+//                    return f
+//
+//                }
+//            }
+//
+//
+//        }
+//    }
+
 }

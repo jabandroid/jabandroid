@@ -5,6 +5,7 @@
 
 
     <string name="please_wait">Please wait</string>
+    <string name="app_name_new">VaxTrax</string>
     <string name="email">Email / Mobile No.</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -145,9 +146,11 @@
     <string name="label_vaccine_card">Vaccine Card</string>
     <string name="label_vaccine_qr_code">QR Code</string>
     <string name="label_covid_test_status">COVID Test Status</string>
+    <string name="label_test_history">Test History</string>
     <string name="label_payment_method">Payment Method</string>
     <string name="label_information">Information</string>
     <string name="label_upload_document">Upload Document</string>
+    <string name="label_upload_info">Upload Health Info</string>
     <string name="label_covid_status">Covid Test Status</string>
     <string name="label_change_password">Change Password</string>
     <string name="label_vaccine_taken_list">Vaccine Taken List</string>
@@ -165,9 +168,12 @@
     <string name="label_hospital">Institute:\u0020</string>
     <string name="label_date">Date:\u0020</string>
     <string name="label_status">Status:\u0020</string>
+    <string name="label_test">Test:\u0020</string>
+    <string name="label_dose">Dose:\u0020</string>
     <string name="label_batch_no_row">Batch/Serial Number:\u0020</string>
     <string name="label_hospital_name">Lab/Clinic Name</string>
     <string name="label_batch_no">Batch/Serial Number</string>
+
     <string name="label_phone_number">User Mobile No.*</string>
 
     <string name="label_certify">Certify</string>
@@ -197,6 +203,8 @@
     <string name="label_first_name">First Name*</string>
     <string name="label_last_name">Last Name*</string>
     <string name="label_dob">Date Of Birth (DOB)</string>
+    <string name="label_test_type">Test Type</string>
+    <string name="label_test_type_1">Type of Testing</string>
     <string name="label_dob_hint">DD/MM/YYYY</string>
     <string name="label_city_step3"><font size="14">City*</font></string>
     <string name="label_place_birth">Place of birth</string>
@@ -247,6 +255,8 @@
     <string name="error_batch_no">Please enter a Batch no or Serial No.</string>
     <string name="error_select_date">Please select a vaccine date.</string>
     <string name="error_select_time">Please select a vaccine time.</string>
+    <string name="error_select_test_type_1">Please select type of testing.</string>
+    <string name="error_select_test_type">Please select type of test.</string>
     <string name="error_hospital_name">Please select a Lab/Clinic Institute name.</string>
     <string name="empty_title">Please select title.</string>
     <string name="empty_gender">Please select gender.</string>
@@ -323,7 +333,8 @@
     <string name="label_parent">Parent Child Linking</string>
     <string name="label_scan_qr_code">Scan QR Code</string>
     <string name="label_Vaccine">Upload Vaccine</string>
-    <string name="label_upload_health">Upload Health Information</string>
+    <string name="label_upload_health">Upload Health Info</string>
+    <string name="label_covid_health">Upload Test Info</string>
     <string name="label_my_qr_code">QR Code</string>
     <string name="label_my_test_history">Test History</string>
     <string name="label_travel_form">Travel Form</string>
@@ -342,10 +353,14 @@
     <string name="label_profile_country">Country:\u0020</string>
     <string name="label_profile_address">Shipping Address:\u0020</string>
     <string name="label_last_covid_result">Display last Covid test results</string>
+    <string name="label_last_result">Display last Covid test results</string>
     <string name="label_positive">Positive</string>
     <string name="label_negative">Negative</string>
     <string name="label_pending">Pending</string>
     <string name="label_health_info">Health Info</string>
+    <string name="label_health_info_V">Health Information</string>
+    <string name="label_vaccine_info_V">Vaccine Information</string>
+    <string name="label_test_info_V">Test Information</string>
     <string name="label_no_result_found">No result found</string>
     <string name="label_or">\u2015 OR \u2015</string>
     <string name="label_old_password">Old Password</string>

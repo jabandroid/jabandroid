@@ -128,9 +128,16 @@ class UploadDocumentViewModel(
                 (if (isCertify.value == false) "false" else "true")
                     .toRequestBody("text/plain".toMediaTypeOrNull())
             }
+            var dateReq: RequestBody? = null
+            if (date != null) {
+                date= "$date $time"
+                var dateForServer=
+                    DateUtils.formatLocalToUtc(date!!, DateUtils.API_DATE_FORMAT_TIME, DateUtils.API_DATE_FORMAT_TIME)
 
-            var dateForServer=DateUtils.formatLocalToUtc(date!!,DateUtils.API_DATE_FORMAT,DateUtils.API_DATE_FORMAT)
-            val dateReq: RequestBody? = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
+                dateReq = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
+            }
+//            var dateForServer=DateUtils.formatLocalToUtc(date!!,DateUtils.API_DATE_FORMAT,DateUtils.API_DATE_FORMAT)
+//            val dateReq: RequestBody? = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
             val username: RequestBody? = if (Constants.USER?.role.equals("ROLE_CLINIC")) {
                 "${code.value}${phone.value}".toRequestBody(
                     "text/plain".toMediaTypeOrNull()

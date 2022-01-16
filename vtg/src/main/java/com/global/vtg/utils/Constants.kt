@@ -23,6 +23,7 @@ object Constants {
 
 
     const val BASE_URL = "https://vaxserver.com/"
+    //const val BASE_URL = "http://localhost:8080/" // stage
 
     var PREFERENCE_NAME = "pref_app_name"
 

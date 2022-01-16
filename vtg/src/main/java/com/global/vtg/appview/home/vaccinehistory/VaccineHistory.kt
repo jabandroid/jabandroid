@@ -30,4 +30,6 @@ data class VaccineHistory(
 
     @field:SerializedName("dose")
     val dose: String? = null
+
+
 )

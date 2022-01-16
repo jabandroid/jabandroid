@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.appview.authentication.registration.ResUser
+import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResInstitute
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
@@ -37,6 +38,7 @@ class UploadHealthDocumentViewModel(
     var date: String? = null
     var time: String? = null
     var dob: String? = null
+    var type: String? = null
     var region: String = "US"
     var code: MutableLiveData<String> = MutableLiveData()
     var phone: MutableLiveData<String> = MutableLiveData()
@@ -62,6 +64,12 @@ class UploadHealthDocumentViewModel(
         userLiveData.postValue(it)
     }
 
+    val testData = MutableLiveData<Resource<TestType>>()
+
+    private val testObserver = Observer<Resource<TestType>> {
+        testData.postValue(it)
+    }
+
 
     init {
         userRepository.searchInstituteLiveData.postValue(null)
@@ -69,6 +77,9 @@ class UploadHealthDocumentViewModel(
 
         userRepository.userLiveData.postValue(null)
         userRepository.userLiveData.observeForever(userObserver)
+
+        userRepository.testTypeLiveData.postValue(null)
+        userRepository.testTypeLiveData.observeForever(testObserver)
     }
 
     fun onClick(view: View) {
@@ -96,6 +107,12 @@ class UploadHealthDocumentViewModel(
         }
     }
 
+    public fun testHistory() {
+        scope.launch {
+            userRepository.getTestHistory()
+        }
+    }
+
     private fun uploadHealthInfo() {
         scope.launch {
 
@@ -114,7 +131,8 @@ class UploadHealthDocumentViewModel(
 
             var instituteIdReq: RequestBody? = null
             if (instituteId != null) {
-                instituteIdReq = instituteId.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+                instituteIdReq =
+                    instituteId.toString().toRequestBody("text/plain".toMediaTypeOrNull())
             }
 
             val status: RequestBody = "Pending"
@@ -141,8 +159,13 @@ class UploadHealthDocumentViewModel(
             }
             var dateReq: RequestBody? = null
             if (date != null) {
-                var dateForServer=
-                    DateUtils.formatLocalToUtc(date!!, DateUtils.API_DATE_FORMAT, DateUtils.API_DATE_FORMAT)
+                date = "$date $time"
+                var dateForServer =
+                    DateUtils.formatLocalToUtc(
+                        date!!,
+                        DateUtils.API_DATE_FORMAT_TIME,
+                        DateUtils.API_DATE_FORMAT_TIME
+                    )
 
                 dateReq = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
             }
@@ -152,8 +175,11 @@ class UploadHealthDocumentViewModel(
                 )
             } else {
                 Constants.USER?.mobileNo?.toRequestBody(
-                    "text/plain".toMediaTypeOrNull())
+                    "text/plain".toMediaTypeOrNull()
+                )
             }
+
+          var  test = type!!.toRequestBody("text/plain".toMediaTypeOrNull())
             userRepository.uploadHealthInfo(
                 part,
                 id,
@@ -163,6 +189,7 @@ class UploadHealthDocumentViewModel(
                 dateReq,
                 batchNo,
                 resultB,
+                test,
                 username
             )
         }
@@ -191,6 +218,10 @@ class UploadHealthDocumentViewModel(
             }
             isNullOrEmpty(date) -> {
                 showToastError.postValue(App.instance?.getString(R.string.error_select_date))
+                isValidate = false
+            }
+            isNullOrEmpty(type) -> {
+                showToastError.postValue(App.instance?.getString(R.string.error_select_test_type))
                 isValidate = false
             }
             isNullOrEmpty(time) -> {

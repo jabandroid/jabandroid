@@ -145,7 +145,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
 
             }
             4 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_TEST)
+                addFragmentInStack<Any>(AppFragmentState.F_TEST_BASE)
 
             }
             5 -> {

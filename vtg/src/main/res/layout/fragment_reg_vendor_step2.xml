@@ -140,12 +140,22 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:minHeight="@dimen/_75sdp">
+                        <ImageView
+                            android:id="@+id/doc_img"
+                            android:layout_width="match_parent"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            android:layout_height="@dimen/_75sdp"
+                            android:contentDescription="@null" />
 
                         <androidx.appcompat.widget.AppCompatImageView
                             android:id="@+id/ivUploadDocument"
                             android:layout_width="@dimen/_22sdp"
                             android:layout_height="@dimen/_22sdp"
                             android:layout_margin="@dimen/_12sdp"
+
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -157,6 +167,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/_12sdp"
                             android:gravity="center"
+
                             android:text="@string/label_upload_text_b"
                             android:textSize="@dimen/_8ssp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -170,9 +181,10 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/_12sdp"
                             android:gravity="center"
+                            android:visibility="gone"
                             android:text="@string/label_doc_name"
                             android:textSize="@dimen/_12ssp"
-                            android:visibility="gone"
+
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

@@ -22,6 +22,7 @@ import android.content.ActivityNotFoundException
 
 import android.content.Intent
 import android.net.Uri
+import androidx.core.content.ContextCompat
 import java.io.File
 
 
@@ -46,36 +47,70 @@ class VaccineHistoryAdapter(
         val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
         holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
         holder.tvDate.text = list[position].date?.let {
-            DateUtils.formatDateUTCToLocal(  it,
+            DateUtils.formatDateUTCToLocal(
+                it,
                 API_DATE_FORMAT_VACCINE,
                 DDMMYYYY,
 
-            )
-        }
-        holder.tvStatus.text = list[position].status
-        holder.tvBatchNo.text = if (list[position].srId.isNullOrEmpty() || list[position].srId.equals("null")) "-" else list[position].srId
-
-        when (list[position].status!!.lowercase(Locale.getDefault())) {
-            "rejected" -> {
-
-                holder.itemView.ivStatus.setImageResource(R.drawable.ic_not_verified)
-                holder.itemView.llVaccine.setBackgroundResource(R.drawable.red_border)
-            }
-            "certified" -> {
-
-                holder.itemView.ivStatus.setImageResource(R.drawable.ic_check_circle)
-                holder.itemView.llVaccine.setBackgroundResource(R.drawable.green_border)
-            }
-            else -> {
-
-                holder.itemView.ivStatus.setImageResource(R.drawable.ic_warning)
-                holder.itemView.llVaccine.setBackgroundResource(R.drawable.yellow_border)
-            }
+                )
         }
 
-        holder.itemView.setOnClickListener{
+        holder.tvBatchNo.text =
+            if (list[position].srId.isNullOrEmpty() || list[position].srId.equals("null")) "-" else list[position].srId
+        if (list[position].dose != null) {
+            var valid: Int = 0
+            for (data in Constants.CONFIG?.doses!!) {
+                if (data!!.id.equals(list[position].dose))
+                {
+                    if(data.name!!.contains("Dose 2")){
+                        valid=1
+                        holder.tvStatus.text=data.name
+                        break
+                    }else  if(data.name!!.contains("Dose 1")){
+                        holder.tvStatus.text=data.name
+                        valid=3
+                        break
+                    }else  if(data.name!!.contains("Booster")||data.name!!.contains("2")){
+                        holder.tvStatus.text=data.name
+                        valid=2
+                        break
+                    }
+                }
+            }
+
+
+            when (valid) {
+                1 -> {
+                    holder.itemView.ivStatus.setImageResource(R.drawable.ic_check_circle_yellow)
+                    holder.itemView.llVaccine.setBackgroundResource(R.drawable.yellow_border)
+                }
+               2 -> {
+
+                    holder.itemView.ivStatus.setImageResource(R.drawable.ic_check_circle)
+                    holder.itemView.llVaccine.setBackgroundResource(R.drawable.green_border)
+                }
+                3 -> {
+
+                    holder.itemView.ivStatus.setImageResource(R.drawable.ic_warning)
+                    holder.itemView.ivStatus.setColorFilter(ContextCompat.getColor(context
+                        , R.color.sea_green))
+                    holder.itemView.llVaccine.setBackgroundResource(R.drawable.blue_border)
+                }
+                else -> {
+
+                    holder.itemView.ivStatus.setImageResource(R.drawable.ic_not_verified)
+                    holder.itemView.llVaccine.setBackgroundResource(R.drawable.red_border)
+
+                }
+            }
+        } else {
+            holder.itemView.ivStatus.setImageResource(0)
+            holder.itemView.llVaccine.setBackgroundResource(R.drawable.red_border)
+        }
+
+        holder.itemView.setOnClickListener {
             if (!list[position].documentLink.isNullOrEmpty())
-            openFile(list[position].documentLink.toString())
+                openFile(list[position].documentLink.toString())
         }
 
     }

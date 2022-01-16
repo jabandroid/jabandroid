@@ -9,17 +9,22 @@ import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.global.vtg.appview.config.HealthInfo
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.utils.Constants
+import com.global.vtg.utils.DateUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentVaccineHistoryBinding
 import kotlinx.android.synthetic.main.fragment_vaccine_history.*
 
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.ArrayList
 
 
 class VaccineHistoryFragment : AppFragment() {
@@ -81,13 +86,32 @@ class VaccineHistoryFragment : AppFragment() {
     }
 
     fun refreshList() {
-        adapter.setList(Constants.USER?.vaccine as ArrayList<VaccineHistory>)
+        val list = Constants.USER?.vaccine as ArrayList<VaccineHistory>
+        Collections.sort(list, Comparator<VaccineHistory?> { obj1, obj2 ->
+
+            val d1= DateUtils.getDate(  obj1!!.date!!,
+                DateUtils.API_DATE_FORMAT_VACCINE)
+            val d2= DateUtils.getDate(  obj2!!.date!!,
+                DateUtils.API_DATE_FORMAT_VACCINE)
+            return@Comparator d2.compareTo(d1)
+        })
+        adapter.setList(list)
         updateNoData()
     }
 
     private fun updateNoData() {
         if (!Constants.USER?.vaccine.isNullOrEmpty()) {
-            adapter.setList(Constants.USER?.vaccine as ArrayList<VaccineHistory>)
+            val list = Constants.USER?.vaccine as ArrayList<VaccineHistory>
+
+            Collections.sort(list, Comparator<VaccineHistory?> { obj1, obj2 ->
+
+                val d1= DateUtils.getDate(  obj1!!.date!!,
+                    DateUtils.API_DATE_FORMAT_VACCINE)
+                val d2= DateUtils.getDate(  obj2!!.date!!,
+                    DateUtils.API_DATE_FORMAT_VACCINE)
+                return@Comparator d2.compareTo(d1)
+            })
+            adapter.setList(list)
             layoutNoData.visibility = View.GONE
         } else {
             layoutNoData.visibility = View.VISIBLE

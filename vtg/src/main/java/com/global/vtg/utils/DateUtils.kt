@@ -13,11 +13,13 @@ object DateUtils {
     val DDMMYY = "dd/MM/yy"
     val DDMMYYYY = "dd/MM/yyyy"
     val MM_DD_YYYY = "MM-dd-yyyy"
-    val MMDDYYHHMM = "MM/dd/yyyy HH:mm"
+    val MMDDYYHHMM = "MM/dd/yyyy  "
     val API_DATE_FORMAT = "yyyy-MM-dd"
+    val API_DATE_FORMAT_TIME = "yyyy-MM-dd HH:mm"
 
     //    val API_DATE_FORMAT_VACCINE = "yyyy-MM-dd HH:mm:ss"
     val API_DATE_FORMAT_VACCINE = "yyyy-MM-dd'T'HH:mm:ss.sssZ"
+    val API_DATE_FORMAT_SERVER = "yyyy-MM-dd HH:mm:ss.sss"
     val API_DATE_FORMAT_EXP = "EEE MMM dd HH:mm:ss 'UTC' yyyy"
     //Tue Dec 21 00:00:00 UTC 2021
     var dateFormateTwentyFourHour = SimpleDateFormat(MMDDYYHHMM, Locale.getDefault())
@@ -494,5 +496,23 @@ object DateUtils {
         }
         return formattedDateStart.toString()
     }
+
+    fun getDate(date:String, formatActual:String ): Date {
+
+        @SuppressLint("SimpleDateFormat") val sdf =
+            SimpleDateFormat(formatActual, Locale.getDefault())
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        var convertedDate: Date? = null
+
+        try {
+            convertedDate = sdf.parse(date)
+
+            return convertedDate
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return convertedDate!!
+    }
+
 
 }
