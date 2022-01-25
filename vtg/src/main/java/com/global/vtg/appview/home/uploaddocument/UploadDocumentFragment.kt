@@ -36,9 +36,27 @@ import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentUploadDocumentBinding
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
 import kotlinx.android.synthetic.main.fragment_registration.*
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.*
 import kotlinx.android.synthetic.main.fragment_upload_document.*
+import kotlinx.android.synthetic.main.fragment_upload_document.cbCertify
 import kotlinx.android.synthetic.main.fragment_upload_document.ccp
+import kotlinx.android.synthetic.main.fragment_upload_document.clForm
+import kotlinx.android.synthetic.main.fragment_upload_document.clThankYou
+import kotlinx.android.synthetic.main.fragment_upload_document.cvUploadDocument
+import kotlinx.android.synthetic.main.fragment_upload_document.etFee
+import kotlinx.android.synthetic.main.fragment_upload_document.etHospitalName
+import kotlinx.android.synthetic.main.fragment_upload_document.ivBack
+import kotlinx.android.synthetic.main.fragment_upload_document.ivCancel
+import kotlinx.android.synthetic.main.fragment_upload_document.ivUploadDocument
+import kotlinx.android.synthetic.main.fragment_upload_document.rvInstitute
+import kotlinx.android.synthetic.main.fragment_upload_document.sDate
+import kotlinx.android.synthetic.main.fragment_upload_document.sDay
+import kotlinx.android.synthetic.main.fragment_upload_document.sTime
+import kotlinx.android.synthetic.main.fragment_upload_document.tvDocName
+import kotlinx.android.synthetic.main.fragment_upload_document.tvFee
+import kotlinx.android.synthetic.main.fragment_upload_document.tvSelectDoc
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -57,7 +75,8 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
     private val currentCalendar: Calendar = Calendar.getInstance()
     val doseList: MutableList<String> = ArrayList()
     val vaccineTypeList: ArrayList<String> = ArrayList()
-
+    var values = ArrayList<Institute>()
+  lateinit var   instituteAdapter: InstituteAutoCompleteAdapter
     override fun getLayoutId(): Int {
         return R.layout.fragment_upload_document
     }
@@ -82,6 +101,9 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             groupMobileNo.visibility = View.GONE
             cbCertify.visibility = View.VISIBLE
         }
+
+         instituteAdapter =
+            InstituteAutoCompleteAdapter(activity, R.layout.recycler_view_institute, values)
         viewModel.code.value = ccp.defaultCountryCode
         viewModel.region = ccp.defaultCountryNameCode
         ccp.setOnCountryChangeListener {

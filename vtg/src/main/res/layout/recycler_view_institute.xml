@@ -6,7 +6,7 @@
     android:paddingStart="@dimen/_16sdp"
     android:paddingEnd="@dimen/_16sdp"
     android:paddingTop="@dimen/_16sdp"
-    android:layout_marginBottom="@dimen/_8sdp">
+    android:layout_marginBottom="@dimen/_16sdp">
 
     <com.global.vtg.utils.textView.RegularTextView
         android:id="@+id/tvInstitute"

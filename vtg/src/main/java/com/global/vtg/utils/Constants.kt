@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.registration.ResUser
+import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResConfig
 import io.michaelrocks.libphonenumber.android.NumberParseException
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
@@ -22,8 +23,8 @@ import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
 object Constants {
 
 
-    const val BASE_URL = "https://vaxserver.com/"
-    //const val BASE_URL = "http://localhost:8080/" // stage
+    const val BASE_URL = "https://vaxserver.com/"// production
+//    const val BASE_URL = "https://vaxserver.com:9090/" // stage
 
     var PREFERENCE_NAME = "pref_app_name"
 
@@ -71,6 +72,8 @@ object Constants {
     var CONFIG: ResConfig? = null
     var USER: ResUser? = null
     var SCANNEDUSER: ResUser? = null
+    var testData: TestType? = null
+    var isSpalsh: Boolean = true
 
     var IS_SIGN_IN = false
     var tempUsername = ""

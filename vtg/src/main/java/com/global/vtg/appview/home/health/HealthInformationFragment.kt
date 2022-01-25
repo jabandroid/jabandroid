@@ -54,14 +54,30 @@ class HealthInformationFragment : AppFragment() {
             activity?.onBackPressed()
         }
 
-        if (isNetworkAvailable(requireActivity())) {
-            viewModel.testHistory()
+//        if (isNetworkAvailable(requireActivity())) {
+//            viewModel.testHistory()
+//        } else {
+//            DialogUtils.showSnackBar(
+//                requireActivity(),
+//                requireActivity().resources.getString(R.string.no_connection)
+//            )
+//        }
+
+        rvHealth.layoutManager = LinearLayoutManager(context)
+        healthAdapter = HealthInformationAdapter(getAppActivity())
+        rvHealth.adapter = healthAdapter
+        val list = Constants.USER?.healthInfo
+        if (!list.isNullOrEmpty()) {
+            Collections.sort(list, Comparator<HealthInfo?> { obj1, obj2 ->
+                return@Comparator obj2!!.id!!.compareTo(obj1!!.id!!)
+            })
+            healthList.addAll(list)
+            healthAdapter.setHealthList(healthList)
+            tvHealthNoData.visibility = View.GONE
         } else {
-            DialogUtils.showSnackBar(
-                requireActivity(),
-                requireActivity().resources.getString(R.string.no_connection)
-            )
+            tvHealthNoData.visibility = View.VISIBLE
         }
+     //   healthAdapter.setTestName(it.data)
 
         viewModel.testData.observe(this, {
             when (it) {
@@ -71,21 +87,7 @@ class HealthInformationFragment : AppFragment() {
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
 
-                    rvHealth.layoutManager = LinearLayoutManager(context)
-                    healthAdapter = HealthInformationAdapter(getAppActivity())
-                    rvHealth.adapter = healthAdapter
-                    val list = Constants.USER?.healthInfo
-                    if (!list.isNullOrEmpty()) {
-                        Collections.sort(list, Comparator<HealthInfo?> { obj1, obj2 ->
-                            return@Comparator obj2!!.id!!.compareTo(obj1!!.id!!)
-                        })
-                        healthList.addAll(list)
-                        healthAdapter.setHealthList(healthList)
-                        tvHealthNoData.visibility = View.GONE
-                    } else {
-                        tvHealthNoData.visibility = View.VISIBLE
-                    }
-                    healthAdapter.setTestName(it.data)
+
                 }
                 is Resource.Error -> {
                     when (activity) {

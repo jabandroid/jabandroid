@@ -1,9 +1,5 @@
 package com.global.vtg.appview.home.qrcode
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Rect
-import android.graphics.RectF
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
@@ -20,6 +16,15 @@ import com.vtg.R
 import com.vtg.databinding.FragmentVaccineQrCodeBinding
 import kotlinx.android.synthetic.main.fragment_vaccine_qr_code.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
+
+import android.content.Context.WINDOW_SERVICE
+import android.graphics.*
+
+import androidx.core.content.ContextCompat.getSystemService
+
+import android.view.WindowManager
+import androidx.core.content.ContextCompat
 
 
 class VaccineQRCodeFragment : AppFragment() {
@@ -47,16 +52,33 @@ class VaccineQRCodeFragment : AppFragment() {
             activity?.onBackPressed()
         }
 
+
+//
+//        var smallerDimension = 800 * 3 / 4
+//
+//        val qrgEncoder = QRGEncoder( Constants.USER?.barcodeId.toString(), null, QRGContents.Type.TEXT, smallerDimension)
+////        qrgEncoder.colorBlack = Color.
+////        qrgEncoder.colorWhite = Color.BLUE
+//
+//        try {
+//            // Getting QR-Code as Bitmap
+//            bitmap = qrgEncoder.bitmap
+//            // Setting Bitmap to ImageView
+//            ivQRCode.setImageBitmap(bitmap)
+//        } catch (e: WriterException) {
+//
+//        }
+
         val color = Color()
         color.light = 0xFFFFFFFF.toInt() // for blank spaces
         color.dark = 0xFF000000.toInt() // for non-blank spaces
         color.background =
             0xFFFFFFFF.toInt() // for the background (will be overriden by background images, if set)
         color.auto = false
-
+//
         val background = StillBackground()
         background.bitmap = BitmapFactory.decodeResource(context?.resources, R.mipmap.logo_vtg)
-        background.clippingRect = Rect(0, 0, 200, 200) // crop the background before applying
+        background.clippingRect = Rect(0, 0, 150,150) // crop the background before applying
         background.alpha = 1f
         val logo = Logo()
         try {
@@ -70,14 +92,14 @@ class VaccineQRCodeFragment : AppFragment() {
         logo.borderWidth = 10 // width of the border to be added around the logo
         logo.scale = 0.3f // scale for the logo in the QR code
         logo.clippingRect =
-            RectF(0f, 0f, 200f, 200f) // crop the logo image before applying it to the QR code
-
+            RectF(0f, 0f, 150f, 150f) // crop the logo image before applying it to the QR code
+//
         val renderOption = RenderOption()
         renderOption.content = Constants.USER?.barcodeId.toString() // content to encode
-        renderOption.size = 800 // size of the final QR code image
+        renderOption.size = 800 * 3 / 4// size of the final QR code image
         renderOption.borderWidth = 20 // width of the empty space around the QR code
         renderOption.ecl = ErrorCorrectionLevel.M // (optional) specify an error correction level
-        renderOption.patternScale = 0.35f // (optional) specify a scale for patterns
+        renderOption.patternScale = 0.33f // (optional) specify a scale for patterns
         renderOption.roundedPatterns =
             true // (optional) if true, blocks will be drawn as dots instead
         renderOption.clearBorder =
@@ -141,4 +163,6 @@ class VaccineQRCodeFragment : AppFragment() {
     override fun pageVisible() {
 
     }
+
+
 }

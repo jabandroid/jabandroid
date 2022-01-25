@@ -83,7 +83,7 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
             resources.getString(R.string.label_profile),
             resources.getString(R.string.label_scan_qr_code),
             resources.getString(R.string.label_Vaccine),
-            resources.getString(R.string.label_test_history),
+            resources.getString(R.string.label_test_upload),
             resources.getString(R.string.label_upload_health),
             resources.getString(R.string.label_vaccine_card)
         )

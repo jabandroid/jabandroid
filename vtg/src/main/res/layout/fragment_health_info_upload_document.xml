@@ -538,6 +538,7 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_24sdp"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:completionThreshold="1"
                     android:layout_marginEnd="@dimen/_24sdp"
                     android:background="@drawable/edittext_shadow"
                     android:text="@={viewModel.hospitalName}"

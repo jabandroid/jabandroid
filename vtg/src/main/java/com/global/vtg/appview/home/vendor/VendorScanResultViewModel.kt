@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.appview.authentication.registration.ResUser
+import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
 import com.vtg.R
@@ -21,6 +22,19 @@ class VendorScanResultViewModel(
 
     private val userObserver = Observer<Resource<ResUser>> {
         scanBarcodeLiveData.postValue(it)
+    }
+
+    val testDataDetails = MutableLiveData<Resource<TestType>>()
+
+    private val testObserver = Observer<Resource<TestType>> {
+        testDataDetails.postValue(it)
+    }
+
+    init {
+
+
+        userRepository.testTypeLiveData.postValue(null)
+        userRepository.testTypeLiveData.observeForever(testObserver)
     }
 
     init {
@@ -39,6 +53,13 @@ class VendorScanResultViewModel(
             R.id.btnShowDetails -> {
                 detailsLiveData.postValue(true)
             }
+        }
+    }
+
+
+    public fun testHistory() {
+        scope.launch {
+            userRepository.getTestHistory()
         }
     }
 }

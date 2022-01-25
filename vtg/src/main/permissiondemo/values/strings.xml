@@ -14,5 +14,7 @@
     <string name="label_rapid">Rapid Antigen</string>
     <string name="rtpcr">RTPCR</string>
     <string name="label_result">Result</string>
+    <string name="vaccination_details">Vaccination Details</string>
+    <string name="test_details">Test Details</string>
 
 </resources>

@@ -127,6 +127,7 @@ interface ApiInterface {
         @Part("buisnessName") buisnessName: RequestBody?,
         @Part("buisnessId") buisnessId: RequestBody?,
         @Part("employeeId") employeeId: RequestBody?,
-        @Part("certificateExpDate") date: RequestBody?
+        @Part("certificateExpDate") date: RequestBody?,
+        @Part("vat") vat: RequestBody?
     ): Deferred<Response<ResUser>>
 }

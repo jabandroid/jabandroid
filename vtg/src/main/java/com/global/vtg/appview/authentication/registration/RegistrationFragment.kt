@@ -45,9 +45,8 @@ import kotlinx.android.synthetic.main.fragment_help.*
 import android.view.View.OnFocusChangeListener
 
 import android.R.string.no
-
-
-
+import com.global.vtg.model.factory.PreferenceManager
+import com.global.vtg.utils.SharedPreferenceUtil
 
 
 class RegistrationFragment : AppFragment() {
@@ -166,6 +165,14 @@ class RegistrationFragment : AppFragment() {
 
         viewModel.redirectToOtp.observe(this, {
             val bundle = Bundle()
+
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(
+                    PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
+                    if (viewModel.isVendor.value == true) "Vendor"
+                    else if (viewModel.isClinic.value == true) "Clinic" else "User"
+
+                )
 //            it.data.id?.let { it1 -> bundle.putInt(BUNDLE_REGISTRATION_ID, it1) }
             bundle.putString(BUNDLE_REGISTRATION_PHONE, viewModel.phone.value)
             bundle.putString(BUNDLE_REGISTRATION_CODE, viewModel.code.value)
@@ -175,6 +182,7 @@ class RegistrationFragment : AppFragment() {
             bundle.putBoolean(BUNDLE_IS_VENDOR, viewModel.isVendor.value == true)
             bundle.putBoolean(BUNDLE_IS_CLINIC, viewModel.isClinic.value == true)
             addFragmentInStack<Any>(AppFragmentState.F_OTP, keys = bundle)
+            //addFragmentInStack<Any>(AppFragmentState.F_REG_STEP1, keys = bundle)
         })
 
         // Handle Error

@@ -107,5 +107,9 @@ data class ResUser(
     val barcodeId: String? = null,
 
     @field:SerializedName("vendorVerify")
-    val vendorVerify: String? = null
+    val vendorVerify: String? = null,
+
+
+
+
 ): BaseResult()

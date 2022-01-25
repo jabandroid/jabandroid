@@ -74,6 +74,7 @@ class ProfileFragment : AppFragment() {
         tvCityValue.text = USER?.birthCity
         tvStateValue.text = USER?.birthState
         tvCountryValue.text = USER?.birthCountry
+        tvEmailValue.text = USER?.email
         loadAddress()
         viewModel.getUser()
         if (!USER!!.profileUrl.isNullOrEmpty())
@@ -107,7 +108,7 @@ class ProfileFragment : AppFragment() {
             SharedPreferenceUtil.INSTANCE?.removeData(PreferenceManager.KEY_USER_LOGGED_IN)
             SharedPreferenceUtil.INSTANCE?.removeData(PreferenceManager.KEY_REFRESH_TOKEN)
             SharedPreferenceUtil.INSTANCE?.removeData(PreferenceManager.KEY_ACCESS_TOKEN)
-
+            SharedPreferenceUtil.INSTANCE?.deleteAllData()
             val intent = Intent(getAppActivity(), AuthenticationActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
@@ -149,17 +150,21 @@ class ProfileFragment : AppFragment() {
         })
     }
 
-    private fun loadAddress() {
+     fun loadAddress() {
         if (!USER?.address.isNullOrEmpty()) {
-            tvCityValue.text = USER?.address?.get(0)?.city ?: ""
-            tvStateValue.text = USER?.address?.get(0)?.state ?: ""
-            tvPostalCodeValue.text = USER?.address?.get(0)?.zipCode ?: ""
-            tvCountryValue.text = USER?.address?.get(0)?.country ?: ""
+            var index=USER?.address!!.size-1
+            tvCityValue.text = USER?.address?.get(index)?.city ?: ""
+            tvStateValue.text = USER?.address?.get(index)?.state ?: ""
+            tvPostalCodeValue.text = USER?.address?.get(index)?.zipCode ?: ""
+            tvCountryValue.text = USER?.address?.get(index)?.country ?: ""
+
+            if (!USER!!.profileUrl.isNullOrEmpty())
+                ivProfilePic.setGlideNormalImage(USER!!.profileUrl)
         }
     }
 
     override fun pageVisible() {
-
+        loadAddress()
     }
 
     private fun resultMessage(
@@ -234,6 +239,6 @@ class ProfileFragment : AppFragment() {
 
     override fun onResume() {
         super.onResume()
-        loadAddress()
+
     }
 }

@@ -57,6 +57,33 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
+import com.global.vtg.appview.home.uploaddocument.InstituteAutoCompleteAdapter
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.cbCertify
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.ccpHealth
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.clForm
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.clThankYou
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.cvUploadDocument
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.dob
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.etFee
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.etHospitalName
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.groupMobileNoHealth
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.ivBack
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.ivCancel
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.ivUploadDocument
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.rvInstitute
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.sDate
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.sDay
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.sDob
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.sStatus
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.sTestType
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.sTime
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.s_status
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.scrollViewHealth
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.tvDocName
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.tvFee
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.tvSelectDoc
+
 
 class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
     private var isSelected: Boolean = false
@@ -65,7 +92,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
     private val viewModel by viewModel<UploadTestDocumentViewModel>()
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
-    private lateinit var type:TestType
+    private  var type:TestType=TestType()
     private  var typeType:String=""
     var isDob=false
 
@@ -110,7 +137,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
         }
         val layoutManager = LinearLayoutManager(getAppActivity())
         rvInstitute.layoutManager = layoutManager
-        val adapter = InstituteAdapter(getAppActivity())
+        var adapter = InstituteAdapter(getAppActivity())
         adapter.setListener(this)
         rvInstitute.addItemDecoration(
             DividerItemDecoration(context, layoutManager.orientation)
@@ -127,24 +154,24 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             var arr=ArrayList<TestTypeResult>()
             var item=TestTypeResult()
             item.id="1"
-            item.name="RTPCR"
+            item.name="RT-PCR"
             arr.add(item)
              item=TestTypeResult()
-            item.id="1"
+            item.id="2"
             item.name="Rapid Antigen"
             arr.add(item)
             type.tests=arr
             showType(type)
         }
 
-        if (isNetworkAvailable(requireActivity())) {
-            viewModel.testHistory()
-        } else {
-            DialogUtils.showSnackBar(
-                requireActivity(),
-                requireActivity().resources.getString(R.string.no_connection)
-            )
-        }
+//        if (isNetworkAvailable(requireActivity())) {
+//            viewModel.testHistory()
+//        } else {
+//            DialogUtils.showSnackBar(
+//                requireActivity(),
+//                requireActivity().resources.getString(R.string.no_connection)
+//            )
+//        }
 
         viewModel.testData.observe(this, {
             when (it) {
@@ -288,9 +315,13 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
 
             val fragments = getAppActivity().supportFragmentManager.fragments
             for (frg in fragments) {
-                if (frg is HealthInformationFragment) {
+                if (frg is TestHistoryDetailFragment) {
                     frg.refreshList()
-                    break
+
+                }
+                if (frg is TestHistoryFragment) {
+                    frg.refreshList()
+
                 }
             }
 
@@ -298,6 +329,9 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
                 activity?.onBackPressed()
             }, 3000)
         })
+
+
+
 
         etHospitalName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -308,13 +342,14 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (!isSelected) {
-                    viewModel.searchInstitute(s.toString())
-                } else {
-                    isSelected = false
-                }
                 if (s?.length ?: 0 == 0) {
                     rvInstitute.visibility = View.GONE
+                } else {
+                    if (!isSelected) {
+                        viewModel.searchInstitute(s.toString())
+                    } else {
+                        isSelected = false
+                    }
                 }
             }
 
@@ -526,6 +561,8 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
         dialog.setView(dialogLayout)
         dialog.show()
     }
+
+
 
 
 }

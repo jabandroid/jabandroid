@@ -489,6 +489,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:singleLine="true"
                     android:layout_marginEnd="@dimen/_24sdp"
+                    android:completionThreshold="1"
                     android:background="@drawable/edittext_shadow"
                     android:text="@={viewModel.hospitalName}"
                     app:layout_constraintEnd_toEndOf="parent"

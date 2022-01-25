@@ -43,6 +43,7 @@ class TestInformationAdapter(
         return HealthViewHolder(v) // pass the view to View Holder
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: HealthViewHolder, position: Int) {
         // set the data in items
         val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
@@ -50,7 +51,7 @@ class TestInformationAdapter(
 
         if(!TextUtils.isEmpty(list[position].test))
         {
-            if(!list[position].test.equals("1"))
+            if(list[position].test.equals("1"))
             {
                 holder.tvTest.text =context.getString(R.string.rtpcr)
             }else{
@@ -77,25 +78,37 @@ class TestInformationAdapter(
                 "positive" -> {
                     holder.tvStatusValue.text =
                         holder.itemView.resources.getString(R.string.label_positive)
-                    holder.ivStatus.setImageResource(R.drawable.ic_not_verified)
+                    holder.ivStatus.setImageResource(R.drawable.ic_drawable_cross)
                     holder.llHealth.setBackgroundResource(R.drawable.red_border)
                 }
                 "negative" -> {
                     holder.tvStatusValue.text =
                         holder.itemView.resources.getString(R.string.label_negative)
-                    holder.ivStatus.setImageResource(R.drawable.ic_check_circle)
+                    holder.ivStatus.setImageResource(R.drawable.ic_drawable_tick)
+                    holder.llHealth.setBackgroundResource(R.drawable.green_border)
+                }
+                "invalid" -> {
+                    holder.tvStatusValue.text =
+                      "invalid"
+                    holder.ivStatus.setImageResource(R.drawable.ic_drawable_pending)
+                    holder.llHealth.setBackgroundResource(R.drawable.green_border)
+                }
+                "NA" -> {
+                    holder.tvStatusValue.text =
+                        "NA"
+                    holder.ivStatus.setImageResource(R.drawable.ic_drawable_na)
                     holder.llHealth.setBackgroundResource(R.drawable.green_border)
                 }
                 else -> {
                     holder.tvStatusValue.text =
-                        holder.itemView.resources.getString(R.string.label_pending)
+                       ""
                     holder.ivStatus.setImageResource(R.drawable.ic_warning)
                     holder.llHealth.setBackgroundResource(R.drawable.yellow_border)
                 }
             }
         } else {
             holder.tvStatusValue.text =
-                holder.itemView.resources.getString(R.string.label_pending)
+                ""
             holder.ivStatus.setImageResource(R.drawable.ic_warning)
             holder.llHealth.setBackgroundResource(R.drawable.yellow_border)
         }

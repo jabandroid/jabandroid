@@ -14,6 +14,7 @@ import com.vtg.databinding.FragmentTestFragmentBinding
 import kotlinx.android.synthetic.main.fragment_test_fragment.*
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
 import androidx.viewpager2.widget.ViewPager2
+import com.global.vtg.utils.Constants
 
 
 class TestBaseFragment : AppFragment() {

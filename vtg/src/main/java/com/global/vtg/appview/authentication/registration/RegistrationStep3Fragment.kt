@@ -8,10 +8,13 @@ import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
+import com.global.vtg.appview.home.health.HealthInformationFragment
+import com.global.vtg.appview.home.profile.ProfileFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.popFragment
+import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
@@ -21,7 +24,9 @@ import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.setDrawableRightTouch
 import com.vtg.R
 import com.vtg.databinding.FragmentRegStep3Binding
+import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_reg_step1.*
+import kotlinx.android.synthetic.main.fragment_reg_step1.ivProfilePic
 import kotlinx.android.synthetic.main.fragment_reg_step2.*
 import kotlinx.android.synthetic.main.fragment_reg_step3.*
 import kotlinx.android.synthetic.main.fragment_reg_step3.ivBack
@@ -59,26 +64,27 @@ class RegistrationStep3Fragment : AppFragment() {
                 ""
             )
 
-        if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
-            tvTitle.text = "Vendor Step 3"
-        }
+//        if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
+//            tvTitle.text = "Vendor Step 3"
+//        }
         if (userType.equals("Clinic")) {
             tvTitle.text = "Lab/Clinic Step 3"
         } else if (userType.equals("Vendor")) {
             tvTitle.text = "Vendor Step 3"
         }
         if (!USER?.address.isNullOrEmpty()) {
-            viewModel.firstName.postValue(USER?.address?.get(0)?.firstName)
-            viewModel.lastName.postValue(USER?.address?.get(0)?.lastName)
-            viewModel.address1.postValue(USER?.address?.get(0)?.addr1)
-            viewModel.address2.postValue(USER?.address?.get(0)?.addr2)
-            viewModel.city.postValue(USER?.address?.get(0)?.city)
-            etMailingCity.text = USER?.address?.get(0)?.city
-            viewModel.state.postValue(USER?.address?.get(0)?.state)
-            etMailingState.setText(USER?.address?.get(0)?.state)
-            viewModel.zip.postValue(USER?.address?.get(0)?.zipCode)
-            viewModel.country.postValue(USER?.address?.get(0)?.country)
-            etMailingCountry.setText(USER?.address?.get(0)?.country)
+            var index=USER?.address!!.size-1
+            viewModel.firstName.postValue(USER?.address?.get(index)?.firstName)
+            viewModel.lastName.postValue(USER?.address?.get(index)?.lastName)
+            viewModel.address1.postValue(USER?.address?.get(index)?.addr1)
+            viewModel.address2.postValue(USER?.address?.get(index)?.addr2)
+            viewModel.city.postValue(USER?.address?.get(index)?.city)
+            etMailingCity.text = USER?.address?.get(index)?.city
+            viewModel.state.postValue(USER?.address?.get(index)?.state)
+            etMailingState.setText(USER?.address?.get(index)?.state)
+            viewModel.zip.postValue(USER?.address?.get(index)?.zipCode)
+            viewModel.country.postValue(USER?.address?.get(index)?.country)
+            etMailingCountry.setText(USER?.address?.get(index)?.country)
         } else {
             viewModel.firstName.postValue(USER?.firstName)
             viewModel.lastName.postValue(USER?.lastName)
@@ -164,7 +170,17 @@ class RegistrationStep3Fragment : AppFragment() {
                     USER = it.data
 
                     if (isFromProfile) {
+
+
+
                         popFragment(3)
+                        val fragments = getAppActivity().supportFragmentManager.fragments
+                        for (frg in fragments) {
+                            if (frg is ProfileFragment) {
+                                frg.loadAddress()
+                                break
+                            }
+                        }
                     } else {
                         it.data.email?.trim()?.let { it1 ->
                             SharedPreferenceUtil.getInstance(getAppActivity())

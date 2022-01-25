@@ -32,6 +32,7 @@ class VendorRegistrationStep2ViewModel(
     var businessName: MutableLiveData<String> = MutableLiveData()
     var businessId: MutableLiveData<String> = MutableLiveData()
     var employeeId: MutableLiveData<String> = MutableLiveData()
+    var businessVat: MutableLiveData<String> = MutableLiveData()
     var expiryDate: MutableLiveData<String> = MutableLiveData()
     val chooseFile: MutableLiveData<Boolean> = MutableLiveData()
     var documentPath: String? = null
@@ -130,12 +131,13 @@ class VendorRegistrationStep2ViewModel(
             val businessName: RequestBody? = businessName.value?.toRequestBody("text/plain".toMediaTypeOrNull())
             val businessId: RequestBody? = businessId.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
             val employeeID: RequestBody? = employeeId.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val vat: RequestBody? = businessVat.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             var utcDate=DateUtils.formatLocalToUtc(expiryDate.value!!,DateUtils.API_DATE_FORMAT,DateUtils.API_DATE_FORMAT)
             val date: RequestBody? = utcDate?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             userRepository.uploadVendorStep2(
-                part, vendorId, businessName, businessId, employeeID,date
+                part, vendorId, businessName, businessId, employeeID,date,vat
             )
         }
     }

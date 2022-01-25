@@ -6,14 +6,10 @@ import androidx.annotation.NonNull
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.VendorActivity
-import com.global.vtg.appview.home.testHistory.TestHistoryDetailFragment
-import com.global.vtg.appview.home.testHistory.TestHistoryFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.model.network.Resource
@@ -22,12 +18,7 @@ import com.global.vtg.utils.DialogUtils
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorScanResultBinding
-import kotlinx.android.synthetic.main.fragment_test_fragment.*
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result.*
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result.ivBackScan
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result.tvTitle
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result.vpDots
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result.vpPager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -61,6 +52,7 @@ class VendorScanResultFragment : AppFragment() {
         ivBackScan.setOnClickListener {
             activity?.onBackPressed()
         }
+Constants.testData
         val f: Fragment? =
             activity?.supportFragmentManager?.findFragmentById(R.id.container)
         if (f is VendorQRCodeFragment) {
@@ -79,17 +71,19 @@ class VendorScanResultFragment : AppFragment() {
                     listName.add("")
                     Constants.SCANNEDUSER = it.data
                     if (it.data.test!!.size > 0) {
-                        listName.add(getString(R.string.label_test_history))
+                        listName.add(getString(R.string.label_test_history_covid))
+                        countView++
+                    }
+
+                    if (it.data.vaccine!!.size > 0) {
+                        listName.add(getString(R.string.label_vaccine_taken_list))
                         countView++
                     }
                     if (it.data.healthInfo!!.size > 0) {
                         listName.add(getString(R.string.label_health_info_V))
                         countView++
                     }
-                    if (it.data.vaccine!!.size > 0) {
-                        listName.add(getString(R.string.label_vaccine_info_V))
-                        countView++
-                    }
+
 
 
                     val pagerAdapter = ViewPagerAdapter(activity,barcodeId,countView,listName)

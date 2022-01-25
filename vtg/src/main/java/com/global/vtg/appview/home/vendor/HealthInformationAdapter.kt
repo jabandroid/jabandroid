@@ -46,25 +46,25 @@ class HealthInformationAdapter(
         val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
         holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
 
-        if(!TextUtils.isEmpty(list[position].test))
-        {
-            if(!TextUtils.isEmpty(list[position].testName))
-            {
+//        if(!TextUtils.isEmpty(list[position].test))
+//        {
+//            if(!TextUtils.isEmpty(list[position].testName))
+//            {
                 holder.tvTest.text =list[position].testName
-            }else{
-                for (item in testType.tests!!){
-                    if(item.id!!.equals(list[position].test)){
-                        holder.tvTest.text =item.name
-                        list[position].testName=item.name
-                        break
+//            }else{
+//                for (item in testType.tests!!){
+//                    if(item.id!!.equals(list[position].test)){
+//                        holder.tvTest.text =item.name
+//                        list[position].testName=item.name
+//                        break
+//
+//                    }
+//                }
+//            }
 
-                    }
-                }
-            }
-
-        }else{
-            holder.tvTest.text =""
-        }
+//        }else{
+//            holder.tvTest.text =""
+//        }
 
           //  if (TextUtils.isEmpty(list[position].test)) "-" else list[position].test
         holder.testRoot.visibility = View.VISIBLE
@@ -82,25 +82,37 @@ class HealthInformationAdapter(
                 "positive" -> {
                     holder.tvStatusValue.text =
                         holder.itemView.resources.getString(R.string.label_positive)
-                    holder.ivStatus.setImageResource(R.drawable.ic_not_verified)
+                    holder.ivStatus.setImageResource(R.drawable.ic_drawable_cross)
                     holder.llHealth.setBackgroundResource(R.drawable.red_border)
                 }
                 "negative" -> {
                     holder.tvStatusValue.text =
                         holder.itemView.resources.getString(R.string.label_negative)
-                    holder.ivStatus.setImageResource(R.drawable.ic_check_circle)
+                    holder.ivStatus.setImageResource(R.drawable.ic_drawable_tick)
+                    holder.llHealth.setBackgroundResource(R.drawable.green_border)
+                }
+                "invalid" -> {
+                    holder.tvStatusValue.text =
+                        "invalid"
+                    holder.ivStatus.setImageResource(R.drawable.ic_drawable_pending)
+                    holder.llHealth.setBackgroundResource(R.drawable.green_border)
+                }
+                "NA" -> {
+                    holder.tvStatusValue.text =
+                        "NA"
+                    holder.ivStatus.setImageResource(R.drawable.ic_drawable_na)
                     holder.llHealth.setBackgroundResource(R.drawable.green_border)
                 }
                 else -> {
                     holder.tvStatusValue.text =
-                        holder.itemView.resources.getString(R.string.label_pending)
+                        ""
                     holder.ivStatus.setImageResource(R.drawable.ic_warning)
                     holder.llHealth.setBackgroundResource(R.drawable.yellow_border)
                 }
             }
         } else {
             holder.tvStatusValue.text =
-                holder.itemView.resources.getString(R.string.label_pending)
+                ""
             holder.ivStatus.setImageResource(R.drawable.ic_warning)
             holder.llHealth.setBackgroundResource(R.drawable.yellow_border)
         }

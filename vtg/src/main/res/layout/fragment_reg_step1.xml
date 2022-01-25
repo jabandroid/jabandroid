@@ -380,7 +380,7 @@
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvCitizenship"
                     style="@style/MarginStartEnd"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="@string/label_citizenship"
@@ -389,7 +389,7 @@
 
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/ccpCitizenship"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="@dimen/edittext_height"
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_8sdp"
@@ -399,6 +399,7 @@
                     android:paddingEnd="@dimen/_12sdp"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
+                    android:gravity="left"
                     android:shadowDy="0"
                     android:shadowRadius="4"
                     app:ccp_defaultNameCode="US"
@@ -406,6 +407,7 @@
                     app:ccp_showFullName="true"
                     app:ccp_showPhoneCode="false"
                     app:ccp_textSize="@dimen/_12ssp"
+                    app:ccp_textGravity="LEFT"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvCitizenship" />
@@ -450,7 +452,7 @@
                     android:layout_height="@dimen/edittext_height"
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginEnd="0dp"
+                    android:layout_marginEnd="@dimen/_16sdp"
                     android:background="@drawable/edittext_shadow"
                     android:imeOptions="actionDone"
                     android:inputType="text"

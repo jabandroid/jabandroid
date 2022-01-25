@@ -137,7 +137,7 @@ class SignInFragment : AppFragment() {
                                 PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
                                 if (viewModel.isVendor.value == true) "Vendor"
                                 else if (viewModel.isClinic.value == true) "Clinic"
-                                else "user"
+                                else "User"
 
                             )
 

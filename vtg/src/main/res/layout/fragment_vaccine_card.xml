@@ -106,6 +106,7 @@
             android:layout_width="@dimen/_170sdp"
             android:layout_height="@dimen/_170sdp"
             android:layout_gravity="top|center"
+            android:visibility="gone"
             android:background="@color/splash_bg"
             android:layout_marginTop="@dimen/_32sdp"
             app:layout_constraintEnd_toEndOf="parent"

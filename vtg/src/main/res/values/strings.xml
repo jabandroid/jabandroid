@@ -5,7 +5,7 @@
 
 
     <string name="please_wait">Please wait</string>
-    <string name="app_name_new">VaxTrax</string>
+    <string name="app_name_new">VAXTRAX</string>
     <string name="email">Email / Mobile No.</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -138,8 +138,8 @@
     <string name="label_resend_otp"><u><b><font fgcolor='#1D4792'>Resend OTP</font></b></u></string>
     <string name="label_verify">Verify</string>
     <string name="label_send">Send</string>
-    <string name="label_vendor_login">Vendor</string>
-    <string name="label_clinic">Lab/clinic</string>
+    <string name="label_vendor_login">I am a Vendor</string>
+    <string name="label_clinic">I am a Lab/clinic</string>
 
     <!-- Dashboard -->
     <string name="label_vaccine_history">Vaccine History</string>
@@ -147,13 +147,15 @@
     <string name="label_vaccine_qr_code">QR Code</string>
     <string name="label_covid_test_status">COVID Test Status</string>
     <string name="label_test_history">Test History</string>
+    <string name="label_test_history_covid">Covid Test History</string>
+    <string name="label_test_upload"> Upload Test</string>
     <string name="label_payment_method">Payment Method</string>
     <string name="label_information">Information</string>
     <string name="label_upload_document">Upload Document</string>
     <string name="label_upload_info">Upload Health Info</string>
     <string name="label_covid_status">Covid Test Status</string>
     <string name="label_change_password">Change Password</string>
-    <string name="label_vaccine_taken_list">Vaccine Taken List</string>
+    <string name="label_vaccine_taken_list">Vaccine List</string>
     <string name="label_upload_file">Upload File</string>
     <string name="label_logout">Logout</string>
     <string name="label_share">Share</string>
@@ -236,6 +238,7 @@
     <string name="label_business_name">Business Name</string>
     <string name="label_business_id">Business Id</string>
     <string name="label_employee_id">Employee Id</string>
+    <string name="label_vat">Business Vat</string>
 
     <!-- Validations -->
     <string name="empty_email">Please enter an E-mail.</string>
@@ -257,7 +260,7 @@
     <string name="error_select_time">Please select a vaccine time.</string>
     <string name="error_select_test_type_1">Please select type of testing.</string>
     <string name="error_select_test_type">Please select type of test.</string>
-    <string name="error_hospital_name">Please select a Lab/Clinic Institute name.</string>
+    <string name="error_hospital_name">Please select a Lab/Clinic Institute name</string>
     <string name="empty_title">Please select title.</string>
     <string name="empty_gender">Please select gender.</string>
     <string name="empty_given_name">Please enter the Given Name.</string>
@@ -339,7 +342,7 @@
     <string name="label_my_test_history">Test History</string>
     <string name="label_travel_form">Travel Form</string>
     <string name="label_my_vaccine_history">Vaccine History</string>
-    <string name="label_my_vaccine_card">My Vaccine Card</string>
+    <string name="label_my_vaccine_card">Vaccine Card</string>
     <string name="label_event">Event</string>
     <string name="label_health_information">Health Information</string>
     <string name="label_quarntine">Quarantine</string>
@@ -349,6 +352,7 @@
     <string name="label_mobile_number">Mobile Number:\u0020</string>
     <string name="label_profile_city">City:\u0020</string>
     <string name="label_profile_state">State:\u0020</string>
+    <string name="label_profile_email">Email:\u0020</string>
     <string name="label_profile_postal_code">Postal Code:\u0020</string>
     <string name="label_profile_country">Country:\u0020</string>
     <string name="label_profile_address">Shipping Address:\u0020</string>

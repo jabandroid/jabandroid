@@ -9,6 +9,7 @@ import com.global.vtg.utils.Constants.tempUsername
 import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.wscoroutine.ApiConstant
 import com.global.vtg.wscoroutine.ApiInterface
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 
 import okhttp3.Interceptor
@@ -37,13 +38,16 @@ import javax.net.ssl.*
 val appNetworkModule = module {
     // Dependency: Retrofit
 
-
+    val gson = GsonBuilder()
+        .setLenient()
+        .create()
     single<Retrofit>(name = "main") {
         Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
             .client(get (  ))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
 //
 //        Retrofit.Builder()

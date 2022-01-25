@@ -38,7 +38,6 @@ class VendorRegistrationStep2Fragment : AppFragment() {
     private lateinit var mFragmentBinding: FragmentRegVendorStep2Binding
     var id: Int? = null
     var isFromProfile = false
-
     var businessDate = ""
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
@@ -69,6 +68,8 @@ class VendorRegistrationStep2Fragment : AppFragment() {
 
         if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
             tvTitleMain!!.text = "Vendor Step 2"
+        }else{
+            tvTitleMain!!.text = "Lab/Clinic Step 2"
         }
         ivBack.setOnClickListener {
             activity?.onBackPressed()
@@ -131,6 +132,13 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                     tvSelectDoc.visibility=View.GONE
                     tvDocName.visibility=View.GONE
                     ivCancel.visibility=View.GONE
+                    viewModel.isDataAvailable=true
+                    cvUploadDocument.isClickable = false
+                    cvUploadDocument.isEnabled = false
+
+                    businessDate=   DateUtils.formatDateUTCToLocal(doc.expireDate!!,DateUtils.API_DATE_FORMAT_VACCINE,DateUtils.API_DATE_FORMAT)
+                    viewModel.expiryDate.postValue(businessDate)
+
                     break
                 }
             }
@@ -147,11 +155,20 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                         etId.isClickable = false
                         etId.isEnabled = false
                         viewModel.businessId.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
                     }
                     extra?.K.equals("employeeId") -> {
                         etEmployeeId.isClickable = false
                         etEmployeeId.isEnabled = false
                         viewModel.employeeId.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+
+                    extra?.K.equals("vat") -> {
+                        etBusinessVat.isClickable = false
+                        etBusinessVat.isEnabled = false
+                        viewModel.businessVat.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
                     }
                     extra?.K.equals("certificateExpDate") -> {
 //                         businessDate=apiSdf.format(myCalendar.time)
@@ -160,12 +177,6 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                         businessDate=   DateUtils.formatDateUTCToLocal(extra?.V!!,DateUtils.API_DATE_FORMAT_EXP,DateUtils.API_DATE_FORMAT)
                         viewModel.expiryDate.postValue(businessDate)
 
-//                        val date = dateEx.parse(extra?.V)
-//                        val cal = Calendar.getInstance()
-//                        cal.time = date
-//                        myCalendar.set(Calendar.YEAR, cal.get(Calendar.YEAR))
-//                        myCalendar.set(Calendar.MONTH, cal.get(Calendar.MONTH))
-//                        myCalendar.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH))
                         eExpiryDate.isClickable = false
                         eExpiryDate.isEnabled = false
                         cvUploadDocument.isClickable = false

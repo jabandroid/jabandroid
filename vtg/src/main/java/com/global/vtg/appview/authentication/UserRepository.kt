@@ -290,6 +290,7 @@ class UserRepository constructor(
         businessId: RequestBody?,
         employeeId: RequestBody?,
         date: RequestBody?,
+        vat: RequestBody?,
     ) {
         registerVendorStep2LiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result = safeApiCall(call = {
@@ -298,7 +299,7 @@ class UserRepository constructor(
                 vendorId,
                 businessName,
                 businessId,
-                employeeId,date
+                employeeId,date,vat
             ).await()
         })
         if (result is ResUser) {

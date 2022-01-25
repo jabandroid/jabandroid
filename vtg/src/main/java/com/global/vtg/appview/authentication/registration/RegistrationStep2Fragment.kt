@@ -1,5 +1,6 @@
 package com.global.vtg.appview.authentication.registration
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -57,6 +58,7 @@ class RegistrationStep2Fragment : AppFragment() {
         return mFragmentBinding
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
         if(isFromProfile)
             tvSkip.visibility=View.GONE
@@ -110,9 +112,11 @@ class RegistrationStep2Fragment : AppFragment() {
                         viewModel.passportCountry.value= doc?.country
                     }
                     doc?.type.equals("SSN", true) -> {
-                        viewModel.ssn.value = doc?.identity
+                        viewModel.ssn.value = doc?.identity!!.substring(0,2)+"XX"
+                        viewModel.ssnFinal=doc?.identity!!
                         etSsn.isClickable = false
                         etSsn.isEnabled = false
+
                     }
                     doc?.type.equals("ID", true) -> {
                         viewModel.id.value = doc?.identity

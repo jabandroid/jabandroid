@@ -72,6 +72,7 @@ class VendorResultFragment : AppFragment() {
         rvHealth.adapter = healthAdapter
         rvTest.adapter = testHistoryAdapter
 
+
         if (isNetworkAvailable(requireActivity())) {
             viewModel.testHistory()
         } else {
@@ -118,7 +119,7 @@ class VendorResultFragment : AppFragment() {
                                 }
                             }
 
-                            getString(R.string.label_vaccine_info_V) -> {
+                            getString(R.string.label_vaccine_taken_list) -> {
                                 rvVaccine.visibility = View.VISIBLE
                                 rvHealth.visibility = View.GONE
                                 rvTest.visibility = View.GONE
@@ -126,10 +127,8 @@ class VendorResultFragment : AppFragment() {
                                 if (!Constants.SCANNEDUSER?.vaccine.isNullOrEmpty()) {
 
                                     Constants.SCANNEDUSER?.vaccine?.let {
-
                                         val list = it
                                         Collections.sort(list, Comparator<VaccineHistory?> { obj1, obj2 ->
-
                                             val d1= DateUtils.getDate(  obj1!!.date!!,
                                                 DateUtils.API_DATE_FORMAT_VACCINE)
                                             val d2= DateUtils.getDate(  obj2!!.date!!,
@@ -144,18 +143,14 @@ class VendorResultFragment : AppFragment() {
                                 }
                             }
 
-                            getString(R.string.label_test_history) -> {
+                            getString(R.string.label_test_history_covid) -> {
                                 rvVaccine.visibility = View.GONE
                                 rvHealth.visibility = View.GONE
                                 rvTest.visibility = View.VISIBLE
-
                                 if (!Constants.SCANNEDUSER?.test.isNullOrEmpty()) {
-
                                     Constants.SCANNEDUSER?.test?.let {
-
                                         val list = it
                                         Collections.sort(list, Comparator<TestInfo?> { obj1, obj2 ->
-
                                             val d1= DateUtils.getDate(  obj1!!.date!!,
                                                 DateUtils.API_DATE_FORMAT_VACCINE)
                                             val d2= DateUtils.getDate(  obj2!!.date!!,
@@ -207,7 +202,6 @@ class VendorResultFragment : AppFragment() {
 //            tvNoData.visibility = View.VISIBLE
 //        }
         tabLayout.visibility = View.GONE
-
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(p0: TabLayout.Tab?) {
                 if (p0?.position == 0) {

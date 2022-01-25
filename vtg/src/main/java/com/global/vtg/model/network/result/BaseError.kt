@@ -8,4 +8,7 @@ class BaseError : BaseResult() {
 
     @SerializedName("message")
     var message: String? = null
+
+    @SerializedName("error")
+    var error: String? = null
 }

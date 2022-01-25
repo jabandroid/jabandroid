@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class TestInfo(
 
     @field:SerializedName("result")
-    val result: String? = null,
+    var result: String? = null,
 
     @field:SerializedName("srId")
     val srId: String? = null,

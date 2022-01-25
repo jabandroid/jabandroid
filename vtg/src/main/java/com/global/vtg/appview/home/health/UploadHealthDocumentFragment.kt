@@ -30,6 +30,7 @@ import com.global.vtg.appview.config.*
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.uploaddocument.InstituteAdapter
+import com.global.vtg.appview.home.uploaddocument.InstituteAutoCompleteAdapter
 import com.global.vtg.appview.home.uploaddocument.TestResultSpinnerAdapter
 import com.global.vtg.appview.home.uploaddocument.VaccineDoseSpinnerAdapter
 import com.global.vtg.base.AppFragment
@@ -45,21 +46,30 @@ import com.vtg.R
 import com.vtg.databinding.FragmentHealthInfoUploadDocumentBinding
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.cbCertify
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ccpHealth
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.clForm
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.clThankYou
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.cvUploadDocument
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.dob
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.etFee
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.etHospitalName
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.groupMobileNoHealth
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ivBack
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ivCancel
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ivUploadDocument
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.rvInstitute
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDate
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDay
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDob
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sStatus
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTestType
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTime
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.s_status
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.scrollViewHealth
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvDocName
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvFee
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvSelectDoc
+import kotlinx.android.synthetic.main.fragment_test_info_upload_document.*
 import kotlinx.android.synthetic.main.fragment_upload_document.*
 
 import kotlinx.coroutines.Dispatchers
@@ -78,9 +88,9 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
     private val viewModel by viewModel<UploadHealthDocumentViewModel>()
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
-    private lateinit var type:TestType
-    private  var typeType:String=""
-    var isDob=false
+    private var type: TestType? = null
+    private var typeType: String = ""
+    var isDob = false
     val resultList: MutableList<String> = ArrayList()
     override fun getLayoutId(): Int {
         return R.layout.fragment_health_info_upload_document
@@ -135,7 +145,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         })
 
         if (isNetworkAvailable(requireActivity())) {
-            viewModel.testHistory()
+            viewModel.testType()
         } else {
             DialogUtils.showSnackBar(
                 requireActivity(),
@@ -144,7 +154,8 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         }
 
         sTestType.setOnClickListener {
-            showType(type)
+            if (type != null)
+                showType(type!!)
         }
 
         viewModel.testData.observe(this, {
@@ -154,7 +165,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
-                    type=it.data
+                    type = it.data
                 }
                 is Resource.Error -> {
                     when (activity) {
@@ -243,7 +254,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             datePicker.show()
         }
         sDob.setOnClickListener {
-            isDob=true
+            isDob = true
             KeyboardUtils.hideKeyboard(getAppActivity())
             val datePicker = DatePickerDialog(
                 getAppActivity(), R.style.DialogTheme, date, myCalendar
@@ -264,7 +275,8 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                 R.style.DialogTheme,
                 { _, selectedHour, selectedMinute ->
                     run {
-                        val time = "${appendZero(selectedHour.toString())}:${appendZero(selectedMinute.toString())}"
+                        val time =
+                            "${appendZero(selectedHour.toString())}:${appendZero(selectedMinute.toString())}"
                         sTime.setText(time)
                         viewModel.time = time
                     }
@@ -300,6 +312,18 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             }, 3000)
         })
 
+//        etHospitalName.onItemClickListener =
+//            AdapterView.OnItemClickListener { adapterView, view, i, l ->
+//
+//                var item : Institute = adapterView.getItemAtPosition(i) as Institute
+//
+//                KeyboardUtils.hideKeyboard(getAppActivity())
+//                isSelected = true
+//
+//                viewModel.instituteId = item.id
+//
+//
+//            }
         etHospitalName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -309,13 +333,14 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (!isSelected) {
-                    viewModel.searchInstitute(s.toString())
-                } else {
-                    isSelected = false
-                }
                 if (s?.length ?: 0 == 0) {
                     rvInstitute.visibility = View.GONE
+                } else {
+                    if (!isSelected) {
+                        viewModel.searchInstitute(s.toString())
+                    } else {
+                        isSelected = false
+                    }
                 }
             }
 
@@ -341,6 +366,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                 }
             }
         })
+
     }
 
     private fun addResut() {
@@ -359,7 +385,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         adapter.setDropDownViewResource(R.layout.my_spinner_row)
 
         sStatus.adapter = TestResultSpinnerAdapter(
-            getAppActivity(),resultList
+            getAppActivity(), resultList
         )
 
         sStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -368,7 +394,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                 KeyboardUtils.hideKeyboard(view)
                 if (!isFirstTime)
                     viewModel.result = resultList[pos - 1]
-                else{
+                else {
                     isFirstTime = false
                 }
             }
@@ -427,12 +453,12 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         val sdf = SimpleDateFormat(DDMMYY, Locale.US)
         val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
         val date = sdf.format(myCalendar.time)
-        if(isDob){
+        if (isDob) {
             sDob.text = apiSdf.format(myCalendar.time)
-            viewModel.dob= apiSdf.format(myCalendar.time).toString()
-            isDob=false
+            viewModel.dob = apiSdf.format(myCalendar.time).toString()
+            isDob = false
 
-        }else {
+        } else {
             sDate.setText(date)
 
             val dayOfWeek = SimpleDateFormat("EEEE", Locale.US).format(myCalendar.time)
@@ -470,7 +496,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 
 
     fun showType(
-       data: TestType,
+        data: TestType,
     ) {
         val builder = AlertDialog.Builder(activity)
         val dialog: AlertDialog = builder.create()
@@ -489,13 +515,15 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             TestTypeAdapter.OnItemClickListener {
             @SuppressLint("SimpleDateFormat")
             override fun onItemClick(item: TestTypeResult) {
-                sTestType.text=item.name
-                typeType=item.id.toString()
-                viewModel.type=typeType
+                sTestType.text = item.name
+                typeType = item.id.toString()
+                viewModel.type = typeType
                 dialog.dismiss()
             }
         }
         var adapter = TestTypeAdapter(activity, mListner)
+
+
 
         Collections.sort(data.tests!!, Comparator<TestTypeResult?> { obj1, obj2 ->
             return@Comparator obj2!!.id!!.compareTo(obj1!!.id!!)

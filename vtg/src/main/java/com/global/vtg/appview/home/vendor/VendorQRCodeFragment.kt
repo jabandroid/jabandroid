@@ -1,18 +1,22 @@
 package com.global.vtg.appview.home.vendor
 
 import android.Manifest
+import android.app.AlertDialog
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
+import androidx.core.app.ActivityCompat
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragment
-import com.global.vtg.permission.PermissionUtils
 import com.global.vtg.utils.Constants
-import com.global.vtg.utils.Constants.CAMERA_REQUEST_CODE
 import com.google.zxing.Result
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorQrBinding
@@ -46,6 +50,7 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
         savedInstanceState: Bundle?
     ): View? {
         mScannerView = ZXingScannerView(activity)
+
         return mScannerView
     }
 
@@ -56,32 +61,108 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
 
     override fun initializeComponent(view: View?) {
 
-        val bundle = Bundle()
+//        mScannerView!! .setAspectTolerance(0.5f);
+//        mScannerView!! .setAutoFocus(true);
+        Constants.isSpalsh=true
+//        val bundle = Bundle()
+//        bundle.putString(Constants.BUNDLE_BARCODE_ID, "78311906389396501642744453248")
+//        addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
 
-        bundle.putString(Constants.BUNDLE_BARCODE_ID, "5F4OWYDDDQ1640003255130")
-
-        addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
-
-        PermissionUtils.with(
-            getAppActivity(),
-            true,
-            resources.getString(R.string.label_camera_permission)
-        )
-        if (PermissionUtils.checkPermission(getAppActivity(), Manifest.permission.CAMERA)) {
+        if(checkPermissions()){
             mScannerView?.startCamera()
-        } else {
-            requestPermissions(arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+        }else{
+            requestPermissions()
         }
+
+//        PermissionUtils.with(
+//            getAppActivity(),
+//            true,
+//            resources.getString(R.string.label_camera_permission)
+//        )
+//        if (PermissionUtils.checkPermission(getAppActivity(), Manifest.permission.CAMERA)) {
+//            mScannerView?.startCamera()
+//
+//
+//        } else {
+//            ActivityCompat.requestPermissions(
+//                requireActivity(), arrayOf(
+//                    Manifest.permission.CAMERA
+//                ), CAMERA_REQUEST_CODE
+//            )
+         //
+//        }
+
+
     }
 
     override fun pageVisible() {
 
     }
 
+    // method to check for permissions
+    private fun checkPermissions(): Boolean {
+        return ActivityCompat.checkSelfPermission(
+            requireActivity(),
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    var PERMISSION_ID = 44
+
+    // method to request for permissions
+    private fun requestPermissions() {
+
+        val mPermissionResult = registerForActivityResult(
+            RequestPermission()
+        ) { result ->
+            if (result) {
+                mScannerView?.startCamera()
+
+
+            } else {
+                val builder = AlertDialog.Builder(requireActivity())
+                builder.setTitle("Alert")
+                builder.setMessage(getString(R.string.label_camera_permission))
+//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+                builder.setPositiveButton("close") { dialog, which ->
+                    activity?.onBackPressed()
+                }
+
+                builder.setNegativeButton("Settings") { dialog, which ->
+                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                    val uri: Uri = Uri.fromParts("package", requireActivity().packageName, null)
+                    intent.data = uri
+                    startActivity(intent)
+                }
+
+
+                builder.show()
+            }
+        }
+        mPermissionResult.launch(
+            Manifest.permission.CAMERA
+        )
+    }
+//
+//    @SuppressLint("MissingPermission")
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        Log.v("asdsad", "asdsadd:" + grantResults.size)
+//        when (requestCode) {
+//            PERMISSION_ID -> {
+//                mScannerView?.startCamera()
+//            }
+//        }
+//    }
+
     override fun handleResult(rawResult: Result?) {
         val bundle = Bundle()
         bundle.putString(Constants.BUNDLE_BARCODE_ID, rawResult?.text.toString())
-
         addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
     }
 
@@ -90,18 +171,5 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
         mScannerView?.stopCamera()
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        for (i in permissions.indices) {
-            val permissionName = permissions[i]
-            if (requestCode == CAMERA_REQUEST_CODE) {
-                if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                    mScannerView?.startCamera()
-                }
-            }
-        }
-    }
+
 }

@@ -1,6 +1,7 @@
 package com.global.vtg.base
 
 
+import android.text.TextUtils
 import android.util.Log
 import com.global.vtg.model.network.Resource
 import com.global.vtg.model.network.result.BaseError
@@ -28,16 +29,27 @@ open class AppRepository {
         try {
             val response = call.invoke()
             Log.e("REsponse","REsponse"+response.toString())
+            if(response.code()==200){
+
+            }
             if (response.isSuccessful) {
                 if (response.body() != null && response.body() is BaseResult) {
                     val baseResult = response.body() as BaseResult
                     return if (baseResult.status == null || baseResult.status.equals("Success", true)) {
+                        if(baseResult.errorApi!=null&&!baseResult.errorApi.equals("null")){
+                            val baseError = BaseError()
+
+                                baseError.code = response.code().toString()
+                                baseError.message = baseResult.errorApi
+
+                            Resource.Error(baseError)
+                        }else
                         Resource.Success(response.body()!!)
                     } else {
                         val baseError = BaseError()
-                        if (baseResult.error != null) {
-                            baseError.code = baseResult.error?.code
-                            baseError.message = baseResult.error?.message
+                        if (baseResult.error_1 != null) {
+                            baseError.code = baseResult.error_1?.code
+                            baseError.message = baseResult.error_1?.message
                         } else {
                             baseError.code = ApiConstant.SOMETHING_WRONG_ERROR_STATUS
                             baseError.message = ApiConstant.SOMETHING_WRONG_ERROR
@@ -68,6 +80,7 @@ open class AppRepository {
                                 val error = jsonResponse.get("error").toString()
                                 val jsonError = JSONObject(error)
                                 baseError.message = jsonError.get("message").toString()
+                                baseError.message =error
                             } catch (e: Exception) {
                                 baseError.code = ApiConstant.SOMETHING_WRONG_ERROR_STATUS
                                 baseError.message = ApiConstant.SOMETHING_WRONG_ERROR

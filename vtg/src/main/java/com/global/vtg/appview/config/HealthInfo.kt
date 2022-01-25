@@ -30,6 +30,8 @@ data class HealthInfo(
 
     @field:SerializedName("testId")
     val test: String? = null,
+    @field:SerializedName("testName")
+    var testName: String? = null,
 
-    var testName: String? = ""
+    //var testName: String? = ""
 )

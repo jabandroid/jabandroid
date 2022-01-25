@@ -453,6 +453,26 @@ object DateUtils {
         return dateParse.format(date)
     }
 
+    fun convertDate(
+        dateFormat: String,
+        dateParse: String,
+        dateTime: String
+    ): String {
+        @SuppressLint("SimpleDateFormat") val sdf = SimpleDateFormat(dateFormat,Locale.getDefault())
+
+        var convertedDate: Date? = null
+        var formattedDateStart: String? = null
+        val simpleDateFormat =SimpleDateFormat(dateParse,Locale.getDefault())
+        try {
+            convertedDate = sdf.parse(dateTime)
+            formattedDateStart =  simpleDateFormat
+                .format(convertedDate!!)
+            return formattedDateStart.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart.toString()
+    }
     fun appendZero(value: String): String {
         if (value.length == 1)
             return "0$value"

@@ -22,7 +22,7 @@ android {
         versionCode 2
         versionName "1.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resValue "string", "app_name", "VaxTrax"
+        resValue "string", "app_name", "VAXTRAX"
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -164,7 +164,10 @@ dependencies {
     implementation 'com.afollestad:viewpagerdots:1.0.0'
 
     // QR Code
-    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.google.zxing:core:3.3.3'
+
+
+
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
 
@@ -185,6 +188,11 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
+    //implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
+    implementation("androidx.activity:activity-ktx:1.4.0")
+    implementation("androidx.fragment:fragment-ktx:1.4.0")
+
+   // compile 'com.google.zxing:core:3.2.0'
 }
 repositories {
     mavenCentral()

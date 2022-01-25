@@ -107,7 +107,7 @@ class UploadHealthDocumentViewModel(
         }
     }
 
-    public fun testHistory() {
+    public fun testType() {
         scope.launch {
             userRepository.getTestHistory()
         }

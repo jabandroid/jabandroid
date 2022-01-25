@@ -113,7 +113,7 @@ class RegistrationStep1ViewModel(
                         else if (isClinic)
                             USER?.role = "clinic"
                         else "user"
-
+                        USER?.website = websiteName.value
                         USER?.isClinic = isClinic == true
                         USER?.step1Complete = true
                         callRegisterStep()

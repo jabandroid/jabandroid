@@ -21,6 +21,7 @@ class RegistrationStep2ViewModel(
 ) : AppViewModel(application) {
 
     var ssn: MutableLiveData<String> = MutableLiveData()
+    var ssnFinal:String=""
     var id: MutableLiveData<String> = MutableLiveData()
     var dln: MutableLiveData<String> = MutableLiveData()
     var dlnState: MutableLiveData<String> = MutableLiveData()
@@ -72,7 +73,7 @@ class RegistrationStep2ViewModel(
                             document.add(
                                 Document(
                                     type = "SSN",
-                                    identity = ssn.value
+                                    identity = if(ssn.value!!.contains("XX"))ssnFinal  else ssn.value
                                 )
                             )
                         }

@@ -165,13 +165,7 @@ class OtpFragment : AppFragment() {
                     else if (isClinic == true) "clinic" else "user"
                 )
 
-            SharedPreferenceUtil.getInstance(getAppActivity())
-                ?.saveData(
-                    PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
-                    if (isVendor == true) "vendor"
-                    else if (isClinic == true) "clinic" else "user"
 
-                )
 
             if (isFromForgotPassword == true) {
                 val bundle = Bundle()

@@ -18,6 +18,7 @@ import com.global.vtg.appview.config.getRealPathFromURI
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
+import com.global.vtg.appview.home.profile.ProfileFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
@@ -85,46 +86,48 @@ class RegistrationStep1Fragment : AppFragment() {
     @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
 
-        if(isFromProfile){
-            btnSkip.visibility=View.GONE
+        if (isFromProfile) {
+            btnSkip.visibility = View.GONE
         }
 
 
-        var userType= SharedPreferenceUtil.getInstance(getAppActivity())
+        var userType = SharedPreferenceUtil.getInstance(getAppActivity())
             ?.getData(
                 PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
                 ""
             )
 
-        if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
-            tvTitle.text = "Vendor Step 1"
-            tvPlaceOfBirth.visibility=View.GONE
-            etCity.visibility=View.GONE
-            etState.visibility=View.GONE
-            etCountry.visibility=View.GONE
-            sEthnicity.visibility=View.GONE
-            tvEthnicity.visibility=View.GONE
-            edWebsite.visibility=View.VISIBLE
-            tvWebsite.visibility=View.VISIBLE
-        }
+//        if (Constants.USER!!.role.equals("ROLE_VENDOR", true)) {
+//            tvTitle.text = "Vendor Step 1"
+//            tvPlaceOfBirth.visibility = View.GONE
+//            etCity.visibility = View.GONE
+//            etState.visibility = View.GONE
+//            etCountry.visibility = View.GONE
+//            sEthnicity.visibility = View.GONE
+//            tvEthnicity.visibility = View.GONE
+//            edWebsite.visibility = View.VISIBLE
+//            tvWebsite.visibility = View.VISIBLE
+//        }
         if (userType.equals("Clinic")) {
             tvTitle.text = "Lab/Clinic Step 1"
-            tvPlaceOfBirth.visibility=View.GONE
-            etCity.visibility=View.GONE
-            etState.visibility=View.GONE
-            etCountry.visibility=View.GONE
-            sEthnicity.visibility=View.GONE
-            tvEthnicity.visibility=View.GONE
-            edWebsite.visibility=View.VISIBLE
-            tvWebsite.visibility=View.VISIBLE
+            tvPlaceOfBirth.visibility = View.GONE
+            etCity.visibility = View.GONE
+            etState.visibility = View.GONE
+            etCountry.visibility = View.GONE
+            sEthnicity.visibility = View.GONE
+            tvEthnicity.visibility = View.GONE
+            edWebsite.visibility = View.VISIBLE
+            tvWebsite.visibility = View.VISIBLE
         } else if (userType.equals("Vendor")) {
             tvTitle.text = "Vendor Step 1"
-            tvPlaceOfBirth.visibility=View.GONE
-            etCity.visibility=View.GONE
-            etState.visibility=View.GONE
-            etCountry.visibility=View.GONE
-            sEthnicity.visibility=View.GONE
-            edWebsite.visibility=View.VISIBLE
+            tvPlaceOfBirth.visibility = View.GONE
+            etCity.visibility = View.GONE
+            etState.visibility = View.GONE
+            etCountry.visibility = View.GONE
+            sEthnicity.visibility = View.GONE
+            tvEthnicity.visibility = View.GONE
+            edWebsite.visibility = View.VISIBLE
+            tvWebsite.visibility = View.VISIBLE
         }
         if (!Constants.USER!!.profileUrl.isNullOrEmpty())
             ivProfilePic.setGlideNormalImage(Constants.USER!!.profileUrl)
@@ -226,14 +229,18 @@ class RegistrationStep1Fragment : AppFragment() {
             ccpCitizenship.setCcpClickable(false)
         }
         if (!Constants.USER?.dateOfBirth.isNullOrEmpty()) {
-            val dob = SimpleDateFormat(API_DATE_FORMAT_VACCINE, Locale.getDefault())
-            val date = dob.parse(Constants.USER?.dateOfBirth)
-            val cal = Calendar.getInstance()
-            cal.time = date
-            myCalendar.set(Calendar.YEAR, cal.get(Calendar.YEAR))
-            myCalendar.set(Calendar.MONTH, cal.get(Calendar.MONTH))
-            myCalendar.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH))
-            updateDate()
+            try {
+                val dob = SimpleDateFormat(API_DATE_FORMAT_VACCINE, Locale.getDefault())
+                val date = dob.parse(Constants.USER?.dateOfBirth)
+                val cal = Calendar.getInstance()
+                cal.time = date
+                myCalendar.set(Calendar.YEAR, cal.get(Calendar.YEAR))
+                myCalendar.set(Calendar.MONTH, cal.get(Calendar.MONTH))
+                myCalendar.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH))
+                updateDate()
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
 //            etDob.isClickable = false
 //            etDob.isEnabled = false
         }
@@ -242,8 +249,13 @@ class RegistrationStep1Fragment : AppFragment() {
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 KeyboardUtils.hideKeyboard(view)
-                if (!isFirstTime)
-                    viewModel.title.value = list[pos - 1]
+                //   if (!isFirstTime)
+                try {
+                    if ((pos - 1) >= 0)
+                        viewModel.title.value = list[pos - 1]
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -254,8 +266,14 @@ class RegistrationStep1Fragment : AppFragment() {
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 KeyboardUtils.hideKeyboard(view)
-                if (!isFirstTime)
-                    viewModel.gender.value = genderList[pos - 1]
+                try {
+                    if ((pos - 1) >= 0)
+                        viewModel.gender.value = genderList[pos - 1]
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -266,9 +284,14 @@ class RegistrationStep1Fragment : AppFragment() {
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 KeyboardUtils.hideKeyboard(view)
-                if (!isFirstTime)
-                    viewModel.ethnicity.value = ethnicityList[pos - 1]
-                else isFirstTime = false
+                try {
+                    if ((pos - 1) >= 0)
+                        viewModel.ethnicity.value = ethnicityList[pos - 1]
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -338,9 +361,9 @@ class RegistrationStep1Fragment : AppFragment() {
                     bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isFromProfile)
                     if (it.data.role.equals("ROLE_VENDOR", true))
                         addFragmentInStack<Any>(AppFragmentState.F_VENDOR_STEP2, bundle)
-                    else  if (it.data.role.equals("ROLE_CLINIC", true)) {
+                    else if (it.data.role.equals("ROLE_CLINIC", true)) {
                         addFragmentInStack<Any>(AppFragmentState.F_VENDOR_STEP2, bundle)
-                    }else addFragmentInStack<Any>(AppFragmentState.F_REG_STEP2, bundle)
+                    } else addFragmentInStack<Any>(AppFragmentState.F_REG_STEP2, bundle)
                 }
                 is Resource.Error -> {
                     when (activity) {
@@ -371,6 +394,15 @@ class RegistrationStep1Fragment : AppFragment() {
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
+                    }
+
+                    Constants.USER?.profileUrl = it.data.profileUrl
+                    val fragments = getAppActivity().supportFragmentManager.fragments
+                    for (frg in fragments) {
+                        if (frg is ProfileFragment) {
+                            frg.loadAddress()
+                            break
+                        }
                     }
 
                 }
@@ -493,13 +525,13 @@ class RegistrationStep1Fragment : AppFragment() {
             }
         })
 
-        etCity.setOnClickListener{
+        etCity.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
-        etState.setOnClickListener{
+        etState.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
-        etCountry.setOnClickListener{
+        etCountry.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
 
@@ -517,6 +549,8 @@ class RegistrationStep1Fragment : AppFragment() {
         viewModel.showToastError.observe(this, {
             DialogUtils.showSnackBar(context, it)
         })
+
+        isFirstTime = false
     }
 
     override fun pageVisible() {
@@ -536,6 +570,7 @@ class RegistrationStep1Fragment : AppFragment() {
         etState.setText(state)
         etCountry.setText(country)
     }
+
     private fun resultMessage(
         resultCode: Int,
         path: String,
