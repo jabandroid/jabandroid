@@ -526,7 +526,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 
 
         Collections.sort(data.tests!!, Comparator<TestTypeResult?> { obj1, obj2 ->
-            return@Comparator obj2!!.id!!.compareTo(obj1!!.id!!)
+            return@Comparator obj1!!.name!!.compareTo(obj2!!.name!!)
         })
         adapter.addAll(data.tests!!)
         list.layoutManager = layoutManager

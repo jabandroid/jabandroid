@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="RtlHardcoded">
+
+    <ImageView
+        android:id="@+id/flag"
+        android:layout_width="50dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="@null" />
+
+    <ImageView
+        android:id="@+id/person"
+        android:layout_width="70dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/flag"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:contentDescription="flag"
+        tools:ignore="HardcodedText" />
+
+    <ImageView
+        android:id="@+id/qrCode"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@+id/flag"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="16dp"
+        android:layout_alignParentRight="true"
+        android:contentDescription="flag"
+        tools:ignore="HardcodedText" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/flag"
+        android:layout_marginStart="26dp"
+        android:layout_toEndOf="@+id/person"
+        android:orientation="vertical">
+
+        <com.global.vtg.utils.textView.SemiBoldTextView
+            android:id="@+id/tvLName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textAllCaps="true"
+            android:textSize="13sp"
+            android:layout_marginTop="@dimen/_4sdp" />
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/tvFName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            app:textAllCaps="true" />
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/add1"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:layout_width="wrap_content"
+            app:textAllCaps="true"
+            android:textSize="11sp"
+            android:layout_height="wrap_content" />
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/add2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            app:textAllCaps="true" />
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/add3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            app:textAllCaps="true"  />
+
+        <com.global.vtg.utils.textView.SemiBoldTextView
+            android:id="@+id/dob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="@dimen/_4sdp"
+            app:textAllCaps="true"  />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal">
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvPP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:textSize="11sp"
+
+                app:textAllCaps="true" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvDL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:textSize="11sp"
+                app:textAllCaps="true" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</merge>

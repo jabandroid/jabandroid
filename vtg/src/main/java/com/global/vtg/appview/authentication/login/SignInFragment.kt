@@ -99,6 +99,7 @@ class SignInFragment : AppFragment() {
             viewModel.region.let { ccp.setCountryForNameCode(it) }
         }
         ccp.setOnCountryChangeListener {
+            var countrycode=ccp.selectedCountryNameCode
             viewModel.code.value = ccp.selectedCountryCode
             viewModel.region = ccp.selectedCountryNameCode
         }
@@ -141,6 +142,11 @@ class SignInFragment : AppFragment() {
 
                             )
 
+                        SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.saveData(
+                                PreferenceManager.KEY_FIRST_STEP,
+                                Constants.USER!!.step1Complete!!
+                            )
                         viewModel.loginLiveData.postValue(true)
 
                         /*   when {
@@ -278,7 +284,9 @@ class SignInFragment : AppFragment() {
             val intent: Intent =
                 if (Constants.USER?.role.equals("ROLE_USER")
                 ) {
-                    Intent(activity, HomeActivity::class.java)
+
+                        Intent(activity, HomeActivity::class.java)
+
                 } else if (Constants.USER?.role.equals("ROLE_CLINIC")) {
                     Intent(activity, ClinicActivity::class.java)
                 } else {

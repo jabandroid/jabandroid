@@ -76,7 +76,7 @@ data class ResUser(
     var firstName: String? = "",
 
     @field:SerializedName("step1Complete")
-    var step1Complete: Boolean? = null,
+    var step1Complete: Boolean? = false,
 
     @field:SerializedName("password")
     var password: String? = null,

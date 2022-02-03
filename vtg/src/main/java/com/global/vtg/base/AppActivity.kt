@@ -49,8 +49,10 @@ import com.braintreepayments.api.dropin.DropInResult
 
 import android.R.attr.data
 import com.braintreepayments.api.dropin.DropInActivity
-import com.global.vtg.utils.Constants.BASE_URL
+import com.global.vtg.test.Const.BASE_URL
+//import com.global.vtg.utils.Constants.BASE_URL
 import com.global.vtg.wscoroutine.ApiInterface
+
 import java.lang.RuntimeException
 import java.security.SecureRandom
 import java.security.cert.CertificateException

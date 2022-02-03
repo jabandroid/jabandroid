@@ -95,6 +95,19 @@
 
                 >
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_add"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:onClick="@{viewModel::onClick}"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_baseline_add_circle_outline_24" />
+
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ivProfilePic"
                     android:layout_width="@dimen/profile_pic"

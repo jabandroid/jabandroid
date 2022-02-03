@@ -7,6 +7,7 @@ import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResConfig
 import com.global.vtg.appview.config.ResInstitute
 import com.global.vtg.appview.home.profile.ResProfile
+import com.global.vtg.appview.home.testHistory.TestKit
 import com.global.vtg.appview.payment.ReqPayment
 import com.global.vtg.model.network.result.BaseResult
 import com.google.gson.JsonObject
@@ -67,6 +68,9 @@ interface ApiInterface {
     @GET("api/v1/testList")
     fun testType(): Deferred<Response<TestType>>
 
+    @GET("api/v1/rapidKitList")
+    fun testkit(): Deferred<Response<TestKit>>
+
     @Multipart
     @POST("api/v1/vaccine/upload")
     fun uploadVaccineAsync(
@@ -109,7 +113,8 @@ interface ApiInterface {
         @Part("srId") batchNo: RequestBody?,
         @Part("result") result: RequestBody?,
         @Part("testId") testId: RequestBody?,
-        @Part("username") username: RequestBody?
+        @Part("username") username: RequestBody?,
+        @Part("kitId") kitID: RequestBody?
     ): Deferred<Response<ResUser>>
 
     @Multipart

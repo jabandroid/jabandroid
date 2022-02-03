@@ -8,13 +8,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.home.ClinicActivity
+import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorScanResultBinding
@@ -59,29 +62,49 @@ Constants.testData
             f.popFragment()
         }
 
+        if (isNetworkAvailable(activity!!)) {
 
-        viewModel.getDataFromBarcodeId(barcodeId)
+            viewModel.getDataFromBarcodeId(barcodeId)
+        } else {
+            DialogUtils.showSnackBar(
+                activity,
+                activity!!.resources.getString(R.string.no_connection)
+            )
+        }
+
 
         viewModel.scanBarcodeLiveData.observe(this, { it ->
             when (it) {
                 is Resource.Success -> {
-                    (activity as VendorActivity).hideProgressBar()
+                    when (activity) {
+
+
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                        else -> (activity as VendorActivity).showProgressBar()
+                    }
+                 //   (activity as VendorActivity).hideProgressBar()
                     // Load data
                     listName = ArrayList()
                     listName.add("")
                     Constants.SCANNEDUSER = it.data
-                    if (it.data.test!!.size > 0) {
-                        listName.add(getString(R.string.label_test_history_covid))
-                        countView++
+                    if(it.data.test!=null) {
+                        if (it.data.test!!.size > 0) {
+                            listName.add(getString(R.string.label_test_history_covid))
+                            countView++
+                        }
                     }
 
-                    if (it.data.vaccine!!.size > 0) {
-                        listName.add(getString(R.string.label_vaccine_taken_list))
-                        countView++
+                    if(it.data.vaccine!=null) {
+                        if (it.data.vaccine!!.size > 0) {
+                            listName.add(getString(R.string.label_vaccine_taken_list))
+                            countView++
+                        }
                     }
-                    if (it.data.healthInfo!!.size > 0) {
-                        listName.add(getString(R.string.label_health_info_V))
-                        countView++
+                    if(it.data.healthInfo!=null) {
+                        if (it.data.healthInfo!!.size > 0) {
+                            listName.add(getString(R.string.label_health_info_V))
+                            countView++
+                        }
                     }
 
 

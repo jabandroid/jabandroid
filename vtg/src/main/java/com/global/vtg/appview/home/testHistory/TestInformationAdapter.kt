@@ -20,6 +20,7 @@ import com.global.vtg.appview.config.TestInfo
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
 import com.vtg.R
+import kotlinx.android.synthetic.main.recycler_vendor_health_info.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -60,6 +61,13 @@ class TestInformationAdapter(
 
         }else{
             holder.tvTest.text =""
+        }
+
+        if(!TextUtils.isEmpty(list[position].kit)){
+           holder.itemView.testKit.visibility=View.VISIBLE
+            holder.itemView.tvKit.text=list[position].kit
+        }else{
+            holder.itemView.testKit.visibility=View.GONE
         }
 
           //  if (TextUtils.isEmpty(list[position].test)) "-" else list[position].test

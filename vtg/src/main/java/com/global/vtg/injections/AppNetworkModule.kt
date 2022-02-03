@@ -1,6 +1,7 @@
 package com.global.vtg.injections
 
 import com.global.vtg.model.factory.PreferenceManager
+import com.global.vtg.test.Const.BASE_URL
 import com.global.vtg.utils.Constants
 
 import com.global.vtg.utils.Constants.IS_SIGN_IN
@@ -11,6 +12,7 @@ import com.global.vtg.wscoroutine.ApiConstant
 import com.global.vtg.wscoroutine.ApiInterface
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+
 
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -43,7 +45,7 @@ val appNetworkModule = module {
         .create()
     single<Retrofit>(name = "main") {
         Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)
+            .baseUrl(BASE_URL)
             .client(get (  ))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())

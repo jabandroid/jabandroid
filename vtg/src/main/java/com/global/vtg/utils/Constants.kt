@@ -23,8 +23,8 @@ import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
 object Constants {
 
 
-    const val BASE_URL = "https://vaxserver.com/"// production
-//    const val BASE_URL = "https://vaxserver.com:9090/" // stage
+//  //  const val BASE_URL = "https://vaxserver.com/"// production
+//  const val BASE_URL = "https://vaxserver.com:9090/" // stage
 
     var PREFERENCE_NAME = "pref_app_name"
 

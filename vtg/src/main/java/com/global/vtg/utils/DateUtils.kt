@@ -2,9 +2,14 @@ package com.global.vtg.utils
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.Month
+import java.time.format.DateTimeFormatter
+import java.time.format.FormatStyle
 import java.util.*
 
 object DateUtils {
@@ -477,6 +482,27 @@ object DateUtils {
         if (value.length == 1)
             return "0$value"
         return value
+    }
+
+    fun formatDate(date:String, formatActual:String, formattoChange :String ): String{
+        @SuppressLint("SimpleDateFormat") val sdf = SimpleDateFormat(formatActual,Locale.getDefault())
+       // sdf.timeZone= TimeZone.getTimeZone("UTC")
+        var convertedDate: Date? = null
+        var formattedDateStart: String? = null
+
+        try {
+            convertedDate = sdf.parse(date)
+            val cal = Calendar.getInstance()
+            cal.time = convertedDate!!
+            val dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
+            val dateOfBirth: LocalDate = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DATE))
+            val formattedDateStart = dateOfBirth.format(dateFormatter)
+
+            return formattedDateStart.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart.toString()
     }
 
     fun formatDateUTCToLocal(date:String, formatActual:String, formattoChange :String ): String{

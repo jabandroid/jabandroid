@@ -34,6 +34,10 @@ class HealthInformationViewModel(
             R.id.btnUploadFile -> {
                 uploadFile.postValue(true)
             }
+            R.id.iv_add -> {
+                uploadFile.postValue(true)
+            }
+
         }
     }
 

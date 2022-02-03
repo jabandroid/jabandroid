@@ -8,11 +8,13 @@ import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.base.AppViewModel
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.USER
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
+import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import kotlinx.coroutines.launch
@@ -22,6 +24,7 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.util.*
 
 class RegistrationStep1ViewModel(
     application: Application,
@@ -35,6 +38,7 @@ class RegistrationStep1ViewModel(
 
     var lastName: MutableLiveData<String> = MutableLiveData()
     var dob: MutableLiveData<String> = MutableLiveData()
+    var dobDate: Date? = null
     var apiDob: String = ""
     var city: MutableLiveData<String> = MutableLiveData()
     var state: MutableLiveData<String> = MutableLiveData()
@@ -93,7 +97,12 @@ class RegistrationStep1ViewModel(
             R.id.btnNext -> {
                 KeyboardUtils.hideKeyboard(view)
                 if (isNetworkAvailable(view.context)) {
-                    if (validateFields()) {
+                    var userType = SharedPreferenceUtil.getInstance(view.context)
+                        ?.getData(
+                            PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
+                            ""
+                        )
+                    if (validateFields(userType!!)) {
                         KeyboardUtils.hideKeyboard(view)
                         USER?.title = title.value
                         USER?.firstName = firstName.value
@@ -130,7 +139,12 @@ class RegistrationStep1ViewModel(
             R.id.btnSkip -> {
                 KeyboardUtils.hideKeyboard(view)
                 if (isNetworkAvailable(view.context)) {
-                    if (validateFields()) {
+                    var userType = SharedPreferenceUtil.getInstance(view.context)
+                        ?.getData(
+                            PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
+                            ""
+                        )
+                    if (validateFields(userType!!)) {
                         KeyboardUtils.hideKeyboard(view)
                         USER?.title = title.value
                         USER?.firstName = firstName.value
@@ -186,8 +200,9 @@ class RegistrationStep1ViewModel(
     }
 
     //validate fields
-    private fun validateFields(): Boolean {
+    private fun validateFields(str:String): Boolean {
         var isValidate = true
+
         when {
             isNullOrEmpty(title.value) -> {
                 showToastError.postValue(App.instance?.getString(R.string.empty_title))
@@ -201,6 +216,25 @@ class RegistrationStep1ViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.empty_last_name))
                 isValidate = false
             }
+            isNullOrEmpty(lastName.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.empty_last_name))
+                isValidate = false
+            }
+
+            isNullOrEmpty(documentPath) -> {
+                showToastError.postValue(App.instance?.getString(R.string.upload_image))
+                isValidate = false
+            }
+            str == "User" ->{
+
+
+                   if( getAge()!! <13) {
+                       showToastError.postValue("dob")
+                       isValidate = false
+                   }
+
+            }
+
 //            isNullOrEmpty(gender.value) -> {
 //                showToastError.postValue(App.instance?.getString(R.string.empty_gender))
 //                isValidate = false
@@ -216,6 +250,18 @@ class RegistrationStep1ViewModel(
         return isValidate
     }
 
+    public fun getAge(): Int? {
+        val dob = Calendar.getInstance()
+        val today = Calendar.getInstance()
+
+        dob.time=dobDate!!
+        var age = today[Calendar.YEAR] - dob[Calendar.YEAR]
+        if (today[Calendar.DAY_OF_YEAR] < dob[Calendar.DAY_OF_YEAR]) {
+            age--
+        }
+        val ageInt = age
+        return ageInt
+    }
     fun uploadProfile(path: String) {
         scope.launch {
             val file: File

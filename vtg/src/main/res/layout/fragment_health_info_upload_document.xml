@@ -357,7 +357,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_24sdp"
                     android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/label_test_type"
+                    android:text="@string/label_test_type_2"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

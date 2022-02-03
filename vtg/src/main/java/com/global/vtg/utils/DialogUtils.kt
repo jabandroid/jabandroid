@@ -172,7 +172,10 @@ object DialogUtils {
      */
     fun showSnackBar(context: Context?, message: String) {
            if (context != null && !TextUtils.isEmpty(message)) {
-               val snackbar = Snackbar.make((context as Activity).findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG)
+               var duration=Snackbar.LENGTH_LONG
+               if(message.equals(context.getString(R.string.error_password)))
+                   duration=6000
+               val snackbar = Snackbar.make((context as Activity).findViewById(android.R.id.content), message, Snackbar.LENGTH_INDEFINITE).setDuration(duration)
                val view = snackbar.view
                val params = view.layoutParams as FrameLayout.LayoutParams
                val tv = view.findViewById(R.id.snackbar_text) as TextView

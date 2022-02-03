@@ -64,6 +64,8 @@ class RegistrationStep3Fragment : AppFragment() {
                 ""
             )
 
+        viewModel.isFromProfile=isFromProfile
+
 //        if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
 //            tvTitle.text = "Vendor Step 3"
 //        }

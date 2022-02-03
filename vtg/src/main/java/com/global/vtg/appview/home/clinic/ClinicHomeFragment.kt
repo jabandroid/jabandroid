@@ -8,17 +8,14 @@ import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.imageview.setGlideNormalImage
 
 import com.global.vtg.appview.home.dashboard.ViewPager2Adapter
-import com.global.vtg.appview.home.uploaddocument.UploadDocumentFragment
 
 import com.global.vtg.appview.home.vendor.VendorDashboardViewModel
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
-import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.ToastUtils
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
@@ -40,7 +37,8 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
     private var titleList = ArrayList<String>()
     private val imagesList = arrayListOf(
         R.drawable.ic_woman, R.drawable.ic_qr_code,R.drawable.ic_health_info,R.drawable.ic_health_information,
-          R.drawable.ic_health_info,R.drawable.ic_vaccine_card,
+          R.drawable.ic_health_info,R.drawable.
+        ic_vaccine_card,
         R.drawable.ic_travel_information
     )
 
@@ -121,7 +119,8 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
                 addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
             }
             1 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
+                ToastUtils.shortToast(0,"Coming soon")
+                //addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
             }
            2 -> {
                 addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_DOCUMENT)

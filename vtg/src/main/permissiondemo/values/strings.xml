@@ -1,5 +1,4 @@
 <resources>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_in">Sign In</string>
     <string name="agree_terms_conditions"><![CDATA[I agree on all Terms & Conditions & Privacy Policy]]></string>
@@ -12,9 +11,10 @@
     <string name="search_here">Search here</string>
     <string name="label_dl">Dl</string>
     <string name="label_rapid">Rapid Antigen</string>
-    <string name="rtpcr">RTPCR</string>
+    <string name="rtpcr">RT-PCR</string>
     <string name="label_result">Result</string>
     <string name="vaccination_details">Vaccination Details</string>
     <string name="test_details">Test Details</string>
-
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
 </resources>

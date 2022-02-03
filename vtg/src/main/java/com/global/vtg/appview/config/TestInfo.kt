@@ -31,5 +31,8 @@ data class TestInfo(
     @field:SerializedName("testId")
     val test: String? = null,
 
+    @field:SerializedName("kitName")
+    val kit: String? = null,
+
     var testName: String? = ""
 )

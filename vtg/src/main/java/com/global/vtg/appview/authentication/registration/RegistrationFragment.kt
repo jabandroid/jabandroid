@@ -154,6 +154,7 @@ class RegistrationFragment : AppFragment() {
 //            }
 //        })
 
+
         ccp.setOnCountryChangeListener {
             viewModel.code.value = ccp.selectedCountryCode
             viewModel.region = ccp.selectedCountryNameCode

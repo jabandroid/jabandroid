@@ -39,6 +39,7 @@ class UploadTestDocumentViewModel(
     var time: String? = null
     var dob: String? = null
     var type: String? = null
+    var typeKitId: String? = null
     var region: String = "US"
     var code: MutableLiveData<String> = MutableLiveData()
     var phone: MutableLiveData<String> = MutableLiveData()
@@ -65,9 +66,9 @@ class UploadTestDocumentViewModel(
         userLiveData.postValue(it)
     }
 
-    val testData = MutableLiveData<Resource<TestType>>()
+    val testData = MutableLiveData<Resource<TestKit>>()
 
-    private val testObserver = Observer<Resource<TestType>> {
+    private val testObserver = Observer<Resource<TestKit>> {
         testData.postValue(it)
     }
 
@@ -79,8 +80,8 @@ class UploadTestDocumentViewModel(
         userRepository.userLiveData.postValue(null)
         userRepository.userLiveData.observeForever(userObserver)
 
-        userRepository.testTypeLiveData.postValue(null)
-        userRepository.testTypeLiveData.observeForever(testObserver)
+        userRepository.testTypeKitData.postValue(null)
+        userRepository.testTypeKitData.observeForever(testObserver)
     }
 
     fun onClick(view: View) {
@@ -108,9 +109,9 @@ class UploadTestDocumentViewModel(
         }
     }
 
-    public fun testHistory() {
+    public fun testKit() {
         scope.launch {
-            userRepository.getTestHistory()
+            userRepository.getTestKit()
         }
     }
 
@@ -181,6 +182,9 @@ class UploadTestDocumentViewModel(
             }
 
           var  test = type!!.toRequestBody("text/plain".toMediaTypeOrNull())
+            var testkit: RequestBody? = null
+            if(!typeKitId.equals("-1"))
+                testkit = typeKitId!!.toRequestBody("text/plain".toMediaTypeOrNull())
             userRepository.uploadTestInfo(
                 part,
                 id,
@@ -191,7 +195,8 @@ class UploadTestDocumentViewModel(
                 batchNo,
                 resultB,
                 test,
-                username
+                username,
+                testkit
             )
         }
     }
@@ -227,6 +232,11 @@ class UploadTestDocumentViewModel(
             }
             isNullOrEmpty(type) -> {
                 showToastError.postValue(App.instance?.getString(R.string.error_select_test_type_1))
+                isValidate = false
+            }
+
+            isNullOrEmpty(typeKitId) -> {
+                showToastError.postValue(App.instance?.getString(R.string.error_select_test_kit))
                 isValidate = false
             }
             instituteId == null -> {

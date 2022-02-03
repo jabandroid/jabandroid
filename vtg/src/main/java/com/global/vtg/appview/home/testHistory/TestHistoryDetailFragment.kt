@@ -28,21 +28,24 @@ import com.vtg.R
 import com.vtg.databinding.FragmentTestDetailsBinding
 import com.vtg.databinding.FragmentTestHistoryBinding
 import kotlinx.android.synthetic.main.fragment_test_details.*
-import kotlinx.android.synthetic.main.fragment_test_details.countDown
-import kotlinx.android.synthetic.main.fragment_test_details.date_test
-import kotlinx.android.synthetic.main.fragment_test_details.ivProfilePic
-import kotlinx.android.synthetic.main.fragment_test_details.ivStatus_1
-import kotlinx.android.synthetic.main.fragment_test_details.test_Root
-import kotlinx.android.synthetic.main.fragment_test_details.tvDl
-import kotlinx.android.synthetic.main.fragment_test_details.tvDob
-import kotlinx.android.synthetic.main.fragment_test_details.tvId
-import kotlinx.android.synthetic.main.fragment_test_details.tvName
-import kotlinx.android.synthetic.main.fragment_test_details.tvStatus
-import kotlinx.android.synthetic.main.fragment_test_details.tvTest
-import kotlinx.android.synthetic.main.fragment_test_details.tvType
+
 
 import kotlinx.android.synthetic.main.fragment_test_history.*
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.*
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.countDown
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date_kit
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date_test
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivProfilePic
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivStatus_1
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.test_Root
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDl
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDob
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvId
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvName
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvStatus
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvTest
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvType
+import kotlinx.android.synthetic.main.recycler_vendor_health_info.view.*
 
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -88,6 +91,10 @@ class TestHistoryDetailFragment : AppFragment() {
     }
 
     fun refreshList() {
+
+
+
+
         mListner = CountdownView.OnCountdownIntervalListener { dtype, time ->
 
             val dft =
@@ -214,6 +221,13 @@ class TestHistoryDetailFragment : AppFragment() {
                     )
                 )
 
+            }
+
+            if(!TextUtils.isEmpty(list[0].kit)){
+                date_kit.visibility=View.VISIBLE
+                date_kit.text=list[0].kit
+            }else{
+                date_kit.visibility=View.GONE
             }
 
             val institute = list[0].instituteId?.let { Constants.getInstituteName(it) }

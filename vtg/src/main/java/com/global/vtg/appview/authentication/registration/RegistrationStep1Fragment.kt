@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import android.widget.AdapterView
 import androidx.databinding.ViewDataBinding
@@ -28,6 +29,7 @@ import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
 import com.global.vtg.utils.DateUtils.API_DATE_FORMAT_VACCINE
 import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
+import com.tslogistics.util.AppAlertDialog
 import com.vtg.R
 import com.vtg.databinding.FragmentRegStep1Binding
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -54,7 +56,7 @@ class RegistrationStep1Fragment : AppFragment() {
     private val currentCalendar: Calendar = Calendar.getInstance()
     var isFromProfile = false
     var twilioUserId = ""
-
+var callService:Boolean=false
     override fun getLayoutId(): Int {
         return R.layout.fragment_reg_step1
     }
@@ -88,6 +90,9 @@ class RegistrationStep1Fragment : AppFragment() {
 
         if (isFromProfile) {
             btnSkip.visibility = View.GONE
+        }else{
+
+            ivBack.visibility=View.GONE
         }
 
 
@@ -129,8 +134,73 @@ class RegistrationStep1Fragment : AppFragment() {
             edWebsite.visibility = View.VISIBLE
             tvWebsite.visibility = View.VISIBLE
         }
-        if (!Constants.USER!!.profileUrl.isNullOrEmpty())
+
+        if(Constants.USER!=null){
+            loadData()
+        }else{
+            callService=true
+            viewModel.getUser()
+        }
+
+        viewModel.userConfigLiveData.observe(this, {
+            when (it) {
+                is Resource.Success -> {
+                    when (activity) {
+                        is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        else -> (activity as VendorActivity).hideProgressBar()
+                    }
+                    Constants.USER = it.data
+                    if(callService){
+                        loadData()
+                    }else {
+                        SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.saveData(
+                                PreferenceManager.KEY_USER_LOGGED_IN,
+                                true
+                            )
+                        val intent: Intent = if (Constants.USER?.role.equals("ROLE_USER")) {
+                            Intent(activity, HomeActivity::class.java)
+                        } else {
+                            Intent(activity, VendorActivity::class.java)
+                        }
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+                }
+                is Resource.Error -> {
+                    when (activity) {
+                        is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        else -> (activity as VendorActivity).hideProgressBar()
+                    }
+                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is AuthenticationActivity -> (activity as AuthenticationActivity).showProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                        else -> (activity as VendorActivity).showProgressBar()
+                    }
+                }
+            }
+        })
+
+    }
+
+    override fun pageVisible() {
+
+    }
+
+    private fun loadData(){
+        if (!Constants.USER!!.profileUrl.isNullOrEmpty()) {
             ivProfilePic.setGlideNormalImage(Constants.USER!!.profileUrl)
+            viewModel.documentPath=Constants.USER!!.profileUrl
+        }
 
         if (!Constants.USER?.website.isNullOrEmpty()) {
             viewModel.websiteName.postValue(Constants.USER?.website)
@@ -357,6 +427,12 @@ class RegistrationStep1Fragment : AppFragment() {
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
                     Constants.USER = it.data
+
+                    SharedPreferenceUtil.getInstance(getAppActivity())
+                        ?.saveData(
+                            PreferenceManager.KEY_FIRST_STEP,
+                            true
+                        )
                     val bundle = Bundle()
                     bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isFromProfile)
                     if (it.data.role.equals("ROLE_VENDOR", true))
@@ -482,48 +558,7 @@ class RegistrationStep1Fragment : AppFragment() {
 
 
 
-        viewModel.userConfigLiveData.observe(this, {
-            when (it) {
-                is Resource.Success -> {
-                    when (activity) {
-                        is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
-                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
-                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
-                        else -> (activity as VendorActivity).hideProgressBar()
-                    }
-                    Constants.USER = it.data
-                    SharedPreferenceUtil.getInstance(getAppActivity())
-                        ?.saveData(
-                            PreferenceManager.KEY_USER_LOGGED_IN,
-                            true
-                        )
-                    val intent: Intent = if (Constants.USER?.role.equals("ROLE_USER")) {
-                        Intent(activity, HomeActivity::class.java)
-                    } else {
-                        Intent(activity, VendorActivity::class.java)
-                    }
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
-                }
-                is Resource.Error -> {
-                    when (activity) {
-                        is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
-                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
-                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
-                        else -> (activity as VendorActivity).hideProgressBar()
-                    }
-                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
-                }
-                is Resource.Loading -> {
-                    when (activity) {
-                        is AuthenticationActivity -> (activity as AuthenticationActivity).showProgressBar()
-                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
-                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
-                        else -> (activity as VendorActivity).showProgressBar()
-                    }
-                }
-            }
-        })
+
 
         etCity.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
@@ -547,22 +582,53 @@ class RegistrationStep1Fragment : AppFragment() {
 
         // Handle Error
         viewModel.showToastError.observe(this, {
-            DialogUtils.showSnackBar(context, it)
+            if(it!="dob") {
+                DialogUtils.showSnackBar(context, it)
+            }else{
+
+                AppAlertDialog().showAlert(
+                    activity!!,
+                    object : AppAlertDialog.GetClick {
+                        override fun response(dtype: String) {
+
+
+                        }
+                    }
+                    ,getString(R.string.valid_age),"Ok",""
+
+                )
+            }
         })
 
         isFirstTime = false
     }
-
-    override fun pageVisible() {
-
-    }
-
     private fun updateDate() {
-        val sdf = SimpleDateFormat(DateUtils.DDMMYYYY, Locale.US)
+
+        val sdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
         val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
         val date = sdf.format(myCalendar.time)
+        var d= DateUtils.formatDate(
+            date,
+            DateUtils.API_DATE_FORMAT,
+            DateUtils.API_DATE_FORMAT
+        )
         viewModel.apiDob = apiSdf.format(myCalendar.time)
-        viewModel.dob.postValue(date)
+        viewModel.dob.postValue(d)
+        viewModel.dobDate=myCalendar.time
+
+        if( viewModel.getAge()!! <13) {
+            AppAlertDialog().showAlert(
+                activity!!,
+                object : AppAlertDialog.GetClick {
+                    override fun response(dtype: String) {
+
+
+                    }
+                }
+                ,getString(R.string.valid_age),"Ok",""
+
+            )
+        }
     }
 
     fun updateAddress(city: String, state: String, country: String) {

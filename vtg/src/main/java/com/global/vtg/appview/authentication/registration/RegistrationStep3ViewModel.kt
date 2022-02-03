@@ -28,6 +28,7 @@ class RegistrationStep3ViewModel(
     var state: MutableLiveData<String> = MutableLiveData()
     var zip: MutableLiveData<String> = MutableLiveData()
     var country: MutableLiveData<String> = MutableLiveData()
+    var isFromProfile: Boolean=false
 
     var showToastError: MutableLiveData<String> = MutableLiveData()
     var redirectToSignIn: MutableLiveData<Boolean> = MutableLiveData()
@@ -107,10 +108,12 @@ class RegistrationStep3ViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.empty_last_name))
                 isValidate = false
             }
-            isNullOrEmpty(address1.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_address1))
-                isValidate = false
-            }
+
+                isNullOrEmpty(address1.value)&& isFromProfile -> {
+                    showToastError.postValue(App.instance?.getString(R.string.empty_address1))
+                    isValidate = false
+                }
+
             isNullOrEmpty(city.value) -> {
                 showToastError.postValue(App.instance?.getString(R.string.empty_address_city))
                 isValidate = false
@@ -119,7 +122,7 @@ class RegistrationStep3ViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.empty_address_state))
                 isValidate = false
             }
-            isNullOrEmpty(zip.value) -> {
+            isNullOrEmpty(zip.value)&& isFromProfile -> {
                 showToastError.postValue(App.instance?.getString(R.string.empty_address_zip))
                 isValidate = false
             }

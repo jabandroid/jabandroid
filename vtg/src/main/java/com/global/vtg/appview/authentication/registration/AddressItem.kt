@@ -8,7 +8,7 @@ data class AddressItem(
 	val lastName: String? = null,
 
 	@field:SerializedName("zipCode")
-	var zipCode: String? = null,
+	var zipCode: String? = "",
 
 	@field:SerializedName("country")
 	var country: String? = null,

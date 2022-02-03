@@ -93,7 +93,9 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
     private  var type:TestType=TestType()
+    private  var typeKit:TestKit=TestKit()
     private  var typeType:String=""
+    private  var typeKitId:String=""
     var isDob=false
 
     val resultList: MutableList<String> = ArrayList()
@@ -143,7 +145,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             DividerItemDecoration(context, layoutManager.orientation)
         )
         rvInstitute.adapter = adapter
-
+        viewModel.typeKitId="-1"
         viewModel.chooseFile.observe(this, {
             PickMediaExtensions.instance.pickFromStorage(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
                 resultMessage(resultCode, path, displayName)
@@ -164,14 +166,19 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             showType(type)
         }
 
-//        if (isNetworkAvailable(requireActivity())) {
-//            viewModel.testHistory()
-//        } else {
-//            DialogUtils.showSnackBar(
-//                requireActivity(),
-//                requireActivity().resources.getString(R.string.no_connection)
-//            )
-//        }
+        sTestKit.setOnClickListener {
+
+            showKit(typeKit)
+        }
+
+        if (isNetworkAvailable(requireActivity())) {
+            viewModel.testKit()
+        } else {
+            DialogUtils.showSnackBar(
+                requireActivity(),
+                requireActivity().resources.getString(R.string.no_connection)
+            )
+        }
 
         viewModel.testData.observe(this, {
             when (it) {
@@ -180,7 +187,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
-                    type=it.data
+                    typeKit=it.data
                 }
                 is Resource.Error -> {
                     when (activity) {
@@ -206,6 +213,17 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
                     Constants.USER = it.data
+                    val fragments = getAppActivity().supportFragmentManager.fragments
+                    for (frg in fragments) {
+                        if (frg is TestHistoryDetailFragment) {
+                            frg.refreshList()
+
+                        }
+                        if (frg is TestHistoryFragment) {
+                            frg.refreshList()
+
+                        }
+                    }
                     viewModel.saveSuccess.postValue(true)
                 }
                 is Resource.Error -> {
@@ -313,17 +331,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             clForm.visibility = View.GONE
             clThankYou.visibility = View.VISIBLE
 
-            val fragments = getAppActivity().supportFragmentManager.fragments
-            for (frg in fragments) {
-                if (frg is TestHistoryDetailFragment) {
-                    frg.refreshList()
 
-                }
-                if (frg is TestHistoryFragment) {
-                    frg.refreshList()
-
-                }
-            }
 
             Handler().postDelayed({
                 activity?.onBackPressed()
@@ -524,6 +532,16 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
                 sTestType.text=item.name
                 typeType=item.id.toString()
                 viewModel.type=typeType
+
+                if(typeType.equals("1")){//rtpcr
+                    test_kit.visibility=View.GONE
+                    sTestKit.visibility=View.GONE
+                    viewModel.typeKitId="-1"
+                }else{
+                    test_kit.visibility=View.VISIBLE
+                    sTestKit.visibility=View.VISIBLE
+                    viewModel.typeKitId=""
+                }
                 dialog.dismiss()
             }
         }
@@ -531,6 +549,67 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
 
         Collections.sort(data.tests!!, Comparator<TestTypeResult?> { obj1, obj2 ->
             return@Comparator obj2!!.id!!.compareTo(obj1!!.id!!)
+        })
+        adapter.addAll(data.tests!!)
+        list.layoutManager = layoutManager
+        list.adapter = adapter
+
+        search.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence?, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+
+                adapter?.filter?.filter(s.toString())
+            }
+        })
+
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
+
+    fun showKit(
+        data: TestKit,
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = requireActivity().layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popup_test_type, null)
+        val list = dialogLayout.findViewById<RecyclerView>(R.id.rv_list)
+        val search = dialogLayout.findViewById<EditText>(R.id.search)
+        var layoutManager = LinearLayoutManager(activity)
+        lateinit var mListner: TestKitAdapter.OnItemClickListener
+        mListner = object :
+            TestKitAdapter.OnItemClickListener {
+            @SuppressLint("SimpleDateFormat")
+            override fun onItemClick(item: TestKitResult) {
+                sTestKit.text=item.name
+                typeKitId=item.id.toString()
+                viewModel.typeKitId=typeKitId
+                dialog.dismiss()
+            }
+        }
+        var adapter = TestKitAdapter(activity, mListner)
+
+        Collections.sort(data.tests!!, Comparator<TestKitResult> { obj1, obj2 ->
+            return@Comparator obj1!!.name!!.compareTo(obj2!!.name!!)
         })
         adapter.addAll(data.tests!!)
         list.layoutManager = layoutManager

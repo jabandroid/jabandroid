@@ -18,6 +18,9 @@ class VaccineHistoryViewModel(application: Application, private val userReposito
             R.id.btnUploadFile -> {
                 uploadFile.postValue(true)
             }
+            R.id.iv_add -> {
+                uploadFile.postValue(true)
+            }
             /*R.id.ivProfilePic -> {
                 if (isNetworkAvailable(view.context)) {
                     uploadProfilePic.postValue(true)

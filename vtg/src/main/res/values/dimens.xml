@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="btn_margin">@dimen/_16sdp</dimen>
-    <dimen name="edittext_height">@dimen/_40sdp</dimen>
+    <dimen name="edittext_height">@dimen/_45sdp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
@@ -10,7 +10,7 @@
     <dimen name="logo_padding">@dimen/_65sdp</dimen>
     <dimen name="auth_title">@dimen/_18ssp</dimen>
     <dimen name="auth_subtitle">@dimen/_10ssp</dimen>
-
+    <dimen name="btn_size">50dp</dimen>
     <dimen name="profile_pic">@dimen/_85sdp</dimen>
     <!-- font sizes -->
     <dimen name="font_larger">22sp</dimen>

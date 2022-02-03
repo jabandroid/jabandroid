@@ -398,10 +398,22 @@ android:layout_centerVertical="true"
             </RelativeLayout>
 
             <com.global.vtg.utils.textView.RegularTextView
-                android:id="@+id/date_test"
+                android:id="@+id/date_kit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/test_Root_sub"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toEndOf="@+id/ivIndecator_1"
+                android:includeFontPadding="false"
+                android:visibility="gone"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_11ssp" />
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/date_test"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/date_kit"
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_toEndOf="@+id/ivIndecator_1"

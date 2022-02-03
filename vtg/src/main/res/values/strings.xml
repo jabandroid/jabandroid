@@ -168,6 +168,7 @@
     <string name="label_doc_name">Selected Document: %s</string>
 
     <string name="label_hospital">Institute:\u0020</string>
+    <string name="label_kit">Test Kit:\u0020</string>
     <string name="label_date">Date:\u0020</string>
     <string name="label_status">Status:\u0020</string>
     <string name="label_test">Test:\u0020</string>
@@ -206,6 +207,8 @@
     <string name="label_last_name">Last Name*</string>
     <string name="label_dob">Date Of Birth (DOB)</string>
     <string name="label_test_type">Test Type</string>
+    <string name="label_test_type_2">Test/Vaccine Type</string>
+    <string name="label_test_kit">Test Kit</string>
     <string name="label_test_type_1">Type of Testing</string>
     <string name="label_dob_hint">DD/MM/YYYY</string>
     <string name="label_city_step3"><font size="14">City*</font></string>
@@ -227,9 +230,9 @@
     <string name="label_issued_date"><font size="14">Issued Date</font></string>
     <string name="label_expiry_date"><font size="14">Expiry Date</font></string>
     <string name="label_passport">Passport</string>
-    <string name="label_mailing_add_1">Mailing Address 1*</string>
+    <string name="label_mailing_add_1">Mailing Address 1</string>
     <string name="label_mailing_add_2">Mailing Address 2</string>
-    <string name="label_zip">Zip or Postal Code*</string>
+    <string name="label_zip">Zip or Postal Code</string>
     <string name="label_state_provincial">State or Provincial*</string>
     <string name="label_step1">Step 1</string>
     <string name="label_step2">Step 2</string>
@@ -259,6 +262,7 @@
     <string name="error_select_date">Please select a vaccine date.</string>
     <string name="error_select_time">Please select a vaccine time.</string>
     <string name="error_select_test_type_1">Please select type of testing.</string>
+    <string name="error_select_test_kit">Please select type of kit used for testing.</string>
     <string name="error_select_test_type">Please select type of test.</string>
     <string name="error_hospital_name">Please select a Lab/Clinic Institute name</string>
     <string name="empty_title">Please select title.</string>
@@ -267,6 +271,7 @@
     <string name="empty_product">Please select Product.</string>
     <string name="empty_first_name">Please enter the First Name.</string>
     <string name="empty_last_name">Please enter the Last Name.</string>
+    <string name="upload_image">Please upload your profile image.</string>
     <string name="empty_dob">Please select Date of Birth.</string>
     <string name="empty_place_birth_city">Please enter a City.</string>
     <string name="empty_place_birth_state">Please enter a State.</string>
@@ -295,6 +300,7 @@
     <string name="empty_address_state">Please select a State or Provincial.</string>
     <string name="empty_address_zip">Please enter a Zip or Postal code.</string>
     <string name="empty_address_country">Please select a Country.</string>
+    <string name="valid_age">To register in our app, one should not be less than 13 year</string>
 
     <string-array name="title">
         <item>Mr</item>
@@ -315,6 +321,25 @@
         <item>Indian</item>
         <item>Indian Caribbean</item>
         <item>Pakistani</item>
+        <item>Ghanaian</item>
+        <item>Luba</item>
+        <item>Kongo</item>
+        <item>Mongo</item>
+        <item>Kenyan</item>
+        <item>Nigerian</item>
+        <item>Bruneian Malay</item>
+        <item>Namibian</item>
+        <item>White Namibian</item>
+        <item>Black Namibian</item>
+        <item>South African</item>
+        <item>White South African</item>
+        <item>Black South African</item>
+        <item>Zambian</item>
+        <item>Zimbabwean</item>
+        <item>Botswanan</item>
+        <item>White Botswanan</item>
+        <item>Black Botswanan</item>
+        <item>Angolan</item>
         <item>Bangladeshi</item>
         <item>Black Caribbean</item>
         <item>Black African</item>

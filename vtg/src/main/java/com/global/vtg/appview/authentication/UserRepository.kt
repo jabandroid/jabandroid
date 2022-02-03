@@ -8,6 +8,7 @@ import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResInstitute
 import com.global.vtg.appview.home.profile.ResProfile
+import com.global.vtg.appview.home.testHistory.TestKit
 import com.global.vtg.appview.payment.ReqPayment
 import com.global.vtg.base.AppRepository
 import com.global.vtg.model.factory.PreferenceManager
@@ -30,6 +31,7 @@ class UserRepository constructor(
     val userProfilePicLiveDataStep1 = MutableLiveData<Resource<ResProfile>>()
     val userConfigLiveData = MutableLiveData<Resource<ResUser>>()
     val testTypeLiveData = MutableLiveData<Resource<TestType>>()
+    val testTypeKitData = MutableLiveData<Resource<TestKit>>()
     val scanBarcodeLiveData = MutableLiveData<Resource<ResUser>>()
     val searchInstituteLiveData = MutableLiveData<Resource<ResInstitute>>()
     val registerLiveData = MutableLiveData<Resource<ResUser>>()
@@ -220,7 +222,8 @@ class UserRepository constructor(
         batchNo: RequestBody?,
         result: RequestBody?,
         test: RequestBody?,
-        username: RequestBody?
+        username: RequestBody?,
+        testkit: RequestBody?
     ) {
         userLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result = safeApiCall(call = {
@@ -234,7 +237,8 @@ class UserRepository constructor(
                 batchNo,
                 result,
                 test,
-                username
+                username,
+                testkit
             ).await()
         })
         if (result is ResUser) {
@@ -329,6 +333,18 @@ class UserRepository constructor(
 
         } else if (result is BaseError) {
             testTypeLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun getTestKit() {
+        testTypeLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.testkit().await() })
+        if (result is TestKit) {
+            testTypeKitData.postValue(Resource.Success(result))
+
+        } else if (result is BaseError) {
+            testTypeKitData.postValue(Resource.Error(result))
         }
     }
 

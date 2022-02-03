@@ -39,6 +39,27 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/testKit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+android:visibility="gone"
+            android:orientation="horizontal">
+
+
+
+            <com.global.vtg.utils.textView.BoldTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/label_kit"
+                android:textColor="@color/black" />
+
+            <com.global.vtg.utils.textView.RegularTextView
+                android:id="@+id/tvKit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 

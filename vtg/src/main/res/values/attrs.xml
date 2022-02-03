@@ -10,4 +10,14 @@
         <enum name="bold" value="2" />
     </attr>
 
+
+
+        <declare-styleable name="vaccincard">
+
+            <attr name="cardBackground" format="reference" />
+            <attr name="person_pic" format="string" />
+            <attr name="cardNumber" format="string" />
+            <attr name="textColor" format="color" />
+        </declare-styleable>
+
 </resources>

@@ -91,4 +91,13 @@
     <style name="DatePickerTheme.ButtonBarNegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
         <item name="android:textColor">@color/colorPrimary</item>
     </style>
+
+    <style name="SlidingDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_p_down</item>
+        <item name="android:windowExitAnimation">@anim/slide_p_up</item>
+    </style>
+    <style name="DialogSlideAnim" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/SlidingDialogAnimation</item>
+    </style>
+
 </resources>

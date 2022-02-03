@@ -57,6 +57,26 @@ import com.global.vtg.appview.config.HealthInfo
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import kotlin.collections.ArrayList
+import android.view.MotionEvent
+import android.view.View.OnTouchListener
+
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.countDown
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date_test
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivProfilePic
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivStatus_1
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.test_Root
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDl
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDob
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDose
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvId
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvName
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvStatus
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvTest
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvType
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvVaccine
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.vaccine_Root
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.view_1
 
 
 class VendorScanResultCountFragment : AppFragment() {
@@ -88,7 +108,7 @@ class VendorScanResultCountFragment : AppFragment() {
         return mFragmentBinding
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "ClickableViewAccessibility")
     override fun initializeComponent(view: View?) {
         /*  ivBackScan.setOnClickListener {
               activity?.onBackPressed()
@@ -102,6 +122,17 @@ class VendorScanResultCountFragment : AppFragment() {
         if (Constants.isSpalsh)
             splash.visibility = View.VISIBLE
         else main.visibility = View.VISIBLE
+
+
+
+        view!!.setOnTouchListener { v, event ->
+            if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+                splash.visibility = View.GONE
+                main.visibility = View.VISIBLE
+            }
+            true
+        }
+
 
         mListner = CountdownView.OnCountdownIntervalListener { dtype, time ->
 
@@ -195,12 +226,10 @@ class VendorScanResultCountFragment : AppFragment() {
 
 
         var datetimer = ""
-        if (Constants.SCANNEDUSER!!.test!!.size > 0) {
+        if (Constants.SCANNEDUSER!!.test!=null&&Constants.SCANNEDUSER!!.test!!.size > 0) {
             val list = Constants.SCANNEDUSER!!.test!!
             Constants.SCANNEDUSER?.test?.let {
-
                 Collections.sort(list, Comparator<TestInfo?> { obj1, obj2 ->
-
                     val d1 = DateUtils.getDate(
                         obj1!!.date!!,
                         DateUtils.API_DATE_FORMAT_VACCINE
@@ -216,20 +245,24 @@ class VendorScanResultCountFragment : AppFragment() {
             if (!TextUtils.isEmpty(list[0].test)) {
                 tvTest.text = "COVID Test | "
                 if (list[0].test.equals("1")) {
-
                     tvType.text = getString(R.string.rtpcr)
                 } else {
                     tvType.text = getString(R.string.label_rapid)
                 }
-
                 tvTest.setTextColor(
                     ContextCompat.getColor(
                         requireActivity(),
                         R.color.green
                     )
                 )
-
             }
+            if(!TextUtils.isEmpty(list[0].kit)){
+                date_kit.visibility=View.VISIBLE
+                date_kit.text=list[0].kit
+            }else{
+                date_kit.visibility=View.GONE
+            }
+
             strTest= list[0].documentLink.toString()
             val institute = list[0].instituteId?.let { Constants.getInstituteName(it) }
             date_test.text = "$institute " + list[0].date?.let {
@@ -251,7 +284,6 @@ class VendorScanResultCountFragment : AppFragment() {
                 datetimer = list[0].date.toString()
                 Glide.with(getAppActivity()).asBitmap().load(R.drawable.ic_drawable_tick)
                     .into(ivStatus_1)
-
                 Glide.with(getAppActivity())
                     .asGif()
                     .load(R.mipmap.gif_verified)
@@ -288,8 +320,9 @@ class VendorScanResultCountFragment : AppFragment() {
 
 
         } else {
-            listHealth = Constants.SCANNEDUSER!!.healthInfo!!
-            if (listHealth.size > 0) {
+
+            if (Constants.SCANNEDUSER!!.healthInfo!=null&&listHealth.size > 0) {
+                listHealth = Constants.SCANNEDUSER!!.healthInfo!!
                 Constants.SCANNEDUSER?.healthInfo?.let {
                     Collections.sort(listHealth, Comparator<HealthInfo?> { obj1, obj2 ->
 
@@ -498,7 +531,6 @@ class VendorScanResultCountFragment : AppFragment() {
                                 if (item.id!!.equals(listHealth[0].test)) {
                                     tvType.text = item.name
                                     break
-
                                 }
                             }
 
