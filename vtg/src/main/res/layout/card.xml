@@ -16,11 +16,11 @@
 
     <ImageView
         android:id="@+id/person"
-        android:layout_width="70dp"
-        android:layout_height="80dp"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
         android:layout_below="@+id/flag"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="14dp"
         android:contentDescription="flag"
         tools:ignore="HardcodedText" />
 
@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             app:textAllCaps="true"
             android:textSize="13sp"
-            android:layout_marginTop="@dimen/_4sdp" />
+            android:layout_marginTop="@dimen/_3sdp" />
 
         <com.global.vtg.utils.textView.RegularTextView
             android:id="@+id/tvFName"
@@ -98,7 +98,7 @@
             android:layout_alignParentRight="true"
             android:orientation="horizontal">
 
-            <com.global.vtg.utils.textView.RegularTextView
+            <TextView
                 android:id="@+id/tvPP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -107,13 +107,14 @@
 
                 app:textAllCaps="true" />
 
-            <com.global.vtg.utils.textView.RegularTextView
+            <TextView
                 android:id="@+id/tvDL"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:layout_marginStart="@dimen/_3sdp"
                 android:textSize="11sp"
+
                 app:textAllCaps="true" />
 
 
@@ -121,4 +122,15 @@
 
 
     </LinearLayout>
+
+    <com.global.vtg.utils.textView.SemiBoldTextView
+        android:id="@+id/tvCardNo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:textAllCaps="true"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:textSize="13sp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_marginTop="@dimen/_4sdp" />
 </merge>

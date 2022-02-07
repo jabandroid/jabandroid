@@ -141,6 +141,7 @@
                 android:id="@+id/btnUploadFile"
                 style="@style/ButtonStyle"
                 android:layout_width="0dp"
+                android:visibility="gone"
                 android:layout_marginStart="@dimen/_32sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:layout_marginEnd="@dimen/_32sdp"

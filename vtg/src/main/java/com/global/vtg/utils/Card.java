@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.text.Spanned;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
@@ -30,12 +32,13 @@ public class Card extends RelativeLayout {
     private ImageView qrCode;
     private SemiBoldTextView txtLName;
     private SemiBoldTextView txtDob;
+    private SemiBoldTextView txtCardNo;
     private RegularTextView txtFName;
     private RegularTextView txtAdd1;
     private RegularTextView txtAdd2;
-    private RegularTextView txtDl;
+    private TextView txtDl;
     private RegularTextView txtAdd3;
-    private RegularTextView txtPP;
+    private TextView txtPP;
     private int mTextColor = Color.BLACK;
     public Card(Context context) {
         this(context, null);
@@ -74,6 +77,7 @@ public class Card extends RelativeLayout {
         txtDl = findViewById(R.id.tvDL);
         flag = findViewById(R.id.flag);
         txtPP = findViewById(R.id.tvPP);
+        txtCardNo = findViewById(R.id.tvCardNo);
 
     }
 
@@ -106,7 +110,9 @@ public class Card extends RelativeLayout {
         txtAdd2.setTextColor(mTextColor);
         txtAdd3.setTextColor(mTextColor);
         txtDl.setTextColor(mTextColor);
+        txtPP.setTextColor(mTextColor);
         txtDob.setTextColor(mTextColor);
+        txtCardNo.setTextColor(mTextColor);
         txtAdd2.setVisibility(View.GONE);
 //
 //        txtLName.setTextSize(13);
@@ -142,8 +148,12 @@ public class Card extends RelativeLayout {
         txtAdd3.setText(name);
         redrawViews();
     }
-    public void setDL(String name){
+    public void setDL(Spanned  name){
         txtDl.setText(name);
+        redrawViews();
+    }
+    public void setCardNo(String name){
+        txtCardNo.setText(name);
         redrawViews();
     }
 
@@ -160,7 +170,7 @@ public class Card extends RelativeLayout {
         redrawViews();
     }
 
-    public void setPP(String name){
+    public void setPP(Spanned name){
         txtPP.setText(name);
         redrawViews();
     }

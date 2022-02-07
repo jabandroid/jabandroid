@@ -17,6 +17,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.appview.authentication.AuthenticationActivity
+import com.global.vtg.appview.authentication.registration.TestTypeResult
 import com.global.vtg.appview.config.Institute
 import com.global.vtg.appview.config.PickMediaExtensions
 import com.global.vtg.appview.config.getRealPath
@@ -416,6 +417,10 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
                 data.type?.let { it1 -> vaccineTypeList.add(it1) }
             }
         }
+
+        Collections.sort(vaccineTypeList, Comparator<String?> { obj1, obj2 ->
+            return@Comparator obj1!!.compareTo(obj2!!)
+        })
         sVaccine.adapter = VaccineTypeSpinnerAdapter(
             getAppActivity(), vaccineTypeList
         )

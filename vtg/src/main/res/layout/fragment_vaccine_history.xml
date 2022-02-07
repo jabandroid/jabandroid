@@ -196,7 +196,7 @@
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_28sdp"
             android:layout_marginBottom="@dimen/_32sdp"
-
+android:visibility="gone"
             android:onClick="@{viewModel::onClick}"
             android:text="@string/label_upload_file"
             app:layout_constraintBottom_toBottomOf="parent"

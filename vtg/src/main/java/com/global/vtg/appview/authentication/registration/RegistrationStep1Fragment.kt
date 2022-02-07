@@ -248,10 +248,11 @@ var callService:Boolean=false
         val list: Array<out String> = resources.getStringArray(R.array.title)
         val genderList: Array<out String> = resources.getStringArray(R.array.gender)
         val ethnicityList: Array<out String> = resources.getStringArray(R.array.ethnicity)
+        Arrays.sort(ethnicityList)
         if (!Constants.USER?.title.isNullOrEmpty()) {
             viewModel.title.value = Constants.USER?.title
             for (titleIndex in list.indices) {
-                if (list[titleIndex].equals(Constants.USER?.title)) {
+                if (list[titleIndex] == Constants.USER?.title) {
                     sTitleRegister.post { sTitleRegister.setSelection(titleIndex + 1) }
                     sTitleRegister.isClickable = false
                     sTitleRegister.isEnabled = false
@@ -276,6 +277,10 @@ var callService:Boolean=false
         sGender.adapter = GenderSpinnerAdapter(
             getAppActivity(), genderList
         )
+
+        Arrays.sort(ethnicityList);
+
+
         sEthnicity.adapter = EthnicitySpinnerAdapter(
             getAppActivity(), ethnicityList
         )

@@ -1,5 +1,6 @@
 package com.global.vtg.appview.home.vaccinehistory
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -40,6 +41,7 @@ class VaccineHistoryAdapter(
         return DashboardViewHolder(v) // pass the view to View Holder
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
         // set the data in items
         holder.tvVaccineName.text =

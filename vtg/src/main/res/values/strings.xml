@@ -186,7 +186,7 @@
     <string name="label_date_time">%d:%d</string>
 
     <string name="label_no_data">No data available…</string>
-    <string name="select_type">Select Vaccine Type</string>
+    <string name="select_type">Vaccine Type</string>
     <string name="select_dose">Select Dose</string>
     <string name="select">Select</string>
     <string name="label_day">Day</string>
@@ -313,8 +313,14 @@
         <item>White</item>
         <item>African American</item>
         <item>Native American</item>
+        <item>Abazin</item>
         <item>Pacific Islander</item>
         <item>Asian</item>
+        <item>Croats</item>
+        <item>White British</item>
+        <item>Dagaaba people</item>
+        <item>Sherbro people</item>
+        <item>Al-Akhdam</item>
         <item>Native Hawaiian</item>
         <item>Chinese</item>
         <item>Irish Traveller</item>
@@ -341,12 +347,55 @@
         <item>Black Botswanan</item>
         <item>Angolan</item>
         <item>Bangladeshi</item>
+        <item>Murut People</item>
         <item>Black Caribbean</item>
         <item>Black African</item>
         <item>Black Other</item>
+        <item>Black British people</item>
+        <item>Asian Hispanic and Latino Americans</item>
+        <item>Filipino</item>
+        <item> Poleshuks</item>
+        <item>Creoles of color</item>
+        <item>Orang Kuala</item>
+        <item>Europeans</item>
+        <item>Indigenous peoples of the Americas</item>
+        <item>Lubu people</item>
+        <item>Mapuche</item>
+        <item>Mala</item>
+        <item>Bhoi</item>
+        <item>Puerto Ricans</item>
+        <item> Americans</item>
+        <item>Asian people</item>
+        <item>Person of color</item>
+        <item> Non-Hispanic whites</item>
+        <item> Native Americans in the United States</item>
+        <item> British people</item>
+        <item> White people</item>
+        <item>Asian Americans</item>
+        <item>Black people</item>
+        <item> Multiracial people</item>
+
+        <item>  Montenegrins</item>
+
+        <item> Alaska Natives</item>
+        <item> Indigenous peoples</item>
+        <item> Latino</item>
+        <item> Black Hispanic and Latino Americans</item>
+        <item> Polyethnicity</item>
+        <item>Hispanic and Latino Americans</item>
+        <item>Hispanic</item>
+        <item>Caucasian race</item>
+        <item>Mexicans</item>
+        <item>Multiracial Americans</item>
+        <item> Serbs</item>
+        <item>Aimag people</item>
+        <item>Anatri</item>
+        <item>Gondi people</item>
+        <item>Cherkesogai</item>
+        <item>Akan people</item>
         <item>Mixed Caribbean</item>
         <item>Mixed ethnic group</item>
-        <item>Any other ethnic group</item>
+        <item>Other ethnic group</item>
     </string-array>
 
     <string-array name="gender">
