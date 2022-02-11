@@ -118,8 +118,8 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         } else {
             groupMobileNoHealth.visibility = View.GONE
             cbCertify.visibility = View.VISIBLE
-            sStatus.visibility = View.GONE
-            s_status.visibility = View.GONE
+            sStatus.visibility = View.VISIBLE
+            s_status.visibility = View.VISIBLE
             sDob.visibility = View.GONE
             dob.visibility = View.GONE
         }
@@ -279,6 +279,9 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                             "${appendZero(selectedHour.toString())}:${appendZero(selectedMinute.toString())}"
                         sTime.setText(time)
                         viewModel.time = time
+                        myCalendar.set(Calendar.HOUR_OF_DAY, selectedHour)
+                        myCalendar.set(Calendar.MINUTE, selectedMinute)
+                        updateDate()
                     }
 
                 },
@@ -450,22 +453,24 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 
     private fun updateDate() {
 
-        val sdf = SimpleDateFormat(DDMMYY, Locale.US)
-        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-        val date = sdf.format(myCalendar.time)
+
+
         if (isDob) {
-            sDob.text = apiSdf.format(myCalendar.time)
-            viewModel.dob = apiSdf.format(myCalendar.time).toString()
-            isDob = false
+//            sDob.text = apiSdf.format(myCalendar.time)
+//            viewModel.dob = apiSdf.format(myCalendar.time).toString()
+//            isDob = false
 
         } else {
-            sDate.setText(date)
+            sDate.setText(DateUtils.formatDateTime(
+                myCalendar.timeInMillis,
+                DDMMYY
+            ))
 
             val dayOfWeek = SimpleDateFormat("EEEE", Locale.US).format(myCalendar.time)
             sDay.setText(dayOfWeek)
 
             viewModel.day = dayOfWeek
-            viewModel.date = apiSdf.format(myCalendar.time)
+            viewModel.date = DateUtils.formatDateTime(myCalendar.timeInMillis,true)
         }
     }
 
@@ -526,7 +531,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 
 
         Collections.sort(data.tests!!, Comparator<TestTypeResult?> { obj1, obj2 ->
-            return@Comparator obj1!!.name!!.compareTo(obj2!!.name!!)
+            return@Comparator obj1!!.name!!.lowercase().compareTo(obj2!!.name!!.lowercase())
         })
         adapter.addAll(data.tests!!)
         list.layoutManager = layoutManager

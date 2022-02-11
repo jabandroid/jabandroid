@@ -5,6 +5,7 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.appview.config.HealthInfo
+import com.global.vtg.appview.config.TestInfo
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
@@ -14,6 +15,7 @@ import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
+import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
@@ -69,7 +71,12 @@ class HealthInformationFragment : AppFragment() {
         val list = Constants.USER?.healthInfo
         if (!list.isNullOrEmpty()) {
             Collections.sort(list, Comparator<HealthInfo?> { obj1, obj2 ->
-                return@Comparator obj2!!.id!!.compareTo(obj1!!.id!!)
+
+                val d1= DateUtils.getDate(  obj1!!.date!!,
+                    DateUtils.API_DATE_FORMAT_VACCINE)
+                val d2= DateUtils.getDate(  obj2!!.date!!,
+                    DateUtils.API_DATE_FORMAT_VACCINE)
+                return@Comparator d2.compareTo(d1)
             })
             healthList.addAll(list)
             healthAdapter.setHealthList(healthList)
@@ -118,12 +125,29 @@ class HealthInformationFragment : AppFragment() {
     }
 
     fun refreshList() {
+        Collections.sort(Constants.USER?.healthInfo, Comparator<HealthInfo?> { obj1, obj2 ->
+
+            val d1= DateUtils.getDate(  obj1!!.date!!,
+                DateUtils.API_DATE_FORMAT_VACCINE)
+            val d2= DateUtils.getDate(  obj2!!.date!!,
+                DateUtils.API_DATE_FORMAT_VACCINE)
+            return@Comparator d2.compareTo(d1)
+        })
         healthAdapter.setHealthList(Constants.USER?.healthInfo as ArrayList<HealthInfo>)
         updateNoData()
     }
 
     private fun updateNoData() {
         if (!Constants.USER?.healthInfo.isNullOrEmpty()) {
+
+            Collections.sort(Constants.USER?.healthInfo, Comparator<HealthInfo?> { obj1, obj2 ->
+
+                val d1= DateUtils.getDate(  obj1!!.date!!,
+                    DateUtils.API_DATE_FORMAT_VACCINE)
+                val d2= DateUtils.getDate(  obj2!!.date!!,
+                    DateUtils.API_DATE_FORMAT_VACCINE)
+                return@Comparator d2.compareTo(d1)
+            })
             healthAdapter.setHealthList(Constants.USER?.healthInfo as ArrayList<HealthInfo>)
             tvHealthNoData.visibility = View.GONE
         } else {

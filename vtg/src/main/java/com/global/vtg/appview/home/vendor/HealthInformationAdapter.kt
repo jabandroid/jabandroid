@@ -8,16 +8,14 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.HealthInfo
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
 import com.vtg.R
+import kotlinx.android.synthetic.main.recycler_view_vaccine_history.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -46,37 +44,25 @@ class HealthInformationAdapter(
         val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
         holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
 
-//        if(!TextUtils.isEmpty(list[position].test))
-//        {
-//            if(!TextUtils.isEmpty(list[position].testName))
-//            {
+
                 holder.tvTest.text =list[position].testName
-//            }else{
-//                for (item in testType.tests!!){
-//                    if(item.id!!.equals(list[position].test)){
-//                        holder.tvTest.text =item.name
-//                        list[position].testName=item.name
-//                        break
-//
-//                    }
-//                }
-//            }
 
-//        }else{
-//            holder.tvTest.text =""
-//        }
-
-          //  if (TextUtils.isEmpty(list[position].test)) "-" else list[position].test
         holder.testRoot.visibility = View.VISIBLE
         holder.tvDate.text = list[position].date?.let {
             DateUtils.formatDateUTCToLocal(
                 it,
                 DateUtils.API_DATE_FORMAT_VACCINE,
-                DateUtils.DDMMYYYY
+               true
             )
         }
+
+        if(list[position].addedBy!!.contains("clinic"))
+            holder.itemView.addedBy.setImageResource(R.drawable.ic_clinic)
+        else
+            holder.itemView.addedBy.setImageResource(R.drawable.ic_user)
+
         holder.tvBatchNo.text =
-            if (list[position].srId.isNullOrEmpty()) "-" else list[position].srId
+            if (list[position].srId.isNullOrEmpty()||list[position].srId.equals("null")) "-" else list[position].srId
         if (list[position].result != null) {
             when (list[position].result!!.lowercase(Locale.getDefault())) {
                 "positive" -> {
@@ -93,11 +79,11 @@ class HealthInformationAdapter(
                 }
                 "invalid" -> {
                     holder.tvStatusValue.text =
-                        "invalid"
+                        "Invalid"
                     holder.ivStatus.setImageResource(R.drawable.ic_drawable_pending)
                     holder.llHealth.setBackgroundResource(R.drawable.green_border)
                 }
-                "NA" -> {
+                "na" -> {
                     holder.tvStatusValue.text =
                         "NA"
                     holder.ivStatus.setImageResource(R.drawable.ic_drawable_na)
@@ -106,14 +92,14 @@ class HealthInformationAdapter(
                 else -> {
                     holder.tvStatusValue.text =
                         ""
-                    holder.ivStatus.setImageResource(R.drawable.ic_warning)
+                    holder.ivStatus.setImageResource(R.drawable.ic_drawable_pending)
                     holder.llHealth.setBackgroundResource(R.drawable.yellow_border)
                 }
             }
         } else {
             holder.tvStatusValue.text =
                 ""
-            holder.ivStatus.setImageResource(R.drawable.ic_warning)
+            holder.ivStatus.setImageResource(R.drawable.ic_drawable_pending)
             holder.llHealth.setBackgroundResource(R.drawable.yellow_border)
         }
 
@@ -137,7 +123,7 @@ class HealthInformationAdapter(
         var tvStatus: TextView = itemView.findViewById(R.id.tvStatus)
         var tvStatusValue: TextView = itemView.findViewById(R.id.tvStatusValue)
         var ivStatus: ImageView = itemView.findViewById(R.id.ivStatus)
-        var llHealth: LinearLayout = itemView.findViewById(R.id.llHealth)
+        var llHealth: RelativeLayout = itemView.findViewById(R.id.llHealth)
         var tvBatchNo: TextView = itemView.findViewById(R.id.tvBatchNoValue)
     }
 

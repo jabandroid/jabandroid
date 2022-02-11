@@ -8,7 +8,7 @@ data class TestInfo(
     var result: String? = null,
 
     @field:SerializedName("srId")
-    val srId: String? = null,
+    val srId: String? = "",
 
     @field:SerializedName("date")
     val date: String? = null,
@@ -33,6 +33,9 @@ data class TestInfo(
 
     @field:SerializedName("kitName")
     val kit: String? = null,
+
+    @field:SerializedName("addedBy")
+    val addedBy: String? = "",
 
     var testName: String? = ""
 )

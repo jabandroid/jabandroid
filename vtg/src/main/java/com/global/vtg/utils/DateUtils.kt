@@ -2,12 +2,10 @@ package com.global.vtg.utils
 
 
 import android.annotation.SuppressLint
-import android.content.Context
 import java.text.DateFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.time.LocalDate
-import java.time.Month
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
@@ -26,6 +24,7 @@ object DateUtils {
     val API_DATE_FORMAT_VACCINE = "yyyy-MM-dd'T'HH:mm:ss.sssZ"
     val API_DATE_FORMAT_SERVER = "yyyy-MM-dd HH:mm:ss.sss"
     val API_DATE_FORMAT_EXP = "EEE MMM dd HH:mm:ss 'UTC' yyyy"
+
     //Tue Dec 21 00:00:00 UTC 2021
     var dateFormateTwentyFourHour = SimpleDateFormat(MMDDYYHHMM, Locale.getDefault())
 
@@ -463,14 +462,15 @@ object DateUtils {
         dateParse: String,
         dateTime: String
     ): String {
-        @SuppressLint("SimpleDateFormat") val sdf = SimpleDateFormat(dateFormat,Locale.getDefault())
+        @SuppressLint("SimpleDateFormat") val sdf =
+            SimpleDateFormat(dateFormat, Locale.getDefault())
 
         var convertedDate: Date? = null
         var formattedDateStart: String? = null
-        val simpleDateFormat =SimpleDateFormat(dateParse,Locale.getDefault())
+        val simpleDateFormat = SimpleDateFormat(dateParse, Locale.getDefault())
         try {
             convertedDate = sdf.parse(dateTime)
-            formattedDateStart =  simpleDateFormat
+            formattedDateStart = simpleDateFormat
                 .format(convertedDate!!)
             return formattedDateStart.toString()
         } catch (e: Exception) {
@@ -478,24 +478,24 @@ object DateUtils {
         }
         return formattedDateStart.toString()
     }
+
     fun appendZero(value: String): String {
         if (value.length == 1)
             return "0$value"
         return value
     }
 
-    fun formatDate(date:String, formatActual:String, formattoChange :String ): String{
-        @SuppressLint("SimpleDateFormat") val sdf = SimpleDateFormat(formatActual,Locale.getDefault())
-       // sdf.timeZone= TimeZone.getTimeZone("UTC")
-        var convertedDate: Date? = null
+    fun formatDate(datetime :Long): String {
         var formattedDateStart: String? = null
-
         try {
-            convertedDate = sdf.parse(date)
             val cal = Calendar.getInstance()
-            cal.time = convertedDate!!
+            cal.timeInMillis = datetime
             val dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
-            val dateOfBirth: LocalDate = LocalDate.of(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH)+1, cal.get(Calendar.DATE))
+            val dateOfBirth: LocalDate = LocalDate.of(
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH) + 1,
+                cal.get(Calendar.DATE)
+            )
             val formattedDateStart = dateOfBirth.format(dateFormatter)
 
             return formattedDateStart.toString()
@@ -505,17 +505,146 @@ object DateUtils {
         return formattedDateStart.toString()
     }
 
-    fun formatDateUTCToLocal(date:String, formatActual:String, formattoChange :String ): String{
-        @SuppressLint("SimpleDateFormat") val sdf = SimpleDateFormat(formatActual,Locale.getDefault())
-        sdf.timeZone= TimeZone.getTimeZone("UTC")
+    fun formatDate(date: String, formatActual: String): String {
+        @SuppressLint("SimpleDateFormat") val sdf =
+            SimpleDateFormat(formatActual, Locale.getDefault())
+        // sdf.timeZone= TimeZone.getTimeZone("UTC")
         var convertedDate: Date? = null
         var formattedDateStart: String? = null
-        val simpleDateFormat =SimpleDateFormat(formattoChange,Locale.getDefault())
-        simpleDateFormat.timeZone= TimeZone.getDefault()
-        //  simpleDateFormat.timeZone= TimeZone.getTimeZone("Africa/Johannesburg")
+
         try {
             convertedDate = sdf.parse(date)
-            formattedDateStart =  simpleDateFormat
+            val cal = Calendar.getInstance()
+            cal.time = convertedDate!!
+            val dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
+            val dateOfBirth: LocalDate = LocalDate.of(
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH) + 1,
+                cal.get(Calendar.DATE)
+            )
+            val formattedDateStart = dateOfBirth.format(dateFormatter)
+
+            return formattedDateStart.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart.toString()
+    }
+
+    fun formatDate(date: Long, formatActual: String): String {
+
+        var formattedDateStart: String? = null
+        try {
+
+            val cal = Calendar.getInstance()
+            cal.timeInMillis = date
+            val dateFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT)
+            val dateOfBirth: LocalDate = LocalDate.of(
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH) + 1,
+                cal.get(Calendar.DATE)
+            )
+            val formattedDateStart = dateOfBirth.format(dateFormatter)
+
+            return formattedDateStart.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart.toString()
+    }
+
+    fun formatDateUTCToLocal(date: String, formatActual: String, isTime: Boolean): String {
+        @SuppressLint("SimpleDateFormat") val sdf =
+            SimpleDateFormat(formatActual, Locale.getDefault())
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
+        var convertedDate: Date? = null
+        var formattedDateStart: String? = null
+        try {
+            convertedDate = sdf.parse(date)
+            val format :DateFormat
+            if (isTime) {
+                format = DateFormat.getDateTimeInstance(
+                    DateFormat.DEFAULT,
+                    DateFormat.SHORT,
+                    Locale.getDefault()
+                )
+            } else
+                format = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault())
+            format.timeZone = TimeZone.getDefault()
+            formattedDateStart = format
+                .format(convertedDate!!)
+
+//            formattedDateStart =  simpleDateFormat
+//                .format(convertedDate!!)
+            return formattedDateStart.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart.toString()
+    }
+
+    fun formatDateTime(date: Long, format :String): String {
+        var formattedDateStart :String=""
+        val sdf =
+            SimpleDateFormat(format, Locale.getDefault())
+        sdf.timeZone = TimeZone.getDefault()
+
+
+        try {
+
+            formattedDateStart = sdf.format(date)
+            return formattedDateStart
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart
+    }
+
+
+    fun formatDateTime(date: Long, isTime: Boolean): String {
+var formattedDateStart :String=""
+        val format :DateFormat
+        if (isTime) {
+            format = DateFormat.getDateTimeInstance(
+                DateFormat.DEFAULT,
+                DateFormat.SHORT,
+                Locale.getDefault()
+            )
+        } else
+            format = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault())
+        format.timeZone = TimeZone.getDefault()
+
+
+        try {
+
+            formattedDateStart = format.format(date)
+            return formattedDateStart
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart
+    }
+
+    fun formatLocalToUtc(date: String, isTime: Boolean, formattoChange: String): String {
+
+        val format :DateFormat
+        if (isTime) {
+            format = DateFormat.getDateTimeInstance(
+                DateFormat.DEFAULT,
+                DateFormat.SHORT,
+                Locale.getDefault()
+            )
+        } else
+            format = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault())
+        format.timeZone = TimeZone.getDefault()
+        var convertedDate: Date? = null
+        var formattedDateStart: String? = null
+        val simpleDateFormat = SimpleDateFormat(formattoChange, Locale.getDefault())
+        simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
+        //  simpleDateFormat.timeZone= TimeZone.getTimeZone("Africa/Johannesburg")
+        try {
+            convertedDate = format.parse(date)
+            formattedDateStart = simpleDateFormat
                 .format(convertedDate!!)
             return formattedDateStart.toString()
         } catch (e: Exception) {
@@ -524,17 +653,42 @@ object DateUtils {
         return formattedDateStart.toString()
     }
 
-    fun formatLocalToUtc(date:String, formatActual:String, formattoChange :String ): String{
-        @SuppressLint("SimpleDateFormat") val sdf = SimpleDateFormat(formatActual,Locale.getDefault())
-        sdf.timeZone= TimeZone.getDefault()
+
+    fun formatDateUTCToLocal(date: String, formatActual: String, isTime: String): String {
+        @SuppressLint("SimpleDateFormat") val sdf =
+            SimpleDateFormat(formatActual, Locale.getDefault())
+        sdf.timeZone = TimeZone.getTimeZone("UTC")
         var convertedDate: Date? = null
         var formattedDateStart: String? = null
-        val simpleDateFormat =SimpleDateFormat(formattoChange,Locale.getDefault())
-        simpleDateFormat.timeZone= TimeZone.getTimeZone("UTC")
+        try {
+            convertedDate = sdf.parse(date)
+            val format :DateFormat
+                format = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault())
+            format.timeZone = TimeZone.getTimeZone("UTC")
+            formattedDateStart = format
+                .format(convertedDate!!)
+
+//            formattedDateStart =  simpleDateFormat
+//                .format(convertedDate!!)
+            return formattedDateStart.toString()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return formattedDateStart.toString()
+    }
+
+    fun formatLocalToUtc(date: String, formatActual: String, formattoChange: String): String {
+        @SuppressLint("SimpleDateFormat") val sdf =
+            SimpleDateFormat(formatActual, Locale.getDefault())
+        sdf.timeZone = TimeZone.getDefault()
+        var convertedDate: Date? = null
+        var formattedDateStart: String? = null
+        val simpleDateFormat = SimpleDateFormat(formattoChange, Locale.getDefault())
+        simpleDateFormat.timeZone = TimeZone.getTimeZone("UTC")
         //  simpleDateFormat.timeZone= TimeZone.getTimeZone("Africa/Johannesburg")
         try {
             convertedDate = sdf.parse(date)
-            formattedDateStart =  simpleDateFormat
+            formattedDateStart = simpleDateFormat
                 .format(convertedDate!!)
             return formattedDateStart.toString()
         } catch (e: Exception) {
@@ -543,7 +697,7 @@ object DateUtils {
         return formattedDateStart.toString()
     }
 
-    fun getDate(date:String, formatActual:String ): Date {
+    fun getDate(date: String, formatActual: String): Date {
 
         @SuppressLint("SimpleDateFormat") val sdf =
             SimpleDateFormat(formatActual, Locale.getDefault())
@@ -559,6 +713,25 @@ object DateUtils {
         }
         return convertedDate!!
     }
+
+    fun getDateLocal(date: String, formatActual: String): Date {
+
+        @SuppressLint("SimpleDateFormat") val sdf =
+            SimpleDateFormat(formatActual, Locale.getDefault())
+
+        var convertedDate: Date? = null
+
+        try {
+            convertedDate = sdf.parse(date)
+
+            return convertedDate
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return convertedDate!!
+    }
+
+
 
 
 }

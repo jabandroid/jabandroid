@@ -66,6 +66,9 @@ class VendorRegistrationStep2ViewModel(
             R.id.btnNext -> {
                 KeyboardUtils.hideKeyboard(view)
                 if(isDataAvailable){
+                    var utcDate=DateUtils.formatLocalToUtc(expiryDate.value!!,false,DateUtils.API_DATE_FORMAT)
+                    val date: RequestBody? = utcDate?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+
                     registerLiveDataAlready.postValue("")
                 }else {
                     if (isNetworkAvailable(view.context)) {
@@ -133,7 +136,7 @@ class VendorRegistrationStep2ViewModel(
             val employeeID: RequestBody? = employeeId.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
             val vat: RequestBody? = businessVat.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
-            var utcDate=DateUtils.formatLocalToUtc(expiryDate.value!!,DateUtils.API_DATE_FORMAT,DateUtils.API_DATE_FORMAT)
+            var utcDate=DateUtils.formatLocalToUtc(expiryDate.value!!,false,DateUtils.API_DATE_FORMAT)
             val date: RequestBody? = utcDate?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             userRepository.uploadVendorStep2(

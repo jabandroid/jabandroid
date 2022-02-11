@@ -31,21 +31,8 @@ import kotlinx.android.synthetic.main.fragment_test_details.*
 
 
 import kotlinx.android.synthetic.main.fragment_test_history.*
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.*
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.countDown
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date_kit
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date_test
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivProfilePic
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivStatus_1
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.test_Root
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDl
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDob
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvId
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvName
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvStatus
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvTest
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvType
-import kotlinx.android.synthetic.main.recycler_vendor_health_info.view.*
+
+
 
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -90,6 +77,7 @@ class TestHistoryDetailFragment : AppFragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     fun refreshList() {
 
 
@@ -137,10 +125,9 @@ class TestHistoryDetailFragment : AppFragment() {
 
         if (!Constants.USER?.dateOfBirth.isNullOrEmpty()) {
             val str = SpannableStringBuilder(
-                "DOB: " + DateUtils.convertDate(
-                    DateUtils.API_DATE_FORMAT_VACCINE,
-                    DateUtils.API_DATE_FORMAT,
-                    Constants.USER?.dateOfBirth!!
+                "DOB: " +   DateUtils.formatDate(
+                    Constants.USER?.dateOfBirth!!,
+                    DateUtils.API_DATE_FORMAT
                 )
             )
             str.setSpan(
@@ -223,6 +210,13 @@ class TestHistoryDetailFragment : AppFragment() {
 
             }
 
+
+            if(list[0].addedBy!!.contains("clinic"))
+                addedBy.setImageResource(R.drawable.ic_clinic)
+            else
+                addedBy.setImageResource(R.drawable.ic_user)
+
+
             if(!TextUtils.isEmpty(list[0].kit)){
                 date_kit.visibility=View.VISIBLE
                 date_kit.text=list[0].kit
@@ -235,7 +229,7 @@ class TestHistoryDetailFragment : AppFragment() {
                 DateUtils.formatDateUTCToLocal(
                     it,
                     DateUtils.API_DATE_FORMAT_VACCINE,
-                    DateUtils.DDMMYYYY,
+                   true
                 )
             }
 
@@ -245,6 +239,11 @@ class TestHistoryDetailFragment : AppFragment() {
                     R.color.green
                 )
             )
+
+            var result=list[0].result
+            if(TextUtils.isEmpty(list[0].result)||list[0].result.equals("null"))
+                result="Pending"
+            tvType.text =   tvType.text.toString() + " | " + result
 
             if (list[0].result?.lowercase().equals("Negative".lowercase())) {
                 datetimer = list[0].date.toString()

@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
-import android.provider.Settings
 import android.view.View
 import android.widget.AdapterView
 import androidx.databinding.ViewDataBinding
@@ -27,12 +26,12 @@ import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
+import com.global.vtg.utils.DateUtils.API_DATE_FORMAT
 import com.global.vtg.utils.DateUtils.API_DATE_FORMAT_VACCINE
 import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
 import com.tslogistics.util.AppAlertDialog
 import com.vtg.R
 import com.vtg.databinding.FragmentRegStep1Binding
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.android.synthetic.main.fragment_reg_step1.*
 import kotlinx.android.synthetic.main.fragment_reg_step1.ivBack
 import kotlinx.android.synthetic.main.fragment_reg_step1.ivProfilePic
@@ -305,14 +304,26 @@ var callService:Boolean=false
         }
         if (!Constants.USER?.dateOfBirth.isNullOrEmpty()) {
             try {
-                val dob = SimpleDateFormat(API_DATE_FORMAT_VACCINE, Locale.getDefault())
-                val date = dob.parse(Constants.USER?.dateOfBirth)
-                val cal = Calendar.getInstance()
-                cal.time = date
-                myCalendar.set(Calendar.YEAR, cal.get(Calendar.YEAR))
-                myCalendar.set(Calendar.MONTH, cal.get(Calendar.MONTH))
-                myCalendar.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH))
-                updateDate()
+
+                viewModel.dob.postValue(DateUtils.formatDate(
+                    Constants.USER?.dateOfBirth!!,
+                    DateUtils.API_DATE_FORMAT
+                ))
+                val date= DateUtils.getDateLocal(  Constants.USER?.dateOfBirth!!,
+                    DateUtils.API_DATE_FORMAT)
+                viewModel.apiDob = DateUtils.formatDateTime(date.time,API_DATE_FORMAT)
+                viewModel.dobDate=date
+//
+//                val dob = SimpleDateFormat(API_DATE_FORMAT_VACCINE, Locale.getDefault())
+//                val date = dob.parse(Constants.USER!!.dateOfBirth!!)
+//                val cal = Calendar.getInstance()
+//                cal.time = DateUtils.getDate(   Constants.USER?.dateOfBirth!!,
+//                    DateUtils.API_DATE_FORMAT)
+//                myCalendar.set(Calendar.YEAR, cal.get(Calendar.YEAR))
+//                myCalendar.set(Calendar.MONTH, cal.get(Calendar.MONTH))
+//                myCalendar.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH))
+              //  updateDate()
+
             }catch (e: Exception){
                 e.printStackTrace()
             }
@@ -609,17 +620,26 @@ var callService:Boolean=false
     }
     private fun updateDate() {
 
-        val sdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-        val date = sdf.format(myCalendar.time)
-        var d= DateUtils.formatDate(
-            date,
-            DateUtils.API_DATE_FORMAT,
-            DateUtils.API_DATE_FORMAT
-        )
-        viewModel.apiDob = apiSdf.format(myCalendar.time)
-        viewModel.dob.postValue(d)
+
+        viewModel.dob.postValue(DateUtils.formatDate(
+            myCalendar.timeInMillis
+        ))
+
+        viewModel.apiDob = DateUtils.formatDateTime(myCalendar.timeInMillis,API_DATE_FORMAT)
         viewModel.dobDate=myCalendar.time
+
+
+
+//        val sdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
+//        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
+//        val date = sdf.format(myCalendar.time)
+//        var d= DateUtils.formatDate(
+//            date,
+//            DateUtils.API_DATE_FORMAT
+//        )
+//        viewModel.apiDob = apiSdf.format(myCalendar.time)
+//        viewModel.dob.postValue(d)
+//        viewModel.dobDate=myCalendar.time
 
         if( viewModel.getAge()!! <13) {
             AppAlertDialog().showAlert(

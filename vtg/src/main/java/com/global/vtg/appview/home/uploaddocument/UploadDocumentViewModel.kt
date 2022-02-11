@@ -130,9 +130,9 @@ class UploadDocumentViewModel(
             }
             var dateReq: RequestBody? = null
             if (date != null) {
-                date= "$date $time"
+                date= "$date"
                 var dateForServer=
-                    DateUtils.formatLocalToUtc(date!!, DateUtils.API_DATE_FORMAT_TIME, DateUtils.API_DATE_FORMAT_TIME)
+                    DateUtils.formatLocalToUtc(date!!, true, DateUtils.API_DATE_FORMAT_TIME)
 
                 dateReq = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
             }

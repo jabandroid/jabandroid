@@ -161,14 +161,9 @@ class UploadTestDocumentViewModel(
             }
             var dateReq: RequestBody? = null
             if (date != null) {
-                date = "$date $time"
-                var dateForServer =
-                    DateUtils.formatLocalToUtc(
-                        date!!,
-                        DateUtils.API_DATE_FORMAT_TIME,
-                        DateUtils.API_DATE_FORMAT_TIME
-                    )
-
+                date= "$date"
+                var dateForServer=
+                    DateUtils.formatLocalToUtc(date!!, true, DateUtils.API_DATE_FORMAT_TIME)
                 dateReq = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
             }
             val username: RequestBody? = if (Constants.USER?.role.equals("ROLE_CLINIC")) {

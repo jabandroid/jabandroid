@@ -6,45 +6,25 @@ import android.graphics.Rect
 import android.graphics.RectF
 import android.os.Bundle
 import android.text.Html
-import android.text.Spannable
-import android.text.SpannableStringBuilder
 import android.text.TextUtils
-import android.text.style.StyleSpan
 import android.view.View
 import androidx.core.text.HtmlCompat
 import androidx.databinding.ViewDataBinding
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.signature.ObjectKey
-import com.global.vtg.imageview.setGlideNormalImageProgress
 import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
 import com.github.sumimakito.awesomeqr.option.RenderOption
 import com.github.sumimakito.awesomeqr.option.background.StillBackground
 import com.github.sumimakito.awesomeqr.option.color.Color
 import com.github.sumimakito.awesomeqr.option.logo.Logo
 import com.global.vtg.base.AppFragment
-import com.global.vtg.imageview.defaultLoader
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
-import com.global.vtg.utils.ToastUtils
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.vtg.R
 import com.vtg.databinding.FragmentVaccineCardBinding
-import kotlinx.android.synthetic.main.fragment_reg_step2.*
-import kotlinx.android.synthetic.main.fragment_reg_step3.*
 import kotlinx.android.synthetic.main.fragment_vaccine_card.*
 import kotlinx.android.synthetic.main.fragment_vaccine_card.ivBack
-import kotlinx.android.synthetic.main.fragment_vaccine_qr_code.ivQRCode
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
-import java.util.*
-import io.michaelrocks.libphonenumber.android.NumberParseException
-
-import io.michaelrocks.libphonenumber.android.Phonenumber.PhoneNumber
-
-import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
 
 
 class VaccineCardFragment : AppFragment() {
@@ -152,7 +132,6 @@ class VaccineCardFragment : AppFragment() {
 
                 val d = DateUtils.formatDate(
                     Constants.USER?.dateOfBirth!!,
-                    DateUtils.API_DATE_FORMAT,
                     DateUtils.API_DATE_FORMAT
                 )
                 ivCard.setDob("DOB $d")

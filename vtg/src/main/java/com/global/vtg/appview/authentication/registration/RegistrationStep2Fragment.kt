@@ -270,39 +270,41 @@ class RegistrationStep2Fragment : AppFragment() {
     }
 
     private fun updateIssuedDate() {
-        val sdf = SimpleDateFormat(DateUtils.DDMMYYYY, Locale.US)
-        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-        val date = sdf.format(myCalendar.time)
-        etDlnIssuedDate.setText(date)
+        etDlnIssuedDate.setText(DateUtils.formatDate(
+            myCalendar.timeInMillis,
+            DateUtils.API_DATE_FORMAT_VACCINE
+        ))
 
-        viewModel.dlnIssuedDate.value = apiSdf.format(myCalendar.time)
+        viewModel.dlnIssuedDate.value = DateUtils.formatDateTime(myCalendar.timeInMillis, DateUtils.API_DATE_FORMAT)
     }
 
     private fun updateExpiryDate() {
-        val sdf = SimpleDateFormat(DateUtils.DDMMYYYY, Locale.US)
-        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-        val date = sdf.format(myCalendar.time)
-        etDlnExpiryDate.setText(date)
+        etDlnExpiryDate.setText(DateUtils.formatDate(
+            myCalendar.timeInMillis,
+            DateUtils.API_DATE_FORMAT_VACCINE
+        ))
 
-        viewModel.dlnExpiredDate.value = apiSdf.format(myCalendar.time)
+        viewModel.dlnExpiredDate.value = DateUtils.formatDateTime(myCalendar.timeInMillis, DateUtils.API_DATE_FORMAT)
     }
 
     private fun updatePassportIssuedDate() {
-        val sdf = SimpleDateFormat(DateUtils.DDMMYYYY, Locale.US)
-        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-        val date = sdf.format(myCalendar.time)
-        etPassportIssuedDate.setText(date)
 
-        viewModel.passportIssuedDate.value = apiSdf.format(myCalendar.time)
+        etPassportIssuedDate.setText(DateUtils.formatDate(
+            myCalendar.timeInMillis,
+            DateUtils.API_DATE_FORMAT_VACCINE
+        ))
+
+        viewModel.passportIssuedDate.value =DateUtils.formatDateTime(myCalendar.timeInMillis, DateUtils.API_DATE_FORMAT)
     }
 
     private fun updatePassportExpiryDate() {
-        val sdf = SimpleDateFormat(DateUtils.DDMMYYYY, Locale.US)
-        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-        val date = sdf.format(myCalendar.time)
-        etPassportExpiryDate.setText(date)
 
-        viewModel.passportExpiredDate.value = apiSdf.format(myCalendar.time)
+        etPassportExpiryDate.setText(DateUtils.formatDate(
+            myCalendar.timeInMillis,
+            DateUtils.API_DATE_FORMAT_VACCINE
+        ))
+
+        viewModel.passportExpiredDate.value = DateUtils.formatDateTime(myCalendar.timeInMillis, DateUtils.API_DATE_FORMAT)
     }
 
     fun updateDlnAddress(state: String, country: String) {
@@ -320,10 +322,9 @@ class RegistrationStep2Fragment : AppFragment() {
     }
 
     private fun setDate(parseDate: String, editText: EditText, function: () -> Unit) {
-        val dob = SimpleDateFormat(DateUtils.API_DATE_FORMAT_VACCINE, Locale.getDefault())
-        val date = dob.parse(parseDate)
+
         val cal = Calendar.getInstance()
-        cal.time = date
+        cal.time = DateUtils.getDate(parseDate, DateUtils.API_DATE_FORMAT_VACCINE)
         myCalendar.set(Calendar.YEAR, cal.get(Calendar.YEAR))
         myCalendar.set(Calendar.MONTH, cal.get(Calendar.MONTH))
         myCalendar.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH))

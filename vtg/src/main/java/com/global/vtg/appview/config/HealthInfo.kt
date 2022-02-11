@@ -8,7 +8,7 @@ data class HealthInfo(
     val result: String? = null,
 
     @field:SerializedName("srId")
-    val srId: String? = null,
+    val srId: String? = "",
 
     @field:SerializedName("date")
     val date: String? = null,
@@ -32,6 +32,9 @@ data class HealthInfo(
     val test: String? = null,
     @field:SerializedName("testName")
     var testName: String? = null,
+
+    @field:SerializedName("addedBy")
+    var addedBy: String? = "",
 
     //var testName: String? = ""
 )

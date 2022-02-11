@@ -29,6 +29,7 @@ import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
+import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.DateUtils.API_DATE_FORMAT
 import com.global.vtg.utils.DateUtils.DDMMYY
 import com.global.vtg.utils.DateUtils.DDMMYYYY
@@ -214,6 +215,9 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
                             "${appendZero(selectedHour.toString())}:${appendZero(selectedMinute.toString())}"
                         sTime.setText(time)
                         viewModel.time = time
+                        myCalendar.set(Calendar.HOUR_OF_DAY, selectedHour)
+                        myCalendar.set(Calendar.MINUTE, selectedMinute)
+                        updateDate()
                     }
 
                 },
@@ -369,16 +373,17 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
     }
 
     private fun updateDate() {
-        val sdf = SimpleDateFormat(DDMMYY, Locale.US)
-        val apiSdf = SimpleDateFormat(API_DATE_FORMAT, Locale.US)
-        val date = sdf.format(myCalendar.time)
-        sDate.setText(date)
 
+        sDate.setText(DateUtils.formatDateTime(
+            myCalendar.timeInMillis,
+            DDMMYY
+        ))
         val dayOfWeek = SimpleDateFormat("EEEE", Locale.US).format(myCalendar.time)
         sDay.setText(dayOfWeek)
 
         viewModel.day = dayOfWeek
-        viewModel.date = apiSdf.format(myCalendar.time)
+        var time=DateUtils.formatDateTime(myCalendar.timeInMillis,true)
+        viewModel.date = DateUtils.formatDateTime(myCalendar.timeInMillis,true)
     }
 
     override fun pageVisible() {

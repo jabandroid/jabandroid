@@ -52,10 +52,15 @@ class VaccineHistoryAdapter(
             DateUtils.formatDateUTCToLocal(
                 it,
                 API_DATE_FORMAT_VACCINE,
-                DDMMYYYY,
+               true
 
                 )
         }
+
+        if(list[position].addedBy!!.contains("clinic"))
+            holder.itemView.addedBy.setImageResource(R.drawable.ic_clinic)
+        else
+            holder.itemView.addedBy.setImageResource(R.drawable.ic_user)
 
         holder.tvBatchNo.text =
             if (list[position].srId.isNullOrEmpty() || list[position].srId.equals("null")) "-" else list[position].srId

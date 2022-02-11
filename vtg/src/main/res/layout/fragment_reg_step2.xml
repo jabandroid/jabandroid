@@ -296,7 +296,7 @@
                     android:shadowDx="0"
                     android:shadowDy="0"
                     android:shadowRadius="4"
-                    android:text="@={viewModel.dlnIssuedDate}"
+
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toStartOf="@+id/etDlnExpiryDate"
                     app:layout_constraintStart_toStartOf="parent"
@@ -324,7 +324,7 @@
                     android:shadowDy="0"
                     android:shadowRadius="4"
                     android:singleLine="true"
-                    android:text="@={viewModel.dlnExpiredDate}"
+
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/etDlnIssuedDate"
@@ -437,7 +437,6 @@
                     android:shadowDy="0"
                     android:shadowRadius="4"
                     android:singleLine="true"
-                    android:text="@={viewModel.passportIssuedDate}"
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toStartOf="@+id/etPassportExpiryDate"
                     app:layout_constraintStart_toStartOf="parent"
@@ -465,7 +464,6 @@
                     android:shadowDy="0"
                     android:shadowRadius="4"
                     android:singleLine="true"
-                    android:text="@={viewModel.passportExpiredDate}"
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/etPassportIssuedDate"

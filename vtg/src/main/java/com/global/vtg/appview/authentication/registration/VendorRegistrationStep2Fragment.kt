@@ -136,7 +136,7 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                     cvUploadDocument.isClickable = false
                     cvUploadDocument.isEnabled = false
 
-                    businessDate=   DateUtils.formatDateUTCToLocal(doc.expireDate!!,DateUtils.API_DATE_FORMAT_VACCINE,DateUtils.API_DATE_FORMAT)
+                    businessDate=   DateUtils.formatDateUTCToLocal(doc.expireDate!!,DateUtils.API_DATE_FORMAT_VACCINE,false)
                     viewModel.expiryDate.postValue(businessDate)
 
                     break
@@ -366,9 +366,9 @@ class VendorRegistrationStep2Fragment : AppFragment() {
     }
 
     private fun updateDate() {
-        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.getDefault())
-        businessDate=apiSdf.format(myCalendar.time)
-        viewModel.expiryDate.postValue(businessDate)
+//        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.getDefault())
+//        businessDate=apiSdf.format(myCalendar.time)
+        viewModel.expiryDate.postValue(DateUtils.formatDateTime(myCalendar.timeInMillis,false))
 
 
 

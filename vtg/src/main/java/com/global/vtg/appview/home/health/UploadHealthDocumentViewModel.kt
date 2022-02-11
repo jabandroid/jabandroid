@@ -159,11 +159,11 @@ class UploadHealthDocumentViewModel(
             }
             var dateReq: RequestBody? = null
             if (date != null) {
-                date = "$date $time"
+                date = "$date"
                 var dateForServer =
                     DateUtils.formatLocalToUtc(
                         date!!,
-                        DateUtils.API_DATE_FORMAT_TIME,
+                     true,
                         DateUtils.API_DATE_FORMAT_TIME
                     )
 

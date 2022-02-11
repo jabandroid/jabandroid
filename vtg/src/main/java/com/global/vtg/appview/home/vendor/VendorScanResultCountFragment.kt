@@ -60,8 +60,10 @@ import kotlin.collections.ArrayList
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
 
+
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.countDown
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date
+import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date_kit
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date_test
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivProfilePic
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivStatus_1
@@ -176,10 +178,9 @@ class VendorScanResultCountFragment : AppFragment() {
 
         if (!Constants.SCANNEDUSER?.dateOfBirth.isNullOrEmpty()) {
             val str = SpannableStringBuilder(
-                "DOB: " + DateUtils.convertDate(
-                    DateUtils.API_DATE_FORMAT_VACCINE,
-                    API_DATE_FORMAT,
-                    Constants.SCANNEDUSER?.dateOfBirth!!
+                "DOB: " + DateUtils.formatDate(
+                    Constants.USER?.dateOfBirth!!,
+                    DateUtils.API_DATE_FORMAT
                 )
             )
             str.setSpan(
@@ -280,7 +281,19 @@ class VendorScanResultCountFragment : AppFragment() {
                 )
             )
 
+
+            if(list[0].addedBy!!.contains("clinic"))
+                addedBy.setImageResource(R.drawable.ic_clinic)
+            else
+                addedBy.setImageResource(R.drawable.ic_user)
+
+
+            var result=list[0].result
+         if(TextUtils.isEmpty(list[0].result)||list[0].result.equals("null"))
+             result="Pending"
+            tvType.text =   tvType.text.toString() + " | " + result
             if (list[0].result?.lowercase().equals("Negative".lowercase())) {
+
                 datetimer = list[0].date.toString()
                 Glide.with(getAppActivity()).asBitmap().load(R.drawable.ic_drawable_tick)
                     .into(ivStatus_1)
@@ -344,7 +357,18 @@ class VendorScanResultCountFragment : AppFragment() {
                         DateUtils.formatDateUTCToLocal(
                             it,
                             DateUtils.API_DATE_FORMAT_VACCINE,
-                            DateUtils.DDMMYYYY,
+                            true
+                        )
+                    }
+
+                    if (!TextUtils.isEmpty(listHealth[0].testName)) {
+                        tvTest.text = listHealth[0].testName
+
+                        tvTest.setTextColor(
+                            ContextCompat.getColor(
+                                requireActivity(),
+                                R.color.green
+                            )
                         )
                     }
 
@@ -354,6 +378,17 @@ class VendorScanResultCountFragment : AppFragment() {
                             R.color.green
                         )
                     )
+
+                    var result=listHealth[0].result
+                    if(TextUtils.isEmpty(listHealth[0].result)||listHealth[0].result.equals("null"))
+                        result="Pending"
+                    tvType.text =   tvType.text.toString() + " | " + result
+
+                    if(listHealth[0].addedBy!!.contains("clinic"))
+                        addedBy.setImageResource(R.drawable.ic_clinic)
+                    else
+                        addedBy.setImageResource(R.drawable.ic_user)
+
                     if (listHealth[0].result?.lowercase().equals("Negative".lowercase())) {
                         datetimer = listHealth[0].date.toString()
                         Glide.with(getAppActivity()).asBitmap().load(R.drawable.ic_drawable_tick)
@@ -436,6 +471,9 @@ class VendorScanResultCountFragment : AppFragment() {
         } else
             countDown.visibility = View.GONE
 
+
+
+
         val list = Constants.SCANNEDUSER!!.vaccine!!
         if (list.size > 0) {
             Constants.SCANNEDUSER?.vaccine?.let {
@@ -468,7 +506,7 @@ class VendorScanResultCountFragment : AppFragment() {
                     DateUtils.formatDateUTCToLocal(
                         it,
                         DateUtils.API_DATE_FORMAT_VACCINE,
-                        DateUtils.DDMMYYYY,
+                       true
                     )
                 }
 

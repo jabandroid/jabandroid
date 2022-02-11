@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llVaccine"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/_16sdp"
-    android:orientation="vertical"
     android:layout_marginTop="@dimen/_10sdp"
-    android:id="@+id/llVaccine"
+    android:orientation="vertical"
     android:paddingStart="@dimen/_16sdp"
     android:paddingTop="@dimen/_16sdp"
-    android:paddingEnd="@dimen/_16sdp">
+    android:paddingEnd="@dimen/_16sdp"
+    android:paddingBottom="@dimen/_16sdp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/button"
         android:orientation="vertical">
 
         <com.global.vtg.utils.textView.BoldTextView
@@ -95,12 +96,30 @@
 
     </LinearLayout>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/ivStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/_28sdp"
 
+    <RelativeLayout
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        app:srcCompat="@drawable/ic_edit" />
+        android:layout_centerVertical="true">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/addedBy"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:tint="@color/colorPrimary"
+android:layout_marginEnd="@dimen/_10sdp"
+            app:srcCompat="@drawable/ic_edit" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivStatus"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toEndOf="@+id/addedBy"
+
+            app:srcCompat="@drawable/ic_edit" />
+
+    </RelativeLayout>
+
 </RelativeLayout>

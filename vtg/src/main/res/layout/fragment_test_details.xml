@@ -346,6 +346,15 @@ android:layout_centerVertical="true"
             android:weightSum="2"
             app:layout_constraintTop_toBottomOf="@+id/view_2">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/addedBy"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:tint="@color/colorPrimary"
+                app:srcCompat="@drawable/ic_edit" />
 
             <com.global.vtg.utils.textView.BoldTextView
                 android:id="@+id/tvtestDetails"
@@ -355,6 +364,8 @@ android:layout_centerVertical="true"
                 android:text="@string/test_details"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp" />
+
+
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/ivIndecator_1"
