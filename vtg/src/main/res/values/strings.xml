@@ -3,9 +3,8 @@
 
     <string name="api_key">AIzaSyD09CYCGjr-h6gCq3ImZe6pnglvuCsGcMU</string>
 
-
     <string name="please_wait">Please wait</string>
-    <string name="app_name_new">VAXTRAX</string>
+    <string name="app_name_new" translatable="false">VAXTRAX</string>
     <string name="email">Email / Mobile No.</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
@@ -107,7 +106,6 @@
     <string name="nv_bookmark">Bookmark</string>
     <string name="Failure">Failure</string>
 
-
     <!--  VTG  -->
     <string name="label_vendor">Vendor</string>
     <string name="label_user">User</string>
@@ -155,6 +153,7 @@
     <string name="label_upload_info">Upload Health Info</string>
     <string name="label_covid_status">Covid Test Status</string>
     <string name="label_change_password">Change Password</string>
+    <string name="label_events">Events</string>
     <string name="label_vaccine_taken_list">Vaccine List</string>
     <string name="label_upload_file">Upload File</string>
     <string name="label_logout">Logout</string>
@@ -164,16 +163,17 @@
     <string name="label_vaccinated_on">Vaccinated On</string>
     <string name="label_test_on">Tested On</string>
     <string name="label_upload_text">Click to upload document \n(PDF/JPG/PNG Max 5MB)</string>
+    <string name="label_upload_images">Add Banner images \n(PDF/JPG/PNG Max 5MB)</string>
     <string name="label_upload_text_b">Click to upload business \n(PDF/JPG/PNG Max 5MB)</string>
     <string name="label_doc_name">Selected Document: %s</string>
-
+    <string name="create">Create</string>
     <string name="label_hospital">Institute:\u0020</string>
     <string name="label_kit">Test Kit:\u0020</string>
     <string name="label_date">Date:\u0020</string>
     <string name="label_status">Status:\u0020</string>
     <string name="label_test">Test:\u0020</string>
     <string name="label_dose">Dose:\u0020</string>
-    <string name="label_batch_no_row">Batch/Serial Number:\u0020</string>
+    <string name="label_batch_no_row">SN:\u0020</string>
     <string name="label_hospital_name">Lab/Clinic Name</string>
     <string name="label_batch_no">Batch/Serial Number</string>
 
@@ -195,6 +195,17 @@
 
     <string name="label_otp_sent">Otp sent successfully.</string>
     <string name="label_title">Title*</string>
+    <string name="label_event_name">Event Name*</string>
+    <string name="label_start_time">Start Date and Time</string>
+    <string name="label_end_time">End Date and Time</string>
+    <string name="label_private_event">Private Event</string>
+    <string name="label_about_event">About Event</string>
+    <string name="label_contact_detail">Contact Details </string>
+    <string name="read_more">Read more. </string>
+    <string name="read_less">Less. </string>
+    <string name="label_public_event">Public Event</string>
+    <string name="label_event_Images">Event Images</string>
+    <string name="label_description">Description</string>
     <string name="label_gender">Gender</string>
     <string name="select_title">Select title</string>
     <string name="select_product">Select product</string>
@@ -231,27 +242,38 @@
     <string name="label_expiry_date"><font size="14">Expiry Date</font></string>
     <string name="label_passport">Passport</string>
     <string name="label_mailing_add_1">Mailing Address 1</string>
+    <string name="label_add_1">Address 1</string>
+    <string name="label_add_2">Address 2</string>
     <string name="label_mailing_add_2">Mailing Address 2</string>
     <string name="label_zip">Zip or Postal Code</string>
     <string name="label_state_provincial">State or Provincial*</string>
     <string name="label_step1">Step 1</string>
     <string name="label_step2">Step 2</string>
     <string name="label_step3">Step 3</string>
+    <string name="label_create_event">Create Event</string>
+    <string name="label_create_event_loc">Event Location</string>
+    <string name="label_create_event_review">Review Details</string>
+    <string name="label_event_detail">Event Details</string>
 
     <string name="label_business_name">Business Name</string>
     <string name="label_business_id">Business Id</string>
     <string name="label_employee_id">Employee Id</string>
     <string name="label_vat">Business Vat</string>
+    <string name="label_contact_no">Contact Number</string>
+    <string name="label_fax">Fax</string>
 
     <!-- Validations -->
     <string name="empty_email">Please enter an E-mail.</string>
     <string name="error_email">Please enter a valid E-mail.</string>
+    <string name="error_event_name">Please enter event name.</string>
     <string name="empty_phone_email">Please enter an E-mail or a Mobile No.</string>
     <string name="empty_password">Please enter a Password</string>
     <string name="error_password">Please enter a valid Password. Password must contain 8 digits. 1 Uppercase, 1 Lowercase, 1 special character and 1 digit.</string>
     <string name="error_terms_condition">Please accept Terms &amp; Conditions and Privacy Policy.</string>
     <string name="empty_phone">Please enter a Mobile No.</string>
     <string name="error_phone">Please enter a valid Mobile No.</string>
+    <string name="error_start_time">Please enter start time.</string>
+    <string name="error_end_time">Please enter end time.</string>
     <string name="empty_otp">Please enter an OTP.</string>
     <string name="error_otp">Please enter a proper OTP.</string>
     <string name="error_select_document">Please select a document.</string>
@@ -295,12 +317,18 @@
     <string name="empty_passport_issued_date">Please select your passport issued date.</string>
     <string name="empty_passport_expiry_date">Please select your passport expiry date.</string>
     <string name="empty_address1">Please enter an Mailing Address 1.</string>
+    <string name="empty_address_1">Please enter an Address 1.</string>
     <string name="empty_address2">Please enter an Mailing Address 2.</string>
     <string name="empty_address_city">Please select a City.</string>
+    <string name="empty_banner_image">Please select a banner image for event.</string>
     <string name="empty_address_state">Please select a State or Provincial.</string>
     <string name="empty_address_zip">Please enter a Zip or Postal code.</string>
     <string name="empty_address_country">Please select a Country.</string>
     <string name="valid_age">To register in our app, one should not be less than 13 year</string>
+    <string name="cancel_event">Are you sure to cancel event?</string>
+    <string name="delete_image">Do you want to delete this image?</string>
+    <string name="no_location">Event location not found.</string>
+    <string name="time">Please select future date and time.</string>
 
     <string-array name="title">
         <item>Mr</item>
@@ -374,9 +402,7 @@
         <item>Asian Americans</item>
         <item>Black people</item>
         <item> Multiracial people</item>
-
         <item>  Montenegrins</item>
-
         <item> Alaska Natives</item>
         <item> Indigenous peoples</item>
         <item> Latino</item>
@@ -422,6 +448,7 @@
     <string name="label_quarntine">Quarantine</string>
     <string name="label_travel_information">Travel Information</string>
     <string name="label_camera_permission">Please accept the Camera permission to scan QR code.</string>
+    <string name="label_location_permission">Please accept the location permission to create event.</string>
     <string name="label_select_time">Select Time</string>
     <string name="label_mobile_number">Mobile Number:\u0020</string>
     <string name="label_profile_city">City:\u0020</string>
@@ -431,7 +458,7 @@
     <string name="label_profile_country">Country:\u0020</string>
     <string name="label_profile_address">Shipping Address:\u0020</string>
     <string name="label_last_covid_result">Display last Covid test results</string>
-    <string name="label_last_result">Display last Covid test results</string>
+    <string name="label_last_result">Test results</string>
     <string name="label_positive">Positive</string>
     <string name="label_negative">Negative</string>
     <string name="label_pending">Pending</string>
@@ -462,7 +489,6 @@
     <string name="label_terms_condition">Terms and Condition</string>
     <string name="label_privacy_policy">Privacy Policy</string>
     <string name="label_accept_terms">I agree to the Terms &amp; Condition and Privacy Policy</string>
-
     <string name="label_select_product">Select Product*</string>
     <string name="label_different_billing_address">Different billing address</string>
     <string name="label_billing_add_1">Billing Address 1*</string>

@@ -28,20 +28,19 @@ open class AppRepository {
     suspend fun <T : BaseResult> safeApiResult(call: suspend () -> Response<T>): Resource<T> {
         try {
             val response = call.invoke()
-            Log.e("REsponse","REsponse"+response.toString())
+            Log.e("Response","REsponse"+response.toString())
             if(response.code()==200){
 
             }
             if (response.isSuccessful) {
                 if (response.body() != null && response.body() is BaseResult) {
                     val baseResult = response.body() as BaseResult
+                    baseResult.code= response.code().toString()
                     return if (baseResult.status == null || baseResult.status.equals("Success", true)) {
                         if(baseResult.errorApi!=null&&!baseResult.errorApi.equals("null")){
                             val baseError = BaseError()
-
                                 baseError.code = response.code().toString()
                                 baseError.message = baseResult.errorApi
-
                             Resource.Error(baseError)
                         }else
                         Resource.Success(response.body()!!)
@@ -58,7 +57,7 @@ open class AppRepository {
                     }
                 } else {
                     val baseError = BaseError()
-                    baseError.code = ApiConstant.SOMETHING_WRONG_ERROR_STATUS
+                    baseError.code = "101"
                     baseError.message = ApiConstant.SOMETHING_WRONG_ERROR
                     return Resource.Error(baseError)
                 }
@@ -70,7 +69,6 @@ open class AppRepository {
                         when (response.code()) {
 
                         }
-
                         val errorString = response.errorBody()?.string()
                         val baseError = BaseError()
                         if (StringUtils.isNotNullOrNotEmpty(errorString)) {
@@ -93,7 +91,7 @@ open class AppRepository {
 
                     } else {//if response is not in json format than handle it
                         val baseError = BaseError()
-                        baseError.code = ApiConstant.SOMETHING_WRONG_ERROR_STATUS
+                        baseError.code = "101"
                         baseError.message = ApiConstant.SOMETHING_WRONG_ERROR
                         return Resource.Error(baseError)
                     }

@@ -7,6 +7,7 @@ import com.global.vtg.injections.appNetworkModule
 import com.global.vtg.injections.appViewModelModule
 import com.global.vtg.injections.databaseModule
 import com.vtg.BuildConfig
+import io.branch.referral.Branch
 import io.michaelrocks.libphonenumber.android.PhoneNumberUtil
 import org.koin.android.ext.android.startKoin
 import timber.log.Timber
@@ -25,6 +26,11 @@ class App : Application() {
         super.onCreate()
         instance = this
         util = PhoneNumberUtil.createInstance(applicationContext)
+        Branch.enableLogging();
+        // Branch object initialization
+        Branch.getAutoInstance(this);
+
+
         initializeTimber()
         initializeKoin()
     }

@@ -5,6 +5,7 @@
     <color name="colorAccent">#255CA4</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="default_color">#757575</color>
+    <color name="primary_light">#c5dff4</color>
 
     <!--  Splash  -->
     <color name="splash_bg">@color/white</color>
@@ -43,6 +44,7 @@
     <color name="white_blue">#00BFFF</color>
     <color name="dark_blue">#255CA4</color>
     <color name="light_blue">#CC255CA4</color>
+
 
     <!--Text color-->
     <color name="text_primary_color">#000000</color>

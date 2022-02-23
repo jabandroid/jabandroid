@@ -10,6 +10,7 @@ import com.global.vtg.appview.home.testHistory.TestHistoryFragment
 import com.global.vtg.appview.home.changepassword.ChangePasswordFragment
 import com.global.vtg.appview.home.clinic.ClinicHomeFragment
 import com.global.vtg.appview.home.dashboard.DashboardFragment
+import com.global.vtg.appview.home.event.*
 import com.global.vtg.appview.home.health.HealthInformationFragment
 import com.global.vtg.appview.home.health.UploadHealthDocumentFragment
 import com.global.vtg.appview.home.help.HelpFragment
@@ -57,7 +58,12 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_VENDOR_SCAN_RESULT(VendorScanResultFragment::class.java),
     F_PERMISSION_DEMO(PermissionDemoFragment::class.java),
     F_TEST_BASE(TestBaseFragment::class.java),
-    F_TEST_UPLOAD(UploadTestDocumentFragment::class.java);
+    F_TEST_UPLOAD(UploadTestDocumentFragment::class.java),
+    F_EVENT_LIST(EventListFragment::class.java),
+    F_EVENT_CREATE(CreateEventFragment::class.java),
+    F_EVENT_CREATE_LOCATION(CreateEventLocationFragment::class.java),
+    F_EVENT_EVENT_DETAIL(EventListDetailFragment::class.java),
+    F_EVENT_CREATE_REVIEW(CreateEventReviewFragment::class.java);
 
 
     companion object {

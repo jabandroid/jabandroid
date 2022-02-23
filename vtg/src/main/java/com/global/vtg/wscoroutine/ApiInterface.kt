@@ -1,11 +1,14 @@
 package com.global.vtg.wscoroutine
 
+import android.app.usage.UsageEvents
 import com.global.vtg.appview.authentication.forgotpassword.ReqForgotPasswordModel
 import com.global.vtg.appview.authentication.registration.ReqRegistration
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResConfig
 import com.global.vtg.appview.config.ResInstitute
+import com.global.vtg.appview.home.event.Event
+import com.global.vtg.appview.home.event.EventArray
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.appview.home.testHistory.TestKit
 import com.global.vtg.appview.payment.ReqPayment
@@ -48,6 +51,9 @@ interface ApiInterface {
 
     @POST("api/payment/user")
     fun makePaymentAsync(@Body reqPayment: ReqPayment): Deferred<Response<BaseResult>>
+
+    @POST("api/v1/event")
+    fun createEvent(@Body reqPayment: Event): Deferred<Response<Event>>
 
     @PUT("api/v1/user/password")
     fun forgotPasswordAsync(@Body req: ReqRegistration): Deferred<Response<BaseResult>>
@@ -135,4 +141,25 @@ interface ApiInterface {
         @Part("certificateExpDate") date: RequestBody?,
         @Part("vat") vat: RequestBody?
     ): Deferred<Response<ResUser>>
+
+
+    @POST("api/v1/event/profile")
+    fun uploadEventImages(
+        @Body  file : RequestBody
+    ): Deferred<Response<BaseResult>>
+
+    @GET("api/v1/events")
+    fun getAllEvents(): Deferred<Response<EventArray>>
+
+    @GET("api/v1/events/user/{userId}")
+    fun getMyEvents(@Path("userId") barcodeId: String): Deferred<Response<EventArray>>
+
+    @GET("api/v1/event/{eventId}")
+    fun getEventId(@Path("eventId") barcodeId: String): Deferred<Response<Event>>
+
+//@Multipart
+//    @PUT("api/v1/event/profile")
+//    fun uploadEventImages(
+//    @PartMap  files: Map<String, RequestBody>
+//    ): Deferred<Response<BaseResult>>
 }

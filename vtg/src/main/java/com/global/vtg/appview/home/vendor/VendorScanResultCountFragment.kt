@@ -177,21 +177,25 @@ class VendorScanResultCountFragment : AppFragment() {
         val list_Doc = Constants.SCANNEDUSER?.document
 
         if (!Constants.SCANNEDUSER?.dateOfBirth.isNullOrEmpty()) {
-            val str = SpannableStringBuilder(
-                "DOB: " + DateUtils.formatDate(
-                    Constants.USER?.dateOfBirth!!,
-                    DateUtils.API_DATE_FORMAT
+            try {
+                val str = SpannableStringBuilder(
+                    "DOB: " + DateUtils.formatDate(
+                        Constants.SCANNEDUSER?.dateOfBirth!!,
+                        DateUtils.API_DATE_FORMAT
+                    )
                 )
-            )
-            str.setSpan(
-                StyleSpan(Typeface.BOLD),
-                0,
-                4,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
+                str.setSpan(
+                    StyleSpan(Typeface.BOLD),
+                    0,
+                    4,
+                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
 
 
-            tvDob.text = str
+                tvDob.text = str
+            }catch(e:Exception){
+                e.printStackTrace()
+            }
         }
         if (list_Doc != null && list_Doc.isNotEmpty()) {
             for (doc in list_Doc) {

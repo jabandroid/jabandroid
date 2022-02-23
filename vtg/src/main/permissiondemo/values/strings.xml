@@ -17,4 +17,8 @@
     <string name="test_details">Test Details</string>
     <string name="yes">YES</string>
     <string name="no">NO</string>
+    <string name="label_all_events">All Events</string>
+    <string name="my_events">My Events</string>
+    <string name="preeti_sharma">Preeti Sharma</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>

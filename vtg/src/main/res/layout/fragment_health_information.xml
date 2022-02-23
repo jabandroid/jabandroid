@@ -115,6 +115,60 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_height="wrap_content" />
 
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfilePic"
+                android:layout_width="@dimen/profile_pic"
+                android:layout_height="@dimen/profile_pic"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:onClick="@{viewModel::onClick}"
+                android:src="@drawable/user"
+                app:civ_border_color="@color/white"
+                app:civ_border_width="@dimen/_4sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="MissingConstraints" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivEditImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_minus24sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:visibility="gone"
+                app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+                app:layout_constraintTop_toTopOf="@+id/ivProfilePic"
+                app:srcCompat="@drawable/ic_edit" />
+
+            <com.global.vtg.utils.textView.SBoldTextView
+                android:id="@+id/tvUserNam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:gravity="center"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivProfilePic" />
+
+            <com.global.vtg.utils.textView.BoldTextView
+                android:id="@+id/tvVaccineTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/label_last_result"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvUserNam" />
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvHealth"
                 android:layout_width="0dp"
@@ -123,7 +177,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/btnUploadFile"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/iv_add" />
+                app:layout_constraintTop_toBottomOf="@+id/tvVaccineTitle" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_add"

@@ -84,8 +84,7 @@ class TestHistoryFragment : AppFragment() {
 
     fun refreshList() {
         val list = Constants.USER?.test as ArrayList<TestInfo>
-        Collections.sort(list, Comparator<TestInfo?> { obj1, obj2 ->
-
+        Collections.sort(list, Comparator { obj1, obj2 ->
             val d1= DateUtils.getDate(  obj1!!.date!!,
                 DateUtils.API_DATE_FORMAT_VACCINE)
             val d2= DateUtils.getDate(  obj2!!.date!!,
@@ -100,8 +99,7 @@ class TestHistoryFragment : AppFragment() {
         if (!Constants.USER?.test.isNullOrEmpty()) {
             val list = Constants.USER?.test as ArrayList<TestInfo>
 
-            Collections.sort(list, Comparator<TestInfo?> { obj1, obj2 ->
-
+            Collections.sort(list, Comparator { obj1, obj2 ->
                 val d1= DateUtils.getDate(  obj1!!.date!!,
                     DateUtils.API_DATE_FORMAT_VACCINE)
                 val d2= DateUtils.getDate(  obj2!!.date!!,

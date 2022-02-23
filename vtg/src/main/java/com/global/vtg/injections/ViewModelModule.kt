@@ -9,6 +9,7 @@ import com.global.vtg.appview.authentication.otp.OtpViewModel
 import com.global.vtg.appview.authentication.registration.*
 import com.global.vtg.appview.home.changepassword.ChangePasswordViewModel
 import com.global.vtg.appview.home.dashboard.DashboardViewModel
+import com.global.vtg.appview.home.event.*
 import com.global.vtg.appview.home.health.HealthInformationViewModel
 import com.global.vtg.appview.home.health.UploadHealthDocumentViewModel
 import com.global.vtg.appview.home.help.HelpViewModel
@@ -141,9 +142,25 @@ val appViewModelModule = module {
     viewModel {
         VendorScanResultViewModel(get(), get())//it will take one argument i.e. UserRepository
     }
+
+    viewModel {
+        CreateEventViewModel(get(), get())//it will take one argument i.e. UserRepository
+    }
+    viewModel {
+        CreateEventLocationViewModel(get(), get())//it will take one argument i.e. UserRepository
+    }
+    viewModel {
+        CreatEventReviewViewModel(get(), get())//it will take one argument i.e. UserRepository
+    }
+    viewModel {
+        EventListDetailViewModel(get(), get())//it will take one argument i.e. UserRepository
+    }
     //2. Permission viewmodel
     viewModel {
         PermissionDemoViewModel(get())
+    }
+    viewModel {
+        EventListViewModel(get(), get())
     }
 
 

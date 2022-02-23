@@ -33,12 +33,10 @@ class VaccineHistoryAdapter(
     RecyclerView.Adapter<VaccineHistoryAdapter.DashboardViewHolder>() {
     private var list: ArrayList<VaccineHistory> = ArrayList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
-        // inflate the item Layout
         val v: View =
             LayoutInflater.from(parent.context)
                 .inflate(R.layout.recycler_view_vaccine_history, parent, false)
-        // set the view's size, margins, paddings and layout parameters
-        return DashboardViewHolder(v) // pass the view to View Holder
+        return DashboardViewHolder(v)
     }
 
     @SuppressLint("SetTextI18n")
@@ -53,36 +51,40 @@ class VaccineHistoryAdapter(
                 it,
                 API_DATE_FORMAT_VACCINE,
                true
-
                 )
         }
 
-        if(list[position].addedBy!!.contains("clinic"))
-            holder.itemView.addedBy.setImageResource(R.drawable.ic_clinic)
-        else
-            holder.itemView.addedBy.setImageResource(R.drawable.ic_user)
+        if(list[position].addedBy!=null) {
+            if (list[position].addedBy!!.contains("clinic"))
+                holder.itemView.addedBy.setImageResource(R.drawable.ic_clinic)
+            else
+                holder.itemView.addedBy.setImageResource(R.drawable.ic_user)
+        }
 
         holder.tvBatchNo.text =
             if (list[position].srId.isNullOrEmpty() || list[position].srId.equals("null")) "-" else list[position].srId
         if (list[position].dose != null) {
             var valid: Int = 0
-            for (data in Constants.CONFIG?.doses!!) {
-                if (data!!.id.equals(list[position].dose))
-                {
-                    if(data.name!!.contains("Dose 2")){
-                        valid=1
-                        holder.tvStatus.text=data.name
-                        break
-                    }else  if(data.name!!.contains("Dose 1")){
-                        holder.tvStatus.text=data.name
-                        valid=3
-                        break
-                    }else  if(data.name!!.contains("Booster")||data.name!!.contains("2")){
-                        holder.tvStatus.text=data.name
-                        valid=2
-                        break
+            try {
+                for (data in Constants.CONFIG?.doses!!) {
+                    if (data!!.id.equals(list[position].dose)) {
+                        if (data.name!!.contains("Dose 2")) {
+                            valid = 1
+                            holder.tvStatus.text = data.name
+                            break
+                        } else if (data.name.contains("Dose 1")) {
+                            holder.tvStatus.text = data.name
+                            valid = 3
+                            break
+                        } else if (data.name.contains("Booster") || data.name.contains("2")) {
+                            holder.tvStatus.text = data.name
+                            valid = 2
+                            break
+                        }
                     }
                 }
+            }catch (e : Exception){
+                e.printStackTrace()
             }
 
 
@@ -92,22 +94,18 @@ class VaccineHistoryAdapter(
                     holder.itemView.llVaccine.setBackgroundResource(R.drawable.yellow_border)
                 }
                2 -> {
-
                     holder.itemView.ivStatus.setImageResource(R.drawable.ic_check_circle)
                     holder.itemView.llVaccine.setBackgroundResource(R.drawable.green_border)
                 }
                 3 -> {
-
                     holder.itemView.ivStatus.setImageResource(R.drawable.ic_warning)
                     holder.itemView.ivStatus.setColorFilter(ContextCompat.getColor(context
                         , R.color.sea_green))
                     holder.itemView.llVaccine.setBackgroundResource(R.drawable.blue_border)
                 }
                 else -> {
-
                     holder.itemView.ivStatus.setImageResource(R.drawable.ic_not_verified)
                     holder.itemView.llVaccine.setBackgroundResource(R.drawable.red_border)
-
                 }
             }
         } else {
@@ -145,7 +143,7 @@ class VaccineHistoryAdapter(
         val list = Constants.CONFIG?.vaccineType
         if (list?.isNotEmpty() == true) {
             for (vaccine in list) {
-                if (vaccine?.id == id) {
+                if (vaccine.id == id) {
                     return vaccine.type
                 }
             }

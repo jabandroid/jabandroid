@@ -154,6 +154,9 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
             6 -> {
                 addFragmentInStack<Any>(AppFragmentState.F_HEALTH_INFORMATION)
             }
+           11 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
+            }
             else ->{
                 ToastUtils.shortToast(0,"Coming soon")
             }

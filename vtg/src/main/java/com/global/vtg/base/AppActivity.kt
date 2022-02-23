@@ -1,6 +1,8 @@
 package com.global.vtg.base
 
-import android.R.attr
+//import com.global.vtg.utils.Constants.BASE_URL
+
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -20,18 +22,22 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.braintreepayments.api.dropin.DropInActivity
+import com.braintreepayments.api.dropin.DropInResult
 import com.global.vtg.appview.authentication.registration.RegistrationStep1Fragment
 import com.global.vtg.appview.authentication.registration.RegistrationStep2Fragment
 import com.global.vtg.appview.authentication.registration.RegistrationStep3Fragment
 import com.global.vtg.appview.config.*
+import com.global.vtg.appview.home.event.CreateEventLocationFragment
 import com.global.vtg.base.fragment.notifyFragment
-
+import com.global.vtg.test.Const.BASE_URL
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.AUTOCOMPLETE_REQUEST_CODE
 import com.global.vtg.utils.Constants.CONFIG
 import com.global.vtg.utils.Constants.DLN_AUTOCOMPLETE_REQUEST_CODE
 import com.global.vtg.utils.Constants.PASSPORT_AUTOCOMPLETE_REQUEST_CODE
 import com.global.vtg.utils.Constants.isShowing
+import com.global.vtg.wscoroutine.ApiInterface
 import com.global.vtg.wscoroutine.CustomCoroutineScope
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
@@ -44,19 +50,10 @@ import com.vtg.R
 import kotlinx.coroutines.CoroutineScope
 import okhttp3.*
 import java.io.IOException
-import java.util.*
-import com.braintreepayments.api.dropin.DropInResult
-
-import android.R.attr.data
-import com.braintreepayments.api.dropin.DropInActivity
-import com.global.vtg.test.Const.BASE_URL
-//import com.global.vtg.utils.Constants.BASE_URL
-import com.global.vtg.wscoroutine.ApiInterface
-
-import java.lang.RuntimeException
 import java.security.SecureRandom
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
+import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.SSLContext
@@ -216,6 +213,9 @@ abstract class AppActivity : AppCompatActivity() {
                         } else if (frg is RegistrationStep3Fragment) {
                             city.let { frg.updateAddress(it, state, country) }
                         }
+                        else if (frg is CreateEventLocationFragment) {
+                            city.let { frg.updateAddress(it, state, country) }
+                        }
                     }
                 } catch (e: IOException) {
                     e.printStackTrace()
@@ -361,11 +361,12 @@ abstract class AppActivity : AppCompatActivity() {
         })
     }
 
-    fun getClient() : OkHttpClient {
+    private fun getClient() : OkHttpClient {
         try {
             // Create a trust manager that does not validate certificate chains
             val trustAllCerts = arrayOf<TrustManager>(
                 object : X509TrustManager {
+                    @SuppressLint("TrustAllX509TrustManager")
                     @Throws(CertificateException::class)
                     override fun checkClientTrusted(
                         chain: Array<X509Certificate?>?,

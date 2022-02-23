@@ -568,13 +568,7 @@ var callService:Boolean=false
                     }
                 }
             }
-
         })
-
-
-
-
-
 
         etCity.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
@@ -601,17 +595,13 @@ var callService:Boolean=false
             if(it!="dob") {
                 DialogUtils.showSnackBar(context, it)
             }else{
-
                 AppAlertDialog().showAlert(
                     activity!!,
                     object : AppAlertDialog.GetClick {
-                        override fun response(dtype: String) {
-
-
+                        override fun response(type: String) {
                         }
                     }
                     ,getString(R.string.valid_age),"Ok",""
-
                 )
             }
         })
@@ -620,15 +610,11 @@ var callService:Boolean=false
     }
     private fun updateDate() {
 
-
         viewModel.dob.postValue(DateUtils.formatDate(
             myCalendar.timeInMillis
         ))
-
         viewModel.apiDob = DateUtils.formatDateTime(myCalendar.timeInMillis,API_DATE_FORMAT)
         viewModel.dobDate=myCalendar.time
-
-
 
 //        val sdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
 //        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
@@ -645,21 +631,19 @@ var callService:Boolean=false
             AppAlertDialog().showAlert(
                 activity!!,
                 object : AppAlertDialog.GetClick {
-                    override fun response(dtype: String) {
-
+                    override fun response(type: String) {
 
                     }
                 }
                 ,getString(R.string.valid_age),"Ok",""
-
             )
         }
     }
 
     fun updateAddress(city: String, state: String, country: String) {
         etCity.text = city
-        etState.setText(state)
-        etCountry.setText(country)
+        etState.text = state
+        etCountry.text = country
     }
 
     private fun resultMessage(

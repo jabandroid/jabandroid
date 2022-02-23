@@ -83,10 +83,10 @@ class RegistrationStep3Fragment : AppFragment() {
             viewModel.city.postValue(USER?.address?.get(index)?.city)
             etMailingCity.text = USER?.address?.get(index)?.city
             viewModel.state.postValue(USER?.address?.get(index)?.state)
-            etMailingState.setText(USER?.address?.get(index)?.state)
+            etMailingState.text = USER?.address?.get(index)?.state
             viewModel.zip.postValue(USER?.address?.get(index)?.zipCode)
             viewModel.country.postValue(USER?.address?.get(index)?.country)
-            etMailingCountry.setText(USER?.address?.get(index)?.country)
+            etMailingCountry.text = USER?.address?.get(index)?.country
         } else {
             viewModel.firstName.postValue(USER?.firstName)
             viewModel.lastName.postValue(USER?.lastName)
@@ -173,8 +173,6 @@ class RegistrationStep3Fragment : AppFragment() {
 
                     if (isFromProfile) {
 
-
-
                         popFragment(3)
                         val fragments = getAppActivity().supportFragmentManager.fragments
                         for (frg in fragments) {
@@ -229,9 +227,9 @@ class RegistrationStep3Fragment : AppFragment() {
     }
 
     fun updateAddress(city: String, state: String, country: String) {
-        etMailingCity.setText(city)
-        etMailingState.setText(state)
-        etMailingCountry.setText(country)
+        etMailingCity.text = city
+        etMailingState.text = state
+        etMailingCountry.text = country
 
         viewModel.city.postValue(city)
         viewModel.state.postValue(state)

@@ -1,6 +1,7 @@
 package com.global.vtg.appview.home.health
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,18 +14,16 @@ import com.global.vtg.appview.home.vendor.HealthInformationAdapter
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.broadcasts.isNetworkAvailable
+
 import com.vtg.R
 import com.vtg.databinding.FragmentHealthInformationBinding
 import kotlinx.android.synthetic.main.fragment_health_information.*
-import kotlinx.android.synthetic.main.fragment_vaccine_history.*
-import kotlinx.android.synthetic.main.fragment_vaccine_history.ivBack
-import kotlinx.android.synthetic.main.fragment_vaccine_result.*
-import kotlinx.android.synthetic.main.fragment_vaccine_result.rvHealth
+
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 import kotlin.Comparator
@@ -55,6 +54,15 @@ class HealthInformationFragment : AppFragment() {
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
+
+
+        if (!Constants.USER?.profileUrl.isNullOrEmpty())
+            ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl)
+
+
+        if(!TextUtils.isEmpty(Constants.USER?.firstName!!)&&!TextUtils.isEmpty(Constants.USER?.lastName!!))
+            tvUserNam.text = Constants.USER?.firstName!!.replace("null","") + " " + Constants.USER?.lastName!!.replace("null","")
+
 
 //        if (isNetworkAvailable(requireActivity())) {
 //            viewModel.testHistory()

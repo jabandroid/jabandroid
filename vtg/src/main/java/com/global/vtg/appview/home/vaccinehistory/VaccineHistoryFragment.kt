@@ -56,7 +56,6 @@ class VaccineHistoryFragment : AppFragment() {
         if (!Constants.USER?.profileUrl.isNullOrEmpty())
             ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl)
 
-
         if(!TextUtils.isEmpty(Constants.USER?.firstName!!)&&!TextUtils.isEmpty(Constants.USER?.lastName!!))
         tvUserNam.text = Constants.USER?.firstName!!.replace("null","") + " " + Constants.USER?.lastName!!.replace("null","")
 

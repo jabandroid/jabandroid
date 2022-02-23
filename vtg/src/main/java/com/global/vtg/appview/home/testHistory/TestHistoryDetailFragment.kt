@@ -124,21 +124,25 @@ class TestHistoryDetailFragment : AppFragment() {
         val list_Doc = Constants.USER?.document
 
         if (!Constants.USER?.dateOfBirth.isNullOrEmpty()) {
-            val str = SpannableStringBuilder(
-                "DOB: " +   DateUtils.formatDate(
-                    Constants.USER?.dateOfBirth!!,
-                    DateUtils.API_DATE_FORMAT
-                )
-            )
-            str.setSpan(
-                StyleSpan(Typeface.BOLD),
-                0,
-                4,
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-            )
+          try {
+              val str = SpannableStringBuilder(
+                  "DOB: " + DateUtils.formatDate(
+                      Constants.USER?.dateOfBirth!!,
+                      DateUtils.API_DATE_FORMAT
+                  )
+              )
+              str.setSpan(
+                  StyleSpan(Typeface.BOLD),
+                  0,
+                  4,
+                  Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+              )
 
 
-            tvDob.text = str
+              tvDob.text = str
+          }catch (e:Exception){
+              e.printStackTrace()
+          }
         }
         if (list_Doc != null && list_Doc.isNotEmpty()) {
             for (doc in list_Doc) {

@@ -1,5 +1,6 @@
 package com.global.vtg.appview.authentication
 
+import android.app.usage.UsageEvents
 import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import com.global.vtg.appview.authentication.login.ReqLoginModel
@@ -7,6 +8,8 @@ import com.global.vtg.appview.authentication.registration.ReqRegistration
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResInstitute
+import com.global.vtg.appview.home.event.Event
+import com.global.vtg.appview.home.event.EventArray
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.appview.home.testHistory.TestKit
 import com.global.vtg.appview.payment.ReqPayment
@@ -18,6 +21,7 @@ import com.global.vtg.model.network.result.BaseError
 import com.global.vtg.model.network.result.BaseResult
 import com.global.vtg.utils.Constants
 import com.global.vtg.wscoroutine.ApiInterface
+import com.google.gson.JsonObject
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
@@ -28,6 +32,7 @@ class UserRepository constructor(
 
     val userLiveData = MutableLiveData<Resource<ResUser>>()
     val userProfilePicLiveData = MutableLiveData<Resource<ResProfile>>()
+    val userEventPicData = MutableLiveData<Resource<BaseResult>>()
     val userProfilePicLiveDataStep1 = MutableLiveData<Resource<ResProfile>>()
     val userConfigLiveData = MutableLiveData<Resource<ResUser>>()
     val testTypeLiveData = MutableLiveData<Resource<TestType>>()
@@ -36,6 +41,10 @@ class UserRepository constructor(
     val searchInstituteLiveData = MutableLiveData<Resource<ResInstitute>>()
     val registerLiveData = MutableLiveData<Resource<ResUser>>()
     val registerStep3LiveData = MutableLiveData<Resource<ResUser>>()
+    val createEventLiveData = MutableLiveData<Resource<Event>>()
+    val getAllEventsLiveData = MutableLiveData<Resource<EventArray>>()
+    val getMyEventLiveData = MutableLiveData<Resource<EventArray>>()
+    val eventLiveData = MutableLiveData<Resource<Event>>()
     val paymentLiveData = MutableLiveData<Resource<BaseResult>>()
     val registerVendorStep2LiveData = MutableLiveData<Resource<ResUser>>()
 
@@ -86,6 +95,50 @@ class UserRepository constructor(
             registerStep3LiveData.postValue(Resource.Success(result))
         } else if (result is BaseError) {
             registerStep3LiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun createEvent(modelReq: Event) {
+        createEventLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.createEvent(modelReq).await() })
+        if (result is Event && result.code=="200") {
+            createEventLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            createEventLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun CallEvents(modelReq: JsonObject) {
+        getAllEventsLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.getAllEvents().await() })
+        if (result is EventArray && result!!.code=="200") {
+            getAllEventsLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            getAllEventsLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun CallMyEvents(modelReq: String) {
+        getMyEventLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.getMyEvents(modelReq).await() })
+        if (result is EventArray && result!!.code=="200") {
+            getMyEventLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            getMyEventLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun CallEventID(modelReq: String) {
+        eventLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.getEventId(modelReq).await() })
+        if (result is Event && result.code=="200") {
+            eventLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            eventLiveData.postValue(Resource.Error(result))
         }
     }
 
@@ -265,6 +318,25 @@ class UserRepository constructor(
             getUser()
         } else if (result is BaseError) {
             userProfilePicLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+
+    suspend fun uploadEventImages(
+        file: RequestBody,
+        userId: RequestBody?
+    ) {
+        userEventPicData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result = safeApiCall(call = {
+            apiServiceInterface.uploadEventImages(
+                file
+            ).await()
+        })
+        if (result is BaseResult && result.code=="200") {
+            userEventPicData.postValue(Resource.Success(result))
+
+        } else if (result is BaseError) {
+            userEventPicData.postValue(Resource.Error(result))
         }
     }
 
