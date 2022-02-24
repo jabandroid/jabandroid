@@ -45,7 +45,7 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name="com.global.vtg.FragmentReplaceActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_maps" />
         <activity
             android:name="com.global.vtg.appview.home.HomeActivity"
@@ -90,13 +90,16 @@
         <activity
             android:name="com.global.vtg.appview.MainActivity"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:theme="@style/CustomTheme" />
         <activity
             android:name="com.global.vtg.appview.home.ImageViewActivity"
             android:screenOrientation="portrait"
+            android:exported="true"
             android:theme="@style/CustomTheme" />
         <activity
             android:name="com.global.vtg.appview.home.ClinicActivity"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/CustomTheme" />
         <activity

@@ -5,9 +5,11 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import com.global.vtg.appview.home.ClinicActivity
+import com.global.vtg.appview.home.dashboard.DashboardViewModel
 import com.global.vtg.imageview.setGlideNormalImage
 
 import com.global.vtg.appview.home.dashboard.ViewPager2Adapter
+import com.global.vtg.appview.home.dashboard.ViewPagerDashAdapter
 
 import com.global.vtg.appview.home.vendor.VendorDashboardViewModel
 import com.global.vtg.base.AppFragment
@@ -19,8 +21,10 @@ import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.ToastUtils
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
+import com.vtg.databinding.FragmentDashboardBinding
 import com.vtg.databinding.FragmentVendorDashboardBinding
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import kotlinx.android.synthetic.main.fragment_dashboard.ivHelp
 import kotlinx.android.synthetic.main.fragment_dashboard.ivQrCode
 
 import kotlinx.android.synthetic.main.fragment_dashboard.tvCountry
@@ -28,22 +32,25 @@ import kotlinx.android.synthetic.main.fragment_dashboard.tvState
 import kotlinx.android.synthetic.main.fragment_dashboard.viewPager
 import kotlinx.android.synthetic.main.fragment_dashboard.vpDots
 import kotlinx.android.synthetic.main.fragment_vendor_dashboard.*
+
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
-    private lateinit var mFragmentBinding: FragmentVendorDashboardBinding
-    private val viewModel by viewModel<VendorDashboardViewModel>()
+    private lateinit var mFragmentBinding: FragmentDashboardBinding
+    private val viewModel by viewModel<DashboardViewModel>()
     private lateinit var viewPager2Adapter: ViewPager2Adapter
+    private lateinit var viewPagerDash: ClinicDashboardAdapter
     private var titleList = ArrayList<String>()
     private val imagesList = arrayListOf(
         R.drawable.ic_woman, R.drawable.ic_qr_code,R.drawable.ic_health_info,R.drawable.ic_health_information,
           R.drawable.ic_health_info,R.drawable.
         ic_vaccine_card,
-        R.drawable.ic_travel_information
+        R.drawable.ic_travel_information,
+        R.drawable.ic_event
     )
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_vendor_dashboard
+        return R.layout.fragment_dashboard
     }
 
     override fun preDataBinding(arguments: Bundle?) {
@@ -51,7 +58,7 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
     }
 
     override fun postDataBinding(binding: ViewDataBinding): ViewDataBinding {
-        mFragmentBinding = binding as FragmentVendorDashboardBinding
+        mFragmentBinding = binding as FragmentDashboardBinding
         mFragmentBinding.viewModel = viewModel
         mFragmentBinding.lifecycleOwner = this
         return mFragmentBinding
@@ -65,31 +72,32 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
         }
         viewPager2Adapter = ViewPager2Adapter(getAppActivity())
         viewPager.adapter = viewPager2Adapter
-        TabLayoutMediator(vpDots, viewPager) { _, _ ->
+
+        viewPagerDash = ClinicDashboardAdapter(getAppActivity())
+        viewPager_dash.adapter = viewPagerDash
+        TabLayoutMediator(vpDots, viewPager_dash) { _, _ ->
             //Some implementation
         }.attach()
+
+        viewPagerDash.setImages(
+            arrayListOf(
+                "1","2"
+            )
+        )
+
+        viewPagerDash.setListenerPager(this)
+        ivQrCode.setOnClickListener {
+            addFragmentInStack<Any>(AppFragmentState.F_VACCINE_QR_CODE)
+        }
+        ivHelp.setOnClickListener {
+            addFragmentInStack<Any>(AppFragmentState.F_HELP)
+        }
 
         viewPager2Adapter.setImages(
             arrayListOf(
                 "https://i.ibb.co/s6MgjJR/Mask-Group-2.png"
-              
             )
         )
-
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        titleList = arrayListOf(
-            resources.getString(R.string.label_profile),
-            resources.getString(R.string.label_scan_qr_code),
-            resources.getString(R.string.label_Vaccine),
-            resources.getString(R.string.label_test_upload),
-            resources.getString(R.string.label_upload_health),
-            resources.getString(R.string.label_vaccine_card)
-        )
-        val dashboardAdapter = ClinicDashboardAdapter(
-            getAppActivity(), titleList, imagesList
-        )
-        dashboardAdapter.setListener(this)
-        recyclerView.adapter = dashboardAdapter
 
         viewModel.userConfigLiveData.observe(this, {
             when (it) {
@@ -113,29 +121,37 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
 
     }
 
-    override fun onItemClick(position: Int) {
+    override fun onItemClickMain(position: Int) {
         when (position) {
-            0 -> {
+            1 -> {
                 addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
             }
-            1 -> {
+            2 -> {
                 ToastUtils.shortToast(0,"Coming soon")
                 //addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
             }
-           2 -> {
+            3 -> {
                 addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_DOCUMENT)
             }
-            3 -> {
+            4 -> {
                 addFragmentInStack<Any>(AppFragmentState.F_TEST_UPLOAD)
             }
-            4 -> {
+            5 -> {
                 addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_HEALTH_INFORMATION)
             }
-            5 -> {
+            6 -> {
                 ToastUtils.shortToast(0,"Coming soon")
             }
+            7 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
+            }
+//            5 -> {
+//                addFragmentInStack<Any>(AppFragmentState.F_PAYMENT)
+//            }
         }
     }
+
+
 
     private fun loadData() {
         if (!Constants.USER?.address.isNullOrEmpty()) {
@@ -144,10 +160,10 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
             var country = Constants.USER?.address?.get(0)?.country
             country = country?.let { getCountryCode(it) }
             if (country.isNullOrEmpty()) {
-                ivVendorCountry.visibility = View.INVISIBLE
+                ivCountry.visibility = View.INVISIBLE
             } else {
-                ivVendorCountry.visibility = View.VISIBLE
-                country.let { ivVendorCountry.setCountryForNameCode(it) }
+                ivCountry.visibility = View.VISIBLE
+                country.let { ivCountry.setCountryForNameCode(it) }
             }
         }
     }
@@ -155,6 +171,6 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
     override fun onResume() {
         super.onResume()
         if (!Constants.USER?.profileUrl.isNullOrEmpty())
-            ivVendorProfilePic.setGlideNormalImage(Constants.USER?.profileUrl)
+            ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl)
     }
 }

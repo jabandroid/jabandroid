@@ -64,9 +64,9 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
 //        mScannerView!! .setAspectTolerance(0.5f);
 //        mScannerView!! .setAutoFocus(true);
         Constants.isSpalsh=true
-        val bundle = Bundle()
-        bundle.putString(Constants.BUNDLE_BARCODE_ID, "82847153710119821642744528894")
-        addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
+//        val bundle = Bundle()
+//        bundle.putString(Constants.BUNDLE_BARCODE_ID, "82847153710119821642744528894")
+//        addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
 
         if(checkPermissions()){
             mScannerView?.startCamera()

@@ -33,7 +33,7 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
     private var titleList = ArrayList<String>()
     private val imagesList = arrayListOf(
         R.drawable.ic_woman, R.drawable.ic_vaccine_history,
-        R.drawable.ic_vaccine_card, R.drawable.ic_qr_code, R.drawable.ic_health_information,
+        R.drawable.ic_event, R.drawable.ic_qr_code, R.drawable.ic_health_information,
         R.drawable.ic_travel_information
     )
 
@@ -71,10 +71,11 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
             )
         )
 
-        recyclerView.layoutManager = GridLayoutManager(context, 1)
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
         titleList = arrayListOf(
             resources.getString(R.string.label_profile),
-            resources.getString(R.string.label_scan_qr_code)
+            resources.getString(R.string.label_scan_qr_code),
+            resources.getString(R.string.label_event)
         )
         val dashboardAdapter = VendorDashboardAdapter(
             getAppActivity(), titleList, imagesList
@@ -111,6 +112,9 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
             }
             1 -> {
                 addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
+            }
+            2 -> {
+                addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
             }
         }
     }
