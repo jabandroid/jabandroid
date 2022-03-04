@@ -59,6 +59,8 @@ import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import kotlin.collections.ArrayList
 import android.view.MotionEvent
 import android.view.View.OnTouchListener
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 
 
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.countDown
@@ -79,6 +81,7 @@ import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvType
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvVaccine
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.vaccine_Root
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.view_1
+import kotlinx.android.synthetic.main.recycler_view_vaccine_history.view.*
 
 
 class VendorScanResultCountFragment : AppFragment() {
@@ -88,8 +91,8 @@ class VendorScanResultCountFragment : AppFragment() {
     var dynamicConfigBuilder = DynamicConfig.Builder()
     lateinit var mListner: CountdownView.OnCountdownIntervalListener
     val calendar: Calendar = Calendar.getInstance()
-    var strVaccine:String=""
-    var strTest:String=""
+    var strVaccine: String = ""
+    var strTest: String = ""
     var listHealth = ArrayList<HealthInfo>()
     override fun getLayoutId(): Int {
         return R.layout.fragment_vendor_scan_result_cout
@@ -193,7 +196,7 @@ class VendorScanResultCountFragment : AppFragment() {
 
 
                 tvDob.text = str
-            }catch(e:Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
@@ -231,7 +234,8 @@ class VendorScanResultCountFragment : AppFragment() {
 
 
         var datetimer = ""
-        if (Constants.SCANNEDUSER!!.test!=null&&Constants.SCANNEDUSER!!.test!!.size > 0) {
+        iv_status_splash.visibility = View.INVISIBLE
+        if (Constants.SCANNEDUSER!!.test != null && Constants.SCANNEDUSER!!.test!!.size > 0) {
             val list = Constants.SCANNEDUSER!!.test!!
             Constants.SCANNEDUSER?.test?.let {
                 Collections.sort(list, Comparator<TestInfo?> { obj1, obj2 ->
@@ -261,14 +265,14 @@ class VendorScanResultCountFragment : AppFragment() {
                     )
                 )
             }
-            if(!TextUtils.isEmpty(list[0].kit)){
-                date_kit.visibility=View.VISIBLE
-                date_kit.text=list[0].kit
-            }else{
-                date_kit.visibility=View.GONE
+            if (!TextUtils.isEmpty(list[0].kit)) {
+                date_kit.visibility = View.VISIBLE
+                date_kit.text = list[0].kit
+            } else {
+                date_kit.visibility = View.GONE
             }
 
-            strTest= list[0].documentLink.toString()
+            strTest = list[0].documentLink.toString()
             val institute = list[0].instituteId?.let { Constants.getInstituteName(it) }
             date_test.text = "$institute " + list[0].date?.let {
                 DateUtils.formatDateUTCToLocal(
@@ -286,24 +290,23 @@ class VendorScanResultCountFragment : AppFragment() {
             )
 
 
-            if(list[0].addedBy!!.contains("clinic"))
+            if (list[0].addedBy!!.contains("clinic"))
                 addedBy.setImageResource(R.drawable.ic_clinic)
             else
                 addedBy.setImageResource(R.drawable.ic_user)
 
 
-            var result=list[0].result
-         if(TextUtils.isEmpty(list[0].result)||list[0].result.equals("null"))
-             result="Pending"
-            tvType.text =   tvType.text.toString() + " | " + result
+            var result = list[0].result
+            if (TextUtils.isEmpty(list[0].result) || list[0].result.equals("null"))
+                result = "Pending"
+            tvType.text = tvType.text.toString() + " | " + result
             if (list[0].result?.lowercase().equals("Negative".lowercase())) {
 
                 datetimer = list[0].date.toString()
                 Glide.with(getAppActivity()).asBitmap().load(R.drawable.ic_drawable_tick)
                     .into(ivStatus_1)
                 Glide.with(getAppActivity())
-                    .asGif()
-                    .load(R.mipmap.gif_verified)
+                    .asBitmap().load(R.drawable.ic_drawable_tick)
                     .into(iv_status_splash)
             } else if (list[0].result?.lowercase().equals("Positive".lowercase())) {
                 Glide.with(getAppActivity()).asBitmap().load(R.drawable.ic_drawable_cross)
@@ -338,7 +341,7 @@ class VendorScanResultCountFragment : AppFragment() {
 
         } else {
 
-            if (Constants.SCANNEDUSER!!.healthInfo!=null&&listHealth.size > 0) {
+            if (Constants.SCANNEDUSER!!.healthInfo != null && listHealth.size > 0) {
                 listHealth = Constants.SCANNEDUSER!!.healthInfo!!
                 Constants.SCANNEDUSER?.healthInfo?.let {
                     Collections.sort(listHealth, Comparator<HealthInfo?> { obj1, obj2 ->
@@ -354,7 +357,7 @@ class VendorScanResultCountFragment : AppFragment() {
                         return@Comparator d2.compareTo(d1)
                     })
 
-                    strTest= listHealth[0].documentLink.toString()
+                    strTest = listHealth[0].documentLink.toString()
                     val institute =
                         listHealth[0].instituteId?.let { Constants.getInstituteName(it) }
                     date_test.text = "$institute " + listHealth[0].date?.let {
@@ -383,12 +386,12 @@ class VendorScanResultCountFragment : AppFragment() {
                         )
                     )
 
-                    var result=listHealth[0].result
-                    if(TextUtils.isEmpty(listHealth[0].result)||listHealth[0].result.equals("null"))
-                        result="Pending"
-                    tvType.text =   tvType.text.toString() + " | " + result
+                    var result = listHealth[0].result
+                    if (TextUtils.isEmpty(listHealth[0].result) || listHealth[0].result.equals("null"))
+                        result = "Pending"
+                    tvType.text = tvType.text.toString() + " | " + result
 
-                    if(listHealth[0].addedBy!!.contains("clinic"))
+                    if (listHealth[0].addedBy!!.contains("clinic"))
                         addedBy.setImageResource(R.drawable.ic_clinic)
                     else
                         addedBy.setImageResource(R.drawable.ic_user)
@@ -398,8 +401,7 @@ class VendorScanResultCountFragment : AppFragment() {
                         Glide.with(getAppActivity()).asBitmap().load(R.drawable.ic_drawable_tick)
                             .into(ivStatus_1)
                         Glide.with(getAppActivity())
-                            .asGif()
-                            .load(R.mipmap.gif_verified)
+                            .asBitmap().load(R.drawable.ic_drawable_tick)
                             .into(iv_status_splash)
                     } else if (listHealth[0].result?.lowercase().equals("Positive".lowercase())) {
                         Glide.with(getAppActivity()).asBitmap().load(R.drawable.ic_drawable_cross)
@@ -430,6 +432,7 @@ class VendorScanResultCountFragment : AppFragment() {
                             .load(R.drawable.ic_drawable_pending)
                             .into(iv_status_splash)
                     }
+
 
                 }
             }
@@ -475,9 +478,7 @@ class VendorScanResultCountFragment : AppFragment() {
         } else
             countDown.visibility = View.GONE
 
-
-
-
+        iv_status_Vaccine.visibility = View.INVISIBLE
         val list = Constants.SCANNEDUSER!!.vaccine!!
         if (list.size > 0) {
             Constants.SCANNEDUSER?.vaccine?.let {
@@ -494,7 +495,7 @@ class VendorScanResultCountFragment : AppFragment() {
                     return@Comparator d2.compareTo(d1)
                 })
 
-                strVaccine= list[0].documentLink.toString()
+                strVaccine = list[0].documentLink.toString()
 
                 if (list[0].dose != null) {
                     for (data in Constants.CONFIG?.doses!!) {
@@ -510,7 +511,7 @@ class VendorScanResultCountFragment : AppFragment() {
                     DateUtils.formatDateUTCToLocal(
                         it,
                         DateUtils.API_DATE_FORMAT_VACCINE,
-                       true
+                        true
                     )
                 }
 
@@ -527,15 +528,79 @@ class VendorScanResultCountFragment : AppFragment() {
                     )
                 )
 
+                if (list[0].dose != null) {
+                    var valid: Int = 0
+                    try {
+                        for (data in Constants.CONFIG?.doses!!) {
+                            if (data!!.id.equals(list[0].dose)) {
+                                if (data.name!!.contains("Dose 2")) {
+                                    valid = 1
+
+                                    break
+                                } else if (data.name.contains("Dose 1")) {
+
+                                    valid = 3
+                                    break
+                                } else if (data.name.contains("Booster") || data.name.contains("2")) {
+
+                                    valid = 2
+                                    break
+                                }
+                            }
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                    }
+
+
+                    when (valid) {
+                        1 -> {
+                            Glide.with(getAppActivity())
+                                .asBitmap()
+                                .load(R.drawable.ic_check_circle_yellow)
+                                .into(iv_status_Vaccine)
+                        }
+                        2 -> {
+                            Glide.with(getAppActivity())
+                                .asGif()
+                                .load(R.mipmap.gif_verified)
+                                .load(R.drawable.ic_check_circle)
+                                .into(iv_status_Vaccine)
+                        }
+                        3 -> {
+                            Glide.with(getAppActivity())
+                                .asBitmap()
+                                .load(R.drawable.ic_drawable_pending)
+                                .into(iv_status_Vaccine)
+                        }
+                        else -> {
+                            Glide.with(getAppActivity())
+                                .asBitmap()
+                                .load(R.drawable.ic_drawable_cross)
+                                .into(iv_status_Vaccine)
+                        }
+                    }
+
+                } else {
+                    Glide.with(getAppActivity())
+                        .asBitmap()
+                        .load(R.drawable.ic_drawable_cross)
+                        .into(iv_status_Vaccine)
+                }
+
+
             }
         } else {
             vaccine_Root.visibility = View.GONE
             view_1.visibility = View.GONE
+            iv_status_Vaccine.visibility = View.GONE
+            tvVacine.visibility = View.GONE
         }
 
 
         var listTest = Constants.SCANNEDUSER!!.test!!
         if (listTest.size == 0) {
+
 
             if (isNetworkAvailable(requireActivity())) {
                 viewModel.testHistory()
@@ -547,12 +612,42 @@ class VendorScanResultCountFragment : AppFragment() {
             }
         }
 
+        Handler().postDelayed(Runnable {
+            iv_status_splash.visibility = View.VISIBLE
+            val anim: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+            anim.duration = 2000
+            anim.repeatCount = 0
+            iv_status_splash.startAnimation(anim)
+            anim.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(anim: Animation) {}
+                override fun onAnimationRepeat(anim: Animation) {}
+                override fun onAnimationEnd(anim: Animation) {
+                    Handler().postDelayed(Runnable {
+                        val list = Constants.SCANNEDUSER!!.vaccine!!
+                        if (list.size > 0) {
+                            iv_status_Vaccine.visibility = View.VISIBLE
+                            val anim: Animation =
+                                AnimationUtils.loadAnimation(context, R.anim.fade_in)
+                            anim.repeatCount = 0
+                            anim.duration = 1800
+                            iv_status_Vaccine.startAnimation(anim)
+                            anim.setAnimationListener(object : Animation.AnimationListener {
+                                override fun onAnimationStart(anim: Animation) {}
+                                override fun onAnimationRepeat(anim: Animation) {}
+                                override fun onAnimationEnd(anim: Animation) {
 
+                                }
+                            })
+                        }
+                    }, 10)
+                }
+            })
+        }, 80)
 
-        vaccine_Root.setOnClickListener{
+        vaccine_Root.setOnClickListener {
             openFile(strVaccine)
         }
-        test_Root.setOnClickListener{
+        test_Root.setOnClickListener {
             openFile(strTest)
         }
 
@@ -606,10 +701,10 @@ class VendorScanResultCountFragment : AppFragment() {
 
         if (Constants.isSpalsh) {
             Handler().postDelayed({
-                Constants.isSpalsh=false
-                    splash.visibility = View.GONE
-                 main.visibility = View.VISIBLE
-            }, 3500)
+                Constants.isSpalsh = false
+                splash.visibility = View.GONE
+                main.visibility = View.VISIBLE
+            }, 4000)
         }
 
 

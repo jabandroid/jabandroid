@@ -1,0 +1,526 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--<string name="app_name">BaseProject</string>-->
+
+    <string name="api_key">AIzaSyD09CYCGjr-h6gCq3ImZe6pnglvuCsGcMU</string>
+    <string name="app_name_new" translatable="false">VAXTRAX</string>
+
+    <string name="please_wait">Wag asseblief</string>
+    <string name="email">E-pos / selfoonnommer.</string>
+    <string name="password">Wagwoord</string>
+    <string name="login">Teken aan</string>
+    <string name="msg_valid_email">Voer asseblief geldige e-pos in</string>
+    <string name="msg_valid_password">Voer asseblief wagwoord in</string>
+    <string name="navigation_drawer_open">Maak oop</string>
+    <string name="navigation_drawer_close">Sluit</string>
+    <string name="signup">Aanmeld</string>
+    <string name="details_screen">Besonderhede</string>
+    <string name="permissions_denied">Toestemmings geweier. Laat asseblief programinstellings toe vir bykomende funksionaliteit.</string>
+
+    <!--Titel-->
+    <string name="title_home">Tuistaak</string>
+    <string name="title_payment">Betaalbeursie</string>
+    <string name="title_whistory">Onttrekkinggeskiedenis</string>
+    <string name="title_myteam">My span</string>
+    <string name="title_installapp">Installeer toepassing</string>
+    <string name="title_noti">Kennisgewing</string>
+    <string name="title_faq">Gereelde vrae</string>
+    <string name="title_contactus">Kontak ons</string>
+    <string name="title_refer">Verwys Verdien</string>
+    <string name="title_logout">Teken af</string>
+
+
+    <!--Fout-->
+    <string name="error_message_location">"Ligging is nie gedefinieer nie"</string>
+    <string name="error_message_network">Gaan jou verbinding na en probeer weer.</string>
+    <string name="error_message_call">Oproep het misluk</string>
+    <string name="error_message_somethingwrong">Iets het verkeerd geloop, probeer asseblief later</string>
+    <string name="error_message_clienterror">Kliëntfout</string>
+    <string name="error_message_servererror">Bedienerfout</string>
+    <string name="error_message_no_record">Geen inhoud gevind nie</string>
+    <string name="error_message_empty">Oeps, daar is geen resultate om te wys nie</string>
+    <string name="error_message_error">Oeps, daar was \'n fout met die haal van die data</string>
+    <string name="error_message_checkagain">Kontroleer weer</string>
+    <string name="error_message_tryagain">Probeer weer</string>
+
+
+    <!--Boodskappe-->
+    <string name="msg_success">Jy het suksesvol aangemeld</string>
+
+    <!--Aksie-->
+    <string name="action_save">Stoor</string>
+    <string name="action_cancel">Kanselleer</string>
+
+
+    <string name="button_login">Aanmeld</string>
+    <string name="button_signup">Sluit aan</string>
+
+    <string name="hint_email_or_username">E-pos</string>
+    <string name="hint_password">Wagwoord</string>
+    <string name="hint_phonenumber">Mobiele nr.</string>
+    <string name="hint_code">Verwysingskode</string>
+    <string name="forgot">Wagwoord vergeet</string>
+    <string name="donthave">Het jy nie \'n rekening nie? <b>TEKEN AAN!</b></string>
+
+
+    <string name="btn_next">Volgende</string>
+    <string name="txt_withdraw_amout">Onttrek bedrag</string>
+    <string name="txt_withdraw">Onttrek</string>
+    <string name="etx_payment_number">Betaalnommer</string>
+    <string name="txt_currnet_balance">Huidige saldo</string>
+
+
+    <string name="enable_random_adaptation">Aktiveer ewekansige aanpassing</string>
+
+    <string name="error_drm_not_supported">Beskermde inhoud word nie op API-vlakke onder 18 ondersteun nie</string>
+
+    <string name="error_drm_unsupported_scheme">Hierdie toestel ondersteun nie die vereiste DRM-skema nie</string>
+
+    <string name="error_drm_unknown">\'n Onbekende DRM-fout het voorgekom</string>
+
+    <string name="error_no_decoder">Hierdie toestel verskaf nie \'n dekodeerder vir <xliff:g id="mime_type">%1$s</xliff:g></string>
+
+    <string name="error_no_secure_decoder">Hierdie toestel verskaf nie \'n veilige dekodeerder vir <xliff:g id="mime_type">%1$s</xliff:g></string>
+
+    <string name="error_querying_decoders">Kan nie navraag doen oor toesteldekodeerders nie</string>
+
+    <string name="error_instantiating_decoder">Kan nie dekodeerder instansieer <xliff:g id="decoder_name">%1$s</xliff:g></string>
+
+    <string name="error_unsupported_video">Media sluit videosnitte in, maar nie een is deur hierdie toestel speelbaar nie</string>
+
+    <string name="error_unsupported_audio">Media sluit oudiosnitte in, maar nie een is deur hierdie toestel speelbaar nie</string>
+
+    <string name="storage_permission_denied">Toestemming vir toegang tot berging is geweier</string>
+
+    <string name="sample_list_load_error">Een of meer voorbeeldlyste kon nie laai nie</string>
+
+    <string name="piker_cam">Kamera</string>
+    <string name="piker_gall">Galery</string>
+    <string name="piker_chosevideo">Kies video</string>
+    <string name="piker_choseimage">Kies prent</string>
+    <string name="txt_file_toolarge">Lêer is te groot. Maksimum grootte is %1$sMB</string>
+    <string name="retry">Probeer weer</string>
+    <string name="no_connection">Geen internetverbinding nie. Gaan asseblief jou verbinding na en probeer weer.</string>
+    <string name="no_connection_msg">Gaan asseblief jou internetverbinding na en probeer weer</string>
+    <string name="nv_settings">Instellings</string>
+    <string name="nv_home">Tuis</string>
+    <string name="nv_bookmark">Boekmerk</string>
+    <string name="Failure">Misluk</string>
+
+    <!-- VTG -->
+    <string name="label_vendor">Verskaffer</string>
+    <string name="label_user">Gebruiker</string>
+
+    <!-- Verifikasie -->
+    <string name="label_login">Teken aan</string>
+    <string name="label_login_subtext">Verbetering van gemeenskapslewe</string>
+    <string name="label_email">E-pos</string>
+    <string name="label_password">Wagwoord</string>
+    <string name="label_remember_me">Onthou My</string>
+    <string name="label_forgot_password">Wagwoord vergeet?</string>
+    <string name="label_forgot_password_title">Wagwoord vergeet</string>
+    <string name="label_forgot_password_subtext">Bevestig jou selfoonnommer en ons sal die\n instruksies stuur.</string>
+    <string name="label_do_sign_up">Het jy nie \'n rekening nie? <u><b><font fgcolor='#1D4792'> Registreer </font></b></u></string>
+    <string name="label_sign_up"><u>Sluit aan</u></string>
+    <string name="label_sign_up1">Sluit aan</string>
+    <string name="label_registration">Registrasie</string>
+    <string name="label_phone_no">Mobiele nr.</string>
+    <string name="label_phone_no_register">Mobiele nr.*</string>
+    <string name="label_password_register">Wagwoord*</string>
+    <string name="label_register">Registreer</string>
+    <string name="label_already_sign_in">Het jy reeds \'n rekening? <u><b><font fgcolor='#1D4792'>Meld aan</font></b></u></string>
+    <string name="label_otp">OTP</string>
+    <string name="label_otp_text">Bevestig jou e-pos en ons sal die\n instruksies stuur.</string>
+    <string name="label_enter_otp_received">Voer die OTP in wat jy ontvang het</string>
+    <string name="label_otp_not_received">Het jy nie die OTP ontvang nie?</string>
+    <string name="label_request_otp">Versoek vir \'n nuwe een binne 30 sekondes</string>
+    <string name="label_resend_otp"><u><b><font fgcolor='#1D4792'>Stuur OTP weer</font></b></u></string>
+    <string name="label_verify">Verifieer</string>
+    <string name="label_send">Stuur</string>
+    <string name="label_vendor_login">Ek is \'n Verkoper</string>
+    <string name="label_clinic">Ek is \'n laboratorium/kliniek</string>
+    <!-- Dashboard -->
+    <string name="label_vaccine_history">Entstofgeskiedenis</string>
+    <string name="label_vaccine_card">Entstofkaart</string>
+    <string name="label_vaccine_qr_code">QR-kode</string>
+    <string name="label_covid_test_status">COVID-toetsstatus</string>
+    <string name="label_test_history">Toetsgeskiedenis</string>
+    <string name="label_test_history_covid">Covid-toetsgeskiedenis</string>
+    <string name="label_test_upload"> Laai toets op</string>
+    <string name="label_payment_method">Betaalmetode</string>
+    <string name="label_information">Inligting</string>
+    <string name="label_upload_document">Laai dokument op</string>
+    <string name="label_upload_info">Laai gesondheidsinligting op</string>
+    <string name="label_covid_status">Covid-toetsstatus</string>
+    <string name="label_change_password">Verander wagwoord</string>
+    <string name="label_events">Gebeure</string>
+    <string name="label_vaccine_taken_list">Entstoflys</string>
+    <string name="label_upload_file">Laai lêer op</string>
+    <string name="label_logout">Teken af</string>
+    <string name="label_share">Deel</string>
+    <string name="label_vaccinations">Inentings</string>
+    <string name="label_vaccinations_covid">Covid-toets</string>
+    <string name="label_vaccinated_on">Geënt op</string>
+    <string name="label_test_on">Getoets op</string>
+    <string name="label_upload_text">Klik om dokument op te laai \n(PDF/JPG/PNG Maks. 5MB)</string>
+    <string name="label_upload_images">Voeg banierprente by \n(PDF/JPG/PNG Maks. 5MB)</string>
+    <string name="label_upload_text_b">Klik om besigheid op te laai \n(PDF/JPG/PNG Maks. 5MB)</string>
+    <string name="label_doc_name">Gekose dokument: %s</string>
+    <string name="create">Skep</string>
+    <string name="label_hospital">Instituut:\u0020</string>
+    <string name="label_kit">Toetsstel:\u0020</string>
+    <string name="label_date">Datum:\u0020</string>
+    <string name="label_status">Status:\u0020</string>
+    <string name="label_test">Toets:\u0020</string>
+    <string name="label_dose">Dosis:\u0020</string>
+    <string name="label_batch_no_row">SN:\u0020</string>
+    <string name="label_hospital_name">Laboratorium/klinieknaam</string>
+    <string name="label_batch_no">Joernaal/reeksnommer</string>
+
+    <string name="label_phone_number">Gebruiker se selfoonnommer*</string>
+
+    <string name="label_certify">Sertifiseer</string>
+    <string name="label_fee">Fooi</string>
+    <string name="label_date1">Datum</string>
+    <string name="label_time">Tyd</string>
+    <string name="label_date_time" formatted="false">%d:%d</string>
+
+    <string name="label_no_data">Geen data beskikbaar nie...</string>
+    <string name="select_type">Entstoftipe</string>
+    <string name="select_dose">Kies dosis</string>
+    <string name="select">Kies</string>
+    <string name="label_day">Dag</string>
+    <string name="label_thank_you">Dankie!</string>
+    <string name="label_uploaded">Opgelaai vir hersiening</string>
+
+    <string name="label_otp_sent">Otp suksesvol gestuur.</string>
+    <string name="label_title">Titel*</string>
+    <string name="label_event_name">Gebeurtenisnaam*</string>
+    <string name="label_start_time">Begindatum en -tyd</string>
+    <string name="label_end_time">Einddatum en -tyd</string>
+    <string name="label_private_event">Privaat geleentheid</string>
+    <string name="label_about_event">Meer oor gebeurtenis</string>
+    <string name="label_contact_detail">Kontakbesonderhede </string>
+    <string name="read_more">Lees meer. </string>
+    <string name="read_less">Minder. </string>
+    <string name="label_public_event">Openbare geleentheid</string>
+    <string name="label_event_Images">Gebeurtenisprente</string>
+    <string name="label_description">Beskrywing</string>
+    <string name="label_gender">Geslag</string>
+    <string name="select_title">Kies titel</string>
+    <string name="select_product">Kies produk</string>
+    <string name="select_gender">Kies geslag</string>
+    <string name="select_ethnicity">Kies etnisiteit</string>
+    <string name="select_citizenship">Kies burgerskap</string>
+    <string name="label_given_name">Gegewe Naam*</string>
+    <string name="label_given_name_hint">(eerste) (middel)</string>
+    <string name="label_first_name">Voornaam*</string>
+    <string name="label_last_name">Vannaam*</string>
+    <string name="label_dob">Geboortedatum (DOB)</string>
+    <string name="label_test_type">Toetstipe</string>
+    <string name="label_test_type_2">Toets/entstoftipe</string>
+    <string name="label_test_kit">Toetsstel</string>
+    <string name="label_test_type_1">tipe toets</string>
+    <string name="label_dob_hint">DD/MM/JJJJ</string>
+    <string name="label_city_step3"><font size="14">Stad*</font></string>
+    <string name="label_place_birth">Plek van geboorte</string>
+    <string name="label_city"><font size="14">Stad</font></string>
+    <string name="label_state"><font size="14">Staat</font></string>
+    <string name="label_country"><font size="14">Land</font></string>
+    <string name="label_country_step3"><font size="14">Land*</font></string>
+    <string name="label_citizenship">Burgerskap</string>
+    <string name="label_ethnicity">Etnisiteit</string>
+    <string name="label_website">Webwerf</string>
+    <string name="label_next">Volgende</string>
+    <string name="label_skip">Slaan oor</string>
+    <string name="label_show_details">Wys besonderhede</string>
+    <string name="label_ssn">Laaste 4 syfers van PIN/SSN/NIN/SIN/DNI/CPR/eID/NEI</string>
+    <string name="label_id_number">ID-nommer</string>
+    <string name="label_drivers_license">Bestuurslisensie</string>
+    <string name="label_number"><font size="14">Nommer</font></string>
+    <string name="label_issued_date"><font size="14">Uitreikingsdatum</font></string>
+    <string name="label_expiry_date"><font size="14">Vervaldatum</font></string>
+    <string name="label_passport">Paspoort</string>
+    <string name="label_mailing_add_1">Posadres 1</string>
+    <string name="label_add_1">Adres 1</string>
+    <string name="label_add_2">Adres 2</string>
+    <string name="label_mailing_add_2">Posadres 2</string>
+    <string name="label_zip">Poskode</string>
+    <string name="label_state_provincial">Staat of Provinsiaal*</string>
+    <string name="label_step1">Stap 1</string>
+    <string name="label_step2">Stap 2</string>
+    <string name="label_step3">Stap 3</string>
+    <string name="label_create_event">Skep gebeurtenis</string>
+    <string name="label_create_event_loc">Gebeurtenisligging</string>
+    <string name="label_create_event_review">Hersien besonderhede</string>
+    <string name="label_event_detail">Gebeurtenisbesonderhede</string>
+
+    <string name="label_business_name">Besigheidsnaam</string>
+    <string name="label_business_id">Besigheid-ID</string>
+    <string name="label_employee_id">Werknemer-ID</string>
+    <string name="label_vat">Besigheidsbelasting</string>
+    <string name="label_contact_no">Kontaknommer</string>
+    <string name="label_fax">Faks</string>
+
+    <!-- Validasies -->
+    <string name="empty_email">Voer asseblief \'n e-pos in.</string>
+    <string name="error_email">Voer asseblief \'n geldige e-pos in.</string>
+    <string name="error_event_name">Voer asseblief gebeurtenisnaam in.</string>
+    <string name="empty_phone_email">Voer asseblief \'n e-pos of \'n selfoonnommer in.</string>
+    <string name="empty_password">Voer asseblief \'n wagwoord in</string>
+    <string name="error_password">Voer asseblief \'n geldige wagwoord in. Wagwoord moet 8 syfers bevat. 1 hoofletter, 1 kleinletter, 1 spesiale karakter en 1 syfer.</string>
+    <string name="error_terms_condition">Aanvaar asseblief bepalings &amp; Voorwaardes en privaatheidsbeleid.</string>
+    <string name="empty_phone">Voer asseblief \'n selfoonnommer in.</string>
+    <string name="error_phone">Voer asseblief \'n geldige selfoonnommer in.</string>
+    <string name="error_start_time">Voer asseblief begintyd in.</string>
+    <string name="error_end_time">Voer asseblief eindtyd in.</string>
+    <string name="empty_otp">Voer asseblief \'n OTP in.</string>
+    <string name="error_otp">Voer asseblief \'n behoorlike OTP in.</string>
+    <string name="error_select_document">Kies asseblief \'n dokument.</string>
+    <string name="error_select_dose">Kies asseblief dosis.</string>
+    <string name="error_fee">Voer asseblief \'n fooi in.</string>
+    <string name="error_select_type">Kies asseblief \'n entstoftipe.</string>
+    <string name="error_batch_no">Voer asseblief \'n joernaalnommer of reeksnommer in.</string>
+    <string name="error_select_date">Kies asseblief \'n entstofdatum.</string>
+    <string name="error_select_time">Kies asseblief \'n entstoftyd.</string>
+    <string name="error_select_test_type_1">Kies asseblief tipe toets.</string>
+
+    <string name="error_select_test_kit">Kies asseblief tipe stel wat vir toetsing gebruik word.</string>
+    <string name="error_select_test_type">Kies asseblief tipe toets.</string>
+    <string name="error_hospital_name">Kies asseblief \'n Lab-/Kliniekinstituutnaam</string>
+    <string name="empty_title">Kies asseblief titel.</string>
+    <string name="empty_gender">Kies asseblief geslag.</string>
+    <string name="empty_given_name">Voer asseblief die Gegewe Naam in.</string>
+    <string name="empty_product">Kies asseblief produk.</string>
+    <string name="empty_first_name">Voer asseblief die voornaam in.</string>
+    <string name="empty_last_name">Voer asseblief die Van in.</string>
+    <string name="upload_image">Laai asseblief jou profielprent op.</string>
+    <string name="empty_dob">Kies asseblief Geboortedatum.</string>
+    <string name="empty_place_birth_city">Voer asseblief \'n stad in.</string>
+    <string name="empty_place_birth_state">Voer asseblief \'n staat in.</string>
+    <string name="empty_place_birth_country">Voer asseblief \'n land in.</string>
+    <string name="empty_citizenship">Voer asseblief jou burgerskap in.</string>
+    <string name="empty_ethnicity">Voer asseblief \'n etnisiteit in.</string>
+    <string name="empty_ssn">Voer asseblief die laaste 4 syfers van die sosiale sekerheidsnommer in.</string>
+    <string name="empty_id_number">Voer asseblief \'n ID-nommer in.</string>
+    <string name="empty_business_name">Voer asseblief besigheidsnaam in.</string>
+    <string name="empty_business_id">Voer asseblief besigheids-ID in.</string>
+    <string name="empty_employee_id">Voer asseblief werknemer-ID in.</string>
+    <string name="empty_expiry_date">Voer asseblief Besigheid se vervaldatum in.</string>
+    <string name="empty_dln">Voer asseblief jou bestuurslisensienommer in.</string>
+    <string name="empty_dln_state">Kies asseblief jou bestuurslisensiestaat.</string>
+    <string name="empty_dln_country">Kies asseblief jou bestuurslisensieland.</string>
+    <string name="empty_passport">Voer asseblief jou paspoortnommer in.</string>
+    <string name="empty_passport_state">Kies asseblief jou paspoortstaat.</string>
+    <string name="empty_passport_country">Kies asseblief jou paspoortland.</string>
+    <string name="empty_dln_issued_date">Kies asseblief jou bestuurslisensie uitgereik datum.</string>
+    <string name="empty_dln_expiry_date">Kies asseblief jou bestuurslisensie se vervaldatum.</string>
+    <string name="empty_passport_issued_date">Kies asseblief jou paspoort uitgereik datum.</string>
+    <string name="empty_passport_expiry_date">Kies asseblief jou paspoort se vervaldatum.</string>
+    <string name="empty_address1">Voer asseblief \'n posadres 1 in.</string>
+    <string name="empty_address_1">Voer asseblief \'n adres 1 in.</string>
+    <string name="empty_address2">Voer asseblief \'n posadres 2 in.</string>
+    <string name="empty_address_city">Kies asseblief \'n stad.</string>
+    <string name="empty_banner_image">Kies asseblief \'n banierprent vir geleentheid.</string>
+    <string name="empty_address_state">Kies asseblief \'n staat of provinsiaal.</string>
+    <string name="empty_address_zip">Voer asseblief \'n pos- of poskode in.</string>
+    <string name="empty_address_country">Kies asseblief \'n land.</string>
+    <string name="valid_age">Om in ons toepassing te registreer, moet \'n mens nie minder as 13 jaar wees nie</string>
+    <string name="cancel_event">Is jy seker om geleentheid te kanselleer?</string>
+    <string name="delete_image">Wil jy hierdie prent uitvee?</string>
+    <string name="no_location">Gebeurtenisligging nie gevind nie.</string>
+    <string name="time">Kies asseblief toekomstige datum en tyd.</string>
+
+    <string-array name="title">
+        <item>Mnr</item>
+        <item>Mev.</item>
+        <item>Juffrou</item>
+    </string-array>>
+
+    <string-array name="ethnicity">
+        <item>--Kies--</item>
+        <item>Wit</item>
+        <item>Afrikaans-Amerikaanse</item>
+        <item>Inheemse Amerikaner</item>
+        <item>Abazin</item>
+        <item>Stille Oseaan-eilandbewoner</item>
+        <item>Asiatiese</item>
+        <item>Kroate</item>
+        <item>Wit Britte</item>
+        <item>Dagaaba-mense</item>
+        <item>Sherbro-mense</item>
+        <item>Al-Akhdam</item>
+        <item>Inheemse Hawaiian</item>
+        <item>Chinees</item>
+        <item>Ierse reisiger</item>
+        <item>Indiër</item>
+        <item>Indiese Karibiese Eilande</item>
+        <item>Pakistan</item>
+        <item>Ghanees</item>
+        <item>Luba</item>
+        <item>Kongo</item>
+        <item>Mongo</item>
+        <item>Keniaans</item>
+        <item>Nigeriaans</item>
+        <item>Bruneiaanse Maleis</item>
+        <item>Namibies</item>
+        <item>Wit Namibiër</item>
+        <item>Swart Namibiër</item>
+        <item>Suid-Afrikaans</item>
+        <item>Wit Suid-Afrikaner</item>
+        <item>Swart Suid-Afrikaner</item>
+        <item>Zambies</item>
+        <item>Zimbabwiese</item>
+        <item>Botswana</item>
+        <item>Wit Botswanan</item>
+        <item>Swart Botswanan</item>
+        <item>Angolaans</item>
+        <item>Bangladesj</item>
+        <item>Murut-mense</item>
+        <item>Swart Karibiese Eilande</item>
+        <item>Swart Afrikaan</item>
+        <item>Swart Ander</item>
+        <item>Swart Britse mense</item>
+        <item>Asiatiese Hispanic en Latino-Amerikaners</item>
+        <item>Filipino</item>
+        <item> Poleshuks</item>
+        <item>Kreole van kleur</item>
+        <item>Orang Kuala</item>
+        <item>Europeërs</item>
+        <item>Inheemse mense van die Amerikas</item>
+        <item>Lubu-mense</item>
+        <item>Mapuche</item>
+        <item>Mala</item>
+        <item>Bhoi</item>
+        <item>Puerto Ricans</item>
+        <item> Amerikaners</item>
+        <item>Asiatiese mense</item>
+        <item>Gekleurde persoon</item>
+        <item> Nie-Spaans blankes</item>
+        <item> Inheemse Amerikaners in die Verenigde State</item>
+        <item> Britse mense</item>
+        <item> Wit mense</item>
+        <item>Asiatiese Amerikaners</item>
+        <item>Swart mense</item>
+        <item> Veelrassige mense</item>
+        <item> Montenegrynse</item>
+        <item> Alaska-inboorlinge</item>
+        <item> Inheemse volke</item>
+        <item> Latino</item>
+        <item> Swart Hispanic en Latino-Amerikaners</item>
+        <item> Poli-etnisiteit</item>
+        <item>Spaans en Latyns-Amerikaners</item>
+        <item>Spaans</item>
+        <item>Kaukasiese ras</item>
+        <item>Meksikane</item>
+        <item>Veelrassige Amerikaners</item>
+        <item> Serwiërs</item>
+        <item>Aimag-mense</item>
+        <item>Anatri</item>
+        <item>Gondi-mense</item>
+        <item>Cherkesogai</item>
+        <item>Akan-mense</item>
+        <item>Gemengde Karibiese Eilande</item>
+        <item>Gemengde etniese groep</item>
+        <item>Ander etniese groep</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Manlik</item>
+        <item>Vroulik</item>
+        <item>Transgender</item>
+        <item>Nie-binêr</item>
+    </string-array>
+
+    <string name="label_profile">Profiel</string>
+    <string name="label_group">Groepe</string>
+    <string name="label_parent">Ouer-kind-skakeling</string>
+    <string name="label_scan_qr_code">Skandeer QR-kode</string>
+    <string name="label_Vaccine">Laai entstof op</string>
+    <string name="label_upload_health">Laai gesondheidsinligting op</string>
+    <string name="label_covid_health">Laai toetsinligting op</string>
+    <string name="label_my_qr_code">QR-kode</string>
+    <string name="label_my_test_history">Toetsgeskiedenis</string>
+    <string name="label_travel_form">Reisvorm</string>
+    <string name="label_my_vaccine_history">Entstofgeskiedenis</string>
+    <string name="label_my_vaccine_card">Entstofkaart</string>
+    <string name="label_event">Gebeure</string>
+    <string name="label_health_information">Gesondheidsinligting</string>
+    <string name="label_quarntine">Karantyn</string>
+    <string name="label_travel_information">Reisinligting</string>
+    <string name="label_camera_permission">Aanvaar asseblief die kamera-toestemming om QR-kode te skandeer.</string>
+    <string name="label_location_permission">Aanvaar asseblief die liggingtoestemming om geleentheid te skep.</string>
+    <string name="label_select_time">Kies tyd</string>
+    <string name="label_mobile_number">Mobiele nommer:\u0020</string>
+    <string name="label_profile_city">Stad:\u0020</string>
+    <string name="label_profile_state">Staat:\u0020</string>
+    <string name="label_profile_email">E-pos:\u0020</string>
+    <string name="label_profile_postal_code">Poskode:\u0020</string>
+    <string name="label_profile_country">Land:\u0020</string>
+    <string name="label_profile_address">Verstuuradres:\u0020</string>
+    <string name="label_last_covid_result">Vertoon laaste Covid-toetsresultate</string>
+    <string name="label_last_result">Toetsresultate</string>
+    <string name="label_positive">Positief</string>
+    <string name="label_negative">Negatief</string>
+    <string name="label_pending">Hangende</string>
+    <string name="label_health_info">Gesondheidsinligting</string>
+    <string name="label_health_info_V">Gesondheidsinligting</string>
+    <string name="label_vaccine_info_V">Entstofinligting</string>
+    <string name="label_test_info_V">Toetsinligting</string>
+    <string name="label_no_result_found">Geen resultaat gevind nie</string>
+    <string name="label_or">\u2015 OF \u2015</string>
+    <string name="label_old_password">Ou wagwoord</string>
+    <string name="label_new_password">Nuwe wagwoord</string>
+    <string name="label_confirm_new_password">Bevestig wagwoord</string>
+    <string name="empty_old_password">Voer asseblief \'n ou wagwoord in.</string>
+    <string name="empty_new_password">Voer asseblief \'n nuwe wagwoord in.</string>
+    <string name="empty_confirm_new_password">Voer asseblief \'n Bevestig Wagwoord in.</string>
+    <string name="error_old_password">Voer asseblief \'n geldige ou wagwoord in.</string>
+    <string name="error_confirm_mismatch">Nuwe wagwoord en bevestig wagwoord stem nie ooreen nie.</string>
+    <string name="error_password_mismatch">Ou wagwoord en nuwe wagwoord stem nie ooreen nie.</string>
+    <string name="error_password_change_subtitle">Verander jou nuwe wagwoord</string>
+    <string name="label_edit">Redigeer</string>
+    <string name="label_password_update">Wagwoord suksesvol opgedateer</string>
+    <string name="permission_desc_rational_photo">Rasionele foto</string>
+    <string name="permission_title_photo">Kies foto</string>
+    <string name="btn_proceed">Gaan voort</string>
+    <string name="label_select_image">Kies/neem asseblief \'n prent vas</string>
+    <string name="label_gallery">Galery</string>
+    <string name="label_camera">Kamera</string>
+    <string name="label_terms_condition">Bepalings en voorwaardes</string>
+    <string name="label_privacy_policy">Privaatheidsbeleid</string>
+    <string name="label_accept_terms">Ek stem in tot die Bepalings &amp; Toestand en privaatheidsbeleid</string>
+    <string name="label_select_product">Kies produk*</string>
+    <string name="label_different_billing_address">Verskillende faktuuradres</string>
+    <string name="label_billing_add_1">Faktuuradres 1*</string>
+    <string name="label_billing_add_2">Faktuuradres 2</string>
+    <string name="braintree_key">sandbox_ykkr4m4m_r73ztkz3v64z7wm6</string>
+    <string name="label_passport_number">Paspoortnommer: %s</string>
+
+
+    <string name="hello_blank_fragment">Hallo leë fragment</string>
+    <string name="sign_in">Meld aan</string>
+    <string name="agree_terms_conditions"><![CDATA[Ek stem in oor alle bepalings en voorwaardes en privaatheidsbeleid]]></string>
+    <string name="welcome">Welkom</string>
+    <string name="hint_username_number">Gebruikernaam/Selfoonnommer.</string>
+    <string name="sign_up">Sluit aan</string>
+    <string name="name">Naam</string>
+    <string name="description">Beskrywing</string>
+    <string name="business_exipry_date">Besigheidsvervaldatum</string>
+    <string name="search_here">Soek hier</string>
+    <string name="label_dl">Dl</string>
+    <string name="label_rapid">Vinnige antigeen</string>
+    <string name="rtpcr">RT-PCR</string>
+    <string name="label_result">Resultaat</string>
+    <string name="vaccination_details">Inentingbesonderhede</string>
+    <string name="test_details">Toetsbesonderhede</string>
+    <string name="yes">JA</string>
+    <string name="no">NEE</string>
+    <string name="label_all_events">Alle gebeurtenisse</string>
+    <string name="my_events">My gebeurtenisse</string>
+    <string name="preeti_sharma">Preeti Sharma</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="label_test_status">Toets Status</string>
+    <string name="label_vaccine_status">Entstofstatus</string>
+
+    <string name="delete_event">Is jy seker om hierdie geleentheid uit te vee?</string>
+</resources>

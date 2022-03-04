@@ -1,0 +1,509 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--<string name="app_name">BaseProject</string>-->
+
+    <string name="api_key">AIzaSyD09CYCGjr-h6gCq3ImZe6pnglvuCsGcMU</string>
+
+    <string name="please_wait">Por favor espere</string>
+    <string name="app_name_new" traducible="false">VAXTRAX</string>
+    <string name="email">Correo electrónico / Número de móvil</string>
+    <string name="password">Contraseña</string>
+    <string name="login">Iniciar sesión</string>
+    <string name="msg_valid_email">Ingrese un correo electrónico válido</string>
+    <string name="msg_valid_password">Por favor ingrese la contraseña</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Cerrar</string>
+    <string name="signup">Registrarse</string>
+    <string name="details_screen">Detalles</string>
+    <string name="permissions_denied">Permisos denegados. Permita en la configuración de la aplicación para funcionalidad adicional.</string>
+    <!--Title-->
+    <string name="title_home">Tarea de inicio</string>
+    <string name="title_payment">Monedero de pago</string>
+    <string name="title_whistory">Historial de retiros</string>
+    <string name="title_myteam">Mi equipo</string>
+    <string name="title_installapp">Instalar aplicación</string>
+    <string name="title_noti">Notificación</string>
+    <string name="title_faq">Preguntas frecuentes</string>
+    <string name="title_contactus">Contáctenos</string>
+    <string name="title_refer">Recomendar ganar</string>
+    <string name="title_logout">Cerrar sesión</string>
+
+
+    <!--Error-->
+    <string name="error_message_location">"La ubicación no está definida"</string>
+    <string name="error_message_network">Compruebe su conexión y vuelva a intentarlo.</string>
+    <string name="error_message_call">Llamada fallida</string>
+    <string name="error_message_somethingwrong">Algo salió mal, intente más tarde</string>
+    <string name="error_message_clienterror">Error de cliente</string>
+    <string name="error_message_servererror">Error del servidor</string>
+    <string name="error_message_no_record">No se encontró contenido</string>
+    <string name="error_message_empty">Vaya, no hay resultados para mostrar</string>
+    <string name="error_message_error">Vaya, hubo un error al obtener los datos</string>
+    <string name="error_message_checkagain">Revisar de nuevo</string>
+    <string name="error_message_tryagain">Inténtalo de nuevo</string>
+
+
+    <!--Messages-->
+    <string name="msg_success">Ha iniciado sesión correctamente</string>
+
+    <!--Acción-->
+    <string name="action_save">Guardar</string>
+    <string name="action_cancel">Cancelar</string>
+
+
+    <string name="button_login">Iniciar sesión</string>
+    <string name="button_signup">Registrarse</string>
+
+    <string name="hint_email_or_username">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_phonenumber">Número de móvil</string>
+    <string name="hint_code">Código de referencia</string>
+    <string name="forgot">Olvidé mi contraseña</string>
+    <string name="donthave">¿No tienes una cuenta? <b>¡REGÍSTRESE!</b></string>
+
+    <string name="btn_next">Siguiente</string>
+    <string name="txt_withdraw_amout">Cantidad de retiro</string>
+    <string name="txt_withdraw">Retirar</string>
+    <string name="etx_payment_number">Número de pago</string>
+    <string name="txt_currnet_balance">Saldo actual</string>
+
+    <string name="enable_random_adaptation">Habilitar adaptación aleatoria</string>
+    <string name="error_drm_not_supported">Contenido protegido no compatible con niveles de API inferiores a 18</string>
+    <string name="error_drm_unsupported_scheme">Este dispositivo no es compatible con el esquema DRM requerido</string>
+    <string name="error_drm_unknown">Ocurrió un error DRM desconocido</string>
+    <string name="error_no_decoder">Este dispositivo no proporciona un decodificador para <xliff:g id="mime_type">%1$s</xliff:g></string>
+    <string name="error_no_secure_decoder">Este dispositivo no proporciona un decodificador seguro para <xliff:g id="mime_type">%1$s</xliff:g></string>
+    <string name="error_querying_decoders">No se pueden consultar los decodificadores del dispositivo</string>
+    <string name="error_instantiating_decoder">No se pudo instanciar el decodificador <xliff:g id="decoder_name">%1$s</xliff:g></string>
+    <string name="error_unsupported_video">Los medios incluyen pistas de video, pero este dispositivo no puede reproducir ninguna</string>
+    <string name="error_unsupported_audio">Los medios incluyen pistas de audio, pero este dispositivo no puede reproducir ninguna</string>
+    <string name="storage_permission_denied">Se denegó el permiso para acceder al almacenamiento</string>
+    <string name="sample_list_load_error">Una o más listas de muestras no se pudieron cargar</string>
+    <string name="piker_cam">Cámara</string>
+    <string name="piker_gall">Galería</string>
+    <string name="piker_chosevideo">Elegir video</string>
+    <string name="piker_choseimage">Elegir imagen</string>
+    <string name="txt_file_toolarge">El archivo es demasiado grande. El tamaño máximo es %1$sMB</string>
+    <string name="retry">Reintentar</string>
+    <string name="no_connection">Sin conexión a Internet. Verifique su conexión y vuelva a intentarlo.</string>
+    <string name="no_connection_msg">Por favor, compruebe su conexión a Internet y vuelva a intentarlo</string>
+    <string name="nv_settings">Configuración</string>
+    <string name="nv_home">Inicio</string>
+    <string name="nv_bookmark">Marcador</string>
+    <string name="Failure">Error</string>
+
+
+    <!--  VTG  -->
+    <string name="label_vendor">Vendedor</string>
+    <string name="label_user">Usuario</string>
+
+    <!-- Authentication -->
+    <string name="label_login">Iniciar sesión</string>
+    <string name="label_login_subtext">Mejorando la vida comunitaria</string>
+    <string name="label_email">Correo electrónico</string>
+    <string name="label_password">Contraseña</string>
+    <string name="label_remember_me">Recordarme</string>
+    <string name="label_forgot_password">¿Olvidó su contraseña?</string>
+    <string name="label_forgot_password_title">Olvidé mi contraseña</string>
+    <string name="label_forgot_password_subtext">Confirme su número de móvil y le enviaremos las\n instrucciones.</string>
+    <string name="label_do_sign_up">¿No tienes una cuenta? <u><b><font fgcolor='#1D4792'> Regístrate </font></b></u></string>
+    <string name="label_sign_up"><u>Registrarse</u></string>
+    <string name="label_sign_up1">Registrarse</string>
+    <string name="label_registration">Registro</string>
+    <string name="label_phone_no">Número de móvil</string>
+    <string name="label_phone_no_register">Número de móvil*</string>
+    <string name="label_password_register">Contraseña*</string>
+    <string name="label_register">Registrarse</string>
+    <string name="label_already_sign_in">¿Ya tienes una cuenta? <u><b><font fgcolor='#1D4792'>Iniciar sesión</font></b></u></string>
+    <string name="label_otp">OTP</string>
+    <string name="label_otp_text">Confirma tu correo electrónico y te enviaremos las\n instrucciones.</string>
+    <string name="label_enter_otp_received">Ingrese la OTP que recibió</string>
+    <string name="label_otp_not_received">¿No recibió la OTP?</string>
+    <string name="label_request_otp">Solicitud de uno nuevo en 30 segundos</string>
+    <string name="label_resend_otp"><u><b><font fgcolor='#1D4792'>Reenviar OTP</font></b></u></string>
+    <string name="label_verify">Verificar</string>
+    <string name="label_send">Enviar</string>
+    <string name="label_vendor_login">Soy un proveedor</string>
+    <string name="label_clinic">Soy un laboratorio/clínica</string>
+
+    <!-- Dashboard -->
+    <string name="label_vaccine_history">Historial de vacunas</string>
+    <string name="label_vaccine_card">Tarjeta de vacunas</string>
+    <string name="label_vaccine_qr_code">Código QR</string>
+    <string name="label_covid_test_status">Estado de prueba de COVID</string>
+    <string name="label_test_history">Historial de pruebas</string>
+    <string name="label_test_history_covid">Historial de pruebas de Covid</string>
+    <string name="label_test_upload"> Subir prueba</string>
+    <string name="label_payment_method">Método de pago</string>
+    <string name="label_information">Información</string>
+    <string name="label_upload_document">Subir documento</string>
+    <string name="label_upload_info">Subir información de salud</string>
+    <string name="label_covid_status">Estado de prueba de Covid</string>
+    <string name="label_change_password">Cambiar contraseña</string>
+    <string name="label_events">Eventos</string>
+    <string name="label_vaccine_taken_list">Lista de vacunas</string>
+    <string name="label_upload_file">Subir archivo</string>
+    <string name="label_logout">Cerrar sesión</string>
+    <string name="label_share">Compartir</string>
+    <string name="label_vaccinations">Vacunaciones</string>
+    <string name="label_vaccinations_covid">Prueba de Covid</string>
+    <string name="label_vaccinated_on">Vacunado el</string>
+    <string name="label_test_on">Probado en</string>
+    <string name="label_upload_text">Haga clic para cargar el documento \n(PDF/JPG/PNG Max 5MB)</string>
+    <string name="label_upload_images">Agregar imágenes de banner \n(PDF/JPG/PNG Max 5MB)</string>
+    <string name="label_upload_text_b">Haga clic para cargar negocios \n(PDF/JPG/PNG Max 5MB)</string>
+    <string name="label_doc_name">Documento seleccionado: %s</string>
+    <string name="create">Crear</string>
+    <string name="label_hospital">Instituto:\u0020</string>
+    <string name="label_kit">Equipo de prueba:\u0020</string>
+    <string name="label_date">Fecha:\u0020</string>
+    <string name="label_status">Estado:\u0020</string>
+    <string name="label_test">Prueba:\u0020</string>
+    <string name="label_dose">Dosis:\u0020</string>
+    <string name="label_batch_no_row">NS:\u0020</string>
+    <string name="label_hospital_name">Nombre del laboratorio/clínica</string>
+    <string name="label_batch_no">Lote/Número de serie</string>
+
+    <string name="label_phone_number">Número de móvil del usuario*</string>
+    <string name="label_certify">Certificar</string>
+    <string name="label_fee">Tarifa</string>
+    <string name="label_date1">Fecha</string>
+    <string name="label_time">Tiempo</string>
+    <string name="label_date_time" formatted="false">%d:%d</string>
+    <string name="label_no_data">No hay datos disponibles…</string>
+    <string name="select_type">Tipo de vacuna</string>
+    <string name="select_dose">Seleccionar dosis</string>
+    <string name="select">Seleccionar</string>
+    <string name="label_day">Día</string>
+    <string name="label_thank_you">¡Gracias!</string>
+    <string name="label_uploaded">Subido para revisión</string>
+
+    <string name="label_otp_sent">Otp enviado con éxito.</string>
+    <string name="label_title">Título*</string>
+    <string name="label_event_name">Nombre del evento*</string>
+    <string name="label_start_time">Fecha y hora de inicio</string>
+    <string name="label_end_time">Fecha y hora de finalización</string>
+    <string name="label_private_event">Evento privado</string>
+    <string name="label_about_event">Acerca del evento</string>
+    <string name="label_contact_detail">Detalles de contacto</string>
+    <string name="read_more">Leer más. </string>
+    <string name="read_less">Menos. </string>
+    <string name="label_public_event">Evento público</string>
+    <string name="label_event_Images">Imágenes de eventos</string>
+    <string name="label_description">Descripción</string>
+    <string name="label_gender">Género</string>
+    <string name="select_title">Seleccionar título</string>
+    <string name="select_product">Seleccionar producto</string>
+    <string name="select_gender">Seleccionar género</string>
+    <string name="select_ethnicity">Seleccionar etnicidad</string>
+    <string name="select_citizenship">Seleccionar Ciudadanía</string>
+    <string name="label_given_name">Nombre de pila*</string>
+    <string name="label_given_name_hint">(primero) (medio)</string>
+    <string name="label_first_name">Nombre*</string>
+    <string name="label_last_name">Apellido*</string>
+    <string name="label_dob">Fecha de nacimiento (DOB)</string>
+    <string name="label_test_type">Tipo de prueba</string>
+    <string name="label_test_type_2">Tipo de prueba/vacuna</string>
+    <string name="label_test_kit">Equipo de prueba</string>
+    <string name="label_test_type_1">Tipo de prueba</string>
+    <string name="label_dob_hint">DD/MM/AAAA</string>
+    <string name="label_city_step3"><font size="14">Ciudad*</font></string>
+    <string name="label_place_birth">Lugar de nacimiento</string>
+    <string name="label_city"><font size="14">Ciudad</font></string>
+    <string name="label_state"><font size="14">Estado</font></string>
+    <string name="label_country"><font size="14">País</font></string>
+    <string name="label_country_step3"><font size="14">País*</font></string>
+    <string name="label_citizenship">Ciudadanía</string>
+    <string name="label_ethnicity">Etnicidad</string>
+    <string name="label_website">Sitio web</string>
+    <string name="label_next">Siguiente</string>
+    <string name="label_skip">Omitir</string>
+    <string name="label_show_details">Mostrar detalles</string>
+    <string name="label_ssn">Últimos 4 dígitos del PIN/SSN/NIN/SIN/DNI/CPR/eID/NEI</string>
+    <string name="label_id_number">Número de identificación</string>
+    <string name="label_drivers_license">Licencia de conducir</string>
+    <string name="label_number"><font size="14">Número</font></string>
+    <string name="label_issued_date"><font size="14">Fecha de emisión</font></string>
+    <string name="label_expiry_date"><font size="14">Fecha de vencimiento</font></string>
+    <string name="label_passport">Pasaporte</string>
+    <string name="label_mailing_add_1">Dirección postal 1</string>
+    <string name="label_add_1">Dirección 1</string>
+    <string name="label_add_2">Dirección 2</string>
+    <string name="label_mailing_add_2">Dirección postal 2</string>
+    <string name="label_zip">Código Postal</string>
+    <string name="label_state_provincial">Estatal o Provincial*</string>
+    <string name="label_step1">Paso 1</string>
+    <string name="label_step2">Paso 2</string>
+    <string name="label_step3">Paso 3</string>
+    <string name="label_create_event">Crear evento</string>
+    <string name="label_create_event_loc">Ubicación del evento</string>
+    <string name="label_create_event_review">Detalles de la revisión</string>
+    <string name="label_event_detail">Detalles del evento</string>
+
+    <string name="label_business_name">Nombre de la empresa</string>
+    <string name="label_business_id">Identificación de la empresa</string>
+    <string name="label_employee_id">Id de empleado</string>
+    <string name="label_vat">IVA comercial</string>
+    <string name="label_contact_no">Número de contacto</string>
+    <string name="label_fax">Fax</string>
+
+    <!-- Validations -->
+    <string name="empty_email">Ingrese un correo electrónico.</string>
+    <string name="error_email">Ingrese un correo electrónico válido.</string>
+    <string name="error_event_name">Ingrese el nombre del evento.</string>
+    <string name="empty_phone_email">Ingrese un correo electrónico o un número de teléfono móvil</string>
+    <string name="empty_password">Ingrese una contraseña</string>
+    <string name="error_password">Ingrese una contraseña válida. La contraseña debe contener 8 dígitos. 1 mayúscula, 1 minúscula, 1 carácter especial y 1 dígito.</string>
+    <string name="error_terms_condition">Acepte los Términos y condiciones; Condiciones y Política de Privacidad.</string>
+    <string name="empty_phone">Ingrese un número de móvil</string>
+    <string name="error_phone">Ingrese un número de móvil válido</string>
+    <string name="error_start_time">Ingrese la hora de inicio.</string>
+    <string name="error_end_time">Ingrese la hora de finalización.</string>
+    <string name="empty_otp">Ingrese una OTP.</string>
+    <string name="error_otp">Ingrese una OTP adecuada.</string>
+    <string name="error_select_document">Seleccione un documento.</string>
+    <string name="error_select_dose">Seleccione la dosis.</string>
+    <string name="error_fee">Ingrese una tarifa.</string>
+    <string name="error_select_type">Seleccione un tipo de vacuna.</string>
+    <string name="error_batch_no">Ingrese un número de lote o número de serie</string>
+    <string name="error_select_date">Seleccione una fecha de vacunación.</string>
+    <string name="error_select_time">Seleccione un horario de vacunación.</string>
+    <string name="error_select_test_type_1">Seleccione el tipo de prueba.</string>
+    <string name="error_select_test_kit">Seleccione el tipo de kit utilizado para la prueba.</string>
+    <string name="error_select_test_type">Seleccione el tipo de prueba.</string>
+    <string name="error_hospital_name">Seleccione un nombre de laboratorio/instituto clínico</string>
+    <string name="empty_title">Seleccione el título.</string>
+    <string name="empty_gender">Seleccione género.</string>
+    <string name="empty_given_name">Por favor ingrese el Nombre.</string>
+    <string name="empty_product">Seleccione Producto.</string>
+    <string name="empty_first_name">Ingrese el nombre.</string>
+    <string name="empty_last_name">Por favor ingrese el Apellido.</string>
+    <string name="upload_image">Cargue su imagen de perfil.</string>
+    <string name="empty_dob">Seleccione la fecha de nacimiento.</string>
+    <string name="empty_place_birth_city">Ingrese una ciudad.</string>
+    <string name="empty_place_birth_state">Ingrese un estado.</string>
+    <string name="empty_place_birth_country">Ingrese un país.</string>
+    <string name="empty_citizenship">Ingrese su ciudadanía.</string>
+    <string name="empty_ethnicity">Ingrese un grupo étnico.</string>
+    <string name="empty_ssn">Ingrese los últimos 4 dígitos del Número de Seguro Social.</string>
+    <string name="empty_id_number">Ingrese un número de identificación.</string>
+    <string name="empty_business_name">Ingrese el nombre de la empresa.</string>
+    <string name="empty_business_id">Ingrese la identificación comercial.</string>
+    <string name="empty_employee_id">Ingrese la identificación del empleado.</string>
+    <string name="empty_expiry_date">Ingrese la fecha de vencimiento comercial.</string>
+    <string name="empty_dln">Ingrese su número de licencia de conducir.</string>
+    <string name="empty_dln_state">Seleccione el estado de su licencia de conducir.</string>
+    <string name="empty_dln_country">Seleccione el país de su licencia de conducir.</string>
+    <string name="empty_passport">Por favor ingrese su número de pasaporte.</string>
+    <string name="empty_passport_state">Seleccione el estado de su pasaporte.</string>
+    <string name="empty_passport_country">Seleccione el país de su pasaporte.</string>
+    <string name="empty_dln_issued_date">Seleccione la fecha de emisión de su licencia de conducir.</string>
+    <string name="empty_dln_expiry_date">Seleccione la fecha de vencimiento de su licencia de conducir.</string>
+    <string name="empty_passport_issued_date">Seleccione la fecha de emisión de su pasaporte.</string>
+    <string name="empty_passport_expiry_date">Seleccione la fecha de vencimiento de su pasaporte.</string>
+    <string name="empty_address1">Ingrese una dirección postal 1.</string>
+    <string name="empty_address_1">Ingrese una dirección 1.</string>
+    <string name="empty_address2">Ingrese una dirección postal 2.</string>
+    <string name="empty_address_city">Seleccione una ciudad.</string>
+    <string name="empty_banner_image">Seleccione una imagen de banner para el evento.</string>
+    <string name="empty_address_state">Seleccione un estado o provincia.</string>
+    <string name="empty_address_zip">Ingrese un código postal.</string>
+    <string name="empty_address_country">Seleccione un país.</string>
+    <string name="valid_age">Para registrarse en nuestra aplicación, uno no debe tener menos de 13 años</string>
+    <string name="cancel_event">¿Está seguro de cancelar el evento?</string>
+    <string name="delete_image">¿Desea eliminar esta imagen?</string>
+    <string name="no_location">Ubicación del evento no encontrada.</string>
+    <string name="time">Seleccione fecha y hora futuras.</string>
+
+    <string-array name="title">
+        <item>Señor</item>
+        <item>Señora</item>
+        <item>Señorita</item>
+    </string-array>
+
+    <string-array name="ethnicity">
+           <item>--Seleccionar--    </item>
+           <item>Blanco    </item>
+        <item>afroamericano</item>
+        <item>Indígena americano</item>
+        <item>Abazin</item>
+        <item>Isleño del Pacífico</item>
+        <item>Asia</item>
+        <item>Croatas</item>
+        <item>Británicos blancos</item>
+        <item>Gente Dagaaba</item>
+        <item>Gente Sherbro</item>
+        <item>Al-Ajdam</item>
+        <item>Hawaiano nativo</item>
+        <item>Chino</item>
+        <item>Viajero irlandés</item>
+        <item>indio</item>
+        <item>Caribe Índico</item>
+        <item>Paquistaní</item>
+        <item>Ghanés</item>
+        <item>Luba</item>
+        <item>Congo</item>
+        <item>Mongo</item>
+        <item>Keniano</item>
+        <item>Nigeriano</item>
+        <item>Malayo de Brunéi</item>
+        <item>Namibio</item>
+        <item>Namibio Blanco</item>
+        <item>Namibio negro</item>
+        <item>Sudáfrica</item>
+        <item>Sudafricano Blanco</item>
+        <item>Sudafricano negro</item>
+        <item>Zambiano</item>
+        <item>Zimbabue</item>
+        <item>Botswana</item>
+        <item>Blanco de Botswana</item>
+        <item>Botswana negra</item>
+        <item>Angoleño</item>
+        <item>Bangladesh</item>
+        <item>Gente Murut</item>
+        <item>Caribe Negro</item>
+        <item>Negro Africano</item>
+        <item>Otros negros</item>
+        <item>Británicos negros</item>
+        <item>Hispanos asiáticos y latinoamericanos</item>
+        <item>filipino</item>
+        <item> Poleshuks</item>
+        <item>Criollos de color</item>
+        <item>Orang Kuala</item>
+        <item>europeos</item>
+        <item>Pueblos Indígenas de las Américas</item>
+        <item>Pueblo Lubu</item>
+        <item>Mapuche</item>
+        <item>Mala</item>
+        <item>Bhoi</item>
+        <item>Puertorriqueños</item>
+        <item> americanos</item>
+        <item>Gente asiática</item>
+        <item>Persona de color</item>
+        <item> Blancos no hispanos</item>
+        <item> Nativos americanos en los Estados Unidos</item>
+        <item> Pueblo británico</item>
+        <item> Gente blanca</item>
+        <item>Asiático-americanos</item>
+        <item>Gente negra</item>
+        <item> Personas multirraciales</item>
+        <item> Montenegrinos</item>
+        <item> Nativos de Alaska</item>
+        <item> Pueblos Indígenas</item>
+           <item> latino    </item>
+        <item> Hispanos negros y latinoamericanos</item>
+        <item> Polietnicidad</item>
+        <item>Hispanos y latinoamericanos</item>
+        <item>Hispano</item>
+        <item>Raza caucásica</item>
+        <item>Mexicanos</item>
+        <item>Estadounidenses multirraciales</item>
+        <item> Serbios</item>
+        <item>Personas aimag</item>
+        <item>Anatri</item>
+        <item>Gente Gondi</item>
+        <item>Cherkesogai</item>
+        <item>Gente Akan</item>
+        <item>Caribe mixto</item>
+        <item>Grupo étnico mixto</item>
+        <item>Otro grupo étnico</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Masculino</item>
+        <item>Mujer</item>
+        <item>Transgénero</item>
+        <item>No binario</item>
+    </string-array>
+
+    <string name="label_profile">Perfil</string>
+    <string name="label_group">Grupos</string>
+    <string name="label_parent">Enlace padre-hijo</string>
+    <string name="label_scan_qr_code">Escanear código QR</string>
+    <string name="label_Vaccine">Subir vacuna</string>
+    <string name="label_upload_health">Subir información de salud</string>
+    <string name="label_covid_health">Subir información de prueba</string>
+    <string name="label_my_qr_code">Código QR</string>
+    <string name="label_my_test_history">Historial de pruebas</string>
+    <string name="label_travel_form">Formulario de viaje</string>
+    <string name="label_my_vaccine_history">Historial de vacunas</string>
+    <string name="label_my_vaccine_card">Tarjeta de vacunas</string>
+    <string name="label_event">Eventos</string>
+    <string name="label_health_information">Información de salud</string>
+    <string name="label_quarntine">Cuarentena</string>
+    <string name="label_travel_information">Información de viaje</string>
+    <string name="label_camera_permission">Acepte el permiso de la cámara para escanear el código QR.</string>
+    <string name="label_location_permission">Acepte el permiso de ubicación para crear el evento.</string>
+    <string name="label_select_time">Seleccionar hora</string>
+    <string name="label_mobile_number">Número de móvil:\u0020</string>
+    <string name="label_profile_city">Ciudad:\u0020</string>
+    <string name="label_profile_state">Estado:\u0020</string>
+    <string name="label_profile_email">Correo electrónico:\u0020</string>
+    <string name="label_profile_postal_code">Código postal:\u0020</string>
+    <string name="label_profile_country">País:\u0020</string>
+    <string name="label_profile_address">Dirección de envío:\u0020</string>
+    <string name="label_last_covid_result">Mostrar los últimos resultados de la prueba de Covid</string>
+    <string name="label_last_result">Resultados de la prueba</string>
+    <string name="label_positive">Positivo</string>
+    <string name="label_negative">Negativo</string>
+    <string name="label_pending">Pendiente</string>
+    <string name="label_health_info">Información de salud</string>
+    <string name="label_health_info_V">Información de salud</string>
+    <string name="label_vaccine_info_V">Información sobre la vacuna</string>
+    <string name="label_test_info_V">Información de prueba</string>
+    <string name="label_no_result_found">No se encontró ningún resultado</string>
+    <string name="label_or">\u2015 O \u2015</string>
+    <string name="label_old_password">Contraseña anterior</string>
+    <string name="label_new_password">Nueva contraseña</string>
+    <string name="label_confirm_new_password">Confirmar contraseña</string>
+    <string name="empty_old_password">Ingrese una contraseña anterior.</string>
+    <string name="empty_new_password">Ingrese una nueva contraseña.</string>
+    <string name="empty_confirm_new_password">Ingrese una contraseña de confirmación.</string>
+    <string name="error_old_password">Ingrese una contraseña anterior válida.</string>
+    <string name="error_confirm_mismatch">La contraseña nueva y la contraseña confirmada no coinciden.</string>
+    <string name="error_password_mismatch">La contraseña anterior y la contraseña nueva no coinciden.</string>
+    <string name="error_password_change_subtitle">Cambia tu nueva contraseña</string>
+    <string name="label_edit">Editar</string>
+    <string name="label_password_update">Contraseña actualizada con éxito</string>
+    <string name="permission_desc_rational_photo">Foto Racional</string>
+    <string name="permission_title_photo">Seleccionar foto</string>
+    <string name="btn_proceed">Continuar</string>
+    <string name="label_select_image">Seleccione/capture una imagen</string>
+    <string name="label_gallery">Galería</string>
+    <string name="label_camera">Cámara</string>
+    <string name="label_terms_condition">Términos y condiciones</string>
+    <string name="label_privacy_policy">Política de privacidad</string>
+    <string name="label_accept_terms">Acepto los Términos &amp; Condiciones y Política de Privacidad</string>
+    <string name="label_select_product">Seleccionar producto*</string>
+    <string name="label_different_billing_address">Dirección de facturación diferente</string>
+    <string name="label_billing_add_1">Dirección de facturación 1*</string>
+    <string name="label_billing_add_2">Dirección de facturación 2</string>
+    <string name="braintree_key">sandbox_ykkr4m4m_r73ztkz3v64z7wm6</string>
+    <string name="label_passport_number">Número de pasaporte: %s</string>
+
+
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="sign_in">Iniciar sesión</string>
+    <string name="agree_terms_conditions"><![CDATA[Acepto todos los Términos y condiciones y la Política de privacidad]]></string>
+    <string name="welcome">Bienvenido</string>
+    <string name="hint_username_number">Nombre de usuario/Número de móvil</string>
+    <string name="sign_up">Registrarse</string>
+    <string name="name">Nombre</string>
+    <string name="description">Descripción</string>
+    <string name="business_exipry_date">Fecha de vencimiento comercial</string>
+    <string name="search_here">Buscar aquí</string>
+    <string name="label_dl">Dl</string>
+    <string name="label_rapid">Antígeno rápido</string>
+    <string name="rtpcr">RT-PCR</string>
+    <string name="label_result">Resultado</string>
+    <string name="vaccination_details">Detalles de vacunación</string>
+    <string name="test_details">Detalles de la prueba</string>
+    <string name="yes">SÍ</string>
+    <string name="no">NO</string>
+    <string name="label_all_events">Todos los eventos</string>
+    <string name="my_events">Mis eventos</string>
+    <string name="preeti_sharma">Preeti Sharma</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="label_test_status">Estado de la prueba</string>
+    <string name="label_vaccine_status">Estado de la vacuna</string>
+    <string name="delete_event">¿Estás segura de eliminar este evento?</string>
+</resources>

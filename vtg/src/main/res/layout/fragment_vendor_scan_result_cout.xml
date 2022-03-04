@@ -24,21 +24,69 @@
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginEnd="@dimen/_24sdp"
             android:layout_marginBottom="@dimen/_52sdp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:cardCornerRadius="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf=" parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/iv_status_splash"
-                android:layout_width="233dp"
-                android:layout_height="233dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:translationZ="10dp"
-                android:visibility="visible"
-                app:srcCompat="@drawable/ic_edit" />
+                android:orientation="vertical">
+
+                <com.global.vtg.utils.textView.SemiBoldTextView
+                    android:id="@+id/tvtest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:gravity="center"
+
+                    android:text="@string/label_test_status"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_17ssp" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_status_splash"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:translationZ="10dp"
+                    android:visibility="visible"
+                  />
+
+                <com.global.vtg.utils.textView.SemiBoldTextView
+                    android:id="@+id/tvVacine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:gravity="center"
+                    android:text="@string/label_vaccine_status"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_17ssp" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_status_Vaccine"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+
+                    android:layout_gravity="center_horizontal"
+                    android:translationZ="10dp"
+                    android:visibility="visible"
+                 />
+            </LinearLayout>
+
+
         </androidx.cardview.widget.CardView>
 
         <RelativeLayout
@@ -53,7 +101,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_above="@+id/countDown"
-                android:visibility="visible" >
+                android:visibility="visible">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -304,8 +352,8 @@
                             android:layout_width="30dp"
                             android:layout_height="30dp"
                             android:layout_alignParentEnd="true"
-                            android:layout_marginEnd="@dimen/_10sdp"
                             android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
                             android:tint="@color/colorPrimary"
                             app:srcCompat="@drawable/ic_edit" />
 

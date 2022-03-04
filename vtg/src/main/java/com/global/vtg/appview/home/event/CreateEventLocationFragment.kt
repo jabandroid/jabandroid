@@ -69,6 +69,7 @@ class CreateEventLocationFragment : AppFragment() {
          viewModel.country.postValue(CreateEventFragment.itemEvent.eventAddress!![0].country)
          viewModel.zip.postValue(CreateEventFragment.itemEvent.eventAddress!![0].zipCode)
          viewModel.contactNumber.postValue(CreateEventFragment.itemEvent.eventAddress!![0].phoneNo)
+         viewModel.email.postValue(CreateEventFragment.itemEvent.eventAddress!![0].email)
          viewModel.fax.postValue(CreateEventFragment.itemEvent.eventAddress!![0].fax)
      }else{
          if (!Constants.USER?.address.isNullOrEmpty()) {
@@ -80,6 +81,7 @@ class CreateEventLocationFragment : AppFragment() {
              viewModel.country.postValue(Constants.USER?.address?.get(index)?.country ?: "")
              viewModel.zip.postValue(Constants.USER?.address?.get(index)?.zipCode ?: "")
              viewModel.contactNumber.postValue(Constants.USER?.mobileNo)
+             viewModel.email.postValue(Constants.USER?.email)
 
 
          }

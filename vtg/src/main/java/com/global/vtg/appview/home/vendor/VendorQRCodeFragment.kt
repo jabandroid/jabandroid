@@ -50,7 +50,6 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
         savedInstanceState: Bundle?
     ): View? {
         mScannerView = ZXingScannerView(activity)
-
         return mScannerView
     }
 
@@ -117,7 +116,6 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
         ) { result ->
             if (result) {
                 mScannerView?.startCamera()
-
 
             } else {
                 val builder = AlertDialog.Builder(requireActivity())

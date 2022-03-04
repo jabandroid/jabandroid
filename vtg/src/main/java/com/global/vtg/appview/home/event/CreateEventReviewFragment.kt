@@ -20,6 +20,7 @@ import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.ViewDataBinding
+import com.bumptech.glide.Glide
 import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.config.PickMediaExtensions
 import com.global.vtg.appview.config.getRealPath
@@ -44,6 +45,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.tslogistics.util.AppAlertDialog
 import com.vtg.R
 import com.vtg.databinding.FragmentCreateEventReviewBinding
+import kotlinx.android.synthetic.main.adapter_event_list.view.*
 import kotlinx.android.synthetic.main.fragment_create_event_review.*
 
 import kotlinx.coroutines.Dispatchers
@@ -116,6 +118,23 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
             tvprivateEvent.text = getString(R.string.label_private_event)
         else
             tvprivateEvent.text = getString(R.string.label_public_event)
+
+        if(CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
+            for ( item in CreateEventFragment.itemEvent.eventImage!!){
+                if(item.banner){
+                    viewModel.bannerImage = item.url
+                    Glide.with(activity!!)
+                        .asBitmap()
+                        .load(item.url)
+                        .into(doc_img)
+                    upload.visibility = View.GONE
+                    ivCancel.visibility = View.VISIBLE
+                    doc_img.visibility = View.VISIBLE
+                    break
+                }
+            }
+
+        }
 
         tvLocation.text = CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
                 CreateEventFragment.itemEvent.eventAddress!![0].state + " " +
@@ -230,6 +249,23 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
 
 
                     } else {
+                        val fragments = getAppActivity().supportFragmentManager.fragments
+                        for (frg in fragments) {
+                            if (frg is EventListFragment) {
+                                frg.refreshList()
+                                break
+                            }
+
+                        }
+
+                        for (frg in fragments) {
+                            if (frg is EventListDetailFragment) {
+                                frg.refreshList()
+                                break
+                            }
+
+                        }
+
                         popFragment(3)
                         when (activity) {
                             is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
@@ -278,6 +314,15 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                                 frg.refreshList()
                                 break
                             }
+
+                        }
+
+                        for (frg in fragments) {
+                            if (frg is EventListDetailFragment) {
+                                frg.refreshList()
+                                break
+                            }
+
                         }
 
                         popFragment(3)

@@ -52,7 +52,7 @@ class CreateEventFragment : AppFragment() {
     }
 
     override fun initializeComponent(view: View?) {
-        itemEvent= Event()
+
         viewModel.eventPrivate.postValue(false)
         btnNext.setOnClickListener(this)
         ivBack.setOnClickListener {
@@ -118,6 +118,42 @@ class CreateEventFragment : AppFragment() {
             )
             datePicker.datePicker.minDate = currentCalendar.timeInMillis
             datePicker.show()
+        }
+
+        if(itemEvent.eventName!=null)
+            viewModel.eventName.postValue(itemEvent.eventName)
+
+        if(itemEvent.startDate!=null) {
+            viewModel.startTime=DateUtils.formatDateUTCToLocal(
+                itemEvent.startDate!!,
+                DateUtils.API_DATE_FORMAT_VACCINE,
+                true
+            )
+            tvEventStartTime.text=DateUtils.formatDateUTCToLocal(
+                itemEvent.startDate!!,
+                DateUtils.API_DATE_FORMAT_VACCINE,
+                true
+            )
+        }
+        if(itemEvent.endDate!=null) {
+            viewModel.endTime=DateUtils.formatDateUTCToLocal(
+                itemEvent.startDate!!,
+                DateUtils.API_DATE_FORMAT_VACCINE,
+                true
+            )
+            tvEventEndTime.text=DateUtils.formatDateUTCToLocal(
+                itemEvent.endDate!!,
+                DateUtils.API_DATE_FORMAT_VACCINE,
+                true
+            )
+        }
+
+
+        if(itemEvent.description!=null)
+            viewModel.eventDescription.postValue(itemEvent.description)
+
+        if(itemEvent.privateEvent!=null){
+                viewModel.eventPrivate.postValue(itemEvent.privateEvent)
         }
 
         viewModel.redirectToStep2.observe(this, {

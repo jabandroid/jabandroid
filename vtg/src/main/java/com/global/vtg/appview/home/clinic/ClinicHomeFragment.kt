@@ -41,6 +41,7 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
     private lateinit var viewPager2Adapter: ViewPager2Adapter
     private lateinit var viewPagerDash: ClinicDashboardAdapter
     private var titleList = ArrayList<String>()
+    private var clickedPosition :Int=-1
     private val imagesList = arrayListOf(
         R.drawable.ic_woman, R.drawable.ic_qr_code,R.drawable.ic_health_info,R.drawable.ic_health_information,
           R.drawable.ic_health_info,R.drawable.
@@ -105,6 +106,9 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
                     (activity as ClinicActivity).hideProgressBar()
                     Constants.USER = it.data
                     loadData()
+                    if(clickedPosition!=-1){
+                        onItemClickMain(clickedPosition)
+                    }
                 }
                 is Resource.Error -> {
                     (activity as ClinicActivity).hideProgressBar()
@@ -122,32 +126,37 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
     }
 
     override fun onItemClickMain(position: Int) {
-        when (position) {
-            1 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
-            }
-            2 -> {
-                ToastUtils.shortToast(0,"Coming soon")
-                //addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
-            }
-            3 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_DOCUMENT)
-            }
-            4 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_TEST_UPLOAD)
-            }
-            5 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_HEALTH_INFORMATION)
-            }
-            6 -> {
-                ToastUtils.shortToast(0,"Coming soon")
-            }
-            7 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
-            }
+        clickedPosition=position
+        if(Constants.USER!=null) {
+            when (position) {
+                1 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
+                }
+                2 -> {
+                    ToastUtils.shortToast(0, "Coming soon")
+                    //addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
+                }
+                3 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_DOCUMENT)
+                }
+                4 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_TEST_UPLOAD)
+                }
+                5 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_HEALTH_INFORMATION)
+                }
+                6 -> {
+                    ToastUtils.shortToast(0, "Coming soon")
+                }
+                7 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
+                }
 //            5 -> {
 //                addFragmentInStack<Any>(AppFragmentState.F_PAYMENT)
 //            }
+            }
+        }else{
+            viewModel.getUser()
         }
     }
 

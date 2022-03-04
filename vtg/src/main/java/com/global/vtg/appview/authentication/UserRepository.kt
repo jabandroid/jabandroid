@@ -45,6 +45,7 @@ class UserRepository constructor(
     val getAllEventsLiveData = MutableLiveData<Resource<EventArray>>()
     val getMyEventLiveData = MutableLiveData<Resource<EventArray>>()
     val eventLiveData = MutableLiveData<Resource<Event>>()
+    val eventDeleteLiveData = MutableLiveData<Resource<BaseResult>>()
     val paymentLiveData = MutableLiveData<Resource<BaseResult>>()
     val registerVendorStep2LiveData = MutableLiveData<Resource<ResUser>>()
 
@@ -139,6 +140,17 @@ class UserRepository constructor(
             eventLiveData.postValue(Resource.Success(result))
         } else if (result is BaseError) {
             eventLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun DeleteEvent(modelReq: String) {
+        eventDeleteLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.deleteEvent(modelReq).await() })
+        if (result is BaseResult && result.code=="200") {
+            eventDeleteLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            eventDeleteLiveData.postValue(Resource.Error(result))
         }
     }
 

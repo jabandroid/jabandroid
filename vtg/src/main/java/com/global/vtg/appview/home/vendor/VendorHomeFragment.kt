@@ -37,6 +37,8 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
         R.drawable.ic_travel_information
     )
 
+    private var clickedPosition :Int=-1
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_vendor_dashboard
     }
@@ -89,6 +91,10 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
                     (activity as VendorActivity).hideProgressBar()
                     Constants.USER = it.data
                     loadData()
+
+                    if(clickedPosition!=-1){
+                        onItemClick(clickedPosition)
+                    }
                 }
                 is Resource.Error -> {
                     (activity as VendorActivity).hideProgressBar()
@@ -106,16 +112,21 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        when (position) {
-            0 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
+        clickedPosition=position
+        if(Constants.USER!=null) {
+            when (position) {
+                0 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
+                }
+                1 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
+                }
+                2 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
+                }
             }
-            1 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
-            }
-            2 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
-            }
+        }else{
+            viewModel.getUser()
         }
     }
 

@@ -39,7 +39,8 @@ data class EventAddress (
      @field: SerializedName("country") val country : String,
      @field: SerializedName("phoneNo") val phoneNo : String,
      @field: SerializedName("mobileNo") val mobileNo : String,
-     @field: SerializedName("fax") val fax : String
+     @field: SerializedName("fax") val fax : String,
+     @field: SerializedName("email") val email : String
 )
 
 @Keep

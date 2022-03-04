@@ -108,37 +108,41 @@ Constants.testData
                     }
 
 
+                    if(listName.size>0) {
 
-                    val pagerAdapter = ViewPagerAdapter(activity,barcodeId,countView,listName)
+                        val pagerAdapter =
+                            ViewPagerAdapter(activity, barcodeId, countView, listName)
 
-                    vpPager.adapter = pagerAdapter
+                        vpPager.adapter = pagerAdapter
 
-                    TabLayoutMediator(vpDots, vpPager) { _, _ ->
-                        //Some implementation
-                    }.attach()
+                        TabLayoutMediator(vpDots, vpPager) { _, _ ->
+                            //Some implementation
+                        }.attach()
 
-                    vpPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-                        override fun onPageScrollStateChanged(state: Int) {}
-                        override fun onPageScrolled(
-                            position: Int,
-                            positionOffset: Float,
-                            positionOffsetPixels: Int
-                        ) {
-                        }
+                        vpPager.registerOnPageChangeCallback(object :
+                            ViewPager2.OnPageChangeCallback() {
+                            override fun onPageScrollStateChanged(state: Int) {}
+                            override fun onPageScrolled(
+                                position: Int,
+                                positionOffset: Float,
+                                positionOffsetPixels: Int
+                            ) {
+                            }
 
-                        override fun onPageSelected(position: Int) {
-                            when (position) {
-                                0 -> {
-                                    tvTitle.text=getString(R.string.label_covid_test_status)
-                                }
+                            override fun onPageSelected(position: Int) {
+                                when (position) {
+                                    0 -> {
+                                        tvTitle.text = getString(R.string.label_covid_test_status)
+                                    }
 
-                                else -> {
-                                    tvTitle.text=listName.get(position)
+                                    else -> {
+                                        tvTitle.text = listName.get(position)
 
+                                    }
                                 }
                             }
-                        }
-                    })
+                        })
+                    }
                 }
                 is Resource.Error -> {
                     when (activity) {

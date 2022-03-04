@@ -3,6 +3,7 @@ package com.global.vtg.appview.home.event
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -12,6 +13,9 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
@@ -43,9 +47,26 @@ import io.branch.referral.util.LinkProperties
 import kotlinx.android.synthetic.main.fragment_event_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
+import android.widget.Toast
 
 
-class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageView.OnDeleteImageClick {
+import android.view.ViewGroup
+
+import android.view.LayoutInflater
+import androidx.annotation.Nullable
+import com.global.vtg.appview.home.dashboard.DashboardAdapter
+import com.global.vtg.base.AppFragmentState
+import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.base.fragment.popFragment
+
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.gson.JsonObject
+import com.tslogistics.util.AppAlertDialog
+import kotlinx.android.synthetic.main.bottom_sheet.view.*
+
+
+class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
+    EventImageView.OnDeleteImageClick {
     private lateinit var mFragmentBinding: FragmentEventDetailBinding
     private var mMap: GoogleMap? = null
     private val viewModel by viewModel<EventListDetailViewModel>()
@@ -54,14 +75,14 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
     private var mobile: String = ""
     private var bannerUrl: String = ""
     private var isMyEvent: Boolean = false
-   val requestMultiplePermissionsCall =
-    registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-        permissions.entries.forEach {
-            val intent =
-                Intent(Intent.ACTION_CALL, Uri.parse("tel:$mobile"))
-            startActivity(intent)
+    val requestMultiplePermissionsCall =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            permissions.entries.forEach {
+                val intent =
+                    Intent(Intent.ACTION_CALL, Uri.parse("tel:$mobile"))
+                startActivity(intent)
+            }
         }
-    }
 
     var listOfImages = ArrayList<String>()
     override fun getLayoutId(): Int {
@@ -106,10 +127,40 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
             requestPermissions()
         }
 
-        if(isMyEvent)
-            share.visibility=View.VISIBLE
+        if (isMyEvent) {
+            share.visibility = View.VISIBLE
+            more.visibility = View.VISIBLE
+        }
+        more.setOnClickListener {
+            val bottomSheet = BottomSheetDialog()
+            bottomSheet.setListener(object : BottomSheetDialog.ClickListener {
+                override fun onItemClick(position: Int) {
+                    when (position) {
+                        0 -> {
+                            AppAlertDialog().showAlert(
+                                activity!!,
+                                object : AppAlertDialog.GetClick {
+                                    override fun response(type: String) {
 
-        share.setOnClickListener{
+                                        viewModel.deleteEvent(eventId)
+                                    }
+                                }, getString(R.string.delete_event), "Yes", "No"
+
+                            )
+                        }
+                        1 -> {
+                            addFragmentInStack<Any>(AppFragmentState.F_EVENT_CREATE)
+                        }
+                    }
+                }
+
+            })
+            bottomSheet.show(
+                childFragmentManager,
+                "ModalBottomSheet"
+            )
+        }
+        share.setOnClickListener {
 
             val branchUniversalObject: BranchUniversalObject = BranchUniversalObject()
                 .setCanonicalIdentifier("item/12345")
@@ -126,7 +177,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
 
             var bundle = Bundle()
 
-            bundle.putString("event_id",  eventId)
+            bundle.putString("event_id", eventId)
             branchUniversalObject.generateShortUrl(
                 activity!!,
                 linkProperties,
@@ -146,14 +197,67 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
         }
 
 
+        viewModel.eventDeletelLiveData.observe(this, { resources ->
+            resources?.let {
+                when (it) {
+                    is Resource.Success -> {
+
+
+                        when (activity) {
+                            is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                            is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                            is FragmentReplaceActivity -> (activity as FragmentReplaceActivity).hideProgressBar()
+                            else -> (activity as VendorActivity).hideProgressBar()
+                        }
+
+                        val fragments = getAppActivity().supportFragmentManager.fragments
+                        for (frg in fragments) {
+                            if (frg is EventListFragment) {
+                                frg.refreshList()
+                                break
+                            }
+
+                        }
+
+
+
+                        popFragment(1)
+
+                    }
+                    is Resource.Error -> {
+
+                        when (activity) {
+                            is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                            is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                            is FragmentReplaceActivity -> (activity as FragmentReplaceActivity).hideProgressBar()
+                            else -> (activity as VendorActivity).hideProgressBar()
+                        }
+                        it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                    }
+                    is Resource.Loading -> {
+
+                        when (activity) {
+                            is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                            is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                            is FragmentReplaceActivity -> (activity as FragmentReplaceActivity).hideProgressBar()
+                            else -> (activity as VendorActivity).hideProgressBar()
+                        }
+                    }
+                }
+            }
+        })
+
         viewModel.eventDetailLiveData.observe(this, {
             when (it) {
                 is Resource.Success -> {
-
-                    if(it.data.eventImage!!.isNotEmpty()) {
-                        for ( item in it.data.eventImage){
-                            if(item.banner){
-                                bannerUrl=item.url
+                    CreateEventFragment.itemEvent = it.data
+                    if (it.data.eventImage!!.isNotEmpty()) {
+                        for (item in it.data.eventImage) {
+                            if (item.banner) {
+                                bannerUrl = item.url
                                 Glide.with(activity!!)
                                     .asBitmap()
                                     .load(item.url)
@@ -161,7 +265,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
                                 break
                             }
                         }
-                    }else{
+                    } else {
 
                         Glide.with(activity!!)
                             .asBitmap()
@@ -169,9 +273,9 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
                             .into(doc_img)
                     }
 
-                    doc_img.setOnClickListener{
+                    doc_img.setOnClickListener {
 
-                       val listOfImages = ArrayList<String>()
+                        val listOfImages = ArrayList<String>()
 
                         listOfImages.add(bannerUrl)
                         val intent = Intent(activity!!, ImageViewActivity::class.java)
@@ -190,28 +294,29 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
                                 DateUtils.API_DATE_FORMAT_VACCINE,
                                 true
                             )
-                    }catch(e:Exception){
+                    } catch (e: Exception) {
                         e.printStackTrace()
                     }
                     tvEventName.text = it.data.eventName
-                    eventName=it.data.eventName.toString()
-                    tvName.text=it.data.userFirstName+" "+ it.data.userLastName
-                    if(!TextUtils.isEmpty(it.data.userProfileUrl)){
+
+                    eventName = it.data.eventName.toString()
+                    tvName.text = it.data.userFirstName + " " + it.data.userLastName
+                    if (!TextUtils.isEmpty(it.data.userProfileUrl)) {
                         Glide.with(activity!!)
                             .asBitmap()
                             .load(it.data.userProfileUrl)
                             .into(ivProfilePic)
                     }
-                    if(!TextUtils.isEmpty(it.data.description)){
-                        tvEventDescription.visibility=View.VISIBLE
+                    if (!TextUtils.isEmpty(it.data.description)) {
+                        tvEventDescription.visibility = View.VISIBLE
                         tvEventDescription.text = it.data.description
 //                        tvEventDescription.text = "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before the final copy is available. It is also used to temporarily replace text in a process called greeking, which allows designers to consider the form of a webpage or publication, without the meaning of the text influencing the design.\n" +
 //                                "\n" +
 //                                "Lorem ipsum is typically a corrupted version of De finibus bonorum et malorum, a 1st-century BC text by the Roman statesman and philosopher Cicero, with words altered, added, and removed to make it nonsensical and improper Latin."
                     }
 
-                    phone.text= it.data.eventAddress!![0].mobileNo
-                    mobile=it.data.eventAddress!![0].mobileNo
+                    phone.text = it.data.eventAddress!![0].mobileNo
+                    mobile = it.data.eventAddress!![0].mobileNo
                     tvLocation.text = it.data.eventAddress!![0].addr1 + " " +
                             it.data.eventAddress!![0].addr2 + " " +
                             it.data.eventAddress!![0].city + " " +
@@ -223,7 +328,10 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
                             it.data.eventAddress!![0].city + " " +
                             it.data.eventAddress!![0].country + " "
 
-
+                    if (!TextUtils.isEmpty(it.data.eventAddress!![0].email))
+                        tvEmail.text = it.data.eventAddress!![0].email
+                    else
+                        tvEmail.text = "testevent@gmail.com"
                     val location = getLocationFromAddress(activity!!, address)
                     val markerOptions = MarkerOptions()
                     if (location != null) {
@@ -232,18 +340,19 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
                         mMap!!.addMarker(markerOptions)
                         mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
                     }
-                    if(it.data.eventImage.isNotEmpty()) {
+                    cvUploadImages.removeAllViews()
+                    if (it.data.eventImage.isNotEmpty()) {
                         for (item in it.data.eventImage) {
                             if (!item.banner) {
-                                eventAddImages.visibility=View.VISIBLE
-                                images_container.visibility=View.VISIBLE
+                                eventAddImages.visibility = View.VISIBLE
+                                images_container.visibility = View.VISIBLE
                                 val v =
                                     EventImageView(
                                         activity!!,
-                                        null,item.url,
+                                        null, item.url,
                                         0,
                                         false,
-                              this,
+                                        this,
                                         cvUploadImages
                                     )
 
@@ -254,8 +363,24 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
                         }
                     }
 
-                    direction.setOnClickListener{
-                        if(location!=null) {
+                    tvEmail.setOnClickListener {
+                        val i = Intent(Intent.ACTION_SEND)
+                        i.type = "message/rfc822"
+                        i.putExtra(Intent.EXTRA_EMAIL, arrayOf(tvEmail.text.toString()))
+
+                        try {
+                            startActivity(Intent.createChooser(i, "Send mail..."))
+                        } catch (ex: ActivityNotFoundException) {
+                            Toast.makeText(
+                                activity,
+                                "There are no email clients installed.",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+
+                    direction.setOnClickListener {
+                        if (location != null) {
                             val google = StringBuilder()
                             google.append("&daddr=")
                                 .append(location.latitude.toString() + "," + location.longitude)
@@ -269,14 +394,14 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
                             )
 
                             startActivity(intent)
-                        }else{
-                            DialogUtils.toast(activity!!,getString(R.string.no_location))
+                        } else {
+                            DialogUtils.toast(activity!!, getString(R.string.no_location))
                         }
 
                     }
 
 
-                    phone.setOnClickListener{
+                    phone.setOnClickListener {
                         if (ActivityCompat.checkSelfPermission(
                                 requireActivity(),
                                 Manifest.permission.CALL_PHONE
@@ -325,13 +450,16 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
 
     private fun initMapView() {
 
-        val mapFragment: WorkaroundMapFragment = childFragmentManager.findFragmentById(R.id.map_frag) as WorkaroundMapFragment
+        val mapFragment: WorkaroundMapFragment =
+            childFragmentManager.findFragmentById(R.id.map_frag) as WorkaroundMapFragment
 
         mapFragment!!.getMapAsync(this)
-        mapFragment.setListener { WorkaroundMapFragment.OnTouchListener {
-            scroll.requestDisallowInterceptTouchEvent(true);
+        mapFragment.setListener {
+            WorkaroundMapFragment.OnTouchListener {
+                scroll.requestDisallowInterceptTouchEvent(true);
 
-        } }
+            }
+        }
 
     }
 
@@ -358,7 +486,6 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
             mMap!!.isMyLocationEnabled = true
 
 
-
         }
 
 
@@ -378,8 +505,6 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
                     Log.e("DEBUG", "${it.key} = ${it.value}")
 
                     mMap!!.isMyLocationEnabled = true
-
-               
 
 
                 }
@@ -403,7 +528,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
             arrayOf(
                 Manifest.permission.CALL_PHONE,
 
-            )
+                )
         )
 
 
@@ -443,8 +568,43 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback, EventImageVie
     }
 
 
+    class BottomSheetDialog : BottomSheetDialogFragment() {
+        private lateinit var listener: ClickListener
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            @Nullable container: ViewGroup?,
+            @Nullable savedInstanceState: Bundle?
+        ): View? {
+            val v: View = inflater.inflate(
+                R.layout.bottom_sheet,
+                container, false
+            )
 
+            v.delete.setOnClickListener(View.OnClickListener {
+                listener.onItemClick(0)
+                dismiss()
+            })
+            v.edit.setOnClickListener(View.OnClickListener {
+                listener.onItemClick(1)
+                dismiss()
 
+            })
+            return v
+        }
+
+        fun setListener(l: ClickListener) {
+            this.listener = l
+        }
+
+        interface ClickListener {
+            fun onItemClick(position: Int)
+        }
+    }
+
+    public fun refreshList() {
+        if (!TextUtils.isEmpty(eventId))
+            viewModel.callEventDetails(eventId)
+    }
 
 
 }

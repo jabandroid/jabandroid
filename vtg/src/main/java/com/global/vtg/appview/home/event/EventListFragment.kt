@@ -47,10 +47,13 @@ class EventListFragment : AppFragment() {
     }
 
     override fun initializeComponent(view: View?) {
+
+        CreateEventFragment.itemEvent = Event()
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
         viewModel.redirectToCreate.observe(this, {
+            CreateEventFragment.itemEvent = Event()
             addFragmentInStack<Any>(AppFragmentState.F_EVENT_CREATE)
             // addFragmentInStack<Any>(AppFragmentState.F_EVENT_CREATE_REVIEW)
         })

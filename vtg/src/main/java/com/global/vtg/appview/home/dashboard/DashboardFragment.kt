@@ -36,6 +36,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
     private lateinit var viewPager2Adapter: ViewPager2Adapter
     private lateinit var viewPagerDash: ViewPagerDashAdapter
 
+    private var clickedPosition: Int = -1
     private val client = OkHttpClient()
 
 
@@ -68,7 +69,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
 
         viewPagerDash.setImages(
             arrayListOf(
-                "1","2"
+                "1", "2"
             )
         )
 
@@ -93,6 +94,9 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                     (activity as HomeActivity).hideProgressBar()
                     Constants.USER = it.data
                     loadData()
+                    if(clickedPosition!=-1){
+                        onItemClickMain(clickedPosition)
+                    }
                 }
                 is Resource.Error -> {
                     (activity as HomeActivity).hideProgressBar()
@@ -108,7 +112,6 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
     override fun pageVisible() {
 
     }
-
 
 
     private fun loadData() {
@@ -133,36 +136,42 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
     }
 
     override fun onItemClickMain(position: Int) {
-        when (position) {
-            1 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
-            }
-            2 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_VACCINE_HISTORY)
-            }
-            3 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_VACCINE_QR_CODE)
+        clickedPosition = position
+        if (Constants.USER != null) {
+            when (position) {
+                1 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
+                }
+                2 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_VACCINE_HISTORY)
+                }
+                3 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_VACCINE_QR_CODE)
 
-            }
-            4 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_TEST_BASE)
+                }
+                4 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_TEST_BASE)
 
-            }
-            5 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_VACCINE_CARD)
-            }
-            6 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_HEALTH_INFORMATION)
-            }
-           11 -> {
-                addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
-            }
-            else ->{
-                ToastUtils.shortToast(0,"Coming soon")
-            }
+                }
+                5 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_VACCINE_CARD)
+                }
+                6 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_HEALTH_INFORMATION)
+                }
+                11 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
+                }
+                else -> {
+                    ToastUtils.shortToast(0, "Coming soon")
+                }
+
 //            5 -> {
 //                addFragmentInStack<Any>(AppFragmentState.F_PAYMENT)
 //            }
+        }
+        }else{
+            viewModel.getUser()
         }
     }
 

@@ -26,6 +26,7 @@ class CreateEventLocationViewModel(
     var country: MutableLiveData<String> = MutableLiveData()
     var contactNumber: MutableLiveData<String> = MutableLiveData()
     var fax: MutableLiveData<String> = MutableLiveData()
+    var email: MutableLiveData<String> = MutableLiveData()
 
     var showToastError: MutableLiveData<String> = MutableLiveData()
     var redirectToStep3: MutableLiveData<Boolean> = MutableLiveData()
@@ -44,7 +45,9 @@ class CreateEventLocationViewModel(
                         country.value!!,
                         contactNumber.value!!,
                         contactNumber.value!!,
-                        if (!TextUtils.isEmpty(fax.value)) fax.value.toString() else ""
+
+                        if (!TextUtils.isEmpty(fax.value)) fax.value.toString() else "",
+                        if (!TextUtils.isEmpty(email.value)) email.value.toString() else "",
                     )
                     val list = ArrayList<EventAddress>()
                     list.add(itemAddress)
@@ -80,6 +83,10 @@ class CreateEventLocationViewModel(
             }
             isNullOrEmpty(contactNumber.value) -> {
                 showToastError.postValue(App.instance?.getString(R.string.empty_phone))
+                isValidate = false
+            }
+            isNullOrEmpty(email.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.empty_email))
                 isValidate = false
             }
 

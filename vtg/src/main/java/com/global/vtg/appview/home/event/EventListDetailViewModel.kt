@@ -38,16 +38,23 @@ class EventListDetailViewModel(
 ) : AppViewModel(application) {
 
     val eventDetailLiveData = MutableLiveData<Resource<Event>>()
+    val eventDeletelLiveData = MutableLiveData<Resource<BaseResult>>()
 
     var showToastError: MutableLiveData<String> = MutableLiveData()
     private val eventObserver = Observer<Resource<Event>> {
         eventDetailLiveData.postValue(it)
+    }
+    private val eventDelete = Observer<Resource<BaseResult>> {
+        eventDeletelLiveData.postValue(it)
     }
 
     init {
 
         userRepository.eventLiveData.postValue(null)
         userRepository.eventLiveData.observeForever(eventObserver)
+
+        userRepository.eventDeleteLiveData.postValue(null)
+        userRepository.eventDeleteLiveData.observeForever(eventDelete)
 
     }
 
@@ -67,6 +74,11 @@ class EventListDetailViewModel(
     fun callEventDetails(obj:String) {
         scope.launch {
             userRepository.CallEventID(obj)
+        }
+    }
+    fun deleteEvent(obj:String) {
+        scope.launch {
+            userRepository.DeleteEvent(obj)
         }
     }
 }
