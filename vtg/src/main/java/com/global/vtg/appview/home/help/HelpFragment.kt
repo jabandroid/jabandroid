@@ -1,6 +1,8 @@
 package com.global.vtg.appview.home.help
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Rect
@@ -8,21 +10,29 @@ import android.graphics.RectF
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import com.github.sumimakito.awesomeqr.AwesomeQrRenderer
 import com.github.sumimakito.awesomeqr.option.RenderOption
 import com.github.sumimakito.awesomeqr.option.background.StillBackground
 import com.github.sumimakito.awesomeqr.option.color.Color
 import com.github.sumimakito.awesomeqr.option.logo.Logo
+import com.global.vtg.appview.home.ClinicActivity
+import com.global.vtg.appview.home.HomeActivity
+import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.utils.Constants
+import com.global.vtg.utils.SharedPreferenceUtil
 import com.google.zxing.WriterException
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
+import com.tslogistics.util.AppAlertDialog
 import com.vtg.R
 import com.vtg.databinding.FragmentHelpBinding
 import com.vtg.databinding.FragmentVaccineQrCodeBinding
 import kotlinx.android.synthetic.main.fragment_vaccine_qr_code.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 
 class HelpFragment : AppFragment() {
@@ -56,6 +66,40 @@ class HelpFragment : AppFragment() {
 
         viewModel.terms.observe(this, {
             viewHtml(Constants.TERMS_CONDITION)
+        })
+
+        viewModel.setting.observe(this, {
+         when(it){
+             "language"->{
+                 AppAlertDialog().ShowLanguage(
+                     activity!! as AppCompatActivity,
+                     object : AppAlertDialog.GetClick {
+                         override fun response(type: String) {
+                             val locale = Locale(type)
+                             Locale.setDefault(locale)
+                             val resources: Resources = activity!!.resources
+                             val config: Configuration = resources.configuration
+                             config.setLocale(locale)
+                             resources.updateConfiguration(config, resources.displayMetrics)
+                             val role = SharedPreferenceUtil.getInstance(getAppActivity())
+                                 ?.getData(PreferenceManager.KEY_ROLE, "user")
+
+                             SharedPreferenceUtil.getInstance(getAppActivity())!!.saveData(PreferenceManager.KEY_LAN_CODE,type)
+                             if (role?.equals("user") == true )
+                                 startActivity(Intent(activity!!, HomeActivity::class.java))
+                             else if  (role?.equals("clinic") == true)
+                                 startActivity(Intent(activity!!, ClinicActivity::class.java))
+                             else
+                                 startActivity(Intent(activity!!, VendorActivity::class.java))
+                         }
+                     }
+
+                 )
+             }
+             "about_us"->{
+
+             }
+         }
         })
     }
 

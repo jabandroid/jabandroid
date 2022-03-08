@@ -97,6 +97,7 @@ data class ResUser(
     @field:SerializedName("barcodeUrl")
     val barcodeUrl: String? = null,
 
+
     @field:SerializedName("healthInfo")
     val healthInfo: ArrayList<HealthInfo>? = null,
 
@@ -106,10 +107,10 @@ data class ResUser(
     @field:SerializedName("barcodeId")
     val barcodeId: String? = null,
 
+    @field:SerializedName("barcodeUUID")
+    val barcodeUUID: String? = null,
+
     @field:SerializedName("vendorVerify")
     val vendorVerify: String? = null,
-
-
-
 
 ): BaseResult()

@@ -1,6 +1,7 @@
 package com.global.vtg.appview.home.vendor
 
 import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,22 +14,33 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.core.app.ActivityCompat
 import androidx.databinding.ViewDataBinding
+
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragment
 import com.global.vtg.utils.Constants
+import com.global.vtg.utils.DialogUtils
 import com.google.zxing.Result
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorQrBinding
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner
+import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner.OnResultListener
+
+import com.global.vtg.appview.MainActivity
+
+import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder
+
+
+
 
 
 class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
     private lateinit var mFragmentBinding: FragmentVendorQrBinding
     private val viewModel by viewModel<VendorQRViewModel>()
     private var mScannerView: ZXingScannerView? = null
-
+    private val REQUEST_CODE_QR_SCAN = 101
     override fun getLayoutId(): Int {
         return R.layout.fragment_vendor_qr
     }
@@ -60,8 +72,7 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
 
     override fun initializeComponent(view: View?) {
 
-//        mScannerView!! .setAspectTolerance(0.5f);
-//        mScannerView!! .setAutoFocus(true);
+
         Constants.isSpalsh=true
 //        val bundle = Bundle()
 //        bundle.putString(Constants.BUNDLE_BARCODE_ID, "82847153710119821642744528894")
@@ -69,6 +80,25 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
 
         if(checkPermissions()){
             mScannerView?.startCamera()
+//            val i = Intent(activity!!, QrCodeActivity::class.java)
+//            startActivityForResult(i, REQUEST_CODE_QR_SCAN)
+
+
+//            val materialBarcodeScanner = MaterialBarcodeScannerBuilder()
+//                .withActivity(activity!!)
+//                .withEnableAutoFocus(true)
+//                .withBleepEnabled(true)
+//                .withBackfacingCamera()
+//
+//                .withText("Scanning...")
+//                .withResultListener { barcode ->
+//                  var  barcodeResult = barcode
+//
+//
+//                }
+//                .build()
+//            materialBarcodeScanner.startScan()
+
         }else{
             requestPermissions()
         }
@@ -97,6 +127,8 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
     override fun pageVisible() {
 
     }
+
+
 
     // method to check for permissions
     private fun checkPermissions(): Boolean {
@@ -133,8 +165,6 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
                     intent.data = uri
                     startActivity(intent)
                 }
-
-
                 builder.show()
             }
         }
@@ -159,8 +189,13 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
 //    }
 
     override fun handleResult(rawResult: Result?) {
+
         val bundle = Bundle()
         bundle.putString(Constants.BUNDLE_BARCODE_ID, rawResult?.text.toString())
+//        DialogUtils.showSnackBar(
+////            activity,
+////            rawResult?.text.toString()
+////        )
         addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
     }
 
@@ -168,6 +203,5 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
         super.onPause()
         mScannerView?.stopCamera()
     }
-
 
 }

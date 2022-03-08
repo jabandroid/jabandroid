@@ -63,7 +63,10 @@ Constants.testData
         }
 
         if (isNetworkAvailable(activity!!)) {
-
+//            DialogUtils.showSnackBar(
+//                activity,
+//                barcodeId
+//            )
             viewModel.getDataFromBarcodeId(barcodeId)
         } else {
             DialogUtils.showSnackBar(
@@ -108,7 +111,7 @@ Constants.testData
                     }
 
 
-                    if(listName.size>0) {
+                    if(listName.size>1) {
 
                         val pagerAdapter =
                             ViewPagerAdapter(activity, barcodeId, countView, listName)

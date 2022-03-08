@@ -77,12 +77,12 @@ class VaccineQRCodeFragment : AppFragment() {
         color.auto = false
 //
         val background = StillBackground()
-        background.bitmap = BitmapFactory.decodeResource(context?.resources, R.mipmap.logo_vtg)
+        background.bitmap = BitmapFactory.decodeResource(context?.resources, R.mipmap.qr_code)
         background.clippingRect = Rect(0, 0, 150,150) // crop the background before applying
         background.alpha = 1f
         val logo = Logo()
         try {
-            val bitmap = BitmapFactory.decodeResource(context?.resources, R.mipmap.logo_vtg)
+            val bitmap = BitmapFactory.decodeResource(context?.resources, R.mipmap.qr_code)
             logo.bitmap = bitmap
         } catch (e: WriterException) {
             e.printStackTrace()

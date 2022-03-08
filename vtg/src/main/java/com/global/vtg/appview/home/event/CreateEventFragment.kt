@@ -5,6 +5,7 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.os.Looper
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.appview.home.changepassword.ChangePasswordViewModel
 import com.global.vtg.base.AppFragment
@@ -119,7 +120,19 @@ class CreateEventFragment : AppFragment() {
             datePicker.datePicker.minDate = currentCalendar.timeInMillis
             datePicker.show()
         }
-
+        tvPrivateEvent.setTextColor(ContextCompat.getColor(activity!!,R.color.gray))
+        lock.setBackgroundResource(R.drawable.ic_icon_awesome_unlock)
+        togglePrivate.setOnClickListener{
+            if(togglePrivate.isChecked){
+                lock.setBackgroundResource(R.drawable.ic_icon_awesome_lock)
+                viewModel.eventPrivate.postValue(true)
+                tvPrivateEvent.setTextColor(ContextCompat.getColor(activity!!,R.color.toggle))
+            }else{
+                lock.setBackgroundResource(R.drawable.ic_icon_awesome_unlock)
+                viewModel.eventPrivate.postValue(false)
+                tvPrivateEvent.setTextColor(ContextCompat.getColor(activity!!,R.color.gray))
+            }
+        }
         if(itemEvent.eventName!=null)
             viewModel.eventName.postValue(itemEvent.eventName)
 
@@ -137,7 +150,7 @@ class CreateEventFragment : AppFragment() {
         }
         if(itemEvent.endDate!=null) {
             viewModel.endTime=DateUtils.formatDateUTCToLocal(
-                itemEvent.startDate!!,
+                itemEvent.endDate!!,
                 DateUtils.API_DATE_FORMAT_VACCINE,
                 true
             )
@@ -154,6 +167,13 @@ class CreateEventFragment : AppFragment() {
 
         if(itemEvent.privateEvent!=null){
                 viewModel.eventPrivate.postValue(itemEvent.privateEvent)
+            if(itemEvent.privateEvent!!){
+                lock.setBackgroundResource(R.drawable.ic_icon_awesome_unlock)
+                tvPrivateEvent.setTextColor(ContextCompat.getColor(activity!!,R.color.toggle))
+            }else{
+                lock.setBackgroundResource(R.drawable.ic_icon_awesome_lock)
+                tvPrivateEvent.setTextColor(ContextCompat.getColor(activity!!,R.color.gray))
+            }
         }
 
         viewModel.redirectToStep2.observe(this, {

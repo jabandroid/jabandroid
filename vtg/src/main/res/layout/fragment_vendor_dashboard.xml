@@ -103,6 +103,7 @@
                         android:layout_width="@dimen/_24sdp"
                         android:layout_height="@dimen/_24sdp"
                         android:padding="@dimen/_4sdp"
+                        android:visibility="gone"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/ivBell"
                         app:layout_constraintTop_toTopOf="parent"
@@ -127,7 +128,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_question" />
+                        app:srcCompat="@drawable/ic_baseline_settings_24" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

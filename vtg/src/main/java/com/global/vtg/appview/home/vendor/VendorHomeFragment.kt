@@ -16,13 +16,8 @@ import com.global.vtg.utils.DialogUtils
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorDashboardBinding
-import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.android.synthetic.main.fragment_dashboard.ivQrCode
 
-import kotlinx.android.synthetic.main.fragment_dashboard.tvCountry
-import kotlinx.android.synthetic.main.fragment_dashboard.tvState
-import kotlinx.android.synthetic.main.fragment_dashboard.viewPager
-import kotlinx.android.synthetic.main.fragment_dashboard.vpDots
+
 import kotlinx.android.synthetic.main.fragment_vendor_dashboard.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -32,7 +27,7 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
     private lateinit var viewPager2Adapter: ViewPager2Adapter
     private var titleList = ArrayList<String>()
     private val imagesList = arrayListOf(
-        R.drawable.ic_woman, R.drawable.ic_vaccine_history,
+        R.drawable.ic_woman, R.drawable.ic_qr_code,
         R.drawable.ic_event, R.drawable.ic_qr_code, R.drawable.ic_health_information,
         R.drawable.ic_travel_information
     )
@@ -65,6 +60,11 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
         TabLayoutMediator(vpDots, viewPager) { _, _ ->
             //Some implementation
         }.attach()
+
+        ivHelp.setOnClickListener {
+            addFragmentInStack<Any>(AppFragmentState.F_HELP)
+        }
+
 
         viewPager2Adapter.setImages(
             arrayListOf(
@@ -112,8 +112,9 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
     }
 
     override fun onItemClick(position: Int) {
-        clickedPosition=position
+
         if(Constants.USER!=null) {
+            clickedPosition=-1
             when (position) {
                 0 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
@@ -126,6 +127,7 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
                 }
             }
         }else{
+            clickedPosition=position
             viewModel.getUser()
         }
     }

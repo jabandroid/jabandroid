@@ -63,6 +63,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:textColor="@color/white"
+                        android:text="@string/label_settings"
                         android:textSize="@dimen/_18ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -96,6 +97,39 @@
             android:layout_margin="@dimen/_4sdp"
             app:layout_constraintTop_toBottomOf="@+id/clToolbar"
             android:orientation="vertical">
+
+            <com.global.vtg.utils.textView.SemiBoldTextView
+                android:id="@+id/tvLanguage"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_12sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel::onClick}"
+                android:text="@string/label_lanaguage"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="@color/gray_light"/>
+            <com.global.vtg.utils.textView.SemiBoldTextView
+                android:id="@+id/tvAboutUs"
+                android:layout_width="match_parent"
+                android:padding="@dimen/_12sdp"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:onClick="@{viewModel::onClick}"
+                android:text="@string/label_about_us"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_8sdp"
+                android:background="@color/gray_light"/>
 
             <com.global.vtg.utils.textView.SemiBoldTextView
                 android:id="@+id/tvTerms"

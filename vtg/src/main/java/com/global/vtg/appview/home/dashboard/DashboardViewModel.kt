@@ -15,10 +15,10 @@ import kotlinx.coroutines.launch
 
 class DashboardViewModel (application: Application, private val userRepository: UserRepository) : AppViewModel(application) {
 
-    val userConfigLiveData = MutableLiveData<Resource<ResUser>>()
+    val userConfigLiveData1 = MutableLiveData<Resource<ResUser>>()
 
     private val userObserver = Observer<Resource<ResUser>> {
-        userConfigLiveData.postValue(it)
+        userConfigLiveData1.postValue(it)
     }
 
     init {
@@ -47,5 +47,6 @@ class DashboardViewModel (application: Application, private val userRepository: 
     override fun onCleared() {
         super.onCleared()
         userRepository.userConfigLiveData.removeObserver(userObserver)
+
     }
 }

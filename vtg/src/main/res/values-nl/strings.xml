@@ -521,4 +521,32 @@
     <string name="label_test_status">Teststatus</string>
     <string name="label_vaccine_status">Vaccinstatus</string>
     <string name="delete_event">Weet je zeker dat je dit evenement wilt verwijderen?</string>
+    <string name="label_email_govt">E-mail/overheids-ID</string>
+    <string name="label_settings">Instellingen</string>
+    <string name="label_lanaguage">Taal</string>
+    <string name="label_about_us">Over de VS</string>
+    <string name="label_choose_your_lanquage">Kies je voorkeurstaal</string>
+
+    <string-array name="lanuage">
+        <item>English</item>
+        <item>Vertaling</item>
+        <item>ترجمة</item>
+        <item>Vertaling</item>
+        <item>Traduction</item>
+        <item>Tradução</item>
+        <item>Traducción</item>
+        <item>Tafsiri</item>
+    </string-array>
+
+    <string-array name="lanuage_1">
+        <item>Engels</item>
+        <item>Afrikaans</item>
+        <item>Arabisch</item>
+        <item>Nederlands</item>
+        <item>Frans</item>
+        <item>Portugees</item>
+        <item>Spaans</item>
+        <item>Swahili</item>
+    </string-array>
+    <string name="label_continue">Doorgaan</string>
 </resources>

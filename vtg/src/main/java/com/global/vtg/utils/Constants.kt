@@ -171,4 +171,5 @@ fun EditText.setDrawableRightTouch(setClickListener: () -> Unit) {
         }
         false
     })
+
 }

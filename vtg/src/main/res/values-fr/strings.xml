@@ -518,4 +518,33 @@
     <string name="label_test_status">Statut du test</string>
     <string name="label_vaccine_status">Statut vaccinal</string>
     <string name="delete_event">Voulez-vous vraiment supprimer cet événement ?</string>
+    <string name="label_email_govt">E-mail/Identifiant gouvernemental</string>
+    <string name="label_settings">Paramètres</string>
+    <string name="label_lanaguage">Langue</string>
+    <string name="label_about_us">À propos de nous</string>
+    <string name="label_choose_your_lanquage">Choisissez votre langue préférée</string>
+
+    <string-array name="lanuage">
+        <item>English</item>
+        <item>Vertaling</item>
+        <item>ترجمة</item>
+        <item>Vertaling</item>
+        <item>Traduction</item>
+        <item>Tradução</item>
+        <item>Traducción</item>
+        <item>Tafsiri</item>
+    </string-array>
+
+    <string-array name="lanuage_1">
+        <item>Anglais</item>
+        <item>Afrikaans</item>
+        <item>Arabe</item>
+        <item>néerlandais</item>
+        <item>Français</item>
+        <item>portugais</item>
+        <item>Espagnol</item>
+        <item>Swahili</item>
+    </string-array>
+
+    <string name="label_continue">Continuez</string>
 </resources>

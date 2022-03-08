@@ -12,8 +12,8 @@ data class EventArray (
 
 @Keep
 data class Event (
-     @field: SerializedName("userId") var userId : Int? = null,
-     @field: SerializedName("id") var eventID : Int? = null,
+     @field: SerializedName("userId") var userId : String? = null,
+     @field: SerializedName("id") var eventID : String? = "",
      @field: SerializedName("eventName") var eventName : String ? = null,
      @field: SerializedName("userFirstName") var userFirstName : String ? = null,
      @field: SerializedName("userLastName") var userLastName : String ? = null,

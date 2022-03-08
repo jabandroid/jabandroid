@@ -100,7 +100,7 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
             )
         )
 
-        viewModel.userConfigLiveData.observe(this, {
+        viewModel.userConfigLiveData1.observe(this, {
             when (it) {
                 is Resource.Success -> {
                     (activity as ClinicActivity).hideProgressBar()
@@ -126,8 +126,9 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
     }
 
     override fun onItemClickMain(position: Int) {
-        clickedPosition=position
+
         if(Constants.USER!=null) {
+            clickedPosition=-1
             when (position) {
                 1 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
@@ -156,6 +157,7 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
 //            }
             }
         }else{
+            clickedPosition=position
             viewModel.getUser()
         }
     }

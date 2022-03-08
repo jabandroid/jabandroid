@@ -522,6 +522,33 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="label_test_status">Status do teste</string>
     <string name="label_vaccine_status">Status da vacina</string>
-
+    <string name="label_email_govt">E-mail/ID do governo</string>
     <string name="delete_event">Tem certeza de que deseja excluir este evento?</string>
+    <string name="label_settings">Configurações</string>
+    <string name="label_lanaguage">Idioma</string>
+    <string name="label_about_us">Sobre os EUA</string>
+    <string name="label_choose_your_lanquage">Escolha seu idioma preferido</string>
+
+    <string-array name="lanuage">
+        <item>English</item>
+        <item>Vertaling</item>
+        <item>ترجمة</item>
+        <item>Vertaling</item>
+        <item>Traduction</item>
+        <item>Tradução</item>
+        <item>Traducción</item>
+        <item>Tafsiri</item>
+    </string-array>
+
+    <string-array name="lanuage_1">
+        <item>Inglês</item>
+        <item>Africâner</item>
+        <item>Árabe</item>
+        <item>Holandês</item>
+        <item>Francês</item>
+        <item>Português</item>
+        <item>Espanhol</item>
+        <item>Suaíli</item>
+    </string-array>
+    <string name="label_continue">Continuar</string>
 </resources>

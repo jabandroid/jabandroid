@@ -88,7 +88,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
         )
 
 
-        viewModel.userConfigLiveData.observe(this, {
+        viewModel.userConfigLiveData1.observe(this, {
             when (it) {
                 is Resource.Success -> {
                     (activity as HomeActivity).hideProgressBar()
@@ -136,8 +136,9 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
     }
 
     override fun onItemClickMain(position: Int) {
-        clickedPosition = position
+
         if (Constants.USER != null) {
+            clickedPosition=-1
             when (position) {
                 1 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
@@ -171,6 +172,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
 //            }
         }
         }else{
+            clickedPosition = position
             viewModel.getUser()
         }
     }

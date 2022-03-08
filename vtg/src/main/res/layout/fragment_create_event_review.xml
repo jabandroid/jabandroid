@@ -108,6 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_16sdp"
+                android:paddingBottom="@dimen/_16sdp"
                 android:orientation="vertical">
 
 
@@ -273,6 +274,7 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="20dp"
+                        android:id="@+id/lock"
                         android:layout_height="20dp"
                         android:src="@drawable/ic_baseline_lock_24"
                         android:tint="@color/light_blue" />
@@ -336,10 +338,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_35sdp"
                     android:layout_marginEnd="@dimen/_24sdp"
                     android:orientation="horizontal"
                     android:weightSum="2"
+                    android:gravity="center"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/images_container">
 
@@ -347,7 +350,7 @@
                         android:id="@+id/btnNext"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_8sdp"
+
                         android:layout_weight="1"
                         android:background="@drawable/rounded_button_global"
                         android:onClick="@{viewModel::onClick}"
@@ -359,8 +362,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        android:layout_marginTop="@dimen/_8sdp"
+
                         android:layout_weight="1"
+
                         android:background="@drawable/rounded_button_global"
                         android:backgroundTint="@color/gray_dark"
                         android:onClick="@{viewModel::onClick}"

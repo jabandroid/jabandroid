@@ -278,7 +278,7 @@ class VendorScanResultCountFragment : AppFragment() {
                 DateUtils.formatDateUTCToLocal(
                     it,
                     DateUtils.API_DATE_FORMAT_VACCINE,
-                    DateUtils.DDMMYYYY,
+                    true
                 )
             }
 
@@ -562,9 +562,7 @@ class VendorScanResultCountFragment : AppFragment() {
                         }
                         2 -> {
                             Glide.with(getAppActivity())
-                                .asGif()
-                                .load(R.mipmap.gif_verified)
-                                .load(R.drawable.ic_check_circle)
+                                .asBitmap().load(R.drawable.ic_drawable_tick)
                                 .into(iv_status_Vaccine)
                         }
                         3 -> {
@@ -629,7 +627,7 @@ class VendorScanResultCountFragment : AppFragment() {
                             val anim: Animation =
                                 AnimationUtils.loadAnimation(context, R.anim.fade_in)
                             anim.repeatCount = 0
-                            anim.duration = 1800
+                            anim.duration = 800
                             iv_status_Vaccine.startAnimation(anim)
                             anim.setAnimationListener(object : Animation.AnimationListener {
                                 override fun onAnimationStart(anim: Animation) {}

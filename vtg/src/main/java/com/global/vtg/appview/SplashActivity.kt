@@ -1,6 +1,8 @@
 package com.global.vtg.appview
 
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Handler
 import android.text.TextUtils
@@ -22,6 +24,7 @@ import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
 
 import io.branch.referral.Branch
+import java.util.*
 
 
 class SplashActivity : AppActivity() {
@@ -42,6 +45,17 @@ class SplashActivity : AppActivity() {
             ?.getData(PreferenceManager.KEY_USER_LOGGED_IN, false)
         val role = SharedPreferenceUtil.getInstance(getAppActivity())
             ?.getData(PreferenceManager.KEY_ROLE, "user")
+        val code = SharedPreferenceUtil.getInstance(getAppActivity())
+            ?.getData(PreferenceManager.KEY_LAN_CODE, "en")
+
+        val locale = Locale(code)
+        Locale.setDefault(locale)
+        val resources: Resources = resources
+        val config: Configuration = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+
 
         Handler().postDelayed({
             if (isUserLoggedIn == false)

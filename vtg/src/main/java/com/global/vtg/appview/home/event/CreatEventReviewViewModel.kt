@@ -71,7 +71,7 @@ class CreatEventReviewViewModel(
                 KeyboardUtils.hideKeyboard(view)
                 if (!TextUtils.isEmpty(bannerImage)) {
                     if (isNetworkAvailable(view.context)) {
-                        CreateEventFragment.itemEvent.userId = Constants.USER!!.id
+                        CreateEventFragment.itemEvent.userId = Constants.USER!!.id.toString()
                         CreateEventFragment.itemEvent.startDate = DateUtils.formatLocalToUtc(
                             CreateEventFragment.itemEvent.startDate!!,
                             true,

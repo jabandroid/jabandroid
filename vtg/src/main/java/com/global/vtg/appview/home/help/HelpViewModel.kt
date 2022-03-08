@@ -11,6 +11,7 @@ class HelpViewModel(application: Application, private val userRepository: UserRe
     AppViewModel(application) {
     val terms: MutableLiveData<Boolean> = MutableLiveData()
     val policy: MutableLiveData<Boolean> = MutableLiveData()
+    val setting: MutableLiveData<String> = MutableLiveData()
 
     fun onClick(view: View) {
         when (view.id) {
@@ -19,6 +20,12 @@ class HelpViewModel(application: Application, private val userRepository: UserRe
             }
             R.id.tvPolicy -> {
                 policy.postValue(true)
+            }
+            R.id.tvLanguage -> {
+                setting.postValue("language")
+            }
+            R.id.tvAboutUs -> {
+                setting.postValue("about_us")
             }
         }
     }

@@ -13,6 +13,7 @@ import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -47,6 +48,15 @@ import com.vtg.R
 import com.vtg.databinding.FragmentCreateEventReviewBinding
 import kotlinx.android.synthetic.main.adapter_event_list.view.*
 import kotlinx.android.synthetic.main.fragment_create_event_review.*
+import kotlinx.android.synthetic.main.fragment_create_event_review.cvUploadImages
+import kotlinx.android.synthetic.main.fragment_create_event_review.doc_img
+import kotlinx.android.synthetic.main.fragment_create_event_review.eventAddImages
+import kotlinx.android.synthetic.main.fragment_create_event_review.images_container
+import kotlinx.android.synthetic.main.fragment_create_event_review.ivBack
+import kotlinx.android.synthetic.main.fragment_create_event_review.tvDate
+import kotlinx.android.synthetic.main.fragment_create_event_review.tvEventName
+import kotlinx.android.synthetic.main.fragment_create_event_review.tvLocation
+import kotlinx.android.synthetic.main.fragment_event_detail.*
 
 import kotlinx.coroutines.Dispatchers
 
@@ -114,26 +124,62 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
 
         tvDate.text = CreateEventFragment.itemEvent.startDate
         tvEventName.text = CreateEventFragment.itemEvent.eventName
-        if (CreateEventFragment.itemEvent.privateEvent!!)
+        if (CreateEventFragment.itemEvent.privateEvent!!) {
             tvprivateEvent.text = getString(R.string.label_private_event)
-        else
+
+            lock.setBackgroundResource(R.drawable.ic_icon_awesome_lock)
+        }
+        else {
+            lock.setBackgroundResource(R.drawable.ic_icon_awesome_unlock)
             tvprivateEvent.text = getString(R.string.label_public_event)
 
-        if(CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
-            for ( item in CreateEventFragment.itemEvent.eventImage!!){
-                if(item.banner){
-                    viewModel.bannerImage = item.url
-                    Glide.with(activity!!)
-                        .asBitmap()
-                        .load(item.url)
-                        .into(doc_img)
-                    upload.visibility = View.GONE
-                    ivCancel.visibility = View.VISIBLE
-                    doc_img.visibility = View.VISIBLE
-                    break
-                }
+        }
+try {
+    if (CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
+        for (item in CreateEventFragment.itemEvent.eventImage!!) {
+            if (item.banner) {
+                viewModel.bannerImage = item.url
+                Glide.with(activity!!)
+                    .asBitmap()
+                    .load(item.url)
+                    .into(doc_img)
+                upload.visibility = View.GONE
+                ivCancel.visibility = View.VISIBLE
+                doc_img.visibility = View.VISIBLE
+                break
             }
+        }
 
+    }
+
+
+    if (CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
+        for (item in CreateEventFragment.itemEvent.eventImage!!) {
+            if (!item.banner) {
+                eventAddImages.visibility = View.VISIBLE
+                images_container.visibility = View.VISIBLE
+                val v =
+                    EventImageViewCreate(
+                        activity!!,
+                        null,item.url,
+                        count,
+                        false,
+                        CreateEventReviewFragment(),
+                        cvUploadImages
+                    )
+
+                cvUploadImages.addView(v,0)
+
+            }
+        }
+    }
+}catch (e:Exception){
+    e.printStackTrace()
+}
+
+        if(!TextUtils.isEmpty(CreateEventFragment.itemEvent.eventID)){
+            btnNext.text=getString(R.string.action_save)
+            btnCancel.visibility=View.GONE
         }
 
         tvLocation.text = CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
@@ -338,7 +384,6 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                     }
                     is Resource.Loading -> {
                         when (activity) {
-
                             is HomeActivity -> (activity as HomeActivity).showProgressBar()
                             is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
                             else -> (activity as VendorActivity).showProgressBar()

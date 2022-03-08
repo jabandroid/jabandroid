@@ -512,6 +512,34 @@
     <string name="title_activity_maps">Shughuli ya Ramani</string>
     <string name="label_test_status">Hali ya Mtihani</string>
     <string name="label_vaccine_status">Hali ya Chanjo</string>
-
+    <string name="label_email_govt">Barua pepe/Kitambulisho cha Serikali</string>
     <string name="delete_event">Je, una uhakika wa kufuta tukio hili?</string>
+
+    <string name="label_settings">Mipangilio</string>
+    <string name="label_lanaguage">Lugha</string>
+    <string name="label_about_us">Kuhusu Marekani</string>
+    <string name="label_choose_your_lanquage">Chagua lugha unayopendelea</string>
+
+    <string-array name="lanuage">
+        <item>English</item>
+        <item>Vertaling</item>
+        <item>ترجمة</item>
+        <item>Vertaling</item>
+        <item>Traduction</item>
+        <item>Tradução</item>
+        <item>Traducción</item>
+        <item>Tafsiri</item>
+    </string-array>
+
+    <string-array name="lanuage_1">
+        <item>Kiingereza</item>
+        <item>Kiafrikana</item>
+        <item>Kiarabu</item>
+        <item>Kiholanzi</item>
+        <item>Kifaransa</item>
+        <item>Kireno</item>
+        <item>Kihispania</item>
+        <item>Kiswahili</item>
+    </string-array>
+    <string name="label_continue">label_endelea</string>
 </resources>

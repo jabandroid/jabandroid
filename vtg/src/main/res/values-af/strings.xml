@@ -521,6 +521,33 @@
     <string name="title_activity_maps">MapsActivity</string>
     <string name="label_test_status">Toets Status</string>
     <string name="label_vaccine_status">Entstofstatus</string>
-
+    <string name="label_email_govt">E-pos/regerings-ID</string>
     <string name="delete_event">Is jy seker om hierdie geleentheid uit te vee?</string>
+    <string name="label_settings">Instellings</string>
+    <string name="label_lanaguage">Taal</string>
+    <string name="label_about_us">Oor ons</string>
+    <string name="label_choose_your_lanquage">Kies jou voorkeurtaal</string>
+
+    <string-array name="lanuage">
+        <item>English</item>
+        <item>Vertaling</item>
+        <item>ترجمة</item>
+        <item>Vertaling</item>
+        <item>Traduction</item>
+        <item>Tradução</item>
+        <item>Traducción</item>
+        <item>Tafsiri</item>
+    </string-array>
+
+    <string-array name="lanuage_1">
+        <item>Engels</item>
+        <item>Afrikaans</item>
+        <item>Arabies</item>
+        <item>Nederlands</item>
+        <item>Frans</item>
+        <item>Portugees</item>
+        <item>Spaans</item>
+        <item>Swahili</item>
+    </string-array>
+    <string name="label_continue">Aanhou</string>
 </resources>

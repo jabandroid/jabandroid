@@ -327,6 +327,7 @@
                     android:background="#B9F1F7FB"
                     android:paddingStart="4dp"
                     android:paddingTop="10dp"
+                    android:visibility="gone"
                     android:paddingBottom="10dp"
                     android:text="@string/label_about_event"
                     android:textColor="@color/colorPrimary"
@@ -362,7 +363,7 @@
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEventName"
+                    app:layout_constraintTop_toBottomOf="@+id/location"
                     app:readMoreColor="@color/colorPrimary"
                     app:readMoreMaxLine="4" />
 
@@ -374,7 +375,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEventDescription">
+                    app:layout_constraintTop_toBottomOf="@+id/tvEventName">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="20dp"
@@ -434,7 +435,7 @@
                     android:layout_marginEnd="@dimen/_24sdp"
                     android:background="@color/light_gray"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/location">
+                    app:layout_constraintTop_toBottomOf="@+id/tvEventDescription">
 
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/map_frag"
