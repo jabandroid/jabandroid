@@ -21,6 +21,7 @@ import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.config.PickMediaExtensions
@@ -71,6 +72,10 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.io.IOException
+import androidx.lifecycle.ViewModelProviders
+
+
+
 
 
 class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
@@ -82,7 +87,9 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
     private var eventID: String = ""
     private var isBanner: Boolean = false
     var count: Int = 0
-
+    var selectedPosion: Int = 0
+    lateinit var selectedLayout: LinearLayout
+    var imageServer: HashMap<Int, String> = HashMap()
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_create_event_review
@@ -114,72 +121,71 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
         vAddNew =
             EventImageViewCreate(
                 activity!!,
-                null,"",
+                null, "", "",
                 0,
                 true,
                 this,
                 cvUploadImages
             )
         cvUploadImages.addView(vAddNew)
-
+        selectedLayout=cvUploadImages
         tvDate.text = CreateEventFragment.itemEvent.startDate
         tvEventName.text = CreateEventFragment.itemEvent.eventName
         if (CreateEventFragment.itemEvent.privateEvent!!) {
             tvprivateEvent.text = getString(R.string.label_private_event)
 
             lock.setBackgroundResource(R.drawable.ic_icon_awesome_lock)
-        }
-        else {
+        } else {
             lock.setBackgroundResource(R.drawable.ic_icon_awesome_unlock)
             tvprivateEvent.text = getString(R.string.label_public_event)
 
         }
-try {
-    if (CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
-        for (item in CreateEventFragment.itemEvent.eventImage!!) {
-            if (item.banner) {
-                viewModel.bannerImage = item.url
-                Glide.with(activity!!)
-                    .asBitmap()
-                    .load(item.url)
-                    .into(doc_img)
-                upload.visibility = View.GONE
-                ivCancel.visibility = View.VISIBLE
-                doc_img.visibility = View.VISIBLE
-                break
-            }
-        }
-
-    }
-
-
-    if (CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
-        for (item in CreateEventFragment.itemEvent.eventImage!!) {
-            if (!item.banner) {
-                eventAddImages.visibility = View.VISIBLE
-                images_container.visibility = View.VISIBLE
-                val v =
-                    EventImageViewCreate(
-                        activity!!,
-                        null,item.url,
-                        count,
-                        false,
-                        CreateEventReviewFragment(),
-                        cvUploadImages
-                    )
-
-                cvUploadImages.addView(v,0)
+        try {
+            if (CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
+                for (item in CreateEventFragment.itemEvent.eventImage!!) {
+                    if (item.banner) {
+                        viewModel.bannerImage = item.url
+                        Glide.with(activity!!)
+                            .asBitmap()
+                            .load(item.url)
+                            .into(doc_img)
+                        upload.visibility = View.GONE
+                        ivCancel.visibility = View.VISIBLE
+                        doc_img.visibility = View.VISIBLE
+                        break
+                    }
+                }
 
             }
-        }
-    }
-}catch (e:Exception){
-    e.printStackTrace()
-}
 
-        if(!TextUtils.isEmpty(CreateEventFragment.itemEvent.eventID)){
-            btnNext.text=getString(R.string.action_save)
-            btnCancel.visibility=View.GONE
+
+            if (CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
+                for (item in CreateEventFragment.itemEvent.eventImage!!) {
+                    if (!item.banner) {
+                        eventAddImages.visibility = View.VISIBLE
+                        images_container.visibility = View.VISIBLE
+                        val v =
+                            EventImageViewCreate(
+                                activity!!,
+                                null, item.url, item.id,
+                                count,
+                                false,
+                                CreateEventReviewFragment(),
+                                cvUploadImages
+                            )
+
+                        cvUploadImages.addView(v, 0)
+
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        if (!TextUtils.isEmpty(CreateEventFragment.itemEvent.eventID)) {
+            btnNext.text = getString(R.string.action_save)
+            btnCancel.visibility = View.GONE
         }
 
         tvLocation.text = CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
@@ -255,10 +261,10 @@ try {
             when (it) {
                 is Resource.Success -> {
                     eventID = it.data.eventID.toString()
-                    var part:  MutableMap<String, RequestBody>  =HashMap()
+                    var part: MutableMap<String, RequestBody> = HashMap()
 
                     val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
-                    builder.addFormDataPart("eventId",eventID)
+                    builder.addFormDataPart("eventId", eventID)
 
                     if (images.size > 0) {
                         val file: File
@@ -280,9 +286,9 @@ try {
                             if (item != "Banner") {
 
                                 isBanner = false
-                                val  filek = File(images[item]!!)
+                                val filek = File(images[item]!!)
                                 builder.addFormDataPart(
-                                    "image"+count,
+                                    "image" + count,
                                     filek.name,
                                     filek.asRequestBody(MultipartBody.FORM)
                                 )
@@ -372,6 +378,38 @@ try {
                         }
 
                         popFragment(3)
+
+                    }
+                    is Resource.Error -> {
+                        when (activity) {
+                            is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                            else -> (activity as VendorActivity).hideProgressBar()
+                        }
+                        it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                    }
+                    is Resource.Loading -> {
+                        when (activity) {
+                            is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                            else -> (activity as VendorActivity).showProgressBar()
+                        }
+                    }
+                }
+            }
+        })
+
+        viewModel.deletPicData.observe(this, { resources ->
+            resources?.let {
+                when (it) {
+                    is Resource.Success -> {
+
+                        when (activity) {
+                            is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                            else -> (activity as VendorActivity).hideProgressBar()
+                        }
+                        selectedLayout.removeViewAt(selectedPosion)
 
                     }
                     is Resource.Error -> {
@@ -509,14 +547,22 @@ try {
         return p1
     }
 
-    override fun onDeleteClick(item: Int, ll: LinearLayout) {
-        images.remove("image" + item)
-        ll.removeViewAt(item)
-        count = images.size
-        if (images.containsKey("Banner"))
-            count--
+    override fun onDeleteClick(item: Int, ll: LinearLayout, url: String) {
+        if (TextUtils.isEmpty(url)) {
+            images.remove("image" + item)
+            ll.removeViewAt(item)
+            count = images.size
+            if (images.containsKey("Banner"))
+                count--
+        } else {
+            ll.removeViewAt(item)
 
-        CreateEventReviewFragment.vAddNew.showAdd(vAddNew)
+        }
+
+
+
+
+        //CreateEventReviewFragment.vAddNew.showAdd(vAddNew)
 //        AppAlertDialog().showAlert(
 //            activity!!,
 //            object : AppAlertDialog.GetClick {
@@ -610,7 +656,7 @@ try {
                 val v =
                     EventImageViewCreate(
                         activity!!,
-                        bitmap,"",
+                        bitmap, "", "",
                         count,
                         false,
                         CreateEventReviewFragment(),

@@ -51,11 +51,20 @@ class CreatEventReviewViewModel(
     private val userObserver = Observer<Resource<BaseResult>> {
         userLiveData.postValue(it)
     }
+
+    val deletPicData = MutableLiveData<Resource<BaseResult>>()
+
+    private val delete = Observer<Resource<BaseResult>> {
+        deletPicData.postValue(it)
+    }
     init {
 
 
         userRepository.createEventLiveData.postValue(null)
         userRepository.createEventLiveData.observeForever(eventObserver)
+
+        userRepository.eventDeletePicLiveData.postValue(null)
+        userRepository.eventDeletePicLiveData.observeForever(delete)
     }
 
     init {
@@ -119,6 +128,12 @@ class CreatEventReviewViewModel(
         scope.launch {
             val eventID = eventId.toRequestBody("text/plain".toMediaTypeOrNull())
             userRepository.uploadEventImages(part, eventID)
+        }
+    }
+
+     fun deletePic(id:String) {
+        scope.launch {
+            userRepository.deleteEventPic(id)
         }
     }
 }

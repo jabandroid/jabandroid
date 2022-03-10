@@ -103,26 +103,32 @@ class SignInFragment : AppFragment() {
             viewModel.code.value = ccp.selectedCountryCode
             viewModel.region = ccp.selectedCountryNameCode
         }
+
+        tvLogin.text=getString(R.string.user_login)
+
         viewModel.isVendor.observe(this, {
             swVendor.visibility = View.VISIBLE
 
-            if (it == true)
+            if (it == true) {
+                tvLogin.text=getString(R.string.vendor_login)
                 swIsClinic.visibility = View.INVISIBLE
-            else
+            }
+            else {
+                tvLogin.text=getString(R.string.user_login)
                 swIsClinic.visibility = View.VISIBLE
+            }
 
-//            swIsClinic.visibility = if (it == true) {
-//                View.VISIBLE
-//            } else {
-//                View.GONE
-//            }
         })
         viewModel.isClinic.observe(this, {
             swIsClinic.visibility = View.VISIBLE
-            if (it == true)
+            if (it == true) {
+                tvLogin.text=getString(R.string.clinic_login)
                 swVendor.visibility = View.INVISIBLE
-            else
+            }
+            else {
+                tvLogin.text=getString(R.string.user_login)
                 swVendor.visibility = View.VISIBLE
+            }
 
         })
 

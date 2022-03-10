@@ -160,6 +160,8 @@ interface ApiInterface {
     @DELETE("api/v1/event/{eventId}")
     fun deleteEvent(@Path("eventId") barcodeId: String): Deferred<Response<BaseResult>>
 
+    @DELETE("api/v1/event/profile/{id}")
+    fun deleteEventPic(@Path("id") barcodeId: String): Deferred<Response<BaseResult>>
 //@Multipart
 //    @PUT("api/v1/event/profile")
 //    fun uploadEventImages(

@@ -535,4 +535,12 @@
     </string-array>
 
     <string name="label_continue">Continuar</string>
+    <string name="user_login"> Inicio de sesión de usuario</string>
+    <string name="user_Reg"> Registro de usuario</string>
+
+    <string name="vendor_login"> Inicio de sesión del proveedor</string>
+    <string name="vendor_reg"> Registro de proveedores</string>
+
+    <string name="clinic_login"> Inicio de sesión en la clínica</string>
+    <string name="clinic_reg"> Registro de la Clínica</string>
 </resources>

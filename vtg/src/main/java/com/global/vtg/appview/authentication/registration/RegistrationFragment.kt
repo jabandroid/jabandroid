@@ -123,13 +123,17 @@ class RegistrationFragment : AppFragment() {
         }
         viewModel.code.value = ccp.defaultCountryCode
         viewModel.region = ccp.defaultCountryNameCode
-
+        tvRegistration.text=getString(R.string.user_Reg)
         viewModel.isVendor.observe(this, {
             swVendor.visibility=View.VISIBLE
-            if (it == true)
-                swClinic.visibility=View.INVISIBLE
-            else
-                swClinic.visibility=View.VISIBLE
+            if (it == true) {
+                tvRegistration.text=getString(R.string.vendor_reg)
+                swClinic.visibility = View.INVISIBLE
+            }
+            else {
+                 tvRegistration.text=getString(R.string.user_Reg)
+                swClinic.visibility = View.VISIBLE
+            }
 
 //            swIsClinic.visibility = if (it == true) {
 //                View.VISIBLE
@@ -139,10 +143,14 @@ class RegistrationFragment : AppFragment() {
         })
         viewModel.isClinic.observe(this, {
             swClinic.visibility=View.VISIBLE
-            if (it == true)
-                swVendor.visibility=View.INVISIBLE
-            else
-                swVendor.visibility=View.VISIBLE
+            if (it == true) {
+                tvRegistration.text=getString(R.string.clinic_reg)
+                swVendor.visibility = View.INVISIBLE
+            }
+            else {
+                tvRegistration.text=getString(R.string.user_Reg)
+                swVendor.visibility = View.VISIBLE
+            }
 
         })
 

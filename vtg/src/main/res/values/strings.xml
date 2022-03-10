@@ -551,4 +551,13 @@
 
     <string name="label_continue">Continue</string>
 
+
+    <string name="user_login"> User Login</string>
+    <string name="user_Reg"> User Registration</string>
+
+    <string name="vendor_login"> Vendor Login</string>
+    <string name="vendor_reg"> Vendor Registration</string>
+
+    <string name="clinic_login"> Clinic Login</string>
+    <string name="clinic_reg"> Clinic Registration</string>
 </resources>

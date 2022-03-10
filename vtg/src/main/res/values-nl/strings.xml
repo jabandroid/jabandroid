@@ -549,4 +549,12 @@
         <item>Swahili</item>
     </string-array>
     <string name="label_continue">Doorgaan</string>
+    <string name="user_login"> Gebruikerslogin</string>
+    <string name="user_Reg"> Gebruikersregistratie</string>
+
+    <string name="vendor_login"> Aanmelding verkoper</string>
+    <string name="vendor_reg"> Leveranciersregistratie</string>
+
+    <string name="clinic_login">Kliniekaanmelding</string>
+    <string name="clinic_reg">Kliniekregistratie</string>
 </resources>

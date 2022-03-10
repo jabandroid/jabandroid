@@ -542,4 +542,12 @@
         <item>Kiswahili</item>
     </string-array>
     <string name="label_continue">label_endelea</string>
+    <string name="user_login"> Ingia kwa Mtumiaji</string>
+    <string name="user_Reg"> Usajili wa Mtumiaji</string>
+
+    <string name="vendor_login"> Ingia kwa Muuzaji</string>
+    <string name="vendor_reg"> Usajili wa Muuzaji</string>
+
+    <string name="clinic_login"> Ingia kwenye Kliniki</string>
+    <string name="clinic_reg"> Usajili wa Kliniki</string>
 </resources>

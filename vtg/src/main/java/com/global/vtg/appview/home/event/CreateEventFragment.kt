@@ -168,12 +168,15 @@ class CreateEventFragment : AppFragment() {
         if(itemEvent.privateEvent!=null){
                 viewModel.eventPrivate.postValue(itemEvent.privateEvent)
             if(itemEvent.privateEvent!!){
-                lock.setBackgroundResource(R.drawable.ic_icon_awesome_unlock)
+                lock.setBackgroundResource(R.drawable.ic_icon_awesome_lock)
                 tvPrivateEvent.setTextColor(ContextCompat.getColor(activity!!,R.color.toggle))
             }else{
-                lock.setBackgroundResource(R.drawable.ic_icon_awesome_lock)
+                lock.setBackgroundResource(R.drawable.ic_icon_awesome_unlock)
                 tvPrivateEvent.setTextColor(ContextCompat.getColor(activity!!,R.color.gray))
             }
+        }else{
+            lock.setBackgroundResource(R.drawable.ic_icon_awesome_unlock)
+            tvPrivateEvent.setTextColor(ContextCompat.getColor(activity!!,R.color.gray))
         }
 
         viewModel.redirectToStep2.observe(this, {

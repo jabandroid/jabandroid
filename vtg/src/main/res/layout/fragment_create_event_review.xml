@@ -276,7 +276,7 @@
                         android:layout_width="20dp"
                         android:id="@+id/lock"
                         android:layout_height="20dp"
-                        android:src="@drawable/ic_baseline_lock_24"
+
                         android:tint="@color/light_blue" />
 
                     <com.global.vtg.utils.textView.RegularTextView

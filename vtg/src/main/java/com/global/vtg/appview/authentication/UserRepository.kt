@@ -46,6 +46,7 @@ class UserRepository constructor(
     val getMyEventLiveData = MutableLiveData<Resource<EventArray>>()
     val eventLiveData = MutableLiveData<Resource<Event>>()
     val eventDeleteLiveData = MutableLiveData<Resource<BaseResult>>()
+    val eventDeletePicLiveData = MutableLiveData<Resource<BaseResult>>()
     val paymentLiveData = MutableLiveData<Resource<BaseResult>>()
     val registerVendorStep2LiveData = MutableLiveData<Resource<ResUser>>()
 
@@ -110,6 +111,7 @@ class UserRepository constructor(
         }
     }
 
+
     suspend fun CallEvents(modelReq: JsonObject) {
         getAllEventsLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result =
@@ -153,6 +155,18 @@ class UserRepository constructor(
             eventDeleteLiveData.postValue(Resource.Error(result))
         }
     }
+
+    suspend fun deleteEventPic(modelReq: String) {
+        eventDeletePicLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.deleteEventPic(modelReq).await() })
+        if (result is Event && result.code=="200") {
+            eventDeletePicLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            eventDeletePicLiveData.postValue(Resource.Error(result))
+        }
+    }
+
 
     suspend fun forgotPassword(modelReq: ReqRegistration) {
         userProfilePicLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))

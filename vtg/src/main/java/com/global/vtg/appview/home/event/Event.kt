@@ -47,5 +47,6 @@ data class EventAddress (
 data class EventImage (
 
      @field: SerializedName("url") val url : String,
+     @field: SerializedName("id") val id : String,
      @field: SerializedName("banner") val banner : Boolean
 )
