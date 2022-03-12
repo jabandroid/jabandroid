@@ -4,7 +4,6 @@ package com.global.vtg.appview.home.event
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -21,7 +20,6 @@ import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.config.PickMediaExtensions
@@ -29,13 +27,10 @@ import com.global.vtg.appview.config.getRealPath
 import com.global.vtg.appview.config.getRealPathFromURI
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
-import com.global.vtg.appview.home.ImageViewActivity
 import com.global.vtg.appview.home.VendorActivity
-import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -44,10 +39,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.tslogistics.util.AppAlertDialog
+import com.global.vtg.utils.AppAlertDialog
 import com.vtg.R
 import com.vtg.databinding.FragmentCreateEventReviewBinding
-import kotlinx.android.synthetic.main.adapter_event_list.view.*
 import kotlinx.android.synthetic.main.fragment_create_event_review.*
 import kotlinx.android.synthetic.main.fragment_create_event_review.cvUploadImages
 import kotlinx.android.synthetic.main.fragment_create_event_review.doc_img
@@ -57,25 +51,17 @@ import kotlinx.android.synthetic.main.fragment_create_event_review.ivBack
 import kotlinx.android.synthetic.main.fragment_create_event_review.tvDate
 import kotlinx.android.synthetic.main.fragment_create_event_review.tvEventName
 import kotlinx.android.synthetic.main.fragment_create_event_review.tvLocation
-import kotlinx.android.synthetic.main.fragment_event_detail.*
 
 import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.io.IOException
-import androidx.lifecycle.ViewModelProviders
-
-
-
 
 
 class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,

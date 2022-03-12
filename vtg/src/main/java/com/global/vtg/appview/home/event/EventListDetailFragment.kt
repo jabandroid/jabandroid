@@ -13,9 +13,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
@@ -54,14 +51,12 @@ import android.view.ViewGroup
 
 import android.view.LayoutInflater
 import androidx.annotation.Nullable
-import com.global.vtg.appview.home.dashboard.DashboardAdapter
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.popFragment
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.gson.JsonObject
-import com.tslogistics.util.AppAlertDialog
+import com.global.vtg.utils.AppAlertDialog
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
 
 

@@ -10,25 +10,16 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.global.vtg.appview.config.ResConfig
 import com.global.vtg.test.Const
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DialogUtils
 import com.global.vtg.wscoroutine.ApiInterface
-import com.google.gson.Gson
-import com.tslogistics.util.AppAlertDialog
+import com.global.vtg.utils.AppAlertDialog
 import com.vtg.R
-import kotlinx.android.synthetic.main.include_image.view.*
 import okhttp3.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-import retrofit2.http.Url
 import java.io.IOException
 import java.security.SecureRandom
 import java.security.cert.CertificateException

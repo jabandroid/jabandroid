@@ -1,8 +1,7 @@
-package com.tslogistics.util
+package com.global.vtg.utils
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.text.TextUtils
@@ -17,15 +16,13 @@ import androidx.appcompat.app.AppCompatActivity
 
 import androidx.fragment.app.FragmentActivity
 import com.global.vtg.model.factory.PreferenceManager
-import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
 import kotlinx.android.synthetic.main.include_language.view.*
-import kotlinx.android.synthetic.main.view_empty.view.*
 
 
 class AppAlertDialog {
 
-    var lanCode: Array<String> = arrayOf("en", "af", "ar", "es", "fr", "nl", "pt", "sw")
+    var lanCode: Array<String> = arrayOf("en", "af", "ar","nl", "fr",   "pt","es", "sw")
     private var position: Int = 0
     private lateinit var selecte: RadioButton
 
