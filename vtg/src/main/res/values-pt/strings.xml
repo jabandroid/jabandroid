@@ -559,4 +559,18 @@
 
     <string name="clinic_login"> Login na clínica</string>
     <string name="clinic_reg"> Registro da Clínica</string>
+    <string name="add_slot">Adicionar subevento</string>
+    <string name="label_event_name_sub">Nome do subevento*</string>
+    <string name="same_address">Endereço igual ao de Criar evento</string>
+    <string name="time_slot">Intervalos de tempo</string>
+    <string name="add_image">Adicionar imagem</string>
+    <string name="succesfully_added">Adicionado com sucesso</string>
+    <string name="add_more">Deseja adicionar mais?<u><font color='#255CA4'>Clique aqui</font></u>.</string>
+    <string name="go_to_event_page">ou vá para <u><font color='#255CA4'>Página do evento</font></u>.</string>
+    <string name="add_attandees">Adicionar participantes</string>
+    <string name="sub_event">Subeventos</string>
+    <string name="total_attendees">Número de participantes</string>
+    <string name="enter_attendees">Digite o número de participantes</string>
+    <string name="edit">Editar</string>
+    <string name="delete">Excluir</string>
 </resources>

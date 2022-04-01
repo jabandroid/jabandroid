@@ -29,6 +29,7 @@ import com.global.vtg.appview.authentication.registration.RegistrationStep2Fragm
 import com.global.vtg.appview.authentication.registration.RegistrationStep3Fragment
 import com.global.vtg.appview.config.*
 import com.global.vtg.appview.home.event.CreateEventLocationFragment
+import com.global.vtg.appview.home.event.CreateSubEventFragment
 import com.global.vtg.base.fragment.notifyFragment
 import com.global.vtg.test.Const.BASE_URL
 import com.global.vtg.utils.Constants
@@ -214,6 +215,9 @@ abstract class AppActivity : AppCompatActivity() {
                             city.let { frg.updateAddress(it, state, country) }
                         }
                         else if (frg is CreateEventLocationFragment) {
+                            city.let { frg.updateAddress(it, state, country) }
+                        }
+                        else if (frg is CreateSubEventFragment) {
                             city.let { frg.updateAddress(it, state, country) }
                         }
                     }

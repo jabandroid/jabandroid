@@ -553,4 +553,18 @@
 
     <string name = "clinic_login"> تسجيل الدخول إلى العيادة </string>
     <string name = "clinic_reg"> تسجيل العيادة </string>
+    <string name = "add_slot"> إضافة حدث فرعي </string>
+    <string name = "label_event_name_sub"> اسم الحدث الفرعي * </string>
+    <string name = "same_address"> العنوان هو نفسه إنشاء حدث </string>
+    <string name = "time_slot"> فترات زمنية </string>
+    <string name = "add_image"> إضافة صورة </string>
+    <string name = "succesfully_added"> تمت الإضافة بنجاح </string>
+    <string name = "add_more"> هل تريد إضافة المزيد؟ <u> <font color = '# 255CA4'> انقر هنا </font> </u>. </string>
+    <string name = "go_to_event_page"> أو انتقل إلى <u> <font color = '# 255CA4'> صفحة الحدث </font> </u>. </string>
+    <string name = "add_attandees"> إضافة الحضور </string>
+    <string name = "sub_event"> الأحداث الفرعية </string>
+    <string name = "total_attendees"> عدد الحاضرين </string>
+    <string name = "enter_attendees"> أدخل عدد الحاضرين </string>
+    <string name = "edit"> تحرير </string>
+    <string name = "delete"> Delete </string>
 </resources>

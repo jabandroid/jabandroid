@@ -62,7 +62,11 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_EVENT_LIST(EventListFragment::class.java),
     F_EVENT_CREATE(CreateEventFragment::class.java),
     F_EVENT_CREATE_LOCATION(CreateEventLocationFragment::class.java),
+    F_EVENT_SUB_EVENT_IMAGE(CreateSubEventReviewFragment::class.java),
     F_EVENT_EVENT_DETAIL(EventListDetailFragment::class.java),
+    F_EVENT_EVENT_SUB_DETAIL(EventListSubDetailFragment::class.java),
+    F_SUB_EVENT_CREATE(CreateSubEventFragment::class.java),
+    F_THANKYOU_EVENT(ThankyouEvent::class.java),
     F_EVENT_CREATE_REVIEW(CreateEventReviewFragment::class.java);
 
 

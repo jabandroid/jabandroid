@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.global.vtg.appview.home.event.EventListDetailViewModel" />
+            type="com.global.vtg.appview.home.event.EventListDetailViewSubModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -25,7 +25,7 @@ import com.google.gson.Gson
 
 
 
-class CreatEventReviewViewModel(
+class CreatEventReviewSubViewModel(
     application: Application,
     private val userRepository: UserRepository
 ) : AppViewModel(application) {
@@ -35,10 +35,11 @@ class CreatEventReviewViewModel(
     val createEventLiveData = MutableLiveData<Resource<Event>>()
     val uploadPics: MutableLiveData<Boolean> = MutableLiveData()
     var showToastError: MutableLiveData<String> = MutableLiveData()
+
     private val eventObserver = Observer<Resource<Event>> {
         createEventLiveData.postValue(it)
     }
-    var  isSubEvent :Boolean=false
+
     val userLiveData = MutableLiveData<Resource<BaseResult>>()
 
     private val userObserver = Observer<Resource<BaseResult>> {
@@ -73,44 +74,23 @@ class CreatEventReviewViewModel(
                 KeyboardUtils.hideKeyboard(view)
                 if (!TextUtils.isEmpty(bannerImage)) {
                     if (isNetworkAvailable(view.context)) {
-                        CreateEventFragment.itemEvent.userId = Constants.USER!!.id.toString()
-                        CreateEventFragment.itemEvent.startDate = DateUtils.formatLocalToUtc(
-                            CreateEventFragment.itemEvent.startDate!!,
+                            CreateSubEventFragment.itemSubEvent.userId = Constants.USER!!.id.toString()
+                            CreateSubEventFragment.itemSubEvent.startDate = DateUtils.formatLocalToUtc(
+                                CreateSubEventFragment.itemSubEvent.startDate!!,
                             true,
                             DateUtils.API_DATE_FORMAT_VACCINE
                         )
-                        CreateEventFragment.itemEvent.endDate = DateUtils.formatLocalToUtc(
-                            CreateEventFragment.itemEvent.endDate!!,
+                            CreateSubEventFragment.itemSubEvent.endDate = DateUtils.formatLocalToUtc(
+                                CreateSubEventFragment.itemSubEvent.endDate!!,
                             true,
                             DateUtils.API_DATE_FORMAT_VACCINE
                         )
-                        val gson = Gson()
-                        val request: Any = gson.toJson(CreateEventFragment.itemEvent)
-                        Log.e("input","input"+request.toString())
 
-                        callCreateEvent()
-                    }
-                } else
-                    showToastError.postValue(App.instance?.getString(R.string.empty_banner_image))
-            }
-            R.id.add_slot -> {
-                KeyboardUtils.hideKeyboard(view)
-                if (!TextUtils.isEmpty(bannerImage)) {
-                    isSubEvent=true
-                    if (isNetworkAvailable(view.context)) {
-                        CreateEventFragment.itemEvent.userId = Constants.USER!!.id.toString()
-                        CreateEventFragment.itemEvent.startDate = DateUtils.formatLocalToUtc(
-                            CreateEventFragment.itemEvent.startDate!!,
-                            true,
-                            DateUtils.API_DATE_FORMAT_VACCINE
-                        )
-                        CreateEventFragment.itemEvent.endDate = DateUtils.formatLocalToUtc(
-                            CreateEventFragment.itemEvent.endDate!!,
-                            true,
-                            DateUtils.API_DATE_FORMAT_VACCINE
-                        )
+                        if(TextUtils.isEmpty(CreateSubEventFragment.itemSubEvent.eventID))
+                            CreateSubEventFragment.itemSubEvent.eventID=null
+                        CreateSubEventFragment.itemSubEvent.parentEvent=CreateEventFragment.itemEvent.eventID
                         val gson = Gson()
-                        val request: Any = gson.toJson(CreateEventFragment.itemEvent)
+                        val request: Any = gson.toJson(CreateSubEventFragment.itemSubEvent)
                         Log.e("input","input"+request.toString())
 
                         callCreateEvent()
@@ -132,7 +112,7 @@ class CreatEventReviewViewModel(
 
     private fun callCreateEvent() {
         scope.launch {
-            userRepository.createEvent(CreateEventFragment.itemEvent)
+            userRepository.createEvent(CreateSubEventFragment.itemSubEvent)
         }
     }
 

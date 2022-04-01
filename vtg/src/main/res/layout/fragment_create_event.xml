@@ -230,6 +230,7 @@
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
+                    android:maxLength="80"
                     android:shadowDy="0"
                     android:shadowRadius="4"
                     android:singleLine="true"
@@ -312,6 +313,43 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvEndDate" />
 
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvTotalNumberAttendese"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/total_attendees"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEventEndTime" />
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/tvTotalNumberAttendees"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="0dp"
+                    android:background="@drawable/edittext_shadow"
+                    android:gravity="center_vertical"
+                    android:hint="@string/total_attendees"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:text="@={viewModel.eventAttendees}"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTotalNumberAttendese" />
+
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvDescription"
                     style="@style/MarginStartEnd"
@@ -321,7 +359,7 @@
                     android:text="@string/label_description"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEventEndTime" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvTotalNumberAttendees" />
 
 
                 <androidx.appcompat.widget.AppCompatEditText
@@ -344,6 +382,7 @@
                     android:shadowDx="0"
                     android:shadowDy="0"
                     android:shadowRadius="4"
+                    android:maxLength="1000"
                     android:singleLine="true"
                     android:text="@={viewModel.eventDescription}"
                     app:layout_constraintEnd_toEndOf="parent"

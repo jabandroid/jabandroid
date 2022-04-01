@@ -560,4 +560,18 @@
 
     <string name="clinic_login"> Clinic Login</string>
     <string name="clinic_reg"> Clinic Registration</string>
+    <string name="add_slot">Add Sub Event</string>
+    <string name="label_event_name_sub">Sub Event Name*</string>
+    <string name="same_address">Address same as Create Event</string>
+    <string name="time_slot">Time Slots</string>
+    <string name="add_image">Add Image</string>
+    <string name="succesfully_added">Successfully Added</string>
+    <string name="add_more">Do you want to add more?<u><font color='#255CA4'>Click here</font></u>.</string>
+    <string name="go_to_event_page">or Go to <u><font color='#255CA4'>Event Page</font></u>.</string>
+    <string name="add_attandees">Add Attendees</string>
+    <string name="sub_event">Sub Events</string>
+    <string name="total_attendees">Number of Attendees</string>
+    <string name="enter_attendees">Enter number of Attendees</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
 </resources>

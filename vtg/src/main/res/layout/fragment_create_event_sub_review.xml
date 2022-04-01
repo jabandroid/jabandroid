@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.global.vtg.appview.home.event.CreatEventReviewViewModel" />
+            type="com.global.vtg.appview.home.event.CreatEventReviewSubViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -62,7 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/label_create_event_review"
+                        android:text="@string/add_image"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_18ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,7 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.core.widget.NestedScrollView
+        <com.global.vtg.utils.CustomScrollView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
@@ -114,19 +114,18 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/banner"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_24sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_24sdp"
                     android:layout_marginBottom="@dimen/_52sdp"
-
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/location"
                     android:visibility="visible"
 
                     app:cardCornerRadius="@dimen/_12sdp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    >
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -200,20 +199,15 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/map_frag" />
-
-
-
-
+                    app:layout_constraintTop_toBottomOf="@+id/banner" />
 
                 <HorizontalScrollView
                     android:id="@+id/images_container"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:layout_marginStart="@dimen/_24sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_24sdp"
-                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/eventAddImages">
 
@@ -231,11 +225,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="@dimen/_13sdp"
                     android:textColor="@color/black"
                     android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/banner" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
 
                 <LinearLayout
                     android:id="@+id/date"
@@ -266,35 +261,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/privateEvent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation="horizontal"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/date">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/lock"
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-
-                        android:tint="@color/light_blue" />
-
-                    <com.global.vtg.utils.textView.RegularTextView
-                        android:id="@+id/tvprivateEvent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_6sdp"
-                        android:text="@string/label_private_event"
-                        android:textColor="@color/black"
-
-                        />
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/location"
@@ -304,7 +270,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/privateEvent">
+                    app:layout_constraintTop_toBottomOf="@+id/date">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="20dp"
@@ -325,37 +291,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/add_slot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:visibility="visible"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_10sdp"
-                    android:onClick="@{viewModel::onClick}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/images_container">
 
-                    <TextView
-                        android:id="@+id/addSlot"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="@dimen/_6sdp"
-                        android:text="@string/add_slot"
-                        android:textSize="13sp"
-                        android:textColor="@color/colorPrimary" />
-
-                    <ImageView
-                        android:id="@+id/clock"
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginStart="@dimen/_4sdp"
-                        android:contentDescription="@null"
-                        android:src="@drawable/ic_slot"
-                        app:tint="@color/colorPrimary" />
-                </LinearLayout>
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/map_frag"
@@ -365,22 +301,24 @@
                     android:layout_height="200dp"
                     android:layout_marginStart="@dimen/_24sdp"
                     android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginBottom="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_24sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/location" />
+                    app:layout_constraintTop_toBottomOf="@+id/images_container" />
 
                 <LinearLayout
                     android:id="@+id/button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_24sdp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingBottom="@dimen/_35sdp"
                     android:weightSum="2"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/add_slot">
+                    app:layout_constraintTop_toBottomOf="@+id/map_frag">
 
                     <androidx.appcompat.widget.AppCompatButton
                         android:id="@+id/btnNext"
@@ -405,6 +343,6 @@
                         android:textColor="@color/white" />
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.core.widget.NestedScrollView>>
+        </com.global.vtg.utils.CustomScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

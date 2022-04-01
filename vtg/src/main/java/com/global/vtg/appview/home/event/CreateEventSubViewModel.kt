@@ -2,6 +2,7 @@ package com.global.vtg.appview.home.event
 
 import android.app.Application
 import android.text.TextUtils
+import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.global.vtg.App
@@ -12,12 +13,21 @@ import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
+import kotlinx.android.synthetic.main.fragment_create_event.*
 
-class CreateEventLocationViewModel(
+class CreateEventSubViewModel(
     application: Application,
     private val userRepository: UserRepository
 ) : AppViewModel(application) {
 
+    var eventName: MutableLiveData<String> = MutableLiveData()
+    var eventDescription: MutableLiveData<String> = MutableLiveData()
+    var eventPrivate: MutableLiveData<Boolean> = MutableLiveData()
+    var startTime: String =""
+    var eventAttendees: MutableLiveData<String> = MutableLiveData()
+    var endTime: String =""
+    var showToastError: MutableLiveData<String> = MutableLiveData()
+    var redirectToStep2: MutableLiveData<Boolean> = MutableLiveData()
     var address1: MutableLiveData<String> = MutableLiveData()
     var id: String = ""
     var address2: MutableLiveData<String> = MutableLiveData()
@@ -25,18 +35,18 @@ class CreateEventLocationViewModel(
     var state: MutableLiveData<String> = MutableLiveData()
     var zip: MutableLiveData<String> = MutableLiveData()
     var country: MutableLiveData<String> = MutableLiveData()
-    var contactNumber: MutableLiveData<String> = MutableLiveData()
-    var fax: MutableLiveData<String> = MutableLiveData()
-    var email: MutableLiveData<String> = MutableLiveData()
-
-    var showToastError: MutableLiveData<String> = MutableLiveData()
-    var redirectToStep3: MutableLiveData<Boolean> = MutableLiveData()
-
     fun onClick(view: View) {
 
         when (view.id) {
-            R.id.btnNext -> {
-                if (validateFields()) {
+            R.id.btnNext->{
+                if(validateFields()) {
+                    CreateSubEventFragment.itemSubEvent.eventName = eventName.value
+                    CreateSubEventFragment.itemSubEvent.startDate = startTime
+                    CreateSubEventFragment.itemSubEvent.endDate = endTime
+                    CreateSubEventFragment.itemSubEvent.description = eventDescription.value
+                    CreateSubEventFragment.itemSubEvent.privateEvent = eventPrivate.value
+                    CreateSubEventFragment.itemSubEvent.crowdLimit = eventAttendees.value
+
                     val itemAddress = EventAddress(
                         id,
                         address1.value!!,
@@ -45,24 +55,38 @@ class CreateEventLocationViewModel(
                         city.value!!,
                         state.value!!,
                         country.value!!,
-                        contactNumber.value!!,
-                        contactNumber.value!!,
-
-                        if (!TextUtils.isEmpty(fax.value)) fax.value.toString() else "",
-                        if (!TextUtils.isEmpty(email.value)) email.value.toString() else "",
+                       "",
+                      "",
+                       "",
+                      "",
                     )
                     val list = ArrayList<EventAddress>()
                     list.add(itemAddress)
-                    CreateEventFragment.itemEvent.eventAddress = list
-                    redirectToStep3.postValue(true)
+                    CreateSubEventFragment.itemSubEvent.eventAddress = list
+
+                    redirectToStep2.postValue(true)
                 }
             }
+
         }
     }
+
 
     private fun validateFields(): Boolean {
         var isValidate = true
         when {
+            isNullOrEmpty(eventName.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.error_event_name))
+                isValidate = false
+            }
+            isNullOrEmpty(startTime) -> {
+                showToastError.postValue(App.instance?.getString(R.string.error_start_time))
+                isValidate = false
+            }
+            isNullOrEmpty(endTime) -> {
+                showToastError.postValue(App.instance?.getString(R.string.error_end_time))
+                isValidate = false
+            }
             isNullOrEmpty(address1.value) -> {
                 showToastError.postValue(App.instance?.getString(R.string.empty_address_1))
                 isValidate = false
@@ -75,20 +99,14 @@ class CreateEventLocationViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.empty_address_state))
                 isValidate = false
             }
-//            isNullOrEmpty(zip.value) -> {
-//                showToastError.postValue(App.instance?.getString(R.string.empty_address_zip))
-//                isValidate = false
-//            }
+
             isNullOrEmpty(country.value) -> {
                 showToastError.postValue(App.instance?.getString(R.string.empty_address_country))
                 isValidate = false
             }
-            isNullOrEmpty(contactNumber.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_phone))
-                isValidate = false
-            }
-            isNullOrEmpty(email.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_email))
+
+            isNullOrEmpty(eventAttendees.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.enter_attendees))
                 isValidate = false
             }
 

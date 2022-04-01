@@ -33,6 +33,7 @@ import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.model.network.Resource
+import com.global.vtg.utils.AppAlertDialog
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -41,21 +42,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.global.vtg.utils.AppAlertDialog
 import com.vtg.R
-import com.vtg.databinding.FragmentCreateEventReviewBinding
+import com.vtg.databinding.FragmentCreateEventSubReviewBinding
 import kotlinx.android.synthetic.main.fragment_create_event_review.*
-import kotlinx.android.synthetic.main.fragment_create_event_review.cvUploadImages
-import kotlinx.android.synthetic.main.fragment_create_event_review.doc_img
-import kotlinx.android.synthetic.main.fragment_create_event_review.eventAddImages
-import kotlinx.android.synthetic.main.fragment_create_event_review.images_container
-import kotlinx.android.synthetic.main.fragment_create_event_review.ivBack
-import kotlinx.android.synthetic.main.fragment_create_event_review.tvDate
-import kotlinx.android.synthetic.main.fragment_create_event_review.tvEventName
-import kotlinx.android.synthetic.main.fragment_create_event_review.tvLocation
-
 import kotlinx.coroutines.Dispatchers
-
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
@@ -64,28 +54,23 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.io.IOException
-import androidx.recyclerview.widget.LinearLayoutManager
 
 
-
-
-
-class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
-    EventImageViewCreate.OnDeleteImageClick {
-    private lateinit var mFragmentBinding: FragmentCreateEventReviewBinding
-    private val viewModel by viewModel<CreatEventReviewViewModel>()
+class CreateSubEventReviewFragment : AppFragment(), OnMapReadyCallback,
+    EventImageViewCreateSub.OnDeleteImageClick {
+    private lateinit var mFragmentBinding: FragmentCreateEventSubReviewBinding
+    private val viewModel by viewModel<CreatEventReviewSubViewModel>()
     private var mMap: GoogleMap? = null
     private lateinit var imagetoLoad: ImageView
     private var eventID: String = ""
     private var isBanner: Boolean = false
     var count: Int = 0
-
     var selectedPosion: Int = 0
     lateinit var selectedLayout: LinearLayout
     var imageServer: HashMap<Int, String> = HashMap()
 
     override fun getLayoutId(): Int {
-        return R.layout.fragment_create_event_review
+        return R.layout.fragment_create_event_sub_review
     }
 
     override fun preDataBinding(arguments: Bundle?) {
@@ -93,7 +78,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
     }
 
     override fun postDataBinding(binding: ViewDataBinding): ViewDataBinding {
-        mFragmentBinding = binding as FragmentCreateEventReviewBinding
+        mFragmentBinding = binding as FragmentCreateEventSubReviewBinding
         mFragmentBinding.viewModel = viewModel
         mFragmentBinding.lifecycleOwner = this
         return mFragmentBinding
@@ -101,7 +86,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
 
     companion object {
         lateinit var images: HashMap<String, String>
-        lateinit var vAddNew: EventImageViewCreate
+        lateinit var vAddNew: EventImageViewCreateSub
     }
 
     @SuppressLint("SetTextI18n")
@@ -110,9 +95,9 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
-        images = HashMap<String, String>()
+        images = HashMap()
         vAddNew =
-            EventImageViewCreate(
+            EventImageViewCreateSub(
                 activity!!,
                 null, "", "",
                 0,
@@ -121,22 +106,13 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                 cvUploadImages
             )
         cvUploadImages.addView(vAddNew)
-        selectedLayout=cvUploadImages
-        tvDate.text = CreateEventFragment.itemEvent.startDate
-        tvEventName.text = CreateEventFragment.itemEvent.eventName
-        if (CreateEventFragment.itemEvent.privateEvent!!) {
-            tvprivateEvent.text = getString(R.string.label_private_event)
-
-            lock.setBackgroundResource(R.drawable.ic_icon_awesome_lock)
-        } else {
-            lock.setBackgroundResource(R.drawable.ic_icon_awesome_unlock)
-            tvprivateEvent.text = getString(R.string.label_public_event)
-
-        }
+        selectedLayout = cvUploadImages
+        tvDate.text = CreateSubEventFragment.itemSubEvent.startDate
+        tvEventName.text = CreateSubEventFragment.itemSubEvent.eventName
 
         try {
-            if (CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
-                for (item in CreateEventFragment.itemEvent.eventImage!!) {
+            if (CreateSubEventFragment.itemSubEvent.eventImage!!.isNotEmpty()) {
+                for (item in CreateSubEventFragment.itemSubEvent.eventImage!!) {
                     if (item.banner) {
                         viewModel.bannerImage = item.url
                         Glide.with(activity!!)
@@ -152,8 +128,8 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
 
             }
 
-            if (CreateEventFragment.itemEvent.eventImage!!.isNotEmpty()) {
-                for (item in CreateEventFragment.itemEvent.eventImage!!) {
+            if (CreateSubEventFragment.itemSubEvent.eventImage!!.isNotEmpty()) {
+                for (item in CreateSubEventFragment.itemSubEvent.eventImage!!) {
                     if (!item.banner) {
                         eventAddImages.visibility = View.VISIBLE
                         images_container.visibility = View.VISIBLE
@@ -176,14 +152,14 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
             e.printStackTrace()
         }
 
-        if (!TextUtils.isEmpty(CreateEventFragment.itemEvent.eventID)) {
+        if (!TextUtils.isEmpty(CreateSubEventFragment.itemSubEvent.eventID)) {
             btnNext.text = getString(R.string.action_save)
             btnCancel.visibility = View.GONE
         }
-
-        tvLocation.text = CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
-                CreateEventFragment.itemEvent.eventAddress!![0].state + " " +
-                CreateEventFragment.itemEvent.eventAddress!![0].country
+//
+        tvLocation.text = CreateSubEventFragment.itemSubEvent.eventAddress!![0].city + " " +
+                CreateSubEventFragment.itemSubEvent.eventAddress!![0].state + " " +
+                CreateSubEventFragment.itemSubEvent.eventAddress!![0].country
 
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
@@ -254,7 +230,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
             when (it) {
                 is Resource.Success -> {
                     eventID = it.data.eventID.toString()
-                    CreateEventFragment.itemEvent.eventID=eventID
+                    CreateSubEventFragment.itemSubEvent.eventID = eventID
                     var part: MutableMap<String, RequestBody> = HashMap()
 
                     val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
@@ -312,13 +288,10 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
 
                         }
 
-                        popFragment(3)
-                        if(viewModel.isSubEvent){
-                            CreateSubEventFragment.itemSubEvent=Event()
-                            addFragmentInStack<Any>(
-                                AppFragmentState.F_SUB_EVENT_CREATE
-                            )
-                        }
+                        popFragment(2)
+                        addFragmentInStack<Any>(
+                            AppFragmentState.F_THANKYOU_EVENT
+                        )
                         when (activity) {
                             is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                             is HomeActivity -> (activity as HomeActivity).hideProgressBar()
@@ -377,12 +350,11 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
 
                         }
 
-                        popFragment(3)
-                        if(viewModel.isSubEvent){
-                            addFragmentInStack<Any>(
-                                AppFragmentState.F_SUB_EVENT_CREATE
-                            )
-                        }
+                        popFragment(2)
+                        addFragmentInStack<Any>(
+                            AppFragmentState.F_THANKYOU_EVENT
+                        )
+
                     }
                     is Resource.Error -> {
                         when (activity) {
@@ -434,13 +406,6 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                 }
             }
         })
-//        CreateEventFragment.itemEvent.eventID="2681"
-//        popFragment(3)
-//
-//            addFragmentInStack<Any>(
-//                AppFragmentState.F_SUB_EVENT_CREATE
-//            )
-
 
 
     }
@@ -477,17 +442,17 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
         ) {
             mMap!!.isMyLocationEnabled = true
 
-            val address = CreateEventFragment.itemEvent.eventAddress!![0].addr1 + " " +
-                    CreateEventFragment.itemEvent.eventAddress!![0].addr2 + " " +
-                    CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
-                    CreateEventFragment.itemEvent.eventAddress!![0].country + " "
+            val address = CreateSubEventFragment.itemSubEvent.eventAddress!![0].addr1 + " " +
+                    CreateSubEventFragment.itemSubEvent.eventAddress!![0].addr2 + " " +
+                    CreateSubEventFragment.itemSubEvent.eventAddress!![0].city + " " +
+                    CreateSubEventFragment.itemSubEvent.eventAddress!![0].country + " "
 
 
             val location = getLocationFromAddress(activity!!, address)
             val markerOptions = MarkerOptions()
             if (location != null) {
                 markerOptions.position(location)
-                markerOptions.title(CreateEventFragment.itemEvent.eventName)
+                markerOptions.title(CreateSubEventFragment.itemSubEvent.eventName)
 
                 mMap!!.addMarker(markerOptions)
 
@@ -509,17 +474,18 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
 
                     mMap!!.isMyLocationEnabled = true
 
-                    val address = CreateEventFragment.itemEvent.eventAddress!![0].addr1 + " " +
-                            CreateEventFragment.itemEvent.eventAddress!![0].addr2 + " " +
-                            CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
-                            CreateEventFragment.itemEvent.eventAddress!![0].country + " "
+                    val address =
+                        CreateSubEventFragment.itemSubEvent.eventAddress!![0].addr1 + " " +
+                                CreateSubEventFragment.itemSubEvent.eventAddress!![0].addr2 + " " +
+                                CreateSubEventFragment.itemSubEvent.eventAddress!![0].city + " " +
+                                CreateSubEventFragment.itemSubEvent.eventAddress!![0].country + " "
 
 
                     val location = getLocationFromAddress(activity!!, address)
                     val markerOptions = MarkerOptions()
                     if (location != null) {
                         markerOptions.position(location)
-                        markerOptions.title(CreateEventFragment.itemEvent.eventName)
+                        markerOptions.title(CreateSubEventFragment.itemSubEvent.eventName)
 
                         mMap!!.addMarker(markerOptions)
 
@@ -570,8 +536,6 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
             ll.removeViewAt(item)
 
         }
-
-
 
 
         //CreateEventReviewFragment.vAddNew.showAdd(vAddNew)
@@ -666,12 +630,12 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                 images["image" + count] = path
 
                 val v =
-                    EventImageViewCreate(
+                    EventImageViewCreateSub(
                         activity!!,
                         bitmap, "", "",
                         count,
                         false,
-                        CreateEventReviewFragment(),
+                        CreateSubEventReviewFragment(),
                         cvUploadImages
                     )
                 cvUploadImages.addView(v, 0)
@@ -688,4 +652,6 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
     override fun onViewClick() {
 
     }
+
+
 }

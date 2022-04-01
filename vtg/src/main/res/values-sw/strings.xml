@@ -550,4 +550,18 @@
 
     <string name="clinic_login"> Ingia kwenye Kliniki</string>
     <string name="clinic_reg"> Usajili wa Kliniki</string>
+    <string name="add_slot">Ongeza Tukio Ndogo</string>
+    <string name="label_event_name_sub">Jina Ndogo la Tukio*</string>
+    <string name="same_address">Anwani sawa na Unda Tukio</string>
+    <string name="time_slot">Nafasi za Wakati</string>
+    <string name="add_image">Ongeza Picha</string>
+    <string name="succesfully_added">Imeongezwa kwa Mafanikio</string>
+    <string name="add_more">Je, ungependa kuongeza zaidi?<u><font color='#255CA4'>Bofya hapa</font></u>.</string>
+    <string name="go_to_event_page">au Nenda kwenye <u><font color='#255CA4'>Ukurasa wa Tukio</font></u>.</string>
+    <string name="add_attandees">Ongeza Waliohudhuria</string>
+    <string name="sub_event">Matukio Ndogo</string>
+    <string name="total_attendees">Idadi ya Wahudhuriaji</string>
+    <string name="enter_attendees">Ingiza idadi ya Washiriki</string>
+    <string name="edit">Hariri</string>
+    <string name="delete">Futa</string>
 </resources>

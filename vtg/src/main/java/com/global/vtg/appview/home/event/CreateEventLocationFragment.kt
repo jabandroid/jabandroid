@@ -2,6 +2,7 @@ package com.global.vtg.appview.home.event
 
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.base.AppFragment
@@ -71,6 +72,8 @@ class CreateEventLocationFragment : AppFragment() {
          viewModel.contactNumber.postValue(CreateEventFragment.itemEvent.eventAddress!![0].phoneNo)
          viewModel.email.postValue(CreateEventFragment.itemEvent.eventAddress!![0].email)
          viewModel.fax.postValue(CreateEventFragment.itemEvent.eventAddress!![0].fax)
+         if(!TextUtils.isEmpty(CreateEventFragment.itemEvent.eventAddress!![0].addressID))
+             viewModel.id= CreateEventFragment.itemEvent.eventAddress!![0].addressID.toString()
      }else{
          if (!Constants.USER?.address.isNullOrEmpty()) {
              val index= Constants.USER?.address!!.size-1

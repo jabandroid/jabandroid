@@ -22,6 +22,7 @@ class CreateEventViewModel(
     var eventName: MutableLiveData<String> = MutableLiveData()
     var eventDescription: MutableLiveData<String> = MutableLiveData()
     var eventPrivate: MutableLiveData<Boolean> = MutableLiveData()
+    var eventAttendees: MutableLiveData<String> = MutableLiveData()
     var startTime: String =""
     var endTime: String =""
     var showToastError: MutableLiveData<String> = MutableLiveData()
@@ -37,6 +38,7 @@ class CreateEventViewModel(
                     CreateEventFragment.itemEvent.endDate = endTime
                     CreateEventFragment.itemEvent.description = eventDescription.value
                     CreateEventFragment.itemEvent.privateEvent = eventPrivate.value
+                    CreateEventFragment.itemEvent.crowdLimit = eventAttendees.value
                     redirectToStep2.postValue(true)
                 }
             }
@@ -58,6 +60,11 @@ class CreateEventViewModel(
             }
             isNullOrEmpty(endTime) -> {
                 showToastError.postValue(App.instance?.getString(R.string.error_end_time))
+                isValidate = false
+            }
+
+            isNullOrEmpty(eventAttendees.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.enter_attendees))
                 isValidate = false
             }
 

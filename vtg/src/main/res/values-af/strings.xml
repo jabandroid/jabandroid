@@ -559,4 +559,18 @@
 
     <string name="clinic_login"> Kliniekaanmelding</string>
     <string name="clinic_reg"> Kliniekregistrasie</string>
+    <string name="add_slot">Voeg subgebeurtenis by</string>
+    <string name="label_event_name_sub">Subgebeurtenisnaam*</string>
+    <string name="same_address">Adres dieselfde as Skep gebeurtenis</string>
+    <string name="time_slot">Tydgleuwe</string>
+    <string name="add_image">Voeg prent by</string>
+    <string name="succesfully_added">Suksesvol bygevoeg</string>
+    <string name="add_more">Wil jy meer byvoeg?<u><font color='#255CA4'>Klik hier</font></u>.</string>
+    <string name="go_to_event_page">of gaan na <u><font color='#255CA4'>Gebeurtenisbladsy</font></u>.</string>
+    <string name="add_attandees">Voeg deelnemers by</string>
+    <string name="sub_event">Subgebeurtenisse</string>
+    <string name="total_attendees">Aantal bywoners</string>
+    <string name="enter_attendees">Voer die aantal deelnemers in</string>
+    <string name="edit">Redigeer</string>
+    <string name="delete">Vee uit</string>
 </resources>

@@ -10,6 +10,7 @@ import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
+import com.global.vtg.appview.home.event.CreateSubEventFragment.Companion.itemSubEvent
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
@@ -49,6 +50,7 @@ class EventListFragment : AppFragment() {
     override fun initializeComponent(view: View?) {
 
         CreateEventFragment.itemEvent = Event()
+        itemSubEvent=Event()
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -56,6 +58,9 @@ class EventListFragment : AppFragment() {
             CreateEventFragment.itemEvent = Event()
             addFragmentInStack<Any>(AppFragmentState.F_EVENT_CREATE)
             // addFragmentInStack<Any>(AppFragmentState.F_EVENT_CREATE_REVIEW)
+//            addFragmentInStack<Any>(
+//                AppFragmentState.F_SUB_EVENT_CREATE
+//            )
         })
         selectedType = 0
 

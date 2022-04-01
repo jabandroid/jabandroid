@@ -155,6 +155,15 @@ val appViewModelModule = module {
     viewModel {
         EventListDetailViewModel(get(), get())//it will take one argument i.e. UserRepository
     }
+    viewModel {
+        CreateEventSubViewModel(get(), get())//it will take one argument i.e. UserRepository
+    }
+    viewModel {
+        CreatEventReviewSubViewModel(get(), get())//it will take one argument i.e. UserRepository
+    }
+    viewModel {
+        EventListDetailViewSubModel(get(), get())//it will take one argument i.e. UserRepository
+    }
     //2. Permission viewmodel
     viewModel {
         PermissionDemoViewModel(get())

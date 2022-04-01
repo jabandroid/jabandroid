@@ -89,7 +89,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="@dimen/_6sdp"
-        android:text="@string/label_date"
+
         android:textColor="@color/black" />
 
   </LinearLayout>

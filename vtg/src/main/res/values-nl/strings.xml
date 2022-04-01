@@ -557,4 +557,18 @@
 
     <string name="clinic_login">Kliniekaanmelding</string>
     <string name="clinic_reg">Kliniekregistratie</string>
+    <string name="add_slot">Subgebeurtenis toevoegen</string>
+    <string name="label_event_name_sub">Subgebeurtenisnaam*</string>
+    <string name="same_address">Adres hetzelfde als Evenement aanmaken</string>
+    <string name="time_slot">Tijdvakken</string>
+    <string name="add_image">Afbeelding toevoegen</string>
+    <string name="succesfully_added">Succesvol toegevoegd</string>
+    <string name="add_more">Wilt u meer toevoegen?<u><font color='#255CA4'>Klik hier</font></u>.</string>
+    <string name="go_to_event_page">of Ga naar <u><font color='#255CA4'>Evenementenpagina</font></u>.</string>
+    <string name="add_attandees">Bezoekers toevoegen</string>
+    <string name="sub_event">Subgebeurtenissen</string>
+    <string name="total_attendees">Aantal deelnemers</string>
+    <string name="enter_attendees">Voer het aantal aanwezigen in</string>
+    <string name="edit">Bewerken</string>
+    <string name="delete">Verwijderen</string>
 </resources>

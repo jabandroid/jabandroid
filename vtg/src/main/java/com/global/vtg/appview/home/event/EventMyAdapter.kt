@@ -58,10 +58,11 @@ class EventMyAdapter(
         holder.itemView.share.visibility =View.VISIBLE
         holder.itemView.tvEventName.text = list[position].eventName
 
-
-        holder.itemView.tvLocation.text = list[position].eventAddress!![0].city + " " +
-                list[position].eventAddress!![0].state + " " +
-                list[position].eventAddress!![0].country
+        if(list[position].eventAddress!!.isNotEmpty()) {
+            holder.itemView.tvLocation.text = list[position].eventAddress!![0].city + " " +
+                    list[position].eventAddress!![0].state + " " +
+                    list[position].eventAddress!![0].country
+        }
 
        
         holder.itemView.setOnClickListener {

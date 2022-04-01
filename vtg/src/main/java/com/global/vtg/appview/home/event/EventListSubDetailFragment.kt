@@ -13,13 +13,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.Nullable
 import androidx.core.app.ActivityCompat
@@ -49,6 +47,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.vtg.R
 import com.vtg.databinding.FragmentEventDetailBinding
+import com.vtg.databinding.FragmentEventDetailSubBinding
 import io.branch.indexing.BranchUniversalObject
 import io.branch.referral.util.LinkProperties
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
@@ -57,11 +56,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
 
 
-class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
+class EventListSubDetailFragment : AppFragment(), OnMapReadyCallback,
     EventImageView.OnDeleteImageClick {
-    private lateinit var mFragmentBinding: FragmentEventDetailBinding
+    private lateinit var mFragmentBinding: FragmentEventDetailSubBinding
     private var mMap: GoogleMap? = null
-    private val viewModel by viewModel<EventListDetailViewModel>()
+    private val viewModel by viewModel<EventListDetailViewSubModel>()
     private var eventId: String = ""
     private var positionForDelete: Int = -1
     private var eventName: String = ""
@@ -81,7 +80,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
 
     var listOfImages = ArrayList<String>()
     override fun getLayoutId(): Int {
-        return R.layout.fragment_event_detail
+        return R.layout.fragment_event_detail_sub
     }
 
     override fun preDataBinding(arguments: Bundle?) {
@@ -95,7 +94,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
     }
 
     override fun postDataBinding(binding: ViewDataBinding): ViewDataBinding {
-        mFragmentBinding = binding as FragmentEventDetailBinding
+        mFragmentBinding = binding as FragmentEventDetailSubBinding
         mFragmentBinding.viewModel = viewModel
         mFragmentBinding.lifecycleOwner = this
         return mFragmentBinding
@@ -105,36 +104,9 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
     override fun initializeComponent(view: View?) {
         initMapView()
 
-        getView()!!.isFocusableInTouchMode = true
-        getView()!!.requestFocus()
-        getView()!!.setOnKeyListener { v, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                if(isSubEvent){
-
-                    val bundle = Bundle()
-                    bundle.putString(Constants.BUNDLE_ID,  CreateEventFragment.itemEvent.parentEvent!!.toString())
-                    bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, true)
-                    bundle.putBoolean(Constants.BUNDLE_IS_SUB_EVENT, false)
-                    popFragment(1)
-                    addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL , bundle)
-                }else
-                    activity?.onBackPressed()
-                true
-            } else false
-        }
-
         ivBack.setOnClickListener {
-            if(isSubEvent){
-                val bundle = Bundle()
-                bundle.putString(Constants.BUNDLE_ID,  CreateEventFragment.itemEvent.parentEvent!!.toString())
-                bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isMyEvent)
-                bundle.putBoolean(Constants.BUNDLE_IS_SUB_EVENT, false)
-                popFragment(1)
-                addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL , bundle)
-            }else
             activity?.onBackPressed()
         }
-
 
         viewModel.callEventDetails(eventId)
         rvEventList.layoutManager = LinearLayoutManager(context)
@@ -146,7 +118,6 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
                     R.id.more -> {
 
                         val bottomSheet = BottomSheetDialog()
-                        bottomSheet.setIsSubEvent(true)
                         bottomSheet.setListener(object : BottomSheetDialog.ClickListener {
                             override fun onItemClick(position: Int) {
                                 when (position) {
@@ -219,10 +190,9 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
                     else -> {
                         val bundle = Bundle()
                         bundle.putString(Constants.BUNDLE_ID, item.eventID!!.toString())
-                        bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isMyEvent)
+                        bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, true)
                         bundle.putBoolean(Constants.BUNDLE_IS_SUB_EVENT, true)
-                        popFragment(1)
-                        addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL , bundle)
+                        addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL, bundle)
                     }
 
                 }
@@ -243,14 +213,12 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
         if (isMyEvent) {
             //  share.visibility = View.VISIBLE
             more.visibility = View.VISIBLE
-
             add_user_root.visibility = View.VISIBLE
 
         }
         public_event.visibility = View.VISIBLE
         more.setOnClickListener {
             val bottomSheet = BottomSheetDialog()
-            bottomSheet.setIsSubEvent(isSubEvent)
             bottomSheet.setListener(object : BottomSheetDialog.ClickListener {
                 override fun onItemClick(position: Int) {
                     when (position) {
@@ -270,7 +238,6 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
                             if(isSubEvent){
 
 
-                                CreateSubEventFragment.itemSubEvent=CreateEventFragment.itemEvent
 
                                 addFragmentInStack<Any>(AppFragmentState.F_SUB_EVENT_CREATE)
 
@@ -307,12 +274,6 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
                                     activity!!.startActivity(sendIntent)
                                 }
                             }
-                        }
-                        4->{
-                            CreateSubEventFragment.itemSubEvent=Event()
-                            addFragmentInStack<Any>(
-                                AppFragmentState.F_SUB_EVENT_CREATE
-                            )
                         }
                     }
                 }
@@ -385,11 +346,11 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
             }
         })
 
-        viewModel.eventDetailLiveData.observe(this, {
+        viewModel.eventDetailSubLiveData.observe(this, {
             when (it) {
                 is Resource.Success -> {
                     CreateEventFragment.itemEvent = it.data
-
+                    CreateSubEventFragment.itemSubEvent = it.data
                     if (it.data.eventImage!!.isNotEmpty()) {
                         for (item in it.data.eventImage) {
                             if (item.banner) {
@@ -749,7 +710,6 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
 
     class BottomSheetDialog : BottomSheetDialogFragment() {
         private lateinit var listener: ClickListener
-        private  var isSubEvent: Boolean = false
         override fun onCreateView(
             inflater: LayoutInflater,
             @Nullable container: ViewGroup?,
@@ -761,17 +721,9 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
             )
 
 
-            if(!isSubEvent){
-                v.addSlot.visibility=View.VISIBLE
-                v.add_sub_event.visibility=View.VISIBLE
-            }
 
             v.delete.setOnClickListener {
                 listener.onItemClick(0)
-                dismiss()
-            }
-            v.addSlot.setOnClickListener {
-                listener.onItemClick(4)
                 dismiss()
             }
             v.edit.setOnClickListener {
@@ -790,9 +742,6 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
         fun setListener(l: ClickListener) {
             this.listener = l
         }
-        fun setIsSubEvent(l: Boolean) {
-            this.isSubEvent = l
-        }
 
         interface ClickListener {
             fun onItemClick(position: Int)
@@ -803,8 +752,6 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
         if (!TextUtils.isEmpty(eventId))
             viewModel.callEventDetails(eventId)
     }
-
-
 
 
 }

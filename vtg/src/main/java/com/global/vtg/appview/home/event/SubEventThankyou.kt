@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_event_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
-class CreateEventFragment : AppFragment() {
+class SubEventThankyou : AppFragment() {
     private lateinit var mFragmentBinding: FragmentCreateEventBinding
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
@@ -135,9 +135,6 @@ class CreateEventFragment : AppFragment() {
         }
         if(itemEvent.eventName!=null)
             viewModel.eventName.postValue(itemEvent.eventName)
-        if(itemEvent.crowdLimit!=null)
-            viewModel.eventAttendees.postValue(itemEvent.crowdLimit)
-
 
         if(itemEvent.startDate!=null) {
             viewModel.startTime=DateUtils.formatDateUTCToLocal(
