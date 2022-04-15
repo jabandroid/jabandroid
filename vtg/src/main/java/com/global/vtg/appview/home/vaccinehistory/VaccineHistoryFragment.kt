@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.appview.config.HealthInfo
@@ -14,8 +15,12 @@ import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.imageview.setGlideNormalImage
+import com.global.vtg.model.factory.PreferenceManager
+import com.global.vtg.utils.AppAlertDialog
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
+import com.global.vtg.utils.SharedPreferenceUtil
+import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentVaccineHistoryBinding
 import kotlinx.android.synthetic.main.fragment_vaccine_history.*
@@ -60,7 +65,20 @@ class VaccineHistoryFragment : AppFragment() {
         tvUserNam.text = Constants.USER?.firstName!!.replace("null","") + " " + Constants.USER?.lastName!!.replace("null","")
 
         rvVaccineList.layoutManager = LinearLayoutManager(context)
-        adapter = VaccineHistoryAdapter(getAppActivity())
+        adapter = VaccineHistoryAdapter(getAppActivity(), object : VaccineHistoryAdapter.onItemClick{
+            override fun response(item: VaccineHistory, v: View, position: Int) {
+                val role = SharedPreferenceUtil.getInstance(activity!!)
+                    ?.getData(PreferenceManager.KEY_ROLE, "user")
+                if (role?.equals("user") == true) {
+                    if (!item.documentLink.isNullOrEmpty())
+                        Constants.openFile(item.documentLink,activity!!)
+
+                } else {
+
+                }
+            }
+
+        })
         rvVaccineList.adapter = adapter
 
         updateNoData()

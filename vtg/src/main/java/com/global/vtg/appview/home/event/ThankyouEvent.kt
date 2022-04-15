@@ -42,6 +42,7 @@ class ThankyouEvent : AppFragment() {
     override fun initializeComponent(view: View?) {
         CreateSubEventFragment.itemSubEvent=Event()
         tvUploaded_add.setOnClickListener {
+            popFragment(1)
             addFragmentInStack<Any>(
                 AppFragmentState.F_SUB_EVENT_CREATE
             )

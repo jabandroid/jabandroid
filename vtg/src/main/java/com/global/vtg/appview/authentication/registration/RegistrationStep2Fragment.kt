@@ -225,6 +225,13 @@ class RegistrationStep2Fragment : AppFragment() {
             } else {
                 Intent(activity, VendorActivity::class.java)
             }
+
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(
+                    PreferenceManager.KEY_USER_REG,
+                    true
+                )
+
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }

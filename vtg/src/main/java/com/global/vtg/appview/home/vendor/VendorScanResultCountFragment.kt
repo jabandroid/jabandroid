@@ -28,10 +28,7 @@ import com.global.vtg.base.fragment.addFragment
 import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.DateUtils.API_DATE_FORMAT
-import com.global.vtg.utils.DialogUtils
 import com.vtg.R
 
 import com.vtg.databinding.FragmentVendorScanResultCoutBinding
@@ -61,6 +58,10 @@ import android.view.MotionEvent
 import android.view.View.OnTouchListener
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import androidx.appcompat.app.AppCompatActivity
+import com.global.vtg.model.factory.PreferenceManager
+import com.global.vtg.utils.*
+import com.google.gson.JsonObject
 
 
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.countDown
@@ -93,6 +94,7 @@ class VendorScanResultCountFragment : AppFragment() {
     val calendar: Calendar = Calendar.getInstance()
     var strVaccine: String = ""
     var strTest: String = ""
+    var openDoc: String = ""
     var listHealth = ArrayList<HealthInfo>()
     override fun getLayoutId(): Int {
         return R.layout.fragment_vendor_scan_result_cout
@@ -643,10 +645,61 @@ class VendorScanResultCountFragment : AppFragment() {
         }, 80)
 
         vaccine_Root.setOnClickListener {
-            openFile(strVaccine)
+
+            val role = SharedPreferenceUtil.getInstance(activity!!)
+                ?.getData(PreferenceManager.KEY_ROLE, "user")
+            if (!strVaccine.isEmpty()) {
+                openDoc = strVaccine
+
+                if (role?.equals("user") == true) {
+
+                        Constants.openFile(strVaccine, activity!!)
+
+                } else {
+                    AppAlertDialog().validatePin(
+                        activity!! as AppCompatActivity,
+                        object : AppAlertDialog.GetClick {
+                            override fun response(type: String) {
+                                val j = JsonObject()
+                                j.addProperty("userId", Constants.SCANNEDUSER?.id)
+                                j.addProperty("pin", type)
+                                viewModel.validatePin(j)
+
+                            }
+                        }
+
+                    )
+                }
+            }
+
         }
         test_Root.setOnClickListener {
-            openFile(strTest)
+           // openFile(strTest)
+            val role = SharedPreferenceUtil.getInstance(activity!!)
+                ?.getData(PreferenceManager.KEY_ROLE, "user")
+            if (!strTest.isNullOrEmpty()) {
+                openDoc = strTest
+
+                if (role?.equals("user") == true) {
+
+                        Constants.openFile(strTest, activity!!)
+
+                } else {
+                    AppAlertDialog().validatePin(
+                        activity!! as AppCompatActivity,
+                        object : AppAlertDialog.GetClick {
+                            override fun response(type: String) {
+                                val j = JsonObject()
+                                j.addProperty("userId", Constants.SCANNEDUSER?.id)
+                                j.addProperty("pin", type)
+                                viewModel.validatePin(j)
+
+                            }
+                        }
+
+                    )
+                }
+            }
         }
 
 
@@ -696,6 +749,43 @@ class VendorScanResultCountFragment : AppFragment() {
                 }
             }
         })
+
+        viewModel.validatePin.observe(this,{
+            when (it) {
+                is Resource.Success -> {
+
+
+                    if(it.data.status=="Success"){
+                        Constants.openFile(openDoc, activity!!)
+                    }else{
+                        ToastUtils.longToast(0, getString(R.string.invalid_pin))
+                    }
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        is VendorActivity -> (activity as VendorActivity).hideProgressBar()
+                    }
+
+                }
+
+                is Resource.Error -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        is VendorActivity -> (activity as VendorActivity).hideProgressBar()
+                    }
+                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                        is VendorActivity -> (activity as VendorActivity).showProgressBar()
+                    }
+                }
+            }
+        })
+
 
         if (Constants.isSpalsh) {
             Handler().postDelayed({

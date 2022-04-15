@@ -7,12 +7,14 @@ import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResConfig
 import com.global.vtg.appview.config.ResInstitute
+import com.global.vtg.appview.home.event.Attendees
 import com.global.vtg.appview.home.event.Event
 import com.global.vtg.appview.home.event.EventArray
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.appview.home.testHistory.TestKit
 import com.global.vtg.appview.payment.ReqPayment
 import com.global.vtg.model.network.result.BaseResult
+import com.google.firebase.crashlytics.internal.model.CrashlyticsReport
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
@@ -64,8 +66,14 @@ interface ApiInterface {
     @GET("api/v1/user")
     fun getUserAsync(): Deferred<Response<ResUser>>
 
+    @POST("api/v1/pin")
+    fun updatePinAsync(@Body j:JsonObject): Deferred<Response<BaseResult>>
+    @POST("api/v1/pin/validate")
+    fun validatePinAsync(@Body j:JsonObject): Deferred<Response<BaseResult>>
+
     @GET("api/v1/barcode/{barcodeId}")
     fun scanBarcodeIdAsync(@Path("barcodeId") barcodeId: String): Deferred<Response<ResUser>>
+
 
     @GET("api/v1/institute/{name}")
     fun searchInstituteAsync(@Path("name") name: String): Deferred<Response<ResInstitute>>
@@ -162,9 +170,23 @@ interface ApiInterface {
 
     @DELETE("api/v1/event/profile/{id}")
     fun deleteEventPic(@Path("id") barcodeId: String): Deferred<Response<BaseResult>>
-//@Multipart
-//    @PUT("api/v1/event/profile")
-//    fun uploadEventImages(
-//    @PartMap  files: Map<String, RequestBody>
-//    ): Deferred<Response<BaseResult>>
+
+    @GET("api/v1/userSearch/{id}")
+    fun searchUser(@Path("id") barcodeId: String): Deferred<Response<ResUser>>
+
+    @POST("api/v1/eventUser")
+    fun addUser(@Body barcodeId: JsonObject): Deferred<Response<BaseResult>>
+
+    @GET("api/v1/eventUser/{id}")
+    fun getUsers(@Path("id") barcodeId: String): Deferred<Response<Attendees>>
+
+    @DELETE("api/v1/eventUser/{id}")
+    fun deleteUser(@Path("id") barcodeId: String): Deferred<Response<BaseResult>>
+
+    @GET("api/v1/eventUser/{eventid}/{id}")
+    fun checkStatus(@Path("eventid") barcodeId: String,@Path("id") id: String): Deferred<Response<BaseResult>>
+
+    @POST("api/v1/token")
+    fun updateToken(@Body j: JsonObject): Deferred<Response<BaseResult>>
+
 }

@@ -1,8 +1,12 @@
 package com.global.vtg.appview.home.dashboard
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.provider.Settings
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import com.global.vtg.appview.config.ResConfig
@@ -13,13 +17,11 @@ import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.SharedPreferenceUtil
-import com.global.vtg.utils.ToastUtils
+import com.global.vtg.utils.*
 import com.global.vtg.wscoroutine.ApiInterface
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentDashboardBinding
 import kotlinx.android.synthetic.main.fragment_dashboard.*
@@ -55,6 +57,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
         return mFragmentBinding
     }
 
+    @SuppressLint("HardwareIds")
     override fun initializeComponent(view: View?) {
         loadData()
         viewModel.getUser()
@@ -88,14 +91,42 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
         )
 
 
+
+
+
         viewModel.userConfigLiveData1.observe(this, {
             when (it) {
                 is Resource.Success -> {
                     (activity as HomeActivity).hideProgressBar()
                     Constants.USER = it.data
                     loadData()
+
+                    if(!TextUtils.isEmpty(SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.getData(PreferenceManager.KEY_TOKEN, ""))){
+                        val v =JsonObject()
+                        v.addProperty("userId",   Constants.USER!!.id.toString())
+                        v.addProperty("deviceId", Settings.Secure.getString(activity!!.contentResolver,
+                            Settings.Secure.ANDROID_ID))
+                        v.addProperty("token",SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.getData(PreferenceManager.KEY_TOKEN, ""))
+                        v.addProperty("deviceType","android")
+                        viewModel.updateToken(v)
+                    }
                     if(clickedPosition!=-1){
                         onItemClickMain(clickedPosition)
+                    }
+
+                    if(SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.getData(
+                                PreferenceManager.KEY_USER_REG,
+                                false
+                            ) == true
+                    ){
+                        AppAlertDialog().showRegMessage(
+                            activity!! as AppCompatActivity,
+                            Constants.USER!!.pin!!
+
+                        )
                     }
                 }
                 is Resource.Error -> {

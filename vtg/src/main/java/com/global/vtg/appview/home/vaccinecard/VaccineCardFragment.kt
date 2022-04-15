@@ -52,16 +52,18 @@ class VaccineCardFragment : AppFragment() {
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
-        val size= Constants.USER?.address!!.size-1
-        var country = Constants.USER?.address?.get(size)?.country
-        country = country?.let { getCountryCode(it) }
+        if(Constants.USER?.address!!.size>0) {
+            val size = Constants.USER?.address!!.size - 1
+            var country = Constants.USER?.address?.get(size)?.country
+            country = country?.let { getCountryCode(it) }
 
-        ivCard.setCountryImage("https://flagcdn.com/60x45/"+country!!.lowercase()+".png")
+            ivCard.setCountryImage("https://flagcdn.com/60x45/" + country!!.lowercase() + ".png")
+        }
 
         ivCard.setPersonImage(Constants.USER?.profileUrl)
         ivCard.setLastName(Constants.USER?.lastName)
         ivCard.setFirstName(Constants.USER?.firstName)
-        ivCard.setCardNo( Constants.USER?.barcodeId)
+        ivCard.setCardNo( Constants.USER?.barcodeUUID)
         val list = Constants.USER?.document
 
         var pp: String = ""

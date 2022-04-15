@@ -21,7 +21,7 @@ import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.USER
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.SharedPreferenceUtil
-import com.global.vtg.utils.setDrawableRightTouch
+
 import com.vtg.R
 import com.vtg.databinding.FragmentRegStep3Binding
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -182,6 +182,12 @@ class RegistrationStep3Fragment : AppFragment() {
                             }
                         }
                     } else {
+
+                        SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.saveData(
+                                PreferenceManager.KEY_USER_REG,
+                                true
+                            )
                         it.data.email?.trim()?.let { it1 ->
                             SharedPreferenceUtil.getInstance(getAppActivity())
                                 ?.saveData(

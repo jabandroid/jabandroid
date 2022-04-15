@@ -3,8 +3,8 @@ package com.global.vtg.appview.home.vendor
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.appview.config.HealthInfo
 import com.global.vtg.appview.config.TestInfo
@@ -15,13 +15,12 @@ import com.global.vtg.appview.home.testHistory.TestInformationAdapter
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryAdapter
 import com.global.vtg.base.AppFragment
-import com.global.vtg.base.fragment.popFragment
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DateUtils
-import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.*
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.google.android.material.tabs.TabLayout
+import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentVaccineResultBinding
 import kotlinx.android.synthetic.main.fragment_health_information.*
@@ -41,6 +40,7 @@ class VendorResultFragment : AppFragment() {
     val testList = ArrayList<TestInfo>()
     var healthList = ArrayList<HealthInfo>()
     var name: String = ""
+    var openDoc: String = ""
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_vaccine_result
@@ -64,9 +64,100 @@ class VendorResultFragment : AppFragment() {
         rvVaccine.layoutManager = LinearLayoutManager(context)
         rvHealth.layoutManager = LinearLayoutManager(context)
         rvTest.layoutManager = LinearLayoutManager(context)
-        val vaccineHistoryAdapter = VaccineHistoryAdapter(getAppActivity())
-        val testHistoryAdapter = TestInformationAdapter(getAppActivity())
-        val healthAdapter = HealthInformationAdapter(getAppActivity())
+        val vaccineHistoryAdapter =
+            VaccineHistoryAdapter(getAppActivity(), object : VaccineHistoryAdapter.onItemClick {
+                override fun response(item: VaccineHistory, v: View, position: Int) {
+                    val role = SharedPreferenceUtil.getInstance(activity!!)
+                        ?.getData(PreferenceManager.KEY_ROLE, "user")
+                    if (!item.documentLink.isNullOrEmpty()) {
+                        openDoc = item.documentLink.toString()
+
+                        if (role?.equals("user") == true) {
+                            if (!item.documentLink.isNullOrEmpty())
+                                Constants.openFile(item.documentLink, activity!!)
+
+                        } else {
+                            AppAlertDialog().validatePin(
+                                activity!! as AppCompatActivity,
+                                object : AppAlertDialog.GetClick {
+                                    override fun response(type: String) {
+                                        val j = JsonObject()
+                                        j.addProperty("userId", Constants.SCANNEDUSER?.id)
+                                        j.addProperty("pin", type)
+                                        viewModel.validatePin(j)
+
+                                    }
+                                }
+
+                            )
+                        }
+                    }
+
+
+                }
+
+            })
+        val testHistoryAdapter = TestInformationAdapter(getAppActivity(), object : TestInformationAdapter.ClickListener{
+            override fun response(item: TestInfo, v: View, position: Int) {
+                val role = SharedPreferenceUtil.getInstance(activity!!)
+                    ?.getData(PreferenceManager.KEY_ROLE, "user")
+                if (!item.documentLink.isNullOrEmpty()) {
+                    openDoc = item.documentLink.toString()
+
+                    if (role?.equals("user") == true) {
+                        if (!item.documentLink.isNullOrEmpty())
+                            Constants.openFile(item.documentLink, activity!!)
+
+                    } else {
+                        AppAlertDialog().validatePin(
+                            activity!! as AppCompatActivity,
+                            object : AppAlertDialog.GetClick {
+                                override fun response(type: String) {
+                                    val j = JsonObject()
+                                    j.addProperty("userId", Constants.SCANNEDUSER?.id)
+                                    j.addProperty("pin", type)
+                                    viewModel.validatePin(j)
+
+                                }
+                            }
+
+                        )
+                    }
+                }
+            }
+
+        })
+        val healthAdapter = HealthInformationAdapter(getAppActivity(),object : HealthInformationAdapter.onItemClick{
+            override fun response(item: HealthInfo, v: View, position: Int) {
+                val role = SharedPreferenceUtil.getInstance(activity!!)
+                    ?.getData(PreferenceManager.KEY_ROLE, "user")
+                if (!item.documentLink.isNullOrEmpty()) {
+                    openDoc = item.documentLink.toString()
+
+                    if (role?.equals("user") == true) {
+                        if (!item.documentLink.isNullOrEmpty())
+                            Constants.openFile(item.documentLink, activity!!)
+
+                    } else {
+                        AppAlertDialog().validatePin(
+                            activity!! as AppCompatActivity,
+                            object : AppAlertDialog.GetClick {
+                                override fun response(type: String) {
+                                    val j = JsonObject()
+                                    j.addProperty("userId", Constants.SCANNEDUSER?.id)
+                                    j.addProperty("pin", type)
+                                    viewModel.validatePin(j)
+
+                                }
+                            }
+
+                        )
+                    }
+                }
+            }
+
+
+        })
 
         rvVaccine.adapter = vaccineHistoryAdapter
         rvHealth.adapter = healthAdapter
@@ -81,6 +172,42 @@ class VendorResultFragment : AppFragment() {
                 requireActivity().resources.getString(R.string.no_connection)
             )
         }
+
+        viewModel.validatePin.observe(this,{
+            when (it) {
+                is Resource.Success -> {
+
+
+                    if(it.data.status=="Success"){
+                        Constants.openFile(openDoc, activity!!)
+                    }else{
+                        ToastUtils.longToast(0, getString(R.string.invalid_pin))
+                    }
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        is VendorActivity -> (activity as VendorActivity).hideProgressBar()
+                    }
+
+                }
+
+                is Resource.Error -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        is VendorActivity -> (activity as VendorActivity).hideProgressBar()
+                    }
+                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                        is VendorActivity -> (activity as VendorActivity).showProgressBar()
+                    }
+                }
+            }
+        })
 
         viewModel.testData.observe(this, {
             when (it) {
@@ -106,9 +233,11 @@ class VendorResultFragment : AppFragment() {
                                         healthList = Constants.SCANNEDUSER?.healthInfo!!
 
 
-                                        Collections.sort(healthList, Comparator<HealthInfo?> { obj1, obj2 ->
-                                            return@Comparator obj2!!.id!!.compareTo(obj1!!.id!!)
-                                        })
+                                        Collections.sort(
+                                            healthList,
+                                            Comparator<HealthInfo?> { obj1, obj2 ->
+                                                return@Comparator obj2!!.id!!.compareTo(obj1!!.id!!)
+                                            })
 
 
                                     }
@@ -128,14 +257,21 @@ class VendorResultFragment : AppFragment() {
 
                                     Constants.SCANNEDUSER?.vaccine?.let {
                                         val list = it
-                                        Collections.sort(list, Comparator<VaccineHistory?> { obj1, obj2 ->
-                                            val d1= DateUtils.getDate(  obj1!!.date!!,
-                                                DateUtils.API_DATE_FORMAT_VACCINE)
-                                            val d2= DateUtils.getDate(  obj2!!.date!!,
-                                                DateUtils.API_DATE_FORMAT_VACCINE)
-                                            return@Comparator d2.compareTo(d1)
-                                        })
-                                        vaccineList.addAll(list) }
+                                        Collections.sort(
+                                            list,
+                                            Comparator<VaccineHistory?> { obj1, obj2 ->
+                                                val d1 = DateUtils.getDate(
+                                                    obj1!!.date!!,
+                                                    DateUtils.API_DATE_FORMAT_VACCINE
+                                                )
+                                                val d2 = DateUtils.getDate(
+                                                    obj2!!.date!!,
+                                                    DateUtils.API_DATE_FORMAT_VACCINE
+                                                )
+                                                return@Comparator d2.compareTo(d1)
+                                            })
+                                        vaccineList.addAll(list)
+                                    }
                                     vaccineHistoryAdapter.setList(vaccineList)
                                     tvNoData.visibility = View.GONE
                                 } else {
@@ -151,13 +287,18 @@ class VendorResultFragment : AppFragment() {
                                     Constants.SCANNEDUSER?.test?.let {
                                         val list = it
                                         Collections.sort(list, Comparator<TestInfo?> { obj1, obj2 ->
-                                            val d1= DateUtils.getDate(  obj1!!.date!!,
-                                                DateUtils.API_DATE_FORMAT_VACCINE)
-                                            val d2= DateUtils.getDate(  obj2!!.date!!,
-                                                DateUtils.API_DATE_FORMAT_VACCINE)
+                                            val d1 = DateUtils.getDate(
+                                                obj1!!.date!!,
+                                                DateUtils.API_DATE_FORMAT_VACCINE
+                                            )
+                                            val d2 = DateUtils.getDate(
+                                                obj2!!.date!!,
+                                                DateUtils.API_DATE_FORMAT_VACCINE
+                                            )
                                             return@Comparator d2.compareTo(d1)
                                         })
-                                        testList.addAll(list) }
+                                        testList.addAll(list)
+                                    }
                                     testHistoryAdapter.setHealthList(testList)
                                     tvNoData.visibility = View.GONE
                                 } else {
@@ -184,7 +325,6 @@ class VendorResultFragment : AppFragment() {
                 }
             }
         })
-
 
 
 //        if (!Constants.SCANNEDUSER?.healthInfo.isNullOrEmpty()) {

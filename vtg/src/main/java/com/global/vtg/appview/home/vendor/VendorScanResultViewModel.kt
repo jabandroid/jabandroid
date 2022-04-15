@@ -9,6 +9,8 @@ import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
+import com.global.vtg.model.network.result.BaseResult
+import com.google.gson.JsonObject
 import com.vtg.R
 import kotlinx.coroutines.launch
 
@@ -30,7 +32,17 @@ class VendorScanResultViewModel(
         testDataDetails.postValue(it)
     }
 
+    val validatePin = MutableLiveData<Resource<BaseResult>>()
+
+    private val userPinObserver = Observer<Resource<BaseResult>> {
+        validatePin.postValue(it)
+    }
+
+
     init {
+        userRepository.validatePinLiveData.postValue(null)
+        userRepository.validatePinLiveData.observeForever(userPinObserver)
+
 
 
         userRepository.testTypeLiveData.postValue(null)
@@ -60,6 +72,12 @@ class VendorScanResultViewModel(
     public fun testHistory() {
         scope.launch {
             userRepository.getTestHistory()
+        }
+    }
+
+    fun validatePin(j: JsonObject) {
+        scope.launch {
+            userRepository.validatePin(j)
         }
     }
 }

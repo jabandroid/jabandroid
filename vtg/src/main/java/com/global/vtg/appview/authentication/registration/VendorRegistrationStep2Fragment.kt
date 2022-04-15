@@ -75,8 +75,8 @@ class VendorRegistrationStep2Fragment : AppFragment() {
             activity?.onBackPressed()
         }
 
-//        if(isFromProfile)
-//            tvSkip.visibility=View.GONE
+        if(isFromProfile)
+            tvSkip.visibility=View.GONE
 
         tvSkip.setOnClickListener{
             val intent: Intent = if (Constants.USER?.role.equals("ROLE_USER")) {
@@ -86,6 +86,11 @@ class VendorRegistrationStep2Fragment : AppFragment() {
             } else {
                 Intent(activity, VendorActivity::class.java)
             }
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(
+                    PreferenceManager.KEY_USER_REG,
+                    true
+                )
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }

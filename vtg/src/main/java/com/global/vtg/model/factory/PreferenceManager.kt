@@ -17,12 +17,14 @@ class PreferenceManager constructor(private var sharedPreferences: SharedPrefere
         const val KEY_PASSWORD = "pre.key.password"
         const val KEY_ROLE = "pre.key.role"
         const val KEY_LAN_CODE = "pre.key.lan_code"
+        const val KEY_TOKEN = "pre.key.token"
         const val KEY_LOGGED_IN_USER_TYPE = "pre.key.logged_type"
         const val KEY_FIRST_STEP = "pre.key.first_step"
         const val KEY_IS_CLINIC = "pre.key.is.clinic"
         const val KEY_ACCESS_TOKEN = "pre.key.accessToken"
         const val KEY_REFRESH_TOKEN = "pre.key.refreshToken"
         const val KEY_USER_LOGGED_IN = "pre.key.userLoggedIn"
+        const val KEY_USER_REG = "pre.key.userreg"
     }
 
     override fun saveLogin(remember: Boolean) {

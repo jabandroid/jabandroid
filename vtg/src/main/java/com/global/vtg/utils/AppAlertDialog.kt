@@ -13,16 +13,25 @@ import android.widget.RadioButton
 
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doOnTextChanged
 
 import androidx.fragment.app.FragmentActivity
 import com.global.vtg.model.factory.PreferenceManager
 import com.vtg.R
 import kotlinx.android.synthetic.main.include_language.view.*
+import kotlinx.android.synthetic.main.popup_update_pin.view.*
+import android.text.Editable
+
+import android.text.TextWatcher
+import kotlinx.android.synthetic.main.popup_register.view.*
+import kotlinx.android.synthetic.main.popup_update_pin.view.tvConfirmPin
+import kotlinx.android.synthetic.main.popup_update_pin.view.tvPin
+import kotlinx.android.synthetic.main.popup_update_pin.view.yes
 
 
 class AppAlertDialog {
 
-    var lanCode: Array<String> = arrayOf("en", "af", "ar","nl", "fr",   "pt","es", "sw")
+    var lanCode: Array<String> = arrayOf("en", "af", "ar", "nl", "fr", "pt", "es", "sw")
     private var position: Int = 0
     private lateinit var selecte: RadioButton
 
@@ -135,6 +144,157 @@ class AppAlertDialog {
         dialog.show()
     }
 
+    @SuppressLint("SetTextI18n")
+    fun updatePin(
+        activity: AppCompatActivity, mInteract: GetClick
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+        dialog.setCancelable(true)
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        if (dialog.window != null)
+            wlp.windowAnimations = R.style.DialogSlideAnim
+        //wlp.gravity = Gravity.BOTTOM
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = activity.layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popup_update_pin, null)
+
+
+        dialogLayout.yes.setOnClickListener {
+
+
+            if (!TextUtils.isEmpty(dialogLayout.etPin.text.toString())) {
+                if (dialogLayout.etPin.text.toString() == dialogLayout.etConfirm_Pin.text.toString()) {
+                    mInteract.response(dialogLayout.etPin.text.toString())
+                    dialog.dismiss()
+                } else
+                    ToastUtils.shortToast(0, activity.getString(R.string.both_pin))
+            } else
+                ToastUtils.shortToast(0, activity.getString(R.string.enter_pin))
+
+
+        }
+
+        dialogLayout.etConfirm_Pin.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            0,
+            0,
+            R.drawable.ic_check_circle_small_gray,
+            0
+        )
+
+        dialogLayout.etConfirm_Pin.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                var k = dialogLayout.tvPin.text.toString()
+                if (!TextUtils.isEmpty(dialogLayout.etPin.text.toString())) {
+                    if (dialogLayout.etPin.text.toString() == s.toString()) {
+                        dialogLayout.etConfirm_Pin.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                            0,
+                            0,
+                            R.drawable.ic_check_circle_small,
+                            0
+                        )
+                    } else
+                        dialogLayout.etConfirm_Pin.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                            0,
+                            0,
+                            R.drawable.ic_check_circle_small_gray,
+                            0
+                        )
+
+                }
+
+            }
+        })
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun validatePin(
+        activity: AppCompatActivity, mInteract: GetClick
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+        dialog.setCancelable(true)
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        if (dialog.window != null)
+            wlp.windowAnimations = R.style.DialogSlideAnim
+        //wlp.gravity = Gravity.BOTTOM
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = activity.layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popup_verify_pin, null)
+
+
+        dialogLayout.yes.setOnClickListener {
+            if (!TextUtils.isEmpty(dialogLayout.etConfirm_Pin.text.toString())) {
+                mInteract.response(dialogLayout.etConfirm_Pin.text.toString())
+                dialog.dismiss()
+            }
+
+
+        }
+
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun showRegMessage(
+        activity: AppCompatActivity, pin: String
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+        dialog.setCancelable(true)
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        if (dialog.window != null)
+            wlp.windowAnimations = R.style.DialogSlideAnim
+        //wlp.gravity = Gravity.BOTTOM
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = activity.layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popup_register, null)
+
+        dialogLayout.message.text = activity.getString(R.string.thanking_you, pin)
+        dialogLayout.yes.setOnClickListener {
+
+            SharedPreferenceUtil.getInstance(activity)
+                ?.saveData(
+                    PreferenceManager.KEY_USER_REG,
+                    false
+                )
+            dialog.dismiss()
+
+        }
+
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
 
     interface GetClick {
         fun response(type: String) {}

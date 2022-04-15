@@ -10,6 +10,7 @@ import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
+import com.google.gson.JsonObject
 import com.vtg.R
 import kotlinx.coroutines.launch
 
@@ -41,6 +42,13 @@ class DashboardViewModel (application: Application, private val userRepository: 
     fun getUser() {
         scope.launch {
             userRepository.getUser()
+        }
+    }
+
+
+    fun updateToken(j:JsonObject) {
+        scope.launch {
+            userRepository.updateToken(j)
         }
     }
 

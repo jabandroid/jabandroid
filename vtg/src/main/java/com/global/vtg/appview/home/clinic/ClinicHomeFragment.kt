@@ -2,6 +2,7 @@ package com.global.vtg.appview.home.clinic
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import com.global.vtg.appview.home.ClinicActivity
@@ -15,10 +16,9 @@ import com.global.vtg.appview.home.vendor.VendorDashboardViewModel
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.ToastUtils
+import com.global.vtg.utils.*
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentDashboardBinding
@@ -108,6 +108,19 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
                     loadData()
                     if(clickedPosition!=-1){
                         onItemClickMain(clickedPosition)
+                    }
+
+                    if(SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.getData(
+                                PreferenceManager.KEY_USER_REG,
+                                false
+                            ) == true
+                    ){
+                        AppAlertDialog().showRegMessage(
+                            activity!! as AppCompatActivity,
+                            Constants.USER!!.pin!!
+
+                        )
                     }
                 }
                 is Resource.Error -> {

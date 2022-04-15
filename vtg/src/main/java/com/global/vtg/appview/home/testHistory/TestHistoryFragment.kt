@@ -3,30 +3,22 @@ package com.global.vtg.appview.home.testHistory
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
-import android.view.WindowManager
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.appview.config.TestInfo
-import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
-import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryAdapter
-import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryViewModel
 import com.global.vtg.base.AppFragment
-import com.global.vtg.base.AppFragmentState
-import com.global.vtg.base.fragment.addFragmentInStack
-import com.global.vtg.imageview.setGlideNormalImage
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
+import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
 import com.vtg.databinding.FragmentTestHistoryBinding
-import com.vtg.databinding.FragmentVaccineHistoryBinding
 
 import kotlinx.android.synthetic.main.fragment_test_history.*
 
 
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -58,7 +50,23 @@ class TestHistoryFragment : AppFragment() {
 //        }
 
         rvTestList.layoutManager = LinearLayoutManager(context)
-        adapter = TestInformationAdapter(getAppActivity())
+        adapter = TestInformationAdapter(getAppActivity(),object : TestInformationAdapter.ClickListener{
+            override fun response(item: TestInfo, v: View, position: Int) {
+                val role = SharedPreferenceUtil.getInstance(activity!!)
+                    ?.getData(PreferenceManager.KEY_ROLE, "user")
+                if (!item.documentLink.isNullOrEmpty()) {
+
+
+                    if (role?.equals("user") == true) {
+                        if (!item.documentLink.isNullOrEmpty())
+                            Constants.openFile(item.documentLink, activity!!)
+
+                    }
+                }
+            }
+
+
+        })
         rvTestList.adapter = adapter
 
         updateNoData()

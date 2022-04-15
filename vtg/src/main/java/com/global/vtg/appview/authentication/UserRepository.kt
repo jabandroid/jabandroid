@@ -1,13 +1,12 @@
 package com.global.vtg.appview.authentication
 
-import android.app.usage.UsageEvents
-import android.widget.ArrayAdapter
 import androidx.lifecycle.MutableLiveData
 import com.global.vtg.appview.authentication.login.ReqLoginModel
 import com.global.vtg.appview.authentication.registration.ReqRegistration
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResInstitute
+import com.global.vtg.appview.home.event.Attendees
 import com.global.vtg.appview.home.event.Event
 import com.global.vtg.appview.home.event.EventArray
 import com.global.vtg.appview.home.profile.ResProfile
@@ -46,9 +45,16 @@ class UserRepository constructor(
     val getMyEventLiveData = MutableLiveData<Resource<EventArray>>()
     val eventLiveData = MutableLiveData<Resource<Event>>()
     val eventDeleteLiveData = MutableLiveData<Resource<BaseResult>>()
+    val updatePinLiveData = MutableLiveData<Resource<BaseResult>>()
+    val validatePinLiveData = MutableLiveData<Resource<BaseResult>>()
     val eventDeletePicLiveData = MutableLiveData<Resource<BaseResult>>()
     val paymentLiveData = MutableLiveData<Resource<BaseResult>>()
     val registerVendorStep2LiveData = MutableLiveData<Resource<ResUser>>()
+    val searchUser = MutableLiveData<Resource<ResUser>>()
+    val addUserLiveData = MutableLiveData<Resource<BaseResult>>()
+    val deleteUserLiveData = MutableLiveData<Resource<BaseResult>>()
+    val getEventsUSerLiveData= MutableLiveData<Resource<Attendees>>()
+    val checkStatus= MutableLiveData<Resource<BaseResult>>()
 
     suspend fun login(modelReq: ReqLoginModel) {
         Constants.tempUsername = modelReq.userName
@@ -196,6 +202,25 @@ class UserRepository constructor(
             userConfigLiveData.postValue(Resource.Success(result))
         } else if (result is BaseError) {
             userConfigLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun updatePin(j:JsonObject) {
+        updatePinLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result = safeApiCall(call = { apiServiceInterface.updatePinAsync(j).await() })
+        if (result is BaseResult) {
+            updatePinLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            updatePinLiveData.postValue(Resource.Error(result))
+        }
+    }
+    suspend fun validatePin(j:JsonObject) {
+        validatePinLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result = safeApiCall(call = { apiServiceInterface.validatePinAsync(j).await() })
+        if (result is BaseResult) {
+            validatePinLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            validatePinLiveData.postValue(Resource.Error(result))
         }
     }
 
@@ -443,6 +468,72 @@ class UserRepository constructor(
 
         } else if (result is BaseError) {
             testTypeKitData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun searchUser(modelReq: String) {
+        searchUser.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.searchUser(modelReq).await() })
+        if (result is ResUser && result.code=="200") {
+            searchUser.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            searchUser.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun addUser(modelReq: JsonObject) {
+        addUserLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.addUser(modelReq).await() })
+        if (result is BaseResult && result.code=="200") {
+            addUserLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            addUserLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun getUsers(modelReq: String) {
+        getEventsUSerLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.getUsers(modelReq).await() })
+        if (result is Attendees && result.code=="200") {
+            getEventsUSerLiveData.postValue(Resource.Success(result))
+        } else if (result  is BaseError) {
+            getEventsUSerLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun deleteUser(modelReq: String) {
+        deleteUserLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.deleteUser(modelReq).await() })
+        if (result is BaseResult && result.code=="200") {
+            deleteUserLiveData.postValue(Resource.Success(result))
+        } else if (result  is BaseError) {
+            deleteUserLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun checkStatus(modelReq: String, id:String) {
+        checkStatus.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.checkStatus(modelReq,id).await() })
+        if (result is BaseResult && result.code=="200") {
+            checkStatus.postValue(Resource.Success(result))
+        } else if (result  is BaseError) {
+            checkStatus.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun updateToken(modelReq: JsonObject) {
+        checkStatus.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.updateToken(modelReq).await() })
+        if (result is BaseResult && result.code=="200") {
+            checkStatus.postValue(Resource.Success(result))
+        } else if (result  is BaseError) {
+            checkStatus.postValue(Resource.Error(result))
         }
     }
 

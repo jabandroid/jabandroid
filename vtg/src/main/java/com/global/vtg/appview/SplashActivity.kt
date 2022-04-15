@@ -21,6 +21,8 @@ import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.BUNDLE_ID
 import com.global.vtg.utils.SharedPreferenceUtil
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.vtg.R
 
 import io.branch.referral.Branch
@@ -55,7 +57,22 @@ class SplashActivity : AppActivity() {
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
 
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+               // Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
 
+            // Get new FCM registration token
+            val token = task.result
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(PreferenceManager.KEY_TOKEN, token)
+
+            // Log and toast
+//            val msg = getString(R.string.msg_token_fmt, token)
+//            Log.d(TAG, msg)
+//            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+        })
 
         Handler().postDelayed({
             if (isUserLoggedIn == false)

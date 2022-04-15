@@ -179,7 +179,7 @@ dependencies {
     implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
-    implementation 'com.google.android.libraries.places:places:2.5.0'
+    implementation 'com.google.android.libraries.places:places:2.6.0'
     implementation 'com.hbb20:ccp:2.4.7'
 
     // Scan QR code
@@ -195,17 +195,17 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-crashlytics'
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging'
 //    implementation 'com.google.firebase:firebase-analytics-ktx:20.1.0'
 //    implementation 'com.google.firebase:firebase-dynamic-links-ktx'
     //implementation 'com.github.blikoon:QRCodeScanner:0.1.2'
     implementation("androidx.activity:activity-ktx:1.4.0")
-    implementation("androidx.fragment:fragment-ktx:1.4.0")
+    implementation("androidx.fragment:fragment-ktx:1.4.1")
 
    // compile 'com.google.zxing:core:3.2.0'
     implementation 'com.google.android.gms:play-services-maps:18.0.1'
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
     implementation 'com.edwardvanraak:MaterialBarcodeScanner:0.0.6-ALPHA'
-
     implementation 'com.google.android.gms:play-services-vision:15.0.2'
 }
 repositories {

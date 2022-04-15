@@ -7,6 +7,8 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.net.Uri
@@ -23,6 +25,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.Nullable
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -36,23 +39,24 @@ import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.popFragment
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.AppAlertDialog
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DateUtils
-import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentEventDetailBinding
 import io.branch.indexing.BranchUniversalObject
 import io.branch.referral.util.LinkProperties
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
+import kotlinx.android.synthetic.main.fragment_contactlist.*
 import kotlinx.android.synthetic.main.fragment_event_detail.*
+import kotlinx.android.synthetic.main.fragment_event_detail.ivBack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
 
@@ -69,6 +73,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
     private var bannerUrl: String = ""
     private var isMyEvent: Boolean = false
     private var isSubEvent: Boolean = false
+    private var isInterested: String = "0"
     private lateinit var eventAdapter: SubEventAdapter
     private val requestMultiplePermissionsCall =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
@@ -109,30 +114,36 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
         getView()!!.requestFocus()
         getView()!!.setOnKeyListener { v, keyCode, event ->
             if (event.action == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
-                if(isSubEvent){
+                if (isSubEvent) {
 
                     val bundle = Bundle()
-                    bundle.putString(Constants.BUNDLE_ID,  CreateEventFragment.itemEvent.parentEvent!!.toString())
+                    bundle.putString(
+                        Constants.BUNDLE_ID,
+                        CreateEventFragment.itemEvent.parentEvent!!.toString()
+                    )
                     bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, true)
                     bundle.putBoolean(Constants.BUNDLE_IS_SUB_EVENT, false)
                     popFragment(1)
-                    addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL , bundle)
-                }else
+                    addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL, bundle)
+                } else
                     activity?.onBackPressed()
                 true
             } else false
         }
 
         ivBack.setOnClickListener {
-            if(isSubEvent){
+            if (isSubEvent) {
                 val bundle = Bundle()
-                bundle.putString(Constants.BUNDLE_ID,  CreateEventFragment.itemEvent.parentEvent!!.toString())
+                bundle.putString(
+                    Constants.BUNDLE_ID,
+                    CreateEventFragment.itemEvent.parentEvent!!.toString()
+                )
                 bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isMyEvent)
                 bundle.putBoolean(Constants.BUNDLE_IS_SUB_EVENT, false)
                 popFragment(1)
-                addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL , bundle)
-            }else
-            activity?.onBackPressed()
+                addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL, bundle)
+            } else
+                activity?.onBackPressed()
         }
 
 
@@ -164,7 +175,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
                                         )
                                     }
                                     1 -> {
-                                        CreateSubEventFragment.itemSubEvent=item
+                                        CreateSubEventFragment.itemSubEvent = item
 
                                         addFragmentInStack<Any>(AppFragmentState.F_SUB_EVENT_CREATE)
                                     }
@@ -222,12 +233,12 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
                         bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isMyEvent)
                         bundle.putBoolean(Constants.BUNDLE_IS_SUB_EVENT, true)
                         popFragment(1)
-                        addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL , bundle)
+                        addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL, bundle)
                     }
 
                 }
             }
-        },isMyEvent)
+        }, isMyEvent)
         rvEventList.adapter = eventAdapter
         if (ActivityCompat.checkSelfPermission(
                 requireActivity(),
@@ -246,6 +257,9 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
 
             add_user_root.visibility = View.VISIBLE
 
+        } else {
+            add_user_root.visibility = View.VISIBLE
+            start.text = getString(R.string.interested)
         }
         public_event.visibility = View.VISIBLE
         more.setOnClickListener {
@@ -267,15 +281,15 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
                             )
                         }
                         1 -> {
-                            if(isSubEvent){
+                            if (isSubEvent) {
 
 
-                                CreateSubEventFragment.itemSubEvent=CreateEventFragment.itemEvent
+                                CreateSubEventFragment.itemSubEvent = CreateEventFragment.itemEvent
 
                                 addFragmentInStack<Any>(AppFragmentState.F_SUB_EVENT_CREATE)
 
-                            }else
-                            addFragmentInStack<Any>(AppFragmentState.F_EVENT_CREATE)
+                            } else
+                                addFragmentInStack<Any>(AppFragmentState.F_EVENT_CREATE)
                         }
                         2 -> {
                             val branchUniversalObject: BranchUniversalObject =
@@ -308,8 +322,8 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
                                 }
                             }
                         }
-                        4->{
-                            CreateSubEventFragment.itemSubEvent=Event()
+                        4 -> {
+                            CreateSubEventFragment.itemSubEvent = Event()
                             addFragmentInStack<Any>(
                                 AppFragmentState.F_SUB_EVENT_CREATE
                             )
@@ -357,7 +371,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
                         } else {
                             eventAdapter.remove(positionForDelete)
                         }
-                        positionForDelete=-1
+                        positionForDelete = -1
 
                     }
                     is Resource.Error -> {
@@ -606,35 +620,148 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
         })
 
         start.setOnClickListener {
-            val branchUniversalObject: BranchUniversalObject = BranchUniversalObject()
-                .setCanonicalIdentifier("item/12345")
-                .setTitle("You are invited to join event :$eventName")
-                .setContentDescription("")
-                .setContentImageUrl(bannerUrl) //.setContentImageUrl(Uri.parse("file://"+downloadedImagePath).toString())
-                .setContentIndexingMode(BranchUniversalObject.CONTENT_INDEX_MODE.PUBLIC)
+            if (isMyEvent) {
+                val bundle = Bundle()
+                bundle.putString(Constants.BUNDLE_ID, eventId)
+                bundle.putString(Constants.BUNDLE_NAME, eventName)
+                bundle.putString(Constants.BUNDLE_PIC, bannerUrl)
+                addFragmentInStack<Any>(AppFragmentState.F_CONTACT_LIST, bundle)
+            } else {
+                if (start.text.toString().equals(getString(R.string.decline))) {
+                    AppAlertDialog().showAlert(
+                        activity!!,
+                        object : AppAlertDialog.GetClick {
+                            override fun response(type: String) {
+                                val j = JsonObject()
+                                j.addProperty("eventId", eventId)
+                                j.addProperty("userId", Constants.USER!!.id)
+                                j.addProperty(
+                                    "userName",
+                                    SharedPreferenceUtil.INSTANCE?.getData(
+                                        PreferenceManager.KEY_USER_NAME,
+                                        ""
+                                    )
+                                )
+                                if (start.text.toString().equals(getString(R.string.decline)))
+                                    j.addProperty("interested", "0")
+                                else
+                                    j.addProperty("interested", "1")
 
-            val linkProperties: LinkProperties = LinkProperties()
-                .addControlParameter("event_id", eventId)
-                .setFeature("sharing")
+                                viewModel.addUSer(j)
+                            }
+                        },
+                        getString(R.string.decline_invitation),
+                        getString(R.string.yes),
+                        getString(R.string.no)
 
-                .setStage("1")
+                    )
+                } else {
+                    val j = JsonObject()
+                    j.addProperty("eventId", eventId)
+                    j.addProperty("userId", Constants.USER!!.id)
+                    j.addProperty(
+                        "userName",
+                        SharedPreferenceUtil.INSTANCE?.getData(PreferenceManager.KEY_USER_NAME, "")
+                    )
+                    if (start.text.toString().equals(getString(R.string.decline)))
+                        j.addProperty("interested", "0")
+                    else
+                        j.addProperty("interested", "1")
 
-            val bundle = Bundle()
+                    viewModel.addUSer(j)
 
-            bundle.putString("event_id", eventId)
-            branchUniversalObject.generateShortUrl(
-                activity!!,
-                linkProperties
-            ) { url, error ->
-                if (error == null) {
-                    val sendIntent = Intent()
-                    sendIntent.action = Intent.ACTION_SEND
-                    sendIntent.putExtra(Intent.EXTRA_TEXT, url)
-                    sendIntent.type = "text/plain"
-                    activity!!.startActivity(sendIntent)
                 }
+                //  {"eventUsers":"{\"status\":\"Success\"}"}
+
+                //  {"eventId":"51","userId":8,"userName":"919855677137","interested":"0"}
             }
         }
+
+        viewModel.checkStatus(eventId, Constants.USER!!.id.toString())
+
+        viewModel.addUser.observe(this, {
+            when (it) {
+                is Resource.Success -> {
+
+                    when (activity) {
+                        is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        else -> (activity as VendorActivity).hideProgressBar()
+                    }
+                    viewModel.checkStatus(eventId, Constants.USER!!.id.toString())
+                }
+                is Resource.Error -> {
+                    when (activity) {
+                        is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        else -> (activity as VendorActivity).hideProgressBar()
+                    }
+                    it.error.message?.let { it1 ->
+                        DialogUtils.showSnackBar(context, it1)
+                    }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is AuthenticationActivity -> (activity as AuthenticationActivity).showProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                        else -> (activity as VendorActivity).showProgressBar()
+                    }
+                }
+
+
+            }
+        })
+
+        viewModel.checkStatusLive.observe(this, {
+            when (it) {
+                is Resource.Success -> {
+                    isInterested = it.data.interestedEvent.toString()
+
+                    //  share.visibility = View.VISIBLE
+
+                    if (!isMyEvent) {
+                        if (isInterested == "1") {
+                            start.text = getString(R.string.decline)
+                            start.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#ff0000"))
+                        } else {
+
+                            start.text = getString(R.string.interested)
+                            start.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#255CA4"))
+                        }
+                    }
+                    when (activity) {
+                        is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        else -> (activity as VendorActivity).hideProgressBar()
+                    }
+                }
+                is Resource.Error -> {
+                    when (activity) {
+                        is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                        else -> (activity as VendorActivity).hideProgressBar()
+                    }
+//                    it.error.message?.let { it1 ->
+//                        DialogUtils.showSnackBar(context, it1)
+//                    }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is AuthenticationActivity -> (activity as AuthenticationActivity).showProgressBar()
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                        else -> (activity as VendorActivity).showProgressBar()
+                    }
+                }
+
+
+            }
+        })
     }
 
     private fun initMapView() {
@@ -749,7 +876,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
 
     class BottomSheetDialog : BottomSheetDialogFragment() {
         private lateinit var listener: ClickListener
-        private  var isSubEvent: Boolean = false
+        private var isSubEvent: Boolean = false
         override fun onCreateView(
             inflater: LayoutInflater,
             @Nullable container: ViewGroup?,
@@ -761,9 +888,9 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
             )
 
 
-            if(!isSubEvent){
-                v.addSlot.visibility=View.VISIBLE
-                v.add_sub_event.visibility=View.VISIBLE
+            if (!isSubEvent) {
+                v.addSlot.visibility = View.VISIBLE
+                v.add_sub_event.visibility = View.VISIBLE
             }
 
             v.delete.setOnClickListener {
@@ -790,6 +917,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
         fun setListener(l: ClickListener) {
             this.listener = l
         }
+
         fun setIsSubEvent(l: Boolean) {
             this.isSubEvent = l
         }
@@ -803,8 +931,6 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
         if (!TextUtils.isEmpty(eventId))
             viewModel.callEventDetails(eventId)
     }
-
-
 
 
 }

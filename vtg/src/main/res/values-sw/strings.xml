@@ -553,15 +553,36 @@
     <string name="add_slot">Ongeza Tukio Ndogo</string>
     <string name="label_event_name_sub">Jina Ndogo la Tukio*</string>
     <string name="same_address">Anwani sawa na Unda Tukio</string>
-    <string name="time_slot">Nafasi za Wakati</string>
+    <string name="time_slot">Tukio Ndogo</string>
     <string name="add_image">Ongeza Picha</string>
     <string name="succesfully_added">Imeongezwa kwa Mafanikio</string>
-    <string name="add_more">Je, ungependa kuongeza zaidi?<u><font color='#255CA4'>Bofya hapa</font></u>.</string>
+    <string name="add_more">Je, ungependa kuongeza zaidi? <br> <u><font color='#255CA4'>Bofya hapa</font></u>.</br></string>
     <string name="go_to_event_page">au Nenda kwenye <u><font color='#255CA4'>Ukurasa wa Tukio</font></u>.</string>
     <string name="add_attandees">Ongeza Waliohudhuria</string>
     <string name="sub_event">Matukio Ndogo</string>
     <string name="total_attendees">Idadi ya Wahudhuriaji</string>
-    <string name="enter_attendees">Ingiza idadi ya Washiriki</string>
+    <string name="enter_attendees">Weka idadi ya Washiriki</string>
     <string name="edit">Hariri</string>
     <string name="delete">Futa</string>
+    <string name="pin">Bandika: </string>
+    <string name="pin_1">Ingiza Bandiko </string>
+    <string name="enter_pin">Tafadhali weka pin yako</string>
+    <string name="confirm_pin">Thibitisha Bandiko</string>
+    <string name="both_pin">Bandika na uthibitishe pin inapaswa kuwa sawa </string>
+    <string name="update"><u>Sasisha</u></string>
+    <string name="authentication">Uthibitishaji</string>
+    <string name="provide_pin">Tafadhali weka mtumiaji pin yenye tarakimu 4 kwa uthibitishaji na ufikiaji. </string>
+    <string name="invalid_pin">Uthibitishaji wa pin umeshindwa. Tafadhali jaribu tena.</string>
+    <string name="submit">Wasilisha</string>
+    <string name="label_contact_permission">Tafadhali kubali ruhusa ya mwasiliani ili kuendelea.</string>
+    <string name="thanking_you">Asante kwa kujisajili. <br><br> PIN yako ya usalama ni %s. Unaweza kuibadilisha kwa kuendelea kuhariri wasifu.</br> </br> </string>
+    <string name="attandees">Waliohudhuria</string>
+    <string name="add">Ongeza</string>
+    <string name="invite">Alika</string>
+    <string name="interested">INAPENDEZA</string>
+    <string name="purchase_subscription">Ili kuongeza wahudhuriaji zaidi lazima ujiandikishe kwa mpango wetu.</string>
+    <string name="subscribe">Jisajili</string>
+    <string name="delete_user">Je, una uhakika wa kufuta mtumiaji huyu?</string>
+    <string name="decline">KATAA</string>
+    <string name="decline_invitation">Je, ungependa kukataa mwaliko huu?</string>
 </resources>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:paddingLeft="20dp"
+    android:paddingTop="20dp"
+    android:paddingRight="20dp">
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/rl_dialog"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_top_border"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            tools:ignore="UselessParent">
+
+            <com.global.vtg.utils.textView.SemiBoldTextView
+                android:id="@+id/tvPin"
+                style="@style/MarginStartEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/_16sdp"
+                android:gravity="center"
+                android:text="@string/pin_1" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etPin"
+                style="@style/EdittextPadding"
+android:maxLength="4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@drawable/edittext_shadow"
+                android:drawablePadding="@dimen/_8sdp"
+                android:imeOptions="actionDone"
+                android:inputType="numberPassword"
+                android:shadowColor="@color/gray_light"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="4" />
+
+            <com.global.vtg.utils.textView.SemiBoldTextView
+                android:id="@+id/tvConfirmPin"
+                style="@style/MarginStartEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:text="@string/confirm_pin" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etConfirm_Pin"
+                style="@style/EdittextPadding"
+                android:maxLength="4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:background="@drawable/edittext_shadow"
+                android:drawablePadding="@dimen/_8sdp"
+                android:imeOptions="actionDone"
+                android:inputType="numberPassword"
+                android:shadowColor="@color/gray_light"
+                android:shadowDx="0"
+                android:shadowDy="0"
+                android:shadowRadius="4" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/yes"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="@dimen/_13sdp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_button_global"
+                android:fontFamily="@font/avenirnextltpromediumcn"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/action_save"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</ScrollView>

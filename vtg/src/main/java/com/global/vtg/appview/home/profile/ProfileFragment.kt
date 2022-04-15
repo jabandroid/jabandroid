@@ -1,12 +1,17 @@
 package com.global.vtg.appview.home.profile
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.appview.authentication.AuthenticationActivity
@@ -21,11 +26,13 @@ import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
+import com.global.vtg.utils.AppAlertDialog
 import com.global.vtg.utils.Constants.BUNDLE_FROM_PROFILE
 import com.global.vtg.utils.Constants.USER
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
+import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentProfileBinding
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -34,12 +41,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 
 class ProfileFragment : AppFragment() {
     private lateinit var mFragmentBinding: FragmentProfileBinding
     private val viewModel by viewModel<ProfileViewModel>()
-
+private  var pin:String=""
     override fun getLayoutId(): Int {
         return R.layout.fragment_profile
     }
@@ -55,6 +63,7 @@ class ProfileFragment : AppFragment() {
         return mFragmentBinding
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
         ivBack.setOnClickListener {
             activity?.onBackPressed()
@@ -69,12 +78,31 @@ class ProfileFragment : AppFragment() {
             addFragmentInStack<Any>(AppFragmentState.F_CHANGE_PASSWORD)
         }
 
+        tvPinUpdate.setOnClickListener {
+            AppAlertDialog().updatePin(
+                activity!! as AppCompatActivity,
+                object : AppAlertDialog.GetClick {
+                    override fun response(type: String) {
+                        pin=type
+                        val j = JsonObject()
+                        j.addProperty("userId", USER?.id)
+                        j.addProperty("pin", type)
+                        viewModel.updatePin(j)
+
+                    }
+                }
+
+            )
+        }
+
         tvUserName.text = USER?.firstName + " " + USER?.lastName
         tvMobileValue.text = USER?.mobileNo
         tvCityValue.text = USER?.birthCity
         tvStateValue.text = USER?.birthState
         tvCountryValue.text = USER?.birthCountry
         tvEmailValue.text = USER?.email
+        tvPin.text = USER?.pin
+        tvPinUpdate.setTextColor(ContextCompat.getColor(activity!!, R.color.colorPrimary))
         loadAddress()
         viewModel.getUser()
         if (!USER!!.profileUrl.isNullOrEmpty())
@@ -91,7 +119,6 @@ class ProfileFragment : AppFragment() {
                             resultMessage(resultCode, path, displayName)
                         }
                     }
-
                     override fun cancel() {
                         PickMediaExtensions.instance.pickFromCamera(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
                             resultMessage(resultCode, path, displayName)
@@ -148,11 +175,48 @@ class ProfileFragment : AppFragment() {
                 }
             }
         })
+
+        viewModel.updatePin.observe(this, { resources ->
+            resources?.let {
+                when (it) {
+                    is Resource.Success -> {
+
+                        when (activity) {
+
+                            is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                            else -> (activity as VendorActivity).hideProgressBar()
+                        }
+
+                        tvPin.text = pin
+
+
+                    }
+                    is Resource.Error -> {
+                        when (activity) {
+
+                            is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                            else -> (activity as VendorActivity).hideProgressBar()
+                        }
+                        it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                    }
+                    is Resource.Loading -> {
+                        when (activity) {
+
+                            is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                            is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                            else -> (activity as VendorActivity).showProgressBar()
+                        }
+                    }
+                }
+            }
+        })
     }
 
-     fun loadAddress() {
+    fun loadAddress() {
         if (!USER?.address.isNullOrEmpty()) {
-            var index=USER?.address!!.size-1
+            var index = USER?.address!!.size - 1
             tvCityValue.text = USER?.address?.get(index)?.city ?: ""
             tvStateValue.text = USER?.address?.get(index)?.state ?: ""
             tvPostalCodeValue.text = USER?.address?.get(index)?.zipCode ?: ""

@@ -560,10 +560,10 @@
     <string name="add_slot">Subgebeurtenis toevoegen</string>
     <string name="label_event_name_sub">Subgebeurtenisnaam*</string>
     <string name="same_address">Adres hetzelfde als Evenement aanmaken</string>
-    <string name="time_slot">Tijdvakken</string>
+    <string name="time_slot">Subgebeurtenis</string>
     <string name="add_image">Afbeelding toevoegen</string>
     <string name="succesfully_added">Succesvol toegevoegd</string>
-    <string name="add_more">Wilt u meer toevoegen?<u><font color='#255CA4'>Klik hier</font></u>.</string>
+    <string name="add_more">Wilt u meer toevoegen? <br> <u><font color='#255CA4'>Klik hier</font></u>.</br></string>
     <string name="go_to_event_page">of Ga naar <u><font color='#255CA4'>Evenementenpagina</font></u>.</string>
     <string name="add_attandees">Bezoekers toevoegen</string>
     <string name="sub_event">Subgebeurtenissen</string>
@@ -571,4 +571,25 @@
     <string name="enter_attendees">Voer het aantal aanwezigen in</string>
     <string name="edit">Bewerken</string>
     <string name="delete">Verwijderen</string>
+    <string name="pin">Pin: </string>
+    <string name="pin_1">Pincode invoeren </string>
+    <string name="enter_pin">Vul je pincode in</string>
+    <string name="confirm_pin">PIN bevestigen</string>
+    <string name="both_pin">Pin en bevestig pin moeten hetzelfde zijn </string>
+    <string name="update"><u>Bijwerken</u></string>
+    <string name="authentication">Authenticatie</string>
+    <string name="provide_pin">Voer de 4-cijferige pincode van de gebruiker in voor authenticatie en toegang. </string>
+    <string name="invalid_pin">Pin-authenticatie mislukt. Probeer het opnieuw.</string>
+    <string name="submit">Verzenden</string>
+    <string name="label_contact_permission">Accepteer de contactrechten om door te gaan.</string>
+    <string name="thanking_you">Bedankt voor je aanmelding. <br><br> Uw beveiligingspin is %s. Je kunt het wijzigen door naar profiel bewerken te gaan.</br> </br> </string>
+    <string name="attandees">Aanwezigen</string>
+    <string name="add">Toevoegen</string>
+    <string name="invite">Uitnodigen</string>
+    <string name="interested">geïnteresseerd</string>
+    <string name="purchase_subscription">Om meer deelnemers toe te voegen, moet je je abonneren op ons abonnement.</string>
+    <string name="subscribe">Abonneren</string>
+    <string name="delete_user">Weet je zeker dat je deze gebruiker wilt verwijderen?</string>
+    <string name="decline">DECLINE</string>
+    <string name="decline_invitation">Wilt u deze uitnodiging afwijzen?</string>
 </resources>

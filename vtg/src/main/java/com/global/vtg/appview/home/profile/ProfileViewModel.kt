@@ -22,6 +22,7 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import android.webkit.MimeTypeMap
 import com.global.vtg.model.network.result.BaseResult
+import com.google.gson.JsonObject
 
 
 class ProfileViewModel(application: Application, private val userRepository: UserRepository) :
@@ -35,9 +36,18 @@ class ProfileViewModel(application: Application, private val userRepository: Use
         userLiveData.postValue(it)
     }
 
+    val updatePin = MutableLiveData<Resource<BaseResult>>()
+
+    private val userPinObserver = Observer<Resource<BaseResult>> {
+        updatePin.postValue(it)
+    }
+
     init {
         userRepository.userProfilePicLiveData.postValue(null)
         userRepository.userProfilePicLiveData.observeForever(userObserver)
+
+        userRepository.updatePinLiveData.postValue(null)
+        userRepository.updatePinLiveData.observeForever(userPinObserver)
     }
 
     fun onClick(view: View) {
@@ -52,6 +62,7 @@ class ProfileViewModel(application: Application, private val userRepository: Use
                     )
                 }
             }
+
 
             R.id.btnLogout -> {
                 logout.postValue(true)
@@ -79,6 +90,12 @@ class ProfileViewModel(application: Application, private val userRepository: Use
     fun getUser() {
         scope.launch {
             userRepository.getUser()
+        }
+    }
+
+    fun updatePin(j:JsonObject) {
+        scope.launch {
+            userRepository.updatePin(j)
         }
     }
 }

@@ -8,6 +8,7 @@ import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
 import com.global.vtg.model.network.result.BaseResult
+import com.google.gson.JsonObject
 import kotlinx.coroutines.launch
 
 
@@ -27,6 +28,19 @@ class EventListDetailViewModel(
         eventDeletelLiveData.postValue(it)
     }
 
+    val addUser = MutableLiveData<Resource<BaseResult>>()
+
+    private val addUserLiveData = Observer<Resource<BaseResult>> {
+        addUser.postValue(it)
+    }
+
+    val checkStatusLive = MutableLiveData<Resource<BaseResult>>()
+
+    private val checkStatus = Observer<Resource<BaseResult>> {
+        checkStatusLive.postValue(it)
+    }
+
+
     init {
 
         userRepository.eventLiveData.postValue(null)
@@ -34,6 +48,11 @@ class EventListDetailViewModel(
 
         userRepository.eventDeleteLiveData.postValue(null)
         userRepository.eventDeleteLiveData.observeForever(eventDelete)
+
+        userRepository.addUserLiveData.postValue(null)
+        userRepository.addUserLiveData.observeForever(addUserLiveData)
+        userRepository.checkStatus.postValue(null)
+        userRepository.checkStatus.observeForever(checkStatus)
 
     }
 
@@ -48,6 +67,7 @@ class EventListDetailViewModel(
     override fun onCleared() {
         super.onCleared()
         userRepository.eventLiveData.removeObserver(eventObserver)
+        userRepository.checkStatus.removeObserver(checkStatus)
     }
 
     fun callEventDetails(obj:String) {
@@ -60,4 +80,18 @@ class EventListDetailViewModel(
             userRepository.DeleteEvent(obj)
         }
     }
+
+
+    fun addUSer(id: JsonObject) {
+        scope.launch {
+            userRepository.addUser(id)
+        }
+    }
+
+    fun checkStatus(event: String,id:String) {
+        scope.launch {
+            userRepository.checkStatus(event, id)
+        }
+    }
+
 }

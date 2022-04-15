@@ -558,16 +558,36 @@
     <string name="add_slot">Ajouter un sous-événement</string>
     <string name="label_event_name_sub">Nom du sous-événement*</string>
     <string name="same_address">Adresse identique à Créer un événement</string>
-    <string name="time_slot">Plages horaires</string>
+    <string name="time_slot">Sous-événement</string>
     <string name="add_image">Ajouter une image</string>
     <string name="succesfully_added">Ajouté avec succès</string>
-    <string name="add_more">Voulez-vous ajouter plus ?<u><font color='#255CA4'>Cliquez ici</font></u>.</string>
+    <string name="add_more">Voulez-vous en ajouter ? <br> <u><font color='#255CA4'>Cliquez ici</font></u>.</br></string>
     <string name="go_to_event_page">ou Aller à la <u><font color='#255CA4'>Page de l\'événement</font></u>.</string>
     <string name="add_attandees">Ajouter des participants</string>
     <string name="sub_event">Sous-événements</string>
-
     <string name="total_attendees">Nombre de participants</string>
     <string name="enter_attendees">Entrez le nombre de participants</string>
     <string name="edit">Modifier</string>
     <string name="delete">Supprimer</string>
+    <string name="pin">Pin : </string>
+    <string name="pin_1">Saisir le code </string>
+    <string name="enter_pin">Veuillez saisir votre code PIN</string>
+    <string name="confirm_pin">Confirmer l\'épingle</string>
+    <string name="both_pin">La broche et la broche de confirmation doivent être identiques </string>
+    <string name="update"><u>Mettre à jour</u></string>
+    <string name="authentication">Authentification</string>
+    <string name="provide_pin">Veuillez entrer le code PIN à 4 chiffres de l\'utilisateur pour l\'authentification et l\'accès. </string>
+    <string name="invalid_pin">Échec de l\'authentification par code PIN. Veuillez réessayer.</string>
+    <string name="submit">Soumettre</string>
+    <string name="label_contact_permission">Veuillez accepter l\'autorisation de contact pour continuer.</string>
+    <string name="thanking_you">Merci pour votre inscription. <br><br> Votre code PIN de sécurité est %s. Vous pouvez le changer en allant sur modifier le profil.</br> </br> </string>
+    <string name="attandees">Participants</string>
+    <string name="add">Ajouter</string>
+    <string name="invite">Inviter</string>
+    <string name="interested">INTÉRESSÉE</string>
+    <string name="purchase_subscription">Pour ajouter plus de participants, vous devez vous abonner à notre plan.</string>
+    <string name="subscribe">S\'abonner</string>
+    <string name="delete_user">Êtes-vous sûr de vouloir supprimer cet utilisateur ?</string>
+    <string name="decline">REFUSER</string>
+    <string name="decline_invitation">Voulez-vous refuser cette invitation ?</string>
 </resources>

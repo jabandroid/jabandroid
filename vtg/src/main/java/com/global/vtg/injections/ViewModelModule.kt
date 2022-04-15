@@ -171,6 +171,9 @@ val appViewModelModule = module {
     viewModel {
         EventListViewModel(get(), get())
     }
+  viewModel {
+      ContactListViewModel(get(), get())
+    }
 
 
 }

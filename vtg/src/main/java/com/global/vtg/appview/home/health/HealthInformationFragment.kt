@@ -15,10 +15,12 @@ import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.imageview.setGlideNormalImage
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.SharedPreferenceUtil
 
 import com.vtg.R
 import com.vtg.databinding.FragmentHealthInformationBinding
@@ -74,7 +76,22 @@ class HealthInformationFragment : AppFragment() {
 //        }
 
         rvHealth.layoutManager = LinearLayoutManager(context)
-        healthAdapter = HealthInformationAdapter(getAppActivity())
+        healthAdapter = HealthInformationAdapter(getAppActivity(), object :HealthInformationAdapter.onItemClick{
+            override fun response(item: HealthInfo, v: View, position: Int) {
+                val role = SharedPreferenceUtil.getInstance(activity!!)
+                    ?.getData(PreferenceManager.KEY_ROLE, "user")
+                if (!item.documentLink.isNullOrEmpty()) {
+
+
+                    if (role?.equals("user") == true) {
+                        if (!item.documentLink.isNullOrEmpty())
+                            Constants.openFile(item.documentLink, activity!!)
+
+                    }
+                }
+            }
+
+        } )
         rvHealth.adapter = healthAdapter
         val list = Constants.USER?.healthInfo
         if (!list.isNullOrEmpty()) {

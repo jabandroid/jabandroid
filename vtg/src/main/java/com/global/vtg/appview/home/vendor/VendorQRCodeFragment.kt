@@ -75,7 +75,7 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
 
         Constants.isSpalsh=true
 //        val bundle = Bundle()
-//        bundle.putString(Constants.BUNDLE_BARCODE_ID, "82847153710119821642744528894")
+//        bundle.putString(Constants.BUNDLE_BARCODE_ID, "4450451384999698164292369")
 //        addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
 
         if(checkPermissions()){

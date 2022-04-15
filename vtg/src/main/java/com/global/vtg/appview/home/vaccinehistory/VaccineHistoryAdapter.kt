@@ -24,11 +24,14 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import androidx.core.content.ContextCompat
+import com.global.vtg.model.factory.PreferenceManager
+import com.global.vtg.utils.SharedPreferenceUtil
 import java.io.File
 
 
 class VaccineHistoryAdapter(
-    var context: Context
+    var context: Context,
+    var click : onItemClick
 ) :
     RecyclerView.Adapter<VaccineHistoryAdapter.DashboardViewHolder>() {
     private var list: ArrayList<VaccineHistory> = ArrayList()
@@ -50,11 +53,11 @@ class VaccineHistoryAdapter(
             DateUtils.formatDateUTCToLocal(
                 it,
                 API_DATE_FORMAT_VACCINE,
-               true
-                )
+                true
+            )
         }
 
-        if(list[position].addedBy!=null) {
+        if (list[position].addedBy != null) {
             if (list[position].addedBy!!.contains("clinic"))
                 holder.itemView.addedBy.setImageResource(R.drawable.ic_clinic)
             else
@@ -83,11 +86,11 @@ class VaccineHistoryAdapter(
                         }
                     }
                 }
-            }catch (e : Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
 
-
+/*
             when (valid) {
                 1 -> {
                     holder.itemView.ivStatus.setImageResource(R.drawable.ic_check_circle_yellow)
@@ -107,15 +110,15 @@ class VaccineHistoryAdapter(
                     holder.itemView.ivStatus.setImageResource(R.drawable.ic_not_verified)
                     holder.itemView.llVaccine.setBackgroundResource(R.drawable.red_border)
                 }
-            }
+            }*/
         } else {
-            holder.itemView.ivStatus.setImageResource(0)
-            holder.itemView.llVaccine.setBackgroundResource(R.drawable.red_border)
+//            holder.itemView.ivStatus.setImageResource(0)
+//            holder.itemView.llVaccine.setBackgroundResource(R.drawable.red_border)
         }
 
         holder.itemView.setOnClickListener {
-            if (!list[position].documentLink.isNullOrEmpty())
-                openFile(list[position].documentLink.toString())
+            click.response(list[position], it, position)
+
         }
 
     }
@@ -139,6 +142,10 @@ class VaccineHistoryAdapter(
         notifyDataSetChanged()
     }
 
+    interface onItemClick {
+        fun response(item: VaccineHistory, v:View, position: Int)
+    }
+
     fun getVaccineName(id: Int): String? {
         val list = Constants.CONFIG?.vaccineType
         if (list?.isNotEmpty() == true) {
@@ -151,63 +158,5 @@ class VaccineHistoryAdapter(
         return ""
     }
 
-    private fun openFile(url: String) {
-        try {
-            val uri: Uri = Uri.parse(url)
-            val intent = Intent(Intent.ACTION_VIEW)
-            if (url.toString().contains(".doc") || url.toString().contains(".docx")) {
-                // Word document
-                intent.setDataAndType(uri, "application/msword")
-            } else if (url.toString().contains(".pdf")) {
-                // PDF file
-                intent.setDataAndType(uri, "application/pdf")
-            } else if (url.toString().contains(".ppt") || url.toString().contains(".pptx")) {
-                // Powerpoint file
-                intent.setDataAndType(uri, "application/vnd.ms-powerpoint")
-            } else if (url.toString().contains(".xls") || url.toString().contains(".xlsx")) {
-                // Excel file
-                intent.setDataAndType(uri, "application/vnd.ms-excel")
-            } else if (url.toString().contains(".zip")) {
-                // ZIP file
-                intent.setDataAndType(uri, "application/zip")
-            } else if (url.toString().contains(".rar")) {
-                // RAR file
-                intent.setDataAndType(uri, "application/x-rar-compressed")
-            } else if (url.toString().contains(".rtf")) {
-                // RTF file
-                intent.setDataAndType(uri, "application/rtf")
-            } else if (url.toString().contains(".wav") || url.toString().contains(".mp3")) {
-                // WAV audio file
-                intent.setDataAndType(uri, "audio/x-wav")
-            } else if (url.toString().contains(".gif")) {
-                // GIF file
-                intent.setDataAndType(uri, "image/gif")
-            } else if (url.toString().contains(".jpg") || url.toString()
-                    .contains(".jpeg") || url.toString().contains(".png")
-            ) {
-                // JPG file
-                intent.setDataAndType(uri, "image/*")
-            } else if (url.toString().contains(".txt")) {
-                // Text file
-                intent.setDataAndType(uri, "text/plain")
-            } else if (url.toString().contains(".3gp") || url.toString().contains(".mpg") ||
-                url.toString().contains(".mpeg") || url.toString()
-                    .contains(".mpe") || url.toString().contains(".mp4") || url.toString()
-                    .contains(".avi")
-            ) {
-                // Video files
-                intent.setDataAndType(uri, "video/*")
-            } else {
-                intent.setDataAndType(uri, "*/*")
-            }
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            context.startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(
-                context,
-                "No application found which can open the file",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
+
 }

@@ -562,10 +562,10 @@
     <string name="add_slot">Voeg subgebeurtenis by</string>
     <string name="label_event_name_sub">Subgebeurtenisnaam*</string>
     <string name="same_address">Adres dieselfde as Skep gebeurtenis</string>
-    <string name="time_slot">Tydgleuwe</string>
+    <string name="time_slot">Subgebeurtenis</string>
     <string name="add_image">Voeg prent by</string>
     <string name="succesfully_added">Suksesvol bygevoeg</string>
-    <string name="add_more">Wil jy meer byvoeg?<u><font color='#255CA4'>Klik hier</font></u>.</string>
+    <string name="add_more">Wil jy meer byvoeg? <br> <u><font color='#255CA4'>Klik hier</font></u>.</br></string>
     <string name="go_to_event_page">of gaan na <u><font color='#255CA4'>Gebeurtenisbladsy</font></u>.</string>
     <string name="add_attandees">Voeg deelnemers by</string>
     <string name="sub_event">Subgebeurtenisse</string>
@@ -573,4 +573,25 @@
     <string name="enter_attendees">Voer die aantal deelnemers in</string>
     <string name="edit">Redigeer</string>
     <string name="delete">Vee uit</string>
+    <string name="pin">Pen: </string>
+    <string name="pin_1">Voer Pin </string> in
+    <string name="enter_pin">Voer asseblief jou pen in</string>
+    <string name="confirm_pin">Bevestig speld</string>
+    <string name="both_pin">Speld en bevestig pen moet dieselfde wees </string>
+    <string name="update"><u>Dateer op</u></string>
+    <string name="authentication">Stawing</string>
+    <string name="provide_pin">Voer asseblief gebruiker 4-syfer-pen in vir stawing en toegang. </string>
+    <string name="invalid_pin">Spel-stawing het misluk. Probeer asseblief weer.</string>
+    <string name="submit">Dien in</string>
+    <string name="label_contact_permission">Aanvaar asseblief die kontaktoestemming om voort te gaan.</string>
+    <string name="thanking_you">Dankie dat jy aangesluit het. <br><br> Jou sekuriteitspeld is %s. Jy kan dit verander deur op wysig profiel te gaan.</br> </br> </string>
+    <string name="attandees">Bywoners</string>
+    <string name="add">Voeg by</string>
+    <string name="invite">Nooi</string>
+    <string name="interested">BELANGSTELLING</string>
+    <string name="purchase_subscription">Om meer deelnemers by te voeg, moet jy by ons plan inteken.</string>
+    <string name="subscribe">Teken in</string>
+    <string name="delete_user">Is jy seker om hierdie gebruiker uit te vee?</string>
+    <string name="decline">WEIS</string>
+    <string name="decline_invitation">Wil jy hierdie uitnodiging afwys?</string>
 </resources>

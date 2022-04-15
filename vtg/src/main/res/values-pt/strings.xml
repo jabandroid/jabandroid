@@ -562,10 +562,10 @@
     <string name="add_slot">Adicionar subevento</string>
     <string name="label_event_name_sub">Nome do subevento*</string>
     <string name="same_address">Endereço igual ao de Criar evento</string>
-    <string name="time_slot">Intervalos de tempo</string>
+    <string name="time_slot">Subevento</string>
     <string name="add_image">Adicionar imagem</string>
     <string name="succesfully_added">Adicionado com sucesso</string>
-    <string name="add_more">Deseja adicionar mais?<u><font color='#255CA4'>Clique aqui</font></u>.</string>
+    <string name="add_more">Deseja adicionar mais? <br> <u><font color='#255CA4'>Clique aqui</font></u>.</br></string>
     <string name="go_to_event_page">ou vá para <u><font color='#255CA4'>Página do evento</font></u>.</string>
     <string name="add_attandees">Adicionar participantes</string>
     <string name="sub_event">Subeventos</string>
@@ -573,4 +573,25 @@
     <string name="enter_attendees">Digite o número de participantes</string>
     <string name="edit">Editar</string>
     <string name="delete">Excluir</string>
+    <string name="pin">Pin: </string>
+    <string name="pin_1">Digite o PIN </string>
+    <string name="enter_pin">Por favor, insira seu PIN</string>
+    <string name="confirm_pin">Confirmar PIN</string>
+    <string name="both_pin">Pin e confirme o pino deve ser o mesmo </string>
+    <string name="update"><u>Atualizar</u></string>
+    <string name="authentication">Autenticação</string>
+    <string name="provide_pin">Por favor, insira o PIN de 4 dígitos do usuário para autenticação e acesso. </string>
+    <string name="invalid_pin">Falha na autenticação do PIN. Por favor, tente novamente.</string>
+    <string name="submit">Enviar</string>
+    <string name="label_contact_permission">Aceite a permissão de contato para continuar.</string>
+    <string name="thanking_you">Obrigado por se inscrever. <br><br> Seu PIN de segurança é %s. Você pode alterá-lo indo em editar perfil.</br> </br> </string>
+    <string name="attandees">Participantes</string>
+    <string name="add">Adicionar</string>
+    <string name="invite">Convidar</string>
+    <string name="interested">TENHO INTERESSE</string>
+    <string name="purchase_subscription">Para adicionar mais participantes, você deve assinar nosso plano.</string>
+    <string name="subscribe">Inscrever-se</string>
+    <string name="delete_user">Tem certeza de excluir este usuário?</string>
+    <string name="decline">RECUSAR</string>
+    <string name="decline_invitation">Deseja recusar este convite?</string>
 </resources>

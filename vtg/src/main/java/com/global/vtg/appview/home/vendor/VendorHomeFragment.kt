@@ -2,6 +2,7 @@ package com.global.vtg.appview.home.vendor
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
 import com.global.vtg.imageview.setGlideNormalImage
@@ -10,9 +11,12 @@ import com.global.vtg.appview.home.dashboard.ViewPager2Adapter
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
+import com.global.vtg.utils.AppAlertDialog
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.SharedPreferenceUtil
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorDashboardBinding
@@ -94,6 +98,18 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
 
                     if(clickedPosition!=-1){
                         onItemClick(clickedPosition)
+                    }
+                    if(SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.getData(
+                                PreferenceManager.KEY_USER_REG,
+                                true
+                            ) == true
+                    ){
+                        AppAlertDialog().showRegMessage(
+                            activity!! as AppCompatActivity,
+                            Constants.USER!!.pin!!
+
+                        )
                     }
                 }
                 is Resource.Error -> {

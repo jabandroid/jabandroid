@@ -555,16 +555,37 @@
     <string name = "clinic_reg"> تسجيل العيادة </string>
     <string name = "add_slot"> إضافة حدث فرعي </string>
     <string name = "label_event_name_sub"> اسم الحدث الفرعي * </string>
-    <string name = "same_address"> العنوان هو نفسه إنشاء حدث </string>
-    <string name = "time_slot"> فترات زمنية </string>
+    <string name = "same_address"> العنوان هو نفسه إنشاء حدث </string><string name = "time_slot"> حدث فرعي </string>
     <string name = "add_image"> إضافة صورة </string>
     <string name = "succesfully_added"> تمت الإضافة بنجاح </string>
-    <string name = "add_more"> هل تريد إضافة المزيد؟ <u> <font color = '# 255CA4'> انقر هنا </font> </u>. </string>
+    <string name = "add_more"> هل تريد إضافة المزيد؟ <br> <u> <font color = '# 255CA4'> انقر هنا </font> </u>. </br> </string>
     <string name = "go_to_event_page"> أو انتقل إلى <u> <font color = '# 255CA4'> صفحة الحدث </font> </u>. </string>
     <string name = "add_attandees"> إضافة الحضور </string>
     <string name = "sub_event"> الأحداث الفرعية </string>
     <string name = "total_attendees"> عدد الحاضرين </string>
     <string name = "enter_attendees"> أدخل عدد الحاضرين </string>
     <string name = "edit"> تحرير </string>
-    <string name = "delete"> Delete </string>
+    <string name = "delete"> حذف </string>
+    <string name = "pin"> تثبيت: </string>
+    <string name = "pin_1"> أدخل رقم التعريف الشخصي </string>
+    <string name = "enter_pin"> الرجاء إدخال رقم التعريف الشخصي الخاص بك </string>
+    <string name = "confirm_pin"> تأكيد الدبوس </string>
+    <string name = "both_pin"> يجب أن يكون الدبوس والتأكيد هو نفسه </string>
+    <string name = "update"> <u> تحديث </u> </string>
+    <string name = "authentication"> المصادقة </string>
+    <string name = "provide_pin"> الرجاء إدخال رقم التعريف الشخصي للمستخدم المكون من 4 أرقام للمصادقة والوصول. </string>
+    <string name = "invalid_pin"> فشلت مصادقة رقم التعريف الشخصي. يرجى المحاولة مرة أخرى. </string>
+    <string name = "submit"> إرسال </string>
+    <string name = "label_contact_permission"> يُرجى قبول إذن جهة الاتصال للمتابعة. </string>
+    <string name = "thanking_you"> شكرًا لك على التسجيل. <br> <br> دبوس الأمان الخاص بك هو٪ s. يمكنك تغييره من خلال الاستمرار في تحرير الملف الشخصي. </br> </br> </string>
+    <string name = "attandees"> الحضور </string>
+    <string name = "add"> Add </string>
+    <string name = "invite"> دعوة </string>
+    <string name = "interested"> مهتم </string>
+    <string name = "purchase_subscription"> لإضافة المزيد من الحاضرين ، عليك الاشتراك في خطتنا. </string>
+    <string name = "subscribe"> اشتراك </string>
+    <string name = "delete_user"> هل أنت متأكد من حذف هذا المستخدم؟ </string>
+    <string name = "decline"> رفض </string>
+    <string name = "decline_invitation"> هل تريد رفض هذه الدعوة؟ </string>
+
 </resources>

@@ -87,7 +87,6 @@ data class ResUser(
     @field:SerializedName("testHistory")
     val test: ArrayList<TestInfo>? = null,
 
-
     @field:SerializedName("step3Complete")
     var step3Complete: Boolean? = null,
 
@@ -97,12 +96,14 @@ data class ResUser(
     @field:SerializedName("barcodeUrl")
     val barcodeUrl: String? = null,
 
-
     @field:SerializedName("healthInfo")
     val healthInfo: ArrayList<HealthInfo>? = null,
 
     @field:SerializedName("email")
     val email: String? = null,
+
+    @field:SerializedName("userPin")
+    val pin: String? = null,
 
     @field:SerializedName("barcodeId")
     val barcodeId: String? = null,
