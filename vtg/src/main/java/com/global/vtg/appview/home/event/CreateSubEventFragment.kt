@@ -149,6 +149,7 @@ class CreateSubEventFragment : AppFragment() {
             if(chSameAddress.isChecked){
                 viewModel.address1.postValue( CreateEventFragment.itemEvent.eventAddress!![0].addr1)
                 viewModel.address2.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].addr2)
+              //  viewModel.address3.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].addr3)
                 viewModel.city.postValue( CreateEventFragment.itemEvent.eventAddress!![0].city)
                 viewModel.state.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].state)
                 viewModel.country.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].country)
@@ -209,6 +210,7 @@ class CreateSubEventFragment : AppFragment() {
         if(itemSubEvent.eventAddress!=null&& itemSubEvent.eventAddress!!.isNotEmpty()){
             viewModel.address1.postValue(itemSubEvent.eventAddress!![0].addr1)
             viewModel.address2.postValue(itemSubEvent.eventAddress!![0].addr2)
+            viewModel.address3.postValue(itemSubEvent.eventAddress!![0].addr3)
             viewModel.city.postValue(itemSubEvent.eventAddress!![0].city)
             viewModel.state.postValue(itemSubEvent.eventAddress!![0].state)
             viewModel.country.postValue(itemSubEvent.eventAddress!![0].country)
@@ -241,7 +243,6 @@ class CreateSubEventFragment : AppFragment() {
             viewModel.endTime = DateUtils.formatDateTime(myCalendar.timeInMillis, true)
             tvEventEndTime.text = viewModel.endTime
         }
-
     }
 
     fun updateAddress(city: String, state: String, country: String) {

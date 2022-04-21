@@ -67,6 +67,8 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
     private var mMap: GoogleMap? = null
     private val viewModel by viewModel<EventListDetailViewModel>()
     private var eventId: String = ""
+    private var userId: String = ""
+
     private var positionForDelete: Int = -1
     private var eventName: String = ""
     private var mobile: String = ""
@@ -93,6 +95,7 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
         if (arguments != null) {
             if (arguments.containsKey(Constants.BUNDLE_ID)) {
                 eventId = arguments.getString(Constants.BUNDLE_ID, "")
+                userId = arguments.getString(Constants.BUNDLE_USERID, "")
                 isMyEvent = arguments.getBoolean(Constants.BUNDLE_FROM_PROFILE, false)
                 isSubEvent = arguments.getBoolean(Constants.BUNDLE_IS_SUB_EVENT, false)
             }
@@ -109,6 +112,9 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
     @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
         initMapView()
+
+        if(userId== Constants.USER!!.id.toString())
+            isMyEvent=true
 
         getView()!!.isFocusableInTouchMode = true
         getView()!!.requestFocus()
@@ -812,7 +818,16 @@ class EventListDetailFragment : AppFragment(), OnMapReadyCallback,
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
                 permissions.entries.forEach {
                     Log.e("DEBUG", "${it.key} = ${it.value}")
-                    mMap!!.isMyLocationEnabled = true
+                    if (ActivityCompat.checkSelfPermission(
+                            requireActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            requireActivity(),
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        mMap!!.isMyLocationEnabled = true
+                    }
                 }
             }
 

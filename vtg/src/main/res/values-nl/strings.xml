@@ -592,4 +592,27 @@
     <string name="delete_user">Weet je zeker dat je deze gebruiker wilt verwijderen?</string>
     <string name="decline">DECLINE</string>
     <string name="decline_invitation">Wilt u deze uitnodiging afwijzen?</string>
+    <string name="history">Geschiedenis</string>
+    <string name="health_bio">Gezondheidsbio</string>
+    <string name="allergies">Allergieën</string>
+    <string name="medical_records">Medische gegevens</string>
+    <string name="chronic">Chronische ziekten</string>
+    <string name="medication">Medicatie</string>
+    <string name="donor">Donor</string>
+    <string name="emergency">Noodgeval</string>
+    <string name="appointments">Afspraken</string>
+    <string name="doctors">Artsen</string>
+    <string name="benifits">Voordelen</string>
+    <string name="qrcode">QR-code </string>
+    <string name="vaccine">Vaccinaties </string>
+    <string name="address3">Adres 3 </string>
+    <string name="vendor_Step_2">Verkoper Stap 2 </string>
+    <string name="vendor_Step_1">Verkoper Stap 1 </string>
+    <string name="vendor_Step_3">Verkoper Stap 3 </string>
+    <string name="lab_Step_2">Lab/kliniek stap 2 </string>
+    <string name="lab_Step_1">Lab/kliniek stap 1 </string>
+    <string name="lab_Step_3">Lab/kliniek stap 3 </string>
+    <string name="enter_vat">Vul de zakelijke btw in</string>
+    <string name="r_state">Registratiestatus</string>
+    <string name="r_country">Registratieland</string>
 </resources>

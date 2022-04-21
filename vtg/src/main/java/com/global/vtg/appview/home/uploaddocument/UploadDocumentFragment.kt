@@ -1,8 +1,10 @@
 package com.global.vtg.appview.home.uploaddocument
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -13,6 +15,7 @@ import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.AdapterView.OnItemSelectedListener
 import android.widget.ArrayAdapter
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -28,19 +31,17 @@ import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DateUtils
+import com.global.vtg.utils.*
 import com.global.vtg.utils.DateUtils.API_DATE_FORMAT
 import com.global.vtg.utils.DateUtils.DDMMYY
 import com.global.vtg.utils.DateUtils.DDMMYYYY
 import com.global.vtg.utils.DateUtils.appendZero
-import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.KeyboardUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentUploadDocumentBinding
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
+
 import kotlinx.android.synthetic.main.fragment_registration.*
-import kotlinx.android.synthetic.main.fragment_test_info_upload_document.*
+
 import kotlinx.android.synthetic.main.fragment_upload_document.*
 import kotlinx.android.synthetic.main.fragment_upload_document.cbCertify
 import kotlinx.android.synthetic.main.fragment_upload_document.ccp
@@ -56,8 +57,10 @@ import kotlinx.android.synthetic.main.fragment_upload_document.rvInstitute
 import kotlinx.android.synthetic.main.fragment_upload_document.sDate
 import kotlinx.android.synthetic.main.fragment_upload_document.sDay
 import kotlinx.android.synthetic.main.fragment_upload_document.sTime
+import kotlinx.android.synthetic.main.fragment_upload_document.s_scan
 import kotlinx.android.synthetic.main.fragment_upload_document.tvDocName
 import kotlinx.android.synthetic.main.fragment_upload_document.tvFee
+import kotlinx.android.synthetic.main.fragment_upload_document.tvScan
 import kotlinx.android.synthetic.main.fragment_upload_document.tvSelectDoc
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -76,6 +79,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
     val doseList: MutableList<String> = ArrayList()
+
     val vaccineTypeList: ArrayList<String> = ArrayList()
     var values = ArrayList<Institute>()
   lateinit var   instituteAdapter: InstituteAutoCompleteAdapter
@@ -96,12 +100,16 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
 
     override fun initializeComponent(view: View?) {
         if (Constants.USER?.role.equals("ROLE_CLINIC")) {
-            groupMobileNo.visibility = View.VISIBLE
+            groupMobileNo.visibility = View.GONE
             cbCertify.isChecked=true
             cbCertify.visibility = View.GONE
+            s_scan.visibility = View.VISIBLE
+            tvScan.visibility = View.VISIBLE
         } else {
             groupMobileNo.visibility = View.GONE
             cbCertify.visibility = View.VISIBLE
+            s_scan.visibility = View.GONE
+            tvScan.visibility = View.GONE
         }
 
          instituteAdapter =
@@ -124,6 +132,8 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
         tvCurrentDate.text = SimpleDateFormat(DDMMYYYY, Locale.US).format(myCalendar.timeInMillis)
         addDoses()
         vaccineType()
+
+        viewModel.email = getString(R.string.scan_qr_code)
         sDose.onItemSelectedListener = object : OnItemSelectedListener {
 
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
@@ -162,6 +172,48 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
         viewModel.showToastError.observe(this, {
             DialogUtils.showSnackBar(context, it)
         })
+
+        var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                val data: Intent? = result.data
+
+
+                viewModel.getDataFromBarcodeId(data!!.getStringExtra("code")!!)
+            }
+        }
+
+        viewModel.scanBarcodeLiveData.observe(this, {
+            when (it) {
+                is Resource.Success -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    tvScan.text="+"+it.data.mobileNo
+                    viewModel.phone.postValue(it.data.mobileNo)
+                }
+                is Resource.Error -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                    }
+                }
+            }
+        })
+
+        tvScan.setOnClickListener {
+
+            val intent = Intent(Intent(activity, QrcodeScanner::class.java))
+            resultLauncher.launch(intent)
+        }
 
         viewModel.isCertify.observe(this, {
             if (it == true) {

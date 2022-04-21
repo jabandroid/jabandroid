@@ -11,6 +11,7 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.core.app.ActivityCompat
 import androidx.databinding.ViewDataBinding
@@ -20,17 +21,12 @@ import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragment
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.QrcodeScanner
 import com.google.zxing.Result
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorQrBinding
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner
-import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner.OnResultListener
-
-import com.global.vtg.appview.MainActivity
-
-import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder
 
 
 
@@ -56,6 +52,22 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
         return mFragmentBinding
     }
 
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // There are no request codes
+            val data: Intent? = result.data
+            val bundle = Bundle()
+            bundle.putString(Constants.BUNDLE_BARCODE_ID, data!!.getStringExtra("code")!!.toString())
+//        DialogUtils.showSnackBar(
+////            activity,
+////            rawResult?.text.toString()
+////        )
+            addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
+
+
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,8 +90,14 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
 //        bundle.putString(Constants.BUNDLE_BARCODE_ID, "4450451384999698164292369")
 //        addFragment<Any>(AppFragmentState.F_VENDOR_SCAN_RESULT, bundle, popFragment = this)
 
+
+
         if(checkPermissions()){
-            mScannerView?.startCamera()
+
+            val intent = Intent(Intent(activity, QrcodeScanner::class.java))
+            resultLauncher.launch(intent)
+
+          //  mScannerView?.startCamera()
 //            val i = Intent(activity!!, QrCodeActivity::class.java)
 //            startActivityForResult(i, REQUEST_CODE_QR_SCAN)
 
@@ -147,7 +165,8 @@ class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {
             RequestPermission()
         ) { result ->
             if (result) {
-                mScannerView?.startCamera()
+                val intent = Intent(Intent(activity, QrcodeScanner::class.java))
+                resultLauncher.launch(intent)
 
             } else {
                 val builder = AlertDialog.Builder(requireActivity())

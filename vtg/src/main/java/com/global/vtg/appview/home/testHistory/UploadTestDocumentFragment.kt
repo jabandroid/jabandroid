@@ -1,10 +1,12 @@
 package com.global.vtg.appview.home.testHistory
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -18,6 +20,7 @@ import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
@@ -36,12 +39,8 @@ import com.global.vtg.appview.home.uploaddocument.TestResultSpinnerAdapter
 import com.global.vtg.appview.home.uploaddocument.VaccineDoseSpinnerAdapter
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.DateUtils.DDMMYY
 import com.global.vtg.utils.DateUtils.appendZero
-import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 
@@ -58,7 +57,8 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 import com.global.vtg.appview.home.uploaddocument.InstituteAutoCompleteAdapter
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
+import com.global.vtg.utils.*
+
 import kotlinx.android.synthetic.main.fragment_test_info_upload_document.cbCertify
 import kotlinx.android.synthetic.main.fragment_test_info_upload_document.ccpHealth
 import kotlinx.android.synthetic.main.fragment_test_info_upload_document.clForm
@@ -83,7 +83,7 @@ import kotlinx.android.synthetic.main.fragment_test_info_upload_document.scrollV
 import kotlinx.android.synthetic.main.fragment_test_info_upload_document.tvDocName
 import kotlinx.android.synthetic.main.fragment_test_info_upload_document.tvFee
 import kotlinx.android.synthetic.main.fragment_test_info_upload_document.tvSelectDoc
-import kotlinx.android.synthetic.main.fragment_upload_document.*
+
 
 
 class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
@@ -93,11 +93,11 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
     private val viewModel by viewModel<UploadTestDocumentViewModel>()
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
-    private  var type:TestType=TestType()
-    private  var typeKit:TestKit=TestKit()
-    private  var typeType:String=""
-    private  var typeKitId:String=""
-    var isDob=false
+    private var type: TestType = TestType()
+    private var typeKit: TestKit = TestKit()
+    private var typeType: String = ""
+    private var typeKitId: String = ""
+    var isDob = false
 
     val resultList: MutableList<String> = ArrayList()
     override fun getLayoutId(): Int {
@@ -117,10 +117,12 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
 
     override fun initializeComponent(view: View?) {
         if (Constants.USER?.role.equals("ROLE_CLINIC")) {
-            groupMobileNoHealth.visibility = View.VISIBLE
+            groupMobileNoHealth.visibility = View.GONE
             cbCertify.visibility = View.GONE
             sStatus.visibility = View.VISIBLE
             s_status.visibility = View.VISIBLE
+            s_scan.visibility = View.VISIBLE
+            tvScan.visibility = View.VISIBLE
             sDob.visibility = View.GONE
             dob.visibility = View.GONE
         } else {
@@ -128,9 +130,53 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             cbCertify.visibility = View.VISIBLE
             sStatus.visibility = View.VISIBLE
             s_status.visibility = View.VISIBLE
-
+            s_scan.visibility = View.GONE
+            tvScan.visibility = View.GONE
             sDob.visibility = View.GONE
             dob.visibility = View.GONE
+        }
+        viewModel.email = getString(R.string.scan_qr_code)
+
+        var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                val data: Intent? = result.data
+
+
+                viewModel.getDataFromBarcodeId(data!!.getStringExtra("code")!!)
+            }
+        }
+
+        viewModel.scanBarcodeLiveData.observe(this, {
+            when (it) {
+                is Resource.Success -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    tvScan.text="+"+it.data.mobileNo
+                    viewModel.phone.postValue(it.data.mobileNo)
+                }
+                is Resource.Error -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                    }
+                }
+            }
+        })
+
+        tvScan.setOnClickListener {
+
+            val intent = Intent(Intent(activity, QrcodeScanner::class.java))
+            resultLauncher.launch(intent)
         }
         viewModel.code.value = ccpHealth.defaultCountryCode
         viewModel.region = ccpHealth.defaultCountryNameCode
@@ -146,7 +192,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             DividerItemDecoration(context, layoutManager.orientation)
         )
         rvInstitute.adapter = adapter
-        viewModel.typeKitId="-1"
+        viewModel.typeKitId = "-1"
         viewModel.chooseFile.observe(this, {
             PickMediaExtensions.instance.pickFromStorage(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
                 resultMessage(resultCode, path, displayName)
@@ -154,16 +200,16 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
         })
 
         sTestType.setOnClickListener {
-            var arr=ArrayList<TestTypeResult>()
-            var item=TestTypeResult()
-            item.id="1"
-            item.name="RT-PCR"
+            var arr = ArrayList<TestTypeResult>()
+            var item = TestTypeResult()
+            item.id = "1"
+            item.name = "RT-PCR"
             arr.add(item)
-             item=TestTypeResult()
-            item.id="2"
-            item.name="Rapid Antigen"
+            item = TestTypeResult()
+            item.id = "2"
+            item.name = "Rapid Antigen"
             arr.add(item)
-            type.tests=arr
+            type.tests = arr
             showType(type)
         }
 
@@ -188,7 +234,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
-                    typeKit=it.data
+                    typeKit = it.data
                 }
                 is Resource.Error -> {
                     when (activity) {
@@ -288,7 +334,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             datePicker.show()
         }
         sDob.setOnClickListener {
-            isDob=true
+            isDob = true
             KeyboardUtils.hideKeyboard(getAppActivity())
             val datePicker = DatePickerDialog(
                 getAppActivity(), R.style.DialogTheme, date, myCalendar
@@ -309,7 +355,8 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
                 R.style.DialogTheme,
                 { _, selectedHour, selectedMinute ->
                     run {
-                        val time = "${appendZero(selectedHour.toString())}:${appendZero(selectedMinute.toString())}"
+                        val time =
+                            "${appendZero(selectedHour.toString())}:${appendZero(selectedMinute.toString())}"
                         sTime.setText(time)
                         viewModel.time = time
                         myCalendar.set(Calendar.HOUR_OF_DAY, selectedHour)
@@ -405,7 +452,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
         adapter.setDropDownViewResource(R.layout.my_spinner_row)
 
         sStatus.adapter = TestResultSpinnerAdapter(
-            getAppActivity(),resultList
+            getAppActivity(), resultList
         )
 
         sStatus.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -414,7 +461,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
                 KeyboardUtils.hideKeyboard(view)
                 if (!isFirstTime)
                     viewModel.result = resultList[pos - 1]
-                else{
+                else {
                     isFirstTime = false
                 }
             }
@@ -470,16 +517,18 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
 
     private fun updateDate() {
 
-        sDate.setText(DateUtils.formatDateTime(
-            myCalendar.timeInMillis,
-            DDMMYY
-        ))
+        sDate.setText(
+            DateUtils.formatDateTime(
+                myCalendar.timeInMillis,
+                DDMMYY
+            )
+        )
         val dayOfWeek = SimpleDateFormat("EEEE", Locale.US).format(myCalendar.time)
         sDay.setText(dayOfWeek)
 
         viewModel.day = dayOfWeek
-        var time=DateUtils.formatDateTime(myCalendar.timeInMillis,true)
-        viewModel.date = DateUtils.formatDateTime(myCalendar.timeInMillis,true)
+        var time = DateUtils.formatDateTime(myCalendar.timeInMillis, true)
+        viewModel.date = DateUtils.formatDateTime(myCalendar.timeInMillis, true)
     }
 
     override fun pageVisible() {
@@ -506,6 +555,7 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
         viewModel.instituteId = institute.id
         rvInstitute.visibility = View.GONE
     }
+
     fun showType(
         data: TestType,
     ) {
@@ -526,18 +576,18 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             TestTypeAdapter.OnItemClickListener {
             @SuppressLint("SimpleDateFormat")
             override fun onItemClick(item: TestTypeResult) {
-                sTestType.text=item.name
-                typeType=item.id.toString()
-                viewModel.type=typeType
+                sTestType.text = item.name
+                typeType = item.id.toString()
+                viewModel.type = typeType
 
-                if(typeType.equals("1")){//rtpcr
-                    test_kit.visibility=View.GONE
-                    sTestKit.visibility=View.GONE
-                    viewModel.typeKitId="-1"
-                }else{
-                    test_kit.visibility=View.VISIBLE
-                    sTestKit.visibility=View.VISIBLE
-                    viewModel.typeKitId=""
+                if (typeType.equals("1")) {//rtpcr
+                    test_kit.visibility = View.GONE
+                    sTestKit.visibility = View.GONE
+                    viewModel.typeKitId = "-1"
+                } else {
+                    test_kit.visibility = View.VISIBLE
+                    sTestKit.visibility = View.VISIBLE
+                    viewModel.typeKitId = ""
                 }
                 dialog.dismiss()
             }
@@ -597,9 +647,9 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
             TestKitAdapter.OnItemClickListener {
             @SuppressLint("SimpleDateFormat")
             override fun onItemClick(item: TestKitResult) {
-                sTestKit.text=item.name
-                typeKitId=item.id.toString()
-                viewModel.typeKitId=typeKitId
+                sTestKit.text = item.name
+                typeKitId = item.id.toString()
+                viewModel.typeKitId = typeKitId
                 dialog.dismiss()
             }
         }
@@ -637,8 +687,6 @@ class UploadTestDocumentFragment : AppFragment(), InstituteAdapter.ClickListener
         dialog.setView(dialogLayout)
         dialog.show()
     }
-
-
 
 
 }

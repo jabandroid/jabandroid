@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.GridLayoutManager
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.dashboard.DashboardViewModel
 import com.global.vtg.imageview.setGlideNormalImage
 
 import com.global.vtg.appview.home.dashboard.ViewPager2Adapter
-import com.global.vtg.appview.home.dashboard.ViewPagerDashAdapter
 
-import com.global.vtg.appview.home.vendor.VendorDashboardViewModel
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
@@ -22,7 +19,6 @@ import com.global.vtg.utils.*
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentDashboardBinding
-import com.vtg.databinding.FragmentVendorDashboardBinding
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.ivHelp
 import kotlinx.android.synthetic.main.fragment_dashboard.ivQrCode

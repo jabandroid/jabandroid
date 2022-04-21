@@ -507,25 +507,33 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                 permissions.entries.forEach {
                     Log.e("DEBUG", "${it.key} = ${it.value}")
 
-                    mMap!!.isMyLocationEnabled = true
+                    if (ActivityCompat.checkSelfPermission(
+                            requireActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            requireActivity(),
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        mMap!!.isMyLocationEnabled = true
 
-                    val address = CreateEventFragment.itemEvent.eventAddress!![0].addr1 + " " +
-                            CreateEventFragment.itemEvent.eventAddress!![0].addr2 + " " +
-                            CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
-                            CreateEventFragment.itemEvent.eventAddress!![0].country + " "
+                        val address = CreateEventFragment.itemEvent.eventAddress!![0].addr1 + " " +
+                                CreateEventFragment.itemEvent.eventAddress!![0].addr2 + " " +
+                                CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
+                                CreateEventFragment.itemEvent.eventAddress!![0].country + " "
 
 
-                    val location = getLocationFromAddress(activity!!, address)
-                    val markerOptions = MarkerOptions()
-                    if (location != null) {
-                        markerOptions.position(location)
-                        markerOptions.title(CreateEventFragment.itemEvent.eventName)
+                        val location = getLocationFromAddress(activity!!, address)
+                        val markerOptions = MarkerOptions()
+                        if (location != null) {
+                            markerOptions.position(location)
+                            markerOptions.title(CreateEventFragment.itemEvent.eventName)
 
-                        mMap!!.addMarker(markerOptions)
+                            mMap!!.addMarker(markerOptions)
 
-                        mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
+                            mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
+                        }
                     }
-
 
                 }
             }

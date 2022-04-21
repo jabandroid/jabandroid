@@ -260,7 +260,7 @@
     <string name="label_business_name">Business Name</string>
     <string name="label_business_id">Business Id</string>
     <string name="label_employee_id">Employee Id</string>
-    <string name="label_vat">Business Vat</string>
+    <string name="label_vat">Business VAT</string>
     <string name="label_contact_no">Contact Number</string>
     <string name="label_fax">Fax</string>
 
@@ -566,7 +566,6 @@
     <string name="time_slot">Sub Event</string>
     <string name="add_image">Add Image</string>
     <string name="succesfully_added">Successfully Added</string>
-    <string name="add_more">Do you want to add more? <br> <u><font color='#255CA4'>Click here</font></u>.</br></string>
     <string name="go_to_event_page">or Go to <u><font color='#255CA4'>Event Page</font></u>.</string>
     <string name="add_attandees">Add Attendees</string>
     <string name="sub_event">Sub Events</string>
@@ -595,4 +594,33 @@
     <string name="delete_user">Are you sure to delete this user?</string>
     <string name="decline">DECLINE</string>
     <string name="decline_invitation">Do you want to decline this invitation?</string>
+    <string name="history">History</string>
+    <string name="health_bio">Health Bio</string>
+    <string name="allergies">Allergies</string>
+    <string name="medical_records">Medical Records</string>
+    <string name="chronic">Chronic Diseases</string>
+    <string name="medication">Medications</string>
+    <string name="donor">Donor</string>
+    <string name="emergency">Emergency</string>
+    <string name="appointments">Appointments</string>
+    <string name="doctors">Doctors</string>
+    <string name="benifits">Benefits</string>
+    <string name="qrcode">QR Code </string>
+    <string name="vaccine">Vaccines </string>
+    <string name="address3">Address 3  </string>
+    <string name="vendor_Step_2">Vendor Step 2 </string>
+    <string name="vendor_Step_1">Vendor Step 1 </string>
+    <string name="vendor_Step_3">Vendor Step 3 </string>
+    <string name="lab_Step_2">Lab/Clinic Step 2 </string>
+    <string name="lab_Step_1">Lab/Clinic Step 1 </string>
+    <string name="lab_Step_3">Lab/Clinic Step 3 </string>
+    <string name="enter_vat">Please enter the business VAT</string>
+    <string name="r_state">Registration state</string>
+    <string name="r_country">Registration Country</string>
+    <string name="r_scan">User Scan</string>
+    <string name="scan_qr_code">Scan QR Code</string>
+    <string name="ok">Ok</string>
+    <string name="scan_user_code">Please scan user QR Code to proceed</string>
+    <string name="add_more">Do you want to add more subcevents.? <br> <u><font color='#255CA4'>Click here</font></u>.</br></string>
+
 </resources>

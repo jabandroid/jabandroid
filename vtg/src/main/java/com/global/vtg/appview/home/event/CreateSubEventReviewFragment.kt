@@ -471,27 +471,34 @@ class CreateSubEventReviewFragment : AppFragment(), OnMapReadyCallback,
             registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
                 permissions.entries.forEach {
                     Log.e("DEBUG", "${it.key} = ${it.value}")
+                    if (ActivityCompat.checkSelfPermission(
+                            requireActivity(),
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                            requireActivity(),
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                        ) == PackageManager.PERMISSION_GRANTED
+                    ) {
+                        mMap!!.isMyLocationEnabled = true
 
-                    mMap!!.isMyLocationEnabled = true
-
-                    val address =
-                        CreateSubEventFragment.itemSubEvent.eventAddress!![0].addr1 + " " +
-                                CreateSubEventFragment.itemSubEvent.eventAddress!![0].addr2 + " " +
-                                CreateSubEventFragment.itemSubEvent.eventAddress!![0].city + " " +
-                                CreateSubEventFragment.itemSubEvent.eventAddress!![0].country + " "
+                        val address =
+                            CreateSubEventFragment.itemSubEvent.eventAddress!![0].addr1 + " " +
+                                    CreateSubEventFragment.itemSubEvent.eventAddress!![0].addr2 + " " +
+                                    CreateSubEventFragment.itemSubEvent.eventAddress!![0].city + " " +
+                                    CreateSubEventFragment.itemSubEvent.eventAddress!![0].country + " "
 
 
-                    val location = getLocationFromAddress(activity!!, address)
-                    val markerOptions = MarkerOptions()
-                    if (location != null) {
-                        markerOptions.position(location)
-                        markerOptions.title(CreateSubEventFragment.itemSubEvent.eventName)
+                        val location = getLocationFromAddress(activity!!, address)
+                        val markerOptions = MarkerOptions()
+                        if (location != null) {
+                            markerOptions.position(location)
+                            markerOptions.title(CreateSubEventFragment.itemSubEvent.eventName)
 
-                        mMap!!.addMarker(markerOptions)
+                            mMap!!.addMarker(markerOptions)
 
-                        mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
+                            mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
+                        }
                     }
-
 
                 }
             }

@@ -175,7 +175,7 @@ dependencies {
         exclude module: 'answers-shim'
     }
 
-    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+   // implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
     implementation 'com.github.SumiMakito:AwesomeQRCode:1.2.0'
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
@@ -203,10 +203,18 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.4.1")
 
    // compile 'com.google.zxing:core:3.2.0'
-    implementation 'com.google.android.gms:play-services-maps:18.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'com.google.maps.android:android-maps-utils:2.3.0'
-    implementation 'com.edwardvanraak:MaterialBarcodeScanner:0.0.6-ALPHA'
-    implementation 'com.google.android.gms:play-services-vision:15.0.2'
+   // implementation 'com.edwardvanraak:MaterialBarcodeScanner:0.0.6-ALPHA'
+
+    implementation 'androidx.camera:camera-camera2:1.1.0-beta03'
+    implementation 'androidx.camera:camera-lifecycle:1.1.0-beta03'
+    implementation 'androidx.camera:camera-view:1.1.0-beta03'
+    implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+
+//    implementation 'com.google.android.gms:play-services-vision:15.0.2'
+//    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'
+//    implementation 'com.google.firebase:firebase-ml-vision-barcode-model:16.0.1'
 }
 repositories {
     mavenCentral()

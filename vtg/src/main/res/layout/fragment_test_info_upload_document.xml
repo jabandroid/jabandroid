@@ -296,6 +296,37 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvBatchNo" />
 
                 <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/s_scan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/r_scan"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etBatchNo" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvScan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="true"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawableEnd="@drawable/ic_qr_code2"
+                    android:drawableTint="@color/colorPrimary"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:text="@={viewModel.email}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/s_scan" />
+                <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/s_status"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -305,7 +336,7 @@
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etBatchNo" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvScan" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/sStatus"

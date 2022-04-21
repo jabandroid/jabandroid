@@ -578,4 +578,27 @@
     <string name="delete_user">¿Está seguro de eliminar este usuario?</string>
     <string name="decline">RECHAZAR</string>
     <string name="decline_invitation">¿Desea rechazar esta invitación?</string>
+    <string name="history">Historia</string>
+    <string name="health_bio">Biografía de salud</string>
+    <string name="allergies">Alergias</string>
+    <string name="medical_records">Registros médicos</string>
+    <string name="chronic">Enfermedades Crónicas</string>
+    <string name="medication">Medicamentos</string>
+    <string name="donor">Donante</string>
+    <string name="emergency">Emergencia</string>
+    <string name="appointments">Citas</string>
+    <string name="doctors">Médicos</string>
+    <string name="benifits">Beneficios</string>
+    <string name="qrcode">Código QR</string>
+    <string name="vaccine">Vacunas</string>
+    <string name="address3">Dirección 3</string>
+    <string name="vendor_Step_2">Proveedor Paso 2</string>
+    <string name="vendor_Step_1">Proveedor Paso 1</string>
+    <string name="vendor_Step_3">Proveedor Paso 3</string>
+    <string name="lab_Step_2">Laboratorio/Clínica Paso 2</string>
+    <string name="lab_Step_1">Laboratorio/Clínica Paso 1</string>
+    <string name="lab_Step_3">Laboratorio/Clínica Paso 3</string>
+    <string name="enter_vat">Ingrese el IVA comercial</string>
+    <string name="r_state">Estado de registro</string>
+    <string name="r_country">País de registro</string>
 </resources>

@@ -81,8 +81,6 @@ class HealthInformationFragment : AppFragment() {
                 val role = SharedPreferenceUtil.getInstance(activity!!)
                     ?.getData(PreferenceManager.KEY_ROLE, "user")
                 if (!item.documentLink.isNullOrEmpty()) {
-
-
                     if (role?.equals("user") == true) {
                         if (!item.documentLink.isNullOrEmpty())
                             Constants.openFile(item.documentLink, activity!!)

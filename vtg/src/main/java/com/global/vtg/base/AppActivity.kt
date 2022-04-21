@@ -27,6 +27,7 @@ import com.braintreepayments.api.dropin.DropInResult
 import com.global.vtg.appview.authentication.registration.RegistrationStep1Fragment
 import com.global.vtg.appview.authentication.registration.RegistrationStep2Fragment
 import com.global.vtg.appview.authentication.registration.RegistrationStep3Fragment
+import com.global.vtg.appview.authentication.registration.VendorRegistrationStep2Fragment
 import com.global.vtg.appview.config.*
 import com.global.vtg.appview.home.event.CreateEventLocationFragment
 import com.global.vtg.appview.home.event.CreateSubEventFragment
@@ -219,6 +220,9 @@ abstract class AppActivity : AppCompatActivity() {
                         }
                         else if (frg is CreateSubEventFragment) {
                             city.let { frg.updateAddress(it, state, country) }
+                        }
+                        else if (frg is VendorRegistrationStep2Fragment) {
+                            state.let { frg.updateAddress(it, state, country) }
                         }
                     }
                 } catch (e: IOException) {

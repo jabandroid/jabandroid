@@ -587,5 +587,28 @@
     <string name = "delete_user"> هل أنت متأكد من حذف هذا المستخدم؟ </string>
     <string name = "decline"> رفض </string>
     <string name = "decline_invitation"> هل تريد رفض هذه الدعوة؟ </string>
+    <string name = "history"> المحفوظات </string>
+    <string name = "health_bio"> السيرة الذاتية للصحة </string>
+    <string name = "allergies"> الحساسية </string>
+    <string name = "medical_records"> السجلات الطبية </string>
+    <string name = "chronic"> الأمراض المزمنة </string>
+    <string name = "medication"> الأدوية </string>
+    <string name = "donor"> المتبرع </string>
+    <string name = "emergency"> الطوارئ </string>
+    <string name = "appointments"> المواعيد </string>
+    <string name = "doctors"> الأطباء </string>
+    <string name = "benifits"> الفوائد </string>
+    <string name = "qrcode"> رمز الاستجابة السريعة </string>
+    <string name = "vaccine"> لقاحات </string>
+    <string name = "address3"> العنوان 3 </string>
+    <string name = "vendor_Step_2"> خطوة المورّد 2 </string>
+    <string name = "vendor_Step_1"> خطوة البائع 1 </string>
+    <string name = "vendor_Step_3"> خطوة البائع 3 </string>
+    <string name = "lab_Step_2"> المختبر / العيادة الخطوة الثانية </string>
+    <string name = "lab_Step_1"> خطوة المختبر / العيادة 1 </string>
+    <string name = "lab_Step_3"> المختبر / العيادة الخطوة الثالثة </string>
+    <string name = "enter_vat"> يرجى إدخال ضريبة القيمة المضافة للأعمال </string>
+    <string name = "r_state"> حالة التسجيل </string>
+    <string name = "r_country"> بلد التسجيل </string>
 
 </resources>

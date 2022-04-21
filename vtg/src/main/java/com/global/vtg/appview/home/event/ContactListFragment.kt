@@ -53,8 +53,8 @@ class ContactListFragment : AppFragment() {
 
     override fun preDataBinding(arguments: Bundle?) {
         eventId = arguments!!.getString(Constants.BUNDLE_ID).toString()
-        nameEvent = arguments!!.getString(Constants.BUNDLE_NAME).toString()
-        namePic = arguments!!.getString(Constants.BUNDLE_PIC).toString()
+        nameEvent = arguments.getString(Constants.BUNDLE_NAME).toString()
+        namePic = arguments.getString(Constants.BUNDLE_PIC).toString()
 
     }
 

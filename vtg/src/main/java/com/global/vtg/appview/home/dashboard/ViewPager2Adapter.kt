@@ -10,6 +10,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.NonNull
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
+import com.global.vtg.imageview.defaultLoader
 import com.global.vtg.imageview.setGlideNormalImageProgress
 
 
@@ -34,7 +39,14 @@ internal class ViewPager2Adapter(ctx: Context) :
     // This method binds the screen with the view
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
         // This will set the images in imageview
-        holder.images.setGlideNormalImageProgress(images[position])
+
+
+        Glide.with(ctx)
+            .load(R.drawable.ic_banner)
+            .apply(
+                RequestOptions().signature(ObjectKey(100000)).diskCacheStrategy(DiskCacheStrategy.DATA)
+)
+            .into( holder.images)
     }
 
     // This Method returns the size of the Array

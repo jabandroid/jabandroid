@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="btn_margin">@dimen/_16sdp</dimen>
+    <dimen name="default_size">@dimen/_100sdp</dimen>
     <dimen name="edittext_height">@dimen/_45sdp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>

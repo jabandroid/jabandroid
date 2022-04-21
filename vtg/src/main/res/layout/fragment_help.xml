@@ -159,5 +159,16 @@
                 android:text="@string/label_privacy_policy"/>
         </LinearLayout>
 
+
+        <com.global.vtg.utils.textView.SemiBoldTextView
+            android:id="@+id/tvVersion"
+            android:layout_width="match_parent"
+            android:padding="@dimen/_12sdp"
+            android:textSize="@dimen/_14ssp"
+            android:textColor="@color/black"
+
+            android:gravity="center"
+            android:layout_height="wrap_content"
+         app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

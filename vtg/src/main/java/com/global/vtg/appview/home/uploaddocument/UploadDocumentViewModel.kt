@@ -37,6 +37,7 @@ class UploadDocumentViewModel(
     var date: String? = null
     var time: String? = null
     var region: String = "US"
+    var email:String=""
     var code: MutableLiveData<String> = MutableLiveData()
     var phone: MutableLiveData<String> = MutableLiveData()
     val cancelDoc: MutableLiveData<Boolean> = MutableLiveData()
@@ -59,12 +60,23 @@ class UploadDocumentViewModel(
         userLiveData.postValue(it)
     }
 
+    val scanBarcodeLiveData = MutableLiveData<Resource<ResUser>>()
+
+
+    private val userObserver1 = Observer<Resource<ResUser>> {
+        scanBarcodeLiveData.postValue(it)
+    }
+
+
     init {
         userRepository.searchInstituteLiveData.postValue(null)
         userRepository.searchInstituteLiveData.observeForever(observer)
 
         userRepository.userLiveData.postValue(null)
         userRepository.userLiveData.observeForever(userObserver)
+
+        userRepository.scanBarcodeLiveData.postValue(null)
+        userRepository.scanBarcodeLiveData.observeForever(userObserver1)
     }
 
     fun onClick(view: View) {
@@ -139,7 +151,7 @@ class UploadDocumentViewModel(
 //            var dateForServer=DateUtils.formatLocalToUtc(date!!,DateUtils.API_DATE_FORMAT,DateUtils.API_DATE_FORMAT)
 //            val dateReq: RequestBody? = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
             val username: RequestBody? = if (Constants.USER?.role.equals("ROLE_CLINIC")) {
-                "${code.value}${phone.value}".toRequestBody(
+                phone.value!!.toRequestBody(
                     "text/plain".toMediaTypeOrNull()
                 )
             } else {
@@ -170,15 +182,15 @@ class UploadDocumentViewModel(
                 isValidate = false
             }
             Constants.USER?.role.equals("ROLE_CLINIC") && isNullOrEmpty(phone.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_phone))
+                showToastError.postValue(App.instance?.getString(R.string.scan_user_code))
                 isValidate = false
             }
-            Constants.USER?.role.equals("ROLE_CLINIC") && !Constants.isValidPhoneNumber(
-                phone.value.toString().trim(), region
-            ) -> {
-                showToastError.postValue(App.instance?.getString(R.string.error_phone))
-                isValidate = false
-            }
+//            Constants.USER?.role.equals("ROLE_CLINIC") && !Constants.isValidPhoneNumber(
+//                phone.value.toString().trim(), region
+//            ) -> {
+//                showToastError.postValue(App.instance?.getString(R.string.error_phone))
+//                isValidate = false
+//            }
             isNullOrEmpty(dose) -> {
                 showToastError.postValue(App.instance?.getString(R.string.error_select_dose))
                 isValidate = false
@@ -216,5 +228,17 @@ class UploadDocumentViewModel(
         scope.launch {
             userRepository.searchInstitute(text)
         }
+    }
+
+    fun getDataFromBarcodeId(barcodeId: String) {
+        scope.launch {
+            userRepository.scanBarcodeId(barcodeId)
+        }
+    }
+    override fun onCleared() {
+        super.onCleared()
+        userRepository.userConfigLiveData.removeObserver(userObserver)
+        userRepository.scanBarcodeLiveData.removeObserver(userObserver1)
+
     }
 }

@@ -161,7 +161,7 @@
                     android:background="@drawable/edittext_shadow"
                    android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:maxLength="20"
+
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"

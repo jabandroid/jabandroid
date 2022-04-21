@@ -16,6 +16,7 @@ import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
+import kotlinx.android.synthetic.main.fragment_reg_step3.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -23,6 +24,7 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
+import java.net.URL
 
 class VendorRegistrationStep2ViewModel(
     application: Application,
@@ -33,6 +35,9 @@ class VendorRegistrationStep2ViewModel(
     var businessId: MutableLiveData<String> = MutableLiveData()
     var employeeId: MutableLiveData<String> = MutableLiveData()
     var businessVat: MutableLiveData<String> = MutableLiveData()
+    var state: MutableLiveData<String> = MutableLiveData()
+    var country: MutableLiveData<String> = MutableLiveData()
+    var zip: MutableLiveData<String> = MutableLiveData()
     var expiryDate: MutableLiveData<String> = MutableLiveData()
     val chooseFile: MutableLiveData<Boolean> = MutableLiveData()
     var documentPath: String? = null
@@ -65,6 +70,7 @@ class VendorRegistrationStep2ViewModel(
             }
             R.id.btnNext -> {
                 KeyboardUtils.hideKeyboard(view)
+
                 if(isDataAvailable){
                     var utcDate=DateUtils.formatLocalToUtc(expiryDate.value!!,false,DateUtils.API_DATE_FORMAT)
                     val date: RequestBody? = utcDate?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -112,6 +118,18 @@ class VendorRegistrationStep2ViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.empty_expiry_date))
                 isValidate = false
             }
+            isNullOrEmpty(businessVat.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.enter_vat))
+                isValidate = false
+            }
+            isNullOrEmpty(state.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.empty_address_state))
+                isValidate = false
+            }
+            isNullOrEmpty(country.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.empty_address_country))
+                isValidate = false
+            }
             else -> {
                 showToastError.postValue("")
             }
@@ -124,23 +142,34 @@ class VendorRegistrationStep2ViewModel(
     }
 
     private fun callRegisterStep(context: Context) {
+
         scope.launch {
-            val file = File(documentPath)
-            val part = MultipartBody.Part.createFormData(
-                "file", file.name,
-                file.asRequestBody(getMimeType(context, Uri.fromFile(file))?.toMediaTypeOrNull())
-            )
+
+                val file = File(documentPath)
+                val part = MultipartBody.Part.createFormData(
+                    "file", file.name,
+                    file.asRequestBody(
+                        getMimeType(
+                            context,
+                            Uri.fromFile(file)
+                        )?.toMediaTypeOrNull()
+                    )
+                )
+
             val vendorId: RequestBody = Constants.USER?.id.toString().toRequestBody("text/plain".toMediaTypeOrNull())
             val businessName: RequestBody? = businessName.value?.toRequestBody("text/plain".toMediaTypeOrNull())
             val businessId: RequestBody? = businessId.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
             val employeeID: RequestBody? = employeeId.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
             val vat: RequestBody? = businessVat.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val state: RequestBody? = state.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val country: RequestBody? = country.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val zip: RequestBody? = zip.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             var utcDate=DateUtils.formatLocalToUtc(expiryDate.value!!,false,DateUtils.API_DATE_FORMAT)
             val date: RequestBody? = utcDate?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             userRepository.uploadVendorStep2(
-                part, vendorId, businessName, businessId, employeeID,date,vat
+                part, vendorId, businessName, businessId, employeeID,date,vat,state, country,zip
             )
         }
     }
@@ -156,4 +185,6 @@ class VendorRegistrationStep2ViewModel(
             userRepository.getUser()
         }
     }
+
+
 }

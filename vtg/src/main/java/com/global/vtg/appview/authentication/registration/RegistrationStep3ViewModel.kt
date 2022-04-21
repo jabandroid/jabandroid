@@ -122,10 +122,10 @@ class RegistrationStep3ViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.empty_address_state))
                 isValidate = false
             }
-            isNullOrEmpty(zip.value)&& isFromProfile -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_address_zip))
-                isValidate = false
-            }
+//            isNullOrEmpty(zip.value)&& isFromProfile -> {
+//                showToastError.postValue(App.instance?.getString(R.string.empty_address_zip))
+//                isValidate = false
+//            }
             isNullOrEmpty(country.value) -> {
                 showToastError.postValue(App.instance?.getString(R.string.empty_address_country))
                 isValidate = false

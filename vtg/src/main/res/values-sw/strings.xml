@@ -585,4 +585,27 @@
     <string name="delete_user">Je, una uhakika wa kufuta mtumiaji huyu?</string>
     <string name="decline">KATAA</string>
     <string name="decline_invitation">Je, ungependa kukataa mwaliko huu?</string>
+    <string name="history">Historia</string>
+    <string name="health_bio">Wasifu wa Afya</string>
+    <string name="allergies">Mzio</string>
+    <string name="medical_records">Rekodi za Matibabu</string>
+    <string name="chronic">Magonjwa sugu</string>
+    <string name="medication">Dawa</string>
+    <string name="donor">Mfadhili</string>
+    <string name="emergency">Dharura</string>
+    <string name="appointments">Miadi</string>
+    <string name="doctors">Madaktari</string>
+    <string name="benifits">Faida</string>
+    <string name="qrcode">Msimbo wa QR </string>
+    <string name="vaccine">Chanjo </string>
+    <string name="address3">Anwani ya 3 </string>
+    <string name="vendor_Step_2">Mchuuzi Hatua ya 2 </string>
+    <string name="vendor_Step_1">Mchuuzi Hatua ya 1 </string>
+    <string name="vendor_Step_3">Muuzaji Hatua ya 3 </string>
+    <string name="lab_Step_2">Maabara/Kliniki Hatua ya 2 </string>
+    <string name="lab_Step_1">Maabara/Kliniki Hatua ya 1 </string>
+    <string name="lab_Step_3">Maabara/Kliniki Hatua ya 3 </string>
+    <string name="enter_vat">Tafadhali weka VAT ya biashara</string>
+    <string name="r_state">Hali ya usajili</string>
+    <string name="r_country">Nchi ya Usajili</string>
 </resources>

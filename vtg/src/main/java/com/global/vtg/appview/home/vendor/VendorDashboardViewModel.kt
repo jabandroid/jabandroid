@@ -44,6 +44,13 @@ class VendorDashboardViewModel (application: Application, private val userReposi
         }
     }
 
+    fun getDataFromBarcodeId(barcodeId: String) {
+        scope.launch {
+            userRepository.scanBarcodeId(barcodeId)
+        }
+    }
+
+
     override fun onCleared() {
         super.onCleared()
         userRepository.userConfigLiveData.removeObserver(userObserver)

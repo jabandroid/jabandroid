@@ -69,12 +69,12 @@ class RegistrationStep2Fragment : AppFragment() {
             )
 
         if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
-            tvTitle.text = "Vendor Step2"
+            tvTitle.text = getString(R.string.vendor_Step_2)
         }
         if (userType.equals("Clinic")) {
-            tvTitle.text = "Lab/Clinic Step 2"
+            tvTitle.text= getString(R.string.lab_Step_2)
         } else if (userType.equals("Vendor")) {
-            tvTitle.text = "Vendor Step 2"
+            tvTitle.text  = getString(com.vtg.R.string.vendor_Step_2)
         }
 
 

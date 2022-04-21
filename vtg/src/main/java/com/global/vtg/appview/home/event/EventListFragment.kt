@@ -73,6 +73,7 @@ class EventListFragment : AppFragment() {
             override fun onClick(item: Event, v: View) {
                 val bundle = Bundle()
                 bundle.putString(Constants.BUNDLE_ID, item.eventID!!.toString())
+                bundle.putString(Constants.BUNDLE_USERID, item.userId!!.toString())
                 bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, false)
                 addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL, bundle)
             }
@@ -135,6 +136,7 @@ class EventListFragment : AppFragment() {
                     else -> {
                         val bundle = Bundle()
                         bundle.putString(Constants.BUNDLE_ID, item.eventID!!.toString())
+                        bundle.putString(Constants.BUNDLE_USERID, item.userId!!.toString())
                         bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, true)
                         addFragmentInStack<Any>(AppFragmentState.F_EVENT_EVENT_DETAIL, bundle)
                     }

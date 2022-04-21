@@ -41,6 +41,7 @@ class CreateEventLocationViewModel(
                         id,
                         address1.value!!,
                         if (!TextUtils.isEmpty(address2.value)) address2.value.toString() else "",
+                        "",
                         if (!TextUtils.isEmpty(zip.value)) zip.value.toString() else "",
                         city.value!!,
                         state.value!!,

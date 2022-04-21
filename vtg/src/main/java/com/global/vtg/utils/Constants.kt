@@ -76,6 +76,7 @@ object Constants {
     const val BUNDLE_ADDRESS_COUNTRY = "BUNDLE_ADDRESS_COUNTRY"
     const val BUNDLE_NAME = "BUNDLE_NAME"
     const val BUNDLE_PIC = "BUNDLE_PIC"
+    const val BUNDLE_USERID = "BUNDLE_USERID"
 
     // Mime type
     const val IMAGE_PNG = "image/png"

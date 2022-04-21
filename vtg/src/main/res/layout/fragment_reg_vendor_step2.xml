@@ -352,7 +352,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
-                    android:imeOptions="actionDone"
+                    android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"
@@ -366,19 +366,115 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvBusinessVat" />
 
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvState"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/r_state"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etBusinessVat" />
+
+                <TextView
+                    android:id="@+id/etState"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:gravity="center_vertical"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.state}"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvState" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvCountry"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/r_country"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etState" />
+
+                <TextView
+                    android:id="@+id/etCountry"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:gravity="center_vertical"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.country}"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCountry" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvZip"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_zip"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etCountry" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etZip"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.zip}"
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvZip" />
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnNext"
                     style="@style/ButtonStyle"
                     android:layout_width="0dp"
                     android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="76dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="@dimen/_24sdp"
                     android:onClick="@{viewModel::onClick}"
                     android:text="@string/label_next"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etBusinessVat" />
+                    app:layout_constraintTop_toBottomOf="@+id/etZip" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,6 +11,7 @@ import com.global.vtg.appview.home.changepassword.ChangePasswordFragment
 import com.global.vtg.appview.home.clinic.ClinicHomeFragment
 import com.global.vtg.appview.home.dashboard.DashboardFragment
 import com.global.vtg.appview.home.event.*
+import com.global.vtg.appview.home.health.HealthInformationDashboardFragment
 import com.global.vtg.appview.home.health.HealthInformationFragment
 import com.global.vtg.appview.home.health.UploadHealthDocumentFragment
 import com.global.vtg.appview.home.help.HelpFragment
@@ -51,6 +52,7 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_PROFILE(ProfileFragment::class.java),
     F_CHANGE_PASSWORD(ChangePasswordFragment::class.java),
     F_HEALTH_INFORMATION(HealthInformationFragment::class.java),
+    F_HEALTH_DASHBOARD_INFORMATION(HealthInformationDashboardFragment::class.java),
     F_UPLOAD_HEALTH_INFORMATION(UploadHealthDocumentFragment::class.java),
     F_HELP(HelpFragment::class.java),
     F_VENDOR_STEP2(VendorRegistrationStep2Fragment::class.java),

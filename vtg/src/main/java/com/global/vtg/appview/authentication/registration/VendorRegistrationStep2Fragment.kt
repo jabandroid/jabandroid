@@ -1,5 +1,6 @@
 package com.global.vtg.appview.authentication.registration
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
@@ -20,11 +21,14 @@ import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
+import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
 import com.vtg.R
 import com.vtg.databinding.FragmentRegVendorStep2Binding
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+import kotlinx.android.synthetic.main.fragment_reg_step3.*
 
 import kotlinx.android.synthetic.main.fragment_reg_vendor_step2.*
+import kotlinx.android.synthetic.main.fragment_reg_vendor_step2.ivBack
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
@@ -64,12 +68,22 @@ class VendorRegistrationStep2Fragment : AppFragment() {
         return mFragmentBinding
     }
 
+    fun updateAddress(city: String, state: String, country: String) {
+
+        etState.text = state
+        etCountry.text = country
+
+
+        viewModel.state.postValue(state)
+        viewModel.country.postValue(country)
+    }
+
     override fun initializeComponent(view: View?) {
 
         if (Constants.USER!!.role.equals("ROLE_VENDOR", true)){
-            tvTitleMain!!.text = "Vendor Step 2"
+            tvTitleMain!!.text = getString(R.string.vendor_Step_2)
         }else{
-            tvTitleMain!!.text = "Lab/Clinic Step 2"
+            tvTitleMain!!.text = getString(R.string.lab_Step_2)
         }
         ivBack.setOnClickListener {
             activity?.onBackPressed()
@@ -77,6 +91,13 @@ class VendorRegistrationStep2Fragment : AppFragment() {
 
         if(isFromProfile)
             tvSkip.visibility=View.GONE
+
+        etState.setOnClickListener {
+            getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
+        }
+        etCountry.setOnClickListener {
+            getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
+        }
 
         tvSkip.setOnClickListener{
             val intent: Intent = if (Constants.USER?.role.equals("ROLE_USER")) {
@@ -143,7 +164,7 @@ class VendorRegistrationStep2Fragment : AppFragment() {
 
                     businessDate=   DateUtils.formatDateUTCToLocal(doc.expireDate!!,DateUtils.API_DATE_FORMAT_VACCINE,false)
                     viewModel.expiryDate.postValue(businessDate)
-
+                    viewModel.documentPath=doc!!.identity
                     break
                 }
             }
@@ -165,6 +186,8 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                     extra?.K.equals("employeeId") -> {
                         etEmployeeId.isClickable = false
                         etEmployeeId.isEnabled = false
+//                        etBusinessVat.isClickable = false
+//                        etBusinessVat.isEnabled = false
                         viewModel.employeeId.postValue(extra?.V)
                         viewModel.isDataAvailable=true
                     }
@@ -173,6 +196,36 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                         etBusinessVat.isClickable = false
                         etBusinessVat.isEnabled = false
                         viewModel.businessVat.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+
+                    extra?.K.equals("rState") -> {
+                        etState.isClickable = false
+                        etState.isEnabled = false
+                        viewModel.state.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+
+                    extra?.K.equals("rState") -> {
+                        etState.isClickable = false
+                        etState.isEnabled = false
+                        viewModel.state.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+
+                    extra?.K.equals("rCountry") -> {
+                        etCountry.isClickable = false
+                        etCountry.isEnabled = false
+                        etZip.isClickable = false
+                        etZip.isEnabled = false
+                        viewModel.country.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+                    extra?.K.equals("rZip") -> {
+
+                        etZip.isEnabled = false
+                        etZip.isEnabled = false
+                        viewModel.zip.postValue(extra?.V)
                         viewModel.isDataAvailable=true
                     }
                     extra?.K.equals("certificateExpDate") -> {
@@ -265,9 +318,31 @@ class VendorRegistrationStep2Fragment : AppFragment() {
             addFragmentInStack<Any>(AppFragmentState.F_REG_STEP3, bundle)})
 
         viewModel.chooseFile.observe(this, {
-            PickMediaExtensions.instance.pickFromStorage(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
-                resultMessage(resultCode, path, displayName)
-            }
+
+            DialogUtils.okCancelNeutralDialog(
+                context,
+                getAppActivity().getString(R.string.app_name),
+                getAppActivity().getString(R.string.label_select_image),
+                object :
+                    OkCancelNeutralDialogInterface {
+                    override fun ok() {
+                        PickMediaExtensions.instance.pickFromStorage(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
+                            resultMessage(resultCode, path, displayName)
+                        }
+                    }
+
+                    override fun cancel() {
+                        PickMediaExtensions.instance.pickFromCamera(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
+                            resultMessage(resultCode, path, displayName)
+                        }
+                    }
+
+                    override fun neutral() {
+
+                    }
+                })
+
+
         })
     }
 
@@ -352,6 +427,7 @@ class VendorRegistrationStep2Fragment : AppFragment() {
 //        })
     }
 
+    @SuppressLint("StringFormatInvalid")
     private fun updateDocument(docName: String, path: String) {
         MainScope().launch {
             ivUploadDocument.visibility = View.GONE

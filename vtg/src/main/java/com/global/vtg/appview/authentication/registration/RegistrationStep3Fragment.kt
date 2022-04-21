@@ -70,9 +70,9 @@ class RegistrationStep3Fragment : AppFragment() {
 //            tvTitle.text = "Vendor Step 3"
 //        }
         if (userType.equals("Clinic")) {
-            tvTitle.text = "Lab/Clinic Step 3"
+            tvTitle.text = getString(R.string.lab_Step_3)
         } else if (userType.equals("Vendor")) {
-            tvTitle.text = "Vendor Step 3"
+            tvTitle.text =  getString(com.vtg.R.string.vendor_Step_3)
         }
         if (!USER?.address.isNullOrEmpty()) {
             var index=USER?.address!!.size-1

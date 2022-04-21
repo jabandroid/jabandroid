@@ -111,7 +111,7 @@ var callService:Boolean=false
 //            tvWebsite.visibility = View.VISIBLE
 //        }
         if (userType.equals("Clinic")) {
-            tvTitle.text = "Lab/Clinic Step 1"
+            tvTitle.text = getString(R.string.lab_Step_1)
             tvPlaceOfBirth.visibility = View.GONE
             etCity.visibility = View.GONE
             etState.visibility = View.GONE
@@ -121,7 +121,7 @@ var callService:Boolean=false
             edWebsite.visibility = View.VISIBLE
             tvWebsite.visibility = View.VISIBLE
         } else if (userType.equals("Vendor")) {
-            tvTitle.text = "Vendor Step 1"
+            tvTitle.text = getString(R.string.vendor_Step_1)
             tvPlaceOfBirth.visibility = View.GONE
             etCity.visibility = View.GONE
             etState.visibility = View.GONE

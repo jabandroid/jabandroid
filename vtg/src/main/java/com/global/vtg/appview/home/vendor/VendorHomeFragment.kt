@@ -102,7 +102,7 @@ class VendorHomeFragment : AppFragment(), VendorDashboardAdapter.ClickListener {
                     if(SharedPreferenceUtil.getInstance(getAppActivity())
                             ?.getData(
                                 PreferenceManager.KEY_USER_REG,
-                                true
+                                false
                             ) == true
                     ){
                         AppAlertDialog().showRegMessage(

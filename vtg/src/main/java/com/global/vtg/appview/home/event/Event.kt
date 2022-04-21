@@ -37,6 +37,7 @@ data class EventAddress (
     @field: SerializedName("id") var addressID : String? = "",
     @field: SerializedName("addr1") val addr1 : String,
      @field: SerializedName("addr2") val addr2 : String,
+     @field: SerializedName("addr3") val addr3 : String,
      @field: SerializedName("zipCode") val zipCode : String,
      @field: SerializedName("city") val city : String,
      @field: SerializedName("state") val state : String,

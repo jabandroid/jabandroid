@@ -594,4 +594,27 @@
     <string name="delete_user">Is jy seker om hierdie gebruiker uit te vee?</string>
     <string name="decline">WEIS</string>
     <string name="decline_invitation">Wil jy hierdie uitnodiging afwys?</string>
+    <string name="history">Geskiedenis</string>
+    <string name="health_bio">Gesondheidsbio</string>
+    <string name="allergies">Allergieë</string>
+    <string name="medical_records">Mediese rekords</string>
+    <string name="chronic">Chroniese siektes</string>
+    <string name="medication">Medikasie</string>
+    <string name="donor">Skenker</string>
+    <string name="emergency">Nood</string>
+    <string name="appointments">Afsprake</string>
+    <string name="doctors">Dokters</string>
+    <string name="benifits">Voordele</string>
+    <string name="qrcode">QR-kode </string>
+    <string name="vaccine">Entstowwe </string>
+    <string name="address3">Adres 3 </string>
+    <string name="vendor_Step_2">Verskafferstap 2 </string>
+    <string name="vendor_Step_1">Verskafferstap 1 </string>
+    <string name="vendor_Step_3">Verskafferstap 3 </string>
+    <string name="lab_Step_2">Laboratorium/Kliniek Stap 2 </string>
+    <string name="lab_Step_1">Laboratorium/Kliniek Stap 1 </string>
+    <string name="lab_Step_3">Laboratorium/Kliniek Stap 3 </string>
+    <string name="enter_vat">Voer asseblief die besigheids-BTW in</string>
+    <string name="r_state">Registrasiestatus</string>
+    <string name="r_country">Registrasieland</string>
 </resources>

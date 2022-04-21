@@ -590,4 +590,27 @@
     <string name="delete_user">Êtes-vous sûr de vouloir supprimer cet utilisateur ?</string>
     <string name="decline">REFUSER</string>
     <string name="decline_invitation">Voulez-vous refuser cette invitation ?</string>
+    <string name="history">Historique</string>
+    <string name="health_bio">Santé Bio</string>
+    <string name="allergies">Allergies</string>
+    <string name="medical_records">Dossiers médicaux</string>
+    <string name="chronic">Maladies chroniques</string>
+    <string name="medication">Médicaments</string>
+    <string name="donor">Donateur</string>
+    <string name="emergency">Urgence</string>
+    <string name="appointments">Rendez-vous</string>
+    <string name="doctors">Médecins</string>
+    <string name="benifits">Avantages</string>
+    <string name="qrcode">Code QR</string>
+    <string name="vaccine">Vaccins </string>
+    <string name="address3">Adresse 3 </string>
+    <string name="vendor_Step_2">Étape 2 du fournisseur </string>
+    <string name="vendor_Step_1">Étape 1 du fournisseur </string>
+    <string name="vendor_Step_3">Étape 3 du fournisseur </string>
+    <string name="lab_Step_2">Laboratoire/Clinique Étape 2</string>
+    <string name="lab_Step_1">Laboratoire/Clinique Étape 1 </string>
+    <string name="lab_Step_3">Laboratoire/Clinique Étape 3 </string>
+    <string name="enter_vat">Veuillez entrer la TVA professionnelle</string>
+    <string name="r_state">État d\'enregistrement</string>
+    <string name="r_country">Pays d\'enregistrement</string>
 </resources>

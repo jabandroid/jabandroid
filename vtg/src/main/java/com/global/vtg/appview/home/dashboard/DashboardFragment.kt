@@ -189,7 +189,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                     addFragmentInStack<Any>(AppFragmentState.F_VACCINE_CARD)
                 }
                 6 -> {
-                    addFragmentInStack<Any>(AppFragmentState.F_HEALTH_INFORMATION)
+                    addFragmentInStack<Any>(AppFragmentState.F_HEALTH_DASHBOARD_INFORMATION)
                 }
                 11 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)

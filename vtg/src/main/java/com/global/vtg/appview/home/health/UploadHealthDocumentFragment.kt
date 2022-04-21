@@ -1,10 +1,12 @@
 package com.global.vtg.appview.home.health
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -18,6 +20,7 @@ import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
@@ -35,12 +38,9 @@ import com.global.vtg.appview.home.uploaddocument.TestResultSpinnerAdapter
 import com.global.vtg.appview.home.uploaddocument.VaccineDoseSpinnerAdapter
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DateUtils
+import com.global.vtg.utils.*
 import com.global.vtg.utils.DateUtils.DDMMYY
 import com.global.vtg.utils.DateUtils.appendZero
-import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import com.vtg.databinding.FragmentHealthInfoUploadDocumentBinding
@@ -64,12 +64,15 @@ import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDob
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sStatus
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTestType
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTime
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.s_scan
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.s_status
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.scrollViewHealth
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvDocName
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvFee
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvScan
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvSelectDoc
 import kotlinx.android.synthetic.main.fragment_test_info_upload_document.*
+
 import kotlinx.android.synthetic.main.fragment_upload_document.*
 
 import kotlinx.coroutines.Dispatchers
@@ -109,12 +112,14 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 
     override fun initializeComponent(view: View?) {
         if (Constants.USER?.role.equals("ROLE_CLINIC")) {
-            groupMobileNoHealth.visibility = View.VISIBLE
+            groupMobileNoHealth.visibility = View.GONE
             cbCertify.visibility = View.GONE
             sStatus.visibility = View.VISIBLE
             s_status.visibility = View.VISIBLE
             sDob.visibility = View.GONE
             dob.visibility = View.GONE
+            s_scan.visibility = View.VISIBLE
+            tvScan.visibility = View.VISIBLE
         } else {
             groupMobileNoHealth.visibility = View.GONE
             cbCertify.visibility = View.VISIBLE
@@ -122,6 +127,8 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             s_status.visibility = View.VISIBLE
             sDob.visibility = View.GONE
             dob.visibility = View.GONE
+            s_scan.visibility = View.GONE
+            tvScan.visibility = View.GONE
         }
         viewModel.code.value = ccpHealth.defaultCountryCode
         viewModel.region = ccpHealth.defaultCountryNameCode
@@ -137,6 +144,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             DividerItemDecoration(context, layoutManager.orientation)
         )
         rvInstitute.adapter = adapter
+        viewModel.email = getString(R.string.scan_qr_code)
 
         viewModel.chooseFile.observe(this, {
             PickMediaExtensions.instance.pickFromStorage(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
@@ -156,6 +164,48 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         sTestType.setOnClickListener {
             if (type != null)
                 showType(type!!)
+        }
+
+        var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // There are no request codes
+                val data: Intent? = result.data
+
+
+                viewModel.getDataFromBarcodeId(data!!.getStringExtra("code")!!)
+            }
+        }
+
+        viewModel.scanBarcodeLiveData.observe(this, {
+            when (it) {
+                is Resource.Success -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    tvScan.text="+"+it.data.mobileNo
+                    viewModel.phone.postValue(it.data.mobileNo)
+                }
+                is Resource.Error -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                    }
+                }
+            }
+        })
+
+        tvScan.setOnClickListener {
+
+            val intent = Intent(Intent(activity, QrcodeScanner::class.java))
+            resultLauncher.launch(intent)
         }
 
         viewModel.testData.observe(this, {
