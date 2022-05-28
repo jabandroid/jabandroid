@@ -24,7 +24,7 @@ data class Event (
     @field: SerializedName("verified") val verified : Boolean ? = null,
     @field: SerializedName("description") var description : String ? = null,
     @field: SerializedName("privateEvent") var privateEvent : Boolean ? = null,
-    @field: SerializedName("eventAddress") var eventAddress : List<EventAddress>? = null,
+    @field: SerializedName("eventAddress") var eventAddress : ArrayList<EventAddress>? = null,
     @field: SerializedName("eventImage") val eventImage : List<EventImage>? = null,
     @field: SerializedName("guestCount") val guestCount : Int? = null,
     @field: SerializedName("crowdLimit") var crowdLimit : String? = null,
@@ -35,17 +35,18 @@ data class Event (
 @Keep
 data class EventAddress (
     @field: SerializedName("id") var addressID : String? = "",
-    @field: SerializedName("addr1") val addr1 : String,
-     @field: SerializedName("addr2") val addr2 : String,
-     @field: SerializedName("addr3") val addr3 : String,
-     @field: SerializedName("zipCode") val zipCode : String,
-     @field: SerializedName("city") val city : String,
-     @field: SerializedName("state") val state : String,
-     @field: SerializedName("country") val country : String,
-     @field: SerializedName("phoneNo") val phoneNo : String,
-     @field: SerializedName("mobileNo") val mobileNo : String,
-     @field: SerializedName("fax") val fax : String,
-     @field: SerializedName("email") val email : String
+    @field: SerializedName("addr1") val addr1 : String? = "",
+     @field: SerializedName("addr2") val addr2 : String? = "",
+     @field: SerializedName("addr3") val addr3 : String? = "",
+     @field: SerializedName("zipCode") val zipCode : String? = "",
+     @field: SerializedName("city") val city : String? = "",
+     @field: SerializedName("state") val state : String? = "",
+     @field: SerializedName("country") val country : String? = "",
+     @field: SerializedName("phoneNo") val phoneNo : String? = "",
+     @field: SerializedName("mobileNo") val mobileNo : String? = "",
+     @field: SerializedName("fax") val fax : String? = "",
+     @field: SerializedName("website") val web : String? = "",
+     @field: SerializedName("email") val email : String? = "",
 )
 
 @Keep

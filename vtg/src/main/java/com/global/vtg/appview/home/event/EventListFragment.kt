@@ -17,6 +17,8 @@ import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.NetworkUtils
+import com.global.vtg.utils.ToastUtils
 import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentEventListBinding
@@ -50,7 +52,7 @@ class EventListFragment : AppFragment() {
     override fun initializeComponent(view: View?) {
 
         CreateEventFragment.itemEvent = Event()
-        itemSubEvent=Event()
+        itemSubEvent = Event()
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -112,7 +114,7 @@ class EventListFragment : AppFragment() {
 
                         var bundle = Bundle()
 
-                        bundle.putString("event_id",  item.eventID.toString())
+                        bundle.putString("event_id", item.eventID.toString())
                         branchUniversalObject.generateShortUrl(
                             activity!!,
                             linkProperties,
@@ -157,8 +159,12 @@ class EventListFragment : AppFragment() {
             selectedType = 1
             setView()
         }
-        viewModel.callEventsApi(JsonObject())
-        viewModel.callMyEventsApi(Constants.USER!!.id.toString())
+        if (NetworkUtils().isNetworkAvailable(activity!!)) {
+            viewModel.callEventsApi(JsonObject())
+            viewModel.callMyEventsApi(Constants.USER!!.id.toString())
+        } else
+            ToastUtils.shortToast(0, getString(R.string.error_message_network))
+
         viewModel.getAllEvents.observe(this,
             {
                 when (it) {
@@ -276,7 +282,7 @@ class EventListFragment : AppFragment() {
         }
     }
 
-    public  fun refreshList(){
+    public fun refreshList() {
         viewModel.callEventsApi(JsonObject())
         viewModel.callMyEventsApi(Constants.USER!!.id.toString())
     }

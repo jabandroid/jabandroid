@@ -132,12 +132,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/gray"
-                        android:minHeight="@dimen/_95sdp">
+                        android:minHeight="@dimen/_125sdp">
 
                         <ImageView
                             android:id="@+id/doc_img"
                             android:layout_width="match_parent"
-                            android:layout_height="@dimen/_95sdp"
+                            android:layout_height="@dimen/_125sdp"
                             android:contentDescription="@null"
                             android:scaleType="centerCrop"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -357,6 +357,36 @@
                         app:tint="@color/colorPrimary" />
                 </LinearLayout>
 
+                <RelativeLayout
+                    android:id="@+id/addNewAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                     android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/location">
+
+                    <com.global.vtg.utils.textView.RegularTextView
+                        android:id="@+id/add_another_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/add_another_address"
+                        android:textColor="@color/colorPrimary" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@+id/add_another_address"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_home_black_24dp">
+
+                    </androidx.appcompat.widget.AppCompatImageView>
+                </RelativeLayout>
+
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/map_frag"
                     android:name="com.global.vtg.appview.home.event.CreateEventReviewFragment"
@@ -367,7 +397,7 @@
                     android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginEnd="@dimen/_24sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/location" />
+                    app:layout_constraintTop_toBottomOf="@+id/addNewAddress" />
 
                 <LinearLayout
                     android:id="@+id/button"

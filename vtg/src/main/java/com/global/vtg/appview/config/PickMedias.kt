@@ -24,6 +24,10 @@ import com.vtg.R
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import android.content.Intent
+
+
+
 
 
 class PickMediaExtensions {
@@ -48,6 +52,15 @@ class PickMediaExtensions {
             PICK_ANY,
             callback
         )
+
+    fun PickCsvFile(context: Context, callback: (Int, String, String?) -> Unit) =
+        requestPhotoPick(
+            context,
+            PICK_CSV,
+            callback
+        )
+
+
 
     class ResultFragment() : Fragment() {
         companion object {
@@ -272,6 +285,27 @@ class PickMediaExtensions {
                         }
                     }
                 }
+
+                PICK_CSV -> {
+                    if (resultCode == RESULT_OK) {
+                        try {
+                            val path = ShareUtils.getPath(requireContext(), data?.data ?: return)
+                            currentPhotoPath = path
+
+                                getOriginalPath(imageUri.toString(), file)
+                                currentPhotoPath = ShareUtils.getPath(requireContext(), data.data ?: return)
+                                currentPhotoPath?.let {
+                                    callback?.invoke(PICK_SUCCESS,
+                                        it,
+                                        displayName)
+
+                            }
+                        } catch (e: Exception) {
+                            e.printStackTrace()
+                            toast("Fail to get document path, Please try again later.")
+                        }
+                    }
+                }
             }
         }
 
@@ -344,6 +378,7 @@ class PickMediaExtensions {
         const val PICK_FROM_VIDEO = 2
         const val PICK_FROM_CAMERA_VIDEO = 3
         const val PICK_ANY = 6
+        const val PICK_CSV = 7
         const val PICK_SUCCESS = 3
         const val PICK_PERMISSION_DENIED = 1
         const val PICK_CANCELED = 5
@@ -437,6 +472,21 @@ fun requestPhotoPick(context: Context, pickType: Int, callback: (Int, String, St
             PickMediaExtensions.currentVideoPath = captureUri.toString()
             intent.putExtra(MediaStore.EXTRA_OUTPUT, captureUri)
         }
+        PickMediaExtensions.PICK_CSV -> {
+
+//            val intent = Intent(Intent.ACTION_GET_CONTENT)
+//            intent.addCategory(Intent.CATEGORY_OPENABLE)
+//            intent.type = "text/csv"
+            intent.action = Intent.ACTION_OPEN_DOCUMENT
+            intent.addCategory(Intent.CATEGORY_OPENABLE)
+            intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true)
+            intent.type = "text/*"
+            val extraMimeTypes = arrayOf(
+                Constants.CSV
+            )
+            intent.putExtra(Intent.EXTRA_MIME_TYPES, extraMimeTypes)
+        }
+
         PickMediaExtensions.PICK_ANY -> {
             intent.action = Intent.ACTION_OPEN_DOCUMENT
             intent.addCategory(Intent.CATEGORY_OPENABLE)

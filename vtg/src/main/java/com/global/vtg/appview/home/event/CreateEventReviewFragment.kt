@@ -33,6 +33,7 @@ import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.model.network.Resource
+import com.global.vtg.utils.AppAlertDialog
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -41,21 +42,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.global.vtg.utils.AppAlertDialog
 import com.vtg.R
 import com.vtg.databinding.FragmentCreateEventReviewBinding
 import kotlinx.android.synthetic.main.fragment_create_event_review.*
-import kotlinx.android.synthetic.main.fragment_create_event_review.cvUploadImages
-import kotlinx.android.synthetic.main.fragment_create_event_review.doc_img
-import kotlinx.android.synthetic.main.fragment_create_event_review.eventAddImages
-import kotlinx.android.synthetic.main.fragment_create_event_review.images_container
-import kotlinx.android.synthetic.main.fragment_create_event_review.ivBack
-import kotlinx.android.synthetic.main.fragment_create_event_review.tvDate
-import kotlinx.android.synthetic.main.fragment_create_event_review.tvEventName
-import kotlinx.android.synthetic.main.fragment_create_event_review.tvLocation
-
 import kotlinx.coroutines.Dispatchers
-
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
@@ -64,10 +54,6 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 import java.io.IOException
-import androidx.recyclerview.widget.LinearLayoutManager
-
-
-
 
 
 class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
@@ -80,9 +66,8 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
     private var isBanner: Boolean = false
     var count: Int = 0
 
-    var selectedPosion: Int = 0
-    lateinit var selectedLayout: LinearLayout
-    var imageServer: HashMap<Int, String> = HashMap()
+    private var selectedPosion: Int = 0
+    private lateinit var selectedLayout: LinearLayout
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_create_event_review
@@ -110,7 +95,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
-        images = HashMap<String, String>()
+        images = HashMap()
         vAddNew =
             EventImageViewCreate(
                 activity!!,
@@ -121,7 +106,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                 cvUploadImages
             )
         cvUploadImages.addView(vAddNew)
-        selectedLayout=cvUploadImages
+        selectedLayout = cvUploadImages
         tvDate.text = CreateEventFragment.itemEvent.startDate
         tvEventName.text = CreateEventFragment.itemEvent.eventName
         if (CreateEventFragment.itemEvent.privateEvent!!) {
@@ -254,8 +239,8 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
             when (it) {
                 is Resource.Success -> {
                     eventID = it.data.eventID.toString()
-                    CreateEventFragment.itemEvent.eventID=eventID
-                    var part: MutableMap<String, RequestBody> = HashMap()
+                    CreateEventFragment.itemEvent.eventID = eventID
+                    // HashMap()
 
                     val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
                     builder.addFormDataPart("eventId", eventID)
@@ -282,7 +267,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                                 isBanner = false
                                 val filek = File(images[item]!!)
                                 builder.addFormDataPart(
-                                    "image" + count,
+                                    "image$count",
                                     filek.name,
                                     filek.asRequestBody(MultipartBody.FORM)
                                 )
@@ -313,8 +298,8 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                         }
 
                         popFragment(3)
-                        if(viewModel.isSubEvent){
-                            CreateSubEventFragment.itemSubEvent=Event()
+                        if (viewModel.isSubEvent) {
+                            CreateSubEventFragment.itemSubEvent = Event()
                             addFragmentInStack<Any>(
                                 AppFragmentState.F_SUB_EVENT_CREATE
                             )
@@ -378,7 +363,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                         }
 
                         popFragment(3)
-                        if(viewModel.isSubEvent){
+                        if (viewModel.isSubEvent) {
                             addFragmentInStack<Any>(
                                 AppFragmentState.F_SUB_EVENT_CREATE
                             )
@@ -442,7 +427,13 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
 //            )
 
 
-
+        addNewAddress.setOnClickListener {
+            val v = Bundle()
+            v.putBoolean("isNew", true)
+            addFragmentInStack<Any>(
+                AppFragmentState.F_EVENT_ADDRESS, v
+            )
+        }
     }
 
     override fun pageVisible() {
@@ -549,7 +540,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
     }
 
 
-    fun getLocationFromAddress(context: Context?, strAddress: String?): LatLng? {
+    private fun getLocationFromAddress(context: Context?, strAddress: String?): LatLng? {
         val coder = Geocoder(context)
         val address: List<Address>?
         var p1: LatLng? = null
@@ -560,7 +551,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                 return null
             }
             val location: Address = address[0]
-            p1 = LatLng(location.getLatitude(), location.getLongitude())
+            p1 = LatLng(location.latitude, location.longitude)
         } catch (ex: IOException) {
             ex.printStackTrace()
         }
@@ -578,8 +569,6 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
             ll.removeViewAt(item)
 
         }
-
-
 
 
         //CreateEventReviewFragment.vAddNew.showAdd(vAddNew)
@@ -612,13 +601,13 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                     val realPath1 = Uri.parse(path).getRealPathFromURI(getAppActivity())
                     if (realPath1 != null) {
                         if (displayName != null) {
-                            updateDocument(displayName, path, fromCamera)
+                            updateDocument(path, fromCamera)
                         }
                     } else {
                         val realPath = Uri.parse(path).getRealPath(getAppActivity())
                         if (realPath != null) {
                             if (displayName != null) {
-                                updateDocument(displayName, path, fromCamera)
+                                updateDocument(path, fromCamera)
                             }
                         } else {
                             DialogUtils.showSnackBar(
@@ -641,7 +630,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
         }
     }
 
-    private fun updateDocument(docName: String, path: String, fromCamera: Boolean) {
+    private fun updateDocument(path: String, fromCamera: Boolean) {
         MainScope().launch {
             //   viewModel.documentPath = path
 
@@ -671,7 +660,7 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
                 doc_img.visibility = View.VISIBLE
                 imagetoLoad.setImageBitmap(bitmap)
             } else {
-                images["image" + count] = path
+                images["image$count"] = path
 
                 val v =
                     EventImageViewCreate(
@@ -694,6 +683,45 @@ class CreateEventReviewFragment : AppFragment(), OnMapReadyCallback,
     }
 
     override fun onViewClick() {
+
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun refreshList() {
+
+
+        tvLocation.text = CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
+                CreateEventFragment.itemEvent.eventAddress!![0].state + " " +
+                CreateEventFragment.itemEvent.eventAddress!![0].country
+
+        if (ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                requireActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mMap!!.isMyLocationEnabled = true
+
+            val address = CreateEventFragment.itemEvent.eventAddress!![0].addr1 + " " +
+                    CreateEventFragment.itemEvent.eventAddress!![0].addr2 + " " +
+                    CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
+                    CreateEventFragment.itemEvent.eventAddress!![0].country + " "
+
+
+            val location = getLocationFromAddress(activity!!, address)
+            val markerOptions = MarkerOptions()
+            if (location != null) {
+                markerOptions.position(location)
+                markerOptions.title(CreateEventFragment.itemEvent.eventName)
+
+                mMap!!.addMarker(markerOptions)
+
+                mMap!!.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 12f))
+            }
+
+        }
 
     }
 }

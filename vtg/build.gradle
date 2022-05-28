@@ -46,8 +46,8 @@ android {
         }
         prod {
             applicationId "com.global.vtg"
-            versionCode 2
-            versionName "1.0.1"
+            versionCode 4
+            versionName "1.0.3"
         }
     }
 
@@ -70,8 +70,8 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
 

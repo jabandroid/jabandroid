@@ -529,6 +529,7 @@
     <string name="label_about_us">Sobre os EUA</string>
     <string name="label_choose_your_lanquage">Escolha seu idioma preferido</string>
 
+
     <string-array name="lanuage">
         <item>English</item>
         <item>Vertaling</item>
@@ -538,8 +539,8 @@
         <item>Tradução</item>
         <item>Traducción</item>
         <item>Tafsiri</item>
+        <item>Isalin</item>
     </string-array>
-
     <string-array name="lanuage_1">
         <item>Inglês</item>
         <item>Africâner</item>
@@ -549,6 +550,7 @@
         <item>Português</item>
         <item>Espanhol</item>
         <item>Suaíli</item>
+        <item>Tagalo</item>
     </string-array>
     <string name="label_continue">Continuar</string>
     <string name="user_login"> Login do usuário</string>
@@ -565,7 +567,6 @@
     <string name="time_slot">Subevento</string>
     <string name="add_image">Adicionar imagem</string>
     <string name="succesfully_added">Adicionado com sucesso</string>
-    <string name="add_more">Deseja adicionar mais? <br> <u><font color='#255CA4'>Clique aqui</font></u>.</br></string>
     <string name="go_to_event_page">ou vá para <u><font color='#255CA4'>Página do evento</font></u>.</string>
     <string name="add_attandees">Adicionar participantes</string>
     <string name="sub_event">Subeventos</string>
@@ -617,4 +618,18 @@
     <string name="enter_vat">Insira o IVA comercial</string>
     <string name="r_state">Estado de registro</string>
     <string name="r_country">País de registro</string>
+    <string name="r_scan">Verificação do usuário</string>
+    <string name="scan_qr_code">Ler código QR</string>
+    <string name="ok">Ok</string>
+    <string name="scan_user_code">Por favor, leia o código QR do usuário para continuar</string>
+    <string name="add_more">Deseja adicionar mais subeventos? <br> <u><font color='#255CA4'>Clique aqui</font></u>.</br></string>
+    <string name="version">Versão </string>
+    <string name="add_another_address">Adicionar outro endereço </string>
+    <string name="your_address">Seu endereço</string>
+    <string name="add_new_address">Adicionar novo endereço</string>
+    <string name="remove">Remover</string>
+    <string name="delete_address">Deseja excluir este endereço?</string>
+    <string name="select_address">Selecione o endereço para o subevento</string>
+    <string name="upload">Por favor, importe o arquivo csv para carregar todos os participantes</string>
+    <string name="selectcsvFile">Selecione um arquivo csv válido.</string>
 </resources>

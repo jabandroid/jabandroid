@@ -1,0 +1,635 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!--<string name="app_name">BaseProject</string>-->
+
+    <string name="api_key">AIzaSyD09CYCGjr-h6gCq3ImZe6pnglvuCsGcMU</string>
+
+    <string name="please_wait">Mangyaring maghintay</string>
+    <string name="app_name_new" translatable="false">VAXTRAX</string>
+    <string name="email">Email / Mobile No.</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="msg_valid_email">Pakilagay ang wastong email</string>
+    <string name="msg_valid_password">Pakilagay ang password</string>
+    <string name="navigation_drawer_open">Buksan</string>
+    <string name="navigation_drawer_close">Isara</string>
+    <string name="signup">Signup</string>
+    <string name="details_screen">Mga Detalye</string>
+    <string name="permissions_denied">Tinanggihan ang mga pahintulot. Mangyaring payagan sa mga setting ng app para sa karagdagang pagpapagana.</string>
+    <!--Title-->
+    <string name="title_home">Home Task</string>
+    <string name="title_payment">Payment Wallet</string>
+    <string name="title_whistory">Withdrawal History</string>
+    <string name="title_myteam">Aking Koponan</string>
+    <string name="title_installapp">I-install ang Application</string>
+    <string name="title_noti">Notification</string>
+    <string name="title_faq">Faq</string>
+    <string name="title_contactus">Makipag-ugnayan sa Amin</string>
+    <string name="title_refer">Refer Kumita</string>
+    <string name="title_logout">Logout</string>
+
+    <!--Error-->
+    <string name="error_message_location">"Hindi tinukoy ang lokasyon"</string>
+    <string name="error_message_network">Suriin ang iyong koneksyon at subukang muli.</string>
+    <string name="error_message_call">Nabigo ang tawag</string>
+    <string name="error_message_somethingwrong">May nangyaring mali, Pakisubukan mamaya</string>
+    <string name="error_message_clienterror">Error ng kliyente</string>
+    <string name="error_message_servererror">Error sa server</string>
+    <string name="error_message_no_record">Walang nakitang nilalaman</string>
+    <string name="error_message_empty">Oops, walang mga resultang ipapakita</string>
+    <string name="error_message_error">Oops, nagkaroon ng error sa pagkuha ng data</string>
+    <string name="error_message_checkagain">Suriin muli</string>
+    <string name="error_message_tryagain">Subukan muli</string>
+
+
+    <!--Mga Mensahe-->
+    <string name="msg_success">Matagumpay kang naka-log in</string>
+
+    <!--Aksyon-->
+    <string name="action_save">I-save</string>
+    <string name="action_cancel">Kanselahin</string>
+
+
+    <string name="button_login">Mag-signin</string>
+    <string name="button_signup">Signup</string>
+
+    <string name="hint_email_or_username">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_phonenumber">Mobile No.</string>
+    <string name="hint_code">Reference code</string>
+    <string name="forgot">Nakalimutan ang Password</string>
+    <string name="donthave">Walang account ? <b>Mag-sign UP!</b></string>
+
+
+    <string name="btn_next">Susunod</string>
+    <string name="txt_withdraw_amout">I-withdraw ang Halaga</string>
+    <string name="txt_withdraw">Withdraw</string>
+    <string name="etx_payment_number">Numero ng Pagbabayad</string>
+    <string name="txt_currnet_balance">Kasalukuyang Balanse</string>
+
+
+    <string name="enable_random_adaptation">I-enable ang random adaptation</string>
+
+    <string name="error_drm_not_supported">Hindi sinusuportahan ang protektadong nilalaman sa mga antas ng API sa ibaba 18</string>
+
+    <string name="error_drm_unsupported_scheme">Hindi sinusuportahan ng device na ito ang kinakailangang DRM scheme</string>
+
+    <string name="error_drm_unknown">May naganap na hindi kilalang DRM error</string>
+
+    <string name="error_no_decoder">Ang device na ito ay hindi nagbibigay ng decoder para sa <xliff:g id="mime_type">%1$s</xliff:g></string>
+
+    <string name="error_no_secure_decoder">Ang device na ito ay hindi nagbibigay ng secure na decoder para sa <xliff:g id="mime_type">%1$s</xliff:g></string>
+
+    <string name="error_querying_decoders">Hindi ma-query ang mga decoder ng device</string>
+
+    <string name="error_instantiating_decoder">Hindi ma-instantiate ang decoder <xliff:g id="decoder_name">%1$s</xliff:g></string>
+
+    <string name="error_unsupported_video">Kasama sa media ang mga video track, ngunit walang nape-play ng device na ito</string>
+
+    <string name="error_unsupported_audio">Kasama sa media ang mga audio track, ngunit walang nape-play ng device na ito</string>
+
+    <string name="storage_permission_denied">Tinanggihan ang pahintulot na ma-access ang storage</string>
+
+    <string name="sample_list_load_error">Nabigong ma-load ang isa o higit pang sample na listahan</string>
+
+    <string name="piker_cam">Camera</string>
+    <string name="piker_gall">Gallery</string>
+    <string name="piker_chosevideo">Pumili ng Video</string>
+    <string name="piker_choseimage">Pumili ng Larawan</string>
+    <string name="txt_file_toolarge">Masyadong malaki ang file. Ang maximum na laki ay %1$sMB</string>
+    <string name="retry">Retry</string>
+    <string name="no_connection">Walang koneksyon sa internet. Pakisuri ang iyong koneksyon at subukang muli.</string>
+    <string name="no_connection_msg">Pakisuri ang iyong koneksyon sa internet at subukang muli</string>
+    <string name="nv_settings">Mga Setting</string>
+    <string name="nv_home">Home</string>
+    <string name="nv_bookmark">Bookmark</string>
+    <string name="Failure">Failure</string>
+
+    <!-- VTG -->
+    <string name="label_vendor">Vendor</string>
+    <string name="label_user">User</string>
+
+    <!-- Authentication -->
+    <string name="label_login">Login</string>
+    <string name="label_login_subtext">Pagpapahusay sa Buhay ng Komunidad</string>
+    <string name="label_email">Email</string>
+    <string name="label_email_govt">Email/Government ID</string>
+    <string name="label_password">Password</string>
+    <string name="label_remember_me">Tandaan Ako</string>
+    <string name="label_forgot_password">Nakalimutan ang Password ?</string>
+    <string name="label_forgot_password_title">Nakalimutan ang Password</string>
+    <string name="label_forgot_password_subtext">Kumpirmahin ang iyong Mobile No. at ipapadala namin ang\n mga tagubilin.</string>
+    <string name="label_do_sign_up">Walang account? <u><b><font fgcolor='#1D4792'> Mag-sign up </font></b></u></string>
+    <string name="label_sign_up"><u>Mag-sign up</u></string>
+    <string name="label_sign_up1">Mag-sign Up</string>
+    <string name="label_registration">Rehistrasyon</string>
+    <string name="label_phone_no">Mobile No.</string>
+    <string name="label_phone_no_register">Mobile No.*</string>
+    <string name="label_password_register">Password*</string>
+    <string name="label_register">Magrehistro</string>
+    <string name="label_already_sign_in">Mayroon ka nang account? <u><b><font fgcolor='#1D4792'>Mag-sign in</font></b></u></string>
+    <string name="label_otp">OTP</string>
+    <string name="label_otp_text">Kumpirmahin ang iyong email at ipapadala namin ang\n mga tagubilin.</string>
+    <string name="label_enter_otp_received">Ilagay ang OTP na natanggap mo</string>
+    <string name="label_otp_not_received">Hindi ba natanggap ang OTP?</string>
+    <string name="label_request_otp">Humiling ng bago sa loob ng 30 segundo</string>
+    <string name="label_resend_otp"><u><b><font fgcolor='#1D4792'>Muling ipadala ang OTP</font></b></u></string>
+    <string name="label_verify">I-verify</string>
+    <string name="label_send">Ipadala</string>
+    <string name="label_vendor_login">Ako ay isang Vendor</string>
+    <string name="label_clinic">Ako ay isang Lab/clinic</string>
+
+    <!-- Dashboard -->
+    <string name="label_vaccine_history">Kasaysayan ng Bakuna</string>
+    <string name="label_vaccine_card">Vaccine Card</string>
+    <string name="label_vaccine_qr_code">QR Code</string>
+    <string name="label_covid_test_status">Katayuan ng Pagsusuri sa COVID</string>
+    <string name="label_test_history">Kasaysayan ng Pagsubok</string>
+    <string name="label_test_history_covid">Kasaysayan ng Pagsusuri sa Covid</string>
+    <string name="label_test_upload"> Pagsubok sa Pag-upload</string>
+    <string name="label_payment_method">Paraan ng Pagbabayad</string>
+    <string name="label_information">Impormasyon</string>
+    <string name="label_upload_document">Mag-upload ng Dokumento</string>
+    <string name="label_upload_info">Mag-upload ng Impormasyong Pangkalusugan</string>
+    <string name="label_covid_status">Covid Test Status</string>
+    <string name="label_change_password">Palitan ang Password</string>
+    <string name="label_events">Mga Kaganapan</string>
+    <string name="label_vaccine_taken_list">Listahan ng Bakuna</string>
+    <string name="label_upload_file">Mag-upload ng File</string>
+    <string name="label_logout">Logout</string>
+    <string name="label_share">Ibahagi</string>
+    <string name="label_vaccinations">Mga pagbabakuna</string>
+    <string name="label_vaccinations_covid">Covid Test</string>
+    <string name="label_vaccinated_on">Nabakunahan Naka-on</string>
+    <string name="label_test_on">Nasubukan Sa</string>
+    <string name="label_upload_text">I-click upang mag-upload ng dokumento \n(PDF/JPG/PNG Max 5MB)</string>
+    <string name="label_upload_images">Magdagdag ng mga larawan ng Banner \n(PDF/JPG/PNG Max 5MB)</string>
+    <string name="label_upload_text_b">I-click para mag-upload ng negosyo \n(PDF/JPG/PNG Max 5MB)</string>
+    <string name="label_doc_name">Napiling Dokumento: %s</string>
+    <string name="create">Gumawa</string>
+    <string name="label_hospital">Institute:\u0020</string>
+    <string name="label_kit">Test Kit:\u0020</string>
+    <string name="label_date">Petsa:\u0020</string>
+    <string name="label_status">Status:\u0020</string>
+    <string name="label_test">Pagsubok:\u0020</string>
+    <string name="label_dose">Dosis:\u0020</string>
+    <string name="label_batch_no_row">SN:\u0020</string>
+    <string name="label_hospital_name">Pangalan ng Lab/Clinic</string>
+    <string name="label_batch_no">Batch/Serial Number</string>
+    <string name="label_phone_number">User Mobile No.*</string>
+    <string name="label_test_status"> Status ng Pagsubok</string>
+    <string name="label_vaccine_status">Status ng Bakuna</string>
+
+    <string name="label_certify">Patunayan</string>
+    <string name="label_fee">Bayaran</string>
+    <string name="label_date1">Petsa</string>
+    <string name="label_time">Oras</string>
+    <string name="label_date_time" formatted="false">%d:%d</string>
+
+    <string name="label_no_data">Walang available na data..</string>
+    <string name="select_type">Uri ng Bakuna</string>
+    <string name="select_dose">Piliin ang Dosis</string>
+    <string name="select">Piliin</string>
+    <string name="label_day">Araw</string>
+    <string name="label_thank_you">Salamat!</string>
+    <string name="label_uploaded">Na-upload para sa Pagsusuri</string>
+
+    <string name="label_otp_sent">Matagumpay na naipadala ang Otp.</string>
+    <string name="label_title">Pamagat*</string>
+    <string name="label_event_name">Pangalan ng Kaganapan*</string>
+    <string name="label_start_time">Petsa at Oras ng Pagsisimula</string>
+    <string name="label_end_time">Petsa at Oras ng Pagtatapos</string>
+    <string name="label_private_event">Pribadong Kaganapan</string>
+    <string name="label_about_event">Tungkol sa Kaganapan</string>
+    <string name="label_contact_detail">Mga Detalye sa Pakikipag-ugnayan </string>
+    <string name="read_more">Magbasa pa. </string>
+    <string name="read_less">Mas kaunti. </string>
+    <string name="label_public_event">Pampublikong Kaganapan</string>
+    <string name="label_event_Images">Mga Larawan ng Kaganapan</string>
+    <string name="label_description">Paglalarawan</string>
+    <string name="label_gender">Kasarian</string>
+    <string name="select_title">Pumili ng pamagat</string>
+    <string name="select_product">Pumili ng produkto</string>
+    <string name="select_gender">Pumili ng kasarian</string>
+    <string name="select_ethnicity">Piliin ang Etnisidad</string>
+    <string name="select_citizenship">Pumili ng Citizenship</string>
+    <string name="label_given_name">Ibinigay na Pangalan*</string>
+    <string name="label_given_name_hint">(una) (gitna)</string>
+    <string name="label_first_name">First Name*</string>
+    <string name="label_last_name">Apelyido*</string>
+    <string name="label_dob">Petsa ng Kapanganakan (DOB)</string>
+    <string name="label_test_type">Uri ng Pagsubok</string>
+    <string name="label_test_type_2">Uri ng Pagsubok/Bakuna</string>
+    <string name="label_test_kit">Test Kit</string>
+    <string name="label_test_type_1">Uri ng Pagsubok</string>
+    <string name="label_dob_hint">DD/MM/YYYY</string>
+    <string name="label_city_step3"><font size="14">City*</font></string>
+    <string name="label_place_birth">Lugar ng kapanganakan</string>
+    <string name="label_city"><font size="14">City</font></string>
+    <string name="label_state"><font size="14">State</font></string>
+    <string name="label_country"><font size="14">Bansa</font></string>
+    <string name="label_country_step3"><font size="14">Bansa*</font></string>
+    <string name="label_citizenship">Citizenship</string>
+    <string name="label_ethnicity">Etnisidad</string>
+    <string name="label_website">Website</string>
+    <string name="label_next">Susunod</string>
+    <string name="label_skip">Laktawan</string>
+    <string name="label_show_details">Ipakita ang Mga Detalye</string>
+    <string name="label_ssn">Huling 4 na digit ng PIN/SSN/NIN/SIN/DNI/CPR/eID/NEI</string>
+    <string name="label_id_number">ID Number</string>
+    <string name="label_drivers_license">Driver License</string>
+    <string name="label_number"><font size="14">Numero</font></string>
+    <string name="label_issued_date"><font size="14">Issued date</font></string>
+    <string name="label_expiry_date"><font size="14">Expiry Date</font></string>
+    <string name="label_passport">Passport</string>
+    <string name="label_mailing_add_1">Mailing Address 1</string>
+    <string name="label_add_1">Address 1</string>
+    <string name="label_add_2">Address 2</string>
+    <string name="label_mailing_add_2">Mailing Address 2</string>
+    <string name="label_zip">Zip o Postal Code</string>
+    <string name="label_state_provincial">Estado o Probinsiya*</string>
+    <string name="label_step1">Hakbang 1</string>
+    <string name="label_step2">Hakbang 2</string>
+    <string name="label_step3">Hakbang 3</string>
+    <string name="label_create_event">Gumawa ng Kaganapan</string>
+    <string name="label_create_event_loc">Lokasyon ng Kaganapan</string>
+    <string name="label_create_event_review">Suriin ang Mga Detalye</string>
+    <string name="label_event_detail">Mga Detalye ng Kaganapan</string>
+
+    <string name="label_business_name">Pangalan ng Negosyo</string>
+    <string name="label_business_id">Business Id</string>
+    <string name="label_employee_id">Employee Id</string>
+    <string name="label_vat">VAT ng Negosyo</string>
+    <string name="label_contact_no">Contact Number</string>
+    <string name="label_fax">Fax</string>
+
+    <!-- Validations -->
+    <string name="empty_email">Mangyaring magpasok ng E-mail.</string>
+    <string name="error_email">Mangyaring magpasok ng wastong E-mail.</string>
+    <string name="error_event_name">Pakilagay ang pangalan ng kaganapan.</string>
+    <string name="empty_phone_email">Mangyaring magpasok ng isang E-mail o isang Mobile No.</string>
+    <string name="empty_password">Mangyaring magpasok ng Password</string>
+    <string name="error_password">Mangyaring magpasok ng wastong Password. Dapat maglaman ang password ng 8 digit. 1 Malaking titik, 1 Maliit na titik, 1 espesyal na karakter at 1 digit.</string>
+    <string name="error_terms_condition">Mangyaring tanggapin ang Mga Tuntunin &amp; Mga Kundisyon at Patakaran sa Privacy.</string>
+    <string name="empty_phone">Mangyaring magpasok ng Mobile No.</string>
+    <string name="error_phone">Mangyaring magpasok ng wastong Mobile No.</string>
+    <string name="error_start_time">Pakilagay ang oras ng pagsisimula.</string>
+    <string name="error_end_time">Pakilagay ang oras ng pagtatapos.</string>
+    <string name="empty_otp">Mangyaring magpasok ng OTP.</string>
+    <string name="error_otp">Mangyaring magpasok ng wastong OTP.</string>
+    <string name="error_select_document">Mangyaring pumili ng dokumento.</string>
+    <string name="error_select_dose">Mangyaring pumili ng dosis.</string>
+    <string name="error_fee">Mangyaring magpasok ng bayad.</string>
+    <string name="error_select_type">Mangyaring pumili ng uri ng bakuna.</string>
+    <string name="error_batch_no">Mangyaring magpasok ng Batch no o Serial No.</string>
+    <string name="error_select_date">Mangyaring pumili ng petsa ng bakuna.</string>
+    <string name="error_select_time">Mangyaring pumili ng oras ng bakuna.</string>
+    <string name="error_select_test_type_1">Pakipili ang uri ng pagsubok.</string>
+    <string name="error_select_test_kit">Mangyaring pumili ng uri ng kit na ginagamit para sa pagsubok.</string>
+    <string name="error_select_test_type">Mangyaring pumili ng uri ng pagsubok.</string>
+    <string name="error_hospital_name">Mangyaring pumili ng pangalan ng Lab/Clinic Institute</string>
+    <string name="empty_title">Mangyaring pumili ng pamagat.</string>
+    <string name="empty_gender">Pakipili ang kasarian.</string>
+    <string name="empty_given_name">Pakilagay ang Given Name.</string>
+    <string name="empty_product">Pakipili ang Produkto.</string>
+    <string name="empty_first_name">Pakilagay ang Unang Pangalan.</string>
+    <string name="empty_last_name">Pakilagay ang Apelyido.</string>
+    <string name="upload_image">Paki-upload ang iyong larawan sa profile.</string>
+    <string name="empty_dob">Pakipili ang Petsa ng Kapanganakan.</string>
+    <string name="empty_place_birth_city">Mangyaring magpasok ng Lungsod.</string>
+    <string name="empty_place_birth_state">Mangyaring magpasok ng Estado.</string>
+    <string name="empty_place_birth_country">Mangyaring magpasok ng isang Bansa.</string>
+    <string name="empty_citizenship">Pakilagay ang iyong Citizenship.</string>
+    <string name="empty_ethnicity">Mangyaring magpasok ng Etnisidad.</string>
+    <string name="empty_ssn">Pakilagay ang huling 4 na digit ng Social Security Number.</string>
+    <string name="empty_id_number">Mangyaring magpasok ng ID Number.</string>
+    <string name="empty_business_name">Pakilagay ang Pangalan ng Negosyo.</string>
+    <string name="empty_business_id">Pakilagay ang Business ID.</string>
+    <string name="empty_employee_id">Pakilagay ang Employee Id.</string>
+    <string name="empty_expiry_date">Pakilagay ang petsa ng pag-expire ng Negosyo.</string>
+    <string name="empty_dln">Pakilagay ang iyong numero ng lisensya sa pagmamaneho.</string>
+    <string name="empty_dln_state">Pakipili ang estado ng iyong lisensya sa pagmamaneho.</string>
+    <string name="empty_dln_country">Pakipili ang bansa ng iyong lisensya sa pagmamaneho.</string>
+    <string name="empty_passport">Pakilagay ang iyong numero ng pasaporte.</string>
+    <string name="empty_passport_state">Pakipili ang estado ng iyong Passport.</string>
+    <string name="empty_passport_country">Pakipili ang iyong Pasaporte na bansa.</string>
+    <string name="empty_dln_issued_date">Pakipili ang petsa na ibinigay ang iyong lisensya sa pagmamaneho.</string>
+    <string name="empty_dln_expiry_date">Pakipili ang petsa ng pag-expire ng iyong lisensya sa pagmamaneho.</string>
+    <string name="empty_passport_issued_date">Pakipili ang petsa na ibinigay ang iyong pasaporte.</string>
+    <string name="empty_passport_expiry_date">Pakipili ang petsa ng pag-expire ng iyong pasaporte.</string>
+    <string name="empty_address1">Mangyaring magpasok ng isang Mailing Address 1.</string>
+    <string name="empty_address_1">Mangyaring magpasok ng Address 1.</string>
+    <string name="empty_address2">Mangyaring magpasok ng Mailing Address 2.</string>
+    <string name="empty_address_city">Mangyaring pumili ng Lungsod.</string>
+    <string name="empty_banner_image">Mangyaring pumili ng larawan ng banner para sa kaganapan.</string>
+    <string name="empty_address_state">Mangyaring pumili ng Estado o Probinsiya.</string>
+    <string name="empty_address_zip">Mangyaring magpasok ng Zip o Postal code.</string>
+    <string name="empty_address_country">Mangyaring pumili ng Bansa.</string>
+    <string name="valid_age">Upang magparehistro sa aming app, hindi dapat mas mababa sa 13 taon ang isa</string>
+    <string name="cancel_event">Sigurado ka bang kanselahin ang kaganapan?</string>
+    <string name="delete_event">Sigurado ka bang tatanggalin ang kaganapang ito?</string>
+    <string name="delete_image">Gusto mo bang tanggalin ang larawang ito?</string>
+    <string name="no_location">Hindi nahanap ang lokasyon ng event.</string>
+    <string name="time">Mangyaring pumili ng petsa at oras sa hinaharap.</string>
+
+    <string-array name="title">
+        <item>Mr</item>
+        <item>Mrs</item>
+        <item>Miss</item>
+    </string-array>
+
+    <string-array name="ethnicity">
+        <item>--Piliin--</item>
+        <item>Puti</item>
+        <item>African American</item>
+        <item>Katutubong Amerikano</item>
+        <item>Abazin</item>
+        <item>Pacific Islander</item>
+        <item>Asyano</item>
+        <item>Croats</item>
+        <item>Puting British</item>
+        <item>Mga taong Dagaaba</item>
+        <item>Sherbro people</item>
+        <item>Al-Akhdam</item>
+        <item>Katutubong Hawaiian</item>
+        <item>Intsik</item>
+        <item>Irish Traveller</item>
+        <item>Indian</item>
+        <item>Indian Caribbean</item>
+        <item>Pakistani</item>
+        <item>Ghanaian</item>
+        <item>Luba</item>
+        <item>Kongo</item>
+        <item>Mongo</item>
+        <item>Kenyan</item>
+        <item>Nigerian</item>
+        <item>Bruneian Malay</item>
+        <item>Namibian</item>
+        <item>Puting Namibian</item>
+        <item>Itim na Namibian</item>
+        <item>South African</item>
+        <item>Puting Timog Aprika</item>
+        <item>Black South African</item>
+        <item>Zambian</item>
+        <item>Zimbabwean</item>
+        <item>Botswanan</item>
+        <item>Puting Botswanan</item>
+        <item>Black Botswanan</item>
+        <item>Angolan</item>
+        <item>Bangladeshi</item>
+        <item>Murut People</item>
+        <item>Black Caribbean</item>
+        <item>Black African</item>
+        <item>Itim na Iba</item>
+        <item>Mga taong Black British</item>
+        <item>Mga Asian Hispanic at Latino American</item>
+        <item>Filipino</item>
+        <item> Poleshuks</item>
+        <item>Mga Creole ng kulay</item>
+        <item>Orang Kuala</item>
+        <item>European</item>
+        <item>Mga katutubo ng Americas</item>
+        <item>Mga taong Lubu</item>
+        <item>Mapuche</item>
+        <item>Mala</item>
+        <item>Bhoi</item>
+        <item>Puerto Ricans</item>
+        <item> Amerikano</item>
+        <item>Mga taong Asyano</item>
+        <item>Taong may kulay</item>
+        <item> Mga hindi Hispanic na puti</item>
+        <item> Mga Katutubong Amerikano sa Estados Unidos</item>
+        <item> British na tao</item>
+        <item> Mga puting tao</item>
+        <item>Asian American</item>
+        <item>Itim na tao</item>
+        <item> Multiracial na tao</item>
+        <item> Montenegrin</item>
+        <item> Mga Katutubong Alaska</item>
+        <item> Mga katutubo</item>
+        <item> Latino</item>
+        <item> Black Hispanic at Latino Americans</item>
+        <item> Polyethnicity</item>
+        <item>Mga Hispanic at Latino American</item>
+        <item>Hispanic</item>
+        <item>Lahing Caucasian</item>
+        <item>Mexican</item>
+        <item>Mga Multiracial American</item>
+        <item> Serbs</item>
+        <item>Aimag mga tao</item>
+        <item>Anatri</item>
+        <item>Mga taong Gondi</item>
+        <item>Cherkesogai</item>
+        <item>Akan people</item>
+        <item>Halong Caribbean</item>
+        <item>Halong pangkat etniko</item>
+        <item>Iba pang pangkat etniko</item>
+    </string-array>
+
+    <string-array name="gender">
+        <item>Lalaki</item>
+        <item>Babae</item>
+        <item>Transgender</item>
+        <item>Hindi binary</item>
+    </string-array>
+
+    <string name="label_profile">Profile</string>
+    <string name="label_group">Mga Grupo</string>
+    <string name="label_parent">Pagli-link ng Magulang na Anak</string>
+    <string name="label_scan_qr_code">I-scan ang QR Code</string>
+    <string name="label_Vaccine">Mag-upload ng Bakuna</string>
+    <string name="label_upload_health">Mag-upload ng Impormasyong Pangkalusugan</string>
+    <string name="label_covid_health">Mag-upload ng Test Info</string>
+    <string name="label_my_qr_code">QR Code</string>
+    <string name="label_my_test_history">Kasaysayan ng Pagsubok</string>
+    <string name="label_travel_form">Form ng Paglalakbay</string>
+    <string name="label_my_vaccine_history">Kasaysayan ng Bakuna</string>
+    <string name="label_my_vaccine_card">Vaccine Card</string>
+    <string name="label_event">Mga Kaganapan</string>
+    <string name="label_health_information">Impormasyon sa Kalusugan</string>
+    <string name="label_quarntine">Quarantine</string>
+    <string name="label_travel_information">Impormasyon sa Paglalakbay</string>
+    <string name="label_camera_permission">Mangyaring tanggapin ang pahintulot ng Camera na i-scan ang QR code.</string>
+    <string name="label_location_permission">Mangyaring tanggapin ang pahintulot sa lokasyon upang lumikha ng kaganapan.</string>
+    <string name="label_select_time">Piliin ang Oras</string>
+    <string name="label_mobile_number">Mobile Number:\u0020</string>
+    <string name="label_profile_city">Lungsod:\u0020</string>
+    <string name="label_profile_state">Estado:\u0020</string>
+    <string name="label_profile_email">Email:\u0020</string>
+    <string name="label_profile_postal_code">Postal Code:\u0020</string>
+    <string name="label_profile_country">Bansa:\u0020</string>
+    <string name="label_profile_address">Address ng Pagpapadala:\u0020</string>
+    <string name="label_last_covid_result">Ipakita ang huling resulta ng pagsubok sa Covid</string>
+    <string name="label_last_result">Mga resulta ng pagsubok</string>
+    <string name="label_positive">Positibo</string>
+    <string name="label_negative">Negatibo</string>
+    <string name="label_pending">Nakabinbin</string>
+    <string name="label_health_info">Impormasyon sa Kalusugan</string>
+    <string name="label_health_info_V">Impormasyon sa Kalusugan</string>
+    <string name="label_vaccine_info_V">Impormasyon sa Bakuna</string>
+    <string name="label_test_info_V">Impormasyon sa Pagsubok</string>
+    <string name="label_no_result_found">Walang nakitang resulta</string>
+    <string name="label_or">\u2015 O \u2015</string>
+    <string name="label_old_password">Lumang Password</string>
+    <string name="label_new_password">Bagong Password</string>
+    <string name="label_confirm_new_password">Kumpirmahin ang Password</string>
+    <string name="empty_old_password">Mangyaring magpasok ng Lumang Password.</string>
+    <string name="empty_new_password">Mangyaring magpasok ng Bagong Password.</string>
+    <string name="empty_confirm_new_password">Mangyaring magpasok ng Kumpirmahin ang Password.</string>
+    <string name="error_old_password">Mangyaring magpasok ng wastong Lumang Password.</string>
+    <string name="error_confirm_mismatch">Hindi tugma ang Bagong Password at kumpirmahin ang password.</string>
+    <string name="error_password_mismatch">Hindi magkatugma ang lumang password at bagong password.</string>
+    <string name="error_password_change_subtitle">Palitan ang iyong bagong password</string>
+    <string name="label_edit">I-edit</string>
+    <string name="label_password_update">Matagumpay na na-update ang password</string>
+    <string name="permission_desc_rational_photo">Rational Photo</string>
+    <string name="permission_title_photo">Pumili ng Larawan</string>
+    <string name="btn_proceed">Magpatuloy</string>
+    <string name="label_select_image">Mangyaring pumili/magkuha ng larawan</string>
+    <string name="label_gallery">Gallery</string>
+    <string name="label_camera">Camera</string>
+    <string name="label_terms_condition">Mga Tuntunin at Kundisyon</string>
+    <string name="label_privacy_policy">Patakaran sa Privacy</string>
+    <string name="label_accept_terms">Sumasang-ayon ako sa Mga Tuntunin &amp; Kundisyon at Patakaran sa Privacy</string>
+    <string name="label_select_product">Pumili ng Produkto*</string>
+    <string name="label_different_billing_address">Iba\'t ibang billing address</string>
+    <string name="label_billing_add_1">Address sa Pagsingil 1*</string>
+    <string name="label_billing_add_2">Address sa Pagsingil 2</string>
+    <string name="braintree_key">sandbox_ykkr4m4m_r73ztkz3v64z7wm6</string>
+    <string name="label_passport_number">Numero ng Pasaporte: %s</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">Mag-sign In</string>
+    <string name="agree_terms_conditions"><![CDATA[Sumasang-ayon ako sa lahat ng Mga Tuntunin at Kundisyon at Patakaran sa Privacy]]></string>
+    <string name="welcome">Welcome</string>
+    <string name="hint_username_number">Username/Mobile No.</string>
+    <string name="sign_up">Mag-sign Up</string>
+    <string name="name">Pangalan</string>
+    <string name="description">Description</string>
+    <string name="business_exipry_date">Petsa ng Pag-expire ng Negosyo</string>
+    <string name="search_here">Maghanap dito</string>
+    <string name="label_dl">Dl</string>
+    <string name="label_rapid">Rapid Antigen</string>
+    <string name="rtpcr">RT-PCR</string>
+    <string name="label_result">Resulta</string>
+    <string name="vaccination_details">Mga Detalye ng Bakuna</string>
+    <string name="test_details">Mga Detalye ng Pagsubok</string>
+    <string name="yes">OO</string>
+    <string name="no">NO</string>
+    <string name="label_all_events">Lahat ng Event</string>
+    <string name="my_events">Aking Mga Kaganapan</string>
+    <string name="preeti_sharma">Preeti Sharma</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="label_settings">Mga Setting</string>
+    <string name="label_lanaguage">Wika</string>
+    <string name="label_about_us">Tungkol sa US</string>
+    <string name="label_choose_your_lanquage">Piliin ang iyong gustong wika</string>
+
+    <string-array name="lanuage">
+        <item>English</item>
+        <item>Vertaling</item>
+        <item>ترجمة</item>
+        <item>Vertaling</item>
+        <item>Traduction</item>
+        <item>Tradução</item>
+        <item>Traducción</item>
+        <item>Tafsiri</item>
+        <item>Isalin</item>
+    </string-array>
+
+    <string-array name="lanuage_1">
+        <item>English</item>
+        <item>Afrikaans</item>
+        <item>Arabic</item>
+        <item>Dutch</item>
+        <item>French</item>
+        <item>Portuguese</item>
+        <item>Spanish</item>
+        <item>Swahili</item>
+        <item>Tagalog</item>
+    </string-array>
+
+    <string name="label_continue">Magpatuloy</string>
+
+
+    <string name="user_login"> User Login</string>
+    <string name="user_Reg"> Pagpaparehistro ng User</string>
+
+    <string name="vendor_login"> Vendor Login</string>
+    <string name="vendor_reg"> Pagpaparehistro ng Vendor</string>
+
+    <string name="clinic_login"> Clinic Login</string>
+    <string name="clinic_reg"> Pagpaparehistro sa Klinika</string>
+    <string name="add_slot">Magdagdag ng Sub Event</string>
+    <string name="label_event_name_sub">Sub Event Name*</string>
+    <string name="same_address">Address na kapareho ng Create Event</string>
+    <string name="time_slot">Sub Event</string>
+    <string name="add_image">Magdagdag ng Larawan</string>
+    <string name="succesfully_added">Matagumpay na Nadagdag</string>
+    <string name="go_to_event_page">o Pumunta sa <u><font color='#255CA4'>Pahina ng Kaganapan</font></u>.</string>
+    <string name="add_attandees">Magdagdag ng mga Dadalo</string>
+    <string name="sub_event">Sub Events</string>
+    <string name="total_attendees">Bilang ng Mga Dadalo</string>
+    <string name="enter_attendees">Ilagay ang bilang ng mga Dadalo</string>
+    <string name="edit">I-edit</string>
+    <string name="delete">Tanggalin</string>
+    <string name="pin">Pin: </string>
+    <string name="pin_1">Ilagay ang Pin </string>
+    <string name="enter_pin">Pakilagay ang iyong pin</string>
+    <string name="confirm_pin">Kumpirmahin ang Pin</string>
+    <string name="both_pin">I-pin at kumpirmahin ang pin ay dapat na pareho </string>
+    <string name="update"><u>Update</u></string>
+    <string name="authentication">Authentication</string>
+    <string name="provide_pin">Pakilagay ang user ng 4 na digit na pin para sa pagpapatunay at pag-access. </string>
+    <string name="invalid_pin">Nabigo ang pagpapatotoo ng pin. Pakisubukang muli.</string>
+    <string name="submit">Isumite</string>
+    <string name="label_contact_permission">Mangyaring tanggapin ang pahintulot sa pakikipag-ugnayan upang magpatuloy.</string>
+    <string name="thanking_you">Salamat sa pag-sign up. <br><br> Ang iyong security pin ay %s. Mababago mo ito sa pamamagitan ng pagpunta sa pag-edit ng profile.</br> </br> </string>
+    <string name="attandees">Mga Dadalo</string>
+    <string name="add">Idagdag</string>
+    <string name="invite">Imbitahan</string>
+    <string name="interested">INTERESADO</string>
+    <string name="purchase_subscription">Upang magdagdag ng higit pang mga dadalo kailangan mong mag-subscribe sa aming plano.</string>
+    <string name="subscribe">Subscribe</string>
+    <string name="delete_user">Sigurado ka bang tatanggalin ang user na ito?</string>
+    <string name="decline">DECLINE</string>
+    <string name="decline_invitation">Gusto mo bang tanggihan ang imbitasyong ito?</string>
+    <string name="history">History</string>
+    <string name="health_bio">Health Bio</string>
+    <string name="allergies">Allergy</string>
+    <string name="medical_records">Mga Rekord na Medikal</string>
+    <string name="chronic">Mga Talamak na Sakit</string>
+    <string name="medication">Mga gamot</string>
+    <string name="donor">Donor</string>
+    <string name="emergency">Emergency</string>
+    <string name="appointments">Mga Appointment</string>
+    <string name="doctors">Doctors</string>
+    <string name="benifits">Mga Benepisyo</string>
+    <string name="qrcode">QR Code </string>
+    <string name="vaccine">Mga bakuna </string>
+    <string name="address3">Address 3 </string>
+    <string name="vendor_Step_2">Vendor Step 2 </string>
+    <string name="vendor_Step_1">Hakbang 1 ng Vendor </string>
+    <string name="vendor_Step_3">Vendor Step 3 </string>
+    <string name="lab_Step_2">Lab/Clinic Step 2 </string>
+    <string name="lab_Step_1">Lab/Clinic Step 1 </string>
+    <string name="lab_Step_3">Lab/Clinic Step 3 </string>
+    <string name="enter_vat">Pakilagay ang business VAT</string>
+    <string name="r_state">Katayuan ng pagpaparehistro</string>
+    <string name="r_country">Bansa ng Pagpaparehistro</string>
+    <string name="r_scan">User Scan</string>
+    <string name="scan_qr_code">I-scan ang QR Code</string>
+    <string name="ok">Ok</string>
+    <string name="scan_user_code">Paki-scan ang user QR Code upang magpatuloy</string>
+    <string name="add_more">Gusto mo bang magdagdag ng higit pang mga sub event.? <br> <u><font color='#255CA4'>Mag-click dito</font></u>.</br></string>
+    <string name="version">Bersyon </string>
+    <string name="add_another_address">Magdagdag ng Isa pang Address </string>
+    <string name="your_address">Iyong Address</string>
+    <string name="add_new_address">Magdagdag ng bagong address</string>
+    <string name="remove">Alisin</string>
+    <string name="delete_address">Gusto mo bang tanggalin ang address na ito?</string>
+    <string name="select_address">Pakipili ang address para sa sub event</string>
+    <string name="upload">Paki-import ang csv file para i-upload ang lahat ng dadalo</string>
+    <string name="selectcsvFile">Mangyaring pumili ng wastong csv file.</string>
+
+</resources>

@@ -50,12 +50,16 @@ internal class ClinicDashboardAdapter(ctx: Context) :
             items.add(item)
             item= DashBoardItem(3, R.drawable.ic_health_info,  ctx.resources.getString(R.string.label_Vaccine))
             items.add(item)
-            item= DashBoardItem(4,    R.drawable.ic_health_information,       ctx.resources.getString(R.string.label_test_upload))
-            items.add(item)
+//            item= DashBoardItem(4,    R.drawable.ic_health_information,       ctx.resources.getString(R.string.label_test_upload))
+//            items.add(item)
             item= DashBoardItem(5,   R.drawable.ic_vaccine_card,       ctx.resources.getString(R.string.label_upload_health))
             items.add(item)
             item= DashBoardItem(6,     R.drawable.ic_health_info,      ctx.resources.getString(R.string.label_vaccine_card))
             items.add(item)
+
+             item= DashBoardItem(7,  R.drawable.ic_event,ctx.resources.getString(R.string.label_event))
+            items.add(item)
+
 
             holder. list.layoutManager = GridLayoutManager(ctx, 2)
             val dashboardAdapter = DashboardAdapter(

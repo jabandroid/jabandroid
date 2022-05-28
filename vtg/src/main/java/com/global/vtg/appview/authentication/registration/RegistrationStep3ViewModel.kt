@@ -9,6 +9,7 @@ import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants.USER
+import com.global.vtg.utils.Constants.USERCHILD
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
@@ -19,7 +20,7 @@ class RegistrationStep3ViewModel(
     application: Application,
     private val userRepository: UserRepository
 ) : AppViewModel(application) {
-
+    val childAccountLiveData: MutableLiveData<Boolean> = MutableLiveData()
     var firstName: MutableLiveData<String> = MutableLiveData()
     var lastName: MutableLiveData<String> = MutableLiveData()
     var address1: MutableLiveData<String> = MutableLiveData()
@@ -29,6 +30,7 @@ class RegistrationStep3ViewModel(
     var zip: MutableLiveData<String> = MutableLiveData()
     var country: MutableLiveData<String> = MutableLiveData()
     var isFromProfile: Boolean=false
+    var childAccount: Boolean=false
 
     var showToastError: MutableLiveData<String> = MutableLiveData()
     var redirectToSignIn: MutableLiveData<Boolean> = MutableLiveData()
@@ -59,22 +61,46 @@ class RegistrationStep3ViewModel(
             R.id.btnSave -> {
                 KeyboardUtils.hideKeyboard(view)
                 if (isNetworkAvailable(view.context)) {
+
                     if (validateFields()) {
-                        USER?.address = arrayListOf(
-                            AddressItem(
-                                firstName = firstName.value,
-                                lastName = lastName.value,
-                                addr1 = address1.value,
-                                addr2 = address2.value,
-                                city = city.value,
-                                state = state.value,
-                                zipCode = zip.value,
-                                country = country.value,
-                                shipping = true)
-                        )
-                        USER?.step3Complete = true
-                        callRegisterStep()
+                        if(childAccount){
+                            if(USERCHILD==null)
+                                USERCHILD=ResUser()
+                            USERCHILD?.address = arrayListOf(
+                                AddressItem(
+                                    firstName = firstName.value,
+                                    lastName = lastName.value,
+                                    addr1 = address1.value,
+                                    addr2 = address2.value,
+                                    city = city.value,
+                                    state = state.value,
+                                    zipCode = zip.value,
+                                    country = country.value,
+                                    shipping = true
+                                )
+                            )
+                            USERCHILD?.step3Complete = true
+                            USERCHILD?.parentId= USER!!.id.toString()
+                            callRegisterStepChild()
+                        }else {
+                            USER?.address = arrayListOf(
+                                AddressItem(
+                                    firstName = firstName.value,
+                                    lastName = lastName.value,
+                                    addr1 = address1.value,
+                                    addr2 = address2.value,
+                                    city = city.value,
+                                    state = state.value,
+                                    zipCode = zip.value,
+                                    country = country.value,
+                                    shipping = true
+                                )
+                            )
+                            USER?.step3Complete = true
+                            callRegisterStep()
+                        }
                     }
+
                 } else {
                     DialogUtils.showSnackBar(
                         view.context,
@@ -144,6 +170,11 @@ class RegistrationStep3ViewModel(
     private fun callRegisterStep() {
         scope.launch {
             USER?.let { userRepository.registerStep3(it) }
+        }
+    }
+    private fun callRegisterStepChild() {
+        scope.launch {
+            USERCHILD?.let { userRepository.registerStep3(it) }
         }
     }
 

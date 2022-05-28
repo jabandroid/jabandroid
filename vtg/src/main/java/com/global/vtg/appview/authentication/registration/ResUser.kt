@@ -55,7 +55,7 @@ data class ResUser(
     var citizenship: String? = null,
 
     @field:SerializedName("document")
-    val document: ArrayList<Document?>? = null,
+    var document: ArrayList<Document?>? = null,
 
     @field:SerializedName("extras")
     val extras: List<ExtraItem?>? = null,
@@ -82,22 +82,22 @@ data class ResUser(
     var password: String? = null,
 
     @field:SerializedName("vaccine")
-    val vaccine: ArrayList<VaccineHistory>? = null,
+    var vaccine: ArrayList<VaccineHistory>? = null,
 
     @field:SerializedName("testHistory")
-    val test: ArrayList<TestInfo>? = null,
+    var test: ArrayList<TestInfo>? = null,
 
     @field:SerializedName("step3Complete")
     var step3Complete: Boolean? = null,
 
     @field:SerializedName("id")
-    val id: Int? = null,
+    var id: Int? = null,
 
     @field:SerializedName("barcodeUrl")
     val barcodeUrl: String? = null,
 
     @field:SerializedName("healthInfo")
-    val healthInfo: ArrayList<HealthInfo>? = null,
+    var healthInfo: ArrayList<HealthInfo>? = null,
 
     @field:SerializedName("email")
     val email: String? = null,
@@ -113,5 +113,11 @@ data class ResUser(
 
     @field:SerializedName("vendorVerify")
     val vendorVerify: String? = null,
+
+    @field:SerializedName("parentId")
+    var parentId: String? = null,
+
+    @field:SerializedName("childAccount")
+    val childAccount: ArrayList<ResUser>? = null,
 
 ): BaseResult()

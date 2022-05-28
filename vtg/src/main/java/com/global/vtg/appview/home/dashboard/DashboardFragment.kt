@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,11 +22,13 @@ import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
 import com.global.vtg.wscoroutine.ApiInterface
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentDashboardBinding
+import kotlinx.android.synthetic.main.bottom_sheet.view.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.ivProfilePic
 import kotlinx.android.synthetic.main.fragment_dashboard.tvCountry
@@ -31,6 +36,21 @@ import kotlinx.android.synthetic.main.fragment_dashboard.tvState
 import okhttp3.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
+
+import android.content.Context
+import android.content.Intent
+import android.widget.LinearLayout
+import com.global.vtg.appview.authentication.registration.Document
+import com.global.vtg.appview.authentication.registration.ResUser
+import com.global.vtg.appview.config.HealthInfo
+import com.global.vtg.appview.config.TestInfo
+import com.global.vtg.appview.home.event.EventListSubDetailFragment
+import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
+import com.global.vtg.utils.Constants.USERMain
+import kotlinx.android.synthetic.main.adapter_child_list.view.*
+import kotlinx.android.synthetic.main.bottom_sheet_child_parent.*
+import kotlinx.android.synthetic.main.fragment_registration.*
+
 
 class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
     private lateinit var mFragmentBinding: FragmentDashboardBinding
@@ -60,6 +80,8 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
     @SuppressLint("HardwareIds")
     override fun initializeComponent(view: View?) {
         loadData()
+
+
         viewModel.getUser()
         viewPager2Adapter = ViewPager2Adapter(getAppActivity())
         viewPager.adapter = viewPager2Adapter
@@ -90,38 +112,164 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
             )
         )
 
+        ivProfilePic.setOnClickListener {
+            if (USERMain!!.childAccount!!.size > 0) {
+                multiple.visibility = View.VISIBLE
+                val bottomSheet = BottomSheetDialog()
+                bottomSheet.setContext(activity!!)
+                bottomSheet.setUser(USERMain!!)
+                bottomSheet.setListener(object :
+                    BottomSheetDialog.ClickListener {
+                    override fun onItemClick(position: Int) {
+                        if (position == -1) {
+
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.saveData(
+                                    PreferenceManager.KEY_USER_NAME,
+                                    SharedPreferenceUtil.INSTANCE?.getData(
+                                        PreferenceManager.KEY_USER_NAME_PARENT,
+                                        ""
+                                    ).toString()
+                                )
+
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.saveData(
+                                    PreferenceManager.KEY_PASSWORD,
+                                    SharedPreferenceUtil.INSTANCE?.getData(
+                                        PreferenceManager.KEY_PASSWORD_PARENT,
+                                        ""
+                                    ).toString()
+                                )
+
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.saveData(
+                                    PreferenceManager.KEY_IS_CHILD,
+                                    false
+                                )
+                            val intent = Intent(getAppActivity(), HomeActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 
 
+                            startActivity(intent)
 
+                        } else {
+
+
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.saveData(
+                                    PreferenceManager.KEY_USER_NAME,
+                                    USERMain!!.childAccount?.get(position )!!.email.toString()
+                                )
+
+
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.saveData(
+                                    PreferenceManager.KEY_PASSWORD,
+                                    USERMain!!.childAccount?.get(position )!!.password.toString()
+                                )
+
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.saveData(
+                                    PreferenceManager.KEY_IS_CHILD,
+                                    true
+                                )
+                            val intent = Intent(getAppActivity(), HomeActivity::class.java)
+                            intent.flags =
+                                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+
+
+                            startActivity(intent)
+
+
+                        }
+
+                    }
+                })
+                bottomSheet.show(
+                    childFragmentManager,
+                    "ModalBottomSheet"
+                )
+            }
+        }
 
         viewModel.userConfigLiveData1.observe(this, {
             when (it) {
                 is Resource.Success -> {
                     (activity as HomeActivity).hideProgressBar()
                     Constants.USER = it.data
+                    val gson = Gson()
+                    if (SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.getData(
+                                PreferenceManager.KEY_IS_CHILD,
+                                false
+                            ) == false
+                    ){
+                        USERMain = it.data
+                        USERMain!!.vaccine=ArrayList<VaccineHistory>()
+                        USERMain!!.healthInfo=ArrayList<HealthInfo>()
+                        USERMain!!.test=ArrayList<TestInfo>()
+
+
+                        val request: Any = gson.toJson(USERMain)
+                        SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.saveData(
+                                PreferenceManager.KEY_USER_MAIN,
+                                request.toString()
+                            )
+                    }
+
+                    if(USERMain==null){
+                     val k=   SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.getData(
+                                PreferenceManager.KEY_USER_MAIN,
+                                ""
+                            )
+
+                        if(k!=""){
+                            USERMain = gson.fromJson(k, ResUser::class.java)
+                            if (USERMain!!.childAccount!!.size > 0) {
+                                multiple.visibility = View.VISIBLE
+                            }
+                        }
+                    }else
+
+
+                    if (USERMain!!.childAccount!!.size > 0) {
+                        multiple.visibility = View.VISIBLE
+                    }
                     loadData()
 
-                    if(!TextUtils.isEmpty(SharedPreferenceUtil.getInstance(getAppActivity())
-                            ?.getData(PreferenceManager.KEY_TOKEN, ""))){
-                        val v =JsonObject()
-                        v.addProperty("userId",   Constants.USER!!.id.toString())
-                        v.addProperty("deviceId", Settings.Secure.getString(activity!!.contentResolver,
-                            Settings.Secure.ANDROID_ID))
-                        v.addProperty("token",SharedPreferenceUtil.getInstance(getAppActivity())
-                            ?.getData(PreferenceManager.KEY_TOKEN, ""))
-                        v.addProperty("deviceType","android")
+                    if (!TextUtils.isEmpty(
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.getData(PreferenceManager.KEY_TOKEN, "")
+                        )
+                    ) {
+                        val v = JsonObject()
+                        v.addProperty("userId", Constants.USER!!.id.toString())
+                        v.addProperty(
+                            "deviceId", Settings.Secure.getString(
+                                activity!!.contentResolver,
+                                Settings.Secure.ANDROID_ID
+                            )
+                        )
+                        v.addProperty(
+                            "token", SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.getData(PreferenceManager.KEY_TOKEN, "")
+                        )
+                        v.addProperty("deviceType", "android")
                         viewModel.updateToken(v)
                     }
-                    if(clickedPosition!=-1){
+                    if (clickedPosition != -1) {
                         onItemClickMain(clickedPosition)
                     }
 
-                    if(SharedPreferenceUtil.getInstance(getAppActivity())
+                    if (SharedPreferenceUtil.getInstance(getAppActivity())
                             ?.getData(
                                 PreferenceManager.KEY_USER_REG,
                                 false
                             ) == true
-                    ){
+                    ) {
                         AppAlertDialog().showRegMessage(
                             activity!! as AppCompatActivity,
                             Constants.USER!!.pin!!
@@ -158,6 +306,8 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                 country.let { ivCountry.setCountryForNameCode(it) }
             }
         }
+
+        ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl)
     }
 
     override fun onResume() {
@@ -169,7 +319,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
     override fun onItemClickMain(position: Int) {
 
         if (Constants.USER != null) {
-            clickedPosition=-1
+            clickedPosition = -1
             when (position) {
                 1 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
@@ -191,6 +341,10 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                 6 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_HEALTH_DASHBOARD_INFORMATION)
                 }
+
+                7 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_CHILD_LIST)
+                }
                 11 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
                 }
@@ -201,12 +355,77 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
 //            5 -> {
 //                addFragmentInStack<Any>(AppFragmentState.F_PAYMENT)
 //            }
-        }
-        }else{
+            }
+        } else {
             clickedPosition = position
             viewModel.getUser()
         }
     }
 
+
+    class BottomSheetDialog : BottomSheetDialogFragment() {
+        private lateinit var listener: ClickListener
+        private lateinit var c: Context
+        private lateinit var user: ResUser
+        private  var count: Int=0
+
+        @SuppressLint("SetTextI18n")
+        override fun onCreateView(
+            inflater: LayoutInflater,
+            @Nullable container: ViewGroup?,
+            @Nullable savedInstanceState: Bundle?
+        ): View {
+            val v: View = inflater.inflate(
+                R.layout.bottom_sheet_child_parent,
+                container, false
+            )
+
+
+            var parent = v.findViewById<LinearLayout>(R.id.parent)
+            val inflater =
+                c.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val view = inflater.inflate(R.layout.bottom_sheet_child, null)
+            view.tvName.text = user.firstName + " " + user.lastName
+            view.ivProfilePic.setGlideNormalImage(user.profileUrl!!)
+            parent.addView(view)
+
+            view.setOnClickListener{
+                listener.onItemClick(-1)
+            }
+            count=0
+            for (item in user.childAccount!!) {
+                val inflater =
+                    c.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                val view = inflater.inflate(R.layout.bottom_sheet_child, null)
+                view.tvName.text = item.firstName + " " + item.lastName
+                view.ivProfilePic.setGlideNormalImage(item.profileUrl!!)
+                view.tag = count
+                count++
+                parent.addView(view)
+                view.setOnClickListener{
+                    listener.onItemClick(view.getTag() as Int)
+                }
+            }
+
+
+            return v
+        }
+
+        fun setListener(l: ClickListener) {
+            this.listener = l
+        }
+
+        fun setUser(l: ResUser) {
+            this.user = l
+        }
+
+        fun setContext(con: Context) {
+            this.c = con
+        }
+
+        interface ClickListener {
+            fun onItemClick(position: Int)
+        }
+    }
 
 }

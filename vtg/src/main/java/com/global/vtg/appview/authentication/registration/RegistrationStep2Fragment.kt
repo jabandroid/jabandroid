@@ -34,6 +34,7 @@ class RegistrationStep2Fragment : AppFragment() {
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
     var isFromProfile = false
+    var isChildAccount = false
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_reg_step2
@@ -48,6 +49,10 @@ class RegistrationStep2Fragment : AppFragment() {
             if (arguments.containsKey(Constants.BUNDLE_FROM_PROFILE)) {
                 isFromProfile = arguments.getBoolean(Constants.BUNDLE_FROM_PROFILE)
             }
+
+            if (arguments.containsKey(Constants.BUNDLE_CHILD_ACCOUNT)) {
+                isChildAccount = arguments.getBoolean(Constants.BUNDLE_CHILD_ACCOUNT)
+            }
         }
     }
 
@@ -60,7 +65,7 @@ class RegistrationStep2Fragment : AppFragment() {
 
     @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
-        if(isFromProfile)
+        if(isFromProfile||isChildAccount)
             tvSkip.visibility=View.GONE
         var userType= SharedPreferenceUtil.getInstance(getAppActivity())
             ?.getData(
@@ -77,10 +82,17 @@ class RegistrationStep2Fragment : AppFragment() {
             tvTitle.text  = getString(com.vtg.R.string.vendor_Step_2)
         }
 
+        if(isChildAccount) {
+            tvTitle.text = getString(R.string.child_sign_up)
+
+            viewModel.isChildAccount =true
+        }
 
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
+
+        if(!isChildAccount){
         val list = Constants.USER?.document
         if (list != null && list.isNotEmpty()) {
             for (doc in list) {
@@ -89,8 +101,8 @@ class RegistrationStep2Fragment : AppFragment() {
                         doc?.issueDate?.let { setDate(it, etDlnIssuedDate, ::updateIssuedDate) }
                         doc?.expireDate?.let { setDate(it, etDlnExpiryDate, ::updateExpiryDate) }
                         viewModel.dln.value = doc?.identity
-                        viewModel.dlnState.value= doc?.state
-                        viewModel.dlnCountry.value= doc?.country
+                        viewModel.dlnState.value = doc?.state
+                        viewModel.dlnCountry.value = doc?.country
                     }
                     doc?.type.equals("Passport", true) -> {
                         doc?.issueDate?.let {
@@ -108,12 +120,12 @@ class RegistrationStep2Fragment : AppFragment() {
                             )
                         }
                         viewModel.passportNumber.value = doc?.identity
-                        viewModel.passportState.value= doc?.state
-                        viewModel.passportCountry.value= doc?.country
+                        viewModel.passportState.value = doc?.state
+                        viewModel.passportCountry.value = doc?.country
                     }
                     doc?.type.equals("SSN", true) -> {
-                        viewModel.ssn.value = doc?.identity!!.substring(0,2)+"XX"
-                        viewModel.ssnFinal=doc?.identity!!
+                        viewModel.ssn.value = doc?.identity!!.substring(0, 2) + "XX"
+                        viewModel.ssnFinal = doc?.identity!!
                         etSsn.isClickable = false
                         etSsn.isEnabled = false
 
@@ -125,6 +137,7 @@ class RegistrationStep2Fragment : AppFragment() {
                     }
                 }
             }
+        }
         }
 
         // Handle Error
@@ -141,10 +154,18 @@ class RegistrationStep2Fragment : AppFragment() {
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
-                    Constants.USER = it.data
-                    val bundle = Bundle()
-                    bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isFromProfile)
-                    addFragmentInStack<Any>(AppFragmentState.F_REG_STEP3, bundle)
+
+                    if(viewModel.isChildAccount){
+                        Constants.USERCHILD= it.data
+                        val bundle = Bundle()
+                        bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT, true)
+                        addFragmentInStack<Any>(AppFragmentState.F_REG_STEP3, bundle)
+                    }else {
+                        Constants.USER = it.data
+                        val bundle = Bundle()
+                        bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isFromProfile)
+                        addFragmentInStack<Any>(AppFragmentState.F_REG_STEP3, bundle)
+                    }
                 }
                 is Resource.Error -> {
                     when (activity) {

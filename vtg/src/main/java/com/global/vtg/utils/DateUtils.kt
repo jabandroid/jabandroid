@@ -17,6 +17,7 @@ object DateUtils {
     val DDMMYYYY = "dd/MM/yyyy"
     val MM_DD_YYYY = "MM-dd-yyyy"
     val MMDDYYHHMM = "MM/dd/yyyy  "
+
     val API_DATE_FORMAT = "yyyy-MM-dd"
     val API_DATE_FORMAT_TIME = "yyyy-MM-dd HH:mm"
 

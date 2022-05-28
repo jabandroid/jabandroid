@@ -88,6 +88,7 @@ class CreatEventReviewSubViewModel(
 
                         if(TextUtils.isEmpty(CreateSubEventFragment.itemSubEvent.eventID))
                             CreateSubEventFragment.itemSubEvent.eventID=null
+                        if(TextUtils.isEmpty( CreateSubEventFragment.itemSubEvent.parentEvent))
                         CreateSubEventFragment.itemSubEvent.parentEvent=CreateEventFragment.itemEvent.eventID
                         val gson = Gson()
                         val request: Any = gson.toJson(CreateSubEventFragment.itemSubEvent)

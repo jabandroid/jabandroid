@@ -47,7 +47,7 @@ import java.util.*
 class ProfileFragment : AppFragment() {
     private lateinit var mFragmentBinding: FragmentProfileBinding
     private val viewModel by viewModel<ProfileViewModel>()
-private  var pin:String=""
+    private var pin: String = ""
     override fun getLayoutId(): Int {
         return R.layout.fragment_profile
     }
@@ -78,12 +78,17 @@ private  var pin:String=""
             addFragmentInStack<Any>(AppFragmentState.F_CHANGE_PASSWORD)
         }
 
+
+        tvChildLabel.setOnClickListener {
+            addFragmentInStack<Any>(AppFragmentState.F_CHILD_LIST)
+        }
+
         tvPinUpdate.setOnClickListener {
             AppAlertDialog().updatePin(
                 activity!! as AppCompatActivity,
                 object : AppAlertDialog.GetClick {
                     override fun response(type: String) {
-                        pin=type
+                        pin = type
                         val j = JsonObject()
                         j.addProperty("userId", USER?.id)
                         j.addProperty("pin", type)
@@ -93,6 +98,19 @@ private  var pin:String=""
                 }
 
             )
+        }
+        if (SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.getData(
+                    PreferenceManager.KEY_IS_CHILD,
+                    false
+                ) == true
+        ) {
+            mobile.visibility=View.GONE
+            mobileView.visibility=View.GONE
+            email.visibility=View.GONE
+            emailView.visibility=View.GONE
+            childAccountView.visibility=View.GONE
+            childAccount.visibility=View.GONE
         }
 
         tvUserName.text = USER?.firstName + " " + USER?.lastName
@@ -119,6 +137,7 @@ private  var pin:String=""
                             resultMessage(resultCode, path, displayName)
                         }
                     }
+
                     override fun cancel() {
                         PickMediaExtensions.instance.pickFromCamera(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
                             resultMessage(resultCode, path, displayName)

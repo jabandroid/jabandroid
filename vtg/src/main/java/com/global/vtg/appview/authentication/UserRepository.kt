@@ -32,6 +32,7 @@ class UserRepository constructor(
     val userLiveData = MutableLiveData<Resource<ResUser>>()
     val userProfilePicLiveData = MutableLiveData<Resource<ResProfile>>()
     val userEventPicData = MutableLiveData<Resource<BaseResult>>()
+    val uploadContactLiveData = MutableLiveData<Resource<BaseResult>>()
     val userProfilePicLiveDataStep1 = MutableLiveData<Resource<ResProfile>>()
     val userConfigLiveData = MutableLiveData<Resource<ResUser>>()
     val testTypeLiveData = MutableLiveData<Resource<TestType>>()
@@ -94,6 +95,19 @@ class UserRepository constructor(
             liveData.postValue(Resource.Error(result))
         }
     }
+
+    suspend fun registerStepChild(liveData: MutableLiveData<Resource<ResUser>>, modelReq: ResUser) {
+        liveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.registerStep1PostAsync(modelReq).await() })
+        if (result is ResUser) {
+            liveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            liveData.postValue(Resource.Error(result))
+        }
+    }
+
+
 
     suspend fun registerStep3(modelReq: ResUser) {
         registerStep3LiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
@@ -537,6 +551,24 @@ class UserRepository constructor(
             checkStatus.postValue(Resource.Success(result))
         } else if (result  is BaseError) {
             checkStatus.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun uploadContactList(
+        file:MultipartBody.Part?,
+        userId: RequestBody?
+    ) {
+        uploadContactLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result = safeApiCall(call = {
+            apiServiceInterface.uploadContactList(
+                file,userId
+            ).await()
+        })
+        if (result is BaseResult && result.code=="200") {
+            uploadContactLiveData.postValue(Resource.Success(result))
+
+        } else if (result is BaseError) {
+            uploadContactLiveData.postValue(Resource.Error(result))
         }
     }
 

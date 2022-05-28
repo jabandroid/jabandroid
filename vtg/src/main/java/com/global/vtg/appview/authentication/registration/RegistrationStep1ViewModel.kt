@@ -6,16 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
+import com.global.vtg.appview.home.event.CreateSubEventFragment
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.USER
+import com.global.vtg.utils.Constants.USERCHILD
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
+import com.google.gson.Gson
 import com.vtg.R
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -40,6 +43,7 @@ class RegistrationStep1ViewModel(
     var dob: MutableLiveData<String> = MutableLiveData()
     var dobDate: Date? = null
     var apiDob: String = ""
+    var childAccount: Boolean = false
     var city: MutableLiveData<String> = MutableLiveData()
     var state: MutableLiveData<String> = MutableLiveData()
     var country: MutableLiveData<String> = MutableLiveData()
@@ -50,21 +54,24 @@ class RegistrationStep1ViewModel(
     var showToastError: MutableLiveData<String> = MutableLiveData()
     var search: MutableLiveData<Boolean> = MutableLiveData()
     var documentPath: String? = null
+    var docName: String? = null
     val registerStep1LiveData = MutableLiveData<Resource<ResUser>>()
     val registerStep1LiveDataskip = MutableLiveData<Resource<ResUser>>()
 
     val userConfigLiveData = MutableLiveData<Resource<ResUser>>()
     val uploadProfilePic: MutableLiveData<Boolean> = MutableLiveData()
+    val childAccountLiveData: MutableLiveData<Boolean> = MutableLiveData()
     private val userObserver = Observer<Resource<ResUser>> {
         userConfigLiveData.postValue(it)
 
     }
 
-    val uploadProfilePicStep1= MutableLiveData<Resource<ResProfile>>()
+    val uploadProfilePicStep1 = MutableLiveData<Resource<ResProfile>>()
     private val userObserver1 = Observer<Resource<ResProfile>> {
         uploadProfilePicStep1.postValue(it)
 
     }
+
     init {
         userRepository.userConfigLiveData.postValue(null)
         userRepository.userConfigLiveData.observeForever(userObserver)
@@ -102,30 +109,84 @@ class RegistrationStep1ViewModel(
                             PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
                             ""
                         )
-                    if (validateFields(userType!!)) {
-                        KeyboardUtils.hideKeyboard(view)
-                        USER?.title = title.value
-                        USER?.firstName = firstName.value
-                        USER?.lastName = lastName.value
-                        USER?.citizenship = citizenship.value
-                        USER?.dateOfBirth = apiDob
-                        USER?.birthCity = city.value
-                        USER?.birthState = state.value
-                        USER?.birthCountry = country.value
+                    var k = SharedPreferenceUtil.getInstance(view.context)
+                        ?.getData(
+                            PreferenceManager.KEY_IS_CHILD,
+                            false
+                        )
 
-                        USER?.ethnicity =
-                            if (ethnicity.value.equals("--Select--")) "" else ethnicity.value
-                        USER?.gender = gender.value
-                        USER?.twilioUserId = Constants.twilioUserId.toString()
-                        if (isVendor)
-                            USER?.role = "vendor"
-                        else if (isClinic)
-                            USER?.role = "clinic"
-                        else "user"
-                        USER?.website = websiteName.value
-                        USER?.isClinic = isClinic == true
-                        USER?.step1Complete = true
-                        callRegisterStep()
+                    if (k == true) {
+                        userType = "child"
+                    }
+
+
+                    if (childAccount) {
+                        if (validateFields("child")) {
+
+                            if (USERCHILD == null)
+                                USERCHILD = ResUser()
+                            USERCHILD?.title = title.value
+                            USERCHILD?.firstName = firstName.value!!.substring(0, 1)
+                                .uppercase() + firstName.value!!.substring(1)
+                            USERCHILD?.lastName = lastName.value!!.substring(0, 1)
+                                .uppercase() + lastName.value!!.substring(1)
+                            USERCHILD?.citizenship = citizenship.value
+                            USERCHILD?.dateOfBirth = apiDob
+                            USERCHILD?.birthCity = city.value
+                            USERCHILD?.birthState = state.value
+                            USERCHILD?.birthCountry = country.value
+                            USERCHILD?.ethnicity =
+                                if (ethnicity.value.equals("--Select--")) "" else ethnicity.value
+                            USERCHILD?.gender = gender.value
+                            USER?.role = "user"
+                            USERCHILD?.website = websiteName.value
+                            USERCHILD?.isClinic = isClinic == true
+                            USERCHILD?.step1Complete = true
+                            USERCHILD?.parentId = USER!!.id.toString()
+
+                            val gson = Gson()
+                            val request: Any = gson.toJson(USERCHILD)
+                            //  USERCHILD!!.id=452
+                            if (USERCHILD!!.id != null && USERCHILD!!.id!! > 0) {
+                                callRegisterStepChildUpdate()
+                            } else
+                                callRegisterStepChild()
+
+                            //childAccountLiveData.postValue(true)
+
+                        }
+                    } else {
+
+                        if (validateFields(userType!!)) {
+                            KeyboardUtils.hideKeyboard(view)
+
+                            USER?.title = title.value
+                            USER?.firstName = firstName.value!!.substring(0, 1)
+                                .uppercase() + firstName.value!!.substring(1)
+                            USER?.lastName = lastName.value!!.substring(0, 1)
+                                .uppercase() + lastName.value!!.substring(1)
+                            USER?.citizenship = citizenship.value
+                            USER?.dateOfBirth = apiDob
+                            USER?.birthCity = city.value
+                            USER?.birthState = state.value
+                            USER?.birthCountry = country.value
+
+                            USER?.ethnicity =
+                                if (ethnicity.value.equals("--Select--")) "" else ethnicity.value
+                            USER?.gender = gender.value
+                            USER?.twilioUserId = Constants.twilioUserId.toString()
+                            if (isVendor)
+                                USER?.role = "vendor"
+                            else if (isClinic)
+                                USER?.role = "clinic"
+                            else "user"
+                            USER?.website = websiteName.value
+                            USER?.isClinic = isClinic == true
+                            USER?.step1Complete = true
+
+                            callRegisterStep()
+
+                        }
                     }
                 } else {
                     DialogUtils.showSnackBar(
@@ -147,8 +208,10 @@ class RegistrationStep1ViewModel(
                     if (validateFields(userType!!)) {
                         KeyboardUtils.hideKeyboard(view)
                         USER?.title = title.value
-                        USER?.firstName = firstName.value
-                        USER?.lastName = lastName.value
+                        USER?.firstName = firstName.value!!.substring(0, 1)
+                            .uppercase() + firstName.value!!.substring(1)
+                        USER?.lastName = lastName.value!!.substring(0, 1)
+                            .uppercase() + lastName.value!!.substring(1)
                         USER?.citizenship = citizenship.value
                         USER?.dateOfBirth = apiDob
                         USER?.birthCity = city.value
@@ -193,6 +256,19 @@ class RegistrationStep1ViewModel(
         }
     }
 
+    private fun callRegisterStepChild() {
+        scope.launch {
+            USERCHILD?.let { userRepository.registerStepChild(registerStep1LiveData, it) }
+        }
+    }
+
+    private fun callRegisterStepChildUpdate() {
+        scope.launch {
+            USERCHILD?.let { userRepository.registerStep(registerStep1LiveData, it) }
+        }
+    }
+
+
     private fun callRegisterskipStep() {
         scope.launch {
             USER?.let { userRepository.registerStep(registerStep1LiveDataskip, it) }
@@ -200,7 +276,7 @@ class RegistrationStep1ViewModel(
     }
 
     //validate fields
-    private fun validateFields(str:String): Boolean {
+    private fun validateFields(str: String): Boolean {
         var isValidate = true
 
         when {
@@ -225,14 +301,20 @@ class RegistrationStep1ViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.upload_image))
                 isValidate = false
             }
-            str == "User" ->{
 
 
-                   if( getAge()!! <13) {
-                       showToastError.postValue("dob")
-                       isValidate = false
-                   }
+            str == "User" -> {
+                if (getAge()!! < 13) {
+                    showToastError.postValue("dob")
+                    isValidate = false
+                }
+            }
 
+            str == "child" -> {
+                if (getAge()!! > 13) {
+                    showToastError.postValue("dobchild")
+                    isValidate = false
+                }
             }
 
 //            isNullOrEmpty(gender.value) -> {
@@ -254,7 +336,7 @@ class RegistrationStep1ViewModel(
         val dob = Calendar.getInstance()
         val today = Calendar.getInstance()
 
-        dob.time=dobDate!!
+        dob.time = dobDate!!
         var age = today[Calendar.YEAR] - dob[Calendar.YEAR]
         if (today[Calendar.DAY_OF_YEAR] < dob[Calendar.DAY_OF_YEAR]) {
             age--
@@ -262,17 +344,36 @@ class RegistrationStep1ViewModel(
         val ageInt = age
         return ageInt
     }
+
     fun uploadProfile(path: String) {
         scope.launch {
             val file: File
             var part: MultipartBody.Part? = null
             if (documentPath != null) {
                 file = File(documentPath)
-                part = MultipartBody.Part.createFormData("file", file.name,
+                part = MultipartBody.Part.createFormData(
+                    "file", file.name,
                     file.asRequestBody("image/png".toMediaTypeOrNull())
                 )
             }
             val id: RequestBody = Constants.USER?.id.toString()
+                .toRequestBody("text/plain".toMediaTypeOrNull())
+            userRepository.uploadProfileStep1(part, id)
+        }
+    }
+
+    fun uploadProfileChildPic(id: String) {
+        scope.launch {
+            val file: File
+            var part: MultipartBody.Part? = null
+            if (documentPath != null) {
+                file = File(documentPath)
+                part = MultipartBody.Part.createFormData(
+                    "file", file.name,
+                    file.asRequestBody("image/png".toMediaTypeOrNull())
+                )
+            }
+            val id: RequestBody = id.toString()
                 .toRequestBody("text/plain".toMediaTypeOrNull())
             userRepository.uploadProfileStep1(part, id)
         }

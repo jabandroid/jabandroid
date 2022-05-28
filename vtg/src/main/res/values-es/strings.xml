@@ -512,6 +512,7 @@
     <string name="label_about_us">Sobre nosotros</string>
     <string name="label_choose_your_lanquage">Elija su idioma preferido</string>
 
+
     <string-array name="lanuage">
         <item>English</item>
         <item>Vertaling</item>
@@ -521,6 +522,7 @@
         <item>Tradução</item>
         <item>Traducción</item>
         <item>Tafsiri</item>
+        <item>Isalin</item>
     </string-array>
 
     <string-array name="lanuage_1">
@@ -532,6 +534,7 @@
         <item>Portugués</item>
         <item>Español</item>
         <item>Suajili</item>
+        <item>Tagala</item>
     </string-array>
 
     <string name="label_continue">Continuar</string>
@@ -549,7 +552,6 @@
     <string name="time_slot">Subevento</string>
     <string name="add_image">Agregar imagen</string>
     <string name="succesfully_added">Agregado con éxito</string>
-    <string name="add_more">¿Quieres agregar más? <br> <u><font color='#255CA4'>Haga clic aquí</font></u>.</br></string>
     <string name="go_to_event_page">o Ir a <u><font color='#255CA4'>Página del evento</font></u>.</string>
     <string name="add_attandees">Agregar asistentes</string>
     <string name="sub_event">Subeventos</string>
@@ -601,4 +603,18 @@
     <string name="enter_vat">Ingrese el IVA comercial</string>
     <string name="r_state">Estado de registro</string>
     <string name="r_country">País de registro</string>
+    <string name="r_scan">Escaneo de usuario</string>
+    <string name="scan_qr_code">Escanear código QR</string>
+    <string name="ok">Ok</string>
+    <string name="scan_user_code">Escanee el código QR del usuario para continuar</string>
+    <string name="add_more">¿Desea agregar más subeventos? <br> <u><font color='#255CA4'>Haga clic aquí</font></u>.</br></string>
+    <string name="version">Versión</string>
+    <string name="add_another_address">Agregar otra dirección</string>
+    <string name="your_address">Tu dirección</string>
+    <string name="add_new_address">Agregar nueva dirección</string>
+    <string name="remove">Eliminar</string>
+    <string name="delete_address">¿Desea eliminar esta dirección?</string>
+    <string name="select_address">Seleccione la dirección para el subevento</string>
+    <string name="upload">Importe el archivo csv para cargar todos los asistentes</string>
+    <string name="selectcsvFile">Seleccione un archivo csv válido.</string>
 </resources>

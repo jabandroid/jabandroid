@@ -13,6 +13,8 @@ import com.global.vtg.appview.home.event.*
 import com.global.vtg.appview.home.health.HealthInformationViewModel
 import com.global.vtg.appview.home.health.UploadHealthDocumentViewModel
 import com.global.vtg.appview.home.help.HelpViewModel
+import com.global.vtg.appview.home.parentchild.ChildListViewModel
+import com.global.vtg.appview.home.parentchild.ChildRegistrationModel
 import com.global.vtg.appview.home.profile.ProfileViewModel
 import com.global.vtg.appview.home.qrcode.VaccineQRCodeViewModel
 import com.global.vtg.appview.home.testHistory.TestHistoryViewModel
@@ -164,6 +166,9 @@ val appViewModelModule = module {
     viewModel {
         EventListDetailViewSubModel(get(), get())//it will take one argument i.e. UserRepository
     }
+    viewModel {
+        ChildListViewModel(get(), get())//it will take one argument i.e. UserRepository
+    }
     //2. Permission viewmodel
     viewModel {
         PermissionDemoViewModel(get())
@@ -173,6 +178,9 @@ val appViewModelModule = module {
     }
   viewModel {
       ContactListViewModel(get(), get())
+    }
+    viewModel {
+        ChildRegistrationModel(get(), get())
     }
 
 

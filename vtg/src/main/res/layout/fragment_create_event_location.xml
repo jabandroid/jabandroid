@@ -127,7 +127,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
-                   android:imeOptions="actionNext"
+                    android:imeOptions="actionNext"
                     android:inputType="text"
 
                     android:maxLines="1"
@@ -159,7 +159,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
-                   android:imeOptions="actionNext"
+                    android:imeOptions="actionNext"
                     android:inputType="text"
 
                     android:maxLines="1"
@@ -412,6 +412,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvContactNo" />
+
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvEmailLabel"
                     style="@style/MarginStartEnd"
@@ -451,6 +452,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="@string/label_fax"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
@@ -472,9 +474,46 @@
                     android:shadowRadius="4"
                     android:singleLine="true"
                     android:text="@={viewModel.fax}"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvfax" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvWebsite"
+
+                    style="@style/MarginStartEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_website"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFaxNumber" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edWebsite"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionDone"
+
+                    android:maxLines="1"
+
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.web}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvWebsite" />
+
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnNext"
@@ -487,7 +526,7 @@
                     android:text="@string/label_next"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvFaxNumber" />
+                    app:layout_constraintTop_toBottomOf="@+id/edWebsite" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

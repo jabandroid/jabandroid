@@ -77,19 +77,24 @@ object Constants {
     const val BUNDLE_NAME = "BUNDLE_NAME"
     const val BUNDLE_PIC = "BUNDLE_PIC"
     const val BUNDLE_USERID = "BUNDLE_USERID"
+    const val BUNDLE_CHILD_ACCOUNT = "BUNDLE_CHILD_ACCOUNT"
+    const val BUNDLE_DATE = "BUNDLE_DATE"
 
     // Mime type
     const val IMAGE_PNG = "image/png"
     const val IMAGE_JPEG = "image/jpeg"
+    const val CSV = "text/*"
     const val IMAGE_JPG = "image/jpg"
     const val DOC_PDF = "application/pdf"
     const val PRIVACY_POLICY =
         "https://app.termly.io/document/privacy-policy/4c62edb0-8586-4d27-9c33-9dc1bd7782b8"
     const val TERMS_CONDITION =
         "https://app.termly.io/document/terms-of-use-for-ios-app/1c67aa22-22e4-45ab-b63b-6e574d21ea87"
-
+    const val ABOUT_US = "https://vaxtraxglobal.com/about-us.html"
     var CONFIG: ResConfig? = null
     var USER: ResUser? = null
+    var USERMain: ResUser? = null
+    var USERCHILD: ResUser? = null
     var SCANNEDUSER: ResUser? = null
     var testData: TestType? = null
     var isSpalsh: Boolean = true

@@ -523,6 +523,7 @@
     <string name="label_about_us">Meer oor VS</string>
     <string name="label_choose_your_lanquage">Kies jou voorkeurtaal</string>
 
+
     <string-array name="lanuage">
         <item>English</item>
         <item>Vertaling</item>
@@ -532,17 +533,19 @@
         <item>Tradução</item>
         <item>Traducción</item>
         <item>Tafsiri</item>
+        <item>Isalin</item>
     </string-array>
 
     <string-array name="lanuage_1">
-        <item>Engels</item>
-        <item>Afrikaans</item>
-        <item>Arabies</item>
-        <item>Nederlands</item>
-        <item>Frans</item>
-        <item>Portugees</item>
-        <item>Spaans</item>
-        <item>Swahili</item>
+        <item> الإنجليزية </item>
+        <item> الأفريكانية </item>
+        <item> العربية </item>
+        <item> الهولندية </item>
+        <item> الفرنسية </item>
+        <item> البرتغالية </item>
+        <item> الإسبانية </item>
+        <item> Swahili </item>
+        <item> تاغالوغ </item>
     </string-array>
     <string name="label_continue">يكمل</string>
     <string name = "user_login"> تسجيل دخول المستخدم </string>
@@ -558,7 +561,6 @@
     <string name = "same_address"> العنوان هو نفسه إنشاء حدث </string><string name = "time_slot"> حدث فرعي </string>
     <string name = "add_image"> إضافة صورة </string>
     <string name = "succesfully_added"> تمت الإضافة بنجاح </string>
-    <string name = "add_more"> هل تريد إضافة المزيد؟ <br> <u> <font color = '# 255CA4'> انقر هنا </font> </u>. </br> </string>
     <string name = "go_to_event_page"> أو انتقل إلى <u> <font color = '# 255CA4'> صفحة الحدث </font> </u>. </string>
     <string name = "add_attandees"> إضافة الحضور </string>
     <string name = "sub_event"> الأحداث الفرعية </string>
@@ -610,5 +612,19 @@
     <string name = "enter_vat"> يرجى إدخال ضريبة القيمة المضافة للأعمال </string>
     <string name = "r_state"> حالة التسجيل </string>
     <string name = "r_country"> بلد التسجيل </string>
+    <string name = "r_scan"> فحص المستخدم </string>
+    <string name = "scan_qr_code"> مسح رمز الاستجابة السريعة ضوئيًا </string>
+    <string name = "ok"> حسنًا </string>
+    <string name = "scan_user_code"> يُرجى مسح رمز الاستجابة السريعة للمستخدم ضوئيًا للمتابعة </string>
+    <string name = "add_more"> هل تريد إضافة المزيد من الأحداث الفرعية.؟ <br> <u> <font color = '# 255CA4'> انقر هنا </font> </u>. </br> </string>
+    <string name = "version"> الإصدار </string>
+    <string name = "add_another_address"> إضافة عنوان آخر </string>
+    <string name = "your_address"> عنوانك </string>
+    <string name = "add_new_address"> إضافة عنوان جديد </string>
+    <string name = "remove"> إزالة </string>
+    <string name = "delete_address"> هل تريد حذف هذا العنوان؟ </string>
+    <string name = "select_address"> الرجاء تحديد عنوان للحدث الفرعي </string>
+    <string name = "upload"> يرجى استيراد ملف csv لتحميل كافة الحاضرين </string>
+    <string name = "selectcsvFile"> الرجاء تحديد ملف csv صالح. </string>
 
 </resources>

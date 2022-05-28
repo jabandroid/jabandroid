@@ -23,6 +23,8 @@ import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
+import com.global.vtg.base.AppFragmentState
+import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
 import com.google.gson.JsonObject
@@ -101,7 +103,11 @@ class ContactListFragment : AppFragment() {
             requestPermissions()
         }
 
-        viewModel.getUsers(eventId)
+        if (NetworkUtils().isNetworkAvailable(activity!!))
+            viewModel.getUsers(eventId)
+        else
+            ToastUtils.shortToast(0, getString(R.string.error_message_network))
+
 
         add.setOnClickListener {
             if(sizeUsers>=5){
@@ -133,7 +139,11 @@ class ContactListFragment : AppFragment() {
                     j.addProperty("userName", code)
                     j.addProperty("name", name)
                     // j.addProperty("interested","0")
-                    viewModel.addUSer(j)
+                    if (NetworkUtils().isNetworkAvailable(activity!!))
+                        viewModel.addUSer(j)
+                    else
+                    ToastUtils.shortToast(0, getString(R.string.error_message_network))
+
                 }
             }
         }
@@ -149,7 +159,10 @@ class ContactListFragment : AppFragment() {
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
                     search.setText("")
-                    viewModel.getUsers(eventId)
+                    if (NetworkUtils().isNetworkAvailable(activity!!))
+                        viewModel.getUsers(eventId)
+                    else
+                        ToastUtils.shortToast(0, getString(R.string.error_message_network))
                 }
                 is Resource.Error -> {
                     when (activity) {
@@ -254,6 +267,12 @@ class ContactListFragment : AppFragment() {
             }
         })
 
+        ivImport.setOnClickListener{
+            addFragmentInStack<Any>(
+                AppFragmentState.F_EVENT_CONTACT_UPLOAD
+            )
+        }
+
     }
 
 private fun deleteButton(position: Int) : SwipeHelper.UnderlayButton {
@@ -269,7 +288,11 @@ private fun deleteButton(position: Int) : SwipeHelper.UnderlayButton {
                     object : AppAlertDialog.GetClick {
                         override fun response(type: String) {
                             positionDelete=position
-                            viewModel.deleteUSer(arrUser?.get(positionDelete)!!.id!!)
+                            if (NetworkUtils().isNetworkAvailable(activity!!))
+                                viewModel.deleteUSer(arrUser?.get(positionDelete)!!.id!!)
+                            else
+                                ToastUtils.shortToast(0, getString(R.string.error_message_network))
+
                         }
                     }, getString(R.string.delete_user), getString(R.string.yes), getString(R.string.no)
 

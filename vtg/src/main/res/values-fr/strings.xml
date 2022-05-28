@@ -524,6 +524,7 @@
     <string name="label_about_us">À propos de nous</string>
     <string name="label_choose_your_lanquage">Choisissez votre langue préférée</string>
 
+
     <string-array name="lanuage">
         <item>English</item>
         <item>Vertaling</item>
@@ -533,6 +534,7 @@
         <item>Tradução</item>
         <item>Traducción</item>
         <item>Tafsiri</item>
+        <item>Isalin</item>
     </string-array>
 
     <string-array name="lanuage_1">
@@ -544,6 +546,7 @@
         <item>portugais</item>
         <item>Espagnol</item>
         <item>Swahili</item>
+        <item>tagalog</item>
     </string-array>
 
     <string name="label_continue">Continuez</string>
@@ -561,7 +564,6 @@
     <string name="time_slot">Sous-événement</string>
     <string name="add_image">Ajouter une image</string>
     <string name="succesfully_added">Ajouté avec succès</string>
-    <string name="add_more">Voulez-vous en ajouter ? <br> <u><font color='#255CA4'>Cliquez ici</font></u>.</br></string>
     <string name="go_to_event_page">ou Aller à la <u><font color='#255CA4'>Page de l\'événement</font></u>.</string>
     <string name="add_attandees">Ajouter des participants</string>
     <string name="sub_event">Sous-événements</string>
@@ -613,4 +615,18 @@
     <string name="enter_vat">Veuillez entrer la TVA professionnelle</string>
     <string name="r_state">État d\'enregistrement</string>
     <string name="r_country">Pays d\'enregistrement</string>
+    <string name="r_scan">Analyse utilisateur</string>
+    <string name="scan_qr_code">Scanner le code QR</string>
+    <string name="ok">D\'accord</string>
+    <string name="scan_user_code">Veuillez scanner le code QR de l\'utilisateur pour continuer</string>
+    <string name="add_more">Voulez-vous ajouter d\'autres sous-événements. ? <br> <u><font color='#255CA4'>Cliquez ici</font></u>.</br></string>
+    <string name="version">Version</string>
+    <string name="add_another_address">Ajouter une autre adresse</string>
+    <string name="your_address">Votre adresse</string>
+    <string name="add_new_address">Ajouter une nouvelle adresse</string>
+    <string name="remove">Supprimer</string>
+    <string name="delete_address">Voulez-vous supprimer cette adresse ?</string>
+    <string name="select_address">Veuillez sélectionner l\'adresse du sous-événement</string>
+    <string name="upload">Veuillez importer le fichier csv pour télécharger tous les participants</string>
+    <string name="selectcsvFile">Veuillez sélectionner un fichier csv valide.</string>
 </resources>

@@ -52,6 +52,18 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/multiple"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:visibility="gone"
+                        android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+                        android:tint="@color/white"
+                        app:layout_constraintBottom_toBottomOf="@+id/ivProfilePic"
+                        app:layout_constraintTop_toTopOf="@+id/ivProfilePic"
+                        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
+                        app:layout_constraintTop_toBottomOf="@+id/tvState"  />
+
                     <com.hbb20.CountryCodePicker
                         android:id="@+id/ivCountry"
                         android:layout_width="@dimen/_42sdp"
@@ -67,9 +79,9 @@
                         app:ccp_showPhoneCode="false"
                         app:ccp_showNameCode="false"
                         app:ccp_showFullName="false"
-                        app:layout_constraintBottom_toBottomOf="@id/ivProfilePic"
-                        app:layout_constraintStart_toEndOf="@+id/ivProfilePic"
-                        app:layout_constraintTop_toTopOf="@id/ivProfilePic" />
+                        app:layout_constraintBottom_toBottomOf="@id/multiple"
+                        app:layout_constraintStart_toEndOf="@+id/multiple"
+                        app:layout_constraintTop_toTopOf="@id/multiple" />
 
                     <com.global.vtg.utils.textView.SBoldTextView
                         android:id="@+id/tvState"
@@ -98,6 +110,7 @@
                         app:layout_constraintBottom_toBottomOf="@+id/ivProfilePic"
                         app:layout_constraintStart_toStartOf="@+id/tvState"
                         app:layout_constraintTop_toBottomOf="@+id/tvState" />
+
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ivQrCode"
@@ -181,15 +194,16 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager_dash"
             android:layout_width="0dp"
+            android:layout_height="0dp"
             android:paddingLeft="@dimen/_8sdp"
             android:paddingRight="@dimen/_8sdp"
             android:paddingBottom="@dimen/_8sdp"
-            android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vpDots" />
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vpDots"
+            app:layout_constraintVertical_bias="1.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -264,11 +264,24 @@ class SignInFragment : AppFragment() {
                         PreferenceManager.KEY_USER_NAME,
                         viewModel.email.value.toString().trim()
                     )
+                SharedPreferenceUtil.getInstance(getAppActivity())
+                    ?.saveData(
+                        PreferenceManager.KEY_USER_NAME_PARENT,
+                        viewModel.email.value.toString().trim()
+                    )
             }
+
+
             if (!viewModel.phone.value.isNullOrEmpty()) {
                 SharedPreferenceUtil.getInstance(getAppActivity())
                     ?.saveData(
                         PreferenceManager.KEY_USER_NAME,
+                        "${viewModel.code.value}${viewModel.phone.value.toString().trim()}"
+                    )
+
+                SharedPreferenceUtil.getInstance(getAppActivity())
+                    ?.saveData(
+                        PreferenceManager.KEY_USER_NAME_PARENT,
                         "${viewModel.code.value}${viewModel.phone.value.toString().trim()}"
                     )
                 SharedPreferenceUtil.getInstance(getAppActivity())
@@ -280,6 +293,11 @@ class SignInFragment : AppFragment() {
             SharedPreferenceUtil.getInstance(getAppActivity())
                 ?.saveData(
                     PreferenceManager.KEY_PASSWORD,
+                    viewModel.password.value.toString().trim()
+                )
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(
+                    PreferenceManager.KEY_PASSWORD_PARENT,
                     viewModel.password.value.toString().trim()
                 )
             SharedPreferenceUtil.getInstance(getAppActivity())

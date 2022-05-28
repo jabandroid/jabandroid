@@ -15,6 +15,10 @@ import com.global.vtg.appview.home.health.HealthInformationDashboardFragment
 import com.global.vtg.appview.home.health.HealthInformationFragment
 import com.global.vtg.appview.home.health.UploadHealthDocumentFragment
 import com.global.vtg.appview.home.help.HelpFragment
+import com.global.vtg.appview.home.parentchild.BirthdayVerificationFragment
+import com.global.vtg.appview.home.parentchild.ChildListFragment
+import com.global.vtg.appview.home.parentchild.ChildRegistration
+import com.global.vtg.appview.home.parentchild.SetPasswordFragment
 import com.global.vtg.appview.home.profile.ProfileFragment
 import com.global.vtg.appview.home.qrcode.VaccineQRCodeFragment
 import com.global.vtg.appview.home.testHistory.TestBaseFragment
@@ -65,11 +69,17 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_EVENT_CREATE(CreateEventFragment::class.java),
     F_EVENT_CREATE_LOCATION(CreateEventLocationFragment::class.java),
     F_EVENT_SUB_EVENT_IMAGE(CreateSubEventReviewFragment::class.java),
+    F_EVENT_CONTACT_UPLOAD(UploadContactFragment::class.java),
     F_EVENT_EVENT_DETAIL(EventListDetailFragment::class.java),
     F_EVENT_EVENT_SUB_DETAIL(EventListSubDetailFragment::class.java),
     F_SUB_EVENT_CREATE(CreateSubEventFragment::class.java),
+    F_EVENT_ADDRESS(EventAddressFragment::class.java),
     F_THANKYOU_EVENT(ThankyouEvent::class.java),
     F_CONTACT_LIST(ContactListFragment::class.java),
+    F_CHILD_REG(ChildRegistration::class.java),
+    F_SET_PASSWORD(SetPasswordFragment::class.java),
+    F_CHILD_BIRTH(BirthdayVerificationFragment::class.java),
+    F_CHILD_LIST(ChildListFragment::class.java),
     F_EVENT_CREATE_REVIEW(CreateEventReviewFragment::class.java);
 
 

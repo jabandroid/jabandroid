@@ -520,6 +520,7 @@
     <string name="label_about_us">Kuhusu Marekani</string>
     <string name="label_choose_your_lanquage">Chagua lugha unayopendelea</string>
 
+
     <string-array name="lanuage">
         <item>English</item>
         <item>Vertaling</item>
@@ -529,8 +530,8 @@
         <item>Tradução</item>
         <item>Traducción</item>
         <item>Tafsiri</item>
+        <item>Isalin</item>
     </string-array>
-
     <string-array name="lanuage_1">
         <item>Kiingereza</item>
         <item>Kiafrikana</item>
@@ -540,6 +541,7 @@
         <item>Kireno</item>
         <item>Kihispania</item>
         <item>Kiswahili</item>
+        <item>Kitagalogi</item>
     </string-array>
     <string name="label_continue">label_endelea</string>
     <string name="user_login"> Ingia kwa Mtumiaji</string>
@@ -556,7 +558,6 @@
     <string name="time_slot">Tukio Ndogo</string>
     <string name="add_image">Ongeza Picha</string>
     <string name="succesfully_added">Imeongezwa kwa Mafanikio</string>
-    <string name="add_more">Je, ungependa kuongeza zaidi? <br> <u><font color='#255CA4'>Bofya hapa</font></u>.</br></string>
     <string name="go_to_event_page">au Nenda kwenye <u><font color='#255CA4'>Ukurasa wa Tukio</font></u>.</string>
     <string name="add_attandees">Ongeza Waliohudhuria</string>
     <string name="sub_event">Matukio Ndogo</string>
@@ -608,4 +609,18 @@
     <string name="enter_vat">Tafadhali weka VAT ya biashara</string>
     <string name="r_state">Hali ya usajili</string>
     <string name="r_country">Nchi ya Usajili</string>
+    <string name="r_scan">Uchanganuzi wa Mtumiaji</string>
+    <string name="scan_qr_code">Changanua Msimbo wa QR</string>
+    <string name="ok">Sawa</string>
+    <string name="scan_user_code">Tafadhali changanua Msimbo wa QR wa mtumiaji ili kuendelea</string>
+    <string name="add_more">Je, ungependa kuongeza matukio madogo zaidi.? <br> <u><font color='#255CA4'>Bofya hapa</font></u>.</br></string>
+    <string name="version">Toleo </string>
+    <string name="add_another_address">Ongeza Anwani Nyingine </string>
+    <string name="your_address">Anwani Yako</string>
+    <string name="add_new_address">Ongeza anwani mpya</string>
+    <string name="remove">Ondoa</string>
+    <string name="delete_address" >Je, ungependa kufuta anwani hii?</string>
+    <string name="select_address">Tafadhali chagua anwani ya tukio dogo</string>
+    <string name="upload">Tafadhali ingiza faili ya csv ili kupakia waliohudhuria wote</string>
+    <string name="selectcsvFile">Tafadhali chagua faili sahihi ya csv.</string>
 </resources>

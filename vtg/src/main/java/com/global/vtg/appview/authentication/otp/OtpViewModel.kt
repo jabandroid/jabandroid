@@ -38,11 +38,14 @@ class OtpViewModel(
     var et6: MutableLiveData<String> = MutableLiveData()
     var redirectToStep1: MutableLiveData<Boolean> = MutableLiveData()
     var verifyOtp: MutableLiveData<Boolean> = MutableLiveData()
+    var birthChild: MutableLiveData<Boolean> = MutableLiveData()
+    var twiloId: MutableLiveData<String> = MutableLiveData()
     var tokenSent: MutableLiveData<Boolean> = MutableLiveData()
     var id: Int = 0
     var email: String = ""
     var phone: String = ""
     var password: String = ""
+    var childaccount: Boolean = false
     var code: String = ""
     private val client = OkHttpClient()
     var context: Context? = null
@@ -85,6 +88,7 @@ class OtpViewModel(
                 KeyboardUtils.hideKeyboard(view)
                 if (isNetworkAvailable(view.context)) {
                     if (validateFields()) {
+                        twiloId.postValue(twilioUserId.toString())
                         verifyOtp.postValue(true)
                     }
                 } else {
@@ -225,7 +229,11 @@ class OtpViewModel(
                     DialogUtils.showSnackBar(context, resTwilioToken.message.toString())
                 } else {
                     verifySuccess = true
-                    redirectToStep1.postValue(true)
+                    twiloId.postValue(twilioUserId.toString())
+                    if(childaccount)
+                        birthChild.postValue(true)
+                    else redirectToStep1.postValue(true)
+
                 }
             }
         })

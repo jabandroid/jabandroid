@@ -131,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:id="@+id/mobile"
                     android:orientation="horizontal">
 
                     <com.global.vtg.utils.textView.SBoldTextView
@@ -155,6 +156,7 @@
                 </LinearLayout>
 
                 <View
+                    android:id="@+id/mobileView"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_marginStart="@dimen/_4sdp"
@@ -165,6 +167,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/email"
                     android:orientation="horizontal">
 
                     <com.global.vtg.utils.textView.SBoldTextView
@@ -193,6 +196,7 @@
                     android:layout_height="1dp"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:id="@+id/emailView"
                     android:layout_marginEnd="@dimen/_4sdp"
                     android:background="@color/light_gray" />
 
@@ -377,6 +381,41 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    android:background="@color/light_gray" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:id="@+id/childAccount"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvChildLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_8sdp"
+                        android:gravity="center"
+                        android:text="@string/child_Account"
+                        android:textColor="@color/black" />
+
+                    <com.global.vtg.utils.textView.RegularTextView
+                        android:id="@+id/tvChild"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_8sdp"
+                      />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:id="@+id/childAccountView"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_4sdp"

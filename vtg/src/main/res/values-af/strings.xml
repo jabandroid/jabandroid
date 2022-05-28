@@ -528,6 +528,7 @@
     <string name="label_about_us">Oor ons</string>
     <string name="label_choose_your_lanquage">Kies jou voorkeurtaal</string>
 
+
     <string-array name="lanuage">
         <item>English</item>
         <item>Vertaling</item>
@@ -537,6 +538,7 @@
         <item>Tradução</item>
         <item>Traducción</item>
         <item>Tafsiri</item>
+        <item>Isalin</item>
     </string-array>
 
     <string-array name="lanuage_1">
@@ -548,6 +550,8 @@
         <item>Portugees</item>
         <item>Spaans</item>
         <item>Swahili</item>
+        <item>Tagalog</item>
+
     </string-array>
     <string name="label_continue">Aanhou</string>
 
@@ -565,7 +569,6 @@
     <string name="time_slot">Subgebeurtenis</string>
     <string name="add_image">Voeg prent by</string>
     <string name="succesfully_added">Suksesvol bygevoeg</string>
-    <string name="add_more">Wil jy meer byvoeg? <br> <u><font color='#255CA4'>Klik hier</font></u>.</br></string>
     <string name="go_to_event_page">of gaan na <u><font color='#255CA4'>Gebeurtenisbladsy</font></u>.</string>
     <string name="add_attandees">Voeg deelnemers by</string>
     <string name="sub_event">Subgebeurtenisse</string>
@@ -617,4 +620,18 @@
     <string name="enter_vat">Voer asseblief die besigheids-BTW in</string>
     <string name="r_state">Registrasiestatus</string>
     <string name="r_country">Registrasieland</string>
+    <string name="r_scan">Gebruikerskandering</string>
+    <string name="scan_qr_code">Skandeer QR-kode</string>
+    <string name="ok">Ok</string>
+    <string name="scan_user_code">Skandeer asseblief die gebruiker se QR-kode om voort te gaan</string>
+    <string name="add_more">Wil jy meer subgeleenthede byvoeg.? <br> <u><font color='#255CA4'>Klik hier</font></u>.</br></string>
+    <string name="version">Weergawe </string>
+    <string name="add_another_address">Voeg nog \'n adres by </string>
+    <string name="your_address">Jou adres</string>
+    <string name="add_new_address">Voeg nuwe adres by</string>
+    <string name="remove">Verwyder</string>
+    <string name="delete_address">Wil jy hierdie adres uitvee?</string>
+    <string name="select_address">Kies asseblief adres vir subgeleentheid</string>
+    <string name="upload">Voer asseblief die csv-lêer in om alle deelnemers op te laai</string>
+    <string name="selectcsvFile">Kies asseblief \'n geldige csv-lêer.</string>
 </resources>

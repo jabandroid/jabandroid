@@ -527,6 +527,7 @@
     <string name="label_about_us">About US</string>
     <string name="label_choose_your_lanquage">Choose your preferred language</string>
 
+
     <string-array name="lanuage">
         <item>English</item>
         <item>Vertaling</item>
@@ -536,6 +537,7 @@
         <item>Tradução</item>
         <item>Traducción</item>
         <item>Tafsiri</item>
+        <item>Isalin</item>
     </string-array>
 
     <string-array name="lanuage_1">
@@ -547,6 +549,7 @@
         <item>Portuguese</item>
         <item>Spanish</item>
         <item>Swahili</item>
+        <item>Tagalog</item>
     </string-array>
 
     <string name="label_continue">Continue</string>
@@ -621,6 +624,30 @@
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="ok">Ok</string>
     <string name="scan_user_code">Please scan user QR Code to proceed</string>
-    <string name="add_more">Do you want to add more subcevents.? <br> <u><font color='#255CA4'>Click here</font></u>.</br></string>
+    <string name="add_more">Do you want to add more sub events.? <br> <u><font color='#255CA4'>Click here</font></u>.</br></string>
+    <string name="version">Version </string>
+    <string name="add_another_address">Add Another Address </string>
+    <string name="your_address">Your Address</string>
+    <string name="add_new_address">Add new address</string>
+    <string name="remove">Remove</string>
+    <string name="delete_address">Do you want to delete this address?</string>
+    <string name="select_address">Please select address for sub event</string>
+    <string name="upload">Please import the csv file to upload all attendees</string>
+    <string name="selectcsvFile">Please select valid csv file.</string>
+    <string name="child_Account">Child Account</string>
+    <string name="parent_verification">Parent Verification</string>
+    <string name="child_registartion">Child Registration</string>
+    <string name="govermentId">Government ID</string>
+    <string name="or">OR</string>
+    <string name="birthday_verification">Birthday Verification</string>
+    <string name="birthday_verification_label1">Your child\'s date of birth is used to identify which services that can access. </string>
+    <string name="child_dob">Your child\'s date of birth. </string>
+    <string name="child_sign_up">Child Sign up </string>
+    <string name="set_password">Set Password </string>
+    <string name="child_password">Your child\'s account password </string>
+    <string name="password_must">Your password must: </string>
+    <string name="contain_atleast_8_character">Contain at least 8 characters. </string>
+    <string name="include_both_letter">Include both letters, numbers and no spaces. </string>
+    <string name="child_valid_date">Children over 13 year old can register their own account. </string>
 
 </resources>

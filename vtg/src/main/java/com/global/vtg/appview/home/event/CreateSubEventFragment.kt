@@ -1,12 +1,14 @@
 package com.global.vtg.appview.home.event
 
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
@@ -16,14 +18,9 @@ import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentCreateEventSubBinding
-import kotlinx.android.synthetic.main.fragment_create_event.*
 import kotlinx.android.synthetic.main.fragment_create_event_sub.*
-import kotlinx.android.synthetic.main.fragment_create_event_sub.btnNext
 import kotlinx.android.synthetic.main.fragment_create_event_sub.ivBack
-import kotlinx.android.synthetic.main.fragment_create_event_sub.tvEventEndTime
-import kotlinx.android.synthetic.main.fragment_create_event_sub.tvEventStartTime
-import kotlinx.android.synthetic.main.fragment_payment.*
-import kotlinx.android.synthetic.main.fragment_reg_step1.*
+import kotlinx.android.synthetic.main.fragment_event_address.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -36,8 +33,9 @@ class CreateSubEventFragment : AppFragment() {
 
 
     companion object {
-        lateinit var itemSubEvent:Event
+        lateinit var itemSubEvent: Event
     }
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_create_event_sub
     }
@@ -53,8 +51,8 @@ class CreateSubEventFragment : AppFragment() {
         return mFragmentBinding
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
-
 
         btnNext.setOnClickListener(this)
         ivBack.setOnClickListener {
@@ -145,22 +143,25 @@ class CreateSubEventFragment : AppFragment() {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
 
-        chSameAddress.setOnClickListener{
-            if(chSameAddress.isChecked){
-                viewModel.address1.postValue( CreateEventFragment.itemEvent.eventAddress!![0].addr1)
-                viewModel.address2.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].addr2)
-              //  viewModel.address3.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].addr3)
-                viewModel.city.postValue( CreateEventFragment.itemEvent.eventAddress!![0].city)
-                viewModel.state.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].state)
-                viewModel.country.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].country)
-                viewModel.zip.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].zipCode)
+        chSameAddress.setOnClickListener {
+            if (chSameAddress.isChecked) {
+                viewModel.address1.postValue(CreateEventFragment.itemEvent.eventAddress!![0].addr1)
+                viewModel.address2.postValue(CreateEventFragment.itemEvent.eventAddress!![0].addr2)
+                //  viewModel.address3.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].addr3)
+                viewModel.city.postValue(CreateEventFragment.itemEvent.eventAddress!![0].city)
+                viewModel.state.postValue(CreateEventFragment.itemEvent.eventAddress!![0].state)
+                viewModel.country.postValue(CreateEventFragment.itemEvent.eventAddress!![0].country)
+                viewModel.zip.postValue(CreateEventFragment.itemEvent.eventAddress!![0].zipCode)
+                viewModel.web.postValue(CreateEventFragment.itemEvent.eventAddress!![0].web)
+                viewModel.contactNumber.postValue(CreateEventFragment.itemEvent.eventAddress!![0].phoneNo)
+                viewModel.email.postValue(CreateEventFragment.itemEvent.eventAddress!![0].email)
 //                etaddress1.isEnabled=false
 //                etaddress2.isEnabled=false
 //                sCity.isEnabled=false
 //                sState.isEnabled=false
 //                sZip.isEnabled=false
 //                sCountry.isEnabled=false
-           }else{
+            } else {
                 viewModel.address1.postValue("")
                 viewModel.address2.postValue("")
                 viewModel.city.postValue("")
@@ -177,37 +178,37 @@ class CreateSubEventFragment : AppFragment() {
             }
         }
 
-            if (itemSubEvent.eventName != null)
-                viewModel.eventName.postValue(itemSubEvent.eventName)
-            if (itemSubEvent.crowdLimit != null)
-                viewModel.eventAttendees.postValue(itemSubEvent.crowdLimit)
+        if (itemSubEvent.eventName != null)
+            viewModel.eventName.postValue(itemSubEvent.eventName)
+        if (itemSubEvent.crowdLimit != null)
+            viewModel.eventAttendees.postValue(itemSubEvent.crowdLimit)
 
 
-            if (itemSubEvent.startDate != null) {
-                viewModel.startTime = DateUtils.formatDateUTCToLocal(
-                    itemSubEvent.startDate!!,
-                    DateUtils.API_DATE_FORMAT_VACCINE,
-                    true
-                )
-                tvEventStartTime.text = DateUtils.formatDateUTCToLocal(
-                    itemSubEvent.startDate!!,
-                    DateUtils.API_DATE_FORMAT_VACCINE,
-                    true
-                )
-            }
-            if (itemSubEvent.endDate != null) {
-                viewModel.endTime = DateUtils.formatDateUTCToLocal(
-                    itemSubEvent.endDate!!,
-                    DateUtils.API_DATE_FORMAT_VACCINE,
-                    true
-                )
-                tvEventEndTime.text = DateUtils.formatDateUTCToLocal(
-                    itemSubEvent.endDate!!,
-                    DateUtils.API_DATE_FORMAT_VACCINE,
-                    true
-                )
-            }
-        if(itemSubEvent.eventAddress!=null&& itemSubEvent.eventAddress!!.isNotEmpty()){
+        if (itemSubEvent.startDate != null) {
+            viewModel.startTime = DateUtils.formatDateUTCToLocal(
+                itemSubEvent.startDate!!,
+                DateUtils.API_DATE_FORMAT_VACCINE,
+                true
+            )
+            tvEventStartTime.text = DateUtils.formatDateUTCToLocal(
+                itemSubEvent.startDate!!,
+                DateUtils.API_DATE_FORMAT_VACCINE,
+                true
+            )
+        }
+        if (itemSubEvent.endDate != null) {
+            viewModel.endTime = DateUtils.formatDateUTCToLocal(
+                itemSubEvent.endDate!!,
+                DateUtils.API_DATE_FORMAT_VACCINE,
+                true
+            )
+            tvEventEndTime.text = DateUtils.formatDateUTCToLocal(
+                itemSubEvent.endDate!!,
+                DateUtils.API_DATE_FORMAT_VACCINE,
+                true
+            )
+        }
+        if (itemSubEvent.eventAddress != null && itemSubEvent.eventAddress!!.isNotEmpty()) {
             viewModel.address1.postValue(itemSubEvent.eventAddress!![0].addr1)
             viewModel.address2.postValue(itemSubEvent.eventAddress!![0].addr2)
             viewModel.address3.postValue(itemSubEvent.eventAddress!![0].addr3)
@@ -215,15 +216,38 @@ class CreateSubEventFragment : AppFragment() {
             viewModel.state.postValue(itemSubEvent.eventAddress!![0].state)
             viewModel.country.postValue(itemSubEvent.eventAddress!![0].country)
             viewModel.zip.postValue(itemSubEvent.eventAddress!![0].zipCode)
-      
-            if(!TextUtils.isEmpty(itemSubEvent.eventAddress!![0].addressID))
-                viewModel.id= itemSubEvent.eventAddress!![0].addressID.toString()
+            viewModel.web.postValue(itemSubEvent.eventAddress!![0].web)
+            viewModel.contactNumber.postValue(itemSubEvent.eventAddress!![0].phoneNo)
+            viewModel.email.postValue(itemSubEvent.eventAddress!![0].email)
+
+            if (!TextUtils.isEmpty(itemSubEvent.eventAddress!![0].addressID))
+                viewModel.id = itemSubEvent.eventAddress!![0].addressID.toString()
+
+
+        }
+
+        if (CreateEventFragment.itemEvent.eventAddress!!.size > 0) {
+            tvAddress.text = CreateEventFragment.itemEvent.eventAddress!![0].addr1 + " " +
+                    CreateEventFragment.itemEvent.eventAddress!![0].addr2 + " " +
+                    CreateEventFragment.itemEvent.eventAddress!![0].addr3 + " " +
+                    CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
+                    CreateEventFragment.itemEvent.eventAddress!![0].state + " "
+            CreateEventFragment.itemEvent.eventAddress!![0].country
         }
 
 
-            if (itemSubEvent.description != null)
-                viewModel.eventDescription.postValue(itemSubEvent.description)
+
+        if (itemSubEvent.description != null)
+            viewModel.eventDescription.postValue(itemSubEvent.description)
+
+        tvAddress.setOnClickListener {
+            val v = Bundle()
+            v.putBoolean("isSubAddress", true)
+            addFragmentInStack<Any>(
+                AppFragmentState.F_EVENT_ADDRESS, v
+            )
         }
+    }
 
 
     override fun pageVisible() {
@@ -236,8 +260,8 @@ class CreateSubEventFragment : AppFragment() {
 //            if(myCalendar.timeInMillis<calendar.timeInMillis){
 //                DialogUtils.toast(activity!!,getString(R.string.time))
 //            }else {
-                viewModel.startTime = DateUtils.formatDateTime(myCalendar.timeInMillis, true)
-                tvEventStartTime.text = viewModel.startTime
+            viewModel.startTime = DateUtils.formatDateTime(myCalendar.timeInMillis, true)
+            tvEventStartTime.text = viewModel.startTime
             //}
         } else {
             viewModel.endTime = DateUtils.formatDateTime(myCalendar.timeInMillis, true)
@@ -249,5 +273,17 @@ class CreateSubEventFragment : AppFragment() {
         sCity.text = city
         sState.text = state
         sCountry.text = country
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun refreshList() {
+        if (itemSubEvent.eventAddress!!.size > 0) {
+            tvAddress.text = itemSubEvent.eventAddress!![0].addr1 + " " +
+                    itemSubEvent.eventAddress!![0].addr2 + " " +
+                    itemSubEvent.eventAddress!![0].addr3 + " " +
+                    itemSubEvent.eventAddress!![0].city + " " +
+                    itemSubEvent.eventAddress!![0].state + " "
+            itemSubEvent.eventAddress!![0].country
+        }
     }
 }

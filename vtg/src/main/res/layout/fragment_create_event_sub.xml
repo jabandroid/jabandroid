@@ -132,10 +132,10 @@
                     android:hint="@string/label_event_name"
                     android:imeOptions="actionNext"
                     android:inputType="text"
+                    android:maxLength="80"
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
-                    android:maxLength="80"
                     android:shadowDy="0"
                     android:shadowRadius="4"
                     android:singleLine="true"
@@ -246,13 +246,12 @@
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
-                    android:text="@={viewModel.eventAttendees}"
                     android:shadowRadius="4"
                     android:singleLine="true"
+                    android:text="@={viewModel.eventAttendees}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvTotalNumberAttendese" />
-
 
 
                 <com.global.vtg.utils.textView.RegularTextView
@@ -278,9 +277,7 @@
                     android:background="@drawable/ic_shadow_1"
                     android:gravity="top"
                     android:hint="@string/description"
-
                     android:inputType="textMultiLine"
-                    android:maxLines="1"
                     android:maxLength="1000"
                     android:minHeight="@dimen/_100sdp"
                     android:paddingTop="@dimen/_10sdp"
@@ -300,6 +297,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etDescription">
 
@@ -309,7 +307,6 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="@dimen/_18sdp"
-
                         android:fontFamily="@font/proximanovareg"
                         android:gravity="center_vertical"
                         android:text="@string/same_address"
@@ -337,6 +334,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="@string/label_add_1"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/add_root" />
 
@@ -350,14 +348,14 @@
                     android:background="@drawable/edittext_shadow"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:text="@={viewModel.address1}"
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
                     android:shadowRadius="4"
                     android:singleLine="true"
-
+                    android:text="@={viewModel.address1}"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvSsn" />
@@ -369,6 +367,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="@string/label_add_2"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etaddress1" />
 
@@ -382,7 +381,6 @@
                     android:background="@drawable/edittext_shadow"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
@@ -390,9 +388,11 @@
                     android:shadowRadius="4"
                     android:singleLine="true"
                     android:text="@={viewModel.address2}"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvaddress2" />
+
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvaddress3"
                     style="@style/MarginStartEnd"
@@ -400,6 +400,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:text="@string/address3"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etaddress2" />
 
@@ -413,7 +414,6 @@
                     android:background="@drawable/edittext_shadow"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
@@ -421,6 +421,7 @@
                     android:shadowRadius="4"
                     android:singleLine="true"
                     android:text="@={viewModel.address3}"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvaddress3" />
@@ -430,6 +431,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -534,6 +536,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -617,11 +620,11 @@
                             android:drawablePadding="@dimen/_4sdp"
                             android:ellipsize="end"
                             android:gravity="center_vertical"
-                            android:text="@={viewModel.country}"
                             android:maxLines="1"
                             android:paddingStart="@dimen/_16sdp"
                             android:paddingEnd="@dimen/_12sdp"
                             android:singleLine="true"
+                            android:text="@={viewModel.country}"
                             android:textColorHint="@color/black"
                             app:drawableEndCompat="@drawable/ic_search"
                             app:layout_constraintEnd_toStartOf="@+id/sDlnCountry"
@@ -631,20 +634,177 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvContactNo"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/title_contactus"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/zipRoot" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/tvContactNumber"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionNext"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.contactNumber}"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvContactNo" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvEmailLabel"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_email"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvContactNumber" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/tvEmail"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.email}"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEmailLabel" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvfax"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_fax"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/tvFaxNumber"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionDone"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.fax}"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvfax" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvWebsite"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/label_website"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvFaxNumber" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edWebsite"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.web}"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvWebsite" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="0dp"
+                    android:background="@drawable/edittext_shadow"
+                    android:backgroundTint="@color/primary_light"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    app:drawableEndCompat="@drawable/ic_arrow_down"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/edWebsite" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnNext"
                     style="@style/ButtonStyle"
                     android:layout_width="0dp"
-                    android:layout_marginStart="@dimen/_18sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:layout_marginEnd="@dimen/_18sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
                     android:onClick="@{viewModel::onClick}"
-                    android:text="@string/next"
-
+                    android:text="@string/label_next"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/zipRoot" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvAddress" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>

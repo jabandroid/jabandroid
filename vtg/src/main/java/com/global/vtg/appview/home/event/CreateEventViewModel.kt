@@ -4,15 +4,23 @@ import android.app.Application
 import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.base.AppViewModel
+import com.global.vtg.model.network.Resource
+import com.global.vtg.model.network.result.BaseResult
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import kotlinx.android.synthetic.main.fragment_create_event.*
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class CreateEventViewModel(
     application: Application,
@@ -28,7 +36,19 @@ class CreateEventViewModel(
     var showToastError: MutableLiveData<String> = MutableLiveData()
     var redirectToStep2: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun onClick(view: View) {
+
+    val uplaodAttendees = MutableLiveData<Resource<BaseResult>>()
+
+    private val userPinObserver = Observer<Resource<BaseResult>> {
+        uplaodAttendees.postValue(it)
+    }
+
+    init {
+        userRepository.uploadContactLiveData.postValue(null)
+        userRepository.uploadContactLiveData.observeForever(userPinObserver)
+
+    }
+        fun onClick(view: View) {
 
         when (view.id) {
             R.id.btnNext->{
@@ -79,5 +99,12 @@ class CreateEventViewModel(
         return isValidate
     }
 
+
+    fun uploadAttendees(file: MultipartBody.Part?, eventId: String) {
+        scope.launch {
+            val eventID = eventId.toRequestBody("text/plain".toMediaTypeOrNull())
+            userRepository.uploadContactList(file, eventID)
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.global.vtg.appview.home.help
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
@@ -46,9 +47,10 @@ class HelpFragment : AppFragment() {
         return mFragmentBinding
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
 
-        tvVersion.text= BuildConfig.VERSION_NAME
+        tvVersion.text=getString(R.string.version) +" "+ BuildConfig.VERSION_NAME
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -60,6 +62,7 @@ class HelpFragment : AppFragment() {
         viewModel.terms.observe(this, {
             viewHtml(Constants.TERMS_CONDITION)
         })
+
 
         viewModel.setting.observe(this, {
          when(it){
@@ -90,7 +93,7 @@ class HelpFragment : AppFragment() {
                  )
              }
              "about_us"->{
-
+                 viewHtml(Constants.ABOUT_US)
              }
          }
         })

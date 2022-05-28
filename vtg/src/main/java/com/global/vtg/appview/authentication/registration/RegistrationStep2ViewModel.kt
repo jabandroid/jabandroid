@@ -22,6 +22,7 @@ class RegistrationStep2ViewModel(
 
     var ssn: MutableLiveData<String> = MutableLiveData()
     var ssnFinal:String=""
+    var isChildAccount:Boolean=false
     var id: MutableLiveData<String> = MutableLiveData()
     var dln: MutableLiveData<String> = MutableLiveData()
     var dlnState: MutableLiveData<String> = MutableLiveData()
@@ -55,68 +56,136 @@ class RegistrationStep2ViewModel(
                 if (isNetworkAvailable(view.context)) {
                     if (validateFields()) {
                         KeyboardUtils.hideKeyboard(view)
-                        Constants.USER?.step2Complete = true
-                        val document = ArrayList<Document>()
-                        if (!isNullOrEmpty(id.value?.trim())) {
-                            document.add(
-                                Document(
-                                    type = "ID",
-                                    identity = id.value
-                                )
-                            )
-                        }
-                        if (!isNullOrEmpty(
-                                ssn
-                                    .value?.trim()
-                            )
-                        ) {
-                            document.add(
-                                Document(
-                                    type = "SSN",
-                                    identity = if(ssn.value!!.contains("XX"))ssnFinal  else ssn.value
-                                )
-                            )
-                        }
-                        if (!isNullOrEmpty(dln.value)
-                            && !isNullOrEmpty(dlnState.value)
-                            && !isNullOrEmpty(dlnCountry.value)
-                            && !isNullOrEmpty(dlnIssuedDate.value)
-                            && !isNullOrEmpty(dlnExpiredDate.value)
-                        ) {
-                            document.add(
-                                Document(
-                                    type = "DL",
-                                    identity = dln.value,
-                                    issueDate = dlnIssuedDate.value,
-                                    expireDate = dlnExpiredDate.value,
-                                    state = dlnState.value,
-                                    country = dlnCountry.value
-                                )
-                            )
-                        }
-                        if (!isNullOrEmpty(passportNumber.value)
-                            && !isNullOrEmpty(passportState.value)
-                            && !isNullOrEmpty(passportCountry.value)
-                            && !isNullOrEmpty(passportIssuedDate.value)
-                            && !isNullOrEmpty(passportExpiredDate.value)
-                        ) {
-                            document.add(
-                                Document(
-                                    type = "Passport",
-                                    identity = passportNumber.value,
-                                    issueDate = passportIssuedDate.value,
-                                    expireDate = passportExpiredDate.value,
-                                    state = passportState.value,
-                                    country = passportCountry.value
-                                )
-                            )
-                        }
-                        if (!document.isNullOrEmpty()) {
-                            Constants.USER?.document?.clear()
-                            Constants.USER?.document?.addAll(document)
-                        }
+               if(isChildAccount){
+                   if(Constants.USERCHILD ==null)
+                       Constants.USERCHILD =ResUser()
+                   Constants.USERCHILD?.step2Complete = true
+                   val document = ArrayList<Document>()
+                   if (!isNullOrEmpty(id.value?.trim())) {
+                       document.add(
+                           Document(
+                               type = "ID",
+                               identity = id.value
+                           )
+                       )
+                   }
+                   if (!isNullOrEmpty(
+                           ssn
+                               .value?.trim()
+                       )
+                   ) {
+                       document.add(
+                           Document(
+                               type = "SSN",
+                               identity = if (ssn.value!!.contains("XX")) ssnFinal else ssn.value
+                           )
+                       )
+                   }
+                   if (!isNullOrEmpty(dln.value)
+                       && !isNullOrEmpty(dlnState.value)
+                       && !isNullOrEmpty(dlnCountry.value)
+                       && !isNullOrEmpty(dlnIssuedDate.value)
+                       && !isNullOrEmpty(dlnExpiredDate.value)
+                   ) {
+                       document.add(
+                           Document(
+                               type = "DL",
+                               identity = dln.value,
+                               issueDate = dlnIssuedDate.value,
+                               expireDate = dlnExpiredDate.value,
+                               state = dlnState.value,
+                               country = dlnCountry.value
+                           )
+                       )
+                   }
+                   if (!isNullOrEmpty(passportNumber.value)
+                       && !isNullOrEmpty(passportState.value)
+                       && !isNullOrEmpty(passportCountry.value)
+                       && !isNullOrEmpty(passportIssuedDate.value)
+                       && !isNullOrEmpty(passportExpiredDate.value)
+                   ) {
+                       document.add(
+                           Document(
+                               type = "Passport",
+                               identity = passportNumber.value,
+                               issueDate = passportIssuedDate.value,
+                               expireDate = passportExpiredDate.value,
+                               state = passportState.value,
+                               country = passportCountry.value
+                           )
+                       )
+                   }
+                   if (!document.isNullOrEmpty()) {
+                       Constants.USERCHILD?.document?.clear()
+                       Constants.USERCHILD?.document?.addAll(document)
+                   }
+                   Constants.USERCHILD?.parentId= Constants.USER!!.id.toString()
+                   callRegisterStepChild()
+               }else {
 
-                        callRegisterStep()
+                   Constants.USER?.step2Complete = true
+                   val document = ArrayList<Document>()
+                   if (!isNullOrEmpty(id.value?.trim())) {
+                       document.add(
+                           Document(
+                               type = "ID",
+                               identity = id.value
+                           )
+                       )
+                   }
+                   if (!isNullOrEmpty(
+                           ssn
+                               .value?.trim()
+                       )
+                   ) {
+                       document.add(
+                           Document(
+                               type = "SSN",
+                               identity = if (ssn.value!!.contains("XX")) ssnFinal else ssn.value
+                           )
+                       )
+                   }
+                   if (!isNullOrEmpty(dln.value)
+                       && !isNullOrEmpty(dlnState.value)
+                       && !isNullOrEmpty(dlnCountry.value)
+                       && !isNullOrEmpty(dlnIssuedDate.value)
+                       && !isNullOrEmpty(dlnExpiredDate.value)
+                   ) {
+                       document.add(
+                           Document(
+                               type = "DL",
+                               identity = dln.value,
+                               issueDate = dlnIssuedDate.value,
+                               expireDate = dlnExpiredDate.value,
+                               state = dlnState.value,
+                               country = dlnCountry.value
+                           )
+                       )
+                   }
+                   if (!isNullOrEmpty(passportNumber.value)
+                       && !isNullOrEmpty(passportState.value)
+                       && !isNullOrEmpty(passportCountry.value)
+                       && !isNullOrEmpty(passportIssuedDate.value)
+                       && !isNullOrEmpty(passportExpiredDate.value)
+                   ) {
+                       document.add(
+                           Document(
+                               type = "Passport",
+                               identity = passportNumber.value,
+                               issueDate = passportIssuedDate.value,
+                               expireDate = passportExpiredDate.value,
+                               state = passportState.value,
+                               country = passportCountry.value
+                           )
+                       )
+                   }
+                   if (!document.isNullOrEmpty()) {
+                       Constants.USER?.document?.clear()
+                       Constants.USER?.document?.addAll(document)
+                   }
+
+                   callRegisterStep()
+               }
                     }
                 } else {
                     DialogUtils.showSnackBar(
@@ -209,6 +278,12 @@ class RegistrationStep2ViewModel(
     private fun callRegisterStep() {
         scope.launch {
             Constants.USER?.let { userRepository.registerStep(registerLiveData, it) }
+        }
+    }
+
+    private fun callRegisterStepChild() {
+        scope.launch {
+            Constants.USERCHILD?.let { userRepository.registerStep(registerLiveData, it) }
         }
     }
 

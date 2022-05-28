@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.popup_update_pin.view.yes
 
 class AppAlertDialog {
 
-    var lanCode: Array<String> = arrayOf("en", "af", "ar", "nl", "fr", "pt", "es", "sw")
+    var lanCode: Array<String> = arrayOf("en", "af", "ar", "nl", "fr", "pt", "es", "sw","tl")
     private var position: Int = 0
     private lateinit var selecte: RadioButton
 

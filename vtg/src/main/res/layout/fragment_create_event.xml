@@ -373,9 +373,9 @@
                     android:background="@drawable/ic_shadow_1"
                     android:gravity="top"
                     android:hint="@string/description"
-                    android:imeOptions="actionDone"
-                    android:inputType="textEmailAddress"
-                    android:maxLines="1"
+
+                    android:inputType="textMultiLine"
+
                     android:minHeight="@dimen/_100sdp"
                     android:paddingTop="@dimen/_10sdp"
                     android:shadowColor="@color/gray_light"

@@ -415,7 +415,7 @@ class EventListSubDetailFragment : AppFragment(), OnMapReadyCallback,
 
                     if (it.data.eventAddress!!.isNotEmpty()) {
                         phone.text = it.data.eventAddress!![0].mobileNo
-                        mobile = it.data.eventAddress!![0].mobileNo
+                        mobile = it.data.eventAddress!![0].mobileNo.toString()
                         tvLocation.text = it.data.eventAddress!![0].addr1 + " " +
                                 it.data.eventAddress!![0].addr2 + " " +
                                 it.data.eventAddress!![0].city + " " +

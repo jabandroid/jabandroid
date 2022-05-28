@@ -39,10 +39,8 @@ internal class ViewPager2Adapter(ctx: Context) :
     // This method binds the screen with the view
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
         // This will set the images in imageview
-
-
         Glide.with(ctx)
-            .load(R.drawable.ic_banner)
+            .load(R.drawable.banner1_small)
             .apply(
                 RequestOptions().signature(ObjectKey(100000)).diskCacheStrategy(DiskCacheStrategy.DATA)
 )

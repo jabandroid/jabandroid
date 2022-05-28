@@ -4,6 +4,7 @@ import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -11,16 +12,20 @@ import android.widget.EditText
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import com.global.vtg.appview.authentication.AuthenticationActivity
+import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragment
+import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.base.fragment.replaceWithCurrentFragment
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
+import com.global.vtg.utils.Constants.BUNDLE_CHILD_ACCOUNT
 import com.global.vtg.utils.Constants.BUNDLE_IS_CLINIC
 import com.global.vtg.utils.Constants.BUNDLE_IS_VENDOR
 import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_CODE
@@ -29,6 +34,7 @@ import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_EMAIL
 import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_PASSWORD
 import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_PHONE
 import com.global.vtg.utils.Constants.USER
+import com.global.vtg.utils.Constants.USERCHILD
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
@@ -42,12 +48,15 @@ class OtpFragment : AppFragment() {
     private lateinit var mFragmentBinding: FragmentOtpBinding
     private val viewModel by viewModel<OtpViewModel>()
     var email: String? = null
+    var twiloId: String? = null
     var phone: String? = null
     var password: String? = null
     var code: String? = null
     var countryCode: String? = null
     var isVendor: Boolean? = null
     var isClinic: Boolean? = null
+    var childAccount: Boolean? = null
+
     var isFromForgotPassword: Boolean? = false
 
     override fun getLayoutId(): Int {
@@ -77,6 +86,10 @@ class OtpFragment : AppFragment() {
             if (arguments.containsKey(BUNDLE_IS_CLINIC)) {
                 isClinic = arguments.getBoolean(BUNDLE_IS_CLINIC)
             }
+            if (arguments.containsKey(BUNDLE_CHILD_ACCOUNT)) {
+                childAccount = arguments.getBoolean(BUNDLE_CHILD_ACCOUNT)
+                isFromForgotPassword=true
+            }
             if (arguments.containsKey(Constants.BUNDLE_FROM_FORGOT_PASSWORD)) {
                 isFromForgotPassword = arguments.getBoolean(Constants.BUNDLE_FROM_FORGOT_PASSWORD)
             }
@@ -92,16 +105,7 @@ class OtpFragment : AppFragment() {
 
     override fun initializeComponent(view: View?) {
 
-        SharedPreferenceUtil.getInstance(getAppActivity())
-            ?.saveData(
-                PreferenceManager.KEY_USER_NAME,
-              ""
-            )
-        SharedPreferenceUtil.getInstance(getAppActivity())
-            ?.saveData(
-                PreferenceManager.KEY_PASSWORD,
-                ""
-            )
+
 
         viewModel.context = activity
         code?.let {
@@ -120,7 +124,10 @@ class OtpFragment : AppFragment() {
             password?.let {
                 viewModel.password = it
             }
-            (activity as AuthenticationActivity).showProgressBar()
+
+
+                (activity as AuthenticationActivity).showProgressBar()
+
         } else {
             when (activity) {
                 is HomeActivity -> (activity as HomeActivity).showProgressBar()
@@ -128,6 +135,26 @@ class OtpFragment : AppFragment() {
                 is ClinicActivity -> (activity as HomeActivity).showProgressBar()
                 else -> (activity as AuthenticationActivity).showProgressBar()
             }
+        }
+
+        if(childAccount!!){
+            viewModel.email = USER?.email.toString()
+            viewModel.phone = USER?.mobileNo.toString()
+            viewModel.code =USER?.mobileNo.toString().substring(0,2)
+            tool_layout.visibility=View.VISIBLE
+            clToolbar.visibility=View.VISIBLE
+            viewModel.childaccount=true
+        }else{
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(
+                    PreferenceManager.KEY_USER_NAME,
+                    ""
+                )
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(
+                    PreferenceManager.KEY_PASSWORD,
+                    ""
+                )
         }
         viewModel.createUser()
 
@@ -158,45 +185,68 @@ class OtpFragment : AppFragment() {
         }
 
         viewModel.redirectToStep1.observe(this, {
-            SharedPreferenceUtil.getInstance(getAppActivity())
-                ?.saveData(
-                    PreferenceManager.KEY_ROLE,
-                    if (isVendor == true) "vendor"
-                    else if (isClinic == true) "clinic" else "user"
-                )
 
 
+                SharedPreferenceUtil.getInstance(getAppActivity())
+                    ?.saveData(
+                        PreferenceManager.KEY_ROLE,
+                        if (isVendor == true) "vendor"
+                        else if (isClinic == true) "clinic" else "user"
+                    )
 
-            if (isFromForgotPassword == true) {
-                val bundle = Bundle()
-                bundle.putString(Constants.BUNDLE_TWILIO_USER_ID, viewModel.twilioUserId.toString())
-                addFragment<Any>(
-                    AppFragmentState.F_FORGOT_CHANGE_PASSWORD,
-                    bundle,
-                    popFragment = this
-                )
-            } else {
-                email?.let { it1 ->
-                    password?.let { it2 ->
-                        phone?.let { it3 ->
-                            code?.let { it4 ->
-                                viewModel.callRegistration(
-                                    it1,
-                                    it2, it3, it4, viewModel.twilioUserId.toString()
-                                )
+                if (isFromForgotPassword == true) {
+                    val bundle = Bundle()
+                    bundle.putString(
+                        Constants.BUNDLE_TWILIO_USER_ID,
+                        viewModel.twilioUserId.toString()
+                    )
+                    addFragment<Any>(
+                        AppFragmentState.F_FORGOT_CHANGE_PASSWORD,
+                        bundle,
+                        popFragment = this
+                    )
+                } else {
+                    email?.let { it1 ->
+                        password?.let { it2 ->
+                            phone?.let { it3 ->
+                                code?.let { it4 ->
+                                    viewModel.callRegistration(
+                                        it1,
+                                        it2, it3, it4, viewModel.twilioUserId.toString()
+                                    )
+                                }
                             }
                         }
                     }
                 }
-            }
+
+
+
         })
 
         viewModel.verifyOtp.observe(this, {
             if (viewModel.verifySuccess) {
+             if(viewModel.childaccount){
+                 viewModel.birthChild.postValue(true)
+             }else
                 viewModel.redirectToStep1.postValue(true)
             } else {
                 viewModel.verifyOTP()
             }
+        })
+
+        viewModel.birthChild.observe(this, {
+            USERCHILD= ResUser()
+            USERCHILD!!.twilioUserId=twiloId
+            Log.e("","c"+Constants.USER)
+            val bundle = Bundle()
+            bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT,true)
+            popFragment(1)
+            addFragmentInStack<Any>(AppFragmentState.F_CHILD_BIRTH, keys = bundle)
+        })
+
+        viewModel.twiloId.observe(this, {
+            twiloId=it
         })
 
         viewModel.registerLiveData.observe(this, {
@@ -207,38 +257,65 @@ class OtpFragment : AppFragment() {
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
-                    USER = it.data
-                    if (!it.data.mobileNo.isNullOrEmpty()) {
-                        SharedPreferenceUtil.getInstance(getAppActivity())
-                            ?.saveData(
-                                PreferenceManager.KEY_USER_NAME,
-                                it.data.mobileNo.toString().trim()
-                            )
-                        countryCode?.let { it1 ->
+                    if(childAccount!!) {
+                        USERCHILD= ResUser()
+                        USERCHILD!!.twilioUserId=twiloId
+                        val bundle = Bundle()
+                        bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT,true)
+                        addFragmentInStack<Any>(AppFragmentState.F_CHILD_BIRTH, keys = bundle)
+                    }
+                    else{
+                        USER = it.data
+                        if (!it.data.mobileNo.isNullOrEmpty()) {
                             SharedPreferenceUtil.getInstance(getAppActivity())
                                 ?.saveData(
-                                    PreferenceManager.KEY_REMEMBER_ME_COUNTRY_CODE,
-                                    it1
+                                    PreferenceManager.KEY_USER_NAME,
+                                    it.data.mobileNo.toString().trim()
+                                )
+
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.saveData(
+                                    PreferenceManager.KEY_USER_NAME_PARENT,
+                                    it.data.mobileNo.toString().trim()
+                                )
+                            countryCode?.let { it1 ->
+                                SharedPreferenceUtil.getInstance(getAppActivity())
+                                    ?.saveData(
+                                        PreferenceManager.KEY_REMEMBER_ME_COUNTRY_CODE,
+                                        it1
+                                    )
+                            }
+                        } else {
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.saveData(
+                                    PreferenceManager.KEY_USER_NAME,
+                                    it.data.email.toString().trim()
+                                )
+
+                            SharedPreferenceUtil.getInstance(getAppActivity())
+                                ?.saveData(
+                                    PreferenceManager.KEY_USER_NAME_PARENT,
+                                    it.data.email.toString().trim()
                                 )
                         }
-                    } else {
                         SharedPreferenceUtil.getInstance(getAppActivity())
                             ?.saveData(
-                                PreferenceManager.KEY_USER_NAME,
-                                it.data.email.toString().trim()
+                                PreferenceManager.KEY_PASSWORD,
+                                it.data.password.toString()
                             )
-                    }
-                    SharedPreferenceUtil.getInstance(getAppActivity())
-                        ?.saveData(
-                            PreferenceManager.KEY_PASSWORD,
-                            it.data.password.toString()
+                        SharedPreferenceUtil.getInstance(getAppActivity())
+                            ?.saveData(
+                                PreferenceManager.KEY_PASSWORD_PARENT,
+                                it.data.password.toString()
+                            )
+                        val bundle = Bundle()
+                        bundle.putString(
+                            Constants.BUNDLE_TWILIO_USER_ID,
+                            viewModel.twilioUserId.toString()
                         )
-                    val bundle = Bundle()
-                    bundle.putString(
-                        Constants.BUNDLE_TWILIO_USER_ID,
-                        viewModel.twilioUserId.toString()
-                    )
-                    replaceWithCurrentFragment<Any>(AppFragmentState.F_REG_STEP1, bundle)
+                        replaceWithCurrentFragment<Any>(AppFragmentState.F_REG_STEP1, bundle)
+                    }
+
                 }
                 is Resource.Error -> {
                     when (activity) {

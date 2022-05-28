@@ -51,6 +51,10 @@ interface ApiInterface {
     @PUT("api/v1/user")
     fun registerStep1Async(@Body reqRegister: ResUser): Deferred<Response<ResUser>>
 
+    @POST("api/v1/user")
+    fun registerStep1PostAsync(@Body reqRegister: ResUser): Deferred<Response<ResUser>>
+
+
     @POST("api/payment/user")
     fun makePaymentAsync(@Body reqPayment: ReqPayment): Deferred<Response<BaseResult>>
 
@@ -191,5 +195,14 @@ interface ApiInterface {
 
     @POST("api/v1/token")
     fun updateToken(@Body j: JsonObject): Deferred<Response<BaseResult>>
+
+
+
+    @Multipart
+    @POST("api/v1/eventUser/upload")
+    fun uploadContactList(
+        @Part file: MultipartBody.Part?,
+        @Part("eventId") userId: RequestBody?
+    ): Deferred<Response<BaseResult>>
 
 }

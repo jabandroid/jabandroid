@@ -527,6 +527,7 @@
     <string name="label_about_us">Over de VS</string>
     <string name="label_choose_your_lanquage">Kies je voorkeurstaal</string>
 
+
     <string-array name="lanuage">
         <item>English</item>
         <item>Vertaling</item>
@@ -536,6 +537,7 @@
         <item>Tradução</item>
         <item>Traducción</item>
         <item>Tafsiri</item>
+        <item>Isalin</item>
     </string-array>
 
     <string-array name="lanuage_1">
@@ -547,6 +549,7 @@
         <item>Portugees</item>
         <item>Spaans</item>
         <item>Swahili</item>
+        <item>Tagalog</item>
     </string-array>
     <string name="label_continue">Doorgaan</string>
     <string name="user_login"> Gebruikerslogin</string>
@@ -563,7 +566,6 @@
     <string name="time_slot">Subgebeurtenis</string>
     <string name="add_image">Afbeelding toevoegen</string>
     <string name="succesfully_added">Succesvol toegevoegd</string>
-    <string name="add_more">Wilt u meer toevoegen? <br> <u><font color='#255CA4'>Klik hier</font></u>.</br></string>
     <string name="go_to_event_page">of Ga naar <u><font color='#255CA4'>Evenementenpagina</font></u>.</string>
     <string name="add_attandees">Bezoekers toevoegen</string>
     <string name="sub_event">Subgebeurtenissen</string>
@@ -615,4 +617,18 @@
     <string name="enter_vat">Vul de zakelijke btw in</string>
     <string name="r_state">Registratiestatus</string>
     <string name="r_country">Registratieland</string>
+    <string name="r_scan">Gebruikersscan</string>
+    <string name="scan_qr_code">QR-code scannen</string>
+    <string name="ok">Ok</string>
+    <string name="scan_user_code">Scan de QR-code van de gebruiker om verder te gaan</string>
+    <string name="add_more">Wilt u meer subgebeurtenissen toevoegen? <br> <u><font color='#255CA4'>Klik hier</font></u>.</br></string>
+    <string name="version">Versie </string>
+    <string name="add_another_address">Nog een adres toevoegen </string>
+    <string name="your_address">Uw adres</string>
+    <string name="add_new_address">Nieuw adres toevoegen</string>
+    <string name="remove">Verwijderen</string>
+    <string name="delete_address">Wilt u dit adres verwijderen?</string>
+    <string name="select_address">Selecteer het adres voor subgebeurtenis</string>
+    <string name="upload">Importeer het csv-bestand om alle deelnemers te uploaden</string>
+    <string name="selectcsvFile">Selecteer een geldig csv-bestand.</string>
 </resources>

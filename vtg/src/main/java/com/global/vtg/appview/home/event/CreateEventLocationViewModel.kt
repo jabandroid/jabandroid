@@ -12,6 +12,7 @@ import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
+import java.util.ArrayList
 
 class CreateEventLocationViewModel(
     application: Application,
@@ -20,6 +21,10 @@ class CreateEventLocationViewModel(
 
     var address1: MutableLiveData<String> = MutableLiveData()
     var id: String = ""
+    var isNew: Boolean = false
+    var isSubEvent: Boolean = false
+    var isEdit: Boolean = false
+    var position: Int = -1
     var address2: MutableLiveData<String> = MutableLiveData()
     var city: MutableLiveData<String> = MutableLiveData()
     var state: MutableLiveData<String> = MutableLiveData()
@@ -27,6 +32,7 @@ class CreateEventLocationViewModel(
     var country: MutableLiveData<String> = MutableLiveData()
     var contactNumber: MutableLiveData<String> = MutableLiveData()
     var fax: MutableLiveData<String> = MutableLiveData()
+    var web: MutableLiveData<String> = MutableLiveData()
     var email: MutableLiveData<String> = MutableLiveData()
 
     var showToastError: MutableLiveData<String> = MutableLiveData()
@@ -50,11 +56,42 @@ class CreateEventLocationViewModel(
                         contactNumber.value!!,
 
                         if (!TextUtils.isEmpty(fax.value)) fax.value.toString() else "",
+                        if (!TextUtils.isEmpty(web.value)) web.value.toString() else "",
                         if (!TextUtils.isEmpty(email.value)) email.value.toString() else "",
                     )
-                    val list = ArrayList<EventAddress>()
-                    list.add(itemAddress)
-                    CreateEventFragment.itemEvent.eventAddress = list
+
+                    if(isSubEvent){
+                        val list = ArrayList<EventAddress>()
+                        list.add(itemAddress)
+                        CreateSubEventFragment.itemSubEvent.eventAddress = list
+
+
+                    }else {
+                        var list= ArrayList<EventAddress>()
+                        if(CreateEventFragment.itemEvent.eventAddress!=null)
+                            list = CreateEventFragment.itemEvent.eventAddress!!
+                        if (!isNew) {
+
+                            if (list.size > 0) {
+                                list.removeAt(0)
+                                list.add(0, itemAddress)
+                            } else
+
+                                list.add(itemAddress)
+                            CreateEventFragment.itemEvent.eventAddress = list
+                        } else {
+
+                            if (isEdit) {
+                                list.removeAt(position)
+                                list.add(position, itemAddress)
+                            } else {
+
+                                list.add(itemAddress)
+
+                            }
+                            CreateEventFragment.itemEvent.eventAddress = list
+                        }
+                    }
                     redirectToStep3.postValue(true)
                 }
             }

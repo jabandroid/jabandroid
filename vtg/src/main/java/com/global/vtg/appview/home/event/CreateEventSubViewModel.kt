@@ -36,6 +36,12 @@ class CreateEventSubViewModel(
     var state: MutableLiveData<String> = MutableLiveData()
     var zip: MutableLiveData<String> = MutableLiveData()
     var country: MutableLiveData<String> = MutableLiveData()
+    var contactNumber: MutableLiveData<String> = MutableLiveData()
+    var fax: MutableLiveData<String> = MutableLiveData()
+    var web: MutableLiveData<String> = MutableLiveData()
+    var email: MutableLiveData<String> = MutableLiveData()
+
+
     fun onClick(view: View) {
 
         when (view.id) {
@@ -48,23 +54,23 @@ class CreateEventSubViewModel(
                     CreateSubEventFragment.itemSubEvent.privateEvent = eventPrivate.value
                     CreateSubEventFragment.itemSubEvent.crowdLimit = eventAttendees.value
 
-                    val itemAddress = EventAddress(
-                        id,
-                        address1.value!!,
-                        if (!TextUtils.isEmpty(address2.value)) address2.value.toString() else "",
-                        if (!TextUtils.isEmpty(address3.value)) address3.value.toString() else "",
-                        zip.value!!,
-                        city.value!!,
-                        state.value!!,
-                        country.value!!,
-                       "",
-                      "",
-                       "",
-                      "",
-                    )
-                    val list = ArrayList<EventAddress>()
-                    list.add(itemAddress)
-                    CreateSubEventFragment.itemSubEvent.eventAddress = list
+//                    val itemAddress = EventAddress(
+//                        id,
+//                        address1.value!!,
+//                        if (!TextUtils.isEmpty(address2.value)) address2.value.toString() else "",
+//                        if (!TextUtils.isEmpty(address3.value)) address3.value.toString() else "",
+//                        zip.value!!,
+//                        city.value!!,
+//                        state.value!!,
+//                        country.value!!,
+//                        if (!TextUtils.isEmpty(contactNumber.value)) contactNumber.value.toString() else "",
+//                        if (!TextUtils.isEmpty(contactNumber.value)) contactNumber.value.toString() else "",
+//
+//                        if (!TextUtils.isEmpty(fax.value)) fax.value.toString() else "",
+//                        if (!TextUtils.isEmpty(web.value)) web.value.toString() else "",
+//                        if (!TextUtils.isEmpty(email.value)) email.value.toString() else "",
+//                    )
+
 
                     redirectToStep2.postValue(true)
                 }
@@ -89,23 +95,23 @@ class CreateEventSubViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.error_end_time))
                 isValidate = false
             }
-            isNullOrEmpty(address1.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_address_1))
+            isNullOrEmpty( CreateSubEventFragment.itemSubEvent.eventAddress!![0].addr1) -> {
+                showToastError.postValue(App.instance?.getString(R.string.select_address))
                 isValidate = false
             }
-            isNullOrEmpty(city.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_address_city))
-                isValidate = false
-            }
-            isNullOrEmpty(state.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_address_state))
-                isValidate = false
-            }
-
-            isNullOrEmpty(country.value) -> {
-                showToastError.postValue(App.instance?.getString(R.string.empty_address_country))
-                isValidate = false
-            }
+//            isNullOrEmpty(city.value) -> {
+//                showToastError.postValue(App.instance?.getString(R.string.empty_address_city))
+//                isValidate = false
+//            }
+//            isNullOrEmpty(state.value) -> {
+//                showToastError.postValue(App.instance?.getString(R.string.empty_address_state))
+//                isValidate = false
+//            }
+//
+//            isNullOrEmpty(country.value) -> {
+//                showToastError.postValue(App.instance?.getString(R.string.empty_address_country))
+//                isValidate = false
+//            }
 
             isNullOrEmpty(eventAttendees.value) -> {
                 showToastError.postValue(App.instance?.getString(R.string.enter_attendees))

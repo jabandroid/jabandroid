@@ -78,7 +78,7 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
 
         viewPagerDash.setImages(
             arrayListOf(
-                "1","2"
+                "1"
             )
         )
 

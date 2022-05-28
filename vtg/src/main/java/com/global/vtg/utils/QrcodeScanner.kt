@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
+import android.util.Size
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -15,14 +16,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.global.vtg.permission.getAspectRatio
 import com.global.vtg.permission.showToast
-import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.common.InputImage
-import com.vtg.databinding.ActivityBarCodeScannerBinding
-
 import com.vtg.R
 import kotlinx.android.synthetic.main.activity_bar_code_scanner.*
+
 
 class QrcodeScanner : AppCompatActivity() {
 
@@ -36,7 +35,9 @@ class QrcodeScanner : AppCompatActivity() {
     }
 
     private val screenAspectRatio by lazy {
-        val metrics = DisplayMetrics().also { previewView.display.getRealMetrics(it) }
+
+
+        val metrics = DisplayMetrics().also { previewView12.display.getRealMetrics(it) }
         metrics.getAspectRatio()
     }
    // private lateinit var binding: ActivityBarCodeScannerBinding
@@ -79,16 +80,18 @@ class QrcodeScanner : AppCompatActivity() {
     @SuppressLint("UnsafeExperimentalUsageError")
     private fun bindPreview(camProvider: ProcessCameraProvider) {
         cameraProvider = camProvider
+//        val screen = Size(previewView12.width, previewView12.height) //size of the screen
+
 
         val previewUseCase = Preview.Builder()
-            .setTargetRotation(previewView.display.rotation)
+           // .setTargetRotation(previewView12.display.rotation)
             .setTargetAspectRatio(screenAspectRatio)
             .build().also {
-                it.setSurfaceProvider(previewView.surfaceProvider)
+                it.setSurfaceProvider(previewView12.surfaceProvider)
             }
         val barcodeScanner = BarcodeScanning.getClient()
         val analysisUseCase = ImageAnalysis.Builder()
-            .setTargetRotation(previewView.display.rotation)
+          //  .setTargetRotation(previewView12.display.rotation)
             .setTargetAspectRatio(screenAspectRatio)
             .build().also {
                 it.setAnalyzer(
