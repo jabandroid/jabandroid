@@ -16,6 +16,7 @@ open class BaseResult {
     @SerializedName("error")
     var errorApi: String? = null
 
+
     @SerializedName("interested")
     var interestedEvent: String? = null
 }

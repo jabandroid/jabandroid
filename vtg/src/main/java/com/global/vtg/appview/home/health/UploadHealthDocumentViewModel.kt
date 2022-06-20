@@ -9,6 +9,7 @@ import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.ResInstitute
+import com.global.vtg.appview.home.testHistory.TestKit
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
@@ -39,6 +40,7 @@ class UploadHealthDocumentViewModel(
     var time: String? = null
     var dob: String? = null
     var type: String? = null
+    var typeKitId: String? = null
     var email: String? = null
     var region: String = "US"
     var code: MutableLiveData<String> = MutableLiveData()
@@ -80,7 +82,19 @@ class UploadHealthDocumentViewModel(
     }
 
 
+
+    val testDataKit = MutableLiveData<Resource<TestKit>>()
+
+    private val testKitObserver = Observer<Resource<TestKit>> {
+        testDataKit.postValue(it)
+    }
+
+
     init {
+
+        userRepository.testTypeKitData.postValue(null)
+        userRepository.testTypeKitData.observeForever(testKitObserver)
+
         userRepository.searchInstituteLiveData.postValue(null)
         userRepository.searchInstituteLiveData.observeForever(observer)
 
@@ -190,6 +204,9 @@ class UploadHealthDocumentViewModel(
                 )
             }
 
+            var testkit: RequestBody? = null
+            if(!typeKitId.equals("-1"))
+                testkit = typeKitId!!.toRequestBody("text/plain".toMediaTypeOrNull())
           var  test = type!!.toRequestBody("text/plain".toMediaTypeOrNull())
             userRepository.uploadHealthInfo(
                 part,
@@ -201,7 +218,8 @@ class UploadHealthDocumentViewModel(
                 batchNo,
                 resultB,
                 test,
-                username
+                username,
+                testkit
             )
         }
     }
@@ -243,6 +261,12 @@ class UploadHealthDocumentViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.error_hospital_name))
                 isValidate = false
             }
+
+            isNullOrEmpty(typeKitId) -> {
+                showToastError.postValue(App.instance?.getString(R.string.error_select_test_kit))
+                isValidate = false
+            }
+
             else -> {
                 showToastError.postValue("")
             }
@@ -269,4 +293,11 @@ class UploadHealthDocumentViewModel(
         userRepository.scanBarcodeLiveData.removeObserver(userObserver1)
 
     }
+
+    public fun testKit() {
+        scope.launch {
+            userRepository.getTestKit()
+        }
+    }
+
 }

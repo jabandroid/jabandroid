@@ -623,4 +623,26 @@
     <string name="select_address">Tafadhali chagua anwani ya tukio dogo</string>
     <string name="upload">Tafadhali ingiza faili ya csv ili kupakia waliohudhuria wote</string>
     <string name="selectcsvFile">Tafadhali chagua faili sahihi ya csv.</string>
+    <string name="child_Account">Akaunti ya Mtoto</string>
+    <string name="parent_verification">Uthibitishaji wa Mzazi</string>
+    <string name="child_registartion">Usajili wa Mtoto</string>
+    <string name="govermentId">Kitambulisho cha Serikali</string>
+    <string name="or">AU</string>
+    <string name="birthday_verification">Uthibitishaji wa Siku ya Kuzaliwa</string>
+    <string name="birthday_verification_label1">Tarehe ya kuzaliwa ya mtoto wako inatumiwa kutambua ni huduma zipi zinazoweza kufikia. </string>
+    <string name="child_dob">Tarehe ya kuzaliwa ya mtoto wako. </string>
+    <string name="child_sign_up">Jisajili kwa Mtoto </string>
+    <string name="set_password">Weka Nenosiri </string>
+    <string name="child_password">Nenosiri la akaunti ya mtoto wako </string>
+    <string name="password_must">Nenosiri lako lazima: </string>
+    <string name="contain_atleast_8_character" msgid="493399959988888883">"Ina angalau vibambo 8. </string>
+    <string name="include_both_letter">Jumuisha herufi, nambari na hakuna nafasi. </string>
+    <string name="child_valid_date">Watoto walio zaidi ya umri wa miaka 13 wanaweza kusajili akaunti zao wenyewe. </string>
+    <string name="digit_pin">Pini ya tarakimu 4. </string>
+    <string name="medical_card">Kadi ya Matibabu. </string>
+    <string name="day">Siku </string>
+    <string name="add_child">Ili kumwongeza mtoto, changanua msimbo wa QR wa mtoto au ubofye kitufe cha kuongeza ili kuongeza maelezo. </string>
+    <string name="scan">Changanua</string>
+    <string name="delete_child">Je, una uhakika wa kufuta mtoto huyu?</string>
+    <string name="alrady_child">Tayari umenasa maelezo ya mtoto huyu. </string>
 </resources>

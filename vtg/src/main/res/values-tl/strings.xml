@@ -631,5 +631,26 @@
     <string name="select_address">Pakipili ang address para sa sub event</string>
     <string name="upload">Paki-import ang csv file para i-upload ang lahat ng dadalo</string>
     <string name="selectcsvFile">Mangyaring pumili ng wastong csv file.</string>
-
+    <string name="child_Account">Child Account</string>
+    <string name="parent_verification">Parent Verification</string>
+    <string name="child_registartion">Pagpaparehistro ng Bata</string>
+    <string name="govermentId">ID ng Pamahalaan</string>
+    <string name="or">OR</string>
+    <string name="birthday_verification">Birthday Verification</string>
+    <string name="birthday_verification_label1">Ginagamit ang petsa ng kapanganakan ng iyong anak upang matukoy kung aling mga serbisyo ang maaaring ma-access. </string>
+    <string name="child_dob">Petsa ng kapanganakan ng iyong anak. </string>
+    <string name="child_sign_up">Pag-sign up ng Bata </string>
+    <string name="set_password">Itakda ang Password </string>
+    <string name="child_password">Ang password ng account ng iyong anak </string>
+    <string name="password_must">Ang iyong password ay dapat: </string>
+    <string name="contain_atleast_8_character">Naglalaman ng hindi bababa sa 8 character. </string>
+    <string name="include_both_letter">Isama ang parehong mga titik, numero at walang puwang. </string>
+    <string name="child_valid_date">Maaaring magrehistro ng sariling account ang mga batang higit sa 13 taong gulang. </string>
+    <string name="digit_pin">4 Digit Pin. </string>
+    <string name="medical_card">Medical Card. </string>
+    <string name="day">Araw </string>
+    <string name="add_child">Upang magdagdag ng bata i-scan ang QR code ng bata o i-click ang button na magdagdag upang magdagdag ng mga detalye. </string>
+    <string name="scan"> Scan</string>
+    <string name="delete_child">Sigurado ka bang tatanggalin ang batang ito?</string>
+    <string name="alrady_child">Nakuha mo na ang mga detalye ng bata na ito. </string>
 </resources>

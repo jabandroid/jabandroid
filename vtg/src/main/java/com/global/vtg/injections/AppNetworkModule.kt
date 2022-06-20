@@ -147,7 +147,7 @@ val appNetworkModule = module {
 
         // Install the all-trusting trust manager
 
-        // Create an ssl socket factory with our all-trusting manager
+       //  Create an ssl socket factory with our all-trusting manager
         try {
             // Create a trust manager that does not validate certificate chains
             val trustAllCerts = arrayOf<TrustManager>(

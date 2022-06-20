@@ -634,4 +634,26 @@
     <string name="select_address">Kies asseblief adres vir subgeleentheid</string>
     <string name="upload">Voer asseblief die csv-lêer in om alle deelnemers op te laai</string>
     <string name="selectcsvFile">Kies asseblief \'n geldige csv-lêer.</string>
+    <string name="child_Account">Kinderrekening</string>
+    <string name="parent_verification">Ouerverifikasie</string>
+    <string name="child_registartion">Kinderregistrasie</string>
+    <string name="govermentId">Regerings-ID</string>
+    <string name="or">OF</string>
+    <string name="birthday_verification">Verjaardagverifikasie</string>
+    <string name="birthday_verification_label1">Jou kind se geboortedatum word gebruik om te identifiseer watter dienste toegang het. </string>
+    <string name="child_dob">Jou kind se geboortedatum. </string>
+    <string name="child_sign_up">Kindregistrasie </string>
+    <string name="set_password">Stel wagwoord </string>
+    <string name="child_password">Jou kind se rekeningwagwoord </string>
+    <string name="password_must">Jou wagwoord moet: </string>
+    <string name="contain_atleast_8_character">Bevat ten minste 8 karakters. </string>
+    <string name="include_both_letter">Sluit beide letters, syfers en geen spasies in nie. </string>
+    <string name="child_valid_date">Kinders ouer as 13 jaar kan hul eie rekening registreer. </string>
+    <string name="digit_pin">4-syfer-pen. </string>
+    <string name="medical_card">Mediese kaart. </string>
+    <string name="day">Dag </string>
+    <string name="add_child">Om kind by te voeg, skandeer óf QR-kode van kind óf klik op Voeg by-knoppie om besonderhede by te voeg. </string>
+    <string name="scan"> Skandeer</string>
+    <string name="delete_child">Is jy seker om hierdie kind uit te vee?</string>
+    <string name="alrady_child">Jy het reeds hierdie kindbesonderhede vasgelê. </string>
 </resources>

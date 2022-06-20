@@ -9,13 +9,6 @@ import com.vtg.R
 
 class VaccineQRCodeViewModel(application: Application, private val userRepository: UserRepository) :
     AppViewModel(application) {
-    val shareIntent: MutableLiveData<Boolean> = MutableLiveData()
 
-    fun onClick(view: View) {
-        when (view.id) {
-            R.id.btnShare -> {
-                shareIntent.postValue(true)
-            }
-        }
-    }
+
 }

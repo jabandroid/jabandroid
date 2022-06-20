@@ -211,6 +211,7 @@ dependencies {
     implementation 'androidx.camera:camera-lifecycle:1.1.0-beta03'
     implementation 'androidx.camera:camera-view:1.1.0-beta03'
     implementation 'com.google.mlkit:barcode-scanning:17.0.2'
+    implementation 'com.qhutch.bottomsheetlayout:bottomsheetlayout:0.1.9'
 
 //    implementation 'com.google.android.gms:play-services-vision:15.0.2'
 //    implementation 'com.google.firebase:firebase-ml-vision:24.0.3'

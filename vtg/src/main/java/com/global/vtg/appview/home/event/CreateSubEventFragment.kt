@@ -21,6 +21,7 @@ import com.vtg.databinding.FragmentCreateEventSubBinding
 import kotlinx.android.synthetic.main.fragment_create_event_sub.*
 import kotlinx.android.synthetic.main.fragment_create_event_sub.ivBack
 import kotlinx.android.synthetic.main.fragment_event_address.*
+import kotlinx.android.synthetic.main.poputadd_child.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -30,7 +31,7 @@ class CreateSubEventFragment : AppFragment() {
     private val currentCalendar: Calendar = Calendar.getInstance()
     private val viewModel by viewModel<CreateEventSubViewModel>()
     private var isStartTime: Boolean = false
-
+private  var addressId:String=""
 
     companion object {
         lateinit var itemSubEvent: Event
@@ -209,6 +210,7 @@ class CreateSubEventFragment : AppFragment() {
             )
         }
         if (itemSubEvent.eventAddress != null && itemSubEvent.eventAddress!!.isNotEmpty()) {
+            addressId=itemSubEvent.eventAddress!![0].addressID.toString()
             viewModel.address1.postValue(itemSubEvent.eventAddress!![0].addr1)
             viewModel.address2.postValue(itemSubEvent.eventAddress!![0].addr2)
             viewModel.address3.postValue(itemSubEvent.eventAddress!![0].addr3)
@@ -227,6 +229,7 @@ class CreateSubEventFragment : AppFragment() {
         }
 
         if (CreateEventFragment.itemEvent.eventAddress!!.size > 0) {
+            addressId=CreateEventFragment.itemEvent.eventAddress!![0].addressID.toString()
             tvAddress.text = CreateEventFragment.itemEvent.eventAddress!![0].addr1 + " " +
                     CreateEventFragment.itemEvent.eventAddress!![0].addr2 + " " +
                     CreateEventFragment.itemEvent.eventAddress!![0].addr3 + " " +
@@ -243,6 +246,7 @@ class CreateSubEventFragment : AppFragment() {
         tvAddress.setOnClickListener {
             val v = Bundle()
             v.putBoolean("isSubAddress", true)
+            v.putString("addressId", addressId)
             addFragmentInStack<Any>(
                 AppFragmentState.F_EVENT_ADDRESS, v
             )
@@ -278,6 +282,7 @@ class CreateSubEventFragment : AppFragment() {
     @SuppressLint("SetTextI18n")
     fun refreshList() {
         if (itemSubEvent.eventAddress!!.size > 0) {
+            addressId=itemSubEvent.eventAddress!![0].addressID.toString()
             tvAddress.text = itemSubEvent.eventAddress!![0].addr1 + " " +
                     itemSubEvent.eventAddress!![0].addr2 + " " +
                     itemSubEvent.eventAddress!![0].addr3 + " " +

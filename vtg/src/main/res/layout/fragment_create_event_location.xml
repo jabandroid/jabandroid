@@ -172,6 +172,38 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tvaddress2" />
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvaddress3"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:text="@string/address3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etaddress2" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etaddress3"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.address3}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvaddress3" />
+
 
                 <LinearLayout
                     android:id="@+id/cityRoot"
@@ -181,7 +213,7 @@
                     android:weightSum="2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etaddress2">
+                    app:layout_constraintTop_toBottomOf="@+id/etaddress3">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -319,7 +351,7 @@
                             android:drawablePadding="@dimen/_4sdp"
                             android:ellipsize="end"
                             android:gravity="center_vertical"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:maxLines="1"
                             android:paddingStart="@dimen/_16sdp"
                             android:paddingEnd="@dimen/_12sdp"
@@ -400,7 +432,7 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
                     android:imeOptions="actionNext"
-                    android:inputType="number"
+                    android:inputType="phone"
                     android:maxLength="11"
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"

@@ -311,7 +311,7 @@ class RegistrationStep1ViewModel(
             }
 
             str == "child" -> {
-                if (getAge()!! > 13) {
+                if (getAge()!! > 18) {
                     showToastError.postValue("dobchild")
                     isValidate = false
                 }

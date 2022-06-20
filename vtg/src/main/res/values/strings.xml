@@ -460,7 +460,7 @@
     <string name="label_profile_postal_code">Postal Code:\u0020</string>
     <string name="label_profile_country">Country:\u0020</string>
     <string name="label_profile_address">Shipping Address:\u0020</string>
-    <string name="label_last_covid_result">Display last Covid test results</string>
+    <string name="label_last_covid_result">Display last test results</string>
     <string name="label_last_result">Test results</string>
     <string name="label_positive">Positive</string>
     <string name="label_negative">Negative</string>
@@ -649,5 +649,12 @@
     <string name="contain_atleast_8_character">Contain at least 8 characters. </string>
     <string name="include_both_letter">Include both letters, numbers and no spaces. </string>
     <string name="child_valid_date">Children over 13 year old can register their own account. </string>
-
+    <string name="digit_pin">4 Digit Pin. </string>
+    <string name="medical_card">Medical Card. </string>
+    <string name="day">Day </string>
+    <string name="add_child">To add child either scan QR code of child or click on add button to add details. </string>
+    <string name="scan"> Scan</string>
+    <string name="delete_child">Are you sure to delete this child?</string>
+    <string name="alrady_child">You already captured this child details. </string>
+    <string name="create_new_account">Create New Account</string>
 </resources>

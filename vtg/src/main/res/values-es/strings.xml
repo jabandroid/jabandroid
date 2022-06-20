@@ -617,4 +617,26 @@
     <string name="select_address">Seleccione la dirección para el subevento</string>
     <string name="upload">Importe el archivo csv para cargar todos los asistentes</string>
     <string name="selectcsvFile">Seleccione un archivo csv válido.</string>
+    <string name="child_Account">Cuenta infantil</string>
+    <string name="parent_verification">Verificación de padres</string>
+    <string name="child_registartion">Registro de niños</string>
+    <string name="govermentId">ID del gobierno</string>
+    <string name="or">O</string>>
+    <string name="birthday_verification">Verificación de cumpleaños</string>
+    <string name="birthday_verification_label1">La fecha de nacimiento de su hijo se usa para identificar a qué servicios puede acceder. </string>
+    <string name="child_dob">La fecha de nacimiento de su hijo. </string>
+    <string name="child_sign_up">Inscripción infantil</string>
+    <string name="set_password">Establecer contraseña</string>
+    <string name="child_password">Contraseña de la cuenta de su hijo</string>
+    <string name="password_must">Tu contraseña debe: </string>
+    <string name="contain_atleast_8_character">Contener al menos 8 caracteres. </string>
+    <string name="include_both_letter">Incluye letras, números y sin espacios. </string>
+    <string name="child_valid_date">Los niños mayores de 13 años pueden registrar su propia cuenta. </string>
+    <string name="digit_pin">Pin de 4 dígitos.</string>
+    <string name="medical_card">Tarjeta Médica. </string>
+    <string name="day">Día</string>
+    <string name="add_child">Para agregar un niño, escanee el código QR del niño o haga clic en el botón Agregar para agregar detalles. </string>
+    <string name="scan"> Escanear</string>
+    <string name="delete_child">¿Está seguro de eliminar a este niño?</string>
+    <string name="alrady_child">Ya capturaste los detalles de este niño. </string>
 </resources>

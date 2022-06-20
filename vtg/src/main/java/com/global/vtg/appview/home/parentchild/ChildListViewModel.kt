@@ -26,18 +26,64 @@ class ChildListViewModel(application: Application, private val userRepository: U
 
     }
 
+
+    val scanBarcodeLiveData = MutableLiveData<Resource<ResUser>>()
+    private val userObserver1 = Observer<Resource<ResUser>> {
+        scanBarcodeLiveData.postValue(it)
+    }
+
+    val addParentLiveData = MutableLiveData<Resource<AddChild>>()
+    private val addParent = Observer<Resource<AddChild>> {
+        addParentLiveData.postValue(it)
+    }
+
+    val deleteUser = MutableLiveData<Resource<BaseResult>>()
+
+    private val deleteUSerLiveData = Observer<Resource<BaseResult>> {
+        deleteUser.postValue(it)
+    }
+
+
     init {
+
+        userRepository.deleteUserLiveData.postValue(null)
+        userRepository.deleteUserLiveData.observeForever(deleteUSerLiveData)
+        userRepository.addParentLiveData.postValue(null)
+        userRepository.addParentLiveData.observeForever(addParent)
+
         userRepository.userConfigLiveData.postValue(null)
         userRepository.userConfigLiveData.observeForever(userObserver)
+        userRepository.scanBarcodeLiveData.postValue(null)
+        userRepository.scanBarcodeLiveData.observeForever(userObserver1)
+
+    }
 
 
+    fun getDataFromBarcodeId(barcodeId: String) {
+        scope.launch {
+            userRepository.scanBarcodeINew(barcodeId)
+        }
+    }
+
+    fun addParent(childId: String,parentId: String) {
+        scope.launch {
+            userRepository.addParent(childId,parentId)
+        }
+    }
+
+    fun deleteUSer(child:String,parent:String) {
+        scope.launch {
+            userRepository.deleteUserChild(child,parent)
+        }
     }
 
 
     override fun onCleared() {
         super.onCleared()
-
+        userRepository.addParentLiveData.removeObserver(addParent)
+        userRepository.scanBarcodeLiveData.removeObserver(userObserver1)
         userRepository.userConfigLiveData.removeObserver(userObserver)
+        userRepository.getEventsUSerLiveData.removeObserver(deleteUSerLiveData)
     }
 
 

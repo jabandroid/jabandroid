@@ -413,6 +413,37 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/test_type" />
 
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/test_kit"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/label_test_kit"
+                    android:textColor="@color/black"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sTestType" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sTestKit"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:drawableEnd="@drawable/ic_arrow_down"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_10sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+
+                    android:spinnerMode="dropdown"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/test_kit" />
 
                 <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cbCertify"
@@ -428,7 +459,7 @@
                     android:textColor="@color/black"
                     app:buttonTint="@color/colorPrimary"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sTestType" />
+                    app:layout_constraintTop_toBottomOf="@+id/sTestKit" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvFee"
@@ -469,7 +500,7 @@
                     android:textSize="@dimen/_12ssp"
                     android:visibility="gone"
                     app:layout_constraintStart_toEndOf="@+id/tvFee"
-                    app:layout_constraintTop_toBottomOf="@+id/sTestType" />
+                    app:layout_constraintTop_toBottomOf="@+id/sTestKit" />
 
                 <com.global.vtg.utils.textView.BoldTextView
                     android:id="@+id/tvVaccinatedOn"

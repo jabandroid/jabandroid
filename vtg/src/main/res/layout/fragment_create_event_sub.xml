@@ -574,7 +574,7 @@
                             android:drawablePadding="@dimen/_4sdp"
                             android:ellipsize="end"
                             android:gravity="center_vertical"
-                            android:inputType="number"
+                            android:inputType="text"
                             android:maxLines="1"
                             android:paddingStart="@dimen/_16sdp"
                             android:paddingEnd="@dimen/_12sdp"

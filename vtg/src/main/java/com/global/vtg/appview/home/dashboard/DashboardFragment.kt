@@ -1,6 +1,7 @@
 package com.global.vtg.appview.home.dashboard
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
@@ -40,6 +41,7 @@ import java.io.IOException
 import android.content.Context
 import android.content.Intent
 import android.widget.LinearLayout
+import androidx.activity.result.contract.ActivityResultContracts
 import com.global.vtg.appview.authentication.registration.Document
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.config.HealthInfo
@@ -80,7 +82,6 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
     @SuppressLint("HardwareIds")
     override fun initializeComponent(view: View?) {
         loadData()
-
 
         viewModel.getUser()
         viewPager2Adapter = ViewPager2Adapter(getAppActivity())
@@ -206,9 +207,10 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                             ) == false
                     ){
                         USERMain = it.data
-                        USERMain!!.vaccine=ArrayList<VaccineHistory>()
-                        USERMain!!.healthInfo=ArrayList<HealthInfo>()
-                        USERMain!!.test=ArrayList<TestInfo>()
+
+//                        USERMain!!.vaccine=ArrayList<VaccineHistory>()
+//                        USERMain!!.healthInfo=ArrayList<HealthInfo>()
+//                        USERMain!!.test=ArrayList<TestInfo>()
 
 
                         val request: Any = gson.toJson(USERMain)
@@ -386,6 +388,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                 c.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val view = inflater.inflate(R.layout.bottom_sheet_child, null)
             view.tvName.text = user.firstName + " " + user.lastName
+            if(!TextUtils.isEmpty(user.profileUrl))
             view.ivProfilePic.setGlideNormalImage(user.profileUrl!!)
             parent.addView(view)
 
@@ -398,6 +401,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                     c.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 val view = inflater.inflate(R.layout.bottom_sheet_child, null)
                 view.tvName.text = item.firstName + " " + item.lastName
+                if(!TextUtils.isEmpty(item.profileUrl))
                 view.ivProfilePic.setGlideNormalImage(item.profileUrl!!)
                 view.tag = count
                 count++

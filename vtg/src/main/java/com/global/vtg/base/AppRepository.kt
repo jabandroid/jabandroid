@@ -3,6 +3,7 @@ package com.global.vtg.base
 
 import android.text.TextUtils
 import android.util.Log
+import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.model.network.Resource
 import com.global.vtg.model.network.result.BaseError
 import com.global.vtg.model.network.result.BaseResult
@@ -30,12 +31,14 @@ open class AppRepository {
             val response = call.invoke()
             Log.e("Response","REsponse"+response.toString())
             if(response.code()==200){
-
+                Log.e("Response123","REsponse123"+response.toString())
             }
             if (response.isSuccessful) {
                 if (response.body() != null && response.body() is BaseResult) {
+                    Log.e("Response124","REsponse124"+response.toString())
                     val baseResult = response.body() as BaseResult
                     baseResult.code= response.code().toString()
+
                     return if (baseResult.status == null || baseResult.status.equals("Success", true)) {
                         if(baseResult.errorApi!=null&&!baseResult.errorApi.equals("null")){
                             val baseError = BaseError()
@@ -56,10 +59,20 @@ open class AppRepository {
                         Resource.Error(baseError)
                     }
                 } else {
-                    val baseError = BaseError()
-                    baseError.code = "101"
-                    baseError.message = ApiConstant.SOMETHING_WRONG_ERROR
-                    return Resource.Error(baseError)
+
+                    Log.e("Response125","REsponse125"+response.toString())
+
+                    if(response.code()==200){
+                        val baseError = ResUser()
+                        baseError.code = "300"
+
+                        return Resource.Success(response.body()!!)
+                    }else {
+                        val baseError = BaseError()
+                        baseError.code = "101"
+                        baseError.message = ApiConstant.SOMETHING_WRONG_ERROR
+                        return Resource.Error(baseError)
+                    }
                 }
             } else {
                 if (response.errorBody() != null) {

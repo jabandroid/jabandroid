@@ -34,6 +34,7 @@ class EventAddressFragment : AppFragment() {
     private var isStartTime: Boolean = false
     private lateinit var contactAdapter: AddressAdapter
     private var isSubEvent: Boolean = false
+    private var addressId: String = ""
 
     companion object {
 
@@ -47,6 +48,7 @@ class EventAddressFragment : AppFragment() {
     override fun preDataBinding(arguments: Bundle?) {
         if (arguments != null) {
             isSubEvent = arguments.getBoolean("isSubAddress")
+            addressId = arguments.getString("addressId").toString()
         }
     }
 
@@ -111,7 +113,7 @@ class EventAddressFragment : AppFragment() {
                             )
                         }
 
-                        R.id.check->{
+                        R.id.check -> {
                             val list = ArrayList<EventAddress>()
                             list.add(item)
                             CreateSubEventFragment.itemSubEvent.eventAddress = list
@@ -131,7 +133,30 @@ class EventAddressFragment : AppFragment() {
                     }
                 }
             })
-        contactAdapter.finalList(CreateEventFragment.itemEvent.eventAddress!!)
+        contactAdapter.setSelectedID(addressId)
+        var eventAddress = CreateEventFragment.itemEvent.eventAddress!!
+        var isAdd: Boolean = true
+        try {
+
+
+            if (eventAddress.size > 0) {
+                for (item in eventAddress) {
+                    if (item == CreateSubEventFragment.itemSubEvent.eventAddress?.get(0)!!) {
+                        isAdd = false
+                        break
+                    }
+                }
+            }
+
+            if (isAdd) {
+                eventAddress.add(CreateSubEventFragment.itemSubEvent.eventAddress?.get(0)!!)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        contactAdapter.finalList(eventAddress)
+        contactAdapter.addAll(eventAddress)
         contactAdapter.isSubEvent(isSubEvent)
         ivBack.setOnClickListener {
             activity?.onBackPressed()
@@ -151,7 +176,7 @@ class EventAddressFragment : AppFragment() {
         rvAddress.adapter = contactAdapter
 
         val list = ArrayList<EventAddress>()
-        list.add(   CreateEventFragment.itemEvent.eventAddress!![0])
+        list.add(CreateEventFragment.itemEvent.eventAddress!![0])
         CreateSubEventFragment.itemSubEvent.eventAddress = list
 
     }
@@ -163,8 +188,20 @@ class EventAddressFragment : AppFragment() {
 
     fun refreshList() {
         rvAddress.layoutManager = LinearLayoutManager(activity!!)
-        contactAdapter.addAll(CreateEventFragment.itemEvent.eventAddress!!)
-        contactAdapter.finalList(CreateEventFragment.itemEvent.eventAddress!!)
+
+        var eventAddress = CreateEventFragment.itemEvent.eventAddress!!
+        var isAdd: Boolean = true
+        for (item in eventAddress) {
+            if (item == CreateSubEventFragment.itemSubEvent.eventAddress?.get(0)!!) {
+                isAdd = false
+                break
+            }
+        }
+        if (isAdd) {
+            eventAddress.add(CreateSubEventFragment.itemSubEvent.eventAddress?.get(0)!!)
+        }
+        contactAdapter.addAll(eventAddress)
+        contactAdapter.finalList(eventAddress)
         val fragments = getAppActivity().supportFragmentManager.fragments
         for (frg in fragments) {
             if (frg is CreateEventReviewFragment) {

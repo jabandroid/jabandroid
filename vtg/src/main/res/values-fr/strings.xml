@@ -629,4 +629,26 @@
     <string name="select_address">Veuillez sélectionner l\'adresse du sous-événement</string>
     <string name="upload">Veuillez importer le fichier csv pour télécharger tous les participants</string>
     <string name="selectcsvFile">Veuillez sélectionner un fichier csv valide.</string>
+    <string name="child_Account">Compte enfant</string>
+    <string name="parent_verification">Vérification parentale</string>
+    <string name="child_registartion">Enregistrement de l\'enfant</string>
+    <string name="govermentId">Identifiant du gouvernement</string>
+    <string name="or">OU</string>
+    <string name="birthday_verification">Vérification de l\'anniversaire</string>
+    <string name="birthday_verification_label1">La date de naissance de votre enfant est utilisée pour identifier les services auxquels il peut accéder. </string>
+    <string name="child_dob">Date de naissance de votre enfant. </string>
+    <string name="child_sign_up">Inscription de l\'enfant </string>
+    <string name="set_password">Définir le mot de passe</string>
+    <string name="child_password">Mot de passe du compte de votre enfant </string>
+    <string name="password_must">Votre mot de passe doit : </string>
+    <string name="contain_atleast_8_character">Contenir au moins 8 caractères. </string>
+    <string name="include_both_letter">Incluez à la fois des lettres, des chiffres et aucun espace. </string>
+    <string name="child_valid_date">Les enfants de plus de 13 ans peuvent créer leur propre compte. </string>
+    <string name="digit_pin">Broche à 4 chiffres. </string>
+    <string name="medical_card">Carte médicale. </string>
+    <string name="day">Jour </string>
+    <string name="add_child">Pour ajouter un enfant, scannez le code QR de l\'enfant ou cliquez sur le bouton Ajouter pour ajouter des détails. </string>
+    <string name="scan">Scanner</string>
+    <string name="delete_child">Êtes-vous sûr de vouloir supprimer cet enfant ?</string>
+    <string name="alrady_child">Vous avez déjà capturé les détails de cet enfant. </string>
 </resources>

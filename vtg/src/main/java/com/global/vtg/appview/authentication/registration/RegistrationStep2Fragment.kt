@@ -81,6 +81,7 @@ class RegistrationStep2Fragment : AppFragment() {
         } else if (userType.equals("Vendor")) {
             tvTitle.text  = getString(com.vtg.R.string.vendor_Step_2)
         }
+        tvSsn.text = getString(R.string.digit_pin)
 
         if(isChildAccount) {
             tvTitle.text = getString(R.string.child_sign_up)

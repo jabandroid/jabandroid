@@ -329,7 +329,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:background="@drawable/edittext_shadow"
                     android:imeOptions="actionDone"
-                    android:inputType="number"
+                    android:inputType="text"
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"

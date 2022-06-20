@@ -10,6 +10,7 @@ import com.global.vtg.appview.config.ResInstitute
 import com.global.vtg.appview.home.event.Attendees
 import com.global.vtg.appview.home.event.Event
 import com.global.vtg.appview.home.event.EventArray
+import com.global.vtg.appview.home.parentchild.AddChild
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.appview.home.testHistory.TestKit
 import com.global.vtg.appview.payment.ReqPayment
@@ -79,6 +80,13 @@ interface ApiInterface {
     fun scanBarcodeIdAsync(@Path("barcodeId") barcodeId: String): Deferred<Response<ResUser>>
 
 
+
+    @POST( "api/v1/addParent/{childid}/{parentid}")
+    fun addChild(@Path("childid") barcodeId: String,@Path("parentid") parentid: String): Deferred<Response<AddChild>>
+
+
+
+
     @GET("api/v1/institute/{name}")
     fun searchInstituteAsync(@Path("name") name: String): Deferred<Response<ResInstitute>>
 
@@ -116,7 +124,8 @@ interface ApiInterface {
         @Part("srId") batchNo: RequestBody?,
         @Part("result") result: RequestBody?,
         @Part("testId") testId: RequestBody?,
-        @Part("username") username: RequestBody?
+        @Part("username") username: RequestBody?,
+        @Part("kitId") kitID: RequestBody?
     ): Deferred<Response<ResUser>>
 
     @Multipart
@@ -189,6 +198,9 @@ interface ApiInterface {
 
     @DELETE("api/v1/eventUser/{id}")
     fun deleteUser(@Path("id") barcodeId: String): Deferred<Response<BaseResult>>
+
+    @DELETE("api/v1/removeParent/{childid}/{parentid}")
+    fun deleteChild(@Path("childid") barcodeId: String,@Path("parentid") parentid: String): Deferred<Response<BaseResult>>
 
     @GET("api/v1/eventUser/{eventid}/{id}")
     fun checkStatus(@Path("eventid") barcodeId: String,@Path("id") id: String): Deferred<Response<BaseResult>>

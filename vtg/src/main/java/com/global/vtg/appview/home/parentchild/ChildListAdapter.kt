@@ -2,6 +2,7 @@ package com.global.vtg.appview.home.parentchild
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,7 @@ class ChildListAdapter(
         } else
             holder.itemView.tvAge.visibility = View.GONE
 
+        if(!TextUtils.isEmpty(list[position].profileUrl))
         holder.itemView.ivProfilePic.setGlideNormalImage(list[position].profileUrl!!)
         holder.itemView.setOnClickListener {
             click.response(list[position], it, position)
@@ -57,6 +59,10 @@ class ChildListAdapter(
 
     inner class DashboardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
+    }
+
+    public fun getID(pos: Int): String? {
+        return  list[pos].id.toString()
     }
 
     public fun getAge(date: String): String? {
@@ -113,6 +119,19 @@ class ChildListAdapter(
 
     interface onItemClick {
         fun response(item: ResUser, v: View, position: Int)
+    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    public  fun remove(index:Int){
+        list.removeAt(index)
+        notifyDataSetChanged()
+    }
+
+
+    @SuppressLint("NotifyDataSetChanged")
+    public  fun getSize() : Int{
+   return list.size
     }
 
 }

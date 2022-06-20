@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
@@ -190,7 +191,11 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
-                    tvScan.text="+"+it.data.mobileNo
+                    if(TextUtils.isDigitsOnly(it.data.mobileNo))
+                        tvScan.text="+"+it.data.mobileNo
+                    else
+                        tvScan.text=it.data.firstName+" "+ it.data.lastName
+                    viewModel.phone.postValue(it.data.mobileNo)
                     viewModel.phone.postValue(it.data.mobileNo)
                 }
                 is Resource.Error -> {

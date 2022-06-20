@@ -355,7 +355,7 @@ abstract class AppActivity : AppCompatActivity() {
             .get()
             .build()
 
-        getClient().newCall(request).enqueue(object : Callback {
+        client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
 //                progressBar.postValue(false)
                 Log.e("",""+e)

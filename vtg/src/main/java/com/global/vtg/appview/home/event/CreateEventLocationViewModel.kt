@@ -26,6 +26,7 @@ class CreateEventLocationViewModel(
     var isEdit: Boolean = false
     var position: Int = -1
     var address2: MutableLiveData<String> = MutableLiveData()
+    var address3: MutableLiveData<String> = MutableLiveData()
     var city: MutableLiveData<String> = MutableLiveData()
     var state: MutableLiveData<String> = MutableLiveData()
     var zip: MutableLiveData<String> = MutableLiveData()
@@ -47,7 +48,7 @@ class CreateEventLocationViewModel(
                         id,
                         address1.value!!,
                         if (!TextUtils.isEmpty(address2.value)) address2.value.toString() else "",
-                        "",
+                        if (!TextUtils.isEmpty(address3.value)) address3.value.toString() else "",
                         if (!TextUtils.isEmpty(zip.value)) zip.value.toString() else "",
                         city.value!!,
                         state.value!!,

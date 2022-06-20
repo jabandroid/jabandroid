@@ -48,7 +48,7 @@ internal class ViewPagerDashAdapter(ctx: Context) :
             items.add(item)
 //            item=DashBoardItem(4,    R.drawable.ic_health_information,       ctx.resources.getString(R.string.label_my_test_history))
 //            items.add(item)
-            item=DashBoardItem(5,   R.drawable.ic_vaccine_card,       ctx.resources.getString(R.string.label_my_vaccine_card))
+            item=DashBoardItem(5,   R.drawable.ic_vaccine_card,       ctx.resources.getString(R.string.medical_card))
             items.add(item)
             item=DashBoardItem(6,     R.drawable.ic_health_info,      ctx.resources.getString(R.string.label_health_information))
             items.add(item)

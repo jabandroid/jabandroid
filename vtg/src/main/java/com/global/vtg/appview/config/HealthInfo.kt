@@ -36,5 +36,10 @@ data class HealthInfo(
     @field:SerializedName("addedBy")
     var addedBy: String? = "",
 
+
+
+    @field:SerializedName("kitName")
+    val kit: String? = null,
+
     //var testName: String? = ""
 )

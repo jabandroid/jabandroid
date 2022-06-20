@@ -54,7 +54,7 @@ internal class ClinicDashboardAdapter(ctx: Context) :
 //            items.add(item)
             item= DashBoardItem(5,   R.drawable.ic_vaccine_card,       ctx.resources.getString(R.string.label_upload_health))
             items.add(item)
-            item= DashBoardItem(6,     R.drawable.ic_health_info,      ctx.resources.getString(R.string.label_vaccine_card))
+            item= DashBoardItem(6,     R.drawable.ic_health_info,      ctx.resources.getString(R.string.medical_card))
             items.add(item)
 
              item= DashBoardItem(7,  R.drawable.ic_event,ctx.resources.getString(R.string.label_event))

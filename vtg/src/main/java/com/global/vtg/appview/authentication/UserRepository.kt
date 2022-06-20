@@ -9,6 +9,7 @@ import com.global.vtg.appview.config.ResInstitute
 import com.global.vtg.appview.home.event.Attendees
 import com.global.vtg.appview.home.event.Event
 import com.global.vtg.appview.home.event.EventArray
+import com.global.vtg.appview.home.parentchild.AddChild
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.appview.home.testHistory.TestKit
 import com.global.vtg.appview.payment.ReqPayment
@@ -38,6 +39,7 @@ class UserRepository constructor(
     val testTypeLiveData = MutableLiveData<Resource<TestType>>()
     val testTypeKitData = MutableLiveData<Resource<TestKit>>()
     val scanBarcodeLiveData = MutableLiveData<Resource<ResUser>>()
+    val addParentLiveData = MutableLiveData<Resource<AddChild>>()
     val searchInstituteLiveData = MutableLiveData<Resource<ResInstitute>>()
     val registerLiveData = MutableLiveData<Resource<ResUser>>()
     val registerStep3LiveData = MutableLiveData<Resource<ResUser>>()
@@ -250,6 +252,31 @@ class UserRepository constructor(
         }
     }
 
+    suspend fun scanBarcodeINew(barcodeId: String) {
+        scanBarcodeLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.scanBarcodeIdAsync(barcodeId).await() })
+        if (result is ResUser) {
+            scanBarcodeLiveData.postValue(Resource.Success(result))
+
+        } else if (result is BaseError) {
+            scanBarcodeLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+
+    suspend fun addParent(childId: String,parentId: String) {
+        addParentLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.addChild(childId,parentId).await() })
+        if (result is AddChild) {
+            addParentLiveData.postValue(Resource.Success(result))
+
+        } else if (result is BaseError) {
+            addParentLiveData.postValue(Resource.Error(result))
+        }
+    }
+
     suspend fun searchInstitute(text: String) {
         searchInstituteLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result = safeApiCall(call = { apiServiceInterface.searchInstituteAsync(text).await() })
@@ -305,7 +332,8 @@ class UserRepository constructor(
         batchNo: RequestBody?,
         result: RequestBody?,
         test: RequestBody?,
-        username: RequestBody?
+        username: RequestBody?,
+        kit: RequestBody?
     ) {
         userLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result = safeApiCall(call = {
@@ -319,7 +347,8 @@ class UserRepository constructor(
                 batchNo,
                 result,
                 test,
-                username
+                username,
+                kit
             ).await()
         })
         if (result is ResUser) {
@@ -525,6 +554,17 @@ class UserRepository constructor(
         deleteUserLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result =
             safeApiCall(call = { apiServiceInterface.deleteUser(modelReq).await() })
+        if (result is BaseResult && result.code=="200") {
+            deleteUserLiveData.postValue(Resource.Success(result))
+        } else if (result  is BaseError) {
+            deleteUserLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun deleteUserChild(child: String,parent: String) {
+        deleteUserLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.deleteChild(child,parent).await() })
         if (result is BaseResult && result.code=="200") {
             deleteUserLiveData.postValue(Resource.Success(result))
         } else if (result  is BaseError) {

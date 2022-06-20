@@ -39,7 +39,7 @@ class AddressAdapter(
     }
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, @SuppressLint("RecyclerView") position: Int) {
 //        holder.layout.tv_name.text = appReqList[position].getName()
 
         holder.layout.tvAddress1.text =
@@ -49,7 +49,7 @@ class AddressAdapter(
         holder.layout.tvPhone.text =
             appReqList[position].phoneNo
         holder.layout.tvCountry.text =
-            appReqList[position].country + if (TextUtils.isEmpty(appReqList[position].zipCode)) "" else appReqList[position].zipCode
+           if (TextUtils.isEmpty(appReqList[position].zipCode)) "" else appReqList[position].zipCode+" "+  appReqList[position].country
 
         if (position == 0)
             holder.layout.remove.visibility = View.GONE
@@ -77,11 +77,7 @@ class AddressAdapter(
             holder.layout.subButton.visibility = View.GONE
             holder.layout.check.visibility = View.VISIBLE
 
-            if(checkedPosition==-1){
-                holder.layout.check.isChecked = position==0
-            }else{
-                holder.layout.check.isChecked = checkedPosition==position
-            }
+            holder.layout.check.isChecked =  addressID == appReqList[position].addressID
         }
 
     }
@@ -90,7 +86,7 @@ class AddressAdapter(
 
     @SuppressLint("NotifyDataSetChanged")
     public fun remove(index: Int) {
-        //appReqList.removeAt(index)
+        appReqList.removeAt(index)
         notifyDataSetChanged()
     }
 
@@ -114,10 +110,15 @@ class AddressAdapter(
     }
 
     var isSubEvent: Boolean = false
+    var addressID: String = ""
 
     fun isSubEvent(isSub: Boolean) {
         isSubEvent = isSub
 
+    }
+
+    fun setSelectedID(id:String){
+        addressID=id
     }
 
     override fun getFilter(): Filter {

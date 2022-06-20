@@ -13,6 +13,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
@@ -32,6 +33,9 @@ import com.global.vtg.appview.authentication.registration.TestTypeResult
 import com.global.vtg.appview.config.*
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
+import com.global.vtg.appview.home.testHistory.TestKit
+import com.global.vtg.appview.home.testHistory.TestKitAdapter
+import com.global.vtg.appview.home.testHistory.TestKitResult
 import com.global.vtg.appview.home.uploaddocument.InstituteAdapter
 import com.global.vtg.appview.home.uploaddocument.InstituteAutoCompleteAdapter
 import com.global.vtg.appview.home.uploaddocument.TestResultSpinnerAdapter
@@ -62,11 +66,13 @@ import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDate
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDay
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDob
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sStatus
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTestKit
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTestType
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTime
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.s_scan
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.s_status
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.scrollViewHealth
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.test_kit
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvDocName
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvFee
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvScan
@@ -94,6 +100,8 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
     private var type: TestType? = null
     private var typeType: String = ""
     var isDob = false
+    private var typeKit: TestKit = TestKit()
+    private var typeKitId: String = ""
     val resultList: MutableList<String> = ArrayList()
     override fun getLayoutId(): Int {
         return R.layout.fragment_health_info_upload_document
@@ -110,6 +118,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         return mFragmentBinding
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
         if (Constants.USER?.role.equals("ROLE_CLINIC")) {
             groupMobileNoHealth.visibility = View.GONE
@@ -166,6 +175,47 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                 showType(type!!)
         }
 
+        sTestKit.setOnClickListener {
+
+            showKit(typeKit)
+        }
+
+
+        if (isNetworkAvailable(requireActivity())) {
+            viewModel.testKit()
+        } else {
+            DialogUtils.showSnackBar(
+                requireActivity(),
+                requireActivity().resources.getString(R.string.no_connection)
+            )
+        }
+
+        viewModel.testDataKit.observe(this, {
+            when (it) {
+                is Resource.Success -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    typeKit = it.data
+                }
+                is Resource.Error -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).hideProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
+                    }
+                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+                }
+                is Resource.Loading -> {
+                    when (activity) {
+                        is HomeActivity -> (activity as HomeActivity).showProgressBar()
+                        is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
+                    }
+                }
+            }
+        })
+
+
         var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
@@ -183,7 +233,10 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
+                    if(TextUtils.isDigitsOnly(it.data.mobileNo))
                     tvScan.text="+"+it.data.mobileNo
+                    else
+                        tvScan.text=it.data.firstName+" "+ it.data.lastName
                     viewModel.phone.postValue(it.data.mobileNo)
                 }
                 is Resource.Error -> {
@@ -573,6 +626,16 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                 sTestType.text = item.name
                 typeType = item.id.toString()
                 viewModel.type = typeType
+// 80 is id of rapid kit
+                if (!typeType.equals("80")) {//rapid
+                    test_kit.visibility = View.GONE
+                    sTestKit.visibility = View.GONE
+                    viewModel.typeKitId = "-1"
+                } else {
+                    test_kit.visibility = View.VISIBLE
+                    sTestKit.visibility = View.VISIBLE
+                    viewModel.typeKitId = ""
+                }
                 dialog.dismiss()
             }
         }
@@ -581,6 +644,67 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 
 
         Collections.sort(data.tests!!, Comparator<TestTypeResult?> { obj1, obj2 ->
+            return@Comparator obj1!!.name!!.lowercase().compareTo(obj2!!.name!!.lowercase())
+        })
+        adapter.addAll(data.tests!!)
+        list.layoutManager = layoutManager
+        list.adapter = adapter
+
+        search.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun beforeTextChanged(
+                s: CharSequence?, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+
+                adapter?.filter?.filter(s.toString())
+            }
+        })
+
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
+
+    fun showKit(
+        data: TestKit,
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = requireActivity().layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popup_test_type, null)
+        val list = dialogLayout.findViewById<RecyclerView>(R.id.rv_list)
+        val search = dialogLayout.findViewById<EditText>(R.id.search)
+        var layoutManager = LinearLayoutManager(activity)
+        lateinit var mListner: TestKitAdapter.OnItemClickListener
+        mListner = object :
+            TestKitAdapter.OnItemClickListener {
+            @SuppressLint("SimpleDateFormat")
+            override fun onItemClick(item: TestKitResult) {
+                sTestKit.text = item.name
+                typeKitId = item.id.toString()
+                viewModel.typeKitId = typeKitId
+                dialog.dismiss()
+            }
+        }
+        var adapter = TestKitAdapter(activity, mListner)
+
+        Collections.sort(data.tests!!, Comparator<TestKitResult> { obj1, obj2 ->
             return@Comparator obj1!!.name!!.lowercase().compareTo(obj2!!.name!!.lowercase())
         })
         adapter.addAll(data.tests!!)

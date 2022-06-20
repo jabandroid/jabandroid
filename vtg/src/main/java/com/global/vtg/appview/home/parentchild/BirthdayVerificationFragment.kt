@@ -68,7 +68,7 @@ class BirthdayVerificationFragment : AppFragment() {
         }
 
         btnNext.setOnClickListener {
-            if( getAge()!! <13) {
+            if( getAge()!! <18) {
                 val bundle = Bundle()
                 bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT, true)
                 bundle.putString(Constants.BUNDLE_DATE,  dob.text.toString())
@@ -98,7 +98,9 @@ class BirthdayVerificationFragment : AppFragment() {
 
         dob.text="$month/$day/$year"
 
-        arrayDate = Array(thisDate) { i -> (i + 1).toString() }
+        val numDays: Int = Calendar.getInstance().getActualMaximum(Calendar.DATE)
+
+        arrayDate = Array(numDays) { i -> (i + 1).toString() }
         numberPickerDate.minValue =1
         numberPickerDate.maxValue = arrayDate.size
         numberPickerDate.displayedValues = arrayDate

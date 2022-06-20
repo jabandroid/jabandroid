@@ -328,6 +328,7 @@
                         android:background="@drawable/rounded_button_global"
                         android:onClick="@{viewModel::onClick}"
                         android:text="@string/create"
+
                         android:textColor="@color/white" />
 
                     <androidx.appcompat.widget.AppCompatButton

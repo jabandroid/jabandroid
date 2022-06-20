@@ -55,7 +55,7 @@ class OtpFragment : AppFragment() {
     var countryCode: String? = null
     var isVendor: Boolean? = null
     var isClinic: Boolean? = null
-    var childAccount: Boolean? = null
+    var childAccount: Boolean? = false
 
     var isFromForgotPassword: Boolean? = false
 

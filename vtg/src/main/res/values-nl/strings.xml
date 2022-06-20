@@ -631,4 +631,27 @@
     <string name="select_address">Selecteer het adres voor subgebeurtenis</string>
     <string name="upload">Importeer het csv-bestand om alle deelnemers te uploaden</string>
     <string name="selectcsvFile">Selecteer een geldig csv-bestand.</string>
+    <string name="child_Account">Kinderaccount</string>
+    <string name="parent_verification">Verificatie door ouders</string>
+    <string name="child_registartion">Kinderregistratie</string>
+    <string name="govermentId">Overheids-ID</string>
+    <string name="or">OF</string>
+    <string name="birthday_verification">Verificatie verjaardag</string>
+    <string name="birthday_verification_label1">De geboortedatum van je kind wordt gebruikt om te bepalen welke diensten toegang hebben. </string>
+    <string name="child_dob">De geboortedatum van uw kind. </string>
+    <string name="child_sign_up">Aanmelden voor kinderen </string>
+    <string name="set_password">Wachtwoord instellen </string>
+    <string name="child_password">Het accountwachtwoord van je kind </string>
+    <string name="password_must">Uw wachtwoord moet: </string>
+    <string name="contain_atleast_8_character">Bevat ten minste 8 tekens. </string>
+    <string name="include_both_letter">Voeg zowel letters als cijfers toe en geen spaties. </string>
+    <string name="child_valid_date">Kinderen ouder dan 13 jaar kunnen hun eigen account registreren. </string>
+    <string name="digit_pin">4-cijferige pin. </string>
+    <string name="medical_card">Medische kaart. </string>
+    <string name="day">Dag </string>
+    <string name="add_child">Om een ​​kind toe te voegen, scant u de QR-code van het kind of klikt u op de knop Toevoegen om details toe te voegen. </string>
+    <string name="scan">Scannen</string>
+    <string name="delete_child">Weet je zeker dat je dit kind wilt verwijderen?</string>
+    <string name="alrady_child">Je hebt de details van dit kind al vastgelegd. </string>
+
 </resources>

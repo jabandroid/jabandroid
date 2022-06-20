@@ -626,5 +626,26 @@
     <string name = "select_address"> الرجاء تحديد عنوان للحدث الفرعي </string>
     <string name = "upload"> يرجى استيراد ملف csv لتحميل كافة الحاضرين </string>
     <string name = "selectcsvFile"> الرجاء تحديد ملف csv صالح. </string>
-
+    <string name = "child_Account"> حساب الطفل </string>
+    <string name = "parent_verification"> التحقق من الوالدين </string>
+    <string name = "child_registartion"> تسجيل الأطفال </string>
+    <string name = "govermentId"> معرف الحكومة </string>
+    <string name = "or"> OR </string>
+    <string name = "birthday_verification"> التحقق من تاريخ الميلاد </string>
+    <string name = "birthday_verification_label1"> يتم استخدام تاريخ ميلاد طفلك لتحديد الخدمات التي يمكنها الوصول. </string>
+    <string name = "child_dob"> تاريخ ميلاد طفلك. </string>
+    <string name = "child_sign_up"> تسجيل الطفل </string>
+    <string name = "set_password"> تعيين كلمة المرور </string>
+    <string name = "child_password"> كلمة مرور حساب طفلك </string>
+    <string name = "password_must"> يجب أن تكون كلمة المرور الخاصة بك: </string>
+    <string name = "contain_atleast_8_character"> تحتوي على 8 أحرف على الأقل. </string>
+    <string name = "include_both_letter"> قم بتضمين كل من الأحرف والأرقام وبدون مسافات. </string>
+    <string name = "child_valid_date"> يمكن للأطفال الذين تزيد أعمارهم عن 13 عامًا تسجيل حساباتهم الخاصة. </string>
+    <string name = "digit_pin"> رقم التعريف الشخصي المكون من 4 أرقام. </string>
+    <string name = "medical_card"> البطاقة الطبية. </string>
+    <string name = "day"> اليوم </string>
+    <string name = "add_child"> لإضافة طفل ، امسح رمز QR للطفل أو انقر على زر "إضافة" لإضافة التفاصيل. </string>
+    <string name = "scan"> مسح </string>
+    <string name = "delete_child"> هل أنت متأكد من حذف هذا الطفل؟ </string>
+    <string name = "alrady_child"> لقد التقطت بالفعل التفاصيل الفرعية هذه. </string>
 </resources>

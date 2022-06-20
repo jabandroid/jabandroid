@@ -46,7 +46,7 @@ data class EventAddress (
      @field: SerializedName("mobileNo") val mobileNo : String? = "",
      @field: SerializedName("fax") val fax : String? = "",
      @field: SerializedName("website") val web : String? = "",
-     @field: SerializedName("email") val email : String? = "",
+     @field: SerializedName("email") val email : String? = ""
 )
 
 @Keep

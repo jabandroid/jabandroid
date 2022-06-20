@@ -24,9 +24,11 @@ import android.text.Editable
 
 import android.text.TextWatcher
 import kotlinx.android.synthetic.main.popup_register.view.*
+import kotlinx.android.synthetic.main.popup_register.view.message
 import kotlinx.android.synthetic.main.popup_update_pin.view.tvConfirmPin
 import kotlinx.android.synthetic.main.popup_update_pin.view.tvPin
 import kotlinx.android.synthetic.main.popup_update_pin.view.yes
+import kotlinx.android.synthetic.main.poputadd_child.view.*
 
 
 class AppAlertDialog {
@@ -260,7 +262,7 @@ class AppAlertDialog {
         dialog.show()
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "StringFormatInvalid")
     fun showRegMessage(
         activity: AppCompatActivity, pin: String
     ) {
@@ -288,6 +290,47 @@ class AppAlertDialog {
             dialog.dismiss()
 
         }
+
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun addChild(
+        activity: AppCompatActivity,  mInteractor: GetClick,
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+        dialog.setCancelable(true)
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        if (dialog.window != null)
+            wlp.windowAnimations = R.style.DialogSlideAnim
+        //wlp.gravity = Gravity.BOTTOM
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = activity.layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.poputadd_child, null)
+
+
+        dialogLayout.add.setOnClickListener {
+            dialog.dismiss()
+            mInteractor.response("add")
+
+
+        }
+
+        dialogLayout.scan.setOnClickListener {
+            dialog.dismiss()
+            mInteractor.response("scan")
+
+
+        }
+
+
 
         builder.setView(dialogLayout)
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
