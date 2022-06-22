@@ -15,10 +15,7 @@ import com.global.vtg.appview.home.health.HealthInformationDashboardFragment
 import com.global.vtg.appview.home.health.HealthInformationFragment
 import com.global.vtg.appview.home.health.UploadHealthDocumentFragment
 import com.global.vtg.appview.home.help.HelpFragment
-import com.global.vtg.appview.home.parentchild.BirthdayVerificationFragment
-import com.global.vtg.appview.home.parentchild.ChildListFragment
-import com.global.vtg.appview.home.parentchild.ChildRegistration
-import com.global.vtg.appview.home.parentchild.SetPasswordFragment
+import com.global.vtg.appview.home.parentchild.*
 import com.global.vtg.appview.home.profile.ProfileFragment
 import com.global.vtg.appview.home.qrcode.VaccineQRCodeFragment
 import com.global.vtg.appview.home.testHistory.TestBaseFragment
@@ -54,6 +51,7 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_VENDOR_QR_CODE(VendorQRCodeFragment::class.java),
     F_VENDOR_RESULT(VendorResultFragment::class.java),
     F_PROFILE(ProfileFragment::class.java),
+    F_PROFILE_CHILD(ChildProfileFragment::class.java),
     F_CHANGE_PASSWORD(ChangePasswordFragment::class.java),
     F_HEALTH_INFORMATION(HealthInformationFragment::class.java),
     F_HEALTH_DASHBOARD_INFORMATION(HealthInformationDashboardFragment::class.java),

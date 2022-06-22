@@ -5,7 +5,6 @@
     android:background="@drawable/rounded_top_border"
     android:layout_height="wrap_content">
 
-
     <RelativeLayout
         android:id="@+id/root"
         android:layout_width="match_parent"
@@ -17,7 +16,6 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_centerVertical="true"
-
             android:translationZ="1dp"
             app:civ_border_color="@color/white"
             app:civ_border_width="@dimen/_1sdp" />
@@ -42,6 +40,5 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/gray_light"/>
-
 
 </RelativeLayout>

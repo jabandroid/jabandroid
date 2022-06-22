@@ -40,6 +40,7 @@ import com.vtg.databinding.FragmentVaccineQrCodeBinding
 import kotlinx.android.synthetic.main.bottom_chid_qr_code.view.*
 import kotlinx.android.synthetic.main.bottom_sheet_child.view.ivProfilePic
 import kotlinx.android.synthetic.main.bottom_sheet_child.view.tvName
+import kotlinx.android.synthetic.main.card.*
 import kotlinx.android.synthetic.main.fragment_vaccine_qr_code.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream
@@ -50,6 +51,9 @@ class VaccineQRCodeFragment : AppFragment() {
     private val viewModel by viewModel<VaccineQRCodeViewModel>()
     var bitmap: Bitmap? = null
     var count : Int=0
+    var namePerson : String=""
+    var profile : String=""
+    var barcodeId : String=""
     lateinit var viewExpand: ImageView
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     override fun getLayoutId(): Int {
@@ -57,7 +61,18 @@ class VaccineQRCodeFragment : AppFragment() {
     }
 
     override fun preDataBinding(arguments: Bundle?) {
+        arguments?.let {
+            if (arguments.containsKey("name")) {
+                namePerson = arguments.getString("name").toString()
+            }
+            if (arguments.containsKey("barcodeId")) {
+                barcodeId = arguments.getString("barcodeId").toString()
+            }
+            if (arguments.containsKey("profile")) {
+                profile = arguments.getString("profile").toString()
+            }
 
+        }
     }
 
     override fun postDataBinding(binding: ViewDataBinding): ViewDataBinding {
@@ -78,6 +93,7 @@ class VaccineQRCodeFragment : AppFragment() {
 
 
         QrCode(-1)
+
         setTitle(-1)
 
         ivQRCode.setOnClickListener {
@@ -122,23 +138,21 @@ class VaccineQRCodeFragment : AppFragment() {
     fun setTitle(position: Int){
         parent.removeAllViews()
 
-
-        if(position==-1) {
+        if(!TextUtils.isEmpty(namePerson)){
             val inflater =
                 activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val viewChild = inflater.inflate(R.layout.bottom_chid_qr_code, null)
-            viewChild.tvName.text = Constants.USER?.firstName + " " + Constants.USER?.lastName
-            if(!TextUtils.isEmpty(Constants.USER?.profileUrl!!))
-            viewChild.ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl!!)
+            viewChild.tvName.text = namePerson
+            if (!TextUtils.isEmpty(profile))
+                viewChild.ivProfilePic.setGlideNormalImage(profile)
             else
                 viewChild.ivProfilePic.setImageResource(R.drawable.user)
             parent.addView(viewChild)
 
-            if(Constants.USER!!.childAccount!!.size>0)
-                viewChild.ivslide.visibility=View.VISIBLE
+            viewChild.ivslide.visibility = View.GONE
 
-            viewExpand= viewChild.ivslide
-            viewChild.ivslide.setOnClickListener{
+            viewExpand = viewChild.ivslide
+            viewChild.ivslide.setOnClickListener {
                 bottomSheetLayout.toggle()
             }
             viewChild.setOnClickListener {
@@ -146,61 +160,39 @@ class VaccineQRCodeFragment : AppFragment() {
                 setTitle(-1)
                 bottomSheetLayout.collapse()
             }
-            count = 0
-            for (item in Constants.USER?.childAccount!!) {
-
+        }else {
+            if (position == -1) {
                 val inflater =
                     activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 val viewChild = inflater.inflate(R.layout.bottom_chid_qr_code, null)
-                viewChild.tvName.text = item.firstName + " " + item.lastName
-                if(!TextUtils.isEmpty(item.profileUrl))
-                viewChild.ivProfilePic.setGlideNormalImage(item.profileUrl!!)
+                viewChild.tvName.text = Constants.USER?.firstName + " " + Constants.USER?.lastName
+                if (!TextUtils.isEmpty(Constants.USER?.profileUrl!!))
+                    viewChild.ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl!!)
                 else
                     viewChild.ivProfilePic.setImageResource(R.drawable.user)
-                viewChild.tag = count
-                count++
                 parent.addView(viewChild)
+
+                if (Constants.USER!!.childAccount!!.size > 0)
+                    viewChild.ivslide.visibility = View.VISIBLE
+
+                viewExpand = viewChild.ivslide
+                viewChild.ivslide.setOnClickListener {
+                    bottomSheetLayout.toggle()
+                }
                 viewChild.setOnClickListener {
-                    QrCode(it.tag as Int)
-                    setTitle(it.tag as Int)
+                    QrCode(-1)
+                    setTitle(-1)
                     bottomSheetLayout.collapse()
                 }
-            }
-        }else{
+                count = 0
+                for (item in Constants.USER?.childAccount!!) {
 
-            var child= Constants.USER?.childAccount?.get(position)
-            var inflater =
-                activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            var viewChild = inflater.inflate(R.layout.bottom_chid_qr_code, null)
-            viewChild.tvName.text = child!!.firstName + " " + child!!.lastName
-            if(!TextUtils.isEmpty(child.profileUrl))
-            viewChild.ivProfilePic.setGlideNormalImage(child!!.profileUrl!!)
-            else
-                viewChild.ivProfilePic.setImageResource(R.drawable.user)
-            viewChild.tag = position
-            if(Constants.USER!!.childAccount!!.size>0)
-                viewChild.ivslide.visibility=View.VISIBLE
-            viewExpand= viewChild.ivslide
-            viewChild.ivslide.setOnClickListener{
-                bottomSheetLayout.toggle()
-            }
-            parent.addView(viewChild)
-            viewChild.setOnClickListener {
-                QrCode(it.tag as Int)
-                setTitle(it.tag as Int)
-                bottomSheetLayout.collapse()
-            }
-
-            count = 0
-            if(Constants.USER?.childAccount!!.size>0)
-            for (item in Constants.USER?.childAccount!!) {
-                if(count!=position) {
                     val inflater =
                         activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
                     val viewChild = inflater.inflate(R.layout.bottom_chid_qr_code, null)
                     viewChild.tvName.text = item.firstName + " " + item.lastName
-                    if(!TextUtils.isEmpty(item.profileUrl))
-                    viewChild.ivProfilePic.setGlideNormalImage(item.profileUrl!!)
+                    if (!TextUtils.isEmpty(item.profileUrl))
+                        viewChild.ivProfilePic.setGlideNormalImage(item.profileUrl!!)
                     else
                         viewChild.ivProfilePic.setImageResource(R.drawable.user)
                     viewChild.tag = count
@@ -211,26 +203,73 @@ class VaccineQRCodeFragment : AppFragment() {
                         setTitle(it.tag as Int)
                         bottomSheetLayout.collapse()
                     }
-                }else
-                count++
+                }
+            } else {
+
+                var child = Constants.USER?.childAccount?.get(position)
+                var inflater =
+                    activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                var viewChild = inflater.inflate(R.layout.bottom_chid_qr_code, null)
+                viewChild.tvName.text = child!!.firstName + " " + child!!.lastName
+                if (!TextUtils.isEmpty(child.profileUrl))
+                    viewChild.ivProfilePic.setGlideNormalImage(child!!.profileUrl!!)
+                else
+                    viewChild.ivProfilePic.setImageResource(R.drawable.user)
+                viewChild.tag = position
+                if (Constants.USER!!.childAccount!!.size > 0)
+                    viewChild.ivslide.visibility = View.VISIBLE
+                viewExpand = viewChild.ivslide
+                viewChild.ivslide.setOnClickListener {
+                    bottomSheetLayout.toggle()
+                }
+                parent.addView(viewChild)
+                viewChild.setOnClickListener {
+                    QrCode(it.tag as Int)
+                    setTitle(it.tag as Int)
+                    bottomSheetLayout.collapse()
+                }
+
+                count = 0
+                if (Constants.USER?.childAccount!!.size > 0)
+                    for (item in Constants.USER?.childAccount!!) {
+                        if (count != position) {
+                            val inflater =
+                                activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                            val viewChild = inflater.inflate(R.layout.bottom_chid_qr_code, null)
+                            viewChild.tvName.text = item.firstName + " " + item.lastName
+                            if (!TextUtils.isEmpty(item.profileUrl))
+                                viewChild.ivProfilePic.setGlideNormalImage(item.profileUrl!!)
+                            else
+                                viewChild.ivProfilePic.setImageResource(R.drawable.user)
+                            viewChild.tag = count
+                            count++
+                            parent.addView(viewChild)
+                            viewChild.setOnClickListener {
+                                QrCode(it.tag as Int)
+                                setTitle(it.tag as Int)
+                                bottomSheetLayout.collapse()
+                            }
+                        } else
+                            count++
+                    }
+
+                inflater =
+                    activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                viewChild = inflater.inflate(R.layout.bottom_chid_qr_code, null)
+                viewChild.tvName.text = Constants.USER?.firstName + " " + Constants.USER?.lastName
+                if (!TextUtils.isEmpty(Constants.USER?.profileUrl))
+                    viewChild.ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl!!)
+                else
+                    viewChild.ivProfilePic.setImageResource(R.drawable.user)
+                parent.addView(viewChild)
+
+                viewChild.setOnClickListener {
+                    QrCode(-1)
+                    setTitle(-1)
+                    bottomSheetLayout.collapse()
+                }
+
             }
-
-             inflater =
-                activity!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-             viewChild = inflater.inflate(R.layout.bottom_chid_qr_code, null)
-            viewChild.tvName.text = Constants.USER?.firstName + " " + Constants.USER?.lastName
-            if(!TextUtils.isEmpty(Constants.USER?.profileUrl))
-            viewChild.ivProfilePic.setGlideNormalImage(Constants.USER?.profileUrl!!)
-            else
-            viewChild.ivProfilePic.setImageResource(R.drawable.user)
-            parent.addView(viewChild)
-
-            viewChild.setOnClickListener {
-                QrCode(-1)
-                setTitle(-1)
-                bottomSheetLayout.collapse()
-            }
-
         }
     }
 
@@ -269,11 +308,17 @@ class VaccineQRCodeFragment : AppFragment() {
 //
         val renderOption = RenderOption()
         if(position==-1) {
-            name.text= Constants.USER?.firstName+" "+ Constants.USER?.lastName
-            renderOption.content = Constants.USER?.barcodeId.toString()
+            if(!TextUtils.isEmpty(namePerson)){
+                btnShare.visibility = View.VISIBLE
+                name.text = namePerson
+                renderOption.content =barcodeId
+            }else {
+                name.text = Constants.USER?.firstName + " " + Constants.USER?.lastName
+                renderOption.content = Constants.USER?.barcodeId.toString()
 
-            if(!TextUtils.isEmpty(Constants.USER!!.parentId)&&Constants.USER!!.parentId!="0")
-                    btnShare.visibility=View.VISIBLE
+                if (!TextUtils.isEmpty(Constants.USER!!.parentId) && Constants.USER!!.parentId != "0")
+                    btnShare.visibility = View.VISIBLE
+            }
         }// content to encode
         else{
             val child=Constants.USER?.childAccount

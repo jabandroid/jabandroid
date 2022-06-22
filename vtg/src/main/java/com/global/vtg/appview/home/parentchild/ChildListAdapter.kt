@@ -6,6 +6,7 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.imageview.setGlideNormalImage
@@ -49,6 +50,14 @@ class ChildListAdapter(
         holder.itemView.setOnClickListener {
             click.response(list[position], it, position)
 
+        }
+
+        for (i in 0 until 4) {
+            val inflater =
+                holder.itemView.shared_with.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val view = inflater.inflate(R.layout.include_child, null)
+            view.ivProfilePic.setGlideNormalImage(list[position].profileUrl!!)
+            holder.itemView.shared_with.addView(view)
         }
 
     }

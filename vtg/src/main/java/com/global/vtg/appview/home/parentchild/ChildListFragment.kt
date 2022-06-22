@@ -60,16 +60,17 @@ class ChildListFragment : AppFragment() {
 
     @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
-        add_child_controller.visibility=View.GONE
-        main_controller.visibility=View.VISIBLE
+        add_child_controller.visibility = View.GONE
+        main_controller.visibility = View.VISIBLE
         ivBack.setOnClickListener {
 
-            if(isChildController){
-                add_child_controller.visibility=View.GONE
-                main_controller.visibility=View.VISIBLE
-                isChildController=true
-            }else
-            activity?.onBackPressed()
+            if (isChildController) {
+                add_child_controller.visibility = View.GONE
+                main_controller.visibility = View.VISIBLE
+                iv_add.visibility = View.VISIBLE
+                isChildController = false
+            } else
+                activity?.onBackPressed()
         }
 
 
@@ -94,9 +95,10 @@ class ChildListFragment : AppFragment() {
             addFragmentInStack<Any>(AppFragmentState.F_OTP, keys = bundle)
         }
         iv_add.setOnClickListener {
-            add_child_controller.visibility=View.VISIBLE
-            main_controller.visibility=View.GONE
-            isChildController=true
+            add_child_controller.visibility = View.VISIBLE
+            main_controller.visibility = View.GONE
+            iv_add.visibility = View.GONE
+            isChildController = true
 
 //            val bundle = Bundle()
 //            bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT, true)
@@ -108,27 +110,34 @@ class ChildListFragment : AppFragment() {
         adapter = ChildListAdapter(getAppActivity(), object : ChildListAdapter.onItemClick {
             override fun response(item: ResUser, v: View, position: Int) {
 
-                SharedPreferenceUtil.getInstance(getAppActivity())
-                    ?.saveData(
-                        PreferenceManager.KEY_USER_NAME,
-                        Constants.USERMain!!.childAccount?.get(position)!!.email.toString()
-                    )
-
-                SharedPreferenceUtil.getInstance(getAppActivity())
-                    ?.saveData(
-                        PreferenceManager.KEY_IS_CHILD,
-                        true
-                    )
-
-                SharedPreferenceUtil.getInstance(getAppActivity())
-                    ?.saveData(
-                        PreferenceManager.KEY_PASSWORD,
-                        Constants.USERMain!!.childAccount?.get(position)!!.password.toString()
-                    )
-
-                val intent = Intent(getAppActivity(), HomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
+                val b = Bundle()
+                b.putString("profilePic", item.profileUrl)
+                b.putString("dob", item.dateOfBirth)
+                b.putString("name", item.firstName+" "+item.lastName)
+                b.putString("barcodeId", item.barcodeId)
+                addFragmentInStack<Any>(AppFragmentState.F_PROFILE_CHILD, b)
+//
+//                SharedPreferenceUtil.getInstance(getAppActivity())
+//                    ?.saveData(
+//                        PreferenceManager.KEY_USER_NAME,
+//                        Constants.USERMain!!.childAccount?.get(position)!!.email.toString()
+//                    )
+//
+//                SharedPreferenceUtil.getInstance(getAppActivity())
+//                    ?.saveData(
+//                        PreferenceManager.KEY_IS_CHILD,
+//                        true
+//                    )
+//
+//                SharedPreferenceUtil.getInstance(getAppActivity())
+//                    ?.saveData(
+//                        PreferenceManager.KEY_PASSWORD,
+//                        Constants.USERMain!!.childAccount?.get(position)!!.password.toString()
+//                    )
+//
+//                val intent = Intent(getAppActivity(), HomeActivity::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                startActivity(intent)
 
             }
 
@@ -171,29 +180,32 @@ class ChildListFragment : AppFragment() {
                         adapter.setList(it.data.childAccount!!)
                         layoutNoData.visibility = View.GONE
                     } else {
+                        add_child_controller.visibility = View.VISIBLE
+                        main_controller.visibility = View.GONE
+                        iv_add.visibility = View.GONE
+                        isChildController = true
 
-                        AppAlertDialog().addChild(
-                            activity!! as AppCompatActivity,
-                            object : AppAlertDialog.GetClick {
-                                override fun response(type: String) {
 
-                                    if (type.equals("add")) {
-                                        val bundle = Bundle()
-                                        bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT, true)
-                                        addFragmentInStack<Any>(AppFragmentState.F_OTP, keys = bundle)
-                                    } else {
-                                        val intent = Intent(Intent(activity, QrcodeScanner::class.java))
-                                        intent.putExtra("child", true)
-                                        resultLauncher.launch(intent)
-                                    }
-
-                                }
-                            }
-
-                        )
+//                        AppAlertDialog().addChild(
+//                            activity!! as AppCompatActivity,
+//                            object : AppAlertDialog.GetClick {
+//                                override fun response(type: String) {
+//
+//                                    if (type.equals("add")) {
+//                                        val bundle = Bundle()
+//                                        bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT, true)
+//                                        addFragmentInStack<Any>(AppFragmentState.F_OTP, keys = bundle)
+//                                    } else {
+//                                        val intent = Intent(Intent(activity, QrcodeScanner::class.java))
+//                                        intent.putExtra("child", true)
+//                                        resultLauncher.launch(intent)
+//                                    }
+//
+//                                }
+//                            }
+//
+//                        )
                     }
-
-
                 }
                 is Resource.Error -> {
                     when (activity) {
@@ -226,7 +238,7 @@ class ChildListFragment : AppFragment() {
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
                     adapter.remove(positionDelete)
-                    if(adapter.getSize()==0){
+                    if (adapter.getSize() == 0) {
                         AppAlertDialog().addChild(
                             activity!! as AppCompatActivity,
                             object : AppAlertDialog.GetClick {
@@ -235,9 +247,13 @@ class ChildListFragment : AppFragment() {
                                     if (type.equals("add")) {
                                         val bundle = Bundle()
                                         bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT, true)
-                                        addFragmentInStack<Any>(AppFragmentState.F_OTP, keys = bundle)
+                                        addFragmentInStack<Any>(
+                                            AppFragmentState.F_OTP,
+                                            keys = bundle
+                                        )
                                     } else {
-                                        val intent = Intent(Intent(activity, QrcodeScanner::class.java))
+                                        val intent =
+                                            Intent(Intent(activity, QrcodeScanner::class.java))
                                         intent.putExtra("child", true)
                                         resultLauncher.launch(intent)
                                     }
@@ -309,15 +325,15 @@ class ChildListFragment : AppFragment() {
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
 
-                    if(it.data.message!!.lowercase().equals("success")) {
+                    if (it.data.message!!.lowercase().equals("success")) {
                         if (NetworkUtils().isNetworkAvailable(activity!!))
                             viewModel.getUser()
                         else
                             ToastUtils.shortToast(0, getString(R.string.error_message_network))
-                    }  else   if(it.data.message!!.lowercase() == "duplicate") {
-                          ToastUtils.shortToast(0, getString(R.string.alrady_child))
-                    }else{
-                           ToastUtils.shortToast(0, getString(R.string.error_message_somethingwrong))
+                    } else if (it.data.message!!.lowercase() == "duplicate") {
+                        ToastUtils.shortToast(0, getString(R.string.alrady_child))
+                    } else {
+                        ToastUtils.shortToast(0, getString(R.string.error_message_somethingwrong))
                     }
                 }
                 is Resource.Error -> {
@@ -350,7 +366,7 @@ class ChildListFragment : AppFragment() {
             ToastUtils.shortToast(0, getString(R.string.error_message_network))
     }
 
-    private fun deleteButton(position: Int) : SwipeHelper.UnderlayButton {
+    private fun deleteButton(position: Int): SwipeHelper.UnderlayButton {
         return SwipeHelper.UnderlayButton(
             activity!!,
             "Delete",
@@ -362,14 +378,23 @@ class ChildListFragment : AppFragment() {
                         activity!!,
                         object : AppAlertDialog.GetClick {
                             override fun response(type: String) {
-                                positionDelete=position
+                                positionDelete = position
                                 if (NetworkUtils().isNetworkAvailable(activity!!))
-                                    viewModel.deleteUSer(adapter.getID(position)!!,Constants.USER!!.id.toString())
+                                    viewModel.deleteUSer(
+                                        adapter.getID(position)!!,
+                                        Constants.USER!!.id.toString()
+                                    )
                                 else
-                                    ToastUtils.shortToast(0, getString(R.string.error_message_network))
+                                    ToastUtils.shortToast(
+                                        0,
+                                        getString(R.string.error_message_network)
+                                    )
 
                             }
-                        }, getString(R.string.delete_child), getString(R.string.yes), getString(R.string.no)
+                        },
+                        getString(R.string.delete_child),
+                        getString(R.string.yes),
+                        getString(R.string.no)
 
                     )
                 }

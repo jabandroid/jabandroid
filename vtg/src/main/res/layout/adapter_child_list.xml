@@ -6,9 +6,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_margin="@dimen/_5sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_5sdp"
 
         android:paddingTop="@dimen/_4sdp"
         android:paddingBottom="@dimen/_4sdp"
@@ -19,42 +19,77 @@
             android:layout_height="match_parent"
             android:padding="@dimen/_10sdp">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/ivProfilePic"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:src="@drawable/user"
-                android:translationZ="5dp"
-                app:civ_border_color="@color/white"
-                app:civ_border_width="@dimen/_2sdp" />
+            <RelativeLayout
+                android:id="@+id/root1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-            <com.global.vtg.utils.textView.SBoldTextView
-                android:id="@+id/tvName"
-                android:layout_width="wrap_content"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivProfilePic"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:src="@drawable/user"
+                    android:translationZ="5dp"
+                    app:civ_border_color="@color/white"
+                    app:civ_border_width="@dimen/_2sdp" />
+
+                <com.global.vtg.utils.textView.SBoldTextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_toEndOf="@+id/ivProfilePic"
+                    android:gravity="center"
+                    android:textColor="@color/colorPrimary" />
+
+
+                <com.global.vtg.utils.textView.SBoldTextView
+                    android:id="@+id/tvAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvName"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_toEndOf="@+id/ivProfilePic"
+                    android:gravity="center"
+                    android:textColor="@color/black" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/root2"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_toEndOf="@+id/ivProfilePic"
-                android:gravity="center"
+                android:layout_below="@+id/root1">
 
-                android:textColor="@color/colorPrimary" />
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:text="@string/share_with" />
 
-
-            <com.global.vtg.utils.textView.SBoldTextView
-                android:id="@+id/tvAge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvName"
-                android:layout_marginStart="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_toEndOf="@+id/ivProfilePic"
-                android:gravity="center"
-
-                android:textColor="@color/black" />
+                <HorizontalScrollView
+                    android:layout_toEndOf="@+id/tvShare"
+                    android:layout_width="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:id="@+id/shared_with"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </HorizontalScrollView>
+            </RelativeLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

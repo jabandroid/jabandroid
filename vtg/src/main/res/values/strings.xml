@@ -174,6 +174,7 @@
     <string name="label_status">Status:\u0020</string>
     <string name="label_test">Test:\u0020</string>
     <string name="label_dose">Dose:\u0020</string>
+
     <string name="label_batch_no_row">SN:\u0020</string>
     <string name="label_hospital_name">Lab/Clinic Name</string>
     <string name="label_batch_no">Batch/Serial Number</string>
@@ -657,4 +658,7 @@
     <string name="delete_child">Are you sure to delete this child?</string>
     <string name="alrady_child">You already captured this child details. </string>
     <string name="create_new_account">Create New Account</string>
+    <string name="share_with">Shared with</string>
+    <string name="parent_email_id">Parent Email Id</string>
+    <string name="label_dob_1">Date Of Birth</string>
 </resources>
