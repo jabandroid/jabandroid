@@ -221,6 +221,7 @@
 
             <com.global.vtg.utils.textView.SBoldTextView
                 android:id="@+id/tvShared"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"

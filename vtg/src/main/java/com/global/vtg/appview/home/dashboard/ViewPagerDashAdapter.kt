@@ -78,8 +78,8 @@ internal class ViewPagerDashAdapter(ctx: Context) :
             }
             var  item=DashBoardItem(8, R.drawable.ic_travel_his, ctx.resources.getString(R.string.label_travel_information))
             items.add(item)
-            item=DashBoardItem(9, R.drawable.ic_group,  ctx.resources.getString(R.string.label_group))
-            items.add(item)
+//            item=DashBoardItem(9, R.drawable.ic_group,  ctx.resources.getString(R.string.label_group))
+//            items.add(item)
             item=DashBoardItem(10,    R.drawable.ic_travel_info,       ctx.resources.getString(R.string.label_travel_form))
             items.add(item)
 

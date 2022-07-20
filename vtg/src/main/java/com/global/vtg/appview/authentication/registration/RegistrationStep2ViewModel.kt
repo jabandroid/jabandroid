@@ -14,6 +14,8 @@ import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import kotlinx.coroutines.launch
+import java.util.*
+import kotlin.collections.ArrayList
 
 class RegistrationStep2ViewModel(
     application: Application,
@@ -293,4 +295,24 @@ class RegistrationStep2ViewModel(
             userRepository.getUser()
         }
     }
+
+
+    public fun getAge(mill:Long): Int? {
+        var ageInt=0
+        val dob = Calendar.getInstance()
+        val today = Calendar.getInstance()
+        try {
+
+            dob.timeInMillis = mill!!
+            var age = today[Calendar.YEAR] - dob[Calendar.YEAR]
+            if (today[Calendar.DAY_OF_YEAR] < dob[Calendar.DAY_OF_YEAR]) {
+                age--
+            }
+            ageInt = age
+        }catch (e:Exception){
+            e.printStackTrace()
+        }
+        return ageInt
+    }
+
 }

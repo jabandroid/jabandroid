@@ -283,6 +283,13 @@ class RegistrationStep1Fragment : AppFragment() {
                 date,
                 DateUtils.MMDDYYY
             )
+
+            viewModel.dob.postValue(
+                DateUtils.formatDateTime(
+                    date.time,
+                    DateUtils.MMDDYYY
+                )
+            )
             viewModel.apiDob = DateUtils.formatDateTime(date.time, API_DATE_FORMAT)
             viewModel.dobDate = date
 
@@ -359,9 +366,18 @@ class RegistrationStep1Fragment : AppFragment() {
                             DateUtils.API_DATE_FORMAT
                         )
                     )
-                    val date = DateUtils.getDateLocal(
+
+
+                  val date = DateUtils.getDateLocal(
                         Constants.USER?.dateOfBirth!!,
                         DateUtils.API_DATE_FORMAT
+                    )
+
+                    viewModel.dob.postValue(
+                        DateUtils.formatDateTime(
+                            date.time,
+                            DateUtils.DDMMYY
+                        )
                     )
                     viewModel.apiDob = DateUtils.formatDateTime(date.time, API_DATE_FORMAT)
                     viewModel.dobDate = date
@@ -706,17 +722,13 @@ class RegistrationStep1Fragment : AppFragment() {
         )
         viewModel.apiDob = DateUtils.formatDateTime(myCalendar.timeInMillis, API_DATE_FORMAT)
         viewModel.dobDate = myCalendar.time
+        viewModel.dob.postValue(
+            DateUtils.formatDateTime(
+                myCalendar.timeInMillis,
+                DateUtils.DDMMYY
+            )
+        )
 
-//        val sdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-//        val apiSdf = SimpleDateFormat(DateUtils.API_DATE_FORMAT, Locale.US)
-//        val date = sdf.format(myCalendar.time)
-//        var d= DateUtils.formatDate(
-//            date,
-//            DateUtils.API_DATE_FORMAT
-//        )
-//        viewModel.apiDob = apiSdf.format(myCalendar.time)
-//        viewModel.dob.postValue(d)
-//        viewModel.dobDate=myCalendar.time
         if(childAccount){
             if (viewModel.getAge()!! > 13) {
                 AppAlertDialog().showAlert(

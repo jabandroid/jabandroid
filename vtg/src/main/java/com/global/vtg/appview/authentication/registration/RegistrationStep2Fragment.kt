@@ -19,6 +19,7 @@ import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
 import com.vtg.R
 import com.vtg.databinding.FragmentRegStep2Binding
+import kotlinx.android.synthetic.main.adapter_child_list.*
 import kotlinx.android.synthetic.main.fragment_reg_step1.*
 import kotlinx.android.synthetic.main.fragment_reg_step2.*
 import kotlinx.android.synthetic.main.fragment_reg_step2.ivBack
@@ -87,6 +88,19 @@ class RegistrationStep2Fragment : AppFragment() {
             tvTitle.text = getString(R.string.child_sign_up)
 
             viewModel.isChildAccount =true
+            val date = DateUtils.getDateLocal(
+                Constants.USERCHILD?.dateOfBirth!!,
+                DateUtils.API_DATE_FORMAT
+            )
+
+            if(viewModel.getAge(date.time)!! <15) {
+                tvDln.visibility = View.GONE
+                etDln.visibility = View.GONE
+                sDlnState.visibility = View.GONE
+                sDlnCountry.visibility = View.GONE
+                etDlnIssuedDate.visibility = View.GONE
+                etDlnExpiryDate.visibility = View.GONE
+            }
         }
 
         ivBack.setOnClickListener {

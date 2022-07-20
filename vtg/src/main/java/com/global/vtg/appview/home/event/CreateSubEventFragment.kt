@@ -144,40 +144,6 @@ private  var addressId:String=""
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
 
-        chSameAddress.setOnClickListener {
-            if (chSameAddress.isChecked) {
-                viewModel.address1.postValue(CreateEventFragment.itemEvent.eventAddress!![0].addr1)
-                viewModel.address2.postValue(CreateEventFragment.itemEvent.eventAddress!![0].addr2)
-                //  viewModel.address3.postValue(  CreateEventFragment.itemEvent.eventAddress!![0].addr3)
-                viewModel.city.postValue(CreateEventFragment.itemEvent.eventAddress!![0].city)
-                viewModel.state.postValue(CreateEventFragment.itemEvent.eventAddress!![0].state)
-                viewModel.country.postValue(CreateEventFragment.itemEvent.eventAddress!![0].country)
-                viewModel.zip.postValue(CreateEventFragment.itemEvent.eventAddress!![0].zipCode)
-                viewModel.web.postValue(CreateEventFragment.itemEvent.eventAddress!![0].web)
-                viewModel.contactNumber.postValue(CreateEventFragment.itemEvent.eventAddress!![0].phoneNo)
-                viewModel.email.postValue(CreateEventFragment.itemEvent.eventAddress!![0].email)
-//                etaddress1.isEnabled=false
-//                etaddress2.isEnabled=false
-//                sCity.isEnabled=false
-//                sState.isEnabled=false
-//                sZip.isEnabled=false
-//                sCountry.isEnabled=false
-            } else {
-                viewModel.address1.postValue("")
-                viewModel.address2.postValue("")
-                viewModel.city.postValue("")
-                viewModel.state.postValue("")
-                viewModel.country.postValue("")
-                viewModel.zip.postValue("")
-//                etaddress1.isEnabled=true
-//                etaddress2.isEnabled=true
-//                sCity.isEnabled=true
-//                sState.isEnabled=true
-//                sZip.isEnabled=true
-//                sCountry.isEnabled=true
-
-            }
-        }
 
         if (itemSubEvent.eventName != null)
             viewModel.eventName.postValue(itemSubEvent.eventName)
@@ -236,6 +202,10 @@ private  var addressId:String=""
                     CreateEventFragment.itemEvent.eventAddress!![0].city + " " +
                     CreateEventFragment.itemEvent.eventAddress!![0].state + " "
             CreateEventFragment.itemEvent.eventAddress!![0].country
+
+            val list = ArrayList<EventAddress>()
+            list.add(CreateEventFragment.itemEvent.eventAddress!![0])
+          itemSubEvent.eventAddress = list
         }
 
 

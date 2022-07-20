@@ -1,6 +1,7 @@
 package com.global.vtg.appview.authentication.registration
 
 import android.app.Application
+import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -304,9 +305,15 @@ class RegistrationStep1ViewModel(
 
 
             str == "User" -> {
-                if (getAge()!! < 13) {
-                    showToastError.postValue("dob")
+
+                if(TextUtils.isEmpty(apiDob)){
+                    showToastError.postValue(App.instance?.getString(R.string.empty_dob))
                     isValidate = false
+                }else {
+                    if (getAge()!! < 13) {
+                        showToastError.postValue("dob")
+                        isValidate = false
+                    }
                 }
             }
 
@@ -333,15 +340,20 @@ class RegistrationStep1ViewModel(
     }
 
     public fun getAge(): Int? {
+        var ageInt=0
         val dob = Calendar.getInstance()
         val today = Calendar.getInstance()
+        try {
 
-        dob.time = dobDate!!
-        var age = today[Calendar.YEAR] - dob[Calendar.YEAR]
-        if (today[Calendar.DAY_OF_YEAR] < dob[Calendar.DAY_OF_YEAR]) {
-            age--
+            dob.time = dobDate!!
+            var age = today[Calendar.YEAR] - dob[Calendar.YEAR]
+            if (today[Calendar.DAY_OF_YEAR] < dob[Calendar.DAY_OF_YEAR]) {
+                age--
+            }
+             ageInt = age
+        }catch (e:Exception){
+            e.printStackTrace()
         }
-        val ageInt = age
         return ageInt
     }
 

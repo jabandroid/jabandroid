@@ -656,4 +656,21 @@
     <string name="scan"> Skandeer</string>
     <string name="delete_child">Is jy seker om hierdie kind uit te vee?</string>
     <string name="alrady_child">Jy het reeds hierdie kindbesonderhede vasgelê. </string>
+    <string name="create_new_account">Skep nuwe rekening</string>
+    <string name="share_with">Gedeel met</string>
+    <string name="parent_email_id">Ouer-e-pos-ID</string>
+    <string name="label_dob_1">Geboortedatum</string>
+    <string name="remove_parent">Is jy seker om toegang van kind vir hierdie ouer te verwyder?</string>
+    <string name="travel_information">Reisinligting</string>
+    <string name="flight_number">Vlugnommer</string>
+    <string name="departure_city">Vertrekstad</string>
+    <string name="arrival_city">Aankomsstad</string>
+    <string name="view_information">Bekyk inligting</string>
+    <string name="add_another">Voeg nog \'n vlugnommer by</string>
+    <string name="traveler_profile">Reisiger se profiel</string>
+    <string name="label_passport_no">Paspoortnommer</string>
+    <string name="label_international_flight">Internasionale vlug</string>
+    <string name="destination_country">Bestemmingsland</string>
+    <!-- <string name="flight_number">Vlugnommer</string>-->
+    <string name="departure_date">Vertrekdatum</string>
 </resources>

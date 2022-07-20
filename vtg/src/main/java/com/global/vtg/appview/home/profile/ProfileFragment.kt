@@ -113,6 +113,21 @@ class ProfileFragment : AppFragment() {
             childAccount.visibility=View.GONE
         }
 
+        if (SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.getData(
+                    PreferenceManager.KEY_ROLE,
+                    ""
+                ) == "vendor"||
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.getData(
+                    PreferenceManager.KEY_ROLE,
+                    ""
+                ) == "clinic"
+        ) {
+            childAccountView.visibility=View.GONE
+            childAccount.visibility=View.GONE
+        }
+
         tvUserName.text = USER?.firstName + " " + USER?.lastName
         tvMobileValue.text = USER?.mobileNo
         tvCityValue.text = USER?.birthCity
@@ -206,9 +221,7 @@ class ProfileFragment : AppFragment() {
                             is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                             else -> (activity as VendorActivity).hideProgressBar()
                         }
-
                         tvPin.text = pin
-
 
                     }
                     is Resource.Error -> {
@@ -322,6 +335,5 @@ class ProfileFragment : AppFragment() {
 
     override fun onResume() {
         super.onResume()
-
     }
 }

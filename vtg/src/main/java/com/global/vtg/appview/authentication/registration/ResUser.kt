@@ -3,6 +3,7 @@ package com.global.vtg.appview.authentication.registration
 import androidx.annotation.Keep
 import com.global.vtg.appview.config.HealthInfo
 import com.global.vtg.appview.config.TestInfo
+import com.global.vtg.appview.home.parentchild.ParentList
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
 import com.global.vtg.model.network.result.BaseResult
 import com.google.gson.annotations.SerializedName
@@ -118,6 +119,9 @@ data class ResUser(
     var parentId: String? = null,
 
     @field:SerializedName("childAccount")
-    val childAccount: ArrayList<ResUser>? = null,
+    var childAccount: ArrayList<ResUser>? = null,
+
+    @field:SerializedName("sharedParent")
+    val sharedAccount: ArrayList<ParentList>? = null,
 
 ): BaseResult()

@@ -32,6 +32,12 @@ class ProfileViewModel(application: Application, private val userRepository: Use
     var documentPath: String? = null
     val userLiveData = MutableLiveData<Resource<ResProfile>>()
 
+    val deleteUser = MutableLiveData<Resource<BaseResult>>()
+
+    private val deleteUSerLiveData = Observer<Resource<BaseResult>> {
+        deleteUser.postValue(it)
+    }
+
     private val userObserver = Observer<Resource<ResProfile>> {
         userLiveData.postValue(it)
     }
@@ -48,6 +54,9 @@ class ProfileViewModel(application: Application, private val userRepository: Use
 
         userRepository.updatePinLiveData.postValue(null)
         userRepository.updatePinLiveData.observeForever(userPinObserver)
+
+        userRepository.deleteUserLiveData.postValue(null)
+        userRepository.deleteUserLiveData.observeForever(deleteUSerLiveData)
     }
 
     fun onClick(view: View) {
@@ -98,4 +107,23 @@ class ProfileViewModel(application: Application, private val userRepository: Use
             userRepository.updatePin(j)
         }
     }
+
+    fun deleteUSer(child:String,parent:String) {
+        scope.launch {
+            userRepository.deleteUserChild(child,parent)
+        }
+    }
+
+    fun removeDeletObserver() {
+        userRepository.deleteUserLiveData.removeObserver(deleteUSerLiveData)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+
+
+        userRepository.deleteUserLiveData.removeObserver(deleteUSerLiveData)
+    }
+
+
 }

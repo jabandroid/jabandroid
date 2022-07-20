@@ -653,5 +653,22 @@
     <string name="scan">Scannen</string>
     <string name="delete_child">Weet je zeker dat je dit kind wilt verwijderen?</string>
     <string name="alrady_child">Je hebt de details van dit kind al vastgelegd. </string>
+    <string name="create_new_account">Nieuw account aanmaken</string>
+    <string name="share_with">Gedeeld met</string>
+    <string name="parent_email_id">E-mailadres ouder</string>
+    <string name="label_dob_1">Geboortedatum</string>
+    <string name="remove_parent">Weet je zeker dat je de toegang van het kind voor deze ouder wilt verwijderen?</string>
+    <string name="travel_information">Reisinformatie</string>
+    <string name="flight_number">Vluchtnummer</string>
+    <string name="departure_city">Vertrekplaats</string>
+    <string name="arrival_city">Aankomstplaats</string>
+    <string name="view_information">Informatie bekijken</string>
+    <string name="add_another">Nog een vluchtnummer toevoegen</string>
+    <string name="traveler_profile">Reizigersprofiel</string>
+    <string name="label_passport_no">Paspoortnummer</string>
+    <string name="label_international_flight">Internationale vlucht</string>
+    <string name="destination_country">Land van bestemming</string>
+    <!-- <string name="flight_number">Vluchtnummer</string>-->
+    <string name="departure_date">Vertrekdatum</string>
 
 </resources>

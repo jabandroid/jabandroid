@@ -648,4 +648,21 @@
     <string name = "scan"> مسح </string>
     <string name = "delete_child"> هل أنت متأكد من حذف هذا الطفل؟ </string>
     <string name = "alrady_child"> لقد التقطت بالفعل التفاصيل الفرعية هذه. </string>
+    <string name = "create_new_account"> إنشاء حساب جديد </string>
+    <string name = "share_with"> مشتركة مع </string>
+    <string name = "parent_email_id"> معرف البريد الإلكتروني للوالد </string>
+    <string name = "label_dob_1"> تاريخ الميلاد </string>
+    <string name = "remove_parent"> هل أنت متأكد من إزالة وصول الطفل لهذا الوالد؟ </string>
+    <string name = "travel_information"> معلومات السفر </string>
+    <string name = "flight_number"> رقم الرحلة </string>
+    <string name = "departure_city"> مدينة المغادرة </string>
+    <string name = "arrival_city"> مدينة الوصول </string>
+    <string name = "view_information"> عرض المعلومات </string>
+    <string name = "add_another"> أضف رقم رحلة آخر </string>
+    <string name = "traveler_profile"> ملف تعريف المسافر </string>
+    <string name = "label_passport_no"> رقم جواز السفر </string>
+    <string name = "label_international_flight"> رحلة دولية </string>
+    <string name = "destination_country"> بلد الوجهة </string>
+
+    <string name = "departure_date"> تاريخ المغادرة </string>
 </resources>

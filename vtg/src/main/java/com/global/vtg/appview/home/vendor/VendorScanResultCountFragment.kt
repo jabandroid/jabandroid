@@ -120,11 +120,11 @@ class VendorScanResultCountFragment : AppFragment() {
         /*  ivBackScan.setOnClickListener {
               activity?.onBackPressed()
           }*/
-        val f: Fragment? =
-            activity?.supportFragmentManager?.findFragmentById(R.id.container)
-        if (f is VendorQRCodeFragment) {
-            f.popFragment()
-        }
+//        val f: Fragment? =
+//            activity?.supportFragmentManager?.findFragmentById(R.id.container)
+//        if (f is VendorQRCodeFragment) {
+//            f.popFragment()
+//        }
 
         if (Constants.isSpalsh)
             splash.visibility = View.VISIBLE
@@ -343,7 +343,7 @@ class VendorScanResultCountFragment : AppFragment() {
 
         } else {
 
-            if (Constants.SCANNEDUSER!!.healthInfo != null && listHealth.size > 0) {
+            if (Constants.SCANNEDUSER!!.healthInfo != null && Constants.SCANNEDUSER!!.healthInfo!!.size > 0) {
                 listHealth = Constants.SCANNEDUSER!!.healthInfo!!
                 Constants.SCANNEDUSER?.healthInfo?.let {
                     Collections.sort(listHealth, Comparator<HealthInfo?> { obj1, obj2 ->
@@ -437,6 +437,10 @@ class VendorScanResultCountFragment : AppFragment() {
 
 
                 }
+            } else {
+                test_Root.visibility = View.GONE
+                iv_status_splash.visibility = View.GONE
+                tvtest.visibility = View.GONE
             }
 
         }
@@ -613,35 +617,54 @@ class VendorScanResultCountFragment : AppFragment() {
         }
 
         Handler().postDelayed(Runnable {
-            iv_status_splash.visibility = View.VISIBLE
-            val anim: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in)
-            anim.duration = 2000
-            anim.repeatCount = 0
-            iv_status_splash.startAnimation(anim)
-            anim.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(anim: Animation) {}
-                override fun onAnimationRepeat(anim: Animation) {}
-                override fun onAnimationEnd(anim: Animation) {
-                    Handler().postDelayed(Runnable {
-                        val list = Constants.SCANNEDUSER!!.vaccine!!
-                        if (list.size > 0) {
-                            iv_status_Vaccine.visibility = View.VISIBLE
-                            val anim: Animation =
-                                AnimationUtils.loadAnimation(context, R.anim.fade_in)
-                            anim.repeatCount = 0
-                            anim.duration = 800
-                            iv_status_Vaccine.startAnimation(anim)
-                            anim.setAnimationListener(object : Animation.AnimationListener {
-                                override fun onAnimationStart(anim: Animation) {}
-                                override fun onAnimationRepeat(anim: Animation) {}
-                                override fun onAnimationEnd(anim: Animation) {
+            if (iv_status_splash.visibility == View.GONE) {
+                val list = Constants.SCANNEDUSER!!.vaccine!!
+                if (list.size > 0) {
+                    iv_status_Vaccine.visibility = View.VISIBLE
+                    val anim: Animation =
+                        AnimationUtils.loadAnimation(context, R.anim.fade_in)
+                    anim.repeatCount = 0
+                    anim.duration = 800
+                    iv_status_Vaccine.startAnimation(anim)
+                    anim.setAnimationListener(object : Animation.AnimationListener {
+                        override fun onAnimationStart(anim: Animation) {}
+                        override fun onAnimationRepeat(anim: Animation) {}
+                        override fun onAnimationEnd(anim: Animation) {
 
-                                }
-                            })
                         }
-                    }, 10)
+                    })
                 }
-            })
+            } else {
+                iv_status_splash.visibility = View.VISIBLE
+                val anim: Animation = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+                anim.duration = 2000
+                anim.repeatCount = 0
+                iv_status_splash.startAnimation(anim)
+                anim.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(anim: Animation) {}
+                    override fun onAnimationRepeat(anim: Animation) {}
+                    override fun onAnimationEnd(anim: Animation) {
+                        Handler().postDelayed(Runnable {
+                            val list = Constants.SCANNEDUSER!!.vaccine!!
+                            if (list.size > 0) {
+                                iv_status_Vaccine.visibility = View.VISIBLE
+                                val anim: Animation =
+                                    AnimationUtils.loadAnimation(context, R.anim.fade_in)
+                                anim.repeatCount = 0
+                                anim.duration = 800
+                                iv_status_Vaccine.startAnimation(anim)
+                                anim.setAnimationListener(object : Animation.AnimationListener {
+                                    override fun onAnimationStart(anim: Animation) {}
+                                    override fun onAnimationRepeat(anim: Animation) {}
+                                    override fun onAnimationEnd(anim: Animation) {
+
+                                    }
+                                })
+                            }
+                        }, 10)
+                    }
+                })
+            }
         }, 80)
 
         vaccine_Root.setOnClickListener {
@@ -653,7 +676,7 @@ class VendorScanResultCountFragment : AppFragment() {
 
                 if (role?.equals("user") == true) {
 
-                        Constants.openFile(strVaccine, activity!!)
+                    Constants.openFile(strVaccine, activity!!)
 
                 } else {
                     AppAlertDialog().validatePin(
@@ -674,7 +697,7 @@ class VendorScanResultCountFragment : AppFragment() {
 
         }
         test_Root.setOnClickListener {
-           // openFile(strTest)
+            // openFile(strTest)
             val role = SharedPreferenceUtil.getInstance(activity!!)
                 ?.getData(PreferenceManager.KEY_ROLE, "user")
             if (!strTest.isNullOrEmpty()) {
@@ -682,7 +705,7 @@ class VendorScanResultCountFragment : AppFragment() {
 
                 if (role?.equals("user") == true) {
 
-                        Constants.openFile(strTest, activity!!)
+                    Constants.openFile(strTest, activity!!)
 
                 } else {
                     AppAlertDialog().validatePin(
@@ -750,14 +773,14 @@ class VendorScanResultCountFragment : AppFragment() {
             }
         })
 
-        viewModel.validatePin.observe(this,{
+        viewModel.validatePin.observe(this, {
             when (it) {
                 is Resource.Success -> {
 
 
-                    if(it.data.status=="Success"){
+                    if (it.data.status == "Success") {
                         Constants.openFile(openDoc, activity!!)
-                    }else{
+                    } else {
                         ToastUtils.longToast(0, getString(R.string.invalid_pin))
                     }
                     when (activity) {

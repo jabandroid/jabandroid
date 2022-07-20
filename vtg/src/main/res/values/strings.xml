@@ -244,6 +244,7 @@
     <string name="label_issued_date"><font size="14">Issued Date</font></string>
     <string name="label_expiry_date"><font size="14">Expiry Date</font></string>
     <string name="label_passport">Passport</string>
+
     <string name="label_mailing_add_1">Mailing Address 1</string>
     <string name="label_add_1">Address 1</string>
     <string name="label_add_2">Address 2</string>
@@ -661,4 +662,75 @@
     <string name="share_with">Shared with</string>
     <string name="parent_email_id">Parent Email Id</string>
     <string name="label_dob_1">Date Of Birth</string>
+    <string name="remove_parent">Are you sure to remove access of child for this parent?</string>
+    <string name="travel_information">Travel Information</string>
+    <string name="flight_number">Flight Number</string>
+    <string name="departure_city">Departure City</string>
+    <string name="arrival_city">Arrival City</string>
+    <string name="view_information">View Information</string>
+    <string name="add_another">Add another flight number</string>
+    <string name="traveler_profile">Traveler\'s Profile</string>
+    <string name="label_passport_no">Passport Number</string>
+    <string name="label_international_flight">International Flight</string>
+    <string name="destination_country">Destination country</string>
+    <string name="departure_date">Departure Date</string>
+    <string name="flight_Details">Flight Details</string>
+    <string name="airline_name">Airline Name</string>
+    <string name="origin_airport">Origin Airport</string>
+    <string name="departure_time">Departure Time</string>
+    <string name="destination_airport">Destination Airport</string>
+    <string name="arrival_time">Arrival Time</string>
+    <string name="iternary_number">Itinerary Number</string>
+    <string name="same_itenary_number">Same itinerary number</string>
+    <string name="seat_number">Seat Number</string>
+    <string name="forms">Exit/Entry Forms</string>
+    <string name="arrival_info">Arrival Information</string>
+    <string name="travel_info">Traveler Information</string>
+    <string name="cust_info">Custom Information</string>
+    <string name="consent">Consent</string>
+    <string name="immigration_form">Immigration/Custom Form</string>
+    <string name="country_of_embarkation">Country of Embarkation</string>
+    <string name="boarded_at">Boarded At</string>
+    <string name="arrival_date">Arrival Date</string>
+    <string name="port_arrival">Port of Arrival</string>
+    <string name="status_of_Board">Status of Board</string>
+    <string name="flight_info">Flight Information</string>
+    <string name="contact_info">Contact Information</string>
+    <string name="desti_info">Destination Information</string>
+    <string name="pupose_of_visit">Purpose of Visit</string>
+    <string name="length_stay">Length of Stay(Number of Nights)</string>
+    <string name="accomation_type">Accommodation Type</string>
+    <string name="address">Address</string>
+    <string name="island">Island</string>
+    <string name="village">Village/Town</string>
+    <string name="confirmation_number">Confirmation Number(Optional)</string>
+    <string name="number_of_traveller">Number of Travelers</string>
+
+    <string name="travel_info_1">Travel Information</string>
+    <string name="personal_info">Personal Information</string>
+
+    <string name="country_of_birth">Country of Birth</string>
+    <string name="nationality">Nationality</string>
+    <string name="marital_status">Marital Status</string>
+    <string name="occupation">Occupation</string>
+    <string name="travel_doc_type">Travel Document Type</string>
+    <string name="travel_doc_number">Travel Document Number</string>
+    <string name="travel_doc_issue_date">Travel Document Issue Date</string>
+    <string name="travel_doc_expiry_date">Travel Document Expiry Date</string>
+    <string name="travel_doc_country"> Document Country</string>
+    <string name="image_doc"> Image of Travel Document BioData page</string>
+    <string name="port_health">Port Health Surveillance Questions</string>
+    <string name="health_care_worker">Are you health care worker?</string>
+    <string name="over_past21_days">Over past 21 days, have you visited or been in contact with anyone from the followings country?</string>
+    <string name="symtom">Are you experiencing any of the following symptoms?</string>
+    <string name="add_symtom">Add symptoms</string>
+    <string name="feeling_pain">Are you feeling any pain?</string>
+    <string name="underline_conition">Do you have any underline conditions?</string>
+    <string name="covid_postive">Have you been tested positive with COVID-19?</string>
+    <string name="covid_test_taken">Please indicate which authorized COVID-19 test did you take?</string>
+    <string name="data_sample_collected">Data sample collected?</string>
+    <string name="image_of_covid_19_test_result">Image of covid 19 test result</string>
+    <string name="no_health_info">No health info found.</string>
+
+
 </resources>

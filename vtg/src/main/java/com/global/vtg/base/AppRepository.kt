@@ -120,7 +120,7 @@ open class AppRepository {
             return when (error) {
                 is ConnectException -> {
                     val baseError = BaseError()
-                    baseError.code = ApiConstant.TIME_OUT_CONNECTION_STATUS
+                    baseError.code = ApiConstant.TIME_OUT_CONNECTION_STATUS_1
                     baseError.message = ApiConstant.TIME_OUT_CONNECTION
                     Resource.Error(baseError)
                 }

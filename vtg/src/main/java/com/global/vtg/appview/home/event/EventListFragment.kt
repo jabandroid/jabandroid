@@ -87,8 +87,7 @@ class EventListFragment : AppFragment() {
                 when (v.id) {
                     R.id.share -> {
 
-                        // preetiwebkrit@gmail.com
-                        //Vaxtrxglobal20@
+
                         var url: String = ""
                         if (item.eventImage!!.isNotEmpty()) {
                             for (item1 in item.eventImage!!) {

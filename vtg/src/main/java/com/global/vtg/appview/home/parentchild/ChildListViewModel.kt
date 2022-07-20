@@ -10,6 +10,7 @@ import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
 import com.global.vtg.model.network.result.BaseResult
+import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.google.gson.JsonObject
@@ -42,10 +43,17 @@ class ChildListViewModel(application: Application, private val userRepository: U
     private val deleteUSerLiveData = Observer<Resource<BaseResult>> {
         deleteUser.postValue(it)
     }
+    val deleteChildPermanent = MutableLiveData<Resource<BaseResult>>()
 
+    private val registerObserver = Observer<Resource<BaseResult>> {
+        deleteChildPermanent.postValue(it)
+    }
 
     init {
 
+
+        userRepository.deleteChildPermanentLiveData.postValue(null)
+        userRepository.deleteChildPermanentLiveData.observeForever(registerObserver)
         userRepository.deleteUserLiveData.postValue(null)
         userRepository.deleteUserLiveData.observeForever(deleteUSerLiveData)
         userRepository.addParentLiveData.postValue(null)
@@ -71,6 +79,12 @@ class ChildListViewModel(application: Application, private val userRepository: U
         }
     }
 
+    fun deleteChild(childId:String) {
+        scope.launch {
+            Constants.USER?.let { userRepository.deleteChildPermanent(childId) }
+        }
+    }
+
     fun deleteUSer(child:String,parent:String) {
         scope.launch {
             userRepository.deleteUserChild(child,parent)
@@ -81,6 +95,7 @@ class ChildListViewModel(application: Application, private val userRepository: U
     override fun onCleared() {
         super.onCleared()
         userRepository.addParentLiveData.removeObserver(addParent)
+        userRepository.deleteChildPermanentLiveData.removeObserver(registerObserver)
         userRepository.scanBarcodeLiveData.removeObserver(userObserver1)
         userRepository.userConfigLiveData.removeObserver(userObserver)
         userRepository.getEventsUSerLiveData.removeObserver(deleteUSerLiveData)

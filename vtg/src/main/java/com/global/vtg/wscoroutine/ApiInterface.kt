@@ -52,6 +52,10 @@ interface ApiInterface {
     @PUT("api/v1/user")
     fun registerStep1Async(@Body reqRegister: ResUser): Deferred<Response<ResUser>>
 
+
+    @DELETE("api/v1/user/{userId}")
+    fun deleteChild(@Path("userId")  zipCode: String): Deferred<Response<BaseResult>>
+
     @POST("api/v1/user")
     fun registerStep1PostAsync(@Body reqRegister: ResUser): Deferred<Response<ResUser>>
 

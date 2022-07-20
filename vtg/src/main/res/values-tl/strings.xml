@@ -653,4 +653,21 @@
     <string name="scan"> Scan</string>
     <string name="delete_child">Sigurado ka bang tatanggalin ang batang ito?</string>
     <string name="alrady_child">Nakuha mo na ang mga detalye ng bata na ito. </string>
+    <string name="create_new_account">Gumawa ng Bagong Account</string>
+    <string name="share_with">Ibinahagi kay</string>
+    <string name="parent_email_id">Parent Email Id</string>
+    <string name="label_dob_1">Petsa ng Kapanganakan</string>
+    <string name="remove_parent">Sigurado ka bang aalisin ang access ng anak para sa magulang na ito?</string>
+    <string name="travel_information">Impormasyon sa Paglalakbay</string>
+    <string name="flight_number">Flight Number</string>
+    <string name="departure_city">Departure City</string>
+    <string name="arrival_city">Arrival City</string>
+    <string name="view_information">Tingnan ang Impormasyon</string>
+    <string name="add_another">Magdagdag ng isa pang flight number</string>
+    <string name="traveler_profile">Profile ng Manlalakbay</string>
+    <string name="label_passport_no">Numero ng Pasaporte</string>
+    <string name="label_international_flight">International Flight</string>
+    <string name="destination_country">Destination country</string>
+    <!-- <string name="flight_number">Flight Number</string>-->
+    <string name="departure_date">Petsa ng Pag-alis</string>
 </resources>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/root1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp">
+
+
+        <com.global.vtg.utils.textView.SBoldTextView
+            android:id="@+id/tvName1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+
+            android:gravity="center"
+            android:text="NYC"
+            android:textColor="@color/gray_dark" />
+
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/tvTime1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvName1"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+
+            android:gravity="center"
+            android:text="9:30 AM"
+            android:textColor="@color/gray_dark" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/root2"
+android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/root1"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/plane"
+            android:background="@drawable/ic_dotted"
+            android:layerType="software" />
+
+        <ImageView
+            android:id="@+id/plane"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_black_plane" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/plane"
+            android:background="@drawable/ic_dotted"
+            android:layerType="software" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/root2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:paddingTop="@dimen/_10sdp"
+        android:gravity="end"
+        android:paddingStart="@dimen/_6sdp"
+        android:paddingBottom="@dimen/_10sdp"
+       >
+
+
+        <com.global.vtg.utils.textView.SBoldTextView
+            android:id="@+id/tvName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:gravity="end"
+            android:text="NYC"
+            android:textColor="@color/gray_dark" />
+
+
+        <com.global.vtg.utils.textView.RegularTextView
+            android:id="@+id/tvTime2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvName2"
+
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:gravity="end"
+            android:text="9:30 AM"
+            android:textColor="@color/gray_dark" />
+    </RelativeLayout>
+
+
+</RelativeLayout>

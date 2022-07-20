@@ -645,4 +645,21 @@
     <string name="scan">Changanua</string>
     <string name="delete_child">Je, una uhakika wa kufuta mtoto huyu?</string>
     <string name="alrady_child">Tayari umenasa maelezo ya mtoto huyu. </string>
+    <string name="create_new_account">Unda Akaunti Mpya</string>
+    <string name="share_with">Imeshirikiwa na</string>
+    <string name="parent_email_id">Kitambulisho cha Barua pepe ya Mzazi</string>
+    <string name="label_dob_1">Tarehe ya Kuzaliwa</string>
+    <string name="remove_parent">Je, una uhakika kuwa umeondoa idhini ya kufikia mtoto kwa mzazi huyu?</string>
+    <string name="travel_information">Maelezo ya Usafiri</string>
+    <string name="flight_number">Nambari ya Ndege</string>
+    <string name="departure_city">Mji wa Kuondoka</string>
+    <string name="arrival_city">Mji wa Kuwasili</string>
+    <string name="view_information">Angalia Taarifa</string>
+    <string name="add_another">Ongeza nambari nyingine ya ndege</string>
+    <string name="traveler_profile">Wasifu wa Msafiri</string>
+    <string name="label_passport_no">Nambari ya Pasipoti</string>
+    <string name="label_international_flight">Ndege ya Kimataifa</string>
+    <string name="destination_country">Nchi lengwa</string>
+    <!-- <string name="flight_number">Nambari ya Ndege</string>-->
+    <string name="departure_date">Tarehe ya Kuondoka</string>
 </resources>

@@ -347,6 +347,9 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                 7 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_CHILD_LIST)
                 }
+                8 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_TRaVEL_INFO)
+                }
                 11 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
                 }

@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.global.vtg.appview.home.parentchild.ChildListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@mipmap/bg_virus">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/ic_dashboard_bg_light"
+            android:paddingTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/ic_bg_top"
+            android:paddingTop="@dimen/_24sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ic_arrow_back" />
+
+                    <com.global.vtg.utils.textView.SemiBoldTextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/traveler_profile"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_18ssp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_bg_bottom" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_6sdp"
+            android:background="@color/curve"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/main_controller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_90sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fillViewport="true"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/clToolbar"
+            app:layout_constraintTop_toTopOf="@+id/btnNext">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:orientation="vertical"
+                android:padding="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <RelativeLayout
+                    android:id="@+id/personal_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorPrimary"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_14sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_14sdp">
+
+
+                    <com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:gravity="center"
+                        android:text="@string/personal_info"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/done"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/tvName"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_drawable_tick"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/expand_1"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+                </RelativeLayout>
+
+                <net.cachapa.expandablelayout.ExpandableLayout
+                    android:id="@+id/expandable_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:el_duration="1000"
+                    app:el_expanded="false"
+                    app:el_parallax="0.5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/primary_border"
+                        android:orientation="vertical"
+                        android:padding="6dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/name"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvUserName"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/label_dob"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDob"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/country_of_birth"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvCountryBirth"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/nationality"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvNationality"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/label_gender"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvArrivalDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/marital_status"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvMaritalStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/occupation"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvaddress1"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvaddress2"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+
+                    </LinearLayout>
+
+                </net.cachapa.expandablelayout.ExpandableLayout>
+
+                <RelativeLayout
+                    android:id="@+id/travel_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:background="@color/colorPrimary"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_14sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_14sdp">
+
+
+                    <com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:gravity="center"
+                        android:text="@string/travel_info_1"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/done_2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/tvContact"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_drawable_tick"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/expand_2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+                </RelativeLayout>
+
+                <net.cachapa.expandablelayout.ExpandableLayout
+                    android:id="@+id/expandable_layout_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:el_duration="1000"
+                    app:el_expanded="false"
+                    app:el_parallax="0.5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/primary_border"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/travel_doc_type"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvTravelDocType"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/travel_doc_number"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvDocNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/travel_doc_issue_date"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDocDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/travel_doc_expiry_date"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvDocExpiryDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/travel_doc_country"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvDocCountry"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:singleLine="true" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/image_doc"
+                            android:textColor="@color/black" />
+
+
+                        <ImageView
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:src="@drawable/ic_baseline_camera_alt_24" />
+
+                    </LinearLayout>
+                </net.cachapa.expandablelayout.ExpandableLayout>
+
+                <RelativeLayout
+                    android:id="@+id/desti_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1sdp"
+                    android:background="@color/colorPrimary"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_14sdp"
+                    android:paddingRight="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_14sdp">
+
+
+                    <com.global.vtg.utils.textView.SBoldTextView
+                        android:id="@+id/tvDestiInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_6sdp"
+                        android:gravity="center"
+                        android:text="@string/port_health"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/done_3"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/tvDestiInfo"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_drawable_tick"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/expand_3"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:contentDescription="@null"
+                        android:src="@drawable/ic_baseline_arrow_drop_down_24" />
+                </RelativeLayout>
+
+                <net.cachapa.expandablelayout.ExpandableLayout
+                    android:id="@+id/expandable_layout_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:el_duration="1000"
+                    app:el_expanded="false"
+                    app:el_parallax="0.5">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/primary_border"
+                        android:orientation="vertical"
+                        android:padding="6dp">
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/health_care_worker"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvHealthCareWorker"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/over_past21_days"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvPast21Days"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/symtom"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvSymtom"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_height="wrap_content">
+
+
+                            <ImageView
+                                android:id="@+id/add"
+                                android:contentDescription="@null"
+                                android:layout_width="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_centerVertical="true"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_baseline_add_circle_outline_24"/>
+
+
+
+                            <com.global.vtg.utils.textView.RegularTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="@dimen/_10sdp"
+                                android:text="@string/add_symtom"
+                                android:layout_toEndOf="@+id/add"
+                                android:textColor="@color/black" />
+                        </RelativeLayout>
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/feeling_pain"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvAnyPain"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/black"
+
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp" />
+
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/underline_conition"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvUnderLineCondition"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/covid_postive"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCovidPostive"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/covid_test_taken"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvCovidTestTaken"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/data_sample_collected"
+                            android:textColor="@color/black" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tvConfirmationNumber"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                            android:drawablePadding="4dp"
+                            android:gravity="center_vertical"
+
+                            android:drawableEnd="@drawable/ic_calendar"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp" />
+
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:text="@string/image_of_covid_19_test_result"
+                            android:textColor="@color/black" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:src="@drawable/ic_baseline_camera_alt_24"
+                            android:id="@+id/imgCovidTest"
+                            android:contentDescription="@null"
+                            android:layout_height="40dp"/>
+                    </LinearLayout>
+                </net.cachapa.expandablelayout.ExpandableLayout>
+
+                  </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnNext"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/_22sdp"
+            android:layout_marginEnd="@dimen/_22sdp"
+            android:layout_marginBottom="@dimen/_26sdp"
+            android:layout_weight="1"
+            android:visibility="gone"
+            android:text="@string/next"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="MissingConstraints" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

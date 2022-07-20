@@ -639,4 +639,21 @@
     <string name="scan"> Escanear</string>
     <string name="delete_child">¿Está seguro de eliminar a este niño?</string>
     <string name="alrady_child">Ya capturaste los detalles de este niño. </string>
+    <string name="create_new_account">Crear nueva cuenta</string>
+    <string name="share_with">Compartido con</string>
+    <string name="parent_email_id">Id de correo electrónico principal</string>
+    <string name="label_dob_1">Fecha de nacimiento</string>
+    <string name="remove_parent">¿Está seguro de eliminar el acceso del niño para este padre?</string>
+    <string name="travel_information">Información de viaje</string>
+    <string name="flight_number">Número de vuelo</string>
+    <string name="departure_city">Ciudad de salida</string>
+    <string name="arrival_city">Ciudad de llegada</string>
+    <string name="view_information">Ver información</string>
+    <string name="add_another">Añadir otro número de vuelo</string>
+    <string name="traveler_profile">Perfil del viajero</string>
+    <string name="label_passport_no">Número de pasaporte</string>
+    <string name="label_international_flight">Vuelo Internacional</string>
+    <string name="destination_country">País de destino</string>
+    <!-- <string name="flight_number">Número de vuelo</string>-->
+    <string name="departure_date">Fecha de salida</string>
 </resources>

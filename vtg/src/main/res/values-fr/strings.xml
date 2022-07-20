@@ -651,4 +651,21 @@
     <string name="scan">Scanner</string>
     <string name="delete_child">Êtes-vous sûr de vouloir supprimer cet enfant ?</string>
     <string name="alrady_child">Vous avez déjà capturé les détails de cet enfant. </string>
+    <string name="create_new_account">Créer un nouveau compte</string>
+    <string name="share_with">Partagé avec</string>
+    <string name="parent_email_id">Identifiant de messagerie parent</string>
+    <string name="label_dob_1">Date de naissance</string>
+    <string name="remove_parent">Êtes-vous sûr de supprimer l\'accès de l\'enfant pour ce parent ?</string>
+    <string name="travel_information">Informations de voyage</string>
+    <string name="flight_number">Numéro de vol</string>
+    <string name="departure_city">Ville de départ</string>
+    <string name="arrival_city">Ville d\'arrivée</string>
+    <string name="view_information">Afficher les informations</string>
+    <string name="add_another">Ajouter un autre numéro de vol</string>
+    <string name="traveler_profile">Profil du voyageur</string>
+    <string name="label_passport_no">Numéro de passeport</string>
+    <string name="label_international_flight">Vol international</string>
+    <string name="destination_country">Pays de destination</string>
+    <!-- <string name="flight_number">Numéro de vol</string>-->
+    <string name="departure_date">Date de départ</string>
 </resources>

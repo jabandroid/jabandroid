@@ -20,6 +20,7 @@ import com.global.vtg.appview.home.profile.ProfileFragment
 import com.global.vtg.appview.home.qrcode.VaccineQRCodeFragment
 import com.global.vtg.appview.home.testHistory.TestBaseFragment
 import com.global.vtg.appview.home.testHistory.UploadTestDocumentFragment
+import com.global.vtg.appview.home.travel.*
 import com.global.vtg.appview.home.uploaddocument.UploadDocumentFragment
 import com.global.vtg.appview.home.vaccinecard.VaccineCardFragment
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryFragment
@@ -78,6 +79,13 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_SET_PASSWORD(SetPasswordFragment::class.java),
     F_CHILD_BIRTH(BirthdayVerificationFragment::class.java),
     F_CHILD_LIST(ChildListFragment::class.java),
+    F_TRaVEL_INFO(TravelInformationFragment::class.java),
+    F_TRaVEL_PROFILE(TravelerProfileFragment::class.java),
+    F_TRaVEL_SUMMARY(TravelerSummaryFragment::class.java),
+    F_ENTER_EXIT_FORM(EnterExitFormFragment::class.java),
+    F_ARIVAL_FRAGMENT(ArrivalFragment::class.java),
+    F_TRAVEL_INFO_FRAGMENT(TravelerInformationFragment::class.java),
+    F_TRVEL_FLIGHT_DETAILS(FlightDetailsFragment::class.java),
     F_EVENT_CREATE_REVIEW(CreateEventReviewFragment::class.java);
 
 

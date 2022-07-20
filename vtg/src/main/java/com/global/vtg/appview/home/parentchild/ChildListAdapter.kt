@@ -12,6 +12,7 @@ import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
+import com.google.firebase.crashlytics.internal.model.CrashlyticsReport
 import com.vtg.R
 import kotlinx.android.synthetic.main.adapter_child_list.view.*
 import kotlinx.android.synthetic.main.fragment_reg_step1.*
@@ -32,32 +33,56 @@ class ChildListAdapter(
         return DashboardViewHolder(v)
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "InflateParams")
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {
         // set the data in items
 
         holder.itemView.tvName.text = list[position].firstName + " " + list[position].lastName
         val age = getAge(list[position].dateOfBirth!!)
-        if (age.toString() != "") {
+        if (age != "") {
             holder.itemView.tvAge.visibility = View.VISIBLE
 
-            holder.itemView.tvAge.text = getAge(list[position].dateOfBirth!!).toString()
+            holder.itemView.tvAge.text = getAge(list[position].dateOfBirth!!)
         } else
             holder.itemView.tvAge.visibility = View.GONE
 
-        if(!TextUtils.isEmpty(list[position].profileUrl))
-        holder.itemView.ivProfilePic.setGlideNormalImage(list[position].profileUrl!!)
+        if (!TextUtils.isEmpty(list[position].profileUrl))
+            holder.itemView.ivProfilePic.setGlideNormalImage(list[position].profileUrl!!)
         holder.itemView.setOnClickListener {
             click.response(list[position], it, position)
 
         }
+        holder.itemView.shared_with.removeAllViews()
+        if (list[position].sharedAccount != null) {
 
-        for (i in 0 until 4) {
-            val inflater =
-                holder.itemView.shared_with.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val view = inflater.inflate(R.layout.include_child, null)
-            view.ivProfilePic.setGlideNormalImage(list[position].profileUrl!!)
-            holder.itemView.shared_with.addView(view)
+
+            if (list[position].sharedAccount!!.size > 0) {
+//                if (list[position].sharedAccount!!.size == 1) {
+//                    if (list[position].sharedAccount?.get(0)!!.ParentID!!.toInt() == Constants.USER!!.id) {
+//                        Constants.USER!!.sharedAccount!!.removeAt(0)
+//
+//                    }
+//                }
+
+                    for (i in 0 until list[position].sharedAccount!!.size) {
+
+                        if (list[position].sharedAccount?.get(i)!!.ParentID!!.toInt() != Constants.USER!!.id) {
+                            holder.itemView.root2.visibility = View.VISIBLE
+                            val inflater =
+                                holder.itemView.shared_with.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+                            val view = inflater.inflate(R.layout.include_child, null)
+                            view.ivProfilePic.setGlideNormalImage(
+                                list[position].sharedAccount?.get(
+                                    i
+                                )!!.profilePic!!
+                            )
+                            holder.itemView.shared_with.addView(view)
+                        } else {
+                            //Constants.USER!!.sharedAccount!!.removeAt(i)
+                        }
+                    }
+
+            }
         }
 
     }
@@ -70,11 +95,11 @@ class ChildListAdapter(
 
     }
 
-    public fun getID(pos: Int): String? {
-        return  list[pos].id.toString()
+    fun getID(pos: Int): Int? {
+        return list[pos].id
     }
 
-    public fun getAge(date: String): String? {
+    fun getAge(date: String): String {
 
 
         val date = DateUtils.getDate(
@@ -92,7 +117,7 @@ class ChildListAdapter(
         if (today[Calendar.DAY_OF_YEAR] < dob[Calendar.DAY_OF_YEAR]) {
             age--
         }
-        var ageInt: String = ""
+        var ageInt = ""
 
         if (age > 0) {
             if (age == 1)
@@ -132,15 +157,15 @@ class ChildListAdapter(
 
 
     @SuppressLint("NotifyDataSetChanged")
-    public  fun remove(index:Int){
+    fun remove(index: Int) {
         list.removeAt(index)
         notifyDataSetChanged()
     }
 
 
     @SuppressLint("NotifyDataSetChanged")
-    public  fun getSize() : Int{
-   return list.size
+    fun getSize(): Int {
+        return list.size
     }
 
 }

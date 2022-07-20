@@ -17,6 +17,7 @@ import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.ToastUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
@@ -145,6 +146,8 @@ Constants.testData
                                 }
                             }
                         })
+                    }else{
+                        ToastUtils.shortToast(0, getString(R.string.no_health_info))
                     }
                 }
                 is Resource.Error -> {

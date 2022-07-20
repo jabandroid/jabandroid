@@ -43,6 +43,7 @@ class UserRepository constructor(
     val searchInstituteLiveData = MutableLiveData<Resource<ResInstitute>>()
     val registerLiveData = MutableLiveData<Resource<ResUser>>()
     val registerStep3LiveData = MutableLiveData<Resource<ResUser>>()
+    val deleteChildPermanentLiveData = MutableLiveData<Resource<BaseResult>>()
     val createEventLiveData = MutableLiveData<Resource<Event>>()
     val getAllEventsLiveData = MutableLiveData<Resource<EventArray>>()
     val getMyEventLiveData = MutableLiveData<Resource<EventArray>>()
@@ -95,6 +96,22 @@ class UserRepository constructor(
             liveData.postValue(Resource.Success(result))
         } else if (result is BaseError) {
             liveData.postValue(Resource.Error(result))
+        }
+    }
+
+
+    suspend fun deleteChildPermanent( modelReq: String) {
+        deleteChildPermanentLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result =
+            safeApiCall(call = { apiServiceInterface.deleteChild(modelReq.toString()).await() })
+        if (result is BaseResult && result.code=="200") {
+            deleteChildPermanentLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+
+            if(result.code=="505")
+                deleteChildPermanentLiveData.postValue(Resource.Success(result))
+            else
+            deleteChildPermanentLiveData.postValue(Resource.Error(result))
         }
     }
 

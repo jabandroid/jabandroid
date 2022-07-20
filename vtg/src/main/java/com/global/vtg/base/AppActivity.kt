@@ -190,6 +190,9 @@ abstract class AppActivity : AppCompatActivity() {
                                 "locality" -> {
                                     city = name
                                 }
+                                "sublocality_level_1" -> {
+                                    city = name
+                                }
                                 "administrative_area_level_1" -> {
                                     state = name
                                 }
@@ -355,7 +358,7 @@ abstract class AppActivity : AppCompatActivity() {
             .get()
             .build()
 
-        client.newCall(request).enqueue(object : Callback {
+        getClient().newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
 //                progressBar.postValue(false)
                 Log.e("",""+e)

@@ -64,17 +64,18 @@
                 android:id="@+id/root2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_below="@+id/root1">
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvShare"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_8sdp"
                     android:gravity="center"
-                    android:layout_centerVertical="true"
                     android:text="@string/share_with" />
 
                 <HorizontalScrollView

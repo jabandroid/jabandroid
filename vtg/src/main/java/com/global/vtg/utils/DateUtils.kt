@@ -13,7 +13,7 @@ import java.util.*
 object DateUtils {
 
     val MMDDYYY = "MM/dd/yyyy"
-    val DDMMYY = "dd/MM/yy"
+    val DDMMYY = "dd/MM/yyyy"
     val DDMMYYYY = "dd/MM/yyyy"
     val MM_DD_YYYY = "MM-dd-yyyy"
     val MMDDYYHHMM = "MM/dd/yyyy  "
