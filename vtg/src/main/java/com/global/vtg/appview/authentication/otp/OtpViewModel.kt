@@ -2,7 +2,6 @@ package com.global.vtg.appview.authentication.otp
 
 import android.app.Application
 import android.content.Context
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -19,7 +18,6 @@ import com.google.gson.Gson
 import com.vtg.R
 import kotlinx.coroutines.launch
 import okhttp3.*
-import okhttp3.FormBody
 import java.io.IOException
 
 

@@ -1,17 +1,17 @@
 package com.global.vtg.appview.home.profile
 
 import android.app.Application
-import android.net.Uri
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.global.vtg.appview.authentication.UserRepository
-import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
+import com.global.vtg.model.network.result.BaseResult
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
+import com.google.gson.JsonObject
 import com.vtg.R
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -20,9 +20,6 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-import android.webkit.MimeTypeMap
-import com.global.vtg.model.network.result.BaseResult
-import com.google.gson.JsonObject
 
 
 class ProfileViewModel(application: Application, private val userRepository: UserRepository) :

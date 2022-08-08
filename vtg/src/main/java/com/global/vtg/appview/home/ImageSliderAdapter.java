@@ -15,7 +15,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.global.vtg.utils.TouchImageView;
 import com.vtg.R;
 
-
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;

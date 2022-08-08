@@ -23,7 +23,6 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 import com.vtg.R
 import com.vtg.databinding.FragmentVaccineCardBinding
 import kotlinx.android.synthetic.main.fragment_vaccine_card.*
-import kotlinx.android.synthetic.main.fragment_vaccine_card.ivBack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

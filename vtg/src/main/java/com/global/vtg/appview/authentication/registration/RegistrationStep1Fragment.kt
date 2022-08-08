@@ -29,17 +29,12 @@ import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
 import com.global.vtg.utils.DateUtils.API_DATE_FORMAT
 import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
-import com.global.vtg.utils.AppAlertDialog
 import com.vtg.R
 import com.vtg.databinding.FragmentRegStep1Binding
 import kotlinx.android.synthetic.main.fragment_reg_step1.*
-import kotlinx.android.synthetic.main.fragment_reg_step1.ivBack
-import kotlinx.android.synthetic.main.fragment_reg_step1.ivProfilePic
-import kotlinx.android.synthetic.main.fragment_reg_step1.tvTitle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -128,8 +123,8 @@ class RegistrationStep1Fragment : AppFragment() {
             etCountry.visibility = View.GONE
             sEthnicity.visibility = View.GONE
             tvEthnicity.visibility = View.GONE
-            edWebsite.visibility = View.VISIBLE
-            tvWebsite.visibility = View.VISIBLE
+//            edWebsite.visibility = View.VISIBLE
+//            tvWebsite.visibility = View.VISIBLE
         } else if (userType.equals("Vendor")) {
 
             tvTitle.text = getString(R.string.vendor_Step_1)
@@ -139,8 +134,8 @@ class RegistrationStep1Fragment : AppFragment() {
             etCountry.visibility = View.GONE
             sEthnicity.visibility = View.GONE
             tvEthnicity.visibility = View.GONE
-            edWebsite.visibility = View.VISIBLE
-            tvWebsite.visibility = View.VISIBLE
+//            edWebsite.visibility = View.VISIBLE
+//            tvWebsite.visibility = View.VISIBLE
         }
 
         if (childAccount) {
@@ -330,7 +325,7 @@ class RegistrationStep1Fragment : AppFragment() {
             getAppActivity(), genderList
         )
 
-        Arrays.sort(ethnicityList);
+        Arrays.sort(ethnicityList)
 
 
         sEthnicity.adapter = EthnicitySpinnerAdapter(

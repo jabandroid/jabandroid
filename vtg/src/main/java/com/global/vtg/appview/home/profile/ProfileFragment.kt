@@ -2,8 +2,6 @@ package com.global.vtg.appview.home.profile
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
@@ -13,7 +11,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
-import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.config.PickMediaExtensions
 import com.global.vtg.appview.config.getRealPath
@@ -24,6 +21,7 @@ import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.AppAlertDialog
@@ -41,7 +39,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 
 
 class ProfileFragment : AppFragment() {

@@ -5,16 +5,11 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.appview.authentication.registration.ResUser
-import com.global.vtg.appview.home.parentchild.ChildListAdapter
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.vtg.R
-import com.vtg.databinding.FragmentChildProfileBinding
-import com.vtg.databinding.FragmentTravelInformatonBinding
-import com.vtg.databinding.FragmentTravelProfileBinding
 import com.vtg.databinding.FragmentTravelSummaryBinding
-
 import kotlinx.android.synthetic.main.fragment_travel_summary.*
 
 class TravelerSummaryFragment : AppFragment() {

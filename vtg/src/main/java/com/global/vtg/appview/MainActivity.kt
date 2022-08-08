@@ -1,20 +1,11 @@
 package com.global.vtg.appview
 
 import android.content.Intent
-import android.os.Handler
-import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.GravityCompat
 import androidx.databinding.ViewDataBinding
-import com.google.android.material.navigation.NavigationView
-import com.global.vtg.App
 import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.base.AppActivity
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.USER_TYPE
-import com.global.vtg.utils.KeyboardUtils
 import com.vtg.R
 import kotlinx.android.synthetic.main.activity_main.*
 

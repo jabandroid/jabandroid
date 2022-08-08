@@ -18,7 +18,6 @@ import com.vtg.R
 import com.vtg.databinding.FragmentForgotUpdatePasswordBinding
 import kotlinx.android.synthetic.main.fragment_forgot_update_password.*
 import kotlinx.android.synthetic.main.fragment_reg_step3.ivBack
-import kotlinx.android.synthetic.main.fragment_registration.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForgotChangePasswordFragment : AppFragment() {

@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
-
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.factory.PreferenceManager
@@ -16,7 +15,6 @@ import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.isValidPhoneNumber
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
-import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import kotlinx.coroutines.launch

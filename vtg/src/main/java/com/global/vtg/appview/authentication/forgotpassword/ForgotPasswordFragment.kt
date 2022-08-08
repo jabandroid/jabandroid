@@ -6,14 +6,12 @@ import androidx.databinding.ViewDataBinding
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
-import com.global.vtg.base.fragment.replaceAllFragment
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.BUNDLE_FROM_FORGOT_PASSWORD
 import com.global.vtg.utils.DialogUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentForgotPasswordBinding
 import kotlinx.android.synthetic.main.fragment_forgot_password.*
-import kotlinx.android.synthetic.main.fragment_registration.*
 import kotlinx.android.synthetic.main.fragment_registration.ccp
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

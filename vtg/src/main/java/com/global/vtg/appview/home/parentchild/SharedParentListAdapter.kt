@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.imageview.setGlideNormalImage
 import com.vtg.R
-import kotlinx.android.synthetic.main.adapter_child_list.view.*
 import kotlinx.android.synthetic.main.adapter_child_list.view.ivProfilePic
 import kotlinx.android.synthetic.main.adapter_child_list.view.tvName
 import kotlinx.android.synthetic.main.adapter_shared_parent_list.view.*

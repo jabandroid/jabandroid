@@ -1,17 +1,12 @@
 package com.global.vtg.appview.home.qrcode
 
 import android.content.Context
-import com.vtg.R
-import androidx.recyclerview.widget.RecyclerView
-
 import android.view.LayoutInflater
 import android.view.View
-
 import android.view.ViewGroup
 import androidx.annotation.NonNull
-import androidx.recyclerview.widget.GridLayoutManager
-import com.global.vtg.model.factory.PreferenceManager
-import com.global.vtg.utils.SharedPreferenceUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.vtg.R
 
 
 internal class ViewPagerQrCodeAdapter(ctx: Context) :

@@ -15,21 +15,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.core.app.ActivityCompat
 import androidx.databinding.ViewDataBinding
-
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragment
 import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.QrcodeScanner
 import com.google.zxing.Result
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorQrBinding
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
-
-
 
 
 class VendorQRCodeFragment : AppFragment(), ZXingScannerView.ResultHandler {

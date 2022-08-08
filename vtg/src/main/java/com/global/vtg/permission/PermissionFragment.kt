@@ -1,8 +1,6 @@
 package com.global.vtg.permission
 
 import android.content.pm.PackageManager
-
-import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 
 class PermissionFragment : androidx.fragment.app.Fragment() {

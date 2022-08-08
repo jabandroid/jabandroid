@@ -9,11 +9,11 @@ import android.content.IntentSender
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import com.global.vtg.interfaces.ILocationChange
+import com.global.vtg.permission.PermissionUtils
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.*
-import com.global.vtg.interfaces.ILocationChange
-import com.global.vtg.permission.PermissionUtils
 
 /**
  * Created by sa on 05/04/17.

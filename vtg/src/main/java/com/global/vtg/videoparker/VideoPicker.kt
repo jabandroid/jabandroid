@@ -20,9 +20,9 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
-import com.vtg.R
 import com.global.vtg.utils.DialogUtils
 import com.shopomy.imagepicker.VideoPickerInterface
+import com.vtg.R
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

@@ -1,52 +1,36 @@
 package com.global.vtg.appview.authentication.registration
 
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.method.LinkMovementMethod
 import android.text.method.PasswordTransformationMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
+import android.text.style.UnderlineSpan
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
-import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.replaceAllFragment
-import com.global.vtg.model.network.Resource
+import com.global.vtg.model.factory.PreferenceManager
+import com.global.vtg.utils.Constants
+import com.global.vtg.utils.Constants.BUNDLE_IS_CLINIC
 import com.global.vtg.utils.Constants.BUNDLE_IS_VENDOR
 import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_CODE
 import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_COUNTRY_CODE
 import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_EMAIL
-import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_ID
 import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_PASSWORD
 import com.global.vtg.utils.Constants.BUNDLE_REGISTRATION_PHONE
 import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
 import com.vtg.databinding.FragmentRegistrationBinding
 import kotlinx.android.synthetic.main.fragment_registration.*
-import kotlinx.android.synthetic.main.fragment_registration.ccp
-import kotlinx.android.synthetic.main.fragment_registration.etLoginPassword
-import kotlinx.android.synthetic.main.fragment_registration.ivPassword
-
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import android.text.method.LinkMovementMethod
-
-import android.text.Spanned
-
-import android.widget.Toast
-
-import android.text.style.ClickableSpan
-
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
-import android.text.style.UnderlineSpan
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.Constants.BUNDLE_IS_CLINIC
-import kotlinx.android.synthetic.main.fragment_help.*
-import android.view.View.OnFocusChangeListener
-
-import android.R.string.no
-import com.global.vtg.model.factory.PreferenceManager
-import com.global.vtg.utils.SharedPreferenceUtil
 
 
 class RegistrationFragment : AppFragment() {

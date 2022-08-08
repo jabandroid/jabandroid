@@ -40,7 +40,6 @@ import com.vtg.databinding.FragmentVaccineQrCodeBinding
 import kotlinx.android.synthetic.main.bottom_chid_qr_code.view.*
 import kotlinx.android.synthetic.main.bottom_sheet_child.view.ivProfilePic
 import kotlinx.android.synthetic.main.bottom_sheet_child.view.tvName
-import kotlinx.android.synthetic.main.card.*
 import kotlinx.android.synthetic.main.fragment_vaccine_qr_code.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.ByteArrayOutputStream

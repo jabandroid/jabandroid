@@ -1,7 +1,6 @@
 package com.global.vtg.appview.home.testHistory
 
 import androidx.annotation.Keep
-import com.global.vtg.appview.config.HealthInfo
 import com.global.vtg.model.network.result.BaseResult
 import com.google.gson.annotations.SerializedName
 

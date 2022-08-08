@@ -23,5 +23,7 @@ data class Document(
 	val state: String? = null,
 
 	@field:SerializedName("country")
-	val country: String? = null
+	val country: String? = null,
+	@field:SerializedName("url")
+	val url: String? = null
 )

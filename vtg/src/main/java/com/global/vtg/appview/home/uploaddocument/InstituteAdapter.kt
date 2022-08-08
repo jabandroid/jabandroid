@@ -8,7 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.appview.config.Institute
 import com.vtg.R
-import kotlin.collections.ArrayList
 
 
 class InstituteAdapter (context: Context) :

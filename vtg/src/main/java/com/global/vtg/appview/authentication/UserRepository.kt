@@ -12,6 +12,7 @@ import com.global.vtg.appview.home.event.EventArray
 import com.global.vtg.appview.home.parentchild.AddChild
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.appview.home.testHistory.TestKit
+import com.global.vtg.appview.home.travel.CitySearchItem
 import com.global.vtg.appview.payment.ReqPayment
 import com.global.vtg.base.AppRepository
 import com.global.vtg.model.factory.PreferenceManager
@@ -32,6 +33,7 @@ class UserRepository constructor(
 
     val userLiveData = MutableLiveData<Resource<ResUser>>()
     val userProfilePicLiveData = MutableLiveData<Resource<ResProfile>>()
+    val userPicLiveData = MutableLiveData<Resource<BaseResult>>()
     val userEventPicData = MutableLiveData<Resource<BaseResult>>()
     val uploadContactLiveData = MutableLiveData<Resource<BaseResult>>()
     val userProfilePicLiveDataStep1 = MutableLiveData<Resource<ResProfile>>()
@@ -41,9 +43,11 @@ class UserRepository constructor(
     val scanBarcodeLiveData = MutableLiveData<Resource<ResUser>>()
     val addParentLiveData = MutableLiveData<Resource<AddChild>>()
     val searchInstituteLiveData = MutableLiveData<Resource<ResInstitute>>()
+    val searchCodeLiveData = MutableLiveData<Resource<CitySearchItem>>()
     val registerLiveData = MutableLiveData<Resource<ResUser>>()
     val registerStep3LiveData = MutableLiveData<Resource<ResUser>>()
     val deleteChildPermanentLiveData = MutableLiveData<Resource<BaseResult>>()
+    val getInfoLiveData = MutableLiveData<Resource<BaseResult>>()
     val createEventLiveData = MutableLiveData<Resource<Event>>()
     val getAllEventsLiveData = MutableLiveData<Resource<EventArray>>()
     val getMyEventLiveData = MutableLiveData<Resource<EventArray>>()
@@ -304,6 +308,26 @@ class UserRepository constructor(
         }
     }
 
+    suspend fun searchCode(text: String) {
+        searchCodeLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result = safeApiCall(call = { apiServiceInterface.searchCode(text).await() })
+        if (result is CitySearchItem   && result.code=="200") {
+            searchCodeLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            searchCodeLiveData.postValue(Resource.Error(result))
+        }
+    }
+
+    suspend fun getInfo(cityCode: String,countryCode: String) {
+        getInfoLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result = safeApiCall(call = { apiServiceInterface.getInfo(cityCode,countryCode).await() })
+        if (result is BaseResult   && result.code=="200") {
+            getInfoLiveData.postValue(Resource.Success(result))
+        } else if (result is BaseError) {
+            getInfoLiveData.postValue(Resource.Error(result))
+        }
+    }
+
     suspend fun uploadVaccine(
         file: MultipartBody.Part?,
         type: RequestBody?,
@@ -470,6 +494,25 @@ class UserRepository constructor(
         }
     }
 
+    suspend fun uploadPic(
+        file: MultipartBody.Part?,
+        userId: RequestBody?
+    ) {
+        userPicLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
+        val result = safeApiCall(call = {
+            apiServiceInterface.uploadImageAsync(
+                file!!,
+                userId
+            ).await()
+        })
+        if (result is BaseResult && result.code=="200") {
+            userPicLiveData.postValue(Resource.Success(result))
+
+        } else if (result is BaseError) {
+            userPicLiveData.postValue(Resource.Error(result))
+        }
+    }
+
     suspend fun uploadVendorStep2(
         file: MultipartBody.Part?,
         vendorId: RequestBody?,
@@ -481,6 +524,12 @@ class UserRepository constructor(
         state: RequestBody?,
         country: RequestBody?,
         zip: RequestBody?,
+        web: RequestBody?,
+        city: RequestBody?,
+        nis: RequestBody?,
+        tin: RequestBody?,
+        email: RequestBody?,
+        phone: RequestBody?,
     ) {
         registerVendorStep2LiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result = safeApiCall(call = {
@@ -489,7 +538,8 @@ class UserRepository constructor(
                 vendorId,
                 businessName,
                 businessId,
-                employeeId,date,vat,state,country,zip
+                employeeId,date,vat,state,country,zip, web,city,nis,tin,
+                email,phone
             ).await()
         })
         if (result is ResUser) {

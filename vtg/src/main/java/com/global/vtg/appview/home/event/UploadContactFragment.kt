@@ -1,13 +1,9 @@
 package com.global.vtg.appview.home.event
 
 
-import android.app.Activity
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.appview.config.PickMediaExtensions
 import com.global.vtg.appview.config.getRealPath
@@ -17,12 +13,12 @@ import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.*
+import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.NetworkUtils
+import com.global.vtg.utils.ToastUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentUploadContactBinding
-import kotlinx.android.synthetic.main.fragment_create_event.*
 import kotlinx.android.synthetic.main.fragment_create_event.ivBack
-import kotlinx.android.synthetic.main.fragment_event_list.*
 import kotlinx.android.synthetic.main.fragment_upload_contact.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,7 +29,6 @@ import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
-import java.util.*
 
 
 class UploadContactFragment : AppFragment() {

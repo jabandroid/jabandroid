@@ -3,26 +3,21 @@ package com.global.vtg.appview.home.event
 
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.global.vtg.appview.config.HealthInfo
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.utils.AppAlertDialog
-
 import com.google.gson.Gson
 import com.vtg.R
 import com.vtg.databinding.FragmentEventAddressBinding
-
 import kotlinx.android.synthetic.main.fragment_create_event.ivBack
 import kotlinx.android.synthetic.main.fragment_event_address.*
-import kotlinx.android.synthetic.main.popup_update_pin.view.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 

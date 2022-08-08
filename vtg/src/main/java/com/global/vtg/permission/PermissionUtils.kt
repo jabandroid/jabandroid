@@ -8,11 +8,10 @@ import android.os.Build
 import android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.vtg.R
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.baseinrerface.OkCancelDialogInterface
+import com.vtg.R
 import java.lang.ref.WeakReference
-import java.util.*
 import java.util.concurrent.Semaphore
 
 

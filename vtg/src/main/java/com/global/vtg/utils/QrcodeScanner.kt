@@ -29,7 +29,6 @@ import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
 import com.vtg.R
 import kotlinx.android.synthetic.main.activity_bar_code_scanner.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch

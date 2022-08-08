@@ -1,12 +1,8 @@
 package com.global.vtg.appview.home.event
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.Rect
-import android.text.TextPaint
-import android.text.style.ClickableSpan
 import android.util.AttributeSet
-import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.text.buildSpannedString

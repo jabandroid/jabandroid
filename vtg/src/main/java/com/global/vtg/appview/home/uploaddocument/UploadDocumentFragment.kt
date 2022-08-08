@@ -1,5 +1,6 @@
 package com.global.vtg.appview.home.uploaddocument
 
+
 import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
@@ -20,56 +21,28 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.global.vtg.appview.authentication.AuthenticationActivity
-import com.global.vtg.appview.authentication.registration.TestTypeResult
 import com.global.vtg.appview.config.Institute
 import com.global.vtg.appview.config.PickMediaExtensions
 import com.global.vtg.appview.config.getRealPath
 import com.global.vtg.appview.config.getRealPathFromURI
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
-import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
-import com.global.vtg.utils.DateUtils.API_DATE_FORMAT
 import com.global.vtg.utils.DateUtils.DDMMYY
 import com.global.vtg.utils.DateUtils.DDMMYYYY
 import com.global.vtg.utils.DateUtils.appendZero
 import com.vtg.R
 import com.vtg.databinding.FragmentUploadDocumentBinding
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
-
-import kotlinx.android.synthetic.main.fragment_registration.*
-
 import kotlinx.android.synthetic.main.fragment_upload_document.*
-import kotlinx.android.synthetic.main.fragment_upload_document.cbCertify
-import kotlinx.android.synthetic.main.fragment_upload_document.ccp
-import kotlinx.android.synthetic.main.fragment_upload_document.clForm
-import kotlinx.android.synthetic.main.fragment_upload_document.clThankYou
-import kotlinx.android.synthetic.main.fragment_upload_document.cvUploadDocument
-import kotlinx.android.synthetic.main.fragment_upload_document.etFee
-import kotlinx.android.synthetic.main.fragment_upload_document.etHospitalName
-import kotlinx.android.synthetic.main.fragment_upload_document.ivBack
-import kotlinx.android.synthetic.main.fragment_upload_document.ivCancel
-import kotlinx.android.synthetic.main.fragment_upload_document.ivUploadDocument
-import kotlinx.android.synthetic.main.fragment_upload_document.rvInstitute
-import kotlinx.android.synthetic.main.fragment_upload_document.sDate
-import kotlinx.android.synthetic.main.fragment_upload_document.sDay
-import kotlinx.android.synthetic.main.fragment_upload_document.sTime
-import kotlinx.android.synthetic.main.fragment_upload_document.s_scan
-import kotlinx.android.synthetic.main.fragment_upload_document.tvDocName
-import kotlinx.android.synthetic.main.fragment_upload_document.tvFee
-import kotlinx.android.synthetic.main.fragment_upload_document.tvScan
-import kotlinx.android.synthetic.main.fragment_upload_document.tvSelectDoc
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
@@ -101,16 +74,29 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
 
     override fun initializeComponent(view: View?) {
         if (Constants.USER?.role.equals("ROLE_CLINIC")) {
-            groupMobileNo.visibility = View.GONE
+            groupMobileNo.visibility = View.VISIBLE
+
+            tvemail.visibility = View.VISIBLE
+            scan.visibility = View.VISIBLE
+            or_1.visibility = View.VISIBLE
+            or_2.visibility = View.VISIBLE
+            cus_label.visibility = View.VISIBLE
+
+            tvScan.visibility = View.GONE
+
             cbCertify.isChecked=true
             cbCertify.visibility = View.GONE
-            s_scan.visibility = View.VISIBLE
-            tvScan.visibility = View.VISIBLE
         } else {
             groupMobileNo.visibility = View.GONE
+            email.visibility = View.GONE
+            tvemail.visibility = View.GONE
+            cus_label.visibility = View.GONE
             cbCertify.visibility = View.VISIBLE
             s_scan.visibility = View.GONE
             tvScan.visibility = View.GONE
+            scan.visibility = View.GONE
+            or_1.visibility = View.GONE
+            or_2.visibility = View.GONE
         }
 
          instituteAdapter =
@@ -184,6 +170,45 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             }
         }
 
+        etLoginPhoneNo.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length ?: 0 == 0) {
+
+                } else {
+                    viewModel.emailScan.postValue("")
+                    viewModel.govId.postValue("")
+                }
+            }
+
+        })
+
+        tvemail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length ?: 0 == 0) {
+
+                } else {
+                    viewModel.emailScan.postValue("")
+                    viewModel.phone.postValue("")
+                }
+            }
+
+        })
+
+
         viewModel.scanBarcodeLiveData.observe(this, {
             when (it) {
                 is Resource.Success -> {
@@ -191,12 +216,16 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
+
+                    scan.visibility=View.GONE
+                    tvScan.visibility=View.VISIBLE
                     if(TextUtils.isDigitsOnly(it.data.mobileNo))
                         tvScan.text="+"+it.data.mobileNo
                     else
                         tvScan.text=it.data.firstName+" "+ it.data.lastName
-                    viewModel.phone.postValue(it.data.mobileNo)
-                    viewModel.phone.postValue(it.data.mobileNo)
+                    viewModel.emailScan.postValue(it.data.mobileNo)
+                    viewModel.phone.postValue("")
+                    viewModel.govId.postValue("")
                 }
                 is Resource.Error -> {
                     when (activity) {
@@ -215,6 +244,11 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
         })
 
         tvScan.setOnClickListener {
+
+            val intent = Intent(Intent(activity, QrcodeScanner::class.java))
+            resultLauncher.launch(intent)
+        }
+        scan.setOnClickListener {
 
             val intent = Intent(Intent(activity, QrcodeScanner::class.java))
             resultLauncher.launch(intent)

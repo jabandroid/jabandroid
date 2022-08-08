@@ -1,5 +1,6 @@
 package com.global.vtg.appview.home
 
+
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -7,9 +8,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.vtg.R
 import kotlinx.android.synthetic.main.activity_image_view.*
-
-
-import java.util.ArrayList
 
 class ImageViewActivity :AppCompatActivity() {
 

@@ -13,7 +13,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.config.TestInfo
-import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
@@ -21,7 +20,6 @@ import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
 import kotlinx.android.synthetic.main.recycler_vendor_health_info.view.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 //
 

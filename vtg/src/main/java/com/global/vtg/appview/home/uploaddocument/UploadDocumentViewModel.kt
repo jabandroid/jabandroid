@@ -1,6 +1,7 @@
 package com.global.vtg.appview.home.uploaddocument
 
 import android.app.Application
+import android.text.TextUtils
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
@@ -40,6 +41,8 @@ class UploadDocumentViewModel(
     var email:String=""
     var code: MutableLiveData<String> = MutableLiveData()
     var phone: MutableLiveData<String> = MutableLiveData()
+    var emailScan: MutableLiveData<String> = MutableLiveData()
+    var govId: MutableLiveData<String> = MutableLiveData()
     val cancelDoc: MutableLiveData<Boolean> = MutableLiveData()
     val chooseFile: MutableLiveData<Boolean> = MutableLiveData()
     val isCertify: MutableLiveData<Boolean> = MutableLiveData(false)
@@ -150,12 +153,37 @@ class UploadDocumentViewModel(
             }
 //            var dateForServer=DateUtils.formatLocalToUtc(date!!,DateUtils.API_DATE_FORMAT,DateUtils.API_DATE_FORMAT)
 //            val dateReq: RequestBody? = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
-            val username: RequestBody? = if (Constants.USER?.role.equals("ROLE_CLINIC")) {
-                phone.value!!.toRequestBody(
-                    "text/plain".toMediaTypeOrNull()
-                )
+//            val username: RequestBody? = if (Constants.USER?.role.equals("ROLE_CLINIC")) {
+//                phone.value!!.toRequestBody(
+//                    "text/plain".toMediaTypeOrNull()
+//                )
+//            } else {
+//                Constants.USER?.mobileNo?.toRequestBody(
+//                    "text/plain".toMediaTypeOrNull()
+//                )
+//            }
+
+            var username: RequestBody?=null
+            if (Constants.USER?.role.equals("ROLE_CLINIC")) {
+
+                if(!TextUtils.isEmpty(phone.value.toString())){
+                    username=  "${code.value}${phone.value}".toRequestBody(
+                        "text/plain".toMediaTypeOrNull()
+                    )
+                }else  if(!TextUtils.isEmpty(emailScan.value.toString())){
+                    username=    emailScan.value!!.toRequestBody(
+                        "text/plain".toMediaTypeOrNull()
+                    )
+                } else  if(!TextUtils.isEmpty(govId.value.toString())){
+                    username=    govId.value!!.toRequestBody(
+                        "text/plain".toMediaTypeOrNull()
+                    )
+                }
+
+
             } else {
-                Constants.USER?.mobileNo?.toRequestBody(
+
+                username=   Constants.USER?.mobileNo?.toRequestBody(
                     "text/plain".toMediaTypeOrNull()
                 )
             }
@@ -181,7 +209,7 @@ class UploadDocumentViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.error_select_document))
                 isValidate = false
             }
-            Constants.USER?.role.equals("ROLE_CLINIC") && isNullOrEmpty(phone.value) -> {
+            Constants.USER?.role.equals("ROLE_CLINIC") && isNullOrEmpty(phone.value)&& isNullOrEmpty(emailScan.value)&& isNullOrEmpty(govId.value) -> {
                 showToastError.postValue(App.instance?.getString(R.string.scan_user_code))
                 isValidate = false
             }

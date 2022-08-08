@@ -28,9 +28,11 @@ class RegistrationStep3ViewModel(
     var city: MutableLiveData<String> = MutableLiveData()
     var state: MutableLiveData<String> = MutableLiveData()
     var zip: MutableLiveData<String> = MutableLiveData()
+
     var country: MutableLiveData<String> = MutableLiveData()
     var isFromProfile: Boolean=false
     var childAccount: Boolean=false
+    var id: String?=null
 
     var showToastError: MutableLiveData<String> = MutableLiveData()
     var redirectToSignIn: MutableLiveData<Boolean> = MutableLiveData()
@@ -68,6 +70,7 @@ class RegistrationStep3ViewModel(
                                 USERCHILD=ResUser()
                             USERCHILD?.address = arrayListOf(
                                 AddressItem(
+                                    id =id,
                                     firstName = firstName.value,
                                     lastName = lastName.value,
                                     addr1 = address1.value,
@@ -85,6 +88,7 @@ class RegistrationStep3ViewModel(
                         }else {
                             USER?.address = arrayListOf(
                                 AddressItem(
+                                    id =id,
                                     firstName = firstName.value,
                                     lastName = lastName.value,
                                     addr1 = address1.value,

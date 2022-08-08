@@ -1,6 +1,5 @@
 package com.global.vtg.appview.home
 
-import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.databinding.ViewDataBinding
@@ -9,7 +8,6 @@ import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.replaceAllFragment
 import com.global.vtg.model.factory.PreferenceManager
-import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.isShowing
 import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R

@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.AdapterView
 import androidx.databinding.ViewDataBinding
 import com.braintreepayments.api.dropin.DropInRequest
+import com.braintreepayments.api.models.ThreeDSecureAdditionalInformation
 import com.braintreepayments.api.models.ThreeDSecurePostalAddress
 import com.braintreepayments.api.models.ThreeDSecureRequest
 import com.global.vtg.base.AppFragment
@@ -14,9 +15,6 @@ import com.vtg.R
 import com.vtg.databinding.FragmentPaymentBinding
 import kotlinx.android.synthetic.main.fragment_payment.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.braintreepayments.api.models.ThreeDSecureAdditionalInformation
-
-
 
 
 class PaymentFragment : AppFragment() {

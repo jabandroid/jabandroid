@@ -1,10 +1,7 @@
 package com.global.vtg.utils
 
-import android.view.View.MeasureSpec
-
 import android.content.Context
 import android.util.AttributeSet
-
 import android.widget.LinearLayout
 import com.vtg.R
 

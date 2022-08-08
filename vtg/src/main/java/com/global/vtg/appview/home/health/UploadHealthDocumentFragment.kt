@@ -1,5 +1,6 @@
 package com.global.vtg.appview.home.health
 
+
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
@@ -15,31 +16,29 @@ import android.os.Handler
 import android.text.Editable
 import android.text.TextUtils
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.appview.authentication.registration.TestType
 import com.global.vtg.appview.authentication.registration.TestTypeResult
-import com.global.vtg.appview.config.*
+import com.global.vtg.appview.config.Institute
+import com.global.vtg.appview.config.PickMediaExtensions
+import com.global.vtg.appview.config.getRealPath
+import com.global.vtg.appview.config.getRealPathFromURI
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.testHistory.TestKit
 import com.global.vtg.appview.home.testHistory.TestKitAdapter
 import com.global.vtg.appview.home.testHistory.TestKitResult
 import com.global.vtg.appview.home.uploaddocument.InstituteAdapter
-import com.global.vtg.appview.home.uploaddocument.InstituteAutoCompleteAdapter
 import com.global.vtg.appview.home.uploaddocument.TestResultSpinnerAdapter
-import com.global.vtg.appview.home.uploaddocument.VaccineDoseSpinnerAdapter
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
@@ -49,45 +48,12 @@ import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import com.vtg.databinding.FragmentHealthInfoUploadDocumentBinding
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.cbCertify
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ccpHealth
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.clForm
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.clThankYou
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.cvUploadDocument
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.dob
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.etFee
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.etHospitalName
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.groupMobileNoHealth
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ivBack
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ivCancel
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ivUploadDocument
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.rvInstitute
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDate
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDay
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDob
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sStatus
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTestKit
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTestType
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTime
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.s_scan
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.s_status
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.scrollViewHealth
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.test_kit
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvDocName
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvFee
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvScan
-import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvSelectDoc
-import kotlinx.android.synthetic.main.fragment_test_info_upload_document.*
-
-import kotlinx.android.synthetic.main.fragment_upload_document.*
-
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
@@ -120,17 +86,26 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 
     @SuppressLint("SetTextI18n")
     override fun initializeComponent(view: View?) {
+
         if (Constants.USER?.role.equals("ROLE_CLINIC")) {
-            groupMobileNoHealth.visibility = View.GONE
-            cbCertify.visibility = View.GONE
+                     cbCertify.visibility = View.GONE
             sStatus.visibility = View.VISIBLE
             s_status.visibility = View.VISIBLE
             sDob.visibility = View.GONE
             dob.visibility = View.GONE
-            s_scan.visibility = View.VISIBLE
-            tvScan.visibility = View.VISIBLE
+            groupMobileNo.visibility = View.VISIBLE
+            tvemail.visibility = View.VISIBLE
+            scan.visibility = View.VISIBLE
+            or_1.visibility = View.VISIBLE
+            or_2.visibility = View.VISIBLE
+            cus_label.visibility = View.VISIBLE
+            tvScan.visibility = View.GONE
+
         } else {
-            groupMobileNoHealth.visibility = View.GONE
+            groupMobileNo.visibility = View.GONE
+            email.visibility = View.GONE
+            tvemail.visibility = View.GONE
+            cus_label.visibility = View.GONE
             cbCertify.visibility = View.VISIBLE
             sStatus.visibility = View.VISIBLE
             s_status.visibility = View.VISIBLE
@@ -138,6 +113,10 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
             dob.visibility = View.GONE
             s_scan.visibility = View.GONE
             tvScan.visibility = View.GONE
+            scan.visibility = View.GONE
+            or_1.visibility = View.GONE
+            or_2.visibility = View.GONE
+
         }
         viewModel.code.value = ccpHealth.defaultCountryCode
         viewModel.region = ccpHealth.defaultCountryNameCode
@@ -216,6 +195,44 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         })
 
 
+        etLoginPhoneNo.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length ?: 0 == 0) {
+
+                } else {
+                    viewModel.emailScan.postValue("")
+                    viewModel.govId.postValue("")
+                }
+            }
+
+        })
+
+        tvemail.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length ?: 0 == 0) {
+
+                } else {
+                    viewModel.emailScan.postValue("")
+                    viewModel.phone.postValue("")
+                }
+            }
+
+        })
+
         var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
@@ -237,7 +254,9 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                     tvScan.text="+"+it.data.mobileNo
                     else
                         tvScan.text=it.data.firstName+" "+ it.data.lastName
-                    viewModel.phone.postValue(it.data.mobileNo)
+                    viewModel.emailScan.postValue(it.data.mobileNo)
+                    viewModel.phone.postValue("")
+                    viewModel.govId.postValue("")
                 }
                 is Resource.Error -> {
                     when (activity) {
@@ -254,6 +273,11 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                 }
             }
         })
+        scan.setOnClickListener {
+
+            val intent = Intent(Intent(activity, QrcodeScanner::class.java))
+            resultLauncher.launch(intent)
+        }
 
         tvScan.setOnClickListener {
 
@@ -581,6 +605,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 
     }
 
+    @SuppressLint("StringFormatInvalid")
     private fun updateDocument(docName: String, path: String) {
         MainScope().launch {
             ivUploadDocument.visibility = View.GONE

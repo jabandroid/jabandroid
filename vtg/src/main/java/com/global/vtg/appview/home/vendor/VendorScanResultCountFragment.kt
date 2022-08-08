@@ -1,88 +1,50 @@
 package com.global.vtg.appview.home.vendor
 
+
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.graphics.Typeface
-import android.icu.lang.UProperty
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.text.Spannable
+import android.text.SpannableStringBuilder
 import android.text.TextUtils
+import android.text.style.StyleSpan
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
 import cn.iwgang.countdownview.CountdownView
 import cn.iwgang.countdownview.DynamicConfig
 import cn.iwgang.countdownview.DynamicConfig.BackgroundInfo
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.gif.GifDrawable
-import com.bumptech.glide.request.target.SimpleTarget
+import com.global.vtg.appview.config.HealthInfo
 import com.global.vtg.appview.config.TestInfo
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
+import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
 import com.global.vtg.base.AppFragment
-import com.global.vtg.base.AppFragmentState
-import com.global.vtg.base.fragment.addFragment
-import com.global.vtg.base.fragment.popFragment
 import com.global.vtg.imageview.setGlideNormalImage
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.DateUtils.API_DATE_FORMAT
+import com.global.vtg.utils.*
+import com.global.vtg.utils.broadcasts.isNetworkAvailable
+import com.google.gson.JsonObject
 import com.vtg.R
-
 import com.vtg.databinding.FragmentVendorScanResultCoutBinding
-
-
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.*
-
-
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
-import android.text.Spannable
-
-import android.icu.lang.UProperty.INT_START
-import android.net.Uri
-import android.os.Handler
-
-import android.text.SpannableStringBuilder
-import android.text.style.StyleSpan
-import android.widget.Toast
-import com.global.vtg.appview.config.HealthInfo
-import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
-import com.global.vtg.utils.broadcasts.isNetworkAvailable
-import kotlin.collections.ArrayList
-import android.view.MotionEvent
-import android.view.View.OnTouchListener
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
-import androidx.appcompat.app.AppCompatActivity
-import com.global.vtg.model.factory.PreferenceManager
-import com.global.vtg.utils.*
-import com.google.gson.JsonObject
-
-
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.countDown
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date_kit
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.date_test
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivProfilePic
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.ivStatus_1
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.test_Root
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDl
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDob
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvDose
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvId
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvName
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvStatus
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvTest
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvType
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.tvVaccine
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.vaccine_Root
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.view_1
-import kotlinx.android.synthetic.main.recycler_view_vaccine_history.view.*
 
 
 class VendorScanResultCountFragment : AppFragment() {

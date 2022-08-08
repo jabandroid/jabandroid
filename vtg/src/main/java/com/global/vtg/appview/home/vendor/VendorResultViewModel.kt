@@ -1,7 +1,6 @@
 package com.global.vtg.appview.home.vendor
 
 import android.app.Application
-import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.global.vtg.appview.authentication.UserRepository
@@ -10,7 +9,6 @@ import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.network.Resource
 import com.global.vtg.model.network.result.BaseResult
 import com.google.gson.JsonObject
-import com.vtg.R
 import kotlinx.coroutines.launch
 
 class VendorResultViewModel(application: Application, private val userRepository: UserRepository) :

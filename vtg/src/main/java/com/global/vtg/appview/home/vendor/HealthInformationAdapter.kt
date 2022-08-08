@@ -18,10 +18,8 @@ import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
 import kotlinx.android.synthetic.main.recycler_vendor_health_info.view.*
-import kotlinx.android.synthetic.main.recycler_view_vaccine_history.view.*
 import kotlinx.android.synthetic.main.recycler_view_vaccine_history.view.addedBy
 import java.util.*
-import kotlin.collections.ArrayList
 
 //
 

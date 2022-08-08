@@ -5,11 +5,8 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.global.vtg.appview.authentication.UserRepository
-import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.AppViewModel
-import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.model.network.Resource
-import com.global.vtg.model.network.result.BaseResult
 import com.google.gson.JsonObject
 import com.vtg.R
 import kotlinx.coroutines.launch

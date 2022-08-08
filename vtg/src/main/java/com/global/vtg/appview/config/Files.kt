@@ -18,8 +18,6 @@ import androidx.annotation.RequiresApi
 import androidx.loader.content.CursorLoader
 import java.io.*
 import java.nio.charset.Charset
-import android.R.id
-import java.lang.NumberFormatException
 
 
 fun Context.requestMediaScanner(url: String) {

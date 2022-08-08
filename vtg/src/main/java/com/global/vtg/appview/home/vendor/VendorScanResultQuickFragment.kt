@@ -27,7 +27,6 @@ import com.vtg.databinding.FragmentVendorScanResultCoutBinding
 import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class VendorScanResultQuickFragment : AppFragment() {

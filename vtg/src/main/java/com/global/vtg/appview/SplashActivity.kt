@@ -3,13 +3,9 @@ package com.global.vtg.appview
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.net.Uri
 import android.os.Handler
 import android.text.TextUtils
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.FragmentReplaceActivity
 import com.global.vtg.appview.authentication.AuthenticationActivity
@@ -24,7 +20,6 @@ import com.global.vtg.utils.SharedPreferenceUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
 import com.vtg.R
-
 import io.branch.referral.Branch
 import java.util.*
 

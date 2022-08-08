@@ -1,16 +1,17 @@
 package com.global.vtg.appview.home.vendor
 
+
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.GridLayoutManager
-import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.appview.home.dashboard.ViewPager2Adapter
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.AppAlertDialog
@@ -20,8 +21,6 @@ import com.global.vtg.utils.SharedPreferenceUtil
 import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentVendorDashboardBinding
-
-
 import kotlinx.android.synthetic.main.fragment_vendor_dashboard.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

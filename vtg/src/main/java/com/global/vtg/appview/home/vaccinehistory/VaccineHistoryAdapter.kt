@@ -11,22 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.DateUtils.API_DATE_FORMAT_VACCINE
-import com.global.vtg.utils.DateUtils.DDMMYYYY
 import com.vtg.R
 import kotlinx.android.synthetic.main.recycler_view_vaccine_history.view.*
-import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
-import android.widget.Toast
-
-import android.content.ActivityNotFoundException
-
-import android.content.Intent
-import android.net.Uri
-import androidx.core.content.ContextCompat
-import com.global.vtg.model.factory.PreferenceManager
-import com.global.vtg.utils.SharedPreferenceUtil
-import java.io.File
 
 
 class VaccineHistoryAdapter(

@@ -665,8 +665,8 @@
     <string name="remove_parent">Are you sure to remove access of child for this parent?</string>
     <string name="travel_information">Travel Information</string>
     <string name="flight_number">Flight Number</string>
-    <string name="departure_city">Departure City</string>
-    <string name="arrival_city">Arrival City</string>
+    <string name="departure_city">Departure Airport</string>
+    <string name="arrival_city">Arrival Airport</string>
     <string name="view_information">View Information</string>
     <string name="add_another">Add another flight number</string>
     <string name="traveler_profile">Traveler\'s Profile</string>
@@ -705,7 +705,6 @@
     <string name="village">Village/Town</string>
     <string name="confirmation_number">Confirmation Number(Optional)</string>
     <string name="number_of_traveller">Number of Travelers</string>
-
     <string name="travel_info_1">Travel Information</string>
     <string name="personal_info">Personal Information</string>
 
@@ -731,6 +730,21 @@
     <string name="data_sample_collected">Data sample collected?</string>
     <string name="image_of_covid_19_test_result">Image of covid 19 test result</string>
     <string name="no_health_info">No health info found.</string>
-
+    <string name="enter_flight_number">Please enter flight number.</string>
+    <string name="enter_departure_airport">Please enter departure airport.</string>
+    <string name="enter_arrival_airport">Please enter arrival airport.</string>
+    <string name="r_scan_2">Scan QR Code</string>
+    <string name="enter_details">Enter User Details</string>
+    <string name="reg_city">Registration City</string>
+    <string name="birth_certificate">Birth Certificate</string>
+    <string name="tin">TIN</string>
+    <string name="nis">NIS</string>
+    <string name="comapny_email">Company Email</string>
+    <string name="comapny_phone">Company Phone</string>
+    <string name="empty_nis">Please enter business NIS</string>
+    <string name="empty_tin">Please enter business TIN</string>
+    <string name="clinic_card">Clinic Card</string>
+    <string name="empty_phone_1">Please enter a phone No.</string>
+    <string name="clinic_details_not_found">Clinic details not found</string>
 
 </resources>

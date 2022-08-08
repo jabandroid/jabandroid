@@ -7,8 +7,6 @@ import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.vtg.R
-import com.vtg.databinding.FragmentChildProfileBinding
-import com.vtg.databinding.FragmentTravelInformatonBinding
 import com.vtg.databinding.FragmentTravelProfileBinding
 import kotlinx.android.synthetic.main.fragment_travel_informaton.*
 

@@ -8,15 +8,12 @@ import com.global.vtg.appview.authentication.AuthenticationActivity
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
-import com.global.vtg.appview.home.event.CreateSubEventFragment
-import com.global.vtg.appview.home.health.HealthInformationFragment
 import com.global.vtg.appview.home.parentchild.ChildListFragment
 import com.global.vtg.appview.home.profile.ProfileFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.popFragment
-import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
@@ -24,16 +21,9 @@ import com.global.vtg.utils.Constants.USER
 import com.global.vtg.utils.Constants.USERCHILD
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.SharedPreferenceUtil
-
 import com.vtg.R
 import com.vtg.databinding.FragmentRegStep3Binding
-import kotlinx.android.synthetic.main.fragment_profile.*
-import kotlinx.android.synthetic.main.fragment_reg_step1.*
-import kotlinx.android.synthetic.main.fragment_reg_step1.ivProfilePic
-import kotlinx.android.synthetic.main.fragment_reg_step2.*
 import kotlinx.android.synthetic.main.fragment_reg_step3.*
-import kotlinx.android.synthetic.main.fragment_reg_step3.ivBack
-import kotlinx.android.synthetic.main.fragment_reg_step3.tvTitle
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class RegistrationStep3Fragment : AppFragment() {
@@ -105,6 +95,7 @@ class RegistrationStep3Fragment : AppFragment() {
                 viewModel.zip.postValue(USER?.address?.get(index)?.zipCode)
                 viewModel.country.postValue(USER?.address?.get(index)?.country)
                 etMailingCountry.text = USER?.address?.get(index)?.country
+                viewModel.id=USER?.address?.get(index)?.id
             } else {
 
                 if (!childAccount) {
@@ -138,7 +129,7 @@ class RegistrationStep3Fragment : AppFragment() {
             DialogUtils.showSnackBar(context, it)
         })
 
-        viewModel.userConfigLiveData.observe(this, {
+        viewModel.userConfigLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -183,7 +174,7 @@ class RegistrationStep3Fragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
         viewModel.childAccountLiveData.observe(this, {
             addFragmentInStack<Any>(AppFragmentState.F_SET_PASSWORD)
         })

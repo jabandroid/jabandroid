@@ -21,11 +21,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.Nullable
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -54,9 +52,7 @@ import com.vtg.databinding.FragmentEventDetailBinding
 import io.branch.indexing.BranchUniversalObject
 import io.branch.referral.util.LinkProperties
 import kotlinx.android.synthetic.main.bottom_sheet.view.*
-import kotlinx.android.synthetic.main.fragment_contactlist.*
 import kotlinx.android.synthetic.main.fragment_event_detail.*
-import kotlinx.android.synthetic.main.fragment_event_detail.ivBack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.IOException
 

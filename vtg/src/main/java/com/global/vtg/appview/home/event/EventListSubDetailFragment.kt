@@ -46,7 +46,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.vtg.R
-import com.vtg.databinding.FragmentEventDetailBinding
 import com.vtg.databinding.FragmentEventDetailSubBinding
 import io.branch.indexing.BranchUniversalObject
 import io.branch.referral.util.LinkProperties

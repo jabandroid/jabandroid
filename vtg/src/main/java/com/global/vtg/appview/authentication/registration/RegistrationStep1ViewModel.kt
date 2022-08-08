@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
-import com.global.vtg.appview.home.event.CreateSubEventFragment
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.factory.PreferenceManager
@@ -175,6 +174,8 @@ class RegistrationStep1ViewModel(
                             USER?.ethnicity =
                                 if (ethnicity.value.equals("--Select--")) "" else ethnicity.value
                             USER?.gender = gender.value
+
+                            if(userType!="child")
                             USER?.twilioUserId = Constants.twilioUserId.toString()
                             if (isVendor)
                                 USER?.role = "vendor"
@@ -184,6 +185,9 @@ class RegistrationStep1ViewModel(
                             USER?.website = websiteName.value
                             USER?.isClinic = isClinic == true
                             USER?.step1Complete = true
+
+                            val gson = Gson()
+                            val request: Any = gson.toJson(USER)
 
                             callRegisterStep()
 

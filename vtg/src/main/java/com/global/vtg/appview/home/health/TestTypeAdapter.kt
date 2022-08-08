@@ -1,19 +1,14 @@
 package com.global.vtg.appview.home.health
 
+
 import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Build
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.RecyclerView
-
-
-import kotlin.collections.ArrayList
-
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.appview.authentication.registration.TestTypeResult
 import com.vtg.R
 import kotlinx.android.synthetic.main.adapter_test_type.view.*

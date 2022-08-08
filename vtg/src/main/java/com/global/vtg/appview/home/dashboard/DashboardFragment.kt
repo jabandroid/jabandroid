@@ -1,57 +1,38 @@
 package com.global.vtg.appview.home.dashboard
 
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.GridLayoutManager
-import com.global.vtg.appview.config.ResConfig
-import com.global.vtg.imageview.setGlideNormalImage
+import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
-import com.global.vtg.wscoroutine.ApiInterface
+import com.global.vtg.utils.Constants.USERMain
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentDashboardBinding
-import kotlinx.android.synthetic.main.bottom_sheet.view.*
-import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.android.synthetic.main.fragment_dashboard.ivProfilePic
-import kotlinx.android.synthetic.main.fragment_dashboard.tvCountry
-import kotlinx.android.synthetic.main.fragment_dashboard.tvState
-import okhttp3.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.IOException
-
-import android.content.Context
-import android.content.Intent
-import android.widget.LinearLayout
-import androidx.activity.result.contract.ActivityResultContracts
-import com.global.vtg.appview.authentication.registration.Document
-import com.global.vtg.appview.authentication.registration.ResUser
-import com.global.vtg.appview.config.HealthInfo
-import com.global.vtg.appview.config.TestInfo
-import com.global.vtg.appview.home.event.EventListSubDetailFragment
-import com.global.vtg.appview.home.vaccinehistory.VaccineHistory
-import com.global.vtg.utils.Constants.USERMain
 import kotlinx.android.synthetic.main.adapter_child_list.view.*
-import kotlinx.android.synthetic.main.bottom_sheet_child_parent.*
-import kotlinx.android.synthetic.main.fragment_registration.*
+import kotlinx.android.synthetic.main.fragment_dashboard.*
+import okhttp3.OkHttpClient
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {

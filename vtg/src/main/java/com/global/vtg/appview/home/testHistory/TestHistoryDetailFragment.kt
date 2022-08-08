@@ -1,5 +1,6 @@
 package com.global.vtg.appview.home.testHistory
 
+
 import android.annotation.SuppressLint
 import android.graphics.Typeface
 import android.os.Bundle
@@ -15,8 +16,6 @@ import androidx.databinding.ViewDataBinding
 import cn.iwgang.countdownview.CountdownView
 import cn.iwgang.countdownview.DynamicConfig
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.gif.GifDrawable
-import com.bumptech.glide.request.target.SimpleTarget
 import com.global.vtg.appview.config.TestInfo
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
@@ -26,15 +25,7 @@ import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentTestDetailsBinding
-import com.vtg.databinding.FragmentTestHistoryBinding
 import kotlinx.android.synthetic.main.fragment_test_details.*
-
-
-import kotlinx.android.synthetic.main.fragment_test_history.*
-
-
-
-
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.text.SimpleDateFormat
 import java.util.*

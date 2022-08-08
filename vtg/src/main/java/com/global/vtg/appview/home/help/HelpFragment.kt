@@ -14,14 +14,13 @@ import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.model.factory.PreferenceManager
+import com.global.vtg.utils.AppAlertDialog
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.SharedPreferenceUtil
-import com.global.vtg.utils.AppAlertDialog
 import com.vtg.BuildConfig
 import com.vtg.R
 import com.vtg.databinding.FragmentHelpBinding
 import kotlinx.android.synthetic.main.fragment_help.*
-import kotlinx.android.synthetic.main.fragment_vaccine_qr_code.*
 import kotlinx.android.synthetic.main.fragment_vaccine_qr_code.ivBack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*

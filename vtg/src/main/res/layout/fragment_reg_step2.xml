@@ -74,8 +74,8 @@
                         android:id="@+id/tvSkip"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                       android:gravity="right"
                         android:layout_marginEnd="@dimen/_14sdp"
+                        android:gravity="right"
                         android:text="@string/label_skip"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_12ssp"
@@ -125,26 +125,39 @@
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvSsn"
                     style="@style/MarginStartEnd"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:text="@string/label_ssn"
+                    android:gravity="left"
+                    android:text="@string/digit_pin"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:id="@+id/view_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_62sdp"
+                    android:background="@color/popupbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSsn" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etSsn"
                     style="@style/EdittextPadding"
                     android:layout_width="0dp"
-                    android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_height="@dimen/edittext_height"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:imeOptions="actionNext"
                     android:inputType="text"
                     android:maxLength="4"
                     android:maxLines="1"
-                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
@@ -153,31 +166,42 @@
                     android:text="@={viewModel.ssn}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSsn" />
+                    app:layout_constraintTop_toBottomOf="@+id/view_1" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvId"
                     style="@style/MarginStartEnd"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/label_id_number"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etSsn" />
+
+                <View
+                    android:id="@+id/view_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_62sdp"
+                    android:background="@color/popupbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvId" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etId"
                     style="@style/EdittextPadding"
                     android:layout_width="0dp"
-                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-                    android:layout_marginEnd="@dimen/_12sdp"
                     android:layout_height="@dimen/edittext_height"
                     android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:imeOptions="actionNext"
                     android:inputType="text"
-                    android:maxLines="1"
                     android:maxLength="20"
+                    android:maxLines="1"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
@@ -186,33 +210,159 @@
                     android:text="@={viewModel.id}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvId" />
+                    app:layout_constraintTop_toBottomOf="@+id/view_2" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvUploadDocumentId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_52sdp"
+                    android:onClick="@{viewModel::onClick}"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etId">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imgId"
+                            android:layout_width="@dimen/_110sdp"
+                            android:layout_height="@dimen/_110sdp"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop" />
+
+                        <ImageView
+                            android:id="@+id/imgIdUpload"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+
+                        <ImageView
+                            android:id="@+id/ig_edit"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:visibility="gone"
+                            android:layout_gravity="bottom|right"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_baseline_camera_alt_24" />
+
+                    </FrameLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvBB"
+                    style="@style/MarginStartEnd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:text="@string/birth_certificate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cvUploadDocumentId" />
+
+                <View
+                    android:id="@+id/view_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_62sdp"
+                    android:background="@color/popupbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBB" />
+
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvUploadDocumentBirth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_52sdp"
+                    android:onClick="@{viewModel::onClick}"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_5">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imgbbId"
+                            android:layout_width="@dimen/_110sdp"
+                            android:layout_height="@dimen/_110sdp"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop" />
+
+                        <ImageView
+                            android:id="@+id/imgbbUpload"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+
+                        <ImageView
+                            android:id="@+id/ig_edit_bb"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:visibility="gone"
+                            android:layout_gravity="bottom|right"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_baseline_camera_alt_24" />
+
+                    </FrameLayout>
+
+                </androidx.cardview.widget.CardView>
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvDln"
                     style="@style/MarginStartEnd"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
                     android:text="@string/label_drivers_license"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etId" />
+                    app:layout_constraintTop_toBottomOf="@+id/cvUploadDocumentBirth" />
+
+                <View
+                    android:id="@+id/view_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_62sdp"
+                    android:background="@color/popupbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDln" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etDln"
                     style="@style/EdittextPadding"
                     android:layout_width="0dp"
-                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:layout_height="@dimen/edittext_height"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
-                    android:hint="@string/label_number"
-                    android:maxLength="20"
-                    android:paddingStart="@dimen/_16sdp"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
                     android:imeOptions="actionNext"
                     android:inputType="text"
+                    android:maxLength="20"
                     android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
@@ -222,32 +372,81 @@
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDln" />
+                    app:layout_constraintTop_toBottomOf="@+id/view_3" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvUploadDocumentDl"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_52sdp"
+                    android:onClick="@{viewModel::onClick}"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etDln">
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imgDl"
+                            android:layout_width="@dimen/_110sdp"
+                            android:layout_height="@dimen/_110sdp"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop" />
+
+                        <ImageView
+                            android:id="@+id/imgDlUpload"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+
+                        <ImageView
+                            android:id="@+id/ig_edit_dl"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+
+                            android:layout_gravity="bottom|right"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_baseline_camera_alt_24"
+                            android:visibility="gone" />
+
+                    </FrameLayout>
+
+                </androidx.cardview.widget.CardView>
+
 
                 <TextView
                     android:id="@+id/sDlnState"
                     style="@style/EdittextPadding"
-                    android:text="@={viewModel.dlnState}"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:background="@drawable/edittext_shadow"
-                    android:hint="@string/label_state"
-                    android:gravity="center_vertical"
                     android:clickable="true"
-                    android:drawablePadding="@dimen/_4sdp"
-
-                    android:singleLine="true"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingStart="@dimen/_16sdp"
                     android:drawableEnd="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+
+                    android:hint="@string/label_state"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:paddingEnd="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:text="@={viewModel.dlnState}"
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toStartOf="@+id/sDlnCountry"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etDln" />
+                    app:layout_constraintTop_toBottomOf="@+id/cvUploadDocumentDl" />
 
                 <TextView
                     android:id="@+id/sDlnCountry"
@@ -256,19 +455,19 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="0dp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:text="@={viewModel.dlnCountry}"
                     android:background="@drawable/edittext_shadow"
-                    android:hint="@string/label_country"
-                    android:gravity="center_vertical"
                     android:clickable="true"
-                    android:drawablePadding="@dimen/_4sdp"
-                    android:paddingStart="@dimen/_16sdp"
-
-                    android:singleLine="true"
-                    android:maxLines="1"
-                    android:ellipsize="end"
                     android:drawableEnd="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="@string/label_country"
+
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:paddingEnd="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:text="@={viewModel.dlnCountry}"
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/sDlnState"
@@ -284,7 +483,6 @@
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:background="@drawable/edittext_shadow"
                     android:clickable="false"
-                    android:paddingStart="@dimen/_16sdp"
                     android:drawableEnd="@drawable/ic_calendar"
                     android:focusable="false"
                     android:focusableInTouchMode="true"
@@ -292,6 +490,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
@@ -311,7 +510,6 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
                     android:clickable="false"
-                    android:paddingStart="@dimen/_16sdp"
                     android:drawableEnd="@drawable/ic_calendar"
                     android:focusable="false"
                     android:focusableInTouchMode="true"
@@ -319,6 +517,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
@@ -341,6 +540,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etDlnExpiryDate" />
 
+
+                <View
+                    android:id="@+id/view_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_62sdp"
+                    android:background="@color/popupbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvPassport" />
+
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etPassport"
                     style="@style/EdittextPadding"
@@ -349,22 +560,70 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
-                    android:hint="@string/label_number"
-                    android:maxLength="20"
+
                     android:imeOptions="actionDone"
                     android:inputType="text"
+                    android:maxLength="20"
                     android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
-                    android:paddingStart="@dimen/_16sdp"
                     android:shadowRadius="4"
                     android:singleLine="true"
                     android:text="@={viewModel.passportNumber}"
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvPassport" />
+                    app:layout_constraintTop_toBottomOf="@+id/view_4" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvUploadDocumentPassport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_18sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_52sdp"
+                    android:onClick="@{viewModel::onClick}"
+                    app:cardCornerRadius="@dimen/_12sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etPassport">
+
+
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imgPP"
+                            android:layout_width="@dimen/_110sdp"
+                            android:layout_height="@dimen/_110sdp"
+                            android:contentDescription="@null"
+                            android:scaleType="centerCrop" />
+
+                        <ImageView
+                            android:id="@+id/imgPPUpload"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_baseline_add_photo_alternate_24" />
+
+                        <ImageView
+                            android:id="@+id/ig_edit_pp"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:visibility="gone"
+                            android:layout_gravity="bottom|right"
+                            android:contentDescription="@null"
+                            android:src="@drawable/ic_baseline_camera_alt_24" />
+
+                    </FrameLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
 
                 <TextView
                     android:id="@+id/sPassportState"
@@ -372,43 +631,44 @@
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_16sdp"
-                    android:text="@={viewModel.passportState}"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:background="@drawable/edittext_shadow"
-                    android:hint="@string/label_state"
-                    android:drawablePadding="@dimen/_4sdp"
-                    android:gravity="center_vertical"
                     android:clickable="true"
-                    android:singleLine="true"
-                    android:maxLines="1"
-                    android:ellipsize="end"
-                    android:paddingStart="@dimen/_16sdp"
                     android:drawableEnd="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="@string/label_state"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:paddingEnd="@dimen/_12sdp"
+                    android:singleLine="true"
+                    android:text="@={viewModel.passportState}"
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toStartOf="@+id/sPassportCountry"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etPassport" />
+                    app:layout_constraintTop_toBottomOf="@+id/cvUploadDocumentPassport" />
 
                 <TextView
                     android:id="@+id/sPassportCountry"
                     style="@style/EdittextPadding"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_40sdp"
-                    android:text="@={viewModel.passportCountry}"
                     android:layout_marginStart="0dp"
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
-                    android:hint="@string/label_country"
-                    android:drawablePadding="@dimen/_4sdp"
-                    android:gravity="center_vertical"
                     android:clickable="true"
-                    android:paddingStart="@dimen/_16sdp"
                     android:drawableEnd="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_4sdp"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:hint="@string/label_country"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:paddingEnd="@dimen/_12sdp"
                     android:singleLine="true"
-                    android:maxLines="1"
-                    android:ellipsize="end"
+                    android:text="@={viewModel.passportCountry}"
                     android:textColorHint="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/sPassportState"
@@ -424,7 +684,6 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
                     android:clickable="false"
-                    android:paddingStart="@dimen/_16sdp"
                     android:drawableEnd="@drawable/ic_calendar"
                     android:focusable="false"
                     android:focusableInTouchMode="true"
@@ -432,6 +691,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
@@ -451,7 +711,6 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:background="@drawable/edittext_shadow"
                     android:clickable="false"
-                    android:paddingStart="@dimen/_16sdp"
                     android:drawableEnd="@drawable/ic_calendar"
                     android:focusable="false"
                     android:focusableInTouchMode="true"
@@ -459,6 +718,7 @@
                     android:imeOptions="actionNext"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"

@@ -1,7 +1,6 @@
 package com.global.vtg.appview.authentication.forgotpassword
 
 import android.app.Application
-import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.global.vtg.App
@@ -12,7 +11,6 @@ import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
-import kotlinx.coroutines.launch
 
 class ForgotPasswordViewModel(
     application: Application,

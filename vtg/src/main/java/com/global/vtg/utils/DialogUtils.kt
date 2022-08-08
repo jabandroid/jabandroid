@@ -10,11 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.global.vtg.App
-import com.vtg.R
 import com.global.vtg.utils.baseinrerface.OkCancelDialogInterface
 import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
 import com.global.vtg.utils.baseinrerface.OkDialogInterface
 import com.google.android.material.snackbar.Snackbar
+import com.vtg.R
 
 
 object DialogUtils {

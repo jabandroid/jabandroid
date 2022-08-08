@@ -23,13 +23,9 @@ import com.google.android.material.tabs.TabLayout
 import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentVaccineResultBinding
-import kotlinx.android.synthetic.main.fragment_health_information.*
 import kotlinx.android.synthetic.main.fragment_vaccine_result.*
-import kotlinx.android.synthetic.main.fragment_vaccine_result.rvHealth
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
-import kotlin.Comparator
-import kotlin.collections.ArrayList
 
 
 class VendorResultFragment : AppFragment() {

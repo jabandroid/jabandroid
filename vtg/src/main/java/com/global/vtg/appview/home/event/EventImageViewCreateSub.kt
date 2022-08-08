@@ -15,11 +15,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.global.vtg.test.Const
-import com.global.vtg.wscoroutine.ApiInterface
 import com.global.vtg.utils.AppAlertDialog
+import com.global.vtg.wscoroutine.ApiInterface
 import com.vtg.R
 import okhttp3.*
-
 import java.io.IOException
 import java.security.SecureRandom
 import java.security.cert.CertificateException

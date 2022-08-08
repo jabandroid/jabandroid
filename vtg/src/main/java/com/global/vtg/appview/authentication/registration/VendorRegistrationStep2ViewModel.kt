@@ -16,7 +16,6 @@ import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
-import kotlinx.android.synthetic.main.fragment_reg_step3.*
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -24,7 +23,6 @@ import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-import java.net.URL
 
 class VendorRegistrationStep2ViewModel(
     application: Application,
@@ -35,9 +33,16 @@ class VendorRegistrationStep2ViewModel(
     var businessId: MutableLiveData<String> = MutableLiveData()
     var employeeId: MutableLiveData<String> = MutableLiveData()
     var businessVat: MutableLiveData<String> = MutableLiveData()
+    var businessNIS: MutableLiveData<String> = MutableLiveData()
+    var businesstin: MutableLiveData<String> = MutableLiveData()
     var state: MutableLiveData<String> = MutableLiveData()
     var country: MutableLiveData<String> = MutableLiveData()
     var zip: MutableLiveData<String> = MutableLiveData()
+    var phone: MutableLiveData<String> = MutableLiveData()
+    var email: MutableLiveData<String> = MutableLiveData()
+    var city: MutableLiveData<String> = MutableLiveData()
+    var website: MutableLiveData<String> = MutableLiveData()
+    var websiteName: MutableLiveData<String> = MutableLiveData()
     var expiryDate: MutableLiveData<String> = MutableLiveData()
     val chooseFile: MutableLiveData<Boolean> = MutableLiveData()
     var documentPath: String? = null
@@ -130,6 +135,24 @@ class VendorRegistrationStep2ViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.empty_address_country))
                 isValidate = false
             }
+            isNullOrEmpty(businessNIS.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.empty_nis))
+                isValidate = false
+            }
+            isNullOrEmpty(businesstin.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.empty_tin))
+                isValidate = false
+            }
+
+            isNullOrEmpty(email.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.empty_email))
+                isValidate = false
+            }
+            isNullOrEmpty(phone.value) -> {
+                showToastError.postValue(App.instance?.getString(R.string.empty_phone_1))
+                isValidate = false
+            }
+
             else -> {
                 showToastError.postValue("")
             }
@@ -163,13 +186,22 @@ class VendorRegistrationStep2ViewModel(
             val vat: RequestBody? = businessVat.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
             val state: RequestBody? = state.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
             val country: RequestBody? = country.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            zip.value="000"
+
             val zip: RequestBody? = zip.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val city: RequestBody? = city.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val web: RequestBody? = websiteName.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val nis: RequestBody? = businessNIS.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val tin: RequestBody? = businesstin.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val email: RequestBody? = email.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val phone: RequestBody? = phone.value?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             var utcDate=DateUtils.formatLocalToUtc(expiryDate.value!!,false,DateUtils.API_DATE_FORMAT)
             val date: RequestBody? = utcDate?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             userRepository.uploadVendorStep2(
-                part, vendorId, businessName, businessId, employeeID,date,vat,state, country,zip
+                part, vendorId, businessName, businessId, employeeID
+                ,date,vat,state, country,zip,web,city,nis,tin,email,phone
             )
         }
     }

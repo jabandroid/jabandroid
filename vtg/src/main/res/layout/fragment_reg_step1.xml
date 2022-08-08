@@ -460,6 +460,7 @@
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"
                     android:shadowDy="0"
+
                     android:shadowRadius="4"
                     android:singleLine="true"
                     android:text="@={viewModel.websiteName}"

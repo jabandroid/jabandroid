@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.global.vtg.appview.home.parentchild.ChildListViewModel" />
+            type="com.global.vtg.appview.home.travel.TravelViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -153,7 +153,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:text="@string/departure_city" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                         android:id="@+id/etDepartureCity"
                         style="@style/EdittextPadding"
                         android:layout_width="match_parent"
@@ -162,10 +162,12 @@
                         android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginEnd="0dp"
                         android:background="@drawable/edittext_shadow"
+                        android:completionThreshold="1"
                         android:hint="@string/departure_city"
                         android:imeOptions="actionNext"
                         android:inputType="text"
                         android:maxLines="1"
+
                         android:shadowColor="@color/gray_light"
                         android:shadowDx="0"
                         android:shadowDy="0"
@@ -181,7 +183,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:text="@string/arrival_city" />
 
-                    <androidx.appcompat.widget.AppCompatEditText
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                         android:id="@+id/etArrivalCity"
                         style="@style/EdittextPadding"
                         android:layout_width="match_parent"
@@ -190,8 +192,9 @@
                         android:layout_marginTop="@dimen/_8sdp"
                         android:layout_marginEnd="0dp"
                         android:background="@drawable/edittext_shadow"
+                        android:completionThreshold="1"
                         android:hint="@string/arrival_city"
-                        android:imeOptions="actionNext"
+                        android:imeOptions="actionDone"
                         android:inputType="text"
                         android:maxLines="1"
                         android:shadowColor="@color/gray_light"
@@ -238,7 +241,6 @@
             android:layout_marginEnd="@dimen/_22sdp"
             android:layout_marginBottom="@dimen/_26sdp"
             android:layout_weight="1"
-
             android:text="@string/view_information"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

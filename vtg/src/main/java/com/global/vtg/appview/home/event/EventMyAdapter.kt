@@ -5,16 +5,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.global.vtg.utils.DateUtils
 import com.vtg.R
 import kotlinx.android.synthetic.main.adapter_event_list.view.*
-import kotlinx.android.synthetic.main.adapter_event_list.view.tvDate
-import kotlinx.android.synthetic.main.fragment_create_event_review.*
-import kotlinx.android.synthetic.main.fragment_vendor_scan_result_cout.*
-import kotlinx.android.synthetic.main.recycler_view_vaccine_history.view.*
 
 
 class EventMyAdapter(

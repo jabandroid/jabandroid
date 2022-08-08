@@ -1,7 +1,7 @@
 package com.global.vtg.appview.authentication.forgotpassword
 
-import com.google.gson.annotations.SerializedName
 import com.global.vtg.model.network.result.BaseResult
+import com.google.gson.annotations.SerializedName
 
 data class ResForgotPasswordModel(
     @field:SerializedName("access_token")

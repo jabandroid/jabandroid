@@ -11,16 +11,10 @@ import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.vtg.R
-import com.vtg.databinding.FragmentChildProfileBinding
 import com.vtg.databinding.FragmentFlightDetailsBinding
-import com.vtg.databinding.FragmentTravelInformatonBinding
-import com.vtg.databinding.FragmentTravelProfileBinding
 import kotlinx.android.synthetic.main.fragment_flight_details.*
-import kotlinx.android.synthetic.main.fragment_travel_informaton.*
 import kotlinx.android.synthetic.main.fragment_travel_informaton.btnNext
 import kotlinx.android.synthetic.main.fragment_travel_informaton.ivBack
-import kotlinx.android.synthetic.main.fragment_upload_document.*
-import kotlinx.android.synthetic.main.fragment_vaccine_qr_code.*
 import java.util.*
 
 class FlightDetailsFragment : AppFragment() {

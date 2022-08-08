@@ -193,24 +193,181 @@
 
                 </androidx.cardview.widget.CardView>
 
+
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/tvBatchNo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:text="@string/label_batch_no"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cvUploadDocument"  />
+
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etBatchNo"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:text="@={viewModel.batchNo}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvBatchNo" />
+
+                <TextView
+                    android:id="@+id/cus_label"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="@dimen/_13sdp"
+                    android:fontFamily="@font/sfprotextsemibold"
+                    android:gravity="center"
+                    android:text="@string/enter_details"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/_16sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etBatchNo" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/s_scan"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/r_scan_2"
+                    android:visibility="gone"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cus_label" />
+
+                <ImageView
+                    android:id="@+id/scan"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:src="@drawable/ic_qr_code2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/s_scan"
+                    app:tint="@color/black" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvScan"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_45sdp"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="true"
+                    android:drawableEnd="@drawable/ic_qr_code2"
+                    android:drawablePadding="@dimen/_10sdp"
+                    android:drawableTint="@color/colorPrimary"
+                    android:gravity="center_vertical"
+                    android:paddingStart="@dimen/_8sdp"
+                    android:paddingEnd="@dimen/_8sdp"
+                    android:text="@={viewModel.emailScan}"
+
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/scan" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/or_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="@string/label_or"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvScan" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/label_email_govt"
+                    android:textColor="@color/black"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/or_1" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/tvemail"
+                    style="@style/EdittextPadding"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_24sdp"
+                    android:layout_marginEnd="@dimen/_24sdp"
+                    android:background="@drawable/edittext_shadow"
+
+                    android:gravity="center_vertical"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:hint="@string/label_email_govt"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.govId}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/email" />
+
+                <com.global.vtg.utils.textView.RegularTextView
+                    android:id="@+id/or_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:gravity="center"
+                    android:text="@string/label_or"
+                    android:textColor="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvemail" />
+
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvMobileNo"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/label_phone_number"
+                    android:visibility="gone"
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cvUploadDocument" />
+                    app:layout_constraintTop_toBottomOf="@+id/or_2" />
 
                 <androidx.constraintlayout.widget.Group
-                    android:id="@+id/groupMobileNoHealth"
+                    android:id="@+id/groupMobileNo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:constraint_referenced_ids="llPhoneNo,tvMobileNo" />
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="llPhoneNo" />
 
                 <LinearLayout
                     android:id="@+id/llPhoneNo"
@@ -254,6 +411,7 @@
                         android:gravity="center_vertical"
                         android:imeOptions="actionNext"
                         android:inputType="phone"
+                        android:hint="@string/label_phone_no"
                         android:maxLines="1"
                         android:shadowColor="@color/gray_light"
                         android:shadowDx="0"
@@ -267,65 +425,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/tvRegistrationPhoneNo" />
                 </LinearLayout>
 
-                <com.global.vtg.utils.textView.RegularTextView
-                    android:id="@+id/tvBatchNo"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="@dimen/_16sdp"
-                    android:text="@string/label_batch_no"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/llPhoneNo" />
-
-
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/etBatchNo"
-                    style="@style/EdittextPadding"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="@dimen/_24sdp"
-                    android:background="@drawable/edittext_shadow"
-                    android:text="@={viewModel.batchNo}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvBatchNo" />
-
-                <com.global.vtg.utils.textView.RegularTextView
-                    android:id="@+id/s_scan"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:text="@string/r_scan"
-                    android:textColor="@color/black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etBatchNo" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvScan"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_24sdp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="@dimen/_24sdp"
-                    android:background="@drawable/edittext_shadow"
-                    android:clickable="true"
-                    android:drawablePadding="@dimen/_10sdp"
-                    android:drawableEnd="@drawable/ic_qr_code2"
-                    android:drawableTint="@color/colorPrimary"
-                    android:gravity="center_vertical"
-                    android:paddingStart="@dimen/_8sdp"
-                    android:paddingEnd="@dimen/_8sdp"
-                    android:text="@={viewModel.email}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/s_scan" />
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/s_status"
@@ -337,7 +436,7 @@
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvScan" />
+                    app:layout_constraintTop_toBottomOf="@+id/llPhoneNo" />
 
                 <androidx.appcompat.widget.AppCompatSpinner
                     android:id="@+id/sStatus"

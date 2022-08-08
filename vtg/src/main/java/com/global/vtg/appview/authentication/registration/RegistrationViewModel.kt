@@ -4,17 +4,14 @@ import android.app.Application
 import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.base.AppViewModel
-import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
-import kotlinx.coroutines.launch
 import java.util.regex.Pattern
 
 class RegistrationViewModel(application: Application, private val userRepository: UserRepository) : AppViewModel(application) {

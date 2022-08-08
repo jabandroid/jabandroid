@@ -24,10 +24,6 @@ import com.vtg.R
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import android.content.Intent
-
-
-
 
 
 class PickMediaExtensions {

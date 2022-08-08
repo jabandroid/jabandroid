@@ -4,20 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.vtg.R
-import com.vtg.databinding.FragmentChildProfileBinding
 import com.vtg.databinding.FragmentEnterExitBinding
-import com.vtg.databinding.FragmentTravelInformatonBinding
-import com.vtg.databinding.FragmentTravelProfileBinding
 import kotlinx.android.synthetic.main.fragment_enter_exit.*
-import kotlinx.android.synthetic.main.fragment_travel_informaton.*
 import kotlinx.android.synthetic.main.fragment_travel_informaton.ivBack
-import kotlinx.android.synthetic.main.fragment_travel_summary.*
-import kotlinx.android.synthetic.main.fragment_travel_summary.rvFlightList
 
 class EnterExitFormFragment : AppFragment() {
     private lateinit var mFragmentBinding: FragmentEnterExitBinding

@@ -5,8 +5,6 @@ import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.base.AppViewModel
-import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 
 class TestHistoryViewModel(application: Application, private val userRepository: UserRepository) : AppViewModel(application) {

@@ -2,23 +2,15 @@ package com.global.vtg.appview.home.event
 
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.popFragment
-import com.global.vtg.imageview.setGlideNormalImage
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DialogUtils
 import com.vtg.R
-import com.vtg.databinding.FragmentCreateEventLocationBinding
 import com.vtg.databinding.FragmentThankyouEventBinding
-import kotlinx.android.synthetic.main.fragment_create_event_location.*
 import kotlinx.android.synthetic.main.fragment_thankyou_event.*
-
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ThankyouEvent : AppFragment() {
     private lateinit var mFragmentBinding: FragmentThankyouEventBinding

@@ -24,18 +24,13 @@ import com.global.vtg.utils.*
 import com.global.vtg.utils.baseinrerface.OkCancelNeutralDialogInterface
 import com.vtg.R
 import com.vtg.databinding.FragmentRegVendorStep2Binding
-import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.android.synthetic.main.fragment_reg_step3.*
-
 import kotlinx.android.synthetic.main.fragment_reg_vendor_step2.*
-import kotlinx.android.synthetic.main.fragment_reg_vendor_step2.ivBack
-
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 class VendorRegistrationStep2Fragment : AppFragment() {
     private val viewModel by viewModel<VendorRegistrationStep2ViewModel>()
@@ -43,6 +38,8 @@ class VendorRegistrationStep2Fragment : AppFragment() {
     var id: Int? = null
     var isFromProfile = false
     var businessDate = ""
+    var isExpired :Boolean=true
+    var isPicloaded :Boolean=false
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
     override fun getLayoutId(): Int {
@@ -71,9 +68,10 @@ class VendorRegistrationStep2Fragment : AppFragment() {
     fun updateAddress(city: String, state: String, country: String) {
 
         etState.text = state
+        etCity.text = city
         etCountry.text = country
 
-
+        viewModel.city.postValue(city)
         viewModel.state.postValue(state)
         viewModel.country.postValue(country)
     }
@@ -93,6 +91,9 @@ class VendorRegistrationStep2Fragment : AppFragment() {
             tvSkip.visibility=View.GONE
 
         etState.setOnClickListener {
+            getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
+        }
+        etCity.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
         etCountry.setOnClickListener {
@@ -116,9 +117,11 @@ class VendorRegistrationStep2Fragment : AppFragment() {
             startActivity(intent)
         }
         ivCancel.setOnClickListener{
+            doc_img.setImageResource(0)
             ivUploadDocument.visibility = View.VISIBLE
             tvSelectDoc.visibility = View.VISIBLE
             cvUploadDocument.isClickable = true
+            cvUploadDocument.isEnabled = true
             viewModel.documentPath = ""
 
             tvDocName.text = resources.getString(R.string.label_upload_text_b)
@@ -153,7 +156,7 @@ class VendorRegistrationStep2Fragment : AppFragment() {
         if(document!=null&&document.isNotEmpty()){
             for (doc in document) {
                 if(doc!!.type!!.lowercase().contains("Vendor/Clinic Certificate".lowercase())){
-                    doc_img.setGlideNormalImage(doc!!.identity)
+                   //
                     ivUploadDocument.visibility=View.GONE
                     tvSelectDoc.visibility=View.GONE
                     tvDocName.visibility=View.GONE
@@ -165,6 +168,20 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                     businessDate=   DateUtils.formatDateUTCToLocal(doc.expireDate!!,DateUtils.API_DATE_FORMAT_VACCINE,false)
                     viewModel.expiryDate.postValue(businessDate)
                     viewModel.documentPath=doc!!.identity
+
+                    val time=DateUtils.getDate(doc.expireDate!!,DateUtils.API_DATE_FORMAT_VACCINE)
+                    isPicloaded=true
+
+                   var mill=time.time- TimeUnit.DAYS.toMillis(30)
+
+//                    var v=Calendar.getInstance()
+//                    v.timeInMillis=mill
+//                    Toast.makeText(activity, DateUtils.formatDate( v.timeInMillis),Toast.LENGTH_SHORT).show()
+
+                    isExpired = mill<=Calendar.getInstance().timeInMillis
+
+                    if(!isExpired)
+                        doc_img.setGlideNormalImage(doc!!.identity)
                     break
                 }
             }
@@ -214,24 +231,60 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                     }
 
                     extra?.K.equals("rCountry") -> {
-                        etCountry.isClickable = false
+
                         etCountry.isEnabled = false
-                        etZip.isClickable = false
+
                         etZip.isEnabled = false
                         viewModel.country.postValue(extra?.V)
                         viewModel.isDataAvailable=true
                     }
-                    extra?.K.equals("rZip") -> {
+                    extra?.K.equals("rCity") -> {
 
-                        etZip.isEnabled = false
-                        etZip.isEnabled = false
-                        viewModel.zip.postValue(extra?.V)
+                        etCity.isEnabled = false
+
+                        viewModel.city.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+
+                    extra?.K.equals("website") -> {
+
+                        edWebsite.isEnabled = false
+
+                        viewModel.websiteName.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+
+                    extra?.K.equals("nis") -> {
+
+                        etBusinessNIS.isEnabled = false
+
+                        viewModel.businessNIS.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+
+                    extra?.K.equals("tin") -> {
+
+                        etBusinessTin.isEnabled = false
+
+                        viewModel.businesstin.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+                    extra?.K.equals("cPhone") -> {
+
+                        etPhone.isEnabled = false
+
+                        viewModel.phone.postValue(extra?.V)
+                        viewModel.isDataAvailable=true
+                    }
+                    extra?.K.equals("cEmail") -> {
+
+                        etEmail.isEnabled = false
+
+                        viewModel.email.postValue(extra?.V)
                         viewModel.isDataAvailable=true
                     }
                     extra?.K.equals("certificateExpDate") -> {
-//                         businessDate=apiSdf.format(myCalendar.time)
-//
-//                        eExpiryDate.text = date
+
                         businessDate=   DateUtils.formatDateUTCToLocal(extra?.V!!,DateUtils.API_DATE_FORMAT_EXP,DateUtils.API_DATE_FORMAT)
                         viewModel.expiryDate.postValue(businessDate)
 
@@ -240,18 +293,102 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                         cvUploadDocument.isClickable = false
                         cvUploadDocument.isEnabled = false
                         viewModel.isDataAvailable=true
+
+                        val time=DateUtils.getDate(extra.V,DateUtils.API_DATE_FORMAT_EXP)
+
+                        isExpired = time.time<=Calendar.getInstance().timeInMillis
+
                       // updateDate()
                     }
                 }
             }
         }
 
-        // Handle Error
-        viewModel.showToastError.observe(this, {
-            DialogUtils.showSnackBar(context, it)
-        })
+      //  isExpired=true
+        if(isExpired){
 
-        viewModel.registerVendorStep2LiveData.observe(this, {
+            doc_img.setImageResource(0)
+            viewModel.documentPath=""
+            viewModel.isDataAvailable=false
+            eExpiryDate.isClickable = true
+            eExpiryDate.isEnabled = true
+            cvUploadDocument.isClickable = true
+            cvUploadDocument.isEnabled = true
+            edWebsite.isEnabled = true
+            etState.isClickable = true
+            etState.isEnabled = true
+            etCountry.isClickable = true
+            etCountry.isEnabled = true
+            etCity.isClickable = true
+            etCity.isEnabled = true
+            etBusinessVat.isClickable = true
+            etBusinessVat.isEnabled = true
+            etId.isClickable = true
+            etId.isEnabled = true
+            etBusinessName.isClickable = true
+            etBusinessName.isEnabled = true
+            etEmployeeId.isClickable = true
+            etEmployeeId.isEnabled = true
+            etBusinessTin.isClickable = true
+            etBusinessTin.isEnabled = true
+            etBusinessNIS.isClickable = true
+            etBusinessNIS.isEnabled = true
+            etPhone.isClickable = true
+            etPhone.isEnabled = true
+            etEmail.isClickable = true
+            etEmail.isEnabled = true
+
+            if(isPicloaded){
+                doc_img.setImageResource(0)
+                ivUploadDocument.visibility = View.VISIBLE
+                tvSelectDoc.visibility = View.VISIBLE
+                cvUploadDocument.isClickable = true
+                cvUploadDocument.isEnabled = true
+                viewModel.documentPath = ""
+
+                tvDocName.text = resources.getString(R.string.label_upload_text_b)
+                tvDocName.visibility = View.GONE
+                ivCancel.visibility = View.GONE
+            }
+            doc_img.setImageResource(0)
+            doc_img.setImageBitmap(null)
+            doc_img.invalidate()
+
+        }else{
+            eExpiryDate.isClickable = false
+            eExpiryDate.isEnabled = false
+            cvUploadDocument.isClickable = false
+            cvUploadDocument.isEnabled = false
+            edWebsite.isEnabled = false
+            etState.isClickable = false
+            etState.isEnabled = false
+            etCountry.isClickable = false
+            etCountry.isEnabled = false
+            etCity.isClickable = false
+            etCity.isEnabled = false
+            etBusinessVat.isClickable = false
+            etBusinessVat.isEnabled = false
+            etId.isClickable = false
+            etId.isEnabled = false
+            etBusinessName.isClickable = false
+            etBusinessName.isEnabled = false
+            etEmployeeId.isClickable = false
+            etEmployeeId.isEnabled = false
+            etBusinessTin.isClickable = false
+            etBusinessTin.isEnabled = false
+            etBusinessNIS.isClickable = false
+            etBusinessNIS.isEnabled = false
+            etPhone.isClickable = false
+            etPhone.isEnabled = false
+            etEmail.isClickable = false
+            etEmail.isEnabled = false
+        }
+        // Handle Error
+        viewModel.showToastError.observe(this) {
+            DialogUtils.showSnackBar(context, it)
+        }
+
+        viewModel.registerVendorStep2LiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     Constants.USER = it.data
@@ -275,9 +412,9 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                 }
             }
 
-        })
+        }
 
-        viewModel.registerLiveData.observe(this, {
+        viewModel.registerLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     Constants.USER = it.data
@@ -306,8 +443,8 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                     }
                 }
             }
-        })
-        viewModel.registerLiveDataAlready.observe(this, {
+        }
+        viewModel.registerLiveDataAlready.observe(this) {
             when (activity) {
                 is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                 is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
@@ -315,9 +452,10 @@ class VendorRegistrationStep2Fragment : AppFragment() {
             }
             val bundle = Bundle()
             bundle.putBoolean(Constants.BUNDLE_FROM_PROFILE, isFromProfile)
-            addFragmentInStack<Any>(AppFragmentState.F_REG_STEP3, bundle)})
+            addFragmentInStack<Any>(AppFragmentState.F_REG_STEP3, bundle)
+        }
 
-        viewModel.chooseFile.observe(this, {
+        viewModel.chooseFile.observe(this) {
 
             DialogUtils.okCancelNeutralDialog(
                 context,
@@ -343,7 +481,7 @@ class VendorRegistrationStep2Fragment : AppFragment() {
                 })
 
 
-        })
+        }
     }
 
     private fun resultMessage(resultCode: Int, path: String, displayName: String?) {
@@ -433,6 +571,7 @@ class VendorRegistrationStep2Fragment : AppFragment() {
             ivUploadDocument.visibility = View.GONE
             tvSelectDoc.visibility = View.GONE
             cvUploadDocument.isClickable = false
+            cvUploadDocument.isEnabled = false
             viewModel.documentPath = path
 
             tvDocName.text = resources.getString(R.string.label_doc_name, docName)
