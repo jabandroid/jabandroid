@@ -1,28 +1,23 @@
 package com.global.vtg.appview.home.event
 
+
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.os.Looper
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
-import com.global.vtg.appview.home.changepassword.ChangePasswordViewModel
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.imageview.setGlideNormalImage
-import com.global.vtg.model.factory.PreferenceManager
-import com.global.vtg.utils.*
+import com.global.vtg.utils.Constants
+import com.global.vtg.utils.DateUtils
+import com.global.vtg.utils.DialogUtils
+import com.global.vtg.utils.KeyboardUtils
 import com.vtg.R
-
 import com.vtg.databinding.FragmentCreateEventBinding
-
 import kotlinx.android.synthetic.main.fragment_create_event.*
-import kotlinx.android.synthetic.main.fragment_create_event.ivBack
-import kotlinx.android.synthetic.main.fragment_event_list.*
-
-
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 

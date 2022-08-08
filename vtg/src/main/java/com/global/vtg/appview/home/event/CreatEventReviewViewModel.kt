@@ -15,14 +15,12 @@ import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.KeyboardUtils
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
+import com.google.gson.Gson
 import com.vtg.R
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import com.google.gson.Gson
-
-
 
 
 class CreatEventReviewViewModel(

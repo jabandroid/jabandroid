@@ -6,13 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.dashboard.DashboardViewModel
-import com.global.vtg.imageview.setGlideNormalImage
-
 import com.global.vtg.appview.home.dashboard.ViewPager2Adapter
-
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
+import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
@@ -20,15 +18,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.vtg.R
 import com.vtg.databinding.FragmentDashboardBinding
 import kotlinx.android.synthetic.main.fragment_dashboard.*
-import kotlinx.android.synthetic.main.fragment_dashboard.ivHelp
-import kotlinx.android.synthetic.main.fragment_dashboard.ivQrCode
-
-import kotlinx.android.synthetic.main.fragment_dashboard.tvCountry
-import kotlinx.android.synthetic.main.fragment_dashboard.tvState
-import kotlinx.android.synthetic.main.fragment_dashboard.viewPager
-import kotlinx.android.synthetic.main.fragment_dashboard.vpDots
-import kotlinx.android.synthetic.main.fragment_vendor_dashboard.*
-
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
@@ -96,22 +85,22 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
             )
         )
 
-        viewModel.userConfigLiveData1.observe(this, {
+        viewModel.userConfigLiveData1.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     (activity as ClinicActivity).hideProgressBar()
                     Constants.USER = it.data
                     loadData()
-                    if(clickedPosition!=-1){
+                    if (clickedPosition != -1) {
                         onItemClickMain(clickedPosition)
                     }
 
-                    if(SharedPreferenceUtil.getInstance(getAppActivity())
+                    if (SharedPreferenceUtil.getInstance(getAppActivity())
                             ?.getData(
                                 PreferenceManager.KEY_USER_REG,
                                 false
                             ) == true
-                    ){
+                    ) {
                         AppAlertDialog().showRegMessage(
                             activity!! as AppCompatActivity,
                             Constants.USER!!.pin!!
@@ -127,7 +116,7 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
                     (activity as ClinicActivity).showProgressBar()
                 }
             }
-        })
+        }
     }
 
     override fun pageVisible() {
@@ -143,8 +132,8 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
                     addFragmentInStack<Any>(AppFragmentState.F_PROFILE)
                 }
                 2 -> {
-                    ToastUtils.shortToast(0, "Coming soon")
-                    //addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
+                    //ToastUtils.shortToast(0, "Coming soon")
+                    addFragmentInStack<Any>(AppFragmentState.F_VENDOR_QR_CODE)
                 }
                 3 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_DOCUMENT)
@@ -156,9 +145,11 @@ class ClinicHomeFragment : AppFragment(), ClinicDashboardAdapter.ClickListener {
                     addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_HEALTH_INFORMATION)
                 }
                 6 -> {
-                    ToastUtils.shortToast(0, "Coming soon")
+
+                    addFragmentInStack<Any>(AppFragmentState.F_CLINIC_CARD)
                 }
                 7 -> {
+
                     addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)
                 }
 //            5 -> {

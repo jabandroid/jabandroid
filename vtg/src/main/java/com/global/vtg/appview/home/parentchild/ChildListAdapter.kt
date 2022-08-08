@@ -6,18 +6,14 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
-import com.google.firebase.crashlytics.internal.model.CrashlyticsReport
 import com.vtg.R
 import kotlinx.android.synthetic.main.adapter_child_list.view.*
-import kotlinx.android.synthetic.main.fragment_reg_step1.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class ChildListAdapter(

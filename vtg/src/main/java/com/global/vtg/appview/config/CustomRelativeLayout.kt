@@ -2,8 +2,8 @@ package com.global.vtg.appview.config
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.RelativeLayout
 import android.view.WindowInsets
+import android.widget.RelativeLayout
 
 class CustomRelativeLayout : RelativeLayout {
     private val mInsets = IntArray(4)

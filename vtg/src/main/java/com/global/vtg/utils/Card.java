@@ -17,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.global.vtg.utils.textView.RegularTextView;
 import com.global.vtg.utils.textView.SemiBoldTextView;
 import com.vtg.R;

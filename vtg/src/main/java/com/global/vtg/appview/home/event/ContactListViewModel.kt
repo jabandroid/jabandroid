@@ -10,7 +10,6 @@ import android.net.Uri
 import android.os.Handler
 import android.os.Looper
 import android.provider.ContactsContract
-import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.global.vtg.appview.authentication.UserRepository

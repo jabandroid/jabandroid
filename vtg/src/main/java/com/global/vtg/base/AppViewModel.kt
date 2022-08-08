@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.webkit.MimeTypeMap
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.global.vtg.appview.authentication.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

@@ -6,7 +6,6 @@ import androidx.databinding.ViewDataBinding
 import com.global.vtg.base.AppActivity
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.replaceAllFragment
-import com.global.vtg.utils.Constants
 import com.global.vtg.utils.Constants.isShowing
 import com.vtg.R
 import kotlinx.android.synthetic.main.activity_authentication.*

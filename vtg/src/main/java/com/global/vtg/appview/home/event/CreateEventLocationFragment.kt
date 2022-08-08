@@ -5,24 +5,17 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import com.global.vtg.appview.home.health.HealthInformationFragment
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.base.fragment.popFragment
-import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
+import com.google.gson.Gson
 import com.vtg.R
 import com.vtg.databinding.FragmentCreateEventLocationBinding
 import kotlinx.android.synthetic.main.fragment_create_event_location.*
-
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.google.firebase.crashlytics.internal.model.CrashlyticsReport.Session.User
-
-import com.google.gson.Gson
-
-
 
 
 class CreateEventLocationFragment : AppFragment() {

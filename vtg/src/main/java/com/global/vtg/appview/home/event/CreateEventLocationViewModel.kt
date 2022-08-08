@@ -7,12 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.base.AppViewModel
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.KeyboardUtils
-import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
-import java.util.ArrayList
 
 class CreateEventLocationViewModel(
     application: Application,

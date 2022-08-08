@@ -2,38 +2,21 @@ package com.global.vtg.appview.home.parentchild
 
 
 import android.annotation.SuppressLint
-import android.net.Uri
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
-import com.global.vtg.imageview.setGlideNormalImage
-import com.global.vtg.model.factory.PreferenceManager
+import com.global.vtg.utils.AppAlertDialog
 import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DateUtils
-import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
 import com.vtg.databinding.FragmentBirthdayVerificationBinding
-import com.vtg.databinding.FragmentChildListBinding
-import com.vtg.databinding.FragmentChildRegistrationBinding
-import kotlinx.android.synthetic.main.fragment_child_list.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
-import kotlin.Comparator
-import android.widget.Toast
-
-import com.global.vtg.appview.MainActivity
-
-import android.widget.NumberPicker
-import android.widget.NumberPicker.OnValueChangeListener
-import com.global.vtg.utils.AppAlertDialog
 import kotlinx.android.synthetic.main.fragment_birthday_verification.*
 import kotlinx.android.synthetic.main.fragment_child_list.ivBack
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 
 class BirthdayVerificationFragment : AppFragment() {

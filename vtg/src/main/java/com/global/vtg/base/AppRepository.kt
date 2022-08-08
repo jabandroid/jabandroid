@@ -1,7 +1,6 @@
 package com.global.vtg.base
 
 
-import android.text.TextUtils
 import android.util.Log
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.model.network.Resource
@@ -36,6 +35,8 @@ open class AppRepository {
             if (response.isSuccessful) {
                 if (response.body() != null && response.body() is BaseResult) {
                     Log.e("Response124","REsponse124"+response.toString())
+
+
                     val baseResult = response.body() as BaseResult
                     baseResult.code= response.code().toString()
 

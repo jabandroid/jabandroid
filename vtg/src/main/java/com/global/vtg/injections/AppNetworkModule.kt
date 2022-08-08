@@ -1,9 +1,8 @@
 package com.global.vtg.injections
 
+
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.test.Const.BASE_URL
-import com.global.vtg.utils.Constants
-
 import com.global.vtg.utils.Constants.IS_SIGN_IN
 import com.global.vtg.utils.Constants.tempPassword
 import com.global.vtg.utils.Constants.tempUsername
@@ -12,27 +11,21 @@ import com.global.vtg.wscoroutine.ApiConstant
 import com.global.vtg.wscoroutine.ApiInterface
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-
-
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
-import java.lang.Exception
-import java.lang.RuntimeException
 import java.security.SecureRandom
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.*
-
-
-
-
+import javax.net.ssl.HostnameVerifier
+import javax.net.ssl.SSLContext
+import javax.net.ssl.TrustManager
+import javax.net.ssl.X509TrustManager
 
 
 //import timber.log.Timber

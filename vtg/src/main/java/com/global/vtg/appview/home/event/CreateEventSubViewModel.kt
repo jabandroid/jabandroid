@@ -1,19 +1,12 @@
 package com.global.vtg.appview.home.event
 
 import android.app.Application
-import android.text.TextUtils
-import android.util.Patterns
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.base.AppViewModel
-import com.global.vtg.utils.Constants
-import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.KeyboardUtils
-import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
-import kotlinx.android.synthetic.main.fragment_create_event.*
 
 class CreateEventSubViewModel(
     application: Application,

@@ -1,9 +1,7 @@
 package com.global.vtg.appview.authentication
 
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.Button
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.base.AppActivity
 import com.global.vtg.base.AppFragmentState

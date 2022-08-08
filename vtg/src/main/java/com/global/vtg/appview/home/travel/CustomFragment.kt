@@ -3,14 +3,9 @@ package com.global.vtg.appview.home.travel
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.global.vtg.appview.authentication.registration.ResUser
-import com.global.vtg.appview.home.parentchild.ChildListAdapter
 import com.global.vtg.base.AppFragment
-import com.global.vtg.base.AppFragmentState
-import com.global.vtg.base.fragment.addFragmentInStack
 import com.vtg.R
-import com.vtg.databinding.*
+import com.vtg.databinding.FragmentArrivalBinding
 import kotlinx.android.synthetic.main.fragment_arrival.*
 
 

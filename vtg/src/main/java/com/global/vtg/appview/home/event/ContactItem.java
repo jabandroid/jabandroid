@@ -2,7 +2,6 @@ package com.global.vtg.appview.home.event;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.text.TextUtils;
 
 
 public class ContactItem implements Parcelable {

@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.base.fragment.addFragmentInStack
@@ -19,9 +18,6 @@ import com.global.vtg.utils.KeyboardUtils
 import com.vtg.R
 import com.vtg.databinding.FragmentCreateEventSubBinding
 import kotlinx.android.synthetic.main.fragment_create_event_sub.*
-import kotlinx.android.synthetic.main.fragment_create_event_sub.ivBack
-import kotlinx.android.synthetic.main.fragment_event_address.*
-import kotlinx.android.synthetic.main.poputadd_child.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.*
 

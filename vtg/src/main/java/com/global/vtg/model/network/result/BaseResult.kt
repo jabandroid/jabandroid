@@ -1,12 +1,12 @@
 package com.global.vtg.model.network.result
 
 import androidx.annotation.Keep
-import com.global.vtg.appview.home.event.Event
 import com.google.gson.annotations.SerializedName
 
 @Keep
 open class BaseResult {
     var status: String ?= null
+    var json: String ?= null
 
 
     var code: String ?= null
@@ -15,6 +15,9 @@ open class BaseResult {
 
     @SerializedName("error")
     var errorApi: String? = null
+
+    @SerializedName("url")
+    var url: String? = null
 
 
     @SerializedName("interested")

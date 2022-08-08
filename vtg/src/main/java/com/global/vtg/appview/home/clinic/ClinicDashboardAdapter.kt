@@ -1,19 +1,16 @@
 package com.global.vtg.appview.home.clinic
 
-import com.global.vtg.appview.home.dashboard.DashBoardItem
-import com.global.vtg.appview.home.dashboard.DashboardAdapter
-
 
 import android.content.Context
-import com.vtg.R
-import androidx.recyclerview.widget.RecyclerView
-
 import android.view.LayoutInflater
 import android.view.View
-
 import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.global.vtg.appview.home.dashboard.DashBoardItem
+import com.global.vtg.appview.home.dashboard.DashboardAdapter
+import com.vtg.R
 
 
 internal class ClinicDashboardAdapter(ctx: Context) :
@@ -54,7 +51,7 @@ internal class ClinicDashboardAdapter(ctx: Context) :
 //            items.add(item)
             item= DashBoardItem(5,   R.drawable.ic_vaccine_card,       ctx.resources.getString(R.string.label_upload_health))
             items.add(item)
-            item= DashBoardItem(6,     R.drawable.ic_health_info,      ctx.resources.getString(R.string.medical_card))
+            item= DashBoardItem(6,     R.drawable.ic_health_info,      ctx.resources.getString(R.string.clinic_card))
             items.add(item)
 
              item= DashBoardItem(7,  R.drawable.ic_event,ctx.resources.getString(R.string.label_event))

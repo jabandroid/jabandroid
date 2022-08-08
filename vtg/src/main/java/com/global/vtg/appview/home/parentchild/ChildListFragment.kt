@@ -248,7 +248,7 @@ class ChildListFragment : AppFragment() {
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
-                    if(positionDelete!=-1) {
+                    if (positionDelete != -1) {
                         adapter.remove(positionDelete)
                         if (adapter.getSize() == 0) {
                             add_child_controller.visibility = View.VISIBLE
@@ -289,9 +289,9 @@ class ChildListFragment : AppFragment() {
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
-                    if(positionDelete!=-1) {
+                    if (positionDelete != -1) {
                         adapter.remove(positionDelete)
-                        positionDelete=-1
+                        positionDelete = -1
                         if (adapter.getSize() == 0) {
                             add_child_controller.visibility = View.VISIBLE
                             main_controller.visibility = View.GONE
@@ -418,38 +418,37 @@ class ChildListFragment : AppFragment() {
                             override fun response(type: String) {
                                 positionDelete = position
                                 if (NetworkUtils().isNetworkAvailable(activity!!)) {
-var parentId =""
-var childId =""
+                                    var parentId = ""
+                                    var childId = ""
 
                                     val childArray = Constants.USER!!.childAccount
                                     for (i in 0 until childArray!!.size) {
 
                                         if (childArray.get(i).id == adapter.getID(position)!!) {
-                                            parentId= childArray.get(i).parentId.toString()
-                                            childId= childArray.get(i).id.toString()
+                                            parentId = childArray.get(i).parentId.toString()
+                                            childId = childArray.get(i).id.toString()
 
                                             break
                                         }
                                     }
                                     Constants.USER!!.childAccount = childArray
-                                    if(parentId == Constants.USER!!.id.toString()){
+                                    if (parentId == Constants.USER!!.id.toString()) {
 
                                         viewModel.deleteChild(
                                             childId
                                         )
-                                    }else{
+                                    } else {
                                         viewModel.deleteUSer(
                                             childId,
                                             Constants.USER!!.id.toString()
                                         )
                                     }
 
-                                }
-                                else
-                                ToastUtils.shortToast(
-                                    0,
-                                    getString(R.string.error_message_network)
-                                )
+                                } else
+                                    ToastUtils.shortToast(
+                                        0,
+                                        getString(R.string.error_message_network)
+                                    )
 
                             }
                         },

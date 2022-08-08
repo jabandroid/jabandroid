@@ -1,17 +1,12 @@
 package com.global.vtg.appview.home.parentchild
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.LayoutInflater
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.global.vtg.appview.authentication.AuthenticationActivity
-import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.VendorActivity
@@ -25,10 +20,7 @@ import com.global.vtg.utils.*
 import com.global.vtg.utils.Constants.USER
 import com.vtg.R
 import com.vtg.databinding.FragmentChildProfileBinding
-import kotlinx.android.synthetic.main.adapter_child_list.view.*
-import kotlinx.android.synthetic.main.fragment_child_list.*
 import kotlinx.android.synthetic.main.fragment_child_profile.*
-import kotlinx.android.synthetic.main.fragment_child_profile.ivBack
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

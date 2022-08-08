@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.global.vtg.imageview.setGlideNormalImage
 import com.global.vtg.utils.Constants
@@ -18,7 +17,6 @@ import com.vtg.R
 import io.branch.indexing.BranchUniversalObject
 import io.branch.referral.util.LinkProperties
 import kotlinx.android.synthetic.main.adapter_attendees.view.*
-
 
 
 class AttendesAdapter(

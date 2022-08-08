@@ -9,10 +9,8 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
-import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import android.view.View
-import android.widget.Adapter
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.ViewDataBinding
@@ -31,11 +29,7 @@ import com.google.gson.JsonObject
 import com.vtg.R
 import com.vtg.databinding.FragmentContactlistBinding
 import kotlinx.android.synthetic.main.fragment_contactlist.*
-import kotlinx.android.synthetic.main.fragment_contactlist.ivBack
-import kotlinx.android.synthetic.main.fragment_create_event.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
-import kotlin.collections.ArrayList
 
 class ContactListFragment : AppFragment() {
     private lateinit var mFragmentBinding: FragmentContactlistBinding
