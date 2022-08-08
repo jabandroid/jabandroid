@@ -12,7 +12,6 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.vtg.R
-import kotlinx.android.synthetic.main.adapter_attendees.view.*
 import kotlinx.android.synthetic.main.adapter_event_address.view.*
 
 
