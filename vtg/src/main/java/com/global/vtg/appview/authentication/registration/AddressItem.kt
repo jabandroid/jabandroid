@@ -17,7 +17,7 @@ data class AddressItem(
 	var addr2: String? = null,
 
 	@field:SerializedName("addr1")
-    var addr1: String? = null,
+	var addr1: String? = null,
 
 	@field:SerializedName("city")
 	var city: String? = null,
@@ -32,7 +32,7 @@ data class AddressItem(
 	val phoneNo: Any? = null,
 
 	@field:SerializedName("billing")
-    var billing: Boolean? = null,
+	var billing: Boolean? = null,
 
 	@field:SerializedName("firstName")
 	val firstName: String? = null,
@@ -41,7 +41,7 @@ data class AddressItem(
 	val shipping: Boolean? = null,
 
 	@field:SerializedName("id")
-	val id: Int? = null,
+	val id: String? = null,
 
 	@field:SerializedName("state")
 	var state: String? = null,

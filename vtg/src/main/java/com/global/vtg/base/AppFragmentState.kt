@@ -6,8 +6,8 @@ import com.global.vtg.appview.authentication.forgotpassword.ForgotPasswordFragme
 import com.global.vtg.appview.authentication.login.SignInFragment
 import com.global.vtg.appview.authentication.otp.OtpFragment
 import com.global.vtg.appview.authentication.registration.*
-import com.global.vtg.appview.home.testHistory.TestHistoryFragment
 import com.global.vtg.appview.home.changepassword.ChangePasswordFragment
+import com.global.vtg.appview.home.clinic.ClinicCardFragment
 import com.global.vtg.appview.home.clinic.ClinicHomeFragment
 import com.global.vtg.appview.home.dashboard.DashboardFragment
 import com.global.vtg.appview.home.event.*
@@ -19,6 +19,7 @@ import com.global.vtg.appview.home.parentchild.*
 import com.global.vtg.appview.home.profile.ProfileFragment
 import com.global.vtg.appview.home.qrcode.VaccineQRCodeFragment
 import com.global.vtg.appview.home.testHistory.TestBaseFragment
+import com.global.vtg.appview.home.testHistory.TestHistoryFragment
 import com.global.vtg.appview.home.testHistory.UploadTestDocumentFragment
 import com.global.vtg.appview.home.travel.*
 import com.global.vtg.appview.home.uploaddocument.UploadDocumentFragment
@@ -57,6 +58,7 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_HEALTH_INFORMATION(HealthInformationFragment::class.java),
     F_HEALTH_DASHBOARD_INFORMATION(HealthInformationDashboardFragment::class.java),
     F_UPLOAD_HEALTH_INFORMATION(UploadHealthDocumentFragment::class.java),
+    F_CLINIC_CARD(ClinicCardFragment::class.java),
     F_HELP(HelpFragment::class.java),
     F_VENDOR_STEP2(VendorRegistrationStep2Fragment::class.java),
     F_PAYMENT(PaymentFragment::class.java),
@@ -80,6 +82,7 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_CHILD_BIRTH(BirthdayVerificationFragment::class.java),
     F_CHILD_LIST(ChildListFragment::class.java),
     F_TRaVEL_INFO(TravelInformationFragment::class.java),
+    F_TRaVEL_INFO_DETAILS(TravelerInformationDetailsFragment::class.java),
     F_TRaVEL_PROFILE(TravelerProfileFragment::class.java),
     F_TRaVEL_SUMMARY(TravelerSummaryFragment::class.java),
     F_ENTER_EXIT_FORM(EnterExitFormFragment::class.java),

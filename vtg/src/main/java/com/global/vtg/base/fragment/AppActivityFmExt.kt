@@ -3,12 +3,11 @@ package com.global.vtg.base.fragment
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.global.vtg.appview.home.vendor.VendorQRCodeFragment
-import com.vtg.R
 import com.global.vtg.base.AppActivity
 import com.global.vtg.base.AppFragment
 import com.global.vtg.base.AppFragmentState
 import com.global.vtg.utils.KeyboardUtils
+import com.vtg.R
 
 // Common Handling of top bar for all fragments like header name, icon on top bar in case of moving to other fragment and coming back again
 fun <T> AppActivity.setUp(currentState: AppFragmentState, keys: T?=null) {

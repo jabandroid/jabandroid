@@ -4,28 +4,22 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
-
 import android.view.WindowManager
 import android.widget.LinearLayout
 import android.widget.RadioButton
-
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.widget.doOnTextChanged
-
 import androidx.fragment.app.FragmentActivity
 import com.global.vtg.model.factory.PreferenceManager
 import com.vtg.R
 import kotlinx.android.synthetic.main.include_language.view.*
-import kotlinx.android.synthetic.main.popup_update_pin.view.*
-import android.text.Editable
-
-import android.text.TextWatcher
 import kotlinx.android.synthetic.main.popup_register.view.*
 import kotlinx.android.synthetic.main.popup_register.view.message
-import kotlinx.android.synthetic.main.popup_update_pin.view.tvConfirmPin
+import kotlinx.android.synthetic.main.popup_update_pin.view.*
 import kotlinx.android.synthetic.main.popup_update_pin.view.tvPin
 import kotlinx.android.synthetic.main.popup_update_pin.view.yes
 import kotlinx.android.synthetic.main.poputadd_child.view.*

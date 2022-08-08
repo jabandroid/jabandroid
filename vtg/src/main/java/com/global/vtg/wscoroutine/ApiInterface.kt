@@ -1,7 +1,5 @@
 package com.global.vtg.wscoroutine
 
-import android.app.usage.UsageEvents
-import com.global.vtg.appview.authentication.forgotpassword.ReqForgotPasswordModel
 import com.global.vtg.appview.authentication.registration.ReqRegistration
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.appview.authentication.registration.TestType
@@ -13,14 +11,13 @@ import com.global.vtg.appview.home.event.EventArray
 import com.global.vtg.appview.home.parentchild.AddChild
 import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.appview.home.testHistory.TestKit
+import com.global.vtg.appview.home.travel.CitySearchItem
 import com.global.vtg.appview.payment.ReqPayment
 import com.global.vtg.model.network.result.BaseResult
-import com.google.firebase.crashlytics.internal.model.CrashlyticsReport
 import com.google.gson.JsonObject
 import kotlinx.coroutines.Deferred
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -94,6 +91,11 @@ interface ApiInterface {
     @GET("api/v1/institute/{name}")
     fun searchInstituteAsync(@Path("name") name: String): Deferred<Response<ResInstitute>>
 
+    @GET("api/v1/airport/{name}")
+    fun searchCode(@Path("name") name: String): Deferred<Response<CitySearchItem>>
+
+    @GET("api/v1/covid/{cityCode}/{countryCode}")
+    fun getInfo(@Path("cityCode") name: String,@Path("countryCode") code: String): Deferred<Response<CitySearchItem>>
 
     @GET("api/v1/testList")
     fun testType(): Deferred<Response<TestType>>
@@ -156,6 +158,13 @@ interface ApiInterface {
     ): Deferred<Response<ResProfile>>
 
     @Multipart
+    @POST("api/file/upload")
+    fun uploadImageAsync(
+        @Part file: MultipartBody.Part?,
+        @Part("id") userId: RequestBody?
+    ): Deferred<Response<BaseResult>>
+
+    @Multipart
     @PUT("api/v1/vendor/upload")
     fun uploadVendorStep2Async(
         @Part file: MultipartBody.Part?,
@@ -168,6 +177,12 @@ interface ApiInterface {
         @Part("rState") state: RequestBody?,
         @Part("rCountry") country: RequestBody?,
         @Part("rZip") zip: RequestBody?,
+        @Part("website") web: RequestBody?,
+        @Part("rCity") city: RequestBody?,
+        @Part("nis") nis: RequestBody?,
+        @Part("tin") tin: RequestBody?,
+        @Part("cEmail") cEmail: RequestBody?,
+        @Part("cPhone") cPhone: RequestBody?
     ): Deferred<Response<ResUser>>
 
 
