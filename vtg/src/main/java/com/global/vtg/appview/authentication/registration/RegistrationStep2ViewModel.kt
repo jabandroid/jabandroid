@@ -32,6 +32,7 @@ class RegistrationStep2ViewModel(
     var ssnFinal: String = ""
     var isChildAccount: Boolean = false
     var id: MutableLiveData<String> = MutableLiveData()
+    var idBbEdit: MutableLiveData<String> = MutableLiveData()
     var dln: MutableLiveData<String> = MutableLiveData()
     var dlnState: MutableLiveData<String> = MutableLiveData()
     var dlnCountry: MutableLiveData<String> = MutableLiveData()
@@ -41,6 +42,7 @@ class RegistrationStep2ViewModel(
     var passportState: MutableLiveData<String> = MutableLiveData()
     var passportCountry: MutableLiveData<String> = MutableLiveData()
     var passportIssuedDate: MutableLiveData<String> = MutableLiveData()
+    var etBbIssuedDate: MutableLiveData<String> = MutableLiveData()
     var passportExpiredDate: MutableLiveData<String> = MutableLiveData()
 
     var documentPathId: String? = null
@@ -105,11 +107,13 @@ class RegistrationStep2ViewModel(
                                 )
                             }
 
-                            if (!isNullOrEmpty(bbUrl!!.trim())) {
+                            if (!isNullOrEmpty(bbUrl!!.trim())||!isNullOrEmpty(idBbEdit.value!!.trim())) {
                                 document.add(
                                     Document(
                                         id=idBB,
                                         type = "BirthCertificate",
+                                        identity=idBbEdit.value,
+                                        issueDate=etBbIssuedDate.value,
 
                                         url = bbUrl
                                     )
@@ -188,11 +192,13 @@ class RegistrationStep2ViewModel(
                                 )
                             }
 
-                            if (!isNullOrEmpty(bbUrl!!.trim())) {
+                            if (!isNullOrEmpty(bbUrl!!.trim())||!isNullOrEmpty(idBbEdit.value!!.trim())) {
                                 document.add(
                                     Document(
                                         id=idBB,
                                         type = "BirthCertificate",
+                                        identity=idBbEdit.value,
+                                        issueDate=etBbIssuedDate.value,
 
                                         url = bbUrl
                                     )

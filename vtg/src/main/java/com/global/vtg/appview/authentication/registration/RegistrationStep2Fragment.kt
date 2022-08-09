@@ -174,6 +174,20 @@ class RegistrationStep2Fragment : AppFragment() {
 
         })
 
+        etBb.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                imgId.isEnabled = s?.length ?: 0 != 0
+            }
+
+        })
+
         etDln.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -325,14 +339,24 @@ class RegistrationStep2Fragment : AppFragment() {
                     doc?.type.equals("BirthCertificate", true) -> {
                         if(TextUtils.isEmpty(  viewModel.id.value)) {
 
+                            doc?.issueDate?.let {
+                                setDate(
+                                    it,
+                                    etBbIssuedDate,
+                                    :: updateBirthDayIssuedDate
+                                )
+
+                            }
+
                             viewModel.idBB = doc!!.id
-                            if (!TextUtils.isEmpty(doc!!.url)) {
-                                viewModel.bbUrl=doc!!.url
+                            viewModel.idBbEdit.value  = doc.identity
+                            if (!TextUtils.isEmpty(doc.url)) {
+                                viewModel.bbUrl = doc.url
                                 imgbbId.setGlideNormalImage(doc!!.url)
                                 imgbbUpload.visibility = View.GONE
                                 ig_edit_bb.visibility = View.VISIBLE
 
-                                imgbbId.setOnClickListener{
+                                imgbbId.setOnClickListener {
                                     val listOfImages = ArrayList<String>()
 
                                     listOfImages.add(doc.url.toString())
@@ -340,6 +364,7 @@ class RegistrationStep2Fragment : AppFragment() {
                                     intent.putExtra("IM", listOfImages)
                                     startActivity(intent)
                                 }
+
                             } else {
                                 imgIdUpload.visibility = View.VISIBLE
                                 ig_edit_bb.visibility = View.GONE
@@ -481,6 +506,13 @@ class RegistrationStep2Fragment : AppFragment() {
                 updatePassportExpiryDate()
             }
 
+        val birthIssuedDate =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                myCalendar.set(Calendar.YEAR, year)
+                myCalendar.set(Calendar.MONTH, monthOfYear)
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateBirthDayIssuedDate()
+            }
         etDlnIssuedDate.setOnClickListener {
             KeyboardUtils.hideKeyboard(getAppActivity())
             val datePicker = DatePickerDialog(
@@ -526,6 +558,16 @@ class RegistrationStep2Fragment : AppFragment() {
             KeyboardUtils.hideKeyboard(getAppActivity())
             val datePicker = DatePickerDialog(
                 getAppActivity(), R.style.DialogTheme, passportIssuedDate, myCalendar
+                    .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)
+            )
+            datePicker.datePicker.maxDate = currentCalendar.timeInMillis
+            datePicker.show()
+        }
+        etBbIssuedDate.setOnClickListener {
+            KeyboardUtils.hideKeyboard(getAppActivity())
+            val datePicker = DatePickerDialog(
+                getAppActivity(), R.style.DialogTheme, birthIssuedDate, myCalendar
                     .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)
             )
@@ -591,6 +633,16 @@ class RegistrationStep2Fragment : AppFragment() {
         viewModel.passportIssuedDate.value =DateUtils.formatDateTime(myCalendar.timeInMillis, DateUtils.API_DATE_FORMAT)
     }
 
+    private fun updateBirthDayIssuedDate() {
+
+        etBbIssuedDate.setText(DateUtils.formatDate(
+            myCalendar.timeInMillis,
+            DateUtils.API_DATE_FORMAT_VACCINE
+        ))
+
+        viewModel.etBbIssuedDate.value =DateUtils.formatDateTime(myCalendar.timeInMillis, DateUtils.API_DATE_FORMAT)
+    }
+
     private fun updatePassportExpiryDate() {
 
         etPassportExpiryDate.setText(DateUtils.formatDate(
@@ -623,8 +675,8 @@ class RegistrationStep2Fragment : AppFragment() {
         myCalendar.set(Calendar.MONTH, cal.get(Calendar.MONTH))
         myCalendar.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH))
         function()
-        editText.isClickable = false
-        editText.isEnabled = false
+//        editText.isClickable = false
+//        editText.isEnabled = false
     }
 
     private  fun  pickImage(){

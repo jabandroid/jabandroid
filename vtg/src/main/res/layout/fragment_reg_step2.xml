@@ -281,7 +281,56 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvBB" />
 
 
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etBb"
+                    style="@style/EdittextPadding"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:digits="0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+                    android:singleLine="true"
+                    android:text="@={viewModel.idBbEdit}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view_5" />
 
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etBbIssuedDate"
+                    style="@style/EdittextPadding"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/edittext_height"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
+                    android:background="@drawable/edittext_shadow"
+                    android:clickable="false"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:focusable="false"
+                    android:focusableInTouchMode="true"
+                    android:hint="@string/label_issued_date"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:paddingStart="@dimen/_16sdp"
+                    android:shadowColor="@color/gray_light"
+                    android:shadowDx="0"
+                    android:shadowDy="0"
+                    android:shadowRadius="4"
+
+                    android:textColorHint="@color/black"
+                    app:layout_constraintEnd_toStartOf="@+id/etDlnExpiryDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etBb" />
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvUploadDocumentBirth"
                     android:layout_width="wrap_content"
@@ -293,7 +342,7 @@
                     android:onClick="@{viewModel::onClick}"
                     app:cardCornerRadius="@dimen/_12sdp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view_5">
+                    app:layout_constraintTop_toBottomOf="@+id/etBbIssuedDate">
 
                     <FrameLayout
                         android:layout_width="wrap_content"
