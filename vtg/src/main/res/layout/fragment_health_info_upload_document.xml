@@ -613,12 +613,24 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cbCertify" />
-
+                <LinearLayout
+                    android:id="@+id/dateLayout"
+                    android:layout_width="match_parent"
+                    android:layout_marginEnd="@dimen/_22sdp"
+                    android:layout_marginStart="@dimen/_22sdp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:weightSum="3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvVaccinatedOn" >
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/sDay"
                     android:layout_width="0dp"
+                    android:layout_weight="0.8"
                     android:layout_height="@dimen/_40sdp"
-                    android:layout_marginStart="@dimen/_24sdp"
+
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_4sdp"
                     android:background="@drawable/disabled_edittext"
@@ -648,6 +660,7 @@
                     android:drawableStart="@drawable/ic_calendar"
                     android:drawablePadding="@dimen/_4sdp"
                     android:focusable="false"
+                    android:layout_weight="1.2"
                     android:focusableInTouchMode="false"
                     android:fontFamily="@font/proximanovareg"
                     android:paddingStart="@dimen/_12sdp"
@@ -664,7 +677,7 @@
                     android:layout_height="@dimen/_40sdp"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_24sdp"
+                android:layout_weight="0.8"
                     android:background="@drawable/edittext_shadow"
                     android:clickable="false"
                     android:cursorVisible="false"
@@ -681,6 +694,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/sDate"
                     app:layout_constraintTop_toBottomOf="@+id/tvVaccinatedOn" />
+                </LinearLayout>
 
                 <com.global.vtg.utils.textView.RegularTextView
                     android:id="@+id/tvClinicHospitalName"
@@ -692,7 +706,7 @@
                     android:textColor="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/sDay" />
+                    app:layout_constraintTop_toBottomOf="@+id/dateLayout" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etHospitalName"

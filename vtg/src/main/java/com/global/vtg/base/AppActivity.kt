@@ -342,6 +342,8 @@ abstract class AppActivity : AppCompatActivity() {
             Place.Field.ADDRESS, Place.Field.ADDRESS_COMPONENTS, Place.Field.LAT_LNG
         )
 
+
+
         // Start the autocomplete intent.
         val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
             .build(this)

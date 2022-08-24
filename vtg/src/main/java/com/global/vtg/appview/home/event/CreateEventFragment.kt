@@ -177,18 +177,18 @@ class CreateEventFragment : AppFragment() {
             tvPrivateEvent.setTextColor(ContextCompat.getColor(activity!!,R.color.gray))
         }
 
-        viewModel.redirectToStep2.observe(this, {
+        viewModel.redirectToStep2.observe(this) {
 
             addFragmentInStack<Any>(
                 AppFragmentState.F_EVENT_CREATE_LOCATION
             )
 
-        })
+        }
 
         // Handle Error
-        viewModel.showToastError.observe(this, {
+        viewModel.showToastError.observe(this) {
             DialogUtils.showSnackBar(context, it)
-        })
+        }
     }
 
     override fun pageVisible() {

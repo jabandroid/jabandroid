@@ -82,6 +82,7 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_CHILD_BIRTH(BirthdayVerificationFragment::class.java),
     F_CHILD_LIST(ChildListFragment::class.java),
     F_TRaVEL_INFO(TravelInformationFragment::class.java),
+    F_TRaVEL_FROM(TravelFormEntryCountryFragment::class.java),
     F_TRaVEL_INFO_DETAILS(TravelerInformationDetailsFragment::class.java),
     F_TRaVEL_PROFILE(TravelerProfileFragment::class.java),
     F_TRaVEL_SUMMARY(TravelerSummaryFragment::class.java),

@@ -509,7 +509,12 @@ class VendorScanResultCountFragment : AppFragment() {
 
                                     valid = 3
                                     break
-                                } else if (data.name.contains("Booster") || data.name.contains("2")) {
+                                } else if (data.name.contains("Dose 3")) {
+
+                                    valid = 2
+                                    break
+                                }
+                                else if (data.name.contains("Booster") || data.name.contains("2")) {
 
                                     valid = 2
                                     break
@@ -688,7 +693,7 @@ class VendorScanResultCountFragment : AppFragment() {
         }
 
 
-        viewModel.testDataDetails.observe(this, {
+        viewModel.testDataDetails.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -733,7 +738,7 @@ class VendorScanResultCountFragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
 
         viewModel.validatePin.observe(this, {
             when (it) {

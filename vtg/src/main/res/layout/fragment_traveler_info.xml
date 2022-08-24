@@ -62,7 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="@string/traveler_profile"
+                        android:text="@string/travel_info"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_18ssp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -113,6 +113,11 @@
                 android:padding="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+
+                <include layout="@layout/include_imegration_header"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent" />
 
                 <RelativeLayout
                     android:id="@+id/personal_info"

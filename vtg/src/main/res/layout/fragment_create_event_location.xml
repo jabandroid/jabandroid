@@ -433,7 +433,7 @@
                     android:background="@drawable/edittext_shadow"
                     android:imeOptions="actionNext"
                     android:inputType="phone"
-                    android:maxLength="11"
+                    android:maxLength="13"
                     android:maxLines="1"
                     android:shadowColor="@color/gray_light"
                     android:shadowDx="0"

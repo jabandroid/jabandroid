@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.global.vtg.appview.home.parentchild.ChildListViewModel" />
+            type="com.global.vtg.appview.home.travel.TravelFormViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,6 +80,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/ic_bg_bottom" />
 
@@ -97,13 +98,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/_90sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
             android:fillViewport="true"
-
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toTopOf="@+id/btnNext"
-            app:layout_constraintTop_toBottomOf="@+id/clToolbar">
+            app:layout_constraintTop_toBottomOf="@+id/clToolbar"
+            app:layout_constraintTop_toTopOf="@+id/btnNext">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,15 +114,21 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
+                <include
+                    layout="@layout/include_imegration_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_10sdp" />
+
                 <RelativeLayout
                     android:id="@+id/flight_info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/_14sdp"
-                    android:paddingBottom="@dimen/_14sdp"
                     android:background="@color/colorPrimary"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_18sdp"
                     android:paddingRight="@dimen/_10sdp"
-                    android:paddingLeft="@dimen/_10sdp">
+                    android:paddingBottom="@dimen/_14sdp">
 
 
                     <com.global.vtg.utils.textView.SBoldTextView
@@ -140,6 +146,7 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_10sdp"
                         android:layout_toEndOf="@+id/tvName"
                         android:contentDescription="@null"
                         android:src="@drawable/ic_drawable_tick"
@@ -192,7 +199,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.airlineName}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -212,7 +220,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.countryOfEmbaraktion}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -221,7 +230,7 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:text="@string/boarded_at"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.AppCompatEditText
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                             android:id="@+id/tvBoardedAt"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
@@ -232,7 +241,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.boardedAt}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -252,14 +262,16 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.flightNumber}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_10sdp"
                             android:text="@string/arrival_date"
-                            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:visibility="gone" />
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/tvArrivalDate"
@@ -272,7 +284,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:visibility="gone" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -292,7 +305,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.arrivalTime}" />
 
 
                         <com.global.vtg.utils.textView.RegularTextView
@@ -302,7 +316,7 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:text="@string/port_arrival"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.AppCompatEditText
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                             android:id="@+id/tvPortOfArrival"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
@@ -313,7 +327,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.portOfArrival}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -333,7 +348,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionDone"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.statusOnBoard}" />
 
                     </LinearLayout>
 
@@ -344,11 +360,11 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_1sdp"
-                    android:paddingTop="@dimen/_14sdp"
-                    android:paddingBottom="@dimen/_14sdp"
                     android:background="@color/colorPrimary"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_14sdp"
                     android:paddingRight="@dimen/_10sdp"
-                    android:paddingLeft="@dimen/_10sdp">
+                    android:paddingBottom="@dimen/_14sdp">
 
 
                     <com.global.vtg.utils.textView.SBoldTextView
@@ -415,7 +431,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="textEmailAddress"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.email}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -435,7 +452,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionDone"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.phone}" />
 
                     </LinearLayout>
                 </net.cachapa.expandablelayout.ExpandableLayout>
@@ -445,11 +463,11 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_1sdp"
-                    android:paddingTop="@dimen/_14sdp"
-                    android:paddingBottom="@dimen/_14sdp"
                     android:background="@color/colorPrimary"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_14sdp"
                     android:paddingRight="@dimen/_10sdp"
-                    android:paddingLeft="@dimen/_10sdp">
+                    android:paddingBottom="@dimen/_14sdp">
 
 
                     <com.global.vtg.utils.textView.SBoldTextView
@@ -487,7 +505,7 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:el_duration="1000"
-                    app:el_expanded="false"
+                    app:el_expanded="true"
                     app:el_parallax="0.5">
 
                     <LinearLayout
@@ -513,12 +531,32 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:background="@drawable/edittext_shadow"
                             android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                             android:drawablePadding="4dp"
+
                             android:drawableTint="@color/black"
                             android:gravity="center_vertical"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.purposeOfVisit}" />
+
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvPurposeOfVisit_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                             android:drawablePadding="4dp"
+android:visibility="gone"
+                            android:hint="@string/specfy_here"
+                            android:drawableTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.PurposeOfVisit_1}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -538,7 +576,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="number"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.lengthStay}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -560,7 +599,25 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.accomodationType}" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/tvAccomodationType_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_40sdp"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            android:background="@drawable/edittext_shadow"
+                    android:hint="@string/specfy_here"
+                            android:drawablePadding="4dp"
+                            android:drawableTint="@color/black"
+                            android:gravity="center_vertical"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:visibility="gone"
+                            android:paddingStart="@dimen/_10sdp"
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.accomodationType_1}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -569,19 +626,19 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:text="@string/address"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/tvAddress"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:background="@drawable/edittext_shadow"
                             android:drawablePadding="4dp"
-
                             android:gravity="center_vertical"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.address}" />
 
 
                         <com.global.vtg.utils.textView.RegularTextView
@@ -591,20 +648,20 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:text="@string/island"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/tvIsland"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:background="@drawable/edittext_shadow"
-                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                             android:drawablePadding="4dp"
                             android:drawableTint="@color/black"
                             android:gravity="center_vertical"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.island}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -613,20 +670,20 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:text="@string/village"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/tvVillage"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:background="@drawable/edittext_shadow"
-                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                             android:drawablePadding="4dp"
                             android:drawableTint="@color/black"
                             android:gravity="center_vertical"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.village}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -635,18 +692,21 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:text="@string/label_quarntine"
                             android:textColor="@color/black" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/tvQuartine"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_40sdp"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:background="@drawable/edittext_shadow"
+                            android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_down_24"
                             android:drawablePadding="4dp"
+
                             android:gravity="center_vertical"
                             android:imeOptions="actionNext"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.quartine}" />
 
                         <com.global.vtg.utils.textView.RegularTextView
                             android:layout_width="match_parent"
@@ -666,7 +726,8 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:imeOptions="actionDone"
                             android:inputType="text"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.confirmationNumber}" />
                     </LinearLayout>
                 </net.cachapa.expandablelayout.ExpandableLayout>
 
@@ -675,11 +736,11 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_1sdp"
-                    android:paddingTop="@dimen/_14sdp"
-                    android:paddingBottom="@dimen/_14sdp"
                     android:background="@color/colorPrimary"
+                    android:paddingLeft="@dimen/_10sdp"
+                    android:paddingTop="@dimen/_14sdp"
                     android:paddingRight="@dimen/_10sdp"
-                    android:paddingLeft="@dimen/_10sdp">
+                    android:paddingBottom="@dimen/_14sdp">
 
 
                     <com.global.vtg.utils.textView.SBoldTextView
@@ -742,21 +803,16 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
                             android:layout_marginTop="@dimen/_2sdp"
                             android:background="@drawable/edittext_shadow"
                             android:drawablePadding="4dp"
-
                             android:gravity="center_vertical"
                             android:imeOptions="actionDone"
                             android:inputType="number"
                             android:paddingStart="@dimen/_10sdp"
-                            android:paddingEnd="@dimen/_9sdp" />
+                            android:paddingEnd="@dimen/_9sdp"
+                            android:text="@={viewModel.numberofTravelers}" />
                     </LinearLayout>
                 </net.cachapa.expandablelayout.ExpandableLayout>
-
-
             </LinearLayout>
-
-
         </androidx.core.widget.NestedScrollView>
-
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -767,8 +823,9 @@ app:layout_constraintTop_toTopOf="@+id/btnNext"
             android:layout_marginEnd="@dimen/_22sdp"
             android:layout_marginBottom="@dimen/_26sdp"
             android:layout_weight="1"
-            android:visibility="gone"
+            android:onClick="@{viewModel::onClick}"
             android:text="@string/next"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

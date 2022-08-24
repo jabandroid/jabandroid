@@ -15,17 +15,20 @@ import kotlinx.android.synthetic.main.fragment_arrival.expandable_layout_2
 import kotlinx.android.synthetic.main.fragment_arrival.expandable_layout_3
 import kotlinx.android.synthetic.main.fragment_arrival.ivBack
 import kotlinx.android.synthetic.main.fragment_traveler_info.*
+import kotlinx.android.synthetic.main.include_imegration_header.*
 
 
 class TravelerInformationFragment : AppFragment() {
     private lateinit var mFragmentBinding: FragmentTravelerInfoBinding
     lateinit var adapter: FlightStatusAdapter
+    private var arg: Bundle = Bundle()
     override fun getLayoutId(): Int {
         return R.layout.fragment_traveler_info
     }
 
     override fun preDataBinding(arguments: Bundle?) {
-
+        arg = Bundle()
+        arg= arguments!!
     }
 
     override fun postDataBinding(binding: ViewDataBinding): ViewDataBinding {
@@ -39,6 +42,20 @@ class TravelerInformationFragment : AppFragment() {
         ivBack.setOnClickListener {
             activity?.onBackPressed()
         }
+
+        when (arg.getString("country")) {
+            "ATG" -> {
+                logo1.setImageResource(R.drawable.ic_atiqua_enblem)
+
+            }
+            "BRB" -> {
+                logo1.setImageResource(R.drawable.ic_barbodosa_emblem)
+            }
+            "KNA" -> {
+                logo1.setImageResource(R.drawable.ic_st_kitt_small)
+            }
+        }
+        title.text = getString(R.string.welcome_custom, arg.getString("name"))
 
       personal_info.setOnClickListener{
             expandable_layout.toggle()

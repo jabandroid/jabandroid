@@ -134,11 +134,11 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         rvInstitute.adapter = adapter
         viewModel.email = getString(R.string.scan_qr_code)
 
-        viewModel.chooseFile.observe(this, {
+        viewModel.chooseFile.observe(this) {
             PickMediaExtensions.instance.pickFromStorage(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
                 resultMessage(resultCode, path, displayName)
             }
-        })
+        }
 
         if (isNetworkAvailable(requireActivity())) {
             viewModel.testType()
@@ -476,7 +476,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 
         })
 
-        viewModel.instituteLiveData.observe(this, {
+        viewModel.instituteLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     it.data.institute?.let { it1 ->
@@ -495,7 +495,7 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
                 is Resource.Loading -> {
                 }
             }
-        })
+        }
 
     }
 

@@ -65,7 +65,12 @@ class VaccineHistoryAdapter(
                             holder.tvStatus.text = data.name
                             valid = 3
                             break
-                        } else if (data.name.contains("Booster") || data.name.contains("2")) {
+                        }else if (data.name.contains("Dose 3")) {
+                            holder.tvStatus.text = data.name
+                            valid = 1
+                            break
+                        }
+                        else if (data.name.contains("Booster") || data.name.contains("2")) {
                             holder.tvStatus.text = data.name
                             valid = 2
                             break

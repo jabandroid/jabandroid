@@ -53,10 +53,9 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
     private val myCalendar: Calendar = Calendar.getInstance()
     private val currentCalendar: Calendar = Calendar.getInstance()
     val doseList: MutableList<String> = ArrayList()
-
     val vaccineTypeList: ArrayList<String> = ArrayList()
     var values = ArrayList<Institute>()
-  lateinit var   instituteAdapter: InstituteAutoCompleteAdapter
+    lateinit var   instituteAdapter: InstituteAutoCompleteAdapter
     override fun getLayoutId(): Int {
         return R.layout.fragment_upload_document
     }
@@ -75,15 +74,12 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
     override fun initializeComponent(view: View?) {
         if (Constants.USER?.role.equals("ROLE_CLINIC")) {
             groupMobileNo.visibility = View.VISIBLE
-
             tvemail.visibility = View.VISIBLE
             scan.visibility = View.VISIBLE
             or_1.visibility = View.VISIBLE
             or_2.visibility = View.VISIBLE
             cus_label.visibility = View.VISIBLE
-
             tvScan.visibility = View.GONE
-
             cbCertify.isChecked=true
             cbCertify.visibility = View.GONE
         } else {
@@ -115,14 +111,11 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             DividerItemDecoration(context, layoutManager.orientation)
         )
         rvInstitute.adapter = adapter
-
         tvCurrentDate.text = SimpleDateFormat(DDMMYYYY, Locale.US).format(myCalendar.timeInMillis)
         addDoses()
         vaccineType()
-
         viewModel.email = getString(R.string.scan_qr_code)
         sDose.onItemSelectedListener = object : OnItemSelectedListener {
-
             override fun onItemSelected(parent: AdapterView<*>, view: View, pos: Int, id: Long) {
                 KeyboardUtils.hideKeyboard(view)
                 if (!isFirstTime)
@@ -145,7 +138,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
-        viewModel.chooseFile.observe(this, {
+        viewModel.chooseFile.observe(this) {
 //            val intent = Intent(Intent.ACTION_GET_CONTENT)
 //            intent.type = "image/*"
 //            getAppActivity().startActivityForResult(intent, PICK_FILE_REQUEST_CODE)
@@ -153,19 +146,17 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             PickMediaExtensions.instance.pickFromStorage(getAppActivity()) { resultCode: Int, path: String, displayName: String? ->
                 resultMessage(resultCode, path, displayName)
             }
-        })
+        }
 
         // Handle Error
-        viewModel.showToastError.observe(this, {
+        viewModel.showToastError.observe(this) {
             DialogUtils.showSnackBar(context, it)
-        })
+        }
 
-        var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        val resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // There are no request codes
                 val data: Intent? = result.data
-
-
                 viewModel.getDataFromBarcodeId(data!!.getStringExtra("code")!!)
             }
         }
@@ -209,7 +200,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
         })
 
 
-        viewModel.scanBarcodeLiveData.observe(this, {
+        viewModel.scanBarcodeLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -217,12 +208,12 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
                     }
 
-                    scan.visibility=View.GONE
-                    tvScan.visibility=View.VISIBLE
-                    if(TextUtils.isDigitsOnly(it.data.mobileNo))
-                        tvScan.text="+"+it.data.mobileNo
+                    scan.visibility = View.GONE
+                    tvScan.visibility = View.VISIBLE
+                    if (TextUtils.isDigitsOnly(it.data.mobileNo))
+                        tvScan.text = "+" + it.data.mobileNo
                     else
-                        tvScan.text=it.data.firstName+" "+ it.data.lastName
+                        tvScan.text = it.data.firstName + " " + it.data.lastName
                     viewModel.emailScan.postValue(it.data.mobileNo)
                     viewModel.phone.postValue("")
                     viewModel.govId.postValue("")
@@ -241,7 +232,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
                     }
                 }
             }
-        })
+        }
 
         tvScan.setOnClickListener {
 
@@ -254,7 +245,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             resultLauncher.launch(intent)
         }
 
-        viewModel.isCertify.observe(this, {
+        viewModel.isCertify.observe(this) {
             if (it == true) {
                 etFee.visibility = View.VISIBLE
                 tvFee.visibility = View.VISIBLE
@@ -262,8 +253,8 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
                 etFee.visibility = View.GONE
                 tvFee.visibility = View.GONE
             }
-        })
-        viewModel.cancelDoc.observe(this, {
+        }
+        viewModel.cancelDoc.observe(this) {
             ivUploadDocument.visibility = View.VISIBLE
             tvSelectDoc.visibility = View.VISIBLE
 
@@ -271,7 +262,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             ivCancel.visibility = View.GONE
             cvUploadDocument.isClickable = true
             viewModel.documentPath = null
-        })
+        }
 
         val date =
             OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
@@ -325,7 +316,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             activity?.onBackPressed()
         }
 
-        viewModel.saveSuccess.observe(this, {
+        viewModel.saveSuccess.observe(this) {
             clForm.visibility = View.GONE
             clThankYou.visibility = View.VISIBLE
             val fragments = getAppActivity().supportFragmentManager.fragments
@@ -339,7 +330,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             Handler().postDelayed({
                 activity?.onBackPressed()
             }, 3000)
-        })
+        }
 
         etHospitalName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -363,7 +354,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
 
         })
 
-        viewModel.instituteLiveData.observe(this, {
+        viewModel.instituteLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     it.data.institute?.let { it1 ->
@@ -382,9 +373,9 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
                 is Resource.Loading -> {
                 }
             }
-        })
+        }
 
-        viewModel.userLiveData.observe(this, {
+        viewModel.userLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
 
@@ -409,7 +400,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
                     }
                 }
             }
-        })
+        }
     }
 
     private fun resultMessage(resultCode: Int, path: String, displayName: String?) {
@@ -458,7 +449,7 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
     private fun getIdFromdose(s: String): String? {
         for (data in Constants.CONFIG?.doses!!) {
             if (data!!.name.equals(s))
-                return data!!.id
+                return data.id
         }
         return ""
     }
@@ -528,7 +519,6 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             tvSelectDoc.visibility = View.GONE
             cvUploadDocument.isClickable = false
             viewModel.documentPath = path
-
             tvDocName.text = resources.getString(R.string.label_doc_name, docName)
             tvDocName.visibility = View.VISIBLE
             ivCancel.visibility = View.VISIBLE

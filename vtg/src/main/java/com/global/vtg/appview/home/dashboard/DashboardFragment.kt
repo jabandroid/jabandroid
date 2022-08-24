@@ -159,11 +159,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                             val intent = Intent(getAppActivity(), HomeActivity::class.java)
                             intent.flags =
                                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
-
                             startActivity(intent)
-
-
                         }
 
                     }
@@ -175,7 +171,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
             }
         }
 
-        viewModel.userConfigLiveData1.observe(this, {
+        viewModel.userConfigLiveData1.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     (activity as HomeActivity).hideProgressBar()
@@ -186,7 +182,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                                 PreferenceManager.KEY_IS_CHILD,
                                 false
                             ) == false
-                    ){
+                    ) {
                         USERMain = it.data
 
 //                        USERMain!!.vaccine=ArrayList<VaccineHistory>()
@@ -202,25 +198,25 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                             )
                     }
 
-                    if(USERMain==null){
-                     val k=   SharedPreferenceUtil.getInstance(getAppActivity())
+                    if (USERMain == null) {
+                        val k = SharedPreferenceUtil.getInstance(getAppActivity())
                             ?.getData(
                                 PreferenceManager.KEY_USER_MAIN,
                                 ""
                             )
 
-                        if(k!=""){
+                        if (k != "") {
                             USERMain = gson.fromJson(k, ResUser::class.java)
                             if (USERMain!!.childAccount!!.size > 0) {
                                 multiple.visibility = View.VISIBLE
                             }
                         }
-                    }else
+                    } else
 
 
-                    if (USERMain!!.childAccount!!.size > 0) {
-                        multiple.visibility = View.VISIBLE
-                    }
+                        if (USERMain!!.childAccount!!.size > 0) {
+                            multiple.visibility = View.VISIBLE
+                        }
                     loadData()
 
                     if (!TextUtils.isEmpty(
@@ -268,7 +264,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                     (activity as HomeActivity).showProgressBar()
                 }
             }
-        })
+        }
     }
 
     override fun pageVisible() {
@@ -330,6 +326,9 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                 }
                 8 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_TRaVEL_INFO)
+                }
+                10 -> {
+                    addFragmentInStack<Any>(AppFragmentState.F_TRaVEL_FROM)
                 }
                 11 -> {
                     addFragmentInStack<Any>(AppFragmentState.F_EVENT_LIST)

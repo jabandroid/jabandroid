@@ -14,10 +14,13 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.global.vtg.appview.authentication.registration.TestType
+import com.global.vtg.appview.home.travel.VisitReasonAdapter
 import com.global.vtg.model.factory.PreferenceManager
 import com.vtg.R
 import kotlinx.android.synthetic.main.include_language.view.*
-import kotlinx.android.synthetic.main.popup_register.view.*
 import kotlinx.android.synthetic.main.popup_register.view.message
 import kotlinx.android.synthetic.main.popup_update_pin.view.*
 import kotlinx.android.synthetic.main.popup_update_pin.view.tvPin
@@ -332,6 +335,92 @@ class AppAlertDialog {
         dialog.setView(dialogLayout)
         dialog.show()
     }
+
+    fun showVisitReason(
+        activity: AppCompatActivity,  mInteractor: GetClick,
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = activity.layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popup_visit_reason, null)
+        val list = dialogLayout.findViewById<RecyclerView>(R.id.rv_list)
+
+        var layoutManager = LinearLayoutManager(activity)
+        lateinit var mListner: VisitReasonAdapter.OnItemClickListener
+        val language1: Array<out String> = activity.resources.getStringArray(R.array.reason)
+        mListner = object :
+            VisitReasonAdapter.OnItemClickListener {
+            @SuppressLint("SimpleDateFormat")
+            override fun onItemClick(item: String) {
+
+                    mInteractor.response(item)
+                    dialog.dismiss()
+
+            }
+        }
+        val adapter = VisitReasonAdapter(activity, mListner)
+
+
+        adapter.addAll(language1)
+        list.layoutManager = layoutManager
+        list.adapter = adapter
+
+
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
+
+
+    fun showVisitAccomodation(
+        activity: AppCompatActivity,  mInteractor: GetClick,
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = activity.layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popup_visit_reason, null)
+        val list = dialogLayout.findViewById<RecyclerView>(R.id.rv_list)
+
+        var layoutManager = LinearLayoutManager(activity)
+        lateinit var mListner: VisitReasonAdapter.OnItemClickListener
+        val language1: Array<out String> = activity.resources.getStringArray(R.array.accomodation)
+        mListner = object :
+            VisitReasonAdapter.OnItemClickListener {
+            @SuppressLint("SimpleDateFormat")
+            override fun onItemClick(item: String) {
+
+                mInteractor.response(item)
+                dialog.dismiss()
+
+            }
+        }
+        val adapter = VisitReasonAdapter(activity, mListner)
+
+
+        adapter.addAll(language1)
+        list.layoutManager = layoutManager
+        list.adapter = adapter
+
+
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
+
 
     interface GetClick {
         fun response(type: String) {}

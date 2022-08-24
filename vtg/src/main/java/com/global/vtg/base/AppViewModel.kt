@@ -31,7 +31,7 @@ open class AppViewModel(application: Application) : AndroidViewModel(application
 
     }
 
-    fun isNullOrEmpty(s: String?): Boolean {
+    open fun isNullOrEmpty(s: String?): Boolean {
         return s == null || s.isEmpty() || s.trim().isEmpty()
     }
 

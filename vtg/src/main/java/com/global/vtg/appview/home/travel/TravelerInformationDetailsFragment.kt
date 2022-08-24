@@ -85,11 +85,11 @@ class TravelerInformationDetailsFragment : AppFragment() {
                 is HomeActivity -> (activity as HomeActivity).showProgressBar()
                 is ClinicActivity -> (activity as ClinicActivity).showProgressBar()
             }
-            var country = arrCode[count].departureCountryCode.toString()
+            var country = arrCode[count].arrivalCountryCode.toString()
             country = getCountryCode(country).toString()
             val request = Request.Builder()
                 .url(
-                    "${Const.BASE_URL}/api/v1/covid/${arrCode[count].departureCode}/${country}"
+                    "${Const.BASE_URL}/api/v1/covid/${arrCode[count].arrivalCode}/${country}"
 //                    "${Const.BASE_URL}/api/v1/covid/AMD/IN"
                 )
                 .get()
@@ -285,8 +285,9 @@ class TravelerInformationDetailsFragment : AppFragment() {
                         } else {
 
 
-                            Handler().postDelayed({
+
                                 activity!!.runOnUiThread(Runnable {
+                                    Handler().postDelayed({
                                     when (activity) {
                                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                                         is ClinicActivity -> (activity as ClinicActivity).hideProgressBar()
@@ -296,8 +297,8 @@ class TravelerInformationDetailsFragment : AppFragment() {
                                         jo.get("errors").asJsonArray.get(0).asJsonObject.get("detail")
                                             .toString()
                                     )
-                                })
-                            }, 3000)
+                                }, 3000)})
+
 
                         }
 

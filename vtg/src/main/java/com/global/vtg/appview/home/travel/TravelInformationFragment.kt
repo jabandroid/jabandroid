@@ -240,7 +240,7 @@ class TravelInformationFragment : AppFragment() {
         })
 
 
-        viewModel.codeLiveData.observe(this, {
+        viewModel.codeLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     it.data.data.let { it1 ->
@@ -259,7 +259,7 @@ class TravelInformationFragment : AppFragment() {
                 is Resource.Loading -> {
                 }
             }
-        })
+        }
 
     }
 

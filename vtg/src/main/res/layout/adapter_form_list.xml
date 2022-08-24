@@ -3,8 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/root"
-    android:layout_marginStart="@dimen/_12sdp"
-    android:layout_marginEnd="@dimen/_12sdp"
     android:layout_marginTop="1dp"
     android:background="@color/gray_light">
 
@@ -28,9 +26,10 @@
 
         <ImageView
             android:id="@+id/done"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="19dp"
+            android:layout_height="13dp"
             android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_5sdp"
             android:layout_toEndOf="@+id/tvName"
             android:contentDescription="@null"
             android:src="@drawable/ic_drawable_tick" />

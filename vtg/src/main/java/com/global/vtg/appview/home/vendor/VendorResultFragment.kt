@@ -169,14 +169,14 @@ class VendorResultFragment : AppFragment() {
             )
         }
 
-        viewModel.validatePin.observe(this,{
+        viewModel.validatePin.observe(this) {
             when (it) {
                 is Resource.Success -> {
 
 
-                    if(it.data.status=="Success"){
+                    if (it.data.status == "Success") {
                         Constants.openFile(openDoc, activity!!)
-                    }else{
+                    } else {
                         ToastUtils.longToast(0, getString(R.string.invalid_pin))
                     }
                     when (activity) {
@@ -203,9 +203,9 @@ class VendorResultFragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
 
-        viewModel.testData.observe(this, {
+        viewModel.testData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -320,7 +320,7 @@ class VendorResultFragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
 
 
 //        if (!Constants.SCANNEDUSER?.healthInfo.isNullOrEmpty()) {

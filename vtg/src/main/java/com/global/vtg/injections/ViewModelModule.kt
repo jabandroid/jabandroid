@@ -20,6 +20,7 @@ import com.global.vtg.appview.home.qrcode.VaccineQRCodeViewModel
 import com.global.vtg.appview.home.testHistory.TestHistoryViewModel
 import com.global.vtg.appview.home.testHistory.TestViewModel
 import com.global.vtg.appview.home.testHistory.UploadTestDocumentViewModel
+import com.global.vtg.appview.home.travel.TravelFormViewModel
 import com.global.vtg.appview.home.travel.TravelViewModel
 import com.global.vtg.appview.home.uploaddocument.UploadDocumentViewModel
 import com.global.vtg.appview.home.vaccinecard.VaccineCardViewModel
@@ -186,6 +187,9 @@ val appViewModelModule = module {
 
     viewModel {
         TravelViewModel(get(), get())
+    }
+    viewModel {
+        TravelFormViewModel(get(), get())
     }
 
 

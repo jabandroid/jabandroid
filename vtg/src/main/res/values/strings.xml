@@ -746,5 +746,39 @@
     <string name="clinic_card">Clinic Card</string>
     <string name="empty_phone_1">Please enter a phone No.</string>
     <string name="clinic_details_not_found">Clinic details not found</string>
+    <string name="enter_details_error">Please provide information</string>
+    <string name="welcome_custom"> Welcome to %1$s \n Immigration/Customs Form</string>
+    <string name="specfy_here">Specify here…</string>
+
+
+
+    <string-array name="reason">
+        <item>Business</item>
+        <item>Convention</item>
+        <item>Funeral</item>
+        <item>Honeymoon/Wedding</item>
+        <item>In Transit</item>
+        <item>Medical</item>
+        <item>Meeting</item>
+        <item>Returning Home</item>
+        <item>Sports</item>
+        <item>Study</item>
+        <item>Vacation</item>
+        <item>Visiting Friends/Relatives</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="accomodation">
+        <item>BED &amp; BREAKFAST</item>
+        <item>DIVE/ECO LODGE</item>
+        <item>GUEST HOUSE</item>
+        <item>HOTEL</item>
+        <item>PRIVATE HOME</item>
+        <item>RUSVM Campus</item>
+        <item>Sea Vessel</item>
+        <item>VILLA</item>
+
+        <item>Others</item>
+    </string-array>
 
 </resources>
