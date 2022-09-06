@@ -15,6 +15,11 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_12ssp" />
 
-
+    <com.global.vtg.utils.textView.RegularTextView
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_9ssp" />
 
 </LinearLayout>

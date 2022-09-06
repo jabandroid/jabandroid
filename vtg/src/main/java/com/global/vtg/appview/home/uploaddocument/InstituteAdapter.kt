@@ -27,6 +27,8 @@ class InstituteAdapter (context: Context) :
     override fun onBindViewHolder(holder: InstituteAdapter.InstituteViewHolder, position: Int) {
         // set the data in items
         holder.tvInstitute.text = items[position].name
+        holder.address.text = items[position].addr1  +" "+ items[position].addr2 +" "+ items[position].city +" "+  items[position].state +" "+ items[position].country
+
         holder.itemView.setOnClickListener {
             listener.onItemClick(items[position])
         }
@@ -39,6 +41,7 @@ class InstituteAdapter (context: Context) :
     inner class InstituteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // init the item view's
         var tvInstitute: TextView = itemView.findViewById(R.id.tvInstitute)
+        var address: TextView = itemView.findViewById(R.id.address)
     }
 
     fun setListener(listener: ClickListener) {

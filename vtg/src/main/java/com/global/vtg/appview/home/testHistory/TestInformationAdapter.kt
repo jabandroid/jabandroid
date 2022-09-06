@@ -44,8 +44,13 @@ class TestInformationAdapter(
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: HealthViewHolder, position: Int) {
         // set the data in items
-        val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
-        holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
+
+        if(list[position].instituteId!=0){
+            val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
+            holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
+
+        }else
+            holder.tvHospitalName.text=list[position].test
 
         if (!TextUtils.isEmpty(list[position].test)) {
             if (list[position].test.equals("1")) {

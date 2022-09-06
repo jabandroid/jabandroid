@@ -449,6 +449,8 @@ class VendorScanResultCountFragment : AppFragment() {
         iv_status_Vaccine.visibility = View.INVISIBLE
         val list = Constants.SCANNEDUSER!!.vaccine!!
         if (list.size > 0) {
+
+
             Constants.SCANNEDUSER?.vaccine?.let {
                 Collections.sort(list, Comparator<VaccineHistory?> { obj1, obj2 ->
 
@@ -496,6 +498,12 @@ class VendorScanResultCountFragment : AppFragment() {
                     )
                 )
 
+
+
+                if (list[0].addedBy!!.contains("clinic"))
+                    addedByVaccine.setImageResource(R.drawable.ic_clinic)
+                else
+                    addedByVaccine.setImageResource(R.drawable.ic_user)
                 if (list[0].dose != null) {
                     var valid: Int = 0
                     try {

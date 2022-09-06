@@ -31,6 +31,7 @@ class UploadDocumentViewModel(
 ) :
     AppViewModel(application) {
     var instituteId: Int? = null
+    var instituteName: String? = null
     var documentPath: String? = null
     var dose: String? = null
     var vaccine: Int? = null
@@ -151,6 +152,12 @@ class UploadDocumentViewModel(
 
                 dateReq = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
             }
+
+            var insReq: RequestBody? = null
+            if (instituteName != null) {
+
+                insReq = instituteName?.toRequestBody("text/plain".toMediaTypeOrNull())
+            }
 //            var dateForServer=DateUtils.formatLocalToUtc(date!!,DateUtils.API_DATE_FORMAT,DateUtils.API_DATE_FORMAT)
 //            val dateReq: RequestBody? = dateForServer?.toRequestBody("text/plain".toMediaTypeOrNull())
 //            val username: RequestBody? = if (Constants.USER?.role.equals("ROLE_CLINIC")) {
@@ -197,7 +204,8 @@ class UploadDocumentViewModel(
                 dateReq,
                 batchNo,
                 dose,
-                username
+                username,
+                insReq
             )
         }
     }

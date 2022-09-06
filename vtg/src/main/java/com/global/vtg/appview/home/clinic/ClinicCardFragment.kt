@@ -14,7 +14,7 @@ import com.vtg.databinding.FragmentClinicCardBinding
 import com.vtg.databinding.FragmentRegStep3Binding
 import kotlinx.android.synthetic.main.fragment_clinic_card.*
 import kotlinx.android.synthetic.main.fragment_clinic_card.ivBack
-import kotlinx.android.synthetic.main.fragment_reg_step3.*
+
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 import java.util.*

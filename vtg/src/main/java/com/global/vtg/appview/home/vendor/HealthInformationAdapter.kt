@@ -43,11 +43,16 @@ class HealthInformationAdapter(
 
     override fun onBindViewHolder(holder: HealthViewHolder, position: Int) {
         // set the data in items
-        val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
-        holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
+        if(list[position].instituteId!=0){
+            val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
+            holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
+
+        }else
+            holder.tvHospitalName.text=list[position].insName
 
 
-                holder.tvTest.text =list[position].testName
+
+        holder.tvTest.text =list[position].testName
 
         holder.testRoot.visibility = View.VISIBLE
         holder.tvDate.text = list[position].date?.let {

@@ -338,7 +338,8 @@ class UserRepository constructor(
         date: RequestBody?,
         batchNo: RequestBody?,
         dose: RequestBody?,
-        username: RequestBody?
+        username: RequestBody?,
+        insReq: RequestBody?
     ) {
         userLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result = safeApiCall(call = {
@@ -352,7 +353,8 @@ class UserRepository constructor(
                 date,
                 batchNo,
                 dose,
-                username
+                username,
+                insReq
             ).await()
         })
         if (result is ResUser) {
@@ -374,7 +376,8 @@ class UserRepository constructor(
         result: RequestBody?,
         test: RequestBody?,
         username: RequestBody?,
-        kit: RequestBody?
+        kit: RequestBody?,
+        insReq: RequestBody?
     ) {
         userLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result = safeApiCall(call = {
@@ -389,7 +392,7 @@ class UserRepository constructor(
                 result,
                 test,
                 username,
-                kit
+                kit, insReq
             ).await()
         })
         if (result is ResUser) {
@@ -411,7 +414,8 @@ class UserRepository constructor(
         result: RequestBody?,
         test: RequestBody?,
         username: RequestBody?,
-        testkit: RequestBody?
+        testkit: RequestBody?,
+        insReq: RequestBody?
     ) {
         userLiveData.postValue(Resource.Loading(EnumLoading.LOADING_ALL))
         val result = safeApiCall(call = {
@@ -426,7 +430,7 @@ class UserRepository constructor(
                 result,
                 test,
                 username,
-                testkit
+                testkit,insReq
             ).await()
         })
         if (result is ResUser) {

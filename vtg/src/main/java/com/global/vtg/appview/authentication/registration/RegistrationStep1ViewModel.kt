@@ -11,12 +11,9 @@ import com.global.vtg.appview.home.profile.ResProfile
 import com.global.vtg.base.AppViewModel
 import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
-import com.global.vtg.utils.Constants
+import com.global.vtg.utils.*
 import com.global.vtg.utils.Constants.USER
 import com.global.vtg.utils.Constants.USERCHILD
-import com.global.vtg.utils.DialogUtils
-import com.global.vtg.utils.KeyboardUtils
-import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.google.gson.Gson
 import com.vtg.R
@@ -355,11 +352,59 @@ class RegistrationStep1ViewModel(
                 age--
             }
              ageInt = age
+
         }catch (e:Exception){
             e.printStackTrace()
         }
         return ageInt
     }
+
+    fun getAgeString(date: String): String {
+
+
+        val date = DateUtils.getDate(
+            date,
+            DateUtils.API_DATE_FORMAT
+        )
+
+        val dob = Calendar.getInstance()
+        val today = Calendar.getInstance()
+
+        dob.time = date
+        var k = today[Calendar.YEAR]
+        var t = dob[Calendar.YEAR]
+        var age = today[Calendar.YEAR] - dob[Calendar.YEAR]
+        if (today[Calendar.DAY_OF_YEAR] < dob[Calendar.DAY_OF_YEAR]) {
+            age--
+        }
+        var ageInt = ""
+
+        if (age > 0) {
+            if (age == 1)
+                ageInt = "$age year"
+            else
+                ageInt = "$age years"
+        } else {
+            age = (today[Calendar.MONTH] + 1) - (dob[Calendar.MONTH] + 1)
+            if (age > 0) {
+                if (age == 1)
+                    ageInt = "$age month"
+                else
+                    ageInt = "$age months"
+            } else {
+                age = today[Calendar.DAY_OF_YEAR] - dob[Calendar.DAY_OF_YEAR]
+                if (age == 0)
+                    age = 1
+                if (age == 1)
+                    ageInt = "$age day"
+                else
+                    ageInt = "$age Days"
+            }
+        }
+        return ageInt
+    }
+
+
 
     fun uploadProfile(path: String) {
         scope.launch {

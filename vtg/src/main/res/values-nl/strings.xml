@@ -2,107 +2,34 @@
     <!--<string name="app_name">BaseProject</string>-->
 
     <string name="api_key">AIzaSyD09CYCGjr-h6gCq3ImZe6pnglvuCsGcMU</string>
-    <string name="app_name_new" translatable="false">VAXTRAX</string>
 
-    <string name="please_wait">Está disponível</string>
-    <string name="email">Número de e-mail / celular</string>
-    <string name="password">Wachtwoord</string>
     <string name="login">Inloggen</string>
-    <string name="msg_valid_email">Você pode encontrar endereços de e-mail em</string>
-    <string name="msg_valid_password">Voer wachtwoord em</string>
-    <string name="navigation_drawer_open">Abrir</string>
-    <string name="navigation_drawer_close">Sluiten</string>
-    <string name="signup">Aanmelden</string>
-    <string name="details_screen">Detalhes</string>
     <string name="permissions_denied">Toestemmingen geweigerd. Laat de app-instellingen toe para funcionalidades extras.</string>
     <!--Titel-->
-    <string name="title_home">Thuistaak</string>
-    <string name="title_payment">Betalingsportemonnee</string>
-    <string name="title_whistory">Intrekkingsgeschiedenis</string>
-    <string name="title_myteam">Equipe Mijn</string>
-    <string name="title_installapp">Instaladores de aplicativos</string>
-    <string name="title_noti">Fusão</string>
-    <string name="title_faq">Veelgestelde vragen</string>
     <string name="title_contactus">Contato Neem com opções</string>
-    <string name="title_refer">Versões verdes</string>
-    <string name="title_logout">Uitloggen</string>
 
 
     <!--Fout-->
-    <string name="error_message_location">"A localização não é definida"</string>
     <string name="error_message_network">Controle de verbinding e probeer het opnieuw.</string>
-    <string name="error_message_call">Oproep mislukt</string>
     <string name="error_message_somethingwrong">Er é iets misgegaan, probeer het depois opnieuw</string>
-    <string name="error_message_clienterror">Clientfout</string>
-    <string name="error_message_servererror">Serverfout</string>
-    <string name="error_message_no_record">Gerado de entrada</string>
     <string name="error_message_empty">Oeps, er zijn geen resultten on weer te geven</string>
     <string name="error_message_error">Oeps, ainda há quatro opções para os outros</string>
-    <string name="error_message_checkagain">Opção do controlador</string>
     <string name="error_message_tryagain">Probe het opnieuw</string>
 
 
     <!--Berichten-->
-    <string name="msg_success">Tenha sucesso no processo</string>
 
     <!--Agir-->
     <string name="action_save">Opslaan</string>
-    <string name="action_cancel">Anular</string>
 
 
-    <string name="button_login">Anmelden</string>
-    <string name="button_signup">Anmelden</string>
-
-    <string name="hint_email_or_username">E-mail</string>
-    <string name="hint_password">Wachtwoord</string>
-    <string name="hint_phonenumber">Nº do celular</string>
-    <string name="hint_code">Código de referência</string>
-    <string name="forgot">Wachtwoord vergeten</string>
-    <string name="donthave">Heb je geen account? <b>MELD U AAN!</b></string>
-
-
-    <string name="btn_next">Volgende</string>
-    <string name="txt_withdraw_amout">Bedrag opnemen</string>
-    <string name="txt_withdraw">Opnemen</string>
-    <string name="etx_payment_number">Betalingsnummer</string>
-    <string name="txt_currnet_balance">Huidig saldo</string>
-
-
-    <string name="enable_random_adaptation">Schakel willekeurige aanpassando</string>
-
-    <string name="error_drm_not_supported">Acessar até 18 de dezembro de 2018</string>
-
-    <string name="error_drm_unsupported_scheme">Dê o aparato onde está o verdadeiro esquema de DRM</string>
-
-    <string name="error_drm_unknown">Está sempre ligado ao DRM-fout opgetreden</string>
-
-    <string name="error_no_decoder">Apareça no início do decodificador para <xliff:g id="mime_type">%1$s</xliff:g></string>
-
-    <string name="error_no_secure_decoder">Apareça com o decodificador para <xliff:g id="mime_type">%1$s</xliff:g></string>
-
-    <string name="error_querying_decoders">Kan apparaatdecoders niet opvragen</string>
-
-    <string name="error_instantiating_decoder">Kan decodificador <xliff:g id="decoder_name">%1$s</xliff:g></string> nenhuma instância
-
-    <string name="error_unsupported_video">Mídia inclui faixas de vídeo, você pode usar palavras e afgspeeld op dit apparaat</string>
-
-    <string name="error_unsupported_audio">A mídia inclui faixas de áudio, mas você pode usar a porta do aparelho e a palavra a ser gravada</string>
-
-    <string name="storage_permission_denied">Avaliar para toegang tot opslag é geweigerd</string>
-
-    <string name="sample_list_load_error">Eventualmente, você pode usar todas as palavras</string>
+    nenhuma instância
 
     <string name="piker_cam">Câmera</string>
     <string name="piker_gall">Galeria</string>
     <string name="piker_chosevideo">Conteúdo de vídeo</string>
-    <string name="piker_choseimage">Kies em ação</string>
     <string name="txt_file_toolarge">O melhor é o groot. O grootte máximo é %1$sMB</string>
-    <string name="retry">Opnieuw proberen</string>
     <string name="no_connection">Gerou internetverbinding. Controleer é verbinding e probeer het opnieuw.</string>
-    <string name="no_connection_msg">Controlador de internetverbinding e sonda de abertura</string>
-    <string name="nv_settings">Instalando</string>
-    <string name="nv_home">Aqui</string>
-    <string name="nv_bookmark">Bladwijzer</string>
     <string name="Failure">Falha</string>
 
     <!-- VTG -->
@@ -119,8 +46,6 @@
     <string name="label_forgot_password_title">Wachtwoord vergeten</string>
     <string name="label_forgot_password_subtext">Bevestig je mobiele nummer en we sturen de\n instruções.</string>
     <string name="label_do_sign_up">Você tem uma conta? <u><b><font fgcolor='#1D4792'> Anmelden </font></b></u></string>
-    <string name="label_sign_up"><u>Aanmelden</u></string>
-    <string name="label_sign_up1">Anmelden</string>
     <string name="label_registration">Registro</string>
     <string name="label_phone_no">Mobiel nr.</string>
     <string name="label_phone_no_register">Mobiel nr.*</string>
@@ -145,12 +70,8 @@
     <string name="label_covid_test_status">status do teste COVID</string>
     <string name="label_test_history">Testgeschiedenis</string>
     <string name="label_test_history_covid">Covid-testgeschiedenis</string>
-    <string name="label_test_upload"> Teste de upload</string>
     <string name="label_payment_method">método beta</string>
-    <string name="label_information">Informações</string>
     <string name="label_upload_document">Documento enviado</string>
-    <string name="label_upload_info">Gezondheidsinfo uploaden</string>
-    <string name="label_covid_status">Covid-teststatus</string>
     <string name="label_change_password">Wachtwoord wijzigen</string>
     <string name="label_events">Eventos</string>
     <string name="label_vaccine_taken_list">Vaccinlijst</string>
@@ -181,7 +102,6 @@
     <string name="label_fee">Vergoing</string>
     <string name="label_date1">Dados</string>
     <string name="label_time">Tijd</string>
-    <string name="label_date_time" formatted="false">%d:%d</string>
 
     <string name="label_no_data">Gerado como um arquivo...</string>
     <string name="select_type">Tipo de vacina</string>
@@ -200,7 +120,6 @@
     <string name="label_about_event">Sobre o nivelamento</string>
     <string name="label_contact_detail">Contatogegevens </string>
     <string name="read_more">Mais um pouco. </string>
-    <string name="read_less">Minder. </string>
     <string name="label_public_event">evento Openbaar</string>
     <string name="label_event_Images">Evenementafbeeldingen</string>
     <string name="label_description">Descrição</string>
@@ -218,7 +137,6 @@
     <string name="label_test_type">Tipo de teste</string>
     <string name="label_test_type_2">Tipo de teste/vacina</string>
     <string name="label_test_kit">kit de teste</string>
-    <string name="label_test_type_1">Teste de tipo</string>
     <string name="label_dob_hint">DD/MM/JJJJ</string>
     <string name="label_city_step3"><font size="14">Estado*</font></string>
     <string name="label_place_birth">Geboorteplaats</string>
@@ -232,10 +150,8 @@
     <string name="label_next">Volgende</string>
     <string name="label_skip">Sobrelaan</string>
     <string name="label_show_details">Tom de detalhes</string>
-    <string name="label_ssn">Últimos 4 códigos de PIN/SSN/NIN/SIN/DNI/CPR/eID/NEI</string>
     <string name="label_id_number">Número de ID</string>
     <string name="label_drivers_license">Rijbewijs</string>
-    <string name="label_number"><font size="14">Número</font></string>
     <string name="label_issued_date"><font size="14">Uitgiftedatum</font></string>
     <string name="label_expiry_date"><font size="14">Vervaldatum</font></string>
     <string name="label_passport">Paspoort</string>
@@ -257,7 +173,6 @@
     <string name="label_business_id">Bedrijfs-ID</string>
     <string name="label_employee_id">Werknemer-ID</string>
     <string name="label_vat">Zakelijke btw</string>
-    <string name="label_contact_no">Número de contato</string>
     <string name="label_fax">Fax</string>
 
     <!-- Validaties -->
@@ -279,7 +194,6 @@
     <string name="error_fee">Voer está chegando.</string>
 
     <string name="error_select_type">Selecione o tipo de vacina.</string>
-    <string name="error_batch_no">Voer um número de lote do número de série.</string>
     <string name="error_select_date">Selecione uma vacina.</string>
     <string name="error_select_time">Selecione uma vacina.</string>
     <string name="error_select_test_type_1">Selecione o teste de tipo.</string>
@@ -287,19 +201,12 @@
     <string name="error_select_test_type">Teste de tipo de seleção do tipo.</string>
     <string name="error_hospital_name">Selecionador a.u.b. een Lab/Clinic Institute naam</string>
     <string name="empty_title">Seletor de título.</string>
-    <string name="empty_gender">Selecione e selecione.</string>
     <string name="empty_given_name">Vul de voornaam in.</string>
     <string name="empty_product">Selecione um produto.</string>
     <string name="empty_first_name">Voer de voornaam in.</string>
     <string name="empty_last_name">Voer de achternaam in.</string>
     <string name="upload_image">Faça o upload do perfilafbeelding.</string>
     <string name="empty_dob">Selecionador de dados.</string>
-    <string name="empty_place_birth_city">Você já esteve em.</string>
-    <string name="empty_place_birth_state">Voer een staat in.</string>
-    <string name="empty_place_birth_country">Você pode chegar.</string>
-    <string name="empty_citizenship">Voer je staatsburgerschap in.</string>
-    <string name="empty_ethnicity">Vul etniciteit in.</string>
-    <string name="empty_ssn">Você tem mais de 4 cijfers do burgerservicenumber in.</string>
     <string name="empty_id_number">Voer een ID-number in.</string>
     <string name="empty_business_name">Voer bedrijfsnaam in.</string>
     <string name="empty_business_id">Voer de bedrijfs-ID in.</string>
@@ -317,7 +224,6 @@
     <string name="empty_passport_expiry_date">Seleção de verificação de passaporte.</string>
     <string name="empty_address1">Voer een postadres 1 in.</string>
     <string name="empty_address_1">Voer een adres 1 pol.</string>
-    <string name="empty_address2">Voer een postadres em 2.</string>
     <string name="empty_address_city">Selecione a cidade</string>
     <string name="empty_banner_image">Selecione o bannerafbeelding para o evento.</string>
     <string name="empty_address_state">Selecione o estado da província.</string>
@@ -327,7 +233,6 @@
     <string name="cancel_event">O que você quer que aconteça?</string>
     <string name="delete_image">Você gostaria de saber o que fazer?</string>
     <string name="no_location">Gebeurtenislocatie niet gevonden.</string>
-    <string name="time">Seletor de dados de toekomstige em tijd.</string>
 
     <string-array name="title">
         <item>Meneer</item>
@@ -431,23 +336,19 @@
     </string-array>
 
     <string name="label_profile">Perfil</string>
-    <string name="label_group">Groepen</string>
     <string name="label_parent">Copa de outro tipo</string>
     <string name="label_scan_qr_code">Leitura de código QR</string>
     <string name="label_Vaccine">Envio de vacina</string>
     <string name="label_upload_health">Gezondheidsinfo uploaden</string>
     <string name="label_covid_health">Informações de teste enviadas</string>
     <string name="label_my_qr_code">código QR</string>
-    <string name="label_my_test_history">Testgeschiedenis</string>
     <string name="label_travel_form">Reisformulier</string>
     <string name="label_my_vaccine_history">Vaccingeschiedenis</string>
-    <string name="label_my_vaccine_card">Vaccinkaart</string>
     <string name="label_event">Eventos</string>
     <string name="label_health_information">Gezondheidsinformatie</string>
     <string name="label_quarntine">Quarentena</string>
     <string name="label_travel_information">Reisinformações</string>
     <string name="label_camera_permission">Aceitar a câmera para estimar a leitura do código QR.</string>
-    <string name="label_location_permission">Aceitar localização para estimar um evento feito.</string>
     <string name="label_select_time">Seletor tijd</string>
     <string name="label_mobile_number">Número do celular:\u0020</string>
     <string name="label_profile_city">Cidade:\u0020</string>
@@ -455,16 +356,12 @@
     <string name="label_profile_email">E-mail:\u0020</string>
     <string name="label_profile_postal_code">Código postal:\u0020</string>
     <string name="label_profile_country">Terra:\u0020</string>
-    <string name="label_profile_address">Verzendadres:\u0020</string>
     <string name="label_last_covid_result">Últimos resultados de testes de Covid-19</string>
     <string name="label_last_result">Testar resultados</string>
     <string name="label_positive">Positivo</string>
     <string name="label_negative">Negativo</string>
-    <string name="label_pending">Em manipulação</string>
     <string name="label_health_info">Gezondheidsinfo</string>
     <string name="label_health_info_V">Gezondheidsinformatie</string>
-    <string name="label_vaccine_info_V">Informações da vacina</string>
-    <string name="label_test_info_V">Forma de teste</string>
     <string name="label_no_result_found">Gerado como resultado</string>
     <string name="label_or">\u2015 DE \u2015</string>
     <string name="label_old_password">Ou wachtwoord</string>
@@ -475,7 +372,6 @@
     <string name="empty_confirm_new_password">VocÃª pode verificar duas palavras.</string>
     <string name="error_old_password">Você pode acessar ou acessar.</string>
     <string name="error_confirm_mismatch">Apenas wachtwoord e bevestig wachtwoord komt overeen.</string>
-    <string name="error_password_mismatch">Ou o wachtwoord e o wachtwoord não são mais.</string>
     <string name="error_password_change_subtitle">Wijzig je nieuwe wachtwoord</string>
     <string name="label_edit">Bewerken</string>
     <string name="label_password_update">Wachtwoord succesvol bijgewerkt</string>
@@ -493,20 +389,12 @@
     <string name="label_billing_add_1">Factuuradres 1*</string>
     <string name="label_billing_add_2">Factuuradres 2</string>
     <string name="braintree_key">sandbox_ykkr4m4m_r73ztkz3v64z7wm6</string>
-    <string name="label_passport_number">Número do passaporte: %s</string>
 
 
-    <string name="hello_blank_fragment">Hello leg fragment</string>
-    <string name="sign_in">Aanmelden</string>
-    <string name="agree_terms_conditions"><![CDATA[Ik gakkoord met alle Algemene voorwaarden & Privacybeleid]]></string>
-    <string name="welcome">Bem-vindo</string>
-    <string name="hint_username_number">Número de Gebruikersnaam/mobiel</string>
-    <string name="sign_up">Aanmelden</string>
     <string name="name">Naam</string>
     <string name="description">Descrição</string>
     <string name="business_exipry_date">Vervaldatum bedrijf</string>
     <string name="search_here">Zoek hier</string>
-    <string name="label_dl">Dl</string>
     <string name="label_rapid">Antígeno do Snel</string>
     <string name="rtpcr">RT-PCR</string>
     <string name="label_result">Resultado</string>
@@ -516,7 +404,6 @@
     <string name="no">NEE</string>
     <string name="label_all_events">Todos os eventos</string>
     <string name="my_events">Mijn evenementen</string>
-    <string name="preeti_sharma">Preeti Sharma</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="label_test_status">Teststatus</string>
     <string name="label_vaccine_status">Vaccinstatus</string>
@@ -617,7 +504,6 @@
     <string name="enter_vat">Vul de zakelijke btw in</string>
     <string name="r_state">Registratiestatus</string>
     <string name="r_country">Registratieland</string>
-    <string name="r_scan">Gebruikersscan</string>
     <string name="scan_qr_code">QR-code scannen</string>
     <string name="ok">Ok</string>
     <string name="scan_user_code">Scan de QR-code van de gebruiker om verder te gaan</string>
@@ -682,9 +568,6 @@
     <string name="forms">Exit/Entry Forms</string>
     <string name="arrival_info">Aankomstinformatie</string>
     <string name="travel_info">Reizigerinformatie</string>
-    <string name="cust_info">Aangepaste informatie</string>
-    <string name="consent">Toestemming</string>
-    <string name="immigration_form">Immigratie/aangepast formulier</string>
     <string name="country_of_embarkation">Land van inscheping</string>
     <string name="boarded_at">Aan boord gegaan bij</string>
     <string name="arrival_date">Aankomstdatum</string>

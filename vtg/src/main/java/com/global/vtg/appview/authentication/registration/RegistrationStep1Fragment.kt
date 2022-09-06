@@ -151,7 +151,7 @@ class RegistrationStep1Fragment : AppFragment() {
             }
         }
 
-        viewModel.userConfigLiveData.observe(this, {
+        viewModel.userConfigLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -161,10 +161,10 @@ class RegistrationStep1Fragment : AppFragment() {
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
 
-                    if( viewModel.childAccount){
+                    if (viewModel.childAccount) {
                         Constants.USERCHILD = it.data
                         viewModel.childAccountLiveData.postValue(true)
-                    }else {
+                    } else {
                         Constants.USER = it.data
                         if (callService) {
                             loadData()
@@ -203,7 +203,7 @@ class RegistrationStep1Fragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
 
     }
 
@@ -274,6 +274,7 @@ class RegistrationStep1Fragment : AppFragment() {
                     DateUtils.MMDDYYY
                 )
             )
+
             val date = DateUtils.getDateLocal(
                 date,
                 DateUtils.MMDDYYY
@@ -286,7 +287,15 @@ class RegistrationStep1Fragment : AppFragment() {
                 )
             )
             viewModel.apiDob = DateUtils.formatDateTime(date.time, API_DATE_FORMAT)
+            var age=viewModel.getAgeString(viewModel.apiDob)
+            if(!TextUtils.isEmpty(age)){
+                tvAge.visibility=View.VISIBLE
+                etAge.visibility=View.VISIBLE
+                etAge.text=age
+            }
             viewModel.dobDate = date
+
+
 
         }
         val list: Array<out String> = resources.getStringArray(R.array.title)
@@ -362,6 +371,12 @@ class RegistrationStep1Fragment : AppFragment() {
                         )
                     )
 
+                    var age=viewModel.getAgeString( Constants.USER?.dateOfBirth!!)
+                    if(!TextUtils.isEmpty(age)){
+                        tvAge.visibility=View.VISIBLE
+                        etAge.visibility=View.VISIBLE
+                        etAge.text=age
+                    }
 
                   val date = DateUtils.getDateLocal(
                         Constants.USER?.dateOfBirth!!,
@@ -683,7 +698,7 @@ class RegistrationStep1Fragment : AppFragment() {
 //        }
 
         // Handle Error
-        viewModel.showToastError.observe(this, {
+        viewModel.showToastError.observe(this) {
             if (it == "dobchild") {
                 AppAlertDialog().showAlert(
                     activity!!,
@@ -703,7 +718,7 @@ class RegistrationStep1Fragment : AppFragment() {
                     }, getString(R.string.valid_age), "Ok", ""
                 )
             }
-        })
+        }
 
         isFirstTime = false
     }
@@ -716,6 +731,13 @@ class RegistrationStep1Fragment : AppFragment() {
             )
         )
         viewModel.apiDob = DateUtils.formatDateTime(myCalendar.timeInMillis, API_DATE_FORMAT)
+
+        var age=viewModel.getAgeString( viewModel.apiDob)
+        if(!TextUtils.isEmpty(age)){
+            tvAge.visibility=View.VISIBLE
+            etAge.visibility=View.VISIBLE
+            etAge.text=age
+        }
         viewModel.dobDate = myCalendar.time
         viewModel.dob.postValue(
             DateUtils.formatDateTime(

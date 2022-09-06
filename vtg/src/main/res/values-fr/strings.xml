@@ -3,102 +3,31 @@
 
     <string name="api_key">AIzaSyD09CYCGjr-h6gCq3ImZe6pnglvuCsGcMU</string>
 
-    <string name="please_wait">Veuillez patienter</string>
-    <string name="app_name_new" translatable="false">VAXTRAX</string>
-    <string name="email">E-mail / N° de portable</string>
-    <string name="password">Mot de passe</string>
     <string name="login">Connexion</string>
-    <string name="msg_valid_email">Veuillez saisir une adresse e-mail valide</string>
-    <string name="msg_valid_password">Veuillez entrer le mot de passe</string>
-    <string name="navigation_drawer_open">Ouvrir</string>
-    <string name="navigation_drawer_close">Fermer</string>
-    <string name="signup">S\'inscrire</string>
-    <string name="details_screen">Détails</string>
     <string name="permissions_denied">Autorisations refusées. Veuillez autoriser les paramètres de l\'application pour des fonctionnalités supplémentaires.</string>
     <!--Title-->
-    <string name="title_home">Tâche d\'accueil</string>
-    <string name="title_payment">Portefeuille de paiement</string>
-    <string name="title_whistory">Historique des retraits</string>
-    <string name="title_myteam">Mon équipe</string>
-    <string name="title_installapp">Installer l\'application</string>
-    <string name="title_noti">Notification</string>
-    <string name="title_faq">FAQ</string>
     <string name="title_contactus">Contactez-nous</string>
-    <string name="title_refer">Parrainez Gagnez</string>
-    <string name="title_logout">Déconnexion</string>
 
 
     <!--Error-->
-    <string name="error_message_location">"L\'emplacement n'est pas défini"</string>
     <string name="error_message_network">Vérifiez votre connexion et réessayez.</string>
-    <string name="error_message_call">Échec de l\'appel</string>
     <string name="error_message_somethingwrong">Une erreur s\'est produite, veuillez réessayer plus tard</string>
-    <string name="error_message_clienterror">Erreur client</string>
-    <string name="error_message_servererror">Erreur de serveur</string>
-    <string name="error_message_no_record">Aucun contenu trouvé</string>
     <string name="error_message_empty">Oups, il n\'y a aucun résultat à afficher</string>
     <string name="error_message_error">Oups, une erreur s\'est produite lors de la récupération des données</string>
-    <string name="error_message_checkagain">Vérifier à nouveau</string>
     <string name="error_message_tryagain">Réessayer</string>
 
 
     <!--Messages-->
-    <string name="msg_success">Vous êtes connecté avec succès</string>
 
     <!--Action-->
     <string name="action_save">Enregistrer</string>
-    <string name="action_cancel">Annuler</string>
 
-
-    <string name="button_login">Connexion</string>
-    <string name="button_signup">S\'inscrire</string>
-
-    <string name="hint_email_or_username">E-mail</string>
-    <string name="hint_password">Mot de passe</string>
-    <string name="hint_phonenumber">Numéro de portable</string>
-    <string name="hint_code">Code de référence</string>
-    <string name="forgot">Mot de passe oublié</string>
-    <string name="donthave">Vous n\'avez pas de compte ? <b>INSCRIVEZ-VOUS !</b></string>
-
-    <string name="btn_next">Suivant</string>
-    <string name="txt_withdraw_amout">Retirer le montant</string>
-    <string name="txt_withdraw">Retirer</string>
-    <string name="etx_payment_number">Numéro de paiement</string>
-    <string name="txt_currnet_balance">Solde actuel</string>
-
-    <string name="enable_random_adaptation">Activer l\'adaptation aléatoire</string>
-
-    <string name="error_drm_not_supported">Contenu protégé non pris en charge sur les niveaux d\'API inférieurs à 18</string>
-
-    <string name="error_drm_unsupported_scheme">Cet appareil ne prend pas en charge le schéma DRM requis</string>
-
-    <string name="error_drm_unknown">Une erreur DRM inconnue s\'est produite</string>
-
-    <string name="error_no_decoder">Cet appareil ne fournit pas de décodeur pour <xliff:g id="mime_type">%1$s</xliff:g></string>
-
-    <string name="error_no_secure_decoder">Cet appareil ne fournit pas de décodeur sécurisé pour <xliff:g id="mime_type">%1$s</xliff:g></string>
-    <string name="error_querying_decoders">Impossible d\'interroger les décodeurs d\'appareils</string>
-
-    <string name="error_instantiating_decoder">Impossible d\'instancier le décodeur <xliff:g id="decoder_name">%1$s</xliff:g></string>
-    <string name="error_unsupported_video">Le média inclut des pistes vidéo, mais aucune n\'est lisible par cet appareil</string>
-
-    <string name="error_unsupported_audio">Le média inclut des pistes audio, mais aucune n\'est lisible par cet appareil</string>
-
-    <string name="storage_permission_denied">L\'autorisation d\'accéder au stockage a été refusée</string>
-
-    <string name="sample_list_load_error">Une ou plusieurs listes d\'échantillons n\'ont pas pu être chargées</string>
 
     <string name="piker_cam">Caméra</string>
     <string name="piker_gall">Galerie</string>
     <string name="piker_chosevideo">Choisir la vidéo</string>
-    <string name="piker_choseimage">Choisir une image</string>
     <string name="txt_file_toolarge">Le fichier est trop volumineux. La taille maximale est de %1$sMo</string>
-    <string name="retry">Réessayer</string>
     <string name="no_connection">Aucune connexion Internet. Veuillez vérifier votre connexion et réessayer.</string>
-    <string name="no_connection_msg">Veuillez vérifier votre connexion Internet et réessayer</string>
-    <string name="nv_settings">Paramètres</string>
-    <string name="nv_home">Accueil</string>
-    <string name="nv_bookmark">Signet</string>
     <string name="Failure">Échec</string>
 
     <!--  VTG  -->
@@ -115,8 +44,6 @@
     <string name="label_forgot_password_title">Mot de passe oublié</string>
     <string name="label_forgot_password_subtext">Confirmez votre numéro de portable et nous vous enverrons les\n instructions.</string>
     <string name="label_do_sign_up">Vous n\'avez pas de compte ? <u><b><font fgcolor='#1D4792'> S\'inscrire </font></b></u></string>
-    <string name="label_sign_up"><u>S\'inscrire</u></string>
-    <string name="label_sign_up1">S\'inscrire</string>
     <string name="label_registration">Inscription</string>
     <string name="label_phone_no">N° de portable</string>
     <string name="label_phone_no_register">N° de portable*</string>
@@ -141,12 +68,8 @@
     <string name="label_covid_test_status">Statut du test COVID</string>
     <string name="label_test_history">Historique des tests</string>
     <string name="label_test_history_covid">Historique des tests Covid</string>
-    <string name="label_test_upload">Test de téléchargement</string>
     <string name="label_payment_method">Méthode de paiement</string>
-    <string name="label_information">Informations</string>
     <string name="label_upload_document">Télécharger le document</string>
-    <string name="label_upload_info">Télécharger les informations de santé</string>
-    <string name="label_covid_status">Statut du test Covid</string>
     <string name="label_change_password">Modifier le mot de passe</string>
     <string name="label_events">Événements</string>
     <string name="label_vaccine_taken_list">Liste des vaccins</string>
@@ -178,7 +101,6 @@
     <string name="label_fee">Frais</string>
     <string name="label_date1">Date</string>
     <string name="label_time">Heure</string>
-    <string name="label_date_time" formatted="false">%d :%d</string>
 
     <string name="label_no_data">Aucune donnée disponible…</string>
     <string name="select_type">Type de vaccin</string>
@@ -197,7 +119,6 @@
     <string name="label_about_event">À propos de l\'événement</string>
     <string name="label_contact_detail">Coordonnées </string>
     <string name="read_more">En savoir plus. </string>
-    <string name="read_less">Moins. </string>
     <string name="label_public_event">Événement public</string>
     <string name="label_event_Images">Images d\'événements</string>
     <string name="label_description">Description</string>
@@ -215,7 +136,6 @@
     <string name="label_test_type">Type de test</string>
     <string name="label_test_type_2">Type de test/vaccin</string>
     <string name="label_test_kit">Kit de test</string>
-    <string name="label_test_type_1">Type de test</string>
     <string name="label_dob_hint">JJ/MM/AAAA</string>
     <string name="label_city_step3"><font size="14">Ville*</font></string>
     <string name="label_place_birth">Lieu de naissance</string>
@@ -229,10 +149,8 @@
     <string name="label_next">Suivant</string>
     <string name="label_skip">Ignorer</string>
     <string name="label_show_details">Afficher les détails</string>
-    <string name="label_ssn">4 derniers chiffres du code PIN/SSN/NIN/SIN/DNI/CPR/eID/NEI</string>
     <string name="label_id_number">Numéro d\'identification</string>
     <string name="label_drivers_license">Permis de conduire</string>
-    <string name="label_number"><font size="14">Numéro</font></string>
     <string name="label_issued_date"><font size="14">Date d\'émission</font></string>
     <string name="label_expiry_date"><font size="14">Date d\'expiration</font></string>
     <string name="label_passport">Passeport</string>
@@ -254,7 +172,6 @@
     <string name="label_business_id">Identifiant de l\'entreprise</string>
     <string name="label_employee_id">Identifiant de l\'employé</string>
     <string name="label_vat">TVA professionnelle</string>
-    <string name="label_contact_no">Numéro de contact</string>
     <string name="label_fax">Fax</string>
 
     <!-- Validations -->
@@ -275,7 +192,6 @@
     <string name="error_select_dose">Veuillez sélectionner la dose.</string>
     <string name="error_fee">Veuillez saisir des frais.</string>
     <string name="error_select_type">Veuillez sélectionner un type de vaccin.</string>
-    <string name="error_batch_no">Veuillez saisir un numéro de lot ou un numéro de série.</string>
     <string name="error_select_date">Veuillez sélectionner une date de vaccination.</string>
     <string name="error_select_time">Veuillez sélectionner une heure de vaccination.</string>
     <string name="error_select_test_type_1">Veuillez sélectionner le type de test.</string>
@@ -283,19 +199,12 @@
     <string name="error_select_test_type">Veuillez sélectionner le type de test.</string>
     <string name="error_hospital_name">Veuillez sélectionner un nom de laboratoire/institut clinique</string>
     <string name="empty_title">Veuillez sélectionner le titre.</string>
-    <string name="empty_gender">Veuillez sélectionner le sexe.</string>
     <string name="empty_given_name">Veuillez saisir le prénom.</string>
     <string name="empty_product">Veuillez sélectionner le produit.</string>
     <string name="empty_first_name">Veuillez saisir le prénom.</string>
     <string name="empty_last_name">Veuillez saisir le nom de famille.</string>
     <string name="upload_image">Veuillez télécharger votre image de profil.</string>
     <string name="empty_dob">Veuillez sélectionner la date de naissance.</string>
-    <string name="empty_place_birth_city">Veuillez saisir une ville.</string>
-    <string name="empty_place_birth_state">Veuillez saisir un État.</string>
-    <string name="empty_place_birth_country">Veuillez saisir un pays.</string>
-    <string name="empty_citizenship">Veuillez saisir votre nationalité.</string>
-    <string name="empty_ethnicity">Veuillez saisir une origine ethnique.</string>
-    <string name="empty_ssn">Veuillez entrer les 4 derniers chiffres du numéro de sécurité sociale.</string>
     <string name="empty_id_number">Veuillez saisir un numéro d\'identification.</string>
     <string name="empty_business_name">Veuillez saisir le nom de l\'entreprise.</string>
     <string name="empty_business_id">Veuillez saisir l\'ID de l\'entreprise.</string>
@@ -313,7 +222,6 @@
     <string name="empty_passport_expiry_date">Veuillez sélectionner la date d\'expiration de votre passeport.</string>
     <string name="empty_address1">Veuillez saisir une adresse postale 1.</string>
     <string name="empty_address_1">Veuillez saisir une adresse 1.</string>
-    <string name="empty_address2">Veuillez saisir une adresse postale 2.</string>
     <string name="empty_address_city">Veuillez sélectionner une ville.</string>
     <string name="empty_banner_image">Veuillez sélectionner une image de bannière pour l\'événement.</string>
     <string name="empty_address_state">Veuillez sélectionner un état ou une province.</string>
@@ -323,7 +231,6 @@
     <string name="cancel_event">Êtes-vous sûr d\'annuler l\'événement ?</string>
     <string name="delete_image">Voulez-vous supprimer cette image ?</string>
     <string name="no_location">Lieu de l\'événement introuvable.</string>
-    <string name="time">Veuillez sélectionner une date et une heure futures.</string>
 
     <string-array name="title">
         <item>Monsieur</item>
@@ -428,23 +335,19 @@
     </string-array>
 
     <string name="label_profile">Profil</string>
-    <string name="label_group">Groupes</string>
     <string name="label_parent">Liaison parent-enfant</string>
     <string name="label_scan_qr_code">Scanner le code QR</string>
     <string name="label_Vaccine">Télécharger le vaccin</string>
     <string name="label_upload_health">Télécharger les informations de santé</string>
     <string name="label_covid_health">Télécharger les informations de test</string>
     <string name="label_my_qr_code">Code QR</string>
-    <string name="label_my_test_history">Historique des tests</string>
     <string name="label_travel_form">Formulaire de voyage</string>
     <string name="label_my_vaccine_history">Historique des vaccins</string>
-    <string name="label_my_vaccine_card">Carte de vaccination</string>
     <string name="label_event">Événements</string>
     <string name="label_health_information">Informations sur la santé</string>
     <string name="label_quarntine">Quarantaine</string>
     <string name="label_travel_information">Informations de voyage</string>
     <string name="label_camera_permission">Veuillez accepter l\'autorisation de la caméra pour scanner le code QR.</string>
-    <string name="label_location_permission">Veuillez accepter l\'autorisation d\'emplacement pour créer un événement.</string>
     <string name="label_select_time">Sélectionner l\'heure</string>
     <string name="label_mobile_number">Numéro de portable :\u0020</string>
     <string name="label_profile_city">Ville :\u0020</string>
@@ -452,16 +355,12 @@
     <string name="label_profile_email">E-mail :\u0020</string>
     <string name="label_profile_postal_code">Code postal :\u0020</string>
     <string name="label_profile_country">Pays :\u0020</string>
-    <string name="label_profile_address">Adresse de livraison :\u0020</string>
     <string name="label_last_covid_result">Afficher les derniers résultats du test Covid</string>
     <string name="label_last_result">Résultats des tests</string>
     <string name="label_positive">Positif</string>
     <string name="label_negative">Négatif</string>
-    <string name="label_pending">En attente</string>
     <string name="label_health_info">Informations sur la santé</string>
     <string name="label_health_info_V">Informations sur la santé</string>
-    <string name="label_vaccine_info_V">Informations sur le vaccin</string>
-    <string name="label_test_info_V">Informations sur les tests</string>
     <string name="label_no_result_found">Aucun résultat trouvé</string>
     <string name="label_or">\u2015 OU \u2015</string>
     <string name="label_old_password">Ancien mot de passe</string>
@@ -472,7 +371,6 @@
     <string name="empty_confirm_new_password">Veuillez saisir un mot de passe de confirmation.</string>
     <string name="error_old_password">Veuillez saisir un ancien mot de passe valide.</string>
     <string name="error_confirm_mismatch">Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.</string>
-    <string name="error_password_mismatch">L\'ancien mot de passe et le nouveau mot de passe ne correspondent pas.</string>
     <string name="error_password_change_subtitle">Modifier votre nouveau mot de passe</string>
     <string name="label_edit">Modifier</string>
     <string name="label_password_update">Mot de passe mis à jour avec succès</string>
@@ -490,20 +388,12 @@
     <string name="label_billing_add_1">Adresse de facturation 1*</string>
     <string name="label_billing_add_2">Adresse de facturation 2</string>
     <string name="braintree_key">bac à sable_ykkr4m4m_r73ztkz3v64z7wm6</string>
-    <string name="label_passport_number">Numéro de passeport : %s</string>
 
 
-    <string name="hello_blank_fragment">Bonjour fragment vide</string>
-    <string name="sign_in">Connexion</string>
-    <string name="agree_terms_conditions"><![CDATA[J\'accepte tous les termes et conditions et la politique de confidentialité]]></string>
-    <string name="welcome">Bienvenue</string>
-    <string name="hint_username_number">Nom d\'utilisateur/numéro de portable</string>
-    <string name="sign_up">S\'inscrire</string>
     <string name="name">Nom</string>
     <string name="description">Description</string>
     <string name="business_exipry_date">Date d\'expiration commerciale</string>
     <string name="search_here">Rechercher ici</string>
-    <string name="label_dl">Dl</string>
     <string name="label_rapid">Antigène rapide</string>
     <string name="rtpcr">RT-PCR</string>
     <string name="label_result">Résultat</string>
@@ -513,7 +403,6 @@
     <string name="no">NON</string>
     <string name="label_all_events">Tous les événements</string>
     <string name="my_events">Mes événements</string>
-    <string name="preeti_sharma">Preeti Sharma</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="label_test_status">Statut du test</string>
     <string name="label_vaccine_status">Statut vaccinal</string>
@@ -615,7 +504,6 @@
     <string name="enter_vat">Veuillez entrer la TVA professionnelle</string>
     <string name="r_state">État d\'enregistrement</string>
     <string name="r_country">Pays d\'enregistrement</string>
-    <string name="r_scan">Analyse utilisateur</string>
     <string name="scan_qr_code">Scanner le code QR</string>
     <string name="ok">D\'accord</string>
     <string name="scan_user_code">Veuillez scanner le code QR de l\'utilisateur pour continuer</string>
@@ -680,9 +568,6 @@
     <string name="forms">Formulaires de sortie/d\'entrée</string>
     <string name="arrival_info">Informations sur l\'arrivée</string>
     <string name="travel_info">Informations voyageurs</string>
-    <string name="cust_info">Informations personnalisées</string>
-    <string name="consent">Consentement</string>
-    <string name="immigration_form">Immigration/Formulaire personnalisé</string>
     <string name="country_of_embarkation">Pays d\'embarquement</string>
     <string name="boarded_at">Embarqué à</string>
     <string name="arrival_date">Date d\'arrivée</string>

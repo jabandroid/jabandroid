@@ -33,6 +33,7 @@ class UploadHealthDocumentViewModel(
 ) :
     AppViewModel(application) {
     var instituteId: Int? = null
+    var instituteName: String? = null
     var documentPath: String? = null
     var file: File? = null
     var result: String? = null
@@ -222,6 +223,12 @@ class UploadHealthDocumentViewModel(
                 )
             }
 
+            var insReq: RequestBody? = null
+            if (instituteName != null) {
+
+                insReq = instituteName?.toRequestBody("text/plain".toMediaTypeOrNull())
+            }
+
             var testkit: RequestBody? = null
             if(!typeKitId.equals("-1"))
                 testkit = typeKitId!!.toRequestBody("text/plain".toMediaTypeOrNull())
@@ -237,7 +244,8 @@ class UploadHealthDocumentViewModel(
                 resultB,
                 test,
                 username,
-                testkit
+                testkit,
+                insReq
             )
         }
     }

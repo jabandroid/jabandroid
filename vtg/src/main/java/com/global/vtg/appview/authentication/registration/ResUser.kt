@@ -101,7 +101,7 @@ data class ResUser(
     var healthInfo: ArrayList<HealthInfo>? = null,
 
     @field:SerializedName("email")
-    val email: String? = null,
+    var email: String? = null,
 
     @field:SerializedName("userPin")
     val pin: String? = null,

@@ -40,6 +40,8 @@ import com.global.vtg.appview.home.testHistory.TestKitResult
 import com.global.vtg.appview.home.uploaddocument.InstituteAdapter
 import com.global.vtg.appview.home.uploaddocument.TestResultSpinnerAdapter
 import com.global.vtg.base.AppFragment
+import com.global.vtg.base.AppFragmentState
+import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
 import com.global.vtg.utils.DateUtils.DDMMYY
@@ -48,6 +50,33 @@ import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import com.vtg.databinding.FragmentHealthInfoUploadDocumentBinding
 import kotlinx.android.synthetic.main.fragment_health_info_upload_document.*
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.cbCertify
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.clForm
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.clThankYou
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.cus_label
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.cvUploadDocument
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.email
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.etFee
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.etHospitalName
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.etLoginPhoneNo
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.groupMobileNo
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ivBack
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ivCancel
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.ivUploadDocument
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.or_1
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.or_2
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.rvInstitute
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDate
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sDay
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.sTime
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.s_scan
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.scan
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvDocName
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvFee
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvScan
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvSelectDoc
+import kotlinx.android.synthetic.main.fragment_health_info_upload_document.tvemail
+import kotlinx.android.synthetic.main.fragment_upload_document.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
@@ -454,49 +483,53 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
 //
 //
 //            }
-        etHospitalName.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
+//        etHospitalName.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                if (s?.length ?: 0 == 0) {
+//                    rvInstitute.visibility = View.GONE
+//                } else {
+//                    if (!isSelected) {
+//                        viewModel.searchInstitute(s.toString())
+//                    } else {
+//                        isSelected = false
+//                    }
+//                }
+//            }
+//
+//        })
+//
+//        viewModel.instituteLiveData.observe(this) {
+//            when (it) {
+//                is Resource.Success -> {
+//                    it.data.institute?.let { it1 ->
+//                        adapter.setInstituteList(it1)
+//                        rvInstitute.visibility = View.VISIBLE
+//                        if (it1.size == 0) {
+//                            it1.add(Institute(name = resources.getString(R.string.label_no_result_found)))
+//                        } else {
+//                            scrollViewHealth.smoothScrollTo(0, etHospitalName.bottom)
+//                        }
+//                    }
+//                }
+//                is Resource.Error -> {
+//                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+//                }
+//                is Resource.Loading -> {
+//                }
+//            }
+//        }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        etHospitalName.setOnClickListener{
+            addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_CLINIC)
 
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s?.length ?: 0 == 0) {
-                    rvInstitute.visibility = View.GONE
-                } else {
-                    if (!isSelected) {
-                        viewModel.searchInstitute(s.toString())
-                    } else {
-                        isSelected = false
-                    }
-                }
-            }
-
-        })
-
-        viewModel.instituteLiveData.observe(this) {
-            when (it) {
-                is Resource.Success -> {
-                    it.data.institute?.let { it1 ->
-                        adapter.setInstituteList(it1)
-                        rvInstitute.visibility = View.VISIBLE
-                        if (it1.size == 0) {
-                            it1.add(Institute(name = resources.getString(R.string.label_no_result_found)))
-                        } else {
-                            scrollViewHealth.smoothScrollTo(0, etHospitalName.bottom)
-                        }
-                    }
-                }
-                is Resource.Error -> {
-                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
-                }
-                is Resource.Loading -> {
-                }
-            }
         }
-
     }
 
     private fun addResut() {
@@ -760,6 +793,15 @@ class UploadHealthDocumentFragment : AppFragment(), InstituteAdapter.ClickListen
         dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
         dialog.setView(dialogLayout)
         dialog.show()
+    }
+
+    fun setID(institute: Institute){
+        KeyboardUtils.hideKeyboard(getAppActivity())
+        etHospitalName.setText(institute.name)
+        viewModel.instituteId = institute.id
+        if(institute.id!! == 0)
+            viewModel.instituteName=institute.name
+        rvInstitute.visibility = View.GONE
     }
 
 }

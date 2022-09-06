@@ -21,6 +21,7 @@ import com.global.vtg.appview.home.travel.VisitReasonAdapter
 import com.global.vtg.model.factory.PreferenceManager
 import com.vtg.R
 import kotlinx.android.synthetic.main.include_language.view.*
+import kotlinx.android.synthetic.main.popoup_add_clinic.view.*
 import kotlinx.android.synthetic.main.popup_register.view.message
 import kotlinx.android.synthetic.main.popup_update_pin.view.*
 import kotlinx.android.synthetic.main.popup_update_pin.view.tvPin
@@ -421,6 +422,35 @@ class AppAlertDialog {
         dialog.show()
     }
 
+
+    fun addClinicName(
+        activity: AppCompatActivity,  mInteractor: GetClick,
+    ) {
+        val builder = AlertDialog.Builder(activity)
+        val dialog: AlertDialog = builder.create()
+
+        val wlp: WindowManager.LayoutParams = dialog.window!!.attributes
+        wlp.flags = wlp.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND.inv()
+        dialog.window!!.attributes = wlp
+        dialog.setCancelable(true)
+        val inflater = activity.layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popoup_add_clinic, null)
+
+
+dialogLayout.save.setOnClickListener {
+    if(!TextUtils.isEmpty(dialogLayout.et_name.text.toString())) {
+        mInteractor.response(dialogLayout.et_name.text.toString())
+        dialog.dismiss()
+    }
+}
+
+
+        builder.setView(dialogLayout)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window!!.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+        dialog.setView(dialogLayout)
+        dialog.show()
+    }
 
     interface GetClick {
         fun response(type: String) {}

@@ -31,7 +31,7 @@ object Constants {
 
    // branch io  // preetiwebkrit@gmail.com
     //Vaxtrxglobal20@
-
+//developerjabcom@gmail.com/ @$%JabDev2022
 
 //  //  const val BASE_URL = "https://vaxserver.com/"// production
 //  const val BASE_URL = "https://vaxserver.com:9090/" // stage

@@ -3,102 +3,29 @@
 
     <string name="api_key">AIzaSyD09CYCGjr-h6gCq3ImZe6pnglvuCsGcMU</string>
 
-    <string name="please_wait">Tafadhali subiri</string>
-    <string name="app_name_new" translatable="false">VAXTRAX</string>
-    <string name="email">Barua pepe / Nambari ya Simu.</string>
-    <string name="password">Nenosiri</string>
     <string name="login">Ingia</string>
-    <string name="msg_valid_email">Tafadhali weka barua pepe halali</string>
-    <string name="msg_valid_password">Tafadhali weka nenosiri</string>
-    <string name="navigation_drawer_open">Fungua</string>
-    <string name="navigation_drawer_close">Funga</string>
-    <string name="signup">Jisajili</string>
-    <string name="details_screen">Maelezo</string>
     <string name="permissions_denied">Ruhusa zimekataliwa. Tafadhali ruhusu katika mipangilio ya programu kwa utendakazi zaidi.</string >
     <!--Kichwa-->
-    <string name="title_home">Kazi ya Nyumbani</string>
-    <string name="title_payment">Wallet ya Malipo</string>
-    <string name="title_whistory">Historia ya Kujiondoa</string>
-    <string name="title_myteam">Timu Yangu</string>
-    <string name="title_installapp">Sakinisha Programu</string>
-    <string name="title_noti">Arifa</string>
-    <string name="title_faq">Faq</string>
     <string name="title_contactus">Wasiliana Nasi</string>
-    <string name="title_refer">Rejelea Pata</string>
-    <string name="title_logout">Toka</string>
 
     <!--Error-->
-    <string name="error_message_location">"Mahali hapajafafanuliwa"</string>
     <string name="error_message_network">Angalia muunganisho wako na ujaribu tena.</string>
-    <string name="error_message_call">Simu imeshindwa</string>
     <string name="error_message_somethingwrong">Hitilafu imetokea, Tafadhali jaribu baadaye</string>
-    <string name="error_message_clienterror">Hitilafu ya mteja</string>
-    <string name="error_message_servererror">Hitilafu ya seva</string>
-    <string name="error_message_no_record">Hakuna maudhui yaliyopatikana</string>
     <string name="error_message_empty">Lo, hakuna matokeo ya kuonyesha</string>
     <string name="error_message_error">Lo, kulikuwa na hitilafu katika kuleta data</string>
-    <string name="error_message_checkagain">Angalia tena</string>
     <string name="error_message_tryagain">Jaribu tena</string>
 
     <!--Messages-->
-    <string name="msg_success">Umefanikiwa kuingia</string>
 
     <!--Kitendo-->
     <string name="action_save">Hifadhi</string>
-    <string name="action_cancel">Ghairi</string>
 
-
-    <string name="button_login">Ingia</string>
-    <string name="button_signup">Jisajili</string>
-
-    <string name="hint_email_or_username">Barua pepe</string>
-    <string name="hint_password">Nenosiri</string>
-    <string name="hint_phonenumber">Nambari ya Simu ya Mkononi</string>
-    <string name="hint_code">Msimbo wa marejeleo</string>
-    <string name="forgot">Umesahau Nenosiri</string>
-    <string name="donthave">Je, huna akaunti? <b>JISAJILI!</b></string>
-
-    <string name="btn_next">Inayofuata</string>
-    <string name="txt_withdraw_amout">Toa Kiasi</string>
-    <string name="txt_withdraw">Ondoa</string>
-    <string name="etx_payment_number">Nambari ya Malipo</string>
-    <string name="txt_currnet_balance">Salio la Sasa</string>
-
-    <string name="enable_random_adaptation" msgid="493433434354444438">"Washa urekebishaji nasibu"</string>
-
-    <string name="error_drm_not_supported">Maudhui yaliyolindwa hayatumiki kwenye viwango vya API chini ya 18</string>
-
-    <string name="error_drm_unsupported_scheme">Kifaa hiki hakitumii mpango unaohitajika wa DRM</string>
-
-    <string name="error_drm_unknown">Hitilafu isiyojulikana ya DRM imetokea</string>
-
-    <string name="error_no_decoder">Kifaa hiki hakitoi avkodare ya <xliff:g id="mime_type">%1$s</xliff:g></string>
-
-    <string name="error_no_secure_decoder">Kifaa hiki hakitoi avkodare salama ya <xliff:g id="mime_type">%1$s</xliff:g></string>
-
-    <string name="error_querying_decoders">Haijaweza kuuliza swali la kusimbua kifaa</string>
-
-    <string name="error_instantiating_decoder" >"Haiwezi kuanzisha avkodare <xliff:g id="decoder_name">%1$s</xliff:g></string>
-
-    <string name="error_unsupported_video">Vyombo vya habari vinajumuisha nyimbo za video, lakini hakuna zinazoweza kuchezwa na kifaa hiki</string>
-
-    <string name="error_unsupported_audio">Vyombo vya habari vinajumuisha nyimbo za sauti, lakini hakuna zinazoweza kuchezwa na kifaa hiki</string>
-
-    <string name="storage_permission_denied">Ruhusa ya kufikia hifadhi imekataliwa</string>
-
-    <string name="sample_list_load_error" >"Sampuli moja au zaidi hazijapakia."</string>
 
     <string name="piker_cam">Kamera</string>
     <string name="piker_gall">Matunzio</string>
     <string name="piker_chosevideo">Chagua Video</string>
-    <string name="piker_choseimage">Chagua Picha</string>
     <string name="txt_file_toolarge">Faili ni kubwa sana. Ukubwa wa juu zaidi ni %1$sMB</string>
-    <string name="retry">Jaribu tena</string>
     <string name="no_connection">Hakuna muunganisho wa intaneti. Tafadhali angalia muunganisho wako na ujaribu tena.</string>
-    <string name="no_connection_msg">Tafadhali angalia muunganisho wako wa intaneti na ujaribu tena</string>
-    <string name="nv_settings">Mipangilio</string>
-    <string name="nv_home">Nyumbani</string>
-    <string name="nv_bookmark">Alamisho</string>
     <string name="Failure">Imeshindwa</string>
 
     <!--  VTG  -->
@@ -115,8 +42,6 @@
     <string name="label_forgot_password_title">Umesahau Nenosiri</string>
     <string name="label_forgot_password_subtext">Thibitisha Nambari yako ya Simu. na tutakutumia\n maagizo.</string>
     <string name="label_do_sign_up">Je, huna akaunti? <u><b><font fgcolor='#1D4792'> Jisajili </font></b></u></string>
-    <string name="label_sign_up"><u>Jisajili</u></string>
-    <string name="label_sign_up1">Jisajili</string>
     <string name="label_registration">Usajili</string>
     <string name="label_phone_no">Nambari ya Simu ya Mkononi</string>
     <string name="label_phone_no_register">Nambari ya Simu ya Mkononi.*</string>
@@ -141,12 +66,8 @@
     <string name="label_covid_test_status">Hali ya Jaribio la COVID</string>
     <string name="label_test_history">Historia ya Jaribio</string>
     <string name="label_test_history_covid">Historia ya Jaribio la Covid</string>
-    <string name="label_test_upload"> Jaribio la Pakia</string>
     <string name="label_payment_method">Njia ya Kulipa</string>
-    <string name="label_information">Maelezo</string>
     <string name="label_upload_document">Pakia Hati</string>
-    <string name="label_upload_info">Pakia Maelezo ya Afya</string>
-    <string name="label_covid_status">Hali ya Jaribio la Covid</string>
     <string name="label_change_password">Badilisha Nenosiri</string>
     <string name="label_events">Matukio</string>
     <string name="label_vaccine_taken_list">Orodha ya Chanjo</string>
@@ -177,7 +98,6 @@
     <string name="label_fee">Ada</string>
     <string name="label_date1">Tarehe</string>
     <string name="label_time">Wakati</string>
-    <string name="label_date_time" formatted="false">%d:%d</string>
     <string name="label_no_data">Hakuna data inayopatikana…</string>
     <string name="select_type">Aina ya Chanjo</string>
     <string name="select_dose">Chagua Kipimo</string>
@@ -195,7 +115,6 @@
     <string name="label_about_event">Kuhusu Tukio</string>
     <string name="label_contact_detail">Maelezo ya Anwani </string>
     <string name="read_more">Soma zaidi. </string>
-    <string name="read_less">Chache. </string>
     <string name="label_public_event">Tukio la Umma</string>
     <string name="label_event_Images">Picha za Tukio</string>
     <string name="label_description">Maelezo</string>
@@ -213,7 +132,6 @@
     <string name="label_test_type">Aina ya Jaribio</string>
     <string name="label_test_type_2">Aina ya Jaribio/Chanjo</string>
     <string name="label_test_kit">Kifaa cha Kujaribu</string>
-    <string name="label_test_type_1">Aina ya Jaribio</string>
     <string name="label_dob_hint">DD/MM/YYYY</string>
     <string name="label_city_step3"><font size="14">Jiji*</font></string>
     <string name="label_place_birth">Mahali pa kuzaliwa</string>
@@ -227,10 +145,8 @@
     <string name="label_next">Inayofuata</string>
     <string name="label_skip">Ruka</string>
     <string name="label_show_details">Onyesha Maelezo</string>
-    <string name="label_ssn">Nambari 4 za mwisho za PIN/SSN/NIN/SIN/DNI/CPR/eID/NEI</string>
     <string name="label_id_number">Nambari ya Kitambulisho</string>
     <string name="label_drivers_license">Leseni ya Udereva</string>
-    <string name="label_number"><font size="14">Nambari</font></string>
     <string name="label_issued_date"><font size="14">Tarehe Iliyotolewa</font></string>
     <string name="label_expiry_date"><font size="14">Tarehe ya Kuisha</font></string>
     <string name="label_passport">Pasipoti</string>
@@ -252,7 +168,6 @@
     <string name="label_business_id">Kitambulisho cha Biashara</string>
     <string name="label_employee_id">Kitambulisho cha Mfanyakazi</string>
     <string name="label_vat">Vat ya Biashara</string>
-    <string name="label_contact_no">Nambari ya Mawasiliano</string>
     <string name="label_fax">Faksi</string>
     <!-- Validations -->
     <string name="empty_email">Tafadhali weka Barua pepe.</string>
@@ -272,7 +187,6 @@
     <string name="error_select_dose">Tafadhali chagua kipimo.</string>
     <string name="error_fee">Tafadhali weka ada.</string>
     <string name="error_select_type">Tafadhali chagua aina ya chanjo.</string>
-    <string name="error_batch_no">Tafadhali weka Nambari ya Kundi au Nambari ya Ufuatiliaji.</string>
     <string name="error_select_date">Tafadhali chagua tarehe ya chanjo.</string>
     <string name="error_select_time">Tafadhali chagua wakati wa chanjo.</string>
     <string name="error_select_test_type_1">Tafadhali chagua aina ya majaribio.</string>
@@ -280,19 +194,12 @@
     <string name="error_select_test_type">Tafadhali chagua aina ya jaribio.</string>
     <string name="error_hospital_name">Tafadhali chagua jina la Taasisi ya Maabara/Kliniki</string>
     <string name="empty_title">Tafadhali chagua kichwa.</string>
-    <string name="empty_gender">Tafadhali chagua jinsia.</string>
     <string name="empty_given_name">Tafadhali weka Jina Ulilopewa.</string>
     <string name="empty_product">Tafadhali chagua Bidhaa.</string>
     <string name="empty_first_name">Tafadhali weka Jina la Kwanza.</string>
     <string name="empty_last_name">Tafadhali weka Jina la Mwisho.</string>
     <string name="upload_image">Tafadhali pakia picha yako ya wasifu.</string>
     <string name="empty_dob">Tafadhali chagua Tarehe ya Kuzaliwa.</string>
-    <string name="empty_place_birth_city">Tafadhali weka Jiji.</string>
-    <string name="empty_place_birth_state">Tafadhali weka Jimbo.</string>
-    <string name="empty_place_birth_country">Tafadhali weka Nchi.</string>
-    <string name="empty_citizenship">Tafadhali weka Uraia wako.</string>
-    <string name="empty_ethnicity">Tafadhali weka kabila.</string>
-    <string name="empty_ssn">Tafadhali weka tarakimu 4 za mwisho za Nambari ya Usalama wa Jamii.</string>
     <string name="empty_id_number">Tafadhali weka Nambari ya Kitambulisho.</string>
     <string name="empty_business_name">Tafadhali weka Jina la Biashara.</string>
     <string name="empty_business_id">Tafadhali weka Kitambulisho cha Biashara.</string>
@@ -310,7 +217,6 @@
     <string name="empty_passport_expiry_date">Tafadhali chagua tarehe ya kuisha muda wa pasipoti yako.</string>
     <string name="empty_address1">Tafadhali weka Anwani ya Barua 1.</string>
     <string name="empty_address_1">Tafadhali weka Anwani ya 1.</string>
-    <string name="empty_address2">Tafadhali weka Anwani ya Barua ya 2.</string>
     <string name="empty_address_city">Tafadhali chagua Jiji.</string>
     <string name="empty_banner_image">Tafadhali chagua picha ya bango kwa ajili ya tukio.</string>
     <string name="empty_address_state">Tafadhali chagua Jimbo au Mkoa.</string>
@@ -320,7 +226,6 @@
     <string name="cancel_event" >Je, una uhakika kuwa umeghairi tukio?</string>
     <string name="delete_image">Je, ungependa kufuta picha hii?</string>
     <string name="no_location">Eneo la tukio halipatikani.</string>
-    <string name="time">Tafadhali chagua tarehe na wakati ujao.</string>
 
     <string-array name="title">
         <item>Mheshimiwa</item>
@@ -424,23 +329,19 @@
     </string-array>
 
     <string name="label_profile">Wasifu</string>
-    <string name="label_group">Vikundi</string>
     <string name="label_parent">Kuunganisha kwa Mtoto kwa Mzazi</string>
     <string name="label_scan_qr_code">Changanua Msimbo wa QR</string>
     <string name="label_Vaccine">Pakia Chanjo</string>
     <string name="label_upload_health">Pakia Maelezo ya Afya</string>
     <string name="label_covid_health">Pakia Maelezo ya Mtihani</string>
     <string name="label_my_qr_code">Msimbo wa QR</string>
-    <string name="label_my_test_history">Historia ya Jaribio</string>
     <string name="label_travel_form">Fomu ya Kusafiri</string>
     <string name="label_my_vaccine_history">Historia ya Chanjo</string>
-    <string name="label_my_vaccine_card">Kadi ya Chanjo</string>
     <string name="label_event">Matukio</string>
     <string name="label_health_information">Maelezo ya Afya</string>
     <string name="label_quarntine">Karantini</string>
     <string name="label_travel_information">Maelezo ya Usafiri</string>
     <string name="label_camera_permission">Tafadhali kubali ruhusa ya Kamera ili kuchanganua msimbo wa QR.</string>
-    <string name="label_location_permission">Tafadhali kubali ruhusa ya eneo ili kuunda tukio.</string>
     <string name="label_select_time">Chagua Saa</string>
     <string name="label_mobile_number">Nambari ya Simu ya Mkononi:\u0020</string>
     <string name="label_profile_city">Mji:\u0020</string>
@@ -448,16 +349,12 @@
     <string name="label_profile_email">Barua pepe:\u0020</string>
     <string name="label_profile_postal_code">Msimbo wa Posta:\u0020</string>
     <string name="label_profile_country">Nchi:\u0020</string>
-    <string name="label_profile_address">Anwani ya Usafirishaji:\u0020</string>
     <string name="label_last_covid_result">Onyesha matokeo ya mwisho ya mtihani wa Covid</string>
     <string name="label_last_result">Matokeo ya mtihani</string>
     <string name="label_positive">Chanya</string>
     <string name="label_negative">Hasi</string>
-    <string name="label_pending">Inasubiri</string>
     <string name="label_health_info">Maelezo ya Afya</string>
     <string name="label_health_info_V">Maelezo ya Afya</string>
-    <string name="label_vaccine_info_V">Maelezo ya Chanjo</string>
-    <string name="label_test_info_V">Maelezo ya Jaribio</string>
     <string name="label_no_result_found">Hakuna matokeo yaliyopatikana</string>
     <string name="label_or">\u2015 AU \u2015</string>
     <string name="label_old_password">Nenosiri la Zamani</string>
@@ -468,7 +365,6 @@
     <string name="empty_confirm_new_password">Tafadhali weka Nenosiri la Thibitisha.</string>
     <string name="error_old_password">Tafadhali weka Nenosiri halali la Kale.</string>
     <string name="error_confirm_mismatch">Nenosiri Jipya na uthibitisho wa nenosiri haulingani.</string>
-    <string name="error_password_mismatch">Nenosiri la zamani na nenosiri jipya hazilingani.</string>
     <string name="error_password_change_subtitle">Badilisha nenosiri lako jipya</string>
     <string name="label_edit">Hariri</string>
     <string name="label_password_update">Nenosiri limesasishwa</string>
@@ -486,19 +382,11 @@
     <string name="label_billing_add_1">Anwani ya Malipo 1*</string>
     <string name="label_billing_add_2">Anwani ya 2 ya Malipo</string>
     <string name="braintree_key">sandbox_ykkr4m4m_r73ztkz3v64z7wm6</string>
-    <string name="label_passport_number">Nambari ya Pasipoti: %s</string>
 
-    <string name="hello_blank_fragment">Hujambo kipande tupu</string>
-    <string name="sign_in">Ingia</string>
-    <string name="agree_terms_conditions"><![CDATA[Nakubali Sheria na Masharti na Sera ya Faragha]]></string>
-    <string name="welcome">Karibu</string>
-    <string name="hint_username_number">Jina la mtumiaji/Nambari ya Simu.</string>
-    <string name="sign_up">Jisajili</string>
     <string name="name">Jina</string>
     <string name="description">Maelezo</string>
     <string name="business_exipry_date">Tarehe ya Kuisha kwa Biashara</string>
     <string name="search_here">Tafuta hapa</string>
-    <string name="label_dl">Dl</string>
     <string name="label_rapid">Antijeni ya Haraka</string>
     <string name="rtpcr">RT-PCR</string>
     <string name="label_result">Tokeo</string>
@@ -508,7 +396,6 @@
     <string name="no">HAPANA</string>
     <string name="label_all_events">Matukio Yote</string>
     <string name="my_events">Matukio Yangu</string>
-    <string name="preeti_sharma">Preeti Sharma</string>
     <string name="title_activity_maps">Shughuli ya Ramani</string>
     <string name="label_test_status">Hali ya Mtihani</string>
     <string name="label_vaccine_status">Hali ya Chanjo</string>
@@ -609,7 +496,6 @@
     <string name="enter_vat">Tafadhali weka VAT ya biashara</string>
     <string name="r_state">Hali ya usajili</string>
     <string name="r_country">Nchi ya Usajili</string>
-    <string name="r_scan">Uchanganuzi wa Mtumiaji</string>
     <string name="scan_qr_code">Changanua Msimbo wa QR</string>
     <string name="ok">Sawa</string>
     <string name="scan_user_code">Tafadhali changanua Msimbo wa QR wa mtumiaji ili kuendelea</string>
@@ -674,9 +560,6 @@
     <string name="forms">Ondoka/Fomu za Kuingia</string>
     <string name="arrival_info">Maelezo ya Kuwasili</string>
     <string name="travel_info">Maelezo ya Msafiri</string>
-    <string name="cust_info">Maelezo Maalum</string>
-    <string name="consent">Idhini</string>
-    <string name="immigration_form">Fomu ya Uhamiaji/Custom</string>
     <string name="country_of_embarkation">Nchi ya Kuanzia</string>
     <string name="boarded_at">Amea ndani</string>
     <string name="arrival_date">Tarehe ya Kuwasili</string>

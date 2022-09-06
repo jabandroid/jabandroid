@@ -2,108 +2,33 @@
     <!--<string name="app_name">BaseProject</string>-->
 
     <string name="api_key">AIzaSyD09CYCGjr-h6gCq3ImZe6pnglvuCsGcMU</string>
-    <string name="app_name_new" translatable="false">VAXTRAX</string>
 
-    <string name="please_wait">Wag asseblief</string>
-    <string name="email">E-pos / selfoonnommer.</string>
-    <string name="password">Wagwoord</string>
     <string name="login">Teken aan</string>
-    <string name="msg_valid_email">Voer asseblief geldige e-pos in</string>
-    <string name="msg_valid_password">Voer asseblief wagwoord in</string>
-    <string name="navigation_drawer_open">Maak oop</string>
-    <string name="navigation_drawer_close">Sluit</string>
-    <string name="signup">Aanmeld</string>
-    <string name="details_screen">Besonderhede</string>
     <string name="permissions_denied">Toestemmings geweier. Laat asseblief programinstellings toe vir bykomende funksionaliteit.</string>
 
     <!--Titel-->
-    <string name="title_home">Tuistaak</string>
-    <string name="title_payment">Betaalbeursie</string>
-    <string name="title_whistory">Onttrekkinggeskiedenis</string>
-    <string name="title_myteam">My span</string>
-    <string name="title_installapp">Installeer toepassing</string>
-    <string name="title_noti">Kennisgewing</string>
-    <string name="title_faq">Gereelde vrae</string>
     <string name="title_contactus">Kontak ons</string>
-    <string name="title_refer">Verwys Verdien</string>
-    <string name="title_logout">Teken af</string>
 
 
     <!--Fout-->
-    <string name="error_message_location">"Ligging is nie gedefinieer nie"</string>
     <string name="error_message_network">Gaan jou verbinding na en probeer weer.</string>
-    <string name="error_message_call">Oproep het misluk</string>
     <string name="error_message_somethingwrong">Iets het verkeerd geloop, probeer asseblief later</string>
-    <string name="error_message_clienterror">Kliëntfout</string>
-    <string name="error_message_servererror">Bedienerfout</string>
-    <string name="error_message_no_record">Geen inhoud gevind nie</string>
     <string name="error_message_empty">Oeps, daar is geen resultate om te wys nie</string>
     <string name="error_message_error">Oeps, daar was \'n fout met die haal van die data</string>
-    <string name="error_message_checkagain">Kontroleer weer</string>
     <string name="error_message_tryagain">Probeer weer</string>
 
 
     <!--Boodskappe-->
-    <string name="msg_success">Jy het suksesvol aangemeld</string>
 
     <!--Aksie-->
     <string name="action_save">Stoor</string>
-    <string name="action_cancel">Kanselleer</string>
 
-
-    <string name="button_login">Aanmeld</string>
-    <string name="button_signup">Sluit aan</string>
-
-    <string name="hint_email_or_username">E-pos</string>
-    <string name="hint_password">Wagwoord</string>
-    <string name="hint_phonenumber">Mobiele nr.</string>
-    <string name="hint_code">Verwysingskode</string>
-    <string name="forgot">Wagwoord vergeet</string>
-    <string name="donthave">Het jy nie \'n rekening nie? <b>TEKEN AAN!</b></string>
-
-
-    <string name="btn_next">Volgende</string>
-    <string name="txt_withdraw_amout">Onttrek bedrag</string>
-    <string name="txt_withdraw">Onttrek</string>
-    <string name="etx_payment_number">Betaalnommer</string>
-    <string name="txt_currnet_balance">Huidige saldo</string>
-
-
-    <string name="enable_random_adaptation">Aktiveer ewekansige aanpassing</string>
-
-    <string name="error_drm_not_supported">Beskermde inhoud word nie op API-vlakke onder 18 ondersteun nie</string>
-
-    <string name="error_drm_unsupported_scheme">Hierdie toestel ondersteun nie die vereiste DRM-skema nie</string>
-
-    <string name="error_drm_unknown">\'n Onbekende DRM-fout het voorgekom</string>
-
-    <string name="error_no_decoder">Hierdie toestel verskaf nie \'n dekodeerder vir <xliff:g id="mime_type">%1$s</xliff:g></string>
-
-    <string name="error_no_secure_decoder">Hierdie toestel verskaf nie \'n veilige dekodeerder vir <xliff:g id="mime_type">%1$s</xliff:g></string>
-
-    <string name="error_querying_decoders">Kan nie navraag doen oor toesteldekodeerders nie</string>
-
-    <string name="error_instantiating_decoder">Kan nie dekodeerder instansieer <xliff:g id="decoder_name">%1$s</xliff:g></string>
-
-    <string name="error_unsupported_video">Media sluit videosnitte in, maar nie een is deur hierdie toestel speelbaar nie</string>
-
-    <string name="error_unsupported_audio">Media sluit oudiosnitte in, maar nie een is deur hierdie toestel speelbaar nie</string>
-
-    <string name="storage_permission_denied">Toestemming vir toegang tot berging is geweier</string>
-
-    <string name="sample_list_load_error">Een of meer voorbeeldlyste kon nie laai nie</string>
 
     <string name="piker_cam">Kamera</string>
     <string name="piker_gall">Galery</string>
     <string name="piker_chosevideo">Kies video</string>
-    <string name="piker_choseimage">Kies prent</string>
     <string name="txt_file_toolarge">Lêer is te groot. Maksimum grootte is %1$sMB</string>
-    <string name="retry">Probeer weer</string>
     <string name="no_connection">Geen internetverbinding nie. Gaan asseblief jou verbinding na en probeer weer.</string>
-    <string name="no_connection_msg">Gaan asseblief jou internetverbinding na en probeer weer</string>
-    <string name="nv_settings">Instellings</string>
-    <string name="nv_home">Tuis</string>
-    <string name="nv_bookmark">Boekmerk</string>
     <string name="Failure">Misluk</string>
 
     <!-- VTG -->
@@ -120,8 +45,6 @@
     <string name="label_forgot_password_title">Wagwoord vergeet</string>
     <string name="label_forgot_password_subtext">Bevestig jou selfoonnommer en ons sal die\n instruksies stuur.</string>
     <string name="label_do_sign_up">Het jy nie \'n rekening nie? <u><b><font fgcolor='#1D4792'> Registreer </font></b></u></string>
-    <string name="label_sign_up"><u>Sluit aan</u></string>
-    <string name="label_sign_up1">Sluit aan</string>
     <string name="label_registration">Registrasie</string>
     <string name="label_phone_no">Mobiele nr.</string>
     <string name="label_phone_no_register">Mobiele nr.*</string>
@@ -145,12 +68,8 @@
     <string name="label_covid_test_status">COVID-toetsstatus</string>
     <string name="label_test_history">Toetsgeskiedenis</string>
     <string name="label_test_history_covid">Covid-toetsgeskiedenis</string>
-    <string name="label_test_upload"> Laai toets op</string>
     <string name="label_payment_method">Betaalmetode</string>
-    <string name="label_information">Inligting</string>
     <string name="label_upload_document">Laai dokument op</string>
-    <string name="label_upload_info">Laai gesondheidsinligting op</string>
-    <string name="label_covid_status">Covid-toetsstatus</string>
     <string name="label_change_password">Verander wagwoord</string>
     <string name="label_events">Gebeure</string>
     <string name="label_vaccine_taken_list">Entstoflys</string>
@@ -182,7 +101,6 @@
     <string name="label_fee">Fooi</string>
     <string name="label_date1">Datum</string>
     <string name="label_time">Tyd</string>
-    <string name="label_date_time" formatted="false">%d:%d</string>
 
     <string name="label_no_data">Geen data beskikbaar nie...</string>
     <string name="select_type">Entstoftipe</string>
@@ -201,7 +119,6 @@
     <string name="label_about_event">Meer oor gebeurtenis</string>
     <string name="label_contact_detail">Kontakbesonderhede </string>
     <string name="read_more">Lees meer. </string>
-    <string name="read_less">Minder. </string>
     <string name="label_public_event">Openbare geleentheid</string>
     <string name="label_event_Images">Gebeurtenisprente</string>
     <string name="label_description">Beskrywing</string>
@@ -219,7 +136,6 @@
     <string name="label_test_type">Toetstipe</string>
     <string name="label_test_type_2">Toets/entstoftipe</string>
     <string name="label_test_kit">Toetsstel</string>
-    <string name="label_test_type_1">tipe toets</string>
     <string name="label_dob_hint">DD/MM/JJJJ</string>
     <string name="label_city_step3"><font size="14">Stad*</font></string>
     <string name="label_place_birth">Plek van geboorte</string>
@@ -233,10 +149,8 @@
     <string name="label_next">Volgende</string>
     <string name="label_skip">Slaan oor</string>
     <string name="label_show_details">Wys besonderhede</string>
-    <string name="label_ssn">Laaste 4 syfers van PIN/SSN/NIN/SIN/DNI/CPR/eID/NEI</string>
     <string name="label_id_number">ID-nommer</string>
     <string name="label_drivers_license">Bestuurslisensie</string>
-    <string name="label_number"><font size="14">Nommer</font></string>
     <string name="label_issued_date"><font size="14">Uitreikingsdatum</font></string>
     <string name="label_expiry_date"><font size="14">Vervaldatum</font></string>
     <string name="label_passport">Paspoort</string>
@@ -258,7 +172,6 @@
     <string name="label_business_id">Besigheids-ID</string>
     <string name="label_employee_id">Werknemer-ID</string>
     <string name="label_vat">Besigheidsbelasting</string>
-    <string name="label_contact_no">Kontaknommer</string>
     <string name="label_fax">Faks</string>
 
     <!-- Validasies -->
@@ -279,7 +192,6 @@
     <string name="error_select_dose">Kies asseblief dosis.</string>
     <string name="error_fee">Voer asseblief \'n fooi in.</string>
     <string name="error_select_type">Kies asseblief \'n entstoftipe.</string>
-    <string name="error_batch_no">Voer asseblief \'n joernaalnommer of reeksnommer in.</string>
     <string name="error_select_date">Kies asseblief \'n entstofdatum.</string>
     <string name="error_select_time">Kies asseblief \'n entstoftyd.</string>
     <string name="error_select_test_type_1">Kies asseblief tipe toets.</string>
@@ -288,19 +200,12 @@
     <string name="error_select_test_type">Kies asseblief tipe toets.</string>
     <string name="error_hospital_name">Kies asseblief \'n Lab-/Kliniekinstituutnaam</string>
     <string name="empty_title">Kies asseblief titel.</string>
-    <string name="empty_gender">Kies asseblief geslag.</string>
     <string name="empty_given_name">Voer asseblief die Gegewe Naam in.</string>
     <string name="empty_product">Kies asseblief produk.</string>
     <string name="empty_first_name">Voer asseblief die voornaam in.</string>
     <string name="empty_last_name">Voer asseblief die Van in.</string>
     <string name="upload_image">Laai asseblief jou profielprent op.</string>
     <string name="empty_dob">Kies asseblief Geboortedatum.</string>
-    <string name="empty_place_birth_city">Voer asseblief \'n stad in.</string>
-    <string name="empty_place_birth_state">Voer asseblief \'n staat in.</string>
-    <string name="empty_place_birth_country">Voer asseblief \'n land in.</string>
-    <string name="empty_citizenship">Voer asseblief jou burgerskap in.</string>
-    <string name="empty_ethnicity">Voer asseblief \'n etnisiteit in.</string>
-    <string name="empty_ssn">Voer asseblief die laaste 4 syfers van die sosiale sekerheidsnommer in.</string>
     <string name="empty_id_number">Voer asseblief \'n ID-nommer in.</string>
     <string name="empty_business_name">Voer asseblief besigheidsnaam in.</string>
     <string name="empty_business_id">Voer asseblief besigheids-ID in.</string>
@@ -318,7 +223,6 @@
     <string name="empty_passport_expiry_date">Kies asseblief jou paspoort se vervaldatum.</string>
     <string name="empty_address1">Voer asseblief \'n posadres 1 in.</string>
     <string name="empty_address_1">Voer asseblief \'n adres 1 in.</string>
-    <string name="empty_address2">Voer asseblief \'n posadres 2 in.</string>
     <string name="empty_address_city">Kies asseblief \'n stad.</string>
     <string name="empty_banner_image">Kies asseblief \'n banierprent vir geleentheid.</string>
     <string name="empty_address_state">Kies asseblief \'n staat of provinsiaal.</string>
@@ -328,7 +232,6 @@
     <string name="cancel_event">Is jy seker om geleentheid te kanselleer?</string>
     <string name="delete_image">Wil jy hierdie prent uitvee?</string>
     <string name="no_location">Gebeurtenisligging nie gevind nie.</string>
-    <string name="time">Kies asseblief toekomstige datum en tyd.</string>
 
     <string-array name="title">
         <item>Mnr</item>
@@ -432,23 +335,19 @@
     </string-array>
 
     <string name="label_profile">Profiel</string>
-    <string name="label_group">Groepe</string>
     <string name="label_parent">Ouer-kind-skakeling</string>
     <string name="label_scan_qr_code">Skandeer QR-kode</string>
     <string name="label_Vaccine">Laai entstof op</string>
     <string name="label_upload_health">Laai gesondheidsinligting op</string>
     <string name="label_covid_health">Laai toetsinligting op</string>
     <string name="label_my_qr_code">QR-kode</string>
-    <string name="label_my_test_history">Toetsgeskiedenis</string>
     <string name="label_travel_form">Reisvorm</string>
     <string name="label_my_vaccine_history">Entstofgeskiedenis</string>
-    <string name="label_my_vaccine_card">Entstofkaart</string>
     <string name="label_event">Gebeure</string>
     <string name="label_health_information">Gesondheidsinligting</string>
     <string name="label_quarntine">Karantyn</string>
     <string name="label_travel_information">Reisinligting</string>
     <string name="label_camera_permission">Aanvaar asseblief die kamera-toestemming om QR-kode te skandeer.</string>
-    <string name="label_location_permission">Aanvaar asseblief die liggingtoestemming om geleentheid te skep.</string>
     <string name="label_select_time">Kies tyd</string>
     <string name="label_mobile_number">Mobiele nommer:\u0020</string>
     <string name="label_profile_city">Stad:\u0020</string>
@@ -456,16 +355,12 @@
     <string name="label_profile_email">E-pos:\u0020</string>
     <string name="label_profile_postal_code">Poskode:\u0020</string>
     <string name="label_profile_country">Land:\u0020</string>
-    <string name="label_profile_address">Verstuuradres:\u0020</string>
     <string name="label_last_covid_result">Vertoon laaste Covid-toetsresultate</string>
     <string name="label_last_result">Toetsresultate</string>
     <string name="label_positive">Positief</string>
     <string name="label_negative">Negatief</string>
-    <string name="label_pending">Hangende</string>
     <string name="label_health_info">Gesondheidsinligting</string>
     <string name="label_health_info_V">Gesondheidsinligting</string>
-    <string name="label_vaccine_info_V">Entstofinligting</string>
-    <string name="label_test_info_V">Toetsinligting</string>
     <string name="label_no_result_found">Geen resultaat gevind nie</string>
     <string name="label_or">\u2015 OF \u2015</string>
     <string name="label_old_password">Ou wagwoord</string>
@@ -476,7 +371,6 @@
     <string name="empty_confirm_new_password">Voer asseblief \'n Bevestig Wagwoord in.</string>
     <string name="error_old_password">Voer asseblief \'n geldige ou wagwoord in.</string>
     <string name="error_confirm_mismatch">Nuwe wagwoord en bevestig wagwoord stem nie ooreen nie.</string>
-    <string name="error_password_mismatch">Ou wagwoord en nuwe wagwoord stem nie ooreen nie.</string>
     <string name="error_password_change_subtitle">Verander jou nuwe wagwoord</string>
     <string name="label_edit">Redigeer</string>
     <string name="label_password_update">Wagwoord suksesvol opgedateer</string>
@@ -494,20 +388,12 @@
     <string name="label_billing_add_1">Faktuuradres 1*</string>
     <string name="label_billing_add_2">Faktuuradres 2</string>
     <string name="braintree_key">sandbox_ykkr4m4m_r73ztkz3v64z7wm6</string>
-    <string name="label_passport_number">Paspoortnommer: %s</string>
 
 
-    <string name="hello_blank_fragment">Hallo leë fragment</string>
-    <string name="sign_in">Meld aan</string>
-    <string name="agree_terms_conditions"><![CDATA[Ek stem in oor alle bepalings en voorwaardes en privaatheidsbeleid]]></string>
-    <string name="welcome">Welkom</string>
-    <string name="hint_username_number">Gebruikernaam/Selfoonnommer.</string>
-    <string name="sign_up">Sluit aan</string>
     <string name="name">Naam</string>
     <string name="description">Beskrywing</string>
     <string name="business_exipry_date">Besigheidsvervaldatum</string>
     <string name="search_here">Soek hier</string>
-    <string name="label_dl">Dl</string>
     <string name="label_rapid">Vinnige antigeen</string>
     <string name="rtpcr">RT-PCR</string>
     <string name="label_result">Resultaat</string>
@@ -517,7 +403,6 @@
     <string name="no">NEE</string>
     <string name="label_all_events">Alle gebeurtenisse</string>
     <string name="my_events">My gebeurtenisse</string>
-    <string name="preeti_sharma">Preeti Sharma</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="label_test_status">Toets Status</string>
     <string name="label_vaccine_status">Entstofstatus</string>
@@ -620,7 +505,6 @@
     <string name="enter_vat">Voer asseblief die besigheids-BTW in</string>
     <string name="r_state">Registrasiestatus</string>
     <string name="r_country">Registrasieland</string>
-    <string name="r_scan">Gebruikerskandering</string>
     <string name="scan_qr_code">Skandeer QR-kode</string>
     <string name="ok">Ok</string>
     <string name="scan_user_code">Skandeer asseblief die gebruiker se QR-kode om voort te gaan</string>
@@ -685,9 +569,6 @@
     <string name="forms">Uit-/inskrywingsvorms</string>
     <string name="arrival_info">Aankomsinligting</string>
     <string name="travel_info">Reisierinligting</string>
-    <string name="cust_info">Gepasmaakte inligting</string>
-    <string name="consent">Toestemming</string>
-    <string name="immigration_form">Immigrasie/pasgemaakte vorm</string>
     <string name="country_of_embarkation">Land van aankoms</string>
     <string name="boarded_at">Klim op</string>
     <string name="arrival_date">Aankomsdatum</string>

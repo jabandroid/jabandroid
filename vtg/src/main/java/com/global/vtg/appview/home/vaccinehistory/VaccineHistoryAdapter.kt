@@ -33,8 +33,14 @@ class VaccineHistoryAdapter(
         // set the data in items
         holder.tvVaccineName.text =
             "${position + 1}. ${list[position].type?.let { getVaccineName(it) }}"
-        val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
-        holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
+
+        if(list[position].instituteId!=0){
+            val institute = list[position].instituteId?.let { Constants.getInstituteName(it) }
+            holder.tvHospitalName.text = if (TextUtils.isEmpty(institute)) "-" else institute
+
+        }else
+            holder.tvHospitalName.text=list[position].insName
+
         holder.tvDate.text = list[position].date?.let {
             DateUtils.formatDateUTCToLocal(
                 it,

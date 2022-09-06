@@ -115,7 +115,8 @@ interface ApiInterface {
         @Part("date") date: RequestBody?,
         @Part("srId") batchNo: RequestBody?,
         @Part("dose") dose: RequestBody?,
-        @Part("username") username: RequestBody?
+        @Part("username") username: RequestBody?,
+        @Part("instituteName") insReq: RequestBody?
     ): Deferred<Response<ResUser>>
 
     @Multipart
@@ -131,7 +132,8 @@ interface ApiInterface {
         @Part("result") result: RequestBody?,
         @Part("testId") testId: RequestBody?,
         @Part("username") username: RequestBody?,
-        @Part("kitId") kitID: RequestBody?
+        @Part("kitId") kitID: RequestBody?,
+        @Part("instituteName") insReq: RequestBody?
     ): Deferred<Response<ResUser>>
 
     @Multipart
@@ -147,7 +149,8 @@ interface ApiInterface {
         @Part("result") result: RequestBody?,
         @Part("testId") testId: RequestBody?,
         @Part("username") username: RequestBody?,
-        @Part("kitId") kitID: RequestBody?
+        @Part("kitId") kitID: RequestBody?,
+        @Part("instituteName") insReq: RequestBody?
     ): Deferred<Response<ResUser>>
 
     @Multipart

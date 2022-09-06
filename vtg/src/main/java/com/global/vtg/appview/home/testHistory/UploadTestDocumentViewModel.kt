@@ -31,6 +31,7 @@ class UploadTestDocumentViewModel(
 ) :
     AppViewModel(application) {
     var instituteId: Int? = null
+    var instituteName: String? = null
     var documentPath: String? = null
     var file: File? = null
     var result: String? = null
@@ -208,6 +209,11 @@ class UploadTestDocumentViewModel(
                 )
             }
 
+            var insReq: RequestBody? = null
+            if (instituteName != null) {
+
+                insReq = instituteName?.toRequestBody("text/plain".toMediaTypeOrNull())
+            }
           var  test = type!!.toRequestBody("text/plain".toMediaTypeOrNull())
             var testkit: RequestBody? = null
             if(!typeKitId.equals("-1"))
@@ -223,7 +229,8 @@ class UploadTestDocumentViewModel(
                 resultB,
                 test,
                 username,
-                testkit
+                testkit,
+                insReq
             )
         }
     }

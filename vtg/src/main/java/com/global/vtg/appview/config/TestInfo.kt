@@ -37,5 +37,8 @@ data class TestInfo(
     @field:SerializedName("addedBy")
     val addedBy: String? = "",
 
-    var testName: String? = ""
+    var testName: String? = "",
+
+    @field:SerializedName("instituteName")
+    val insName: String? = ""
 )

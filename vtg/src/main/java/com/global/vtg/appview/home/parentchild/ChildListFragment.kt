@@ -97,7 +97,8 @@ class ChildListFragment : AppFragment() {
         add_child.setOnClickListener {
             val bundle = Bundle()
             bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT, true)
-            addFragmentInStack<Any>(AppFragmentState.F_OTP, keys = bundle)
+            //addFragmentInStack<Any>(AppFragmentState.F_CHILD_BIRTH, keys = bundle)
+           addFragmentInStack<Any>(AppFragmentState.F_OTP, keys = bundle)
         }
         iv_add.setOnClickListener {
             add_child_controller.visibility = View.VISIBLE
@@ -165,15 +166,15 @@ class ChildListFragment : AppFragment() {
         itemTouchHelper.attachToRecyclerView(rvVaccineList)
 
 
-        viewModel.uploadFile.observe(this, {
+        viewModel.uploadFile.observe(this) {
             addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_DOCUMENT)
-        })
+        }
         if (NetworkUtils().isNetworkAvailable(activity!!))
             viewModel.getUser()
         else
             ToastUtils.shortToast(0, getString(R.string.error_message_network))
 
-        viewModel.userConfigLiveData.observe(this, {
+        viewModel.userConfigLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -236,10 +237,10 @@ class ChildListFragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
 
 
-        viewModel.deleteChildPermanent.observe(this, {
+        viewModel.deleteChildPermanent.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -277,9 +278,9 @@ class ChildListFragment : AppFragment() {
                 }
             }
 
-        })
+        }
 
-        viewModel.deleteUser.observe(this, {
+        viewModel.deleteUser.observe(this) {
             when (it) {
                 is Resource.Success -> {
 
@@ -325,9 +326,9 @@ class ChildListFragment : AppFragment() {
 
 
             }
-        })
+        }
 
-        viewModel.scanBarcodeLiveData.observe(this, {
+        viewModel.scanBarcodeLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -352,10 +353,10 @@ class ChildListFragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
 
 
-        viewModel.addParentLiveData.observe(this, {
+        viewModel.addParentLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -388,7 +389,7 @@ class ChildListFragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
 
     }
 

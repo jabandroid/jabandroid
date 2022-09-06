@@ -22,6 +22,7 @@ import com.global.vtg.appview.home.testHistory.TestBaseFragment
 import com.global.vtg.appview.home.testHistory.TestHistoryFragment
 import com.global.vtg.appview.home.testHistory.UploadTestDocumentFragment
 import com.global.vtg.appview.home.travel.*
+import com.global.vtg.appview.home.uploaddocument.ClinicListFragment
 import com.global.vtg.appview.home.uploaddocument.UploadDocumentFragment
 import com.global.vtg.appview.home.vaccinecard.VaccineCardFragment
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryFragment
@@ -45,6 +46,8 @@ enum class AppFragmentState(var fragment: Class<out AppFragment>) {
     F_VACCINE_CARD(VaccineCardFragment::class.java),
     F_VACCINE_QR_CODE(VaccineQRCodeFragment::class.java),
     F_UPLOAD_DOCUMENT(UploadDocumentFragment::class.java),
+    F_UPLOAD_CLINIC(ClinicListFragment::class.java),
+    F_ADD_CLINIC(AddClinicFragment::class.java),
     F_REG_STEP1(RegistrationStep1Fragment::class.java),
     F_REG_STEP2(RegistrationStep2Fragment::class.java),
     F_REG_STEP3(RegistrationStep3Fragment::class.java),

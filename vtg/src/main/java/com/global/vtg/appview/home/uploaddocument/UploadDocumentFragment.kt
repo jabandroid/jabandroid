@@ -29,6 +29,8 @@ import com.global.vtg.appview.home.ClinicActivity
 import com.global.vtg.appview.home.HomeActivity
 import com.global.vtg.appview.home.vaccinehistory.VaccineHistoryFragment
 import com.global.vtg.base.AppFragment
+import com.global.vtg.base.AppFragmentState
+import com.global.vtg.base.fragment.addFragmentInStack
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.*
 import com.global.vtg.utils.DateUtils.DDMMYY
@@ -332,48 +334,54 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
             }, 3000)
         }
 
-        etHospitalName.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        etHospitalName.setOnClickListener{
+            addFragmentInStack<Any>(AppFragmentState.F_UPLOAD_CLINIC)
 
-            }
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s?.length ?: 0 == 0) {
-                    rvInstitute.visibility = View.GONE
-                } else {
-                    if (!isSelected) {
-                        viewModel.searchInstitute(s.toString())
-                    } else {
-                        isSelected = false
-                    }
-                }
-            }
-
-        })
-
-        viewModel.instituteLiveData.observe(this) {
-            when (it) {
-                is Resource.Success -> {
-                    it.data.institute?.let { it1 ->
-                        adapter.setInstituteList(it1)
-                        rvInstitute.visibility = View.VISIBLE
-                        if (it1.size == 0) {
-                            it1.add(Institute(name = resources.getString(R.string.label_no_result_found)))
-                        } else {
-                            scrollView.smoothScrollTo(0, etHospitalName.bottom)
-                        }
-                    }
-                }
-                is Resource.Error -> {
-                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
-                }
-                is Resource.Loading -> {
-                }
-            }
         }
+
+//        etHospitalName.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//                if (s?.length ?: 0 == 0) {
+//                    rvInstitute.visibility = View.GONE
+//                } else {
+//                    if (!isSelected) {
+//                        viewModel.searchInstitute(s.toString())
+//                    } else {
+//                        isSelected = false
+//                    }
+//                }
+//            }
+//
+//        })
+
+//        viewModel.instituteLiveData.observe(this) {
+//            when (it) {
+//                is Resource.Success -> {
+//                    it.data.institute?.let { it1 ->
+//                        adapter.setInstituteList(it1)
+//                        rvInstitute.visibility = View.VISIBLE
+//                        if (it1.size == 0) {
+//                            it1.add(Institute(name = resources.getString(R.string.label_no_result_found)))
+//                        } else {
+//                            scrollView.smoothScrollTo(0, etHospitalName.bottom)
+//                        }
+//                    }
+//                }
+//                is Resource.Error -> {
+//                    it.error.message?.let { it1 -> DialogUtils.showSnackBar(context, it1) }
+//                }
+//                is Resource.Loading -> {
+//                }
+//            }
+//        }
 
         viewModel.userLiveData.observe(this) {
             when (it) {
@@ -530,6 +538,16 @@ class UploadDocumentFragment : AppFragment(), InstituteAdapter.ClickListener {
         isSelected = true
         etHospitalName.setText(institute.name)
         viewModel.instituteId = institute.id
+        rvInstitute.visibility = View.GONE
+    }
+
+
+    fun setID(institute: Institute){
+        KeyboardUtils.hideKeyboard(getAppActivity())
+        etHospitalName.setText(institute.name)
+        viewModel.instituteId = institute.id
+        if(institute.id!! == 0)
+            viewModel.instituteName=institute.name
         rvInstitute.visibility = View.GONE
     }
 }

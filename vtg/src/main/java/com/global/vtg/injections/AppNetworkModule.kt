@@ -83,36 +83,48 @@ val appNetworkModule = module {
                 SharedPreferenceUtil.INSTANCE?.getData(PreferenceManager.KEY_PASSWORD, "")
             val role =
                 SharedPreferenceUtil.INSTANCE?.getData(PreferenceManager.KEY_ROLE, "user")
-
+            val add_clinic =   SharedPreferenceUtil.INSTANCE?.getData(
+                    PreferenceManager.KEY_USER__ADD_CLINIC,
+                    false
+                )
             val builder = chain.request().newBuilder()
                 .addHeader(ApiConstant.HEADER_AUTHORIZATION, "bearer $token")
+//
+//            if(add_clinic == true){
+//
+//                    builder.addHeader(
+//                        ApiConstant.HEADER_ROLE,
+//                        "clinic")
+//
+//
+//            }else {
+                if (IS_SIGN_IN) {
+                    builder.addHeader(
+                        ApiConstant.HEADER_USERNAME,
+                        if (IS_SIGN_IN) tempUsername else username ?: ""
+                    )
+                    builder.addHeader(
+                        ApiConstant.HEADER_PASSWORD,
+                        if (IS_SIGN_IN) tempPassword else password ?: ""
+                    )
+                } else if (username?.isNotEmpty() == true) {
+                    builder.addHeader(
+                        ApiConstant.HEADER_USERNAME,
+                        username
+                    )
+                    builder.addHeader(
+                        ApiConstant.HEADER_PASSWORD,
+                        password ?: ""
+                    )
+                }
 
-            if (IS_SIGN_IN) {
-                builder.addHeader(
-                    ApiConstant.HEADER_USERNAME,
-                    if (IS_SIGN_IN) tempUsername else username ?: ""
-                )
-                builder.addHeader(
-                    ApiConstant.HEADER_PASSWORD,
-                    if (IS_SIGN_IN) tempPassword else password ?: ""
-                )
-            } else if (username?.isNotEmpty() == true) {
-                builder.addHeader(
-                    ApiConstant.HEADER_USERNAME,
-                    username
-                )
-                builder.addHeader(
-                    ApiConstant.HEADER_PASSWORD,
-                    password ?: ""
-                )
-            }
-
-            if (role?.isNotEmpty() == true) {
-                builder.addHeader(
-                    ApiConstant.HEADER_ROLE,
-                    role
-                )
-            }
+                if (role?.isNotEmpty() == true) {
+                    builder.addHeader(
+                        ApiConstant.HEADER_ROLE,
+                        role
+                    )
+                }
+//            }
             builder.addHeader(
                 "Content-Type",
                 "application/json"

@@ -29,6 +29,7 @@ class PreferenceManager constructor(private var sharedPreferences: SharedPrefere
         const val KEY_REFRESH_TOKEN = "pre.key.refreshToken"
         const val KEY_USER_LOGGED_IN = "pre.key.userLoggedIn"
         const val KEY_USER_REG = "pre.key.userreg"
+        const val KEY_USER__ADD_CLINIC = "pre.key.user_add_clinic"
     }
 
     override fun saveLogin(remember: Boolean) {

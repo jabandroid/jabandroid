@@ -184,63 +184,62 @@ class OtpFragment : AppFragment() {
             viewModel.createUser()
         }
 
-        viewModel.redirectToStep1.observe(this, {
+        viewModel.redirectToStep1.observe(this) {
 
 
-                SharedPreferenceUtil.getInstance(getAppActivity())
-                    ?.saveData(
-                        PreferenceManager.KEY_ROLE,
-                        if (isVendor == true) "vendor"
-                        else if (isClinic == true) "clinic" else "user"
-                    )
+            SharedPreferenceUtil.getInstance(getAppActivity())
+                ?.saveData(
+                    PreferenceManager.KEY_ROLE,
+                    if (isVendor == true) "vendor"
+                    else if (isClinic == true) "clinic" else "user"
+                )
 
-                if (isFromForgotPassword == true) {
-                    val bundle = Bundle()
-                    bundle.putString(
-                        Constants.BUNDLE_TWILIO_USER_ID,
-                        viewModel.twilioUserId.toString()
-                    )
-                    addFragment<Any>(
-                        AppFragmentState.F_FORGOT_CHANGE_PASSWORD,
-                        bundle,
-                        popFragment = this
-                    )
-                } else {
-                    email?.let { it1 ->
-                        password?.let { it2 ->
-                            phone?.let { it3 ->
-                                code?.let { it4 ->
-                                    viewModel.callRegistration(
-                                        it1,
-                                        it2, it3, it4, viewModel.twilioUserId.toString()
-                                    )
-                                }
+            if (isFromForgotPassword == true) {
+                val bundle = Bundle()
+                bundle.putString(
+                    Constants.BUNDLE_TWILIO_USER_ID,
+                    viewModel.twilioUserId.toString()
+                )
+                addFragment<Any>(
+                    AppFragmentState.F_FORGOT_CHANGE_PASSWORD,
+                    bundle,
+                    popFragment = this
+                )
+            } else {
+                email?.let { it1 ->
+                    password?.let { it2 ->
+                        phone?.let { it3 ->
+                            code?.let { it4 ->
+                                viewModel.callRegistration(
+                                    it1,
+                                    it2, it3, it4, viewModel.twilioUserId.toString()
+                                )
                             }
                         }
                     }
                 }
+            }
 
 
+        }
 
-        })
-
-        viewModel.verifyOtp.observe(this, {
+        viewModel.verifyOtp.observe(this) {
             if (viewModel.verifySuccess) {
-             if(viewModel.childaccount){
-                 viewModel.birthChild.postValue(true)
-             }else
-                viewModel.redirectToStep1.postValue(true)
+                if (viewModel.childaccount) {
+                    viewModel.birthChild.postValue(true)
+                } else
+                    viewModel.redirectToStep1.postValue(true)
             } else {
                 viewModel.verifyOTP()
             }
-        })
+        }
 
         viewModel.birthChild.observe(this, {
             USERCHILD= ResUser()
             USERCHILD!!.twilioUserId=twiloId
             Log.e("","c"+Constants.USER)
             val bundle = Bundle()
-            bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT,true)
+            bundle.putBoolean(BUNDLE_CHILD_ACCOUNT,true)
             popFragment(1)
             addFragmentInStack<Any>(AppFragmentState.F_CHILD_BIRTH, keys = bundle)
         })
@@ -249,7 +248,7 @@ class OtpFragment : AppFragment() {
             twiloId=it
         })
 
-        viewModel.registerLiveData.observe(this, {
+        viewModel.registerLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -257,14 +256,13 @@ class OtpFragment : AppFragment() {
                         is HomeActivity -> (activity as HomeActivity).hideProgressBar()
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
-                    if(childAccount!!) {
-                        USERCHILD= ResUser()
-                        USERCHILD!!.twilioUserId=twiloId
+                    if (childAccount!!) {
+                        USERCHILD = ResUser()
+                        USERCHILD!!.twilioUserId = twiloId
                         val bundle = Bundle()
-                        bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT,true)
+                        bundle.putBoolean(BUNDLE_CHILD_ACCOUNT, true)
                         addFragmentInStack<Any>(AppFragmentState.F_CHILD_BIRTH, keys = bundle)
-                    }
-                    else{
+                    } else {
                         USER = it.data
                         if (!it.data.mobileNo.isNullOrEmpty()) {
                             SharedPreferenceUtil.getInstance(getAppActivity())
@@ -334,7 +332,7 @@ class OtpFragment : AppFragment() {
                 }
             }
 
-        })
+        }
 
         viewModel.tokenSent.observe(this, {
             when (activity) {

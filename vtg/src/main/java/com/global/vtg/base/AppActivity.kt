@@ -24,10 +24,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.braintreepayments.api.dropin.DropInActivity
 import com.braintreepayments.api.dropin.DropInResult
-import com.global.vtg.appview.authentication.registration.RegistrationStep1Fragment
-import com.global.vtg.appview.authentication.registration.RegistrationStep2Fragment
-import com.global.vtg.appview.authentication.registration.RegistrationStep3Fragment
-import com.global.vtg.appview.authentication.registration.VendorRegistrationStep2Fragment
+import com.global.vtg.appview.authentication.registration.*
 import com.global.vtg.appview.config.PickMediaExtensions
 import com.global.vtg.appview.config.ResConfig
 import com.global.vtg.appview.home.event.CreateEventLocationFragment
@@ -52,6 +49,7 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.vtg.R
 import kotlinx.coroutines.CoroutineScope
 import okhttp3.*
+import okhttp3.Response
 import java.io.IOException
 import java.security.SecureRandom
 import java.security.cert.CertificateException
@@ -217,6 +215,8 @@ abstract class AppActivity : AppCompatActivity() {
                                 frg.updatePassportAddress(state, country)
                             }
                         } else if (frg is RegistrationStep3Fragment) {
+                            city.let { frg.updateAddress(it, state, country) }
+                        }else if (frg is AddClinicFragment) {
                             city.let { frg.updateAddress(it, state, country) }
                         }
                         else if (frg is CreateEventLocationFragment) {

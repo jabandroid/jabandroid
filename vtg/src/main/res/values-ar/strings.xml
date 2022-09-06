@@ -2,104 +2,30 @@
     <!--<string name="app_name">BaseProject</string>-->
 
     <string name="api_key">AIzaSyD09CYCGjr-h6gCq3ImZe6pnglvuCsGcMU</string>
-    <string name="app_name_new" translatable="false">VAXTRAX</string>
 
-    <string name = "please_wait"> الرجاء الانتظار </string>
-    <string name = "email"> البريد الإلكتروني /رقم الجوال </string>
-    <string name = "password"> كلمة المرور </string>
     <string name = "login"> تسجيل الدخول </string>
-    <string name = "msg_valid_email"> الرجاء إدخال بريد إلكتروني صالح </string>
-    <string name = "msg_valid_password"> الرجاء إدخال كلمة المرور </string>
-    <string name = "navigation_drawer_open"> فتح </string>
-    <string name = "navigation_drawer_close"> إغلاق </string>
-    <string name = "signup"> الاشتراك </string>
-    <string name = "details_screen"> التفاصيل </string>
     <string name = "permissions_denied"> تم رفض الأذونات. يُرجى السماح في إعدادات التطبيق بالوظائف الإضافية. </string>    <!--Title-->
 
-    <string name = "title_home"> المهمة الرئيسية </string>
-    <string name = "title_payment"> محفظة الدفع </string>
-    <string name = "title_whistory"> تاريخ السحب </string>
-    <string name = "title_myteam"> فريقي </string>
-    <string name = "title_installapp"> تثبيت التطبيق </string>
-    <string name = "title_noti"> إعلام </string>
-    <string name = "title_faq"> الأسئلة الشائعة </string>
     <string name = "title_contactus"> اتصل بنا </string>
-    <string name = "title_refer"> إحالة كسب </string>
-    <string name = "title_logout"> تسجيل الخروج </string>
 
     <!--Error-->
-    <string name = "error_message_location"> "الموقع غير محدد" </string>
     <string name = "error_message_network"> تحقق من الاتصال وحاول مرة أخرى. </string>
-    <string name = "error_message_call"> فشل الاتصال </string>
     <string name = "error_message_somethingwrong"> حدث خطأ ما ، الرجاء المحاولة لاحقًا </string>
-    <string name = "error_message_clienterror"> خطأ في العميل </string>
-    <string name = "error_message_servererror"> خطأ في الخادم </string>
-    <string name = "error_message_no_record"> لم يتم العثور على محتوى </string>
     <string name = "error_message_empty"> عفوًا ، لا توجد نتائج لعرضها </string>
     <string name = "error_message_error"> عفوًا ، حدث خطأ أثناء جلب البيانات </string>
-    <string name = "error_message_checkagain"> تحقق مرة أخرى </string>
     <string name = "error_message_tryagain"> حاول مرة أخرى </string>
 
     <!--Messages-->
-    <string name = "msg_success"> تم تسجيل دخولك بنجاح </string>
 
 
     <string name = "action_save"> حفظ </string>
-    <string name = "action_cancel"> إلغاء </string>
 
-
-    <string name = "button_login"> تسجيل الدخول </string>
-    <string name = "button_signup"> الاشتراك </string>
-
-    <string name = "hint_email_or_username"> البريد الإلكتروني </string>
-    <string name = "hint_password"> كلمة المرور </string>
-    <string name = "hint_phonenumber"> رقم الجوال </string>
-    <string name = "hint_code"> الرمز المرجعي </string>
-    <string name = "forgot"> نسيت كلمة المرور </string>
-    <string name = "donthave"> ليس لديك حساب؟ <b> اشترك! </b> </string>
-
-
-    <string name = "btn_next"> التالي </string>
-    <string name = "txt_withdraw_amout"> سحب المبلغ </string>
-    <string name = "txt_withdraw"> سحب </string>
-    <string name = "etx_payment_number"> رقم الدفع </string>
-    <string name = "txt_currnet_balance"> الرصيد الحالي </string>
-
-    <string name = "enable_random_adaptation"> تمكين التكيف العشوائي </string>
-
-    <string name = "error_drm_not_supported"> المحتوى المحمي غير مدعوم على مستويات واجهة برمجة التطبيقات أقل من 18 </string>
-
-    <string name = "error_drm_unsupported_scheme"> هذا الجهاز لا يدعم نظام DRM المطلوب </string>
-
-    <string name = "error_drm_unknown"> حدث خطأ غير معروف في DRM </string>
-
-    <string name = "error_no_decoder"> لا يوفر هذا الجهاز وحدة فك ترميز لـ <xliff gid = "mime_type">٪ 1 $ s </xliff> </string>
-
-    <string name = "error_no_secure_decoder"> لا يوفر هذا الجهاز وحدة فك ترميز آمنة لـ <xliff gid = "mime_type">٪ 1 $ s </xliff> </string>
-
-    <string name = "error_querying_decoders"> تعذر الاستعلام عن أجهزة فك ترميز الجهاز </string>
-
-    <string name = "error_instantiating_decoder"> تعذر إنشاء مثيل لوحدة فك الترميز <xliff gid = "decoder_name">٪ 1 $ s </xliff> </string>
-
-    <string name = "error_unsupported_video"> تتضمن الوسائط مقاطع فيديو ، لكن لا يمكن تشغيل أي منها بواسطة هذا الجهاز </string>
-
-    <string name = "error_unsupported_audio"> تتضمن الوسائط مسارات صوتية ، ولكن لا يمكن تشغيل أي منها بواسطة هذا الجهاز </string>
-
-    <string name = "storage_permission_denied"> تم رفض إذن الوصول إلى التخزين </string>
-
-    <string name = "sample_list_load_error"> فشل تحميل عينة واحدة أو أكثر من قوائم العينات </string>
 
     <string name = "piker_cam"> الكاميرا </string>
     <string name = "piker_gall"> المعرض </string>
     <string name = "piker_chosevideo"> اختر فيديو </string>
-    <string name = "piker_choseimage"> اختر صورة </string>
     <string name = "txt_file_toolarge"> الملف كبير جدًا. الحجم الأقصى هو٪ 1 $ sMB </string>
-    <string name = "retry"> إعادة المحاولة </string>
     <string name = "no_connection"> لا يوجد اتصال بالإنترنت. يرجى التحقق من الاتصال الخاص بك والمحاولة مرة أخرى. </string>
-    <string name = "no_connection_msg"> يرجى التحقق من اتصالك بالإنترنت وحاول مرة أخرى </string>
-    <string name = "nv_settings"> الإعدادات </string>
-    <string name = "nv_home"> الصفحة الرئيسية </string>
-    <string name = "nv_bookmark"> إشارة مرجعية </string>
     <string name = "Failure"> فشل </string>
 
     <!--  VTG  -->
@@ -115,8 +41,6 @@
     <string name = "label_forgot_password_title"> نسيت كلمة المرور </string>
     <string name = "label_forgot_password_subtext"> قم بتأكيد رقم هاتفك المحمول وسنرسل \ n التعليمات. </string>
     <string name = "label_do_sign_up"> أليس لديك حساب؟ <u> <b> <font fgcolor = '# 1D4792'> تسجيل </font> </b> </u> </string>
-    <string name = "label_sign_up"> <u> اشترك </u> </string>
-    <string name = "label_sign_up1"> تسجيل </string>
     <string name = "label_registration"> التسجيل </string>
     <string name = "label_phone_no"> رقم الجوال </string>
     <string name = "label_phone_no_register"> رقم الجوال * </string>
@@ -141,12 +65,8 @@
     <string name = "label_covid_test_status"> حالة اختبار COVID </string>
     <string name = "label_test_history"> سجل الاختبار </string>
     <string name = "label_test_history_covid"> سجل اختبار كوفيد </string>
-    <string name = "label_test_upload"> تحميل اختبار </string>
     <string name = "label_payment_method"> طريقة الدفع </string>
-    <string name = "label_information"> معلومات </string>
     <string name = "label_upload_document"> تحميل المستند </string>
-    <string name = "label_upload_info"> تحميل المعلومات الصحية </string>
-    <string name = "label_covid_status"> حالة اختبار كوفيد </string>
     <string name = "label_change_password"> تغيير كلمة المرور </string>
     <string name = "label_events"> الأحداث </string>
     <string name = "label_vaccine_taken_list"> قائمة اللقاحات </string>
@@ -178,7 +98,6 @@
     <string name = "label_fee"> الرسوم </string>
     <string name = "label_date1"> التاريخ </string>
     <string name = "label_time"> الوقت </string>
-    <string name="label_date_time" formatted="false">%d:%d</string>
 
     <string name = "label_no_data"> لا توجد بيانات متاحة ... </string>
     <string name = "select_type"> نوع اللقاح </string>
@@ -197,7 +116,6 @@
     <string name = "label_about_event"> حول الحدث </string>
     <string name = "label_contact_detail"> تفاصيل جهة الاتصال </string>
     <string name = "read_more"> اقرأ المزيد. </string>
-    <string name = "read_less"> أقل. </string>
     <string name = "label_public_event"> حدث عام </string>
     <string name = "label_event_Images"> صور الحدث </string>
     <string name = "label_description"> الوصف </string>
@@ -215,7 +133,6 @@
     <string name = "label_test_type"> نوع الاختبار </string>
     <string name = "label_test_type_2"> الاختبار /نوع اللقاح </string>
     <string name = "label_test_kit"> أدوات الاختبار </string>
-    <string name = "label_test_type_1"> نوع الاختبار </string>
     <string name = "label_dob_hint"> DD /MM /YYYY </string>
     <string name = "label_city_step3"> <font size = "14"> المدينة * </font> </string>
     <string name = "label_place_birth"> مكان الميلاد </string>
@@ -229,10 +146,8 @@
     <string name = "label_next"> التالي </string>
     <string name = "label_skip"> تخطي </string>
     <string name = "label_show_details"> إظهار التفاصيل </string>
-    <string name = "label_ssn"> آخر 4 أرقام من PIN /SSN /NIN /SIN /DNI /CPR /eID /NEI </string>
     <string name = "label_id_number"> رقم المعرف </string>
     <string name = "label_drivers_license"> رخصة القيادة </string>
-    <string name = "label_number"> <font size = "14"> الرقم </font> </string>
     <string name = "label_issued_date"> <font size = "14"> تاريخ الإصدار </font> </string>
     <string name = "label_expiry_date"> <font size = "14"> تاريخ انتهاء الصلاحية </font> </string>
     <string name = "label_passport"> جواز السفر </string>
@@ -254,7 +169,6 @@
     <string name = "label_business_id">معرف الأعمال</string>
     <string name = "label_employee_id"> معرف الموظف </string>
     <string name = "label_vat"> ضريبة الأعمال التجارية </string>
-    <string name = "label_contact_no"> رقم جهة الاتصال </string>
     <string name = "label_fax"> فاكس </string>
 
     <!-- Validations -->
@@ -275,7 +189,6 @@
     <string name = "error_select_dose"> الرجاء تحديد الجرعة. </string>
     <string name = "error_fee"> الرجاء إدخال رسوم. </string>
     <string name = "error_select_type"> الرجاء تحديد نوع اللقاح. </string>
-    <string name = "error_batch_no"> الرجاء إدخال رقم الدُفعة أو الرقم التسلسلي </string>
     <string name = "error_select_date"> يرجى تحديد تاريخ اللقاح. </string>
     <string name = "error_select_time"> يرجى تحديد وقت اللقاح. </string>
     <string name = "error_select_test_type_1"> الرجاء تحديد نوع الاختبار. </string>
@@ -283,19 +196,12 @@
     <string name = "error_select_test_type"> الرجاء تحديد نوع الاختبار. </string>
     <string name = "error_hospital_name"> يرجى تحديد اسم معمل /معهد عيادة </string>
     <string name = "empty_title"> الرجاء تحديد العنوان. </string>
-    <string name = "empty_gender"> الرجاء تحديد الجنس. </string>
     <string name = "empty_given_name"> الرجاء إدخال الاسم المحدد. </string>
     <string name = "empty_product"> الرجاء تحديد المنتج. </string>
     <string name = "empty_first_name"> الرجاء إدخال الاسم الأول. </string>
     <string name = "empty_last_name"> الرجاء إدخال اسم العائلة. </string>
     <string name = "upload_image"> يرجى تحميل صورة ملفك الشخصي. </string>
     <string name = "empty_dob"> الرجاء تحديد تاريخ الميلاد. </string>
-    <string name = "empty_place_birth_city"> الرجاء إدخال مدينة. </string>
-    <string name = "empty_place_birth_state"> الرجاء إدخال الولاية. </string>
-    <string name = "empty_place_birth_country"> الرجاء إدخال البلد. </string>
-    <string name = "empty_citizenship"> الرجاء إدخال جنسيتك. </string>
-    <string name = "empty_ethnicity"> الرجاء إدخال العرق. </string>
-    <string name = "empty_ssn"> الرجاء إدخال آخر 4 أرقام من رقم الضمان الاجتماعي. </string>
     <string name = "empty_id_number"> الرجاء إدخال رقم معرف. </string>
     <string name = "empty_business_name"> الرجاء إدخال اسم الشركة. </string>
     <string name = "empty_business_id"> الرجاء إدخال معرف النشاط التجاري. </string>
@@ -313,7 +219,6 @@
     <string name = "empty_passport_expiry_date"> يرجى تحديد تاريخ انتهاء صلاحية جواز السفر. </string>
     <string name = "empty_address1"> الرجاء إدخال العنوان البريدي 1. </string>
     <string name = "empty_address_1"> الرجاء إدخال العنوان 1. </string>
-    <string name = "empty_address2"> الرجاء إدخال عنوان بريدي 2. </string>
     <string name = "empty_address_city"> الرجاء تحديد مدينة. </string>
     <string name = "empty_banner_image"> الرجاء تحديد صورة شعار للحدث. </string>
     <string name = "empty_address_state"> الرجاء تحديد ولاية أو مقاطعة. </string>
@@ -323,7 +228,6 @@
     <string name = "cancel_event"> هل أنت متأكد من إلغاء الحدث؟ </string>
     <string name = "delete_image"> هل تريد حذف هذه الصورة؟ </string>
     <string name = "no_location"> لم يتم العثور على موقع الحدث. </string>
-    <string name = "time"> الرجاء تحديد التاريخ والوقت في المستقبل. </string>
 
     <string-array name="title">
         <item> السيد </item>
@@ -427,23 +331,19 @@
     </string-array>
 
     <string name = "label_profile"> الملف الشخصي </string>
-    <string name = "label_group"> مجموعات </string>
     <string name = "label_parent"> ربط أحد الوالدين والطفل </string>
     <string name = "label_scan_qr_code"> امسح رمز الاستجابة السريعة ضوئيًا </string>
     <string name = "label_Vaccine"> تحميل اللقاح </string>
     <string name = "label_upload_health"> تحميل المعلومات الصحية </string>
     <string name = "label_covid_health"> تحميل معلومات الاختبار </string>
     <string name = "label_my_qr_code"> رمز الاستجابة السريعة </string>
-    <string name = "label_my_test_history"> سجل الاختبار </string>
     <string name = "label_travel_form"> نموذج السفر </string>
     <string name = "label_my_vaccine_history"> سجل اللقاح </string>
-    <string name = "label_my_vaccine_card"> بطاقة اللقاح </string>
     <string name = "label_event"> الأحداث </string>
     <string name = "label_health_information"> معلومات صحية </string>
     <string name = "label_quarntine"> عزل </string>
     <string name = "label_travel_information"> معلومات السفر </string>
     <string name = "label_camera_permission"> يُرجى قبول إذن الكاميرا لمسح رمز الاستجابة السريعة. </string>
-    <string name = "label_location_permission"> يُرجى قبول إذن الموقع لإنشاء الحدث. </string>
     <string name = "label_select_time"> حدد الوقت </string>
     <string name = "label_mobile_number"> رقم الجوال: \ u0020 </string>
     <string name = "label_profile_city"> المدينة: \ u0020 </string>
@@ -451,16 +351,12 @@
     <string name = "label_profile_email"> البريد الإلكتروني: \ u0020 </string>
     <string name = "label_profile_postal_code"> الرمز البريدي: \ u0020 </string>
     <string name = "label_profile_country"> الدولة: \ u0020 </string>
-    <string name = "label_profile_address"> عنوان الشحن: \ u0020 </string>
     <string name = "label_last_covid_result"> عرض نتائج اختبار Covid الأخيرة </string>
     <string name = "label_last_result"> نتائج الاختبار </string>
     <string name = "label_positive"> موجب </string>
     <string name = "label_negative"> سلبي </string>
-    <string name = "label_pending"> معلق </string>
     <string name = "label_health_info"> المعلومات الصحية </string>
     <string name = "label_health_info_V"> المعلومات الصحية </string>
-    <string name = "label_vaccine_info_V"> معلومات اللقاح </string>
-    <string name = "label_test_info_V"> معلومات الاختبار </string>
     <string name = "label_no_result_found"> ​​لم يتم العثور على نتيجة </string>
     <string name = "label_or"> \ u2015 أو \ u2015 </string>
     <string name = "label_old_password"> كلمة المرور القديمة </string>
@@ -471,7 +367,6 @@
     <string name = "empty_confirm_new_password"> الرجاء إدخال تأكيد كلمة المرور. </string>
     <string name = "error_old_password"> الرجاء إدخال كلمة مرور قديمة صالحة. </string>
     <string name = "error_confirm_mismatch"> كلمة المرور الجديدة وتأكيد كلمة المرور غير متطابقين. </string>
-    <string name = "error_password_mismatch"> كلمة المرور القديمة وكلمة المرور الجديدة غير متطابقتين. </string>
     <string name = "error_password_change_subtitle"> تغيير كلمة المرور الجديدة </string>
     <string name = "label_edit"> تحرير </string>
     <string name = "label_password_update"> تم تحديث كلمة المرور بنجاح </string>
@@ -489,20 +384,12 @@
     <string name = "label_billing_add_1"> عنوان الفواتير 1 * </string>
     <string name = "label_billing_add_2"> عنوان الفواتير 2 </string>
     <string name = "braintree_key"> sandbox_ykkr4m4m_r73ztkz3v64z7wm6 </string>
-    <string name = "label_passport_number"> رقم جواز السفر:٪ s </string>
 
 
-    <string name = "hello_blank_fragment"> مرحبا قطعة فارغة </string>
-    <string name = "sign_in"> تسجيل الدخول </string>
-    <string name = "agree_terms_conditions"> أوافق على جميع البنود والشروط وسياسة الخصوصية </string>
-    <string name = "welcome"> مرحبًا </string>
-    <string name = "hint_username_number"> اسم المستخدم /رقم الجوال </string>
-    <string name = "sign_up"> تسجيل </string>
     <string name = "name"> الاسم </string>
     <string name = "description"> الوصف </string>
     <string name = "business_exipry_date"> تاريخ انتهاء العمل </string>
     <string name = "search_here"> ابحث هنا </string>
-    <string name = "label_dl"> Dl </string>
     <string name = "label_rapid"> مستضد سريع </string>
     <string name = "rtpcr"> RT-PCR </string>
     <string name = "label_result"> النتيجة </string>
@@ -512,7 +399,6 @@
     <string name = "no"> NO </string>
     <string name = "label_all_events"> كافة الأحداث </string>
     <string name = "my_events"> أحداثي </string>
-    <string name = "preeti_sharma"> بريتي شارما </string>
     <string name = "title_activity_maps"> MapsActivity </string>
     <string name="label_test_status">Teststatus</string>
     <string name="label_vaccine_status">حالة اللقاح</string>
@@ -612,7 +498,6 @@
     <string name = "enter_vat"> يرجى إدخال ضريبة القيمة المضافة للأعمال </string>
     <string name = "r_state"> حالة التسجيل </string>
     <string name = "r_country"> بلد التسجيل </string>
-    <string name = "r_scan"> فحص المستخدم </string>
     <string name = "scan_qr_code"> مسح رمز الاستجابة السريعة ضوئيًا </string>
     <string name = "ok"> حسنًا </string>
     <string name = "scan_user_code"> يُرجى مسح رمز الاستجابة السريعة للمستخدم ضوئيًا للمتابعة </string>
@@ -677,9 +562,6 @@
     <string name = "forms"> الخروج / نماذج الدخول </string>
     <string name = "arrival_info"> معلومات الوصول </string>
     <string name = "travel_info"> معلومات المسافر </string>
-    <string name = "cust_info"> معلومات مخصصة </string>
-    <string name = "consent"> الموافقة </string>
-    <string name = "immigration_form"> الهجرة / النموذج المخصص </string>
     <string name = "country_of_embarkation"> بلد الركوب </string>
     <string name = "boarded_at"> ركب في </string>
     <string name = "arrival_date"> تاريخ الوصول </string>
