@@ -153,7 +153,7 @@
     <string name="label_next">Next</string>
     <string name="label_skip">Skip</string>
     <string name="label_show_details">Show Details</string>
-    <string name="label_id_number">ID Number</string>
+    <string name="label_id_number">Government ID Number</string>
     <string name="label_drivers_license">Drivers License</string>
     <string name="label_issued_date"><font size="14">Issued Date</font></string>
     <string name="label_expiry_date"><font size="14">Expiry Date</font></string>
@@ -635,8 +635,12 @@
     <string name="clinic_name">Clinic name</string>
     <string name="clinic_name_emoty">Enter clinic name</string>
     <string name="age">Age</string>
+    <string name="clinic_not_found">We don\'t have clinic details at this moments.
+        Please add clinic details in profile and visit again.  </string>
 
-
+    <string name="user">User</string>
+    <string name="clinic">Clinic</string>
+    <string name="vendor">Vendor</string>
 
     <string-array name="reason">
         <item>Business</item>

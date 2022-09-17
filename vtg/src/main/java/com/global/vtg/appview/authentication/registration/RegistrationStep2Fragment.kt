@@ -214,11 +214,15 @@ class RegistrationStep2Fragment : AppFragment() {
             }
 
         })
+        viewModel.bbUrl=""
+        viewModel.dlUrl=""
+        viewModel.ppUrl=""
+        viewModel.bbUrl=""
 
         if(!isChildAccount){
         val list = Constants.USER?.document
             list!!.reverse()
-        if (list != null && list.isNotEmpty()) {
+     if (list != null && list.isNotEmpty()) {
             for (doc in list) {
                 when {
                     doc?.type.equals("DL", true) -> {
@@ -313,9 +317,9 @@ class RegistrationStep2Fragment : AppFragment() {
                         if(TextUtils.isEmpty(  viewModel.id.value)) {
                             viewModel.id.value = doc?.identity
                             viewModel.idId = doc!!.id
-                            if (!TextUtils.isEmpty(doc!!.url)) {
-                                viewModel.idUrl=doc!!.url
-                                imgId.setGlideNormalImage(doc!!.url)
+                            if (!TextUtils.isEmpty(doc.url)) {
+                                viewModel.idUrl= doc.url
+                                imgId.setGlideNormalImage(doc.url)
                                 imgIdUpload.visibility = View.GONE
                                 ig_edit.visibility = View.VISIBLE
 

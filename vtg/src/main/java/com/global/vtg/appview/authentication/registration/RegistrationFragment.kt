@@ -30,6 +30,16 @@ import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
 import com.vtg.databinding.FragmentRegistrationBinding
 import kotlinx.android.synthetic.main.fragment_registration.*
+import kotlinx.android.synthetic.main.fragment_registration.ccp
+import kotlinx.android.synthetic.main.fragment_registration.clinic
+import kotlinx.android.synthetic.main.fragment_registration.clinic_done
+import kotlinx.android.synthetic.main.fragment_registration.etLoginPassword
+import kotlinx.android.synthetic.main.fragment_registration.ivPassword
+import kotlinx.android.synthetic.main.fragment_registration.user
+import kotlinx.android.synthetic.main.fragment_registration.user_done
+import kotlinx.android.synthetic.main.fragment_registration.vendor
+import kotlinx.android.synthetic.main.fragment_registration.vendor_done
+import kotlinx.android.synthetic.main.fragment_signin.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -108,7 +118,49 @@ class RegistrationFragment : AppFragment() {
         viewModel.code.value = ccp.defaultCountryCode
         viewModel.region = ccp.defaultCountryNameCode
         tvRegistration.text=getString(R.string.user_Reg)
-        viewModel.isVendor.observe(this, {
+
+        viewModel.isVendor.value=false
+        viewModel.isClinic.value = false
+        user_done.visibility=View.VISIBLE
+        clinic_done.visibility=View.GONE
+        vendor_done.visibility=View.GONE
+
+        user.setOnClickListener {
+            viewModel.isVendor.value=false
+            viewModel.isClinic.value = false
+            user_done.visibility=View.VISIBLE
+            clinic_done.visibility=View.GONE
+            vendor_done.visibility=View.GONE
+            tvRegistrationEmail.text=getString(R.string.label_email_govt)
+            user.setBackgroundResource(R.drawable.ic_circle_selected)
+            clinic.setBackgroundResource(R.drawable.ic_circle_unselected)
+            vendor.setBackgroundResource(R.drawable.ic_circle_unselected)
+        }
+
+        vendor.setOnClickListener {
+            viewModel.isVendor.value=true
+            viewModel.isClinic.value =false
+            user_done.visibility=View.GONE
+            clinic_done.visibility=View.GONE
+            vendor_done.visibility=View.VISIBLE
+            tvRegistrationEmail.text=getString(R.string.label_email)
+            vendor.setBackgroundResource(R.drawable.ic_circle_selected)
+            clinic.setBackgroundResource(R.drawable.ic_circle_unselected)
+            user.setBackgroundResource(R.drawable.ic_circle_unselected)
+        }
+
+        clinic.setOnClickListener {
+            viewModel.isVendor.value=false
+            viewModel.isClinic.value = true
+            user_done.visibility=View.GONE
+            vendor_done.visibility=View.GONE
+            clinic_done.visibility=View.VISIBLE
+            tvRegistrationEmail.text=getString(R.string.label_email)
+            clinic.setBackgroundResource(R.drawable.ic_circle_selected)
+            vendor.setBackgroundResource(R.drawable.ic_circle_unselected)
+            user.setBackgroundResource(R.drawable.ic_circle_unselected)
+        }
+     /*   viewModel.isVendor.observe(this, {
             swVendor.visibility=View.VISIBLE
             if (it == true) {
                 tvRegistration.text=getString(R.string.vendor_reg)
@@ -137,7 +189,7 @@ class RegistrationFragment : AppFragment() {
             }
 
         })
-
+*/
 //        viewModel.isVendor.observe(this, {
 //            swClinic.visibility = if (it == true) {
 //                View.VISIBLE
@@ -152,11 +204,11 @@ class RegistrationFragment : AppFragment() {
             viewModel.region = ccp.selectedCountryNameCode
         }
 
-        viewModel.redirectToSignIn.observe(this, {
+        viewModel.redirectToSignIn.observe(this) {
             replaceAllFragment<Any>(AppFragmentState.F_SIGN_IN)
-        })
+        }
 
-        viewModel.redirectToOtp.observe(this, {
+        viewModel.redirectToOtp.observe(this) {
             val bundle = Bundle()
 
             SharedPreferenceUtil.getInstance(getAppActivity())
@@ -176,12 +228,12 @@ class RegistrationFragment : AppFragment() {
             bundle.putBoolean(BUNDLE_IS_CLINIC, viewModel.isClinic.value == true)
             addFragmentInStack<Any>(AppFragmentState.F_OTP, keys = bundle)
             //addFragmentInStack<Any>(AppFragmentState.F_REG_STEP1, keys = bundle)
-        })
+        }
 
         // Handle Error
-        viewModel.showToastError.observe(this, {
+        viewModel.showToastError.observe(this) {
             DialogUtils.showSnackBar(context, it)
-        })
+        }
     }
 
     override fun pageVisible() {

@@ -55,7 +55,7 @@ class RegistrationStep3Fragment : AppFragment() {
     }
 
     override fun initializeComponent(view: View?) {
-        var userType = SharedPreferenceUtil.getInstance(getAppActivity())
+        val userType = SharedPreferenceUtil.getInstance(getAppActivity())
             ?.getData(
                 PreferenceManager.KEY_LOGGED_IN_USER_TYPE,
                 ""
@@ -69,7 +69,7 @@ class RegistrationStep3Fragment : AppFragment() {
         if (userType.equals("Clinic")) {
             tvTitle.text = getString(R.string.lab_Step_3)
         } else if (userType.equals("Vendor")) {
-            tvTitle.text = getString(com.vtg.R.string.vendor_Step_3)
+            tvTitle.text = getString(R.string.vendor_Step_3)
         }
 
         if (childAccount) {
@@ -120,14 +120,14 @@ class RegistrationStep3Fragment : AppFragment() {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)
         }
 
-        viewModel.redirectToSignIn.observe(this, {
+        viewModel.redirectToSignIn.observe(this) {
             addFragmentInStack<Any>(AppFragmentState.F_SIGN_IN)
-        })
+        }
 
         // Handle Error
-        viewModel.showToastError.observe(this, {
+        viewModel.showToastError.observe(this) {
             DialogUtils.showSnackBar(context, it)
-        })
+        }
 
         viewModel.userConfigLiveData.observe(this) {
             when (it) {
@@ -175,11 +175,11 @@ class RegistrationStep3Fragment : AppFragment() {
                 }
             }
         }
-        viewModel.childAccountLiveData.observe(this, {
+        viewModel.childAccountLiveData.observe(this) {
             addFragmentInStack<Any>(AppFragmentState.F_SET_PASSWORD)
-        })
+        }
 
-        viewModel.registerStep3LiveData.observe(this, {
+        viewModel.registerStep3LiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -189,8 +189,8 @@ class RegistrationStep3Fragment : AppFragment() {
                         else -> (activity as VendorActivity).hideProgressBar()
                     }
 
-                    if(viewModel.childAccount){
-                        USERCHILD=it.data
+                    if (viewModel.childAccount) {
+                        USERCHILD = it.data
                         val fragments = getAppActivity().supportFragmentManager.fragments
                         for (frg in fragments) {
                             if (frg is ChildListFragment) {
@@ -199,14 +199,14 @@ class RegistrationStep3Fragment : AppFragment() {
                             }
                         }
                         popFragment(4)
-                    }else {
+                    } else {
 
 
                         USER = it.data
 
                         if (isFromProfile) {
 
-                            popFragment(3)
+
                             val fragments = getAppActivity().supportFragmentManager.fragments
                             for (frg in fragments) {
                                 if (frg is ProfileFragment) {
@@ -214,6 +214,8 @@ class RegistrationStep3Fragment : AppFragment() {
                                     break
                                 }
                             }
+
+                            popFragment(3)
                         } else {
 
                             SharedPreferenceUtil.getInstance(getAppActivity())
@@ -280,7 +282,7 @@ class RegistrationStep3Fragment : AppFragment() {
                 }
             }
 
-        })
+        }
     }
 
     fun updateAddress(city: String, state: String, country: String) {

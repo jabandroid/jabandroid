@@ -50,16 +50,14 @@ import com.vtg.R
 import kotlinx.coroutines.CoroutineScope
 import okhttp3.*
 import okhttp3.Response
+import org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER
 import java.io.IOException
 import java.security.SecureRandom
 import java.security.cert.CertificateException
 import java.security.cert.X509Certificate
 import java.util.*
 import java.util.concurrent.TimeUnit
-import javax.net.ssl.HostnameVerifier
-import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
+import javax.net.ssl.*
 
 
 abstract class AppActivity : AppCompatActivity() {
@@ -361,7 +359,7 @@ abstract class AppActivity : AppCompatActivity() {
             .get()
             .build()
 
-        getClient().newCall(request).enqueue(object : Callback {
+        getClient() .newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
 //                progressBar.postValue(false)
                 Log.e("",""+e)
@@ -418,7 +416,11 @@ abstract class AppActivity : AppCompatActivity() {
                 sslSocketFactory,
                 trustAllCerts[0] as X509TrustManager
             )
-            builder.hostnameVerifier(HostnameVerifier { hostname, session -> true })
+
+            val allHostsValid =
+                HostnameVerifier { hostname, session -> true }
+
+             builder.hostnameVerifier(allHostsValid)
 
             return builder.build()
         } catch (e: java.lang.Exception) {

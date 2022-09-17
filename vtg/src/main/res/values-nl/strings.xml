@@ -150,7 +150,7 @@
     <string name="label_next">Volgende</string>
     <string name="label_skip">Sobrelaan</string>
     <string name="label_show_details">Tom de detalhes</string>
-    <string name="label_id_number">Número de ID</string>
+    <string name="label_id_number">Identiteitsnummer van de overheid</string>
     <string name="label_drivers_license">Rijbewijs</string>
     <string name="label_issued_date"><font size="14">Uitgiftedatum</font></string>
     <string name="label_expiry_date"><font size="14">Vervaldatum</font></string>
@@ -624,5 +624,14 @@
     <string name="clinic_card">Kliniekkaart</string>
     <string name="empty_phone_1">Voer een telefoonnummer in.</string>
     <string name="clinic_details_not_found">Kliniekgegevens niet gevonden</string>
-
+    <string name="enter_details_error">Geef informatie op</string>
+    <string name="welcome_custom"> Welkom bij %1$s \n Immigratie-/Douaneformulier</string>
+    <string name="specfy_here">Geef hier op...</string>
+    <string name="text_add_clinic">Kan kliniek niet vinden. Klik hier</string>
+    <string name="add_clinic">Kliniekgegevens toevoegen</string>
+    <string name="clinic_name">Klinieknaam</string>
+    <string name="clinic_name_emoty">Vul klinieknaam in</string>
+    <string name="age">Leeftijd</string>
+    <string name="clinic_not_found">We hebben op dit moment geen kliniekgegevens.
+        Voeg kliniekdetails toe in het profiel en bezoek opnieuw. </string>
 </resources>

@@ -149,7 +149,7 @@
     <string name="label_next">Suivant</string>
     <string name="label_skip">Ignorer</string>
     <string name="label_show_details">Afficher les détails</string>
-    <string name="label_id_number">Numéro d\'identification</string>
+    <string name="label_id_number">Numéro d\'identification du gouvernement</string>
     <string name="label_drivers_license">Permis de conduire</string>
     <string name="label_issued_date"><font size="14">Date d\'émission</font></string>
     <string name="label_expiry_date"><font size="14">Date d\'expiration</font></string>
@@ -624,4 +624,14 @@
     <string name="clinic_card">Carte clinique</string>
     <string name="empty_phone_1">Veuillez saisir un numéro de téléphone</string>
     <string name="clinic_details_not_found">Détails de la clinique introuvables</string>
+    <string name="enter_details_error">Veuillez fournir des informations</string>
+    <string name="welcome_custom"> Bienvenue sur %1$s \n Formulaire d\'immigration/douane</string>
+    <string name="specfy_here">Spécifier ici…</string>
+    <string name="text_add_clinic">Impossible de trouver la clinique. Cliquez ici</string>
+    <string name="add_clinic">Ajouter les détails de la clinique</string>
+    <string name="clinic_name">Nom de la clinique</string>
+    <string name="clinic_name_emoty">Entrez le nom de la clinique</string>
+    <string name="age">Âge</string>
+    <string name="clinic_not_found">Nous n\'avons pas les détails de la clinique pour le moment.
+        Veuillez ajouter les détails de la clinique dans le profil et visiter à nouveau. </string>
 </resources>

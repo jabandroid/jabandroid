@@ -103,15 +103,15 @@ class ChangePasswordFragment : AppFragment() {
             activity?.onBackPressed()
         }
         // Handle Error
-        viewModel.showToastError.observe(this, {
+        viewModel.showToastError.observe(this) {
             DialogUtils.showSnackBar(context, it)
-        })
+        }
 
-        viewModel.redirectToSignIn.observe(this, {
+        viewModel.redirectToSignIn.observe(this) {
             replaceAllFragment<Any>(AppFragmentState.F_SIGN_IN)
-        })
+        }
 
-        viewModel.userLiveData.observe(this, {
+        viewModel.userLiveData.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     if (activity is HomeActivity) {
@@ -154,7 +154,7 @@ class ChangePasswordFragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
     }
 
     override fun pageVisible() {

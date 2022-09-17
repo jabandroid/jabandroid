@@ -145,7 +145,7 @@
     <string name="label_next">Inayofuata</string>
     <string name="label_skip">Ruka</string>
     <string name="label_show_details">Onyesha Maelezo</string>
-    <string name="label_id_number">Nambari ya Kitambulisho</string>
+    <string name="label_id_number">Nambari ya Kitambulisho cha Serikali</string>
     <string name="label_drivers_license">Leseni ya Udereva</string>
     <string name="label_issued_date"><font size="14">Tarehe Iliyotolewa</font></string>
     <string name="label_expiry_date"><font size="14">Tarehe ya Kuisha</font></string>
@@ -616,4 +616,14 @@
     <string name="clinic_card">Kadi ya Kliniki</string>
     <string name="empty_phone_1">Tafadhali weka Nambari ya simu.</string>
     <string name="clinic_details_not_found">Maelezo ya kliniki hayajapatikana</string>
+    <string name="enter_details_error">Tafadhali toa maelezo</string>
+    <string name="welcome_custom"> Karibu kwenye %1$s \n Fomu ya Uhamiaji/Forodha</string>
+    <string name="specfy_here">Bainisha hapa…</string>
+    <string name="text_add_clinic" msgid="499393434454434383">"Haiwezi kupata kliniki. Bofya hapa</string>
+    <string name="add_clinic">Ongeza maelezo ya kliniki</string>
+    <string name="clinic_name">Jina la kliniki</string>
+    <string name="clinic_name_emoty">Andika jina la kliniki</string>
+    <string name="age">Umri</string>
+    <string name="clinic_not_found">Hatuna maelezo ya kliniki kwa wakati huu.
+        Tafadhali ongeza maelezo ya kliniki katika wasifu na utembelee tena. </string>
 </resources>

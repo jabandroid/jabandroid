@@ -51,7 +51,7 @@ class BirthdayVerificationFragment : AppFragment() {
         }
 
         btnNext.setOnClickListener {
-            if( getAge()!! <18) {
+            if( getAge()!! <18||getAge()!! >64) {
                 val bundle = Bundle()
                 bundle.putBoolean(Constants.BUNDLE_CHILD_ACCOUNT, true)
                 bundle.putString(Constants.BUNDLE_DATE,  dob.text.toString())

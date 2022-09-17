@@ -7,7 +7,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="logo_margin_top">@dimen/_60sdp</dimen>
+    <dimen name="logo_margin_top">@dimen/_50sdp</dimen>
     <dimen name="logo_padding">@dimen/_65sdp</dimen>
     <dimen name="auth_title">@dimen/_18ssp</dimen>
     <dimen name="auth_subtitle">@dimen/_10ssp</dimen>

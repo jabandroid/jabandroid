@@ -8,10 +8,12 @@ import com.global.vtg.App
 import com.global.vtg.appview.authentication.UserRepository
 import com.global.vtg.appview.authentication.registration.ResUser
 import com.global.vtg.base.AppViewModel
+import com.global.vtg.model.factory.PreferenceManager
 import com.global.vtg.model.network.Resource
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DialogUtils
 import com.global.vtg.utils.KeyboardUtils
+import com.global.vtg.utils.SharedPreferenceUtil
 import com.global.vtg.utils.broadcasts.isNetworkAvailable
 import com.vtg.R
 import kotlinx.coroutines.launch
@@ -72,7 +74,10 @@ class ChangePasswordViewModel(
                 showToastError.postValue(App.instance?.getString(R.string.empty_confirm_new_password))
                 isValidate = false
             }
-            !(oldPassword.value.equals(Constants.USER?.password)) -> {
+            !(oldPassword.value.equals(  SharedPreferenceUtil.INSTANCE?.getData(
+                PreferenceManager.KEY_PASSWORD_PARENT,
+                ""
+            ))) -> {
                 showToastError.postValue(App.instance?.getString(R.string.error_old_password))
                 isValidate = false
             }

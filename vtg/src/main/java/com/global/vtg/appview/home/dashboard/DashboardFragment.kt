@@ -95,6 +95,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
         )
 
         ivProfilePic.setOnClickListener {
+            try{
             if (USERMain!!.childAccount!!.size > 0) {
                 multiple.visibility = View.VISIBLE
                 val bottomSheet = BottomSheetDialog()
@@ -148,7 +149,7 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                             SharedPreferenceUtil.getInstance(getAppActivity())
                                 ?.saveData(
                                     PreferenceManager.KEY_PASSWORD,
-                                    USERMain!!.childAccount?.get(position )!!.password.toString()
+                                    USERMain!!.childAccount?.get(position )!!.email.toString()
                                 )
 
                             SharedPreferenceUtil.getInstance(getAppActivity())
@@ -168,6 +169,9 @@ class DashboardFragment : AppFragment(), ViewPagerDashAdapter.ClickListener {
                     childFragmentManager,
                     "ModalBottomSheet"
                 )
+            }}
+            catch(e:Exception){
+                e.printStackTrace()
             }
         }
 

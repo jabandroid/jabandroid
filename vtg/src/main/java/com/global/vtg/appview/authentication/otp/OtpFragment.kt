@@ -40,6 +40,9 @@ import com.global.vtg.utils.SharedPreferenceUtil
 import com.vtg.R
 import com.vtg.databinding.FragmentOtpBinding
 import kotlinx.android.synthetic.main.fragment_otp.*
+import kotlinx.android.synthetic.main.fragment_otp.clToolbar
+import kotlinx.android.synthetic.main.fragment_otp.ivBack
+import kotlinx.android.synthetic.main.fragment_reg_step2.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -136,8 +139,15 @@ class OtpFragment : AppFragment() {
                 else -> (activity as AuthenticationActivity).showProgressBar()
             }
         }
+        ivBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
+        ivBackMain.setOnClickListener {
+            activity?.onBackPressed()
+        }
 
         if(childAccount!!){
+            ivBackMain.visibility=View.GONE
             viewModel.email = USER?.email.toString()
             viewModel.phone = USER?.mobileNo.toString()
             viewModel.code =USER?.mobileNo.toString().substring(0,2)
@@ -234,19 +244,19 @@ class OtpFragment : AppFragment() {
             }
         }
 
-        viewModel.birthChild.observe(this, {
-            USERCHILD= ResUser()
-            USERCHILD!!.twilioUserId=twiloId
-            Log.e("","c"+Constants.USER)
+        viewModel.birthChild.observe(this) {
+            USERCHILD = ResUser()
+            USERCHILD!!.twilioUserId = twiloId
+            Log.e("", "c" + Constants.USER)
             val bundle = Bundle()
-            bundle.putBoolean(BUNDLE_CHILD_ACCOUNT,true)
+            bundle.putBoolean(BUNDLE_CHILD_ACCOUNT, true)
             popFragment(1)
             addFragmentInStack<Any>(AppFragmentState.F_CHILD_BIRTH, keys = bundle)
-        })
+        }
 
-        viewModel.twiloId.observe(this, {
-            twiloId=it
-        })
+        viewModel.twiloId.observe(this) {
+            twiloId = it
+        }
 
         viewModel.registerLiveData.observe(this) {
             when (it) {
@@ -334,7 +344,7 @@ class OtpFragment : AppFragment() {
 
         }
 
-        viewModel.tokenSent.observe(this, {
+        viewModel.tokenSent.observe(this) {
             when (activity) {
                 is AuthenticationActivity -> (activity as AuthenticationActivity).hideProgressBar()
                 is HomeActivity -> (activity as HomeActivity).hideProgressBar()
@@ -344,9 +354,9 @@ class OtpFragment : AppFragment() {
             DialogUtils.showSnackBar(getAppActivity(), resources.getString(R.string.label_otp_sent))
             btnVerify.isClickable = true
             btnVerify.isEnabled = true
-        })
+        }
 
-        viewModel.progressBar.observe(this, {
+        viewModel.progressBar.observe(this) {
             if (it) {
                 when (activity) {
                     is AuthenticationActivity -> (activity as AuthenticationActivity).showProgressBar()
@@ -362,12 +372,12 @@ class OtpFragment : AppFragment() {
                     else -> (activity as VendorActivity).hideProgressBar()
                 }
             }
-        })
+        }
 
         // Handle Error
-        viewModel.showToastError.observe(this, {
+        viewModel.showToastError.observe(this) {
             DialogUtils.showSnackBar(context, it)
-        })
+        }
 
 
     }

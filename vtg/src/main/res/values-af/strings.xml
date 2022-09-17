@@ -149,7 +149,7 @@
     <string name="label_next">Volgende</string>
     <string name="label_skip">Slaan oor</string>
     <string name="label_show_details">Wys besonderhede</string>
-    <string name="label_id_number">ID-nommer</string>
+    <string name="label_id_number">Regering ID-nommer</string>
     <string name="label_drivers_license">Bestuurslisensie</string>
     <string name="label_issued_date"><font size="14">Uitreikingsdatum</font></string>
     <string name="label_expiry_date"><font size="14">Vervaldatum</font></string>
@@ -625,4 +625,15 @@
     <string name="clinic_card">Kliniekkaart</string>
     <string name="empty_phone_1">Voer asseblief \'n telefoonnommer in.</string>
     <string name="clinic_details_not_found">Kliniekbesonderhede nie gevind nie</string>
+
+    <string name="enter_details_error">Verskaf asseblief inligting</string>
+    <string name="welcome_custom"> Welkom by %1$s \n Immigrasie-/Doeanevorm</string>
+    <string name="specfy_here">Spesifiseer hier...</string>
+    <string name="text_add_clinic">Kan nie kliniek vind nie. Klik hier</string>
+    <string name="add_clinic">Voeg kliniekbesonderhede by</string>
+    <string name="clinic_name">Klinieknaam</string>
+    <string name="clinic_name_emoty">Voer klinieknaam in</string>
+    <string name="age">Ouderdom</string>
+    <string name="clinic_not_found">Ons het op die oomblik nie kliniekbesonderhede nie.
+        Voeg asseblief kliniekbesonderhede in profiel by en besoek weer. </string>
 </resources>

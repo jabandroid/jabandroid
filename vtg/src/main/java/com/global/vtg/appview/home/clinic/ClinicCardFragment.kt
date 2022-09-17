@@ -6,6 +6,8 @@ import android.view.View
 import androidx.databinding.ViewDataBinding
 import com.global.vtg.appview.authentication.registration.RegistrationStep3ViewModel
 import com.global.vtg.base.AppFragment
+import com.global.vtg.base.fragment.popFragment
+import com.global.vtg.utils.AppAlertDialog
 import com.global.vtg.utils.Constants
 import com.global.vtg.utils.DateUtils
 import com.global.vtg.utils.ToastUtils
@@ -74,15 +76,22 @@ class ClinicCardFragment : AppFragment() {
                 }
             }
         }else{
-            ToastUtils.shortToast(0,getString(R.string.clinic_details_not_found))
+            AppAlertDialog().showAlert(
+                activity!!,
+                object : AppAlertDialog.GetClick {
+                    override fun response(type: String) {
+                        popFragment(1)
+                    }
+                }, getString(R.string.clinic_not_found), "Ok", ""
+            )
         }
 
 
+
+
         if (!Constants.USER?.address.isNullOrEmpty()) {
-            var index = Constants.USER?.address!!.size - 1
-
-
-            var string=Constants.USER?.address?.get(index)?.addr1 +" "+ Constants.USER?.address?.get(index)?.addr2+" "+
+            val index = Constants.USER?.address!!.size - 1
+            val string=Constants.USER?.address?.get(index)?.addr1 +" "+ Constants.USER?.address?.get(index)?.addr2+" "+
 
                     Constants.USER?.address?.get(index)?.city+ " "+ Constants.USER?.address?.get(index)?.state+" "+
                     Constants.USER?.address?.get(index)?.country+ " "+ Constants.USER?.address?.get(index)?.zipCode

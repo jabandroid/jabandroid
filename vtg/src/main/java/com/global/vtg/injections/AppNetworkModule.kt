@@ -87,7 +87,7 @@ val appNetworkModule = module {
                     PreferenceManager.KEY_USER__ADD_CLINIC,
                     false
                 )
-            val builder = chain.request().newBuilder()
+             val builder = chain.request().newBuilder()
                 .addHeader(ApiConstant.HEADER_AUTHORIZATION, "bearer $token")
 //
 //            if(add_clinic == true){
@@ -154,6 +154,7 @@ val appNetworkModule = module {
 
        //  Create an ssl socket factory with our all-trusting manager
         try {
+
             // Create a trust manager that does not validate certificate chains
             val trustAllCerts = arrayOf<TrustManager>(
                 object : X509TrustManager {
@@ -203,15 +204,14 @@ val appNetworkModule = module {
             throw RuntimeException(e)
         }
 //
-//        val okHttpClient: OkHttpClient = TrustClient().getUnsafeOkHttpClient()
-//        okHttpClient.Builder()
-//            .connectTimeout(10, TimeUnit.SECONDS)
-//            .readTimeout(10, TimeUnit.SECONDS)
-//            .writeTimeout(10, TimeUnit.SECONDS)
-//            .addInterceptor(get<Interceptor>("LOGGING_INTERCEPTOR"))
-//            .addInterceptor(get<Interceptor>("OK_HTTP_INTERCEPTOR"))
-//            .addInterceptor(get<Interceptor>("OK_HTTP_INTERCEPTOR_TWILIO"))
-//            .build()
+//        val builder = OkHttpClient.Builder()
+//            builder
+//                .connectTimeout(10, TimeUnit.SECONDS)
+//                .readTimeout(10, TimeUnit.SECONDS)
+//                .writeTimeout(10, TimeUnit.SECONDS)
+//                .addInterceptor(get<Interceptor>("LOGGING_INTERCEPTOR"))
+//                .addInterceptor(get<Interceptor>("OK_HTTP_INTERCEPTOR"))
+//                .addInterceptor(get<Interceptor>("OK_HTTP_INTERCEPTOR_TWILIO")).build()
     }
 
 

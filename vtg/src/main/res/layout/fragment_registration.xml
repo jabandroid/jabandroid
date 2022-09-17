@@ -78,13 +78,156 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvRegistration" />
+            <RelativeLayout
+                android:id="@+id/userType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_marginStart="@dimen/_30sdp"
+                android:layout_marginEnd="@dimen/_30sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSubText">
+
+                <FrameLayout
+                    android:id="@+id/user"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:background="@drawable/ic_circle_selected">
+
+                    <ImageView
+                        android:id="@+id/user_done"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="end"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginEnd="6dp"
+                        android:src="@drawable/ic_baseline_check_circle_24" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_user_login" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:gravity="center"
+                            android:text="@string/user"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/vendor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/ic_circle_unselected">
+                    <ImageView
+                        android:id="@+id/vendor_done"
+                        android:layout_width="15dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="6dp"
+                        android:visibility="gone"
+                        android:layout_marginTop="6dp"
+                        android:src="@drawable/ic_baseline_check_circle_24"
+                        android:layout_height="15dp"/>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_login_vendor" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:gravity="center"
+                            android:text="@string/vendor"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/clinic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:background="@drawable/ic_circle_unselected">
+                    <ImageView
+                        android:id="@+id/clinic_done"
+                        android:layout_width="15dp"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="6dp"
+                        android:layout_marginTop="6dp"
+                        android:visibility="gone"
+                        android:src="@drawable/ic_baseline_check_circle_24"
+                        android:layout_height="15dp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_user_clinic" />
+
+                        <com.global.vtg.utils.textView.RegularTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:gravity="center"
+                            android:text="@string/clinic"
+                            android:textSize="@dimen/_9sdp" />
+
+                    </LinearLayout>
+
+
+                </FrameLayout>
+
+
+
+
+            </RelativeLayout>
 
             <com.global.vtg.utils.textView.RegularTextView
                 android:id="@+id/tvRegistrationEmail"
                 style="@style/MarginStartEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:gravity="center"
                 android:text="@string/label_email_govt"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +238,7 @@
                 style="@style/EdittextPadding"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/edittext_height"
-                android:layout_marginTop="@dimen/_8sdp"
+
                 android:background="@drawable/edittext_shadow"
                 android:drawableStart="@drawable/ic_email"
                 android:drawablePadding="@dimen/_8sdp"
@@ -117,17 +260,17 @@
                 style="@style/MarginStartEnd"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_20sdp"
                 android:text="@string/label_phone_no_register"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvSubText" />
+                app:layout_constraintTop_toBottomOf="@+id/userType" />
 
             <LinearLayout
                 android:id="@+id/llPhoneNo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+
                 android:gravity="center_vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -183,7 +326,7 @@
                 style="@style/MarginStartEnd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:gravity="center"
                 android:text="@string/label_password_register"
                 app:layout_constraintStart_toStartOf="parent"
@@ -194,7 +337,7 @@
                 style="@style/EdittextPadding"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/edittext_height"
-                android:layout_marginTop="@dimen/_8sdp"
+
                 android:background="@drawable/edittext_shadow"
                 android:drawableStart="@drawable/ic_padlock"
                 android:drawablePadding="@dimen/_8sdp"
@@ -221,6 +364,7 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/swVendor"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
@@ -238,6 +382,7 @@
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/swClinic"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_16sdp"
@@ -247,7 +392,7 @@
                 android:text="@string/label_clinic"
                 android:thumbTint="@drawable/newthumb"
                 android:trackTint="@drawable/newtrack"
-                android:visibility="visible"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etLoginPassword"
                 app:switchPadding="@dimen/_8sdp"
@@ -290,7 +435,7 @@
                 style="@style/ButtonStyle"
                 android:layout_width="0dp"
                 android:layout_marginStart="@dimen/_18sdp"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_18sdp"
                 android:onClick="@{viewModel::onClick}"
                 android:text="@string/label_register"

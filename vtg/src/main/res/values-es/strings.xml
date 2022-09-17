@@ -148,7 +148,7 @@
     <string name="label_next">Siguiente</string>
     <string name="label_skip">Omitir</string>
     <string name="label_show_details">Mostrar detalles</string>
-    <string name="label_id_number">Número de identificación</string>
+    <string name="label_id_number">número de identificación del Gobierno</string>
     <string name="label_drivers_license">Licencia de conducir</string>
     <string name="label_issued_date"><font size="14">Fecha de emisión</font></string>
     <string name="label_expiry_date"><font size="14">Fecha de vencimiento</font></string>
@@ -622,4 +622,14 @@
     <string name="clinic_card">Tarjeta Clínica</string>
     <string name="empty_phone_1">Ingrese un número de teléfono</string>
     <string name="clinic_details_not_found">No se encontraron los detalles de la clínica</string>
+    <string name="enter_details_error">Proporcione información</string>
+    <string name="welcome_custom"> Bienvenido a %1$s \n Formulario de inmigración/aduana</string>
+    <string name="specfy_here">Especifique aquí…</string>
+    <string name="text_add_clinic">No se puede encontrar la clínica. Haga clic aquí</string>
+    <string name="add_clinic">Agregar detalles de la clínica</string>
+    <string name="clinic_name">Nombre de la clínica</string>
+    <string name="clinic_name_emoty">Ingrese el nombre de la clínica</string>
+    <string name="age">Edad</string>
+    <string name="clinic_not_found">No tenemos detalles de la clínica en este momento.
+        Agregue los detalles de la clínica en el perfil y vuelva a visitarnos.</string>
 </resources>

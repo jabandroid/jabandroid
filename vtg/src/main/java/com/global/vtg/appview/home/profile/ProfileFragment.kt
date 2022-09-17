@@ -108,6 +108,7 @@ class ProfileFragment : AppFragment() {
             emailView.visibility=View.GONE
             childAccountView.visibility=View.GONE
             childAccount.visibility=View.GONE
+            tvChangePassword.visibility=View.GONE
         }
 
         if (SharedPreferenceUtil.getInstance(getAppActivity())

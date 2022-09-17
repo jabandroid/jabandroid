@@ -105,39 +105,90 @@ class SignInFragment : AppFragment() {
         }
 
         tvLogin.text=getString(R.string.user_login)
+        viewModel.isVendor.value=false
+        viewModel.isClinic.value = false
+        user_done.visibility=View.VISIBLE
+        clinic_done.visibility=View.GONE
+        vendor_done.visibility=View.GONE
 
-        viewModel.isVendor.observe(this, {
-            swVendor.visibility = View.VISIBLE
+        user.setOnClickListener {
+            viewModel.isVendor.value=false
+            viewModel.isClinic.value = false
+            user_done.visibility=View.VISIBLE
+            clinic_done.visibility=View.GONE
+            vendor_done.visibility=View.GONE
+            tvLoginEmail.text=getString(R.string.label_email_govt)
+            user.setBackgroundResource(R.drawable.ic_circle_selected)
+            clinic.setBackgroundResource(R.drawable.ic_circle_unselected)
+            vendor.setBackgroundResource(R.drawable.ic_circle_unselected)
+        }
 
-            if (it == true) {
-                tvLogin.text=getString(R.string.vendor_login)
-                swIsClinic.visibility = View.INVISIBLE
-            }
-            else {
-                tvLogin.text=getString(R.string.user_login)
-                swIsClinic.visibility = View.VISIBLE
-            }
+        vendor.setOnClickListener {
+            viewModel.isVendor.value=true
+            viewModel.isClinic.value =false
+            user_done.visibility=View.GONE
+            clinic_done.visibility=View.GONE
+            vendor_done.visibility=View.VISIBLE
+            tvLoginEmail.text=getString(R.string.label_email)
+            vendor.setBackgroundResource(R.drawable.ic_circle_selected)
+            clinic.setBackgroundResource(R.drawable.ic_circle_unselected)
+            user.setBackgroundResource(R.drawable.ic_circle_unselected)
+        }
 
-        })
-        viewModel.isClinic.observe(this, {
-            swIsClinic.visibility = View.VISIBLE
-            if (it == true) {
-                tvLogin.text=getString(R.string.clinic_login)
-                swVendor.visibility = View.INVISIBLE
-            }
-            else {
-                tvLogin.text=getString(R.string.user_login)
-                swVendor.visibility = View.VISIBLE
-            }
+        clinic.setOnClickListener {
+            viewModel.isVendor.value=false
+            viewModel.isClinic.value = true
+            user_done.visibility=View.GONE
+            vendor_done.visibility=View.GONE
+            clinic_done.visibility=View.VISIBLE
+            tvLoginEmail.text=getString(R.string.label_email)
+            clinic.setBackgroundResource(R.drawable.ic_circle_selected)
+            vendor.setBackgroundResource(R.drawable.ic_circle_unselected)
+            user.setBackgroundResource(R.drawable.ic_circle_unselected)
+        }
 
-        })
 
-        viewModel.userLiveData.observe(this, { resources ->
+//        viewModel.isVendor.observe(this) {
+//            swVendor.visibility = View.VISIBLE
+//
+//            if (it == true) {
+//                tvLogin.text = getString(R.string.vendor_login)
+//                swIsClinic.visibility = View.INVISIBLE
+//            } else {
+//                tvLogin.text = getString(R.string.user_login)
+//                swIsClinic.visibility = View.VISIBLE
+//            }
+//
+//        }
+//        viewModel.isClinic.observe(this) {
+//            swIsClinic.visibility = View.VISIBLE
+//            if (it == true) {
+//                tvLogin.text = getString(R.string.clinic_login)
+//                swVendor.visibility = View.INVISIBLE
+//            } else {
+//                tvLogin.text = getString(R.string.user_login)
+//                swVendor.visibility = View.VISIBLE
+//            }
+//
+//        }
+
+        viewModel.userLiveData.observe(this) { resources ->
             resources?.let {
                 when (it) {
                     is Resource.Success -> {
                         (activity as AuthenticationActivity).hideProgressBar()
                         Constants.USER = it.data
+
+                        if(Constants.USER!!.role!!.contains("ROLE_VENDOR")){
+                            viewModel.isVendor.value=true
+                            viewModel.isClinic.value =false
+                        }else   if(Constants.USER!!.role!!.contains("ROLE_CLINIC")){
+                            viewModel.isVendor.value=false
+                            viewModel.isClinic.value = true
+                        }else{
+                            viewModel.isVendor.value=false
+                            viewModel.isClinic.value = false
+                        }
 
                         SharedPreferenceUtil.getInstance(getAppActivity())
                             ?.saveData(
@@ -181,28 +232,28 @@ class SignInFragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
 
-        viewModel.showDialog.observe(this, {
+        viewModel.showDialog.observe(this) {
             if (it != "") {
                 if (activity != null)
                     DialogUtils.dialog(activity, it)
             }
-        })
+        }
 
-        viewModel.showProgress.observe(this, {
+        viewModel.showProgress.observe(this) {
             if (it) {
                 (activity as AuthenticationActivity).showProgressBar()
             } else {
                 (activity as AuthenticationActivity).hideProgressBar()
             }
-        })
+        }
 
-        viewModel.addFragment.observe(this, {
+        viewModel.addFragment.observe(this) {
             addFragment<Any>(it.first, it.second)
-        })
+        }
 
-        viewModel.loginLiveData.observe(this, {
+        viewModel.loginLiveData.observe(this) {
             if (viewModel.isRememberMeChecked.value == true) {
                 // Store email and password in to the preferences for Remember Me
                 SharedPreferenceUtil.getInstance(getAppActivity())
@@ -309,7 +360,7 @@ class SignInFragment : AppFragment() {
                 if (Constants.USER?.role.equals("ROLE_USER")
                 ) {
 
-                        Intent(activity, HomeActivity::class.java)
+                    Intent(activity, HomeActivity::class.java)
 
                 } else if (Constants.USER?.role.equals("ROLE_CLINIC")) {
                     Intent(activity, ClinicActivity::class.java)
@@ -318,20 +369,20 @@ class SignInFragment : AppFragment() {
                 }
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
-        })
+        }
 
-        viewModel.redirectToSignUp.observe(this, {
+        viewModel.redirectToSignUp.observe(this) {
             addFragmentInStack<Any>(AppFragmentState.F_SIGN_UP)
-        })
+        }
 
-        viewModel.redirectToForgotPassword.observe(this, {
+        viewModel.redirectToForgotPassword.observe(this) {
             addFragmentInStack<Any>(AppFragmentState.F_FORGOT_PASSWORD)
-        })
+        }
 
         // Handle Error
-        viewModel.showToastError.observe(this, {
+        viewModel.showToastError.observe(this) {
             showSnackBar(context, it)
-        })
+        }
     }
 
     override fun pageVisible() {

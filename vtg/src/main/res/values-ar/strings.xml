@@ -146,7 +146,7 @@
     <string name = "label_next"> التالي </string>
     <string name = "label_skip"> تخطي </string>
     <string name = "label_show_details"> إظهار التفاصيل </string>
-    <string name = "label_id_number"> رقم المعرف </string>
+    <string name = "label_id_number">رقم السجل المدني</string>
     <string name = "label_drivers_license"> رخصة القيادة </string>
     <string name = "label_issued_date"> <font size = "14"> تاريخ الإصدار </font> </string>
     <string name = "label_expiry_date"> <font size = "14"> تاريخ انتهاء الصلاحية </font> </string>
@@ -618,4 +618,14 @@
     <string name = "clinic_card"> بطاقة العيادة </string>
     <string name = "empty_phone_1"> الرجاء إدخال رقم الهاتف </string>
     <string name = "clinic_details_not_found">  يتم العثور على تفاصيل العيادة </string>
+    <string name = "enter_details_error"> يرجى تقديم المعلومات </string>
+    <string name = "welcome_custom"> مرحبًا بك في٪ 1 $ s \ n نموذج الهجرة / الجمارك </string>
+    <string name = "specfy_here"> حدد هنا… </string>
+    <string name = "text_add_clinic"> لا يمكن العثور على العيادة. انقر هنا </string>
+    <string name = "add_clinic"> إضافة تفاصيل العيادة </string>
+    <string name = "clinic_name"> اسم العيادة </string>
+    <string name = "clinic_name_emoty"> أدخل اسم العيادة </string>
+    <string name = "age"> العمر </string>
+    <string name = "clinic_not_found"> ​​ليس لدينا تفاصيل العيادة في هذه اللحظات.
+        الرجاء إضافة تفاصيل العيادة في الملف الشخصي وزيارة مرة أخرى. </string>
 </resources>

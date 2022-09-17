@@ -107,7 +107,7 @@ class RegistrationStep2ViewModel(
                                 )
                             }
 
-                            if (!isNullOrEmpty(bbUrl!!.trim())||!isNullOrEmpty(idBbEdit.value!!.trim())) {
+                            if (!isNullOrEmpty(bbUrl!!.trim())||!isNullOrEmpty(idBbEdit.value)) {
                                 document.add(
                                     Document(
                                         id=idBB,
@@ -192,7 +192,7 @@ class RegistrationStep2ViewModel(
                                 )
                             }
 
-                            if (!isNullOrEmpty(bbUrl!!.trim())||!isNullOrEmpty(idBbEdit.value!!.trim())) {
+                            if (!isNullOrEmpty(bbUrl!!.trim())||!isNullOrEmpty(idBbEdit.value)) {
                                 document.add(
                                     Document(
                                         id=idBB,
