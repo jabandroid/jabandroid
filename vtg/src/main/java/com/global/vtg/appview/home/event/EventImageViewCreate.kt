@@ -16,6 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.global.vtg.test.Const
 import com.global.vtg.utils.AppAlertDialog
+import com.global.vtg.utils.NetworkUtils
 import com.global.vtg.wscoroutine.ApiInterface
 import com.vtg.R
 import okhttp3.*
@@ -127,7 +128,7 @@ class EventImageViewCreate(context: Context?, name: Bitmap?, url: String?,id:Str
             .delete()
             .build()
 
-        getClient().newCall(request).enqueue(object : Callback {
+        NetworkUtils().getClient().newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
 //                progressBar.postValue(false)
                 Log.e("",""+e)
@@ -144,57 +145,6 @@ class EventImageViewCreate(context: Context?, name: Bitmap?, url: String?,id:Str
         })
     }
 
-    private fun getClient() : OkHttpClient {
-        try {
-            // Create a trust manager that does not validate certificate chains
-            val trustAllCerts = arrayOf<TrustManager>(
-                object : X509TrustManager {
-                    @SuppressLint("TrustAllX509TrustManager")
-                    @Throws(CertificateException::class)
-                    override fun checkClientTrusted(
-                        chain: Array<X509Certificate?>?,
-                        authType: String?
-                    ) {
-                    }
-
-                    @Throws(CertificateException::class)
-                    override fun checkServerTrusted(
-                        chain: Array<X509Certificate?>?,
-                        authType: String?
-                    ) {
-                    }
-
-                    override fun getAcceptedIssuers(): Array<X509Certificate> {
-                        return arrayOf()
-                    }
-                }
-            )
-
-            // Install the all-trusting trust manager
-            val sslContext = SSLContext.getInstance("SSL")
-            sslContext.init(null, trustAllCerts, SecureRandom())
-
-            // Create an ssl socket factory with our all-trusting manager
-            val sslSocketFactory = sslContext.socketFactory
-            val builder = OkHttpClient.Builder()
-            builder
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(10, TimeUnit.SECONDS)
-                .writeTimeout(10, TimeUnit.SECONDS)
-
-
-            builder.sslSocketFactory(
-                sslSocketFactory,
-                trustAllCerts[0] as X509TrustManager
-            )
-            builder.hostnameVerifier(HostnameVerifier { hostname, session -> true })
-
-            return builder.build()
-        } catch (e: java.lang.Exception) {
-            throw RuntimeException(e)
-        }
-
-    }
 
 
 }

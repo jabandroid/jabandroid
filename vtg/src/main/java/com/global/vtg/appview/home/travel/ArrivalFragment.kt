@@ -65,6 +65,15 @@ class ArrivalFragment : AppFragment() {
             "KNA" -> {
                 logo1.setImageResource(R.drawable.ic_st_kitt_small)
             }
+            "GUY" -> {
+                logo1.setImageResource(R.drawable.ic_gayana_amblem)
+            }
+            "PHL" -> {
+                logo1.setImageResource(R.drawable.ic_philli_amblem)
+            }
+            "NAM" -> {
+                logo1.setImageResource(R.drawable.ic_nam_amblem)
+            }
         }
         title.text = getString(R.string.welcome_custom, arg.getString("name"))
 

@@ -44,23 +44,14 @@ internal class ViewPagerDashAdapter(ctx: Context) :
             items.add(item)
             item=DashBoardItem(3, R.drawable.ic_qr_code,  ctx.resources.getString(R.string.label_my_qr_code))
             items.add(item)
+            item=DashBoardItem(6,     R.drawable.ic_health_info,      ctx.resources.getString(R.string.label_health_information))
+            items.add(item)
 //            item=DashBoardItem(4,    R.drawable.ic_health_information,       ctx.resources.getString(R.string.label_my_test_history))
 //            items.add(item)
             item=DashBoardItem(5,   R.drawable.ic_vaccine_card,       ctx.resources.getString(R.string.medical_card))
             items.add(item)
-            item=DashBoardItem(6,     R.drawable.ic_health_info,      ctx.resources.getString(R.string.label_health_information))
-            items.add(item)
-            item=DashBoardItem(11,   R.drawable.ic_event,       ctx.resources.getString(R.string.label_event))
-            items.add(item)
 
-           holder. list.layoutManager = GridLayoutManager(ctx, 2)
-            val dashboardAdapter = DashboardAdapter(
-               ctx, items
-            )
-            dashboardAdapter.setListener(this)
-            holder. list.adapter = dashboardAdapter
-        }else{
-            items.clear()
+
             if (SharedPreferenceUtil.getInstance(ctx)
                     ?.getData(
                         PreferenceManager.KEY_IS_CHILD,
@@ -74,10 +65,25 @@ internal class ViewPagerDashAdapter(ctx: Context) :
                 )
                 items.add(item)
             }
+
+
+
+           holder. list.layoutManager = GridLayoutManager(ctx, 2)
+            val dashboardAdapter = DashboardAdapter(
+               ctx, items
+            )
+            dashboardAdapter.setListener(this)
+            holder. list.adapter = dashboardAdapter
+        }else{
+            items.clear()
+
             var  item=DashBoardItem(8, R.drawable.ic_travel_his, ctx.resources.getString(R.string.label_travel_information))
             items.add(item)
 //            item=DashBoardItem(9, R.drawable.ic_group,  ctx.resources.getString(R.string.label_group))
 //            items.add(item)
+            item=DashBoardItem(11,   R.drawable.ic_event,       ctx.resources.getString(R.string.label_event))
+            items.add(item)
+
             item=DashBoardItem(10,    R.drawable.ic_travel_info,       ctx.resources.getString(R.string.label_travel_form))
             items.add(item)
 

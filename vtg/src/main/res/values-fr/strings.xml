@@ -361,7 +361,6 @@
     <string name="label_negative">Négatif</string>
     <string name="label_health_info">Informations sur la santé</string>
     <string name="label_health_info_V">Informations sur la santé</string>
-    <string name="label_no_result_found">Aucun résultat trouvé</string>
     <string name="label_or">\u2015 OU \u2015</string>
     <string name="label_old_password">Ancien mot de passe</string>
     <string name="label_new_password">Nouveau mot de passe</string>
@@ -442,11 +441,6 @@
     <string name="user_login"> Connexion utilisateur</string>
     <string name="user_Reg"> Enregistrement de l\'utilisateur</string>
 
-    <string name="vendor_login"> Connexion fournisseur</string>
-    <string name="vendor_reg"> Inscription du fournisseur</string>
-
-    <string name="clinic_login"> Connexion à la clinique</string>
-    <string name="clinic_reg"> Inscription à la clinique</string>
     <string name="add_slot">Ajouter un sous-événement</string>
     <string name="label_event_name_sub">Nom du sous-événement*</string>
     <string name="same_address">Adresse identique à Créer un événement</string>
@@ -623,7 +617,6 @@
     <string name="empty_tin">Veuillez saisir le TIN professionnel</string>
     <string name="clinic_card">Carte clinique</string>
     <string name="empty_phone_1">Veuillez saisir un numéro de téléphone</string>
-    <string name="clinic_details_not_found">Détails de la clinique introuvables</string>
     <string name="enter_details_error">Veuillez fournir des informations</string>
     <string name="welcome_custom"> Bienvenue sur %1$s \n Formulaire d\'immigration/douane</string>
     <string name="specfy_here">Spécifier ici…</string>
@@ -634,4 +627,36 @@
     <string name="age">Âge</string>
     <string name="clinic_not_found">Nous n\'avons pas les détails de la clinique pour le moment.
         Veuillez ajouter les détails de la clinique dans le profil et visiter à nouveau. </string>
+    <string name="user">Utilisateur</string>
+    <string name="clinic">Clinique</string>
+    <string name="vendor">Fournisseur</string>
+
+    <string-array name="reason">
+        <item>Business</item>
+        <item>Convention</item>
+        <item>Funeral</item>
+        <item>Honeymoon/Wedding</item>
+        <item>In Transit</item>
+        <item>Medical</item>
+        <item>Meeting</item>
+        <item>Returning Home</item>
+        <item>Sports</item>
+        <item>Study</item>
+        <item>Vacation</item>
+        <item>Visiting Friends/Relatives</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="accomodation">
+        <item>BED &amp; BREAKFAST</item>
+        <item>DIVE/ECO LODGE</item>
+        <item>GUEST HOUSE</item>
+        <item>HOTEL</item>
+        <item>PRIVATE HOME</item>
+        <item>RUSVM Campus</item>
+        <item>Sea Vessel</item>
+        <item>VILLA</item>
+
+        <item>Others</item>
+    </string-array>
 </resources>

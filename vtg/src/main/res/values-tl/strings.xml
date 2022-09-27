@@ -362,7 +362,6 @@
     <string name="label_negative">Negatibo</string>
     <string name="label_health_info">Impormasyon sa Kalusugan</string>
     <string name="label_health_info_V">Impormasyon sa Kalusugan</string>
-    <string name="label_no_result_found">Walang nakitang resulta</string>
     <string name="label_or">\u2015 O \u2015</string>
     <string name="label_old_password">Lumang Password</string>
     <string name="label_new_password">Bagong Password</string>
@@ -440,11 +439,6 @@
     <string name="user_login"> User Login</string>
     <string name="user_Reg"> Pagpaparehistro ng User</string>
 
-    <string name="vendor_login"> Vendor Login</string>
-    <string name="vendor_reg"> Pagpaparehistro ng Vendor</string>
-
-    <string name="clinic_login"> Clinic Login</string>
-    <string name="clinic_reg"> Pagpaparehistro sa Klinika</string>
     <string name="add_slot">Magdagdag ng Sub Event</string>
     <string name="label_event_name_sub">Sub Event Name*</string>
     <string name="same_address">Address na kapareho ng Create Event</string>
@@ -621,7 +615,6 @@
     <string name="empty_tin">Pakilagay ang TIN ng negosyo</string>
     <string name="clinic_card">Clinic Card</string>
     <string name="empty_phone_1">Mangyaring magpasok ng numero ng telepono.</string>
-    <string name="clinic_details_not_found">Hindi nakita ang mga detalye ng klinika</string>
     <string name="enter_details_error">Mangyaring magbigay ng impormasyon</string>
     <string name="welcome_custom"> Welcome sa %1$s \n Immigration/Customs Form</string>
     <string name="specfy_here">Tukuyin dito...</string>
@@ -632,4 +625,37 @@
     <string name="age">Edad</string>
     <string name="clinic_not_found">Wala kaming mga detalye ng klinika sa mga sandaling ito.
         Mangyaring magdagdag ng mga detalye ng klinika sa profile at bisitahin muli. </string>
+
+    <string name="user">User</string>
+    <string name="clinic">Clinic</string>
+    <string name="vendor">Vendor</string>
+
+    <string-array name="reason">
+        <item>Business</item>
+        <item>Convention</item>
+        <item>Funeral</item>
+        <item>Honeymoon/Wedding</item>
+        <item>In Transit</item>
+        <item>Medical</item>
+        <item>Meeting</item>
+        <item>Returning Home</item>
+        <item>Sports</item>
+        <item>Study</item>
+        <item>Vacation</item>
+        <item>Visiting Friends/Relatives</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="accomodation">
+        <item>BED &amp; BREAKFAST</item>
+        <item>DIVE/ECO LODGE</item>
+        <item>GUEST HOUSE</item>
+        <item>HOTEL</item>
+        <item>PRIVATE HOME</item>
+        <item>RUSVM Campus</item>
+        <item>Sea Vessel</item>
+        <item>VILLA</item>
+
+        <item>Others</item>
+    </string-array>
 </resources>

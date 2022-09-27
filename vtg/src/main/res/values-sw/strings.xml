@@ -355,7 +355,6 @@
     <string name="label_negative">Hasi</string>
     <string name="label_health_info">Maelezo ya Afya</string>
     <string name="label_health_info_V">Maelezo ya Afya</string>
-    <string name="label_no_result_found">Hakuna matokeo yaliyopatikana</string>
     <string name="label_or">\u2015 AU \u2015</string>
     <string name="label_old_password">Nenosiri la Zamani</string>
     <string name="label_new_password">Nenosiri Jipya</string>
@@ -434,11 +433,6 @@
     <string name="user_login"> Ingia kwa Mtumiaji</string>
     <string name="user_Reg"> Usajili wa Mtumiaji</string>
 
-    <string name="vendor_login"> Ingia kwa Muuzaji</string>
-    <string name="vendor_reg"> Usajili wa Muuzaji</string>
-
-    <string name="clinic_login"> Ingia kwenye Kliniki</string>
-    <string name="clinic_reg"> Usajili wa Kliniki</string>
     <string name="add_slot">Ongeza Tukio Ndogo</string>
     <string name="label_event_name_sub">Jina Ndogo la Tukio*</string>
     <string name="same_address">Anwani sawa na Unda Tukio</string>
@@ -615,7 +609,6 @@
     <string name="empty_tin">Tafadhali weka TIN ya biashara</string>
     <string name="clinic_card">Kadi ya Kliniki</string>
     <string name="empty_phone_1">Tafadhali weka Nambari ya simu.</string>
-    <string name="clinic_details_not_found">Maelezo ya kliniki hayajapatikana</string>
     <string name="enter_details_error">Tafadhali toa maelezo</string>
     <string name="welcome_custom"> Karibu kwenye %1$s \n Fomu ya Uhamiaji/Forodha</string>
     <string name="specfy_here">Bainisha hapa…</string>
@@ -626,4 +619,37 @@
     <string name="age">Umri</string>
     <string name="clinic_not_found">Hatuna maelezo ya kliniki kwa wakati huu.
         Tafadhali ongeza maelezo ya kliniki katika wasifu na utembelee tena. </string>
+
+    <string name="user">Mtumiaji</string>
+    <string name="clinic">Kliniki</string>
+    <string name="vendor">Mchuuzi</string>
+
+    <string-array name="reason">
+        <item>Business</item>
+        <item>Convention</item>
+        <item>Funeral</item>
+        <item>Honeymoon/Wedding</item>
+        <item>In Transit</item>
+        <item>Medical</item>
+        <item>Meeting</item>
+        <item>Returning Home</item>
+        <item>Sports</item>
+        <item>Study</item>
+        <item>Vacation</item>
+        <item>Visiting Friends/Relatives</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="accomodation">
+        <item>BED &amp; BREAKFAST</item>
+        <item>DIVE/ECO LODGE</item>
+        <item>GUEST HOUSE</item>
+        <item>HOTEL</item>
+        <item>PRIVATE HOME</item>
+        <item>RUSVM Campus</item>
+        <item>Sea Vessel</item>
+        <item>VILLA</item>
+
+        <item>Others</item>
+    </string-array>
 </resources>

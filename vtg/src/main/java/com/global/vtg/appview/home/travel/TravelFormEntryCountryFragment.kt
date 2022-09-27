@@ -51,6 +51,9 @@ class TravelFormEntryCountryFragment : AppFragment(), TravelFormAdapter.ClickLis
         titles.add(FormMain("Antigua and Barbuda",R.drawable.ic_antiqua,"ATG"))
         titles.add(FormMain("Barbados",R.drawable.ic_barbo,"BRB"))
         titles.add(FormMain("Saint Kitts and Nevis",R.drawable.flag_saint_kitts_and_nevis,"KNA"))
+        titles.add(FormMain("GUYANA",R.drawable.flay_gauyana,"GUY"))
+        titles.add(FormMain("PHILIPPINES",R.drawable.flag_pilli,"PHL"))
+        titles.add(FormMain("NAMIBIA",R.drawable.flag_namibia,"NAM"))
         main_controller.layoutManager = GridLayoutManager(activity, 2)
         val dashboardAdapter = TravelFormAdapter(
             activity!!, titles

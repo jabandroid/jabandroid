@@ -36,7 +36,7 @@ internal class ViewPager2Adapter(ctx: Context) :
     override fun onBindViewHolder(@NonNull holder: ViewHolder, position: Int) {
         // This will set the images in imageview
         Glide.with(ctx)
-            .load(R.drawable.banner1_small)
+            .load(R.drawable.banner_dashboard1)
             .apply(
                 RequestOptions().signature(ObjectKey(100000)).diskCacheStrategy(DiskCacheStrategy.DATA)
 )

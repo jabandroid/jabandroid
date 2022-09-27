@@ -357,7 +357,6 @@
     <string name = "label_negative"> سلبي </string>
     <string name = "label_health_info"> المعلومات الصحية </string>
     <string name = "label_health_info_V"> المعلومات الصحية </string>
-    <string name = "label_no_result_found"> ​​لم يتم العثور على نتيجة </string>
     <string name = "label_or"> \ u2015 أو \ u2015 </string>
     <string name = "label_old_password"> كلمة المرور القديمة </string>
     <string name = "label_new_password"> كلمة مرور جديدة </string>
@@ -437,11 +436,6 @@
     <string name = "user_login"> تسجيل دخول المستخدم </string>
     <string name = "user_Reg"> تسجيل المستخدم </string>
 
-    <string name = "vendor_login"> تسجيل دخول البائع </string>
-    <string name = "vendor_reg"> تسجيل البائع </string>
-
-    <string name = "clinic_login"> تسجيل الدخول إلى العيادة </string>
-    <string name = "clinic_reg"> تسجيل العيادة </string>
     <string name = "add_slot"> إضافة حدث فرعي </string>
     <string name = "label_event_name_sub"> اسم الحدث الفرعي * </string>
     <string name = "same_address"> العنوان هو نفسه إنشاء حدث </string><string name = "time_slot"> حدث فرعي </string>
@@ -617,7 +611,6 @@
     <string name = "empty_tin"> الرجاء إدخال TIN للأعمال </string>
     <string name = "clinic_card"> بطاقة العيادة </string>
     <string name = "empty_phone_1"> الرجاء إدخال رقم الهاتف </string>
-    <string name = "clinic_details_not_found">  يتم العثور على تفاصيل العيادة </string>
     <string name = "enter_details_error"> يرجى تقديم المعلومات </string>
     <string name = "welcome_custom"> مرحبًا بك في٪ 1 $ s \ n نموذج الهجرة / الجمارك </string>
     <string name = "specfy_here"> حدد هنا… </string>
@@ -628,4 +621,37 @@
     <string name = "age"> العمر </string>
     <string name = "clinic_not_found"> ​​ليس لدينا تفاصيل العيادة في هذه اللحظات.
         الرجاء إضافة تفاصيل العيادة في الملف الشخصي وزيارة مرة أخرى. </string>
+
+    <string name = "user"> مستخدم </string>
+    <string name = "clinic"> عيادة </string>
+    <string name = "vendor"> بائع </string>
+
+    <string-array name="reason">
+        <item>Business</item>
+        <item>Convention</item>
+        <item>Funeral</item>
+        <item>Honeymoon/Wedding</item>
+        <item>In Transit</item>
+        <item>Medical</item>
+        <item>Meeting</item>
+        <item>Returning Home</item>
+        <item>Sports</item>
+        <item>Study</item>
+        <item>Vacation</item>
+        <item>Visiting Friends/Relatives</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="accomodation">
+        <item>BED &amp; BREAKFAST</item>
+        <item>DIVE/ECO LODGE</item>
+        <item>GUEST HOUSE</item>
+        <item>HOTEL</item>
+        <item>PRIVATE HOME</item>
+        <item>RUSVM Campus</item>
+        <item>Sea Vessel</item>
+        <item>VILLA</item>
+
+        <item>Others</item>
+    </string-array>
 </resources>

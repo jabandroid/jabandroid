@@ -457,7 +457,7 @@ class RegistrationStep1Fragment : AppFragment() {
             viewModel.citizenship.value = ccpCitizenship.selectedCountryNameCode
         }
 
-        viewModel.uploadProfilePic.observe(this, {
+        viewModel.uploadProfilePic.observe(this) {
             DialogUtils.okCancelNeutralDialog(
                 context,
                 getAppActivity().getString(R.string.app_name),
@@ -480,7 +480,7 @@ class RegistrationStep1Fragment : AppFragment() {
 
                     }
                 })
-        })
+        }
 
 
         val date =
@@ -611,7 +611,7 @@ class RegistrationStep1Fragment : AppFragment() {
         })
 
 
-        viewModel.registerStep1LiveDataskip.observe(this, {
+        viewModel.registerStep1LiveDataskip.observe(this) {
             when (it) {
                 is Resource.Success -> {
                     when (activity) {
@@ -675,7 +675,7 @@ class RegistrationStep1Fragment : AppFragment() {
                     }
                 }
             }
-        })
+        }
 
         etCity.setOnClickListener {
             getAppActivity().onSearchCalled(Constants.AUTOCOMPLETE_REQUEST_CODE)

@@ -361,7 +361,6 @@
     <string name="label_negative">Negatief</string>
     <string name="label_health_info">Gesondheidsinligting</string>
     <string name="label_health_info_V">Gesondheidsinligting</string>
-    <string name="label_no_result_found">Geen resultaat gevind nie</string>
     <string name="label_or">\u2015 OF \u2015</string>
     <string name="label_old_password">Ou wagwoord</string>
     <string name="label_new_password">Nuwe wagwoord</string>
@@ -443,11 +442,6 @@
     <string name="user_login"> Gebruikeraanmelding</string>
     <string name="user_Reg"> Gebruikersregistrasie</string>
 
-    <string name="vendor_login"> Verskafferaanmelding</string>
-    <string name="vendor_reg"> Verkoperregistrasie</string>
-
-    <string name="clinic_login"> Kliniekaanmelding</string>
-    <string name="clinic_reg"> Kliniekregistrasie</string>
     <string name="add_slot">Voeg subgebeurtenis by</string>
     <string name="label_event_name_sub">Subgebeurtenisnaam*</string>
     <string name="same_address">Adres dieselfde as Skep gebeurtenis</string>
@@ -624,7 +618,6 @@
     <string name="empty_tin">Voer asseblief besigheid-TIN in</string>
     <string name="clinic_card">Kliniekkaart</string>
     <string name="empty_phone_1">Voer asseblief \'n telefoonnommer in.</string>
-    <string name="clinic_details_not_found">Kliniekbesonderhede nie gevind nie</string>
 
     <string name="enter_details_error">Verskaf asseblief inligting</string>
     <string name="welcome_custom"> Welkom by %1$s \n Immigrasie-/Doeanevorm</string>
@@ -636,4 +629,36 @@
     <string name="age">Ouderdom</string>
     <string name="clinic_not_found">Ons het op die oomblik nie kliniekbesonderhede nie.
         Voeg asseblief kliniekbesonderhede in profiel by en besoek weer. </string>
+    <string name="user">Gebruiker</string>
+    <string name="clinic">Kliniek</string>
+    <string name="vendor">Verskaffer</string>
+
+    <string-array name="reason">
+        <item>Business</item>
+        <item>Convention</item>
+        <item>Funeral</item>
+        <item>Honeymoon/Wedding</item>
+        <item>In Transit</item>
+        <item>Medical</item>
+        <item>Meeting</item>
+        <item>Returning Home</item>
+        <item>Sports</item>
+        <item>Study</item>
+        <item>Vacation</item>
+        <item>Visiting Friends/Relatives</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="accomodation">
+        <item>BED &amp; BREAKFAST</item>
+        <item>DIVE/ECO LODGE</item>
+        <item>GUEST HOUSE</item>
+        <item>HOTEL</item>
+        <item>PRIVATE HOME</item>
+        <item>RUSVM Campus</item>
+        <item>Sea Vessel</item>
+        <item>VILLA</item>
+
+        <item>Others</item>
+    </string-array>
 </resources>

@@ -359,7 +359,6 @@
     <string name="label_negative">Negativo</string>
     <string name="label_health_info">Información de salud</string>
     <string name="label_health_info_V">Información de salud</string>
-    <string name="label_no_result_found">No se encontró ningún resultado</string>
     <string name="label_or">\u2015 O \u2015</string>
     <string name="label_old_password">Contraseña anterior</string>
     <string name="label_new_password">Nueva contraseña</string>
@@ -440,11 +439,6 @@
     <string name="user_login"> Inicio de sesión de usuario</string>
     <string name="user_Reg"> Registro de usuario</string>
 
-    <string name="vendor_login"> Inicio de sesión del proveedor</string>
-    <string name="vendor_reg"> Registro de proveedores</string>
-
-    <string name="clinic_login"> Inicio de sesión en la clínica</string>
-    <string name="clinic_reg"> Registro de la Clínica</string>
     <string name="add_slot">Añadir Sub Evento</string>
     <string name="label_event_name_sub">Nombre del subevento*</string>
     <string name="same_address">Dirección igual que Crear evento</string>
@@ -621,7 +615,6 @@
     <string name="empty_tin">Ingrese el TIN comercial</string>
     <string name="clinic_card">Tarjeta Clínica</string>
     <string name="empty_phone_1">Ingrese un número de teléfono</string>
-    <string name="clinic_details_not_found">No se encontraron los detalles de la clínica</string>
     <string name="enter_details_error">Proporcione información</string>
     <string name="welcome_custom"> Bienvenido a %1$s \n Formulario de inmigración/aduana</string>
     <string name="specfy_here">Especifique aquí…</string>
@@ -632,4 +625,37 @@
     <string name="age">Edad</string>
     <string name="clinic_not_found">No tenemos detalles de la clínica en este momento.
         Agregue los detalles de la clínica en el perfil y vuelva a visitarnos.</string>
+    <string name="user">Usuario</string>
+    <string name="clinic">Clínica</string>
+    <string name="vendor">Vendedor</string>
+
+
+    <string-array name="reason">
+        <item>Business</item>
+        <item>Convention</item>
+        <item>Funeral</item>
+        <item>Honeymoon/Wedding</item>
+        <item>In Transit</item>
+        <item>Medical</item>
+        <item>Meeting</item>
+        <item>Returning Home</item>
+        <item>Sports</item>
+        <item>Study</item>
+        <item>Vacation</item>
+        <item>Visiting Friends/Relatives</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="accomodation">
+        <item>BED &amp; BREAKFAST</item>
+        <item>DIVE/ECO LODGE</item>
+        <item>GUEST HOUSE</item>
+        <item>HOTEL</item>
+        <item>PRIVATE HOME</item>
+        <item>RUSVM Campus</item>
+        <item>Sea Vessel</item>
+        <item>VILLA</item>
+
+        <item>Others</item>
+    </string-array>
 </resources>

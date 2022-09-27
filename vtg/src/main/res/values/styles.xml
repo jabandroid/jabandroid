@@ -94,7 +94,4 @@
         <item name="android:windowAnimationStyle">@style/SlidingDialogAnimation</item>
     </style>
 
-    <style name="EditText.OutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-    </style>
 </resources>
